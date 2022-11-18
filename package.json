@@ -6,7 +6,9 @@
   "license": "MIT",
   "keywords": [],
   "files": [
-    "index.ts"
+    "api.ts",
+    "index.ts",
+    "types.ts"
   ],
   "main": "index.ts",
   "type": "module",
