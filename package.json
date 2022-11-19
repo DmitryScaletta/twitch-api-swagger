@@ -1,7 +1,7 @@
 {
   "name": "twitch-api-ts",
   "version": "0.1.0",
-  "description": "",
+  "description": "TypeScript definitions for Twitch API",
   "author": "DmitryScaletta",
   "license": "MIT",
   "keywords": [],
