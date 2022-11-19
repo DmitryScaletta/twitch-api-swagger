@@ -17,8 +17,6 @@ export interface StartCommercialResponse {
   }[];
 }
 
-
-
 export interface GetExtensionAnalyticsParams {
   /** The extension’s client ID. If specified, the response contains a report for the specified extension. If not specified, the response includes a report for each extension that the authenticated user owns. */
   extension_id?: string;
@@ -79,8 +77,6 @@ export interface GetExtensionAnalyticsResponse {
     cursor: string;
   };
 }
-
-
 
 export interface GetGameAnalyticsParams {
   /** The game’s client ID. If specified, the response contains a report for the specified game. If not specified, the response includes a report for each of the authenticated user’s games. */
@@ -143,8 +139,6 @@ export interface GetGameAnalyticsResponse {
   };
 }
 
-
-
 export interface GetBitsLeaderboardParams {
   /** The number of results to return. The minimum count is 1 and the maximum is 100\. The default is 10. */
   count?: number;
@@ -196,8 +190,6 @@ export interface GetBitsLeaderboardResponse {
   /** The number of ranked users in `data`. This is the value in the _count_ query parameter or the total number of entries on the leaderboard, whichever is less. */
   total: number;
 }
-
-
 
 export interface GetCheermotesParams {
   /**
@@ -256,8 +248,6 @@ export interface GetCheermotesResponse {
     is_charitable: boolean;
   }[];
 }
-
-
 
 export interface GetExtensionTransactionsParams {
   /** The ID of the extension whose list of transactions you want to get. */
@@ -320,8 +310,6 @@ export interface GetExtensionTransactionsResponse {
   };
 }
 
-
-
 export interface GetChannelInformationParams {
   /** The ID of the broadcaster whose channel you want to get. To specify more than one ID, include this parameter for each broadcaster you want to get. For example, `broadcaster_id=1234&broadcaster_id=5678`. You may specify a maximum of 100 IDs. The API ignores duplicate IDs and IDs that are not found. */
   broadcaster_id: string | string[];
@@ -349,8 +337,6 @@ export interface GetChannelInformationResponse {
   }[];
 }
 
-
-
 /**
  * All fields are optional, but you must specify at least one field.
  */
@@ -370,8 +356,6 @@ export interface ModifyChannelInformationParams {
   broadcaster_id: string;
 }
 
-
-
 export interface GetChannelEditorsParams {
   /** The ID of the broadcaster that owns the channel. This ID must match the user ID in the access token. */
   broadcaster_id: string;
@@ -388,8 +372,6 @@ export interface GetChannelEditorsResponse {
     created_at: string;
   }[];
 }
-
-
 
 export interface CreateCustomRewardsBody {
   /** The custom reward’s title. The title may contain a maximum of 45 characters and it must be unique amongst all of the broadcaster’s custom rewards. */
@@ -500,16 +482,12 @@ export interface CreateCustomRewardsResponse {
   }[];
 }
 
-
-
 export interface DeleteCustomRewardParams {
   /** The ID of the broadcaster that created the custom reward. This ID must match the user ID found in the OAuth token. */
   broadcaster_id: string;
   /** The ID of the custom reward to delete. */
   id: string;
 }
-
-
 
 export interface GetCustomRewardParams {
   /** The ID of the broadcaster whose custom rewards you want to get. This ID must match the user ID found in the OAuth token. */
@@ -599,8 +577,6 @@ export interface GetCustomRewardResponse {
   }[];
 }
 
-
-
 export interface GetCustomRewardRedemptionParams {
   /** The ID of the broadcaster that owns the custom reward. This ID must match the user ID found in the user OAuth token. */
   broadcaster_id: string;
@@ -679,8 +655,6 @@ export interface GetCustomRewardRedemptionResponse {
     };
   }[];
 }
-
-
 
 /**
  * The body of the request should contain only the fields you’re updating.
@@ -796,8 +770,6 @@ export interface UpdateCustomRewardResponse {
   }[];
 }
 
-
-
 export interface UpdateRedemptionStatusBody {
   /**
    * The status to set the redemption to. Possible values are:  
@@ -862,8 +834,6 @@ export interface UpdateRedemptionStatusResponse {
   }[];
 }
 
-
-
 export interface GetCharityCampaignParams {
   /** The ID of the broadcaster that’s actively running a charity campaign. This ID must match the user ID in the access token. */
   broadcaster_id: string;
@@ -917,8 +887,6 @@ export interface GetCharityCampaignResponse {
   }[];
 }
 
-
-
 export interface GetChattersParams {
   /** The ID of the broadcaster whose list of chatters you want to get. */
   broadcaster_id: string;
@@ -954,8 +922,6 @@ export interface GetChattersResponse {
   /** The total number of users that are connected to the broadcaster’s chat room. As you page through the list, the number of users may change as users join and leave the chat room. */
   total: number;
 }
-
-
 
 export interface GetChannelEmotesParams {
   /** An ID that identifies the broadcaster whose emotes you want to get. */
@@ -1021,8 +987,6 @@ export interface GetChannelEmotesResponse {
   template: string;
 }
 
-
-
 export interface GetGlobalEmotesResponse {
   /** The list of global emotes. */
   data: {
@@ -1069,8 +1033,6 @@ export interface GetGlobalEmotesResponse {
   /** A templated URL. Use the values from the `id`, `format`, `scale`, and `theme_mode` fields to replace the like-named placeholder strings in the templated URL to create a CDN (content delivery network) URL that you use to fetch the emote. For information about what the template looks like and how to use it to fetch emotes, see [Emote CDN URL format](https://dev.twitch.tv/docs/irc/emotes#cdn-template). You should use this template instead of using the URLs in the `images` object. */
   template: string;
 }
-
-
 
 export interface GetEmoteSetsParams {
   /**
@@ -1140,8 +1102,6 @@ export interface GetEmoteSetsResponse {
   template: string;
 }
 
-
-
 export interface GetChannelChatBadgesResponse {
   /** The list of chat badges. The list is sorted in ascending order by `set_id`, and within a set, the list is sorted in ascending order by `id`. */
   data: {
@@ -1161,8 +1121,6 @@ export interface GetChannelChatBadgesResponse {
   }[];
 }
 
-
-
 export interface GetGlobalChatBadgesResponse {
   /** The list of chat badges. The list is sorted in ascending order by `set_id`, and within a set, the list is sorted in ascending order by `id`. */
   data: {
@@ -1181,8 +1139,6 @@ export interface GetGlobalChatBadgesResponse {
     }[];
   }[];
 }
-
-
 
 export interface GetChatSettingsParams {
   /** The ID of the broadcaster whose chat settings you want to get. */
@@ -1256,8 +1212,6 @@ export interface GetChatSettingsResponse {
     unique_chat_mode: boolean;
   }[];
 }
-
-
 
 /**
  * All fields are optional. Specify only those fields that you want to update.
@@ -1386,8 +1340,6 @@ export interface UpdateChatSettingsResponse {
   }[];
 }
 
-
-
 export interface SendChatAnnouncementBody {
   /** The announcement to make in the broadcaster’s chat room. Announcements are limited to a maximum of 500 characters; announcements longer than 500 characters are truncated. */
   message: string;
@@ -1412,8 +1364,6 @@ export interface SendChatAnnouncementParams {
   moderator_id: string;
 }
 
-
-
 export interface GetUserChatColorParams {
   /**
    * The ID of the user whose username color you want to get. To specify more than one user, include the _user\_id_ parameter for each user to get. For example, `&user_id=1234&user_id=5678`. The maximum number of IDs that you may specify is 100.  
@@ -1436,8 +1386,6 @@ export interface GetUserChatColorResponse {
     color: string;
   }[];
 }
-
-
 
 export interface UpdateUserChatColorParams {
   /** The ID of the user whose chat color you want to update. This ID must match the user ID in the access token. */
@@ -1466,8 +1414,6 @@ export interface UpdateUserChatColorParams {
   color: string;
 }
 
-
-
 export interface CreateClipParams {
   /** The ID of the broadcaster whose stream you want to create a clip from. */
   broadcaster_id: string;
@@ -1485,8 +1431,6 @@ export interface CreateClipResponse {
   /** An ID that uniquely identifies the clip. */
   id: string;
 }
-
-
 
 /**
  * The _id_, _game\_id_, and _broadcaster\_id_ query parameters are mutually exclusive.
@@ -1557,8 +1501,6 @@ export interface GetClipsResponse {
   };
 }
 
-
-
 export interface GetCodeStatusParams {
   /** The redemption code to check. Include this parameter for each redemption code whose status you want to check. For example, `code=1234&code=5678`. You may specify a maximum of 20 codes. */
   code: string | string[];
@@ -1586,8 +1528,6 @@ export interface GetCodeStatusResponse {
     status: 'ALREADY_CLAIMED' | 'EXPIRED' | 'INACTIVE' | 'INCORRECT_FORMAT' | 'INTERNAL_ERROR' | 'NOT_FOUND' | 'UNUSED' | 'USER_NOT_ELIGIBLE';
   }[];
 }
-
-
 
 export interface GetDropsEntitlementsParams {
   /** An ID that identifies the entitlement to get. Include this parameter for each entitlement you want to get. For example, `id=1234&id=5678`. You may specify a maximum of 100 IDs. */
@@ -1639,8 +1579,6 @@ export interface GetDropsEntitlementsResponse {
   };
 }
 
-
-
 export interface UpdateDropsEntitlementsResponse {
   /** A list that indicates which entitlements were successfully updated and those that weren’t. */
   data: {
@@ -1658,8 +1596,6 @@ export interface UpdateDropsEntitlementsResponse {
     ids: string[];
   }[];
 }
-
-
 
 export interface RedeemCodeParams {
   /** The redemption code to redeem. To redeem multiple codes, include this parameter for each redemption code. For example, `code=1234&code=5678`. You may specify a maximum of 20 codes. */
@@ -1689,8 +1625,6 @@ export interface RedeemCodeResponse {
     status: 'ALREADY_CLAIMED' | 'EXPIRED' | 'INACTIVE' | 'INCORRECT_FORMAT' | 'INTERNAL_ERROR' | 'NOT_FOUND' | 'SUCCESSFULLY_REDEEMED' | 'UNUSED' | 'USER_NOT_ELIGIBLE';
   }[];
 }
-
-
 
 export interface GetExtensionConfigurationSegmentParams {
   /** The ID of the broadcaster that installed the extension. This parameter is required if you set the _segment_ parameter to broadcaster or developer. Do not specify this parameter if you set _segment_ to global. */
@@ -1729,8 +1663,6 @@ export interface GetExtensionConfigurationSegmentResponse {
   }[];
 }
 
-
-
 export interface SetExtensionConfigurationSegmentBody {
   /** The ID of the extension to update. */
   extension_id: string;
@@ -1750,8 +1682,6 @@ export interface SetExtensionConfigurationSegmentBody {
   version?: string;
 }
 
-
-
 export interface SetExtensionRequiredConfigurationBody {
   /** The ID of the extension to update. */
   extension_id: string;
@@ -1765,8 +1695,6 @@ export interface SetExtensionRequiredConfigurationParams {
   /** The ID of the broadcaster that installed the extension on their channel. */
   broadcaster_id: string;
 }
-
-
 
 export interface SendExtensionPubSubMessageBody {
   /**
@@ -1786,8 +1714,6 @@ export interface SendExtensionPubSubMessageBody {
   /** The message to send. The message can be a plain-text string or a string-encoded JSON object. The message is limited to a maximum of 5 KB. */
   message: string;
 }
-
-
 
 export interface GetExtensionLiveChannelsParams {
   /** The ID of the extension to get. Returns the list of broadcasters that are live and that have installed or activated this extension. */
@@ -1816,8 +1742,6 @@ export interface GetExtensionLiveChannelsResponse {
   pagination: string;
 }
 
-
-
 export interface GetExtensionSecretsResponse {
   /** The list of shared secrets that the extension created. */
   data: {
@@ -1834,8 +1758,6 @@ export interface GetExtensionSecretsResponse {
     }[];
   }[];
 }
-
-
 
 export interface CreateExtensionSecretParams {
   /** The ID of the extension to apply the shared secret to. */
@@ -1861,8 +1783,6 @@ export interface CreateExtensionSecretResponse {
   }[];
 }
 
-
-
 export interface SendExtensionChatMessageBody {
   /** The message. The message may contain a maximum of 280 characters. */
   text: string;
@@ -1876,8 +1796,6 @@ export interface SendExtensionChatMessageParams {
   /** The ID of the broadcaster that has activated the extension. */
   broadcaster_id: string;
 }
-
-
 
 export interface GetExtensionsParams {
   /** The ID of the extension to get. */
@@ -1976,8 +1894,6 @@ export interface GetExtensionsResponse {
   }[];
 }
 
-
-
 export interface GetReleasedExtensionsParams {
   /** The ID of the extension to get. */
   extension_id: string;
@@ -2075,8 +1991,6 @@ export interface GetReleasedExtensionsResponse {
   }[];
 }
 
-
-
 export interface GetExtensionBitsProductsParams {
   /** A Boolean value that determines whether to include disabled or expired Bits products in the response. The default is **false**. */
   should_include_all?: boolean;
@@ -2109,8 +2023,6 @@ export interface GetExtensionBitsProductsResponse {
   }[];
 }
 
-
-
 export interface UpdateExtensionBitsProductResponse {
   /** A list of Bits products that the extension created. The list is in ascending SKU order. The list is empty if the extension hasn’t created any products or they’re all expired or disabled. */
   data: {
@@ -2137,8 +2049,6 @@ export interface UpdateExtensionBitsProductResponse {
     is_broadcast: boolean;
   }[];
 }
-
-
 
 export interface CreateEventSubSubscriptionBody {
   /** The type of subscription to create. For a list of subscriptions that you can create, see [Subscription Types](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#subscription-types). Set this field to the value in the **Name** column of the Subscription Types table. */
@@ -2230,14 +2140,10 @@ export interface CreateEventSubSubscriptionResponse {
   max_total_cost: number;
 }
 
-
-
 export interface DeleteEventSubSubscriptionParams {
   /** The ID of the subscription to delete. */
   id: string;
 }
-
-
 
 /**
  * Use the _status_, _type_, and _user\_id_ query parameters to filter the list of subscriptions that are returned. The filters are mutually exclusive; the request fails if you specify more than one filter.
@@ -2320,8 +2226,6 @@ export interface GetEventSubSubscriptionsResponse {
   };
 }
 
-
-
 export interface GetTopGamesParams {
   /** The maximum number of items to return per page in the response. The minimum page size is 1 item per page and the maximum is 100 items per page. The default is 20. */
   first?: number;
@@ -2348,8 +2252,6 @@ export interface GetTopGamesResponse {
   };
 }
 
-
-
 export interface GetGamesParams {
   /** The ID of the category or game to get. Include this parameter for each category or game you want to get. For example, `&id=1234&id=5678`. You may specify a maximum of 100 IDs. The endpoint ignores duplicate and invalid IDs or IDs that weren’t found. */
   id: string | string[];
@@ -2368,8 +2270,6 @@ export interface GetGamesResponse {
     box_art_url: string;
   }[];
 }
-
-
 
 export interface GetCreatorGoalsParams {
   /** The ID of the broadcaster that created the goals. This ID must match the user ID in the user access token. */
@@ -2417,8 +2317,6 @@ export interface GetCreatorGoalsResponse {
     created_at: string;
   }[];
 }
-
-
 
 export interface GetHypeTrainEventsParams {
   /** The ID of the broadcaster that’s running the Hype Train. This ID must match the User ID in the user access token. */
@@ -2471,8 +2369,6 @@ export interface GetHypeTrainEventsResponse {
   };
 }
 
-
-
 export interface CheckAutoModStatusBody {
   /** The list of messages to check. The list must contain at least one message and may contain up to a maximum of 100 messages. */
   data: {
@@ -2498,8 +2394,6 @@ export interface CheckAutoModStatusResponse {
   }[];
 }
 
-
-
 export interface ManageHeldAutoModMessagesBody {
   /** The moderator who is approving or denying the held message. This ID must match the user ID in the access token. */
   user_id: string;
@@ -2513,8 +2407,6 @@ export interface ManageHeldAutoModMessagesBody {
    */
   action: 'ALLOW' | 'DENY';
 }
-
-
 
 export interface GetAutoModSettingsParams {
   /** The ID of the broadcaster whose AutoMod settings you want to get. */
@@ -2550,8 +2442,6 @@ export interface GetAutoModSettingsResponse {
     sex_based_terms: number;
   }[];
 }
-
-
 
 /**
  * Because PUT is an overwrite operation, you must include all the fields that you want set after the operation completes. Typically, you’ll send a GET request, update the fields you want to change, and pass that object in the PUT request.
@@ -2622,8 +2512,6 @@ export interface UpdateAutoModSettingsResponse {
   }[];
 }
 
-
-
 export interface GetBannedUsersParams {
   /** The ID of the broadcaster whose list of banned users you want to get. This ID must match the user ID in the access token. */
   broadcaster_id: string;
@@ -2670,8 +2558,6 @@ export interface GetBannedUsersResponse {
   };
 }
 
-
-
 export interface BanUserBody {
   /** Identifies the user and type of ban. */
   data: {
@@ -2713,8 +2599,6 @@ export interface BanUserResponse {
   }[];
 }
 
-
-
 export interface UnbanUserParams {
   /** The ID of the broadcaster whose chat room the user is banned from chatting in. */
   broadcaster_id: string;
@@ -2723,8 +2607,6 @@ export interface UnbanUserParams {
   /** The ID of the user to remove the ban or timeout from. */
   user_id: string;
 }
-
-
 
 export interface GetBlockedTermsParams {
   /** The ID of the broadcaster whose blocked terms you’re getting. */
@@ -2746,8 +2628,6 @@ export interface GetBlockedTermsResponse {
     cursor: string;
   };
 }
-
-
 
 export interface AddBlockedTermBody {
   /**
@@ -2795,8 +2675,6 @@ export interface AddBlockedTermResponse {
   }[];
 }
 
-
-
 export interface RemoveBlockedTermParams {
   /** The ID of the broadcaster that owns the list of blocked terms. */
   broadcaster_id: string;
@@ -2805,8 +2683,6 @@ export interface RemoveBlockedTermParams {
   /** The ID of the blocked term to remove from the broadcaster’s list of blocked terms. */
   id: string;
 }
-
-
 
 export interface DeleteChatMessagesParams {
   /** The ID of the broadcaster that owns the chat room to remove messages from. */
@@ -2824,8 +2700,6 @@ export interface DeleteChatMessagesParams {
    */
   message_id?: string;
 }
-
-
 
 export interface GetModeratorsParams {
   /** The ID of the broadcaster whose list of moderators you want to get. This ID must match the user ID in the access token. */
@@ -2859,8 +2733,6 @@ export interface GetModeratorsResponse {
   };
 }
 
-
-
 export interface AddChannelModeratorParams {
   /** The ID of the broadcaster that owns the chat room. This ID must match the user ID in the access token. */
   broadcaster_id: string;
@@ -2868,16 +2740,12 @@ export interface AddChannelModeratorParams {
   user_id: string;
 }
 
-
-
 export interface RemoveChannelModeratorParams {
   /** The ID of the broadcaster that owns the chat room. This ID must match the user ID in the access token. */
   broadcaster_id: string;
   /** The ID of the user to remove as a moderator from the broadcaster’s chat room. */
   user_id: string;
 }
-
-
 
 export interface GetVIPsParams {
   /** Filters the list for specific VIPs. To specify more than one user, include the _user\_id_ parameter for each user to get. For example, `&user_id=1234&user_id=5678`. The maximum number of IDs that you may specify is 100\. Ignores the ID of those users in the list that aren’t VIPs. */
@@ -2907,8 +2775,6 @@ export interface GetVIPsResponse {
   };
 }
 
-
-
 export interface AddChannelVIPParams {
   /** The ID of the user to give VIP status to. */
   user_id: string;
@@ -2916,16 +2782,12 @@ export interface AddChannelVIPParams {
   broadcaster_id: string;
 }
 
-
-
 export interface RemoveChannelVIPParams {
   /** The ID of the user to remove VIP status from. */
   user_id: string;
   /** The ID of the broadcaster who owns the channel where the user has VIP status. */
   broadcaster_id: string;
 }
-
-
 
 export interface GetPollsParams {
   /** The ID of the broadcaster that created the polls. This ID must match the user ID in the user access token. */
@@ -3001,8 +2863,6 @@ export interface GetPollsResponse {
   };
 }
 
-
-
 export interface CreatePollBody {
   /** The ID of the broadcaster that’s running the poll. This ID must match the user ID in the user access token. */
   broadcaster_id: string;
@@ -3075,8 +2935,6 @@ export interface CreatePollResponse {
   }[];
 }
 
-
-
 export interface EndPollBody {
   /** The ID of the broadcaster that’s running the poll. This ID must match the user ID in the user access token. */
   broadcaster_id: string;
@@ -3144,8 +3002,6 @@ export interface EndPollResponse {
     ended_at: string;
   }[];
 }
-
-
 
 export interface GetPredictionsParams {
   /** The ID of the broadcaster whose predictions you want to get. This ID must match the user ID associated with the user access token. */
@@ -3220,8 +3076,6 @@ export interface GetPredictionsResponse {
   };
 }
 
-
-
 export interface CreatePredictionBody {
   /** The ID of the broadcaster that’s running the prediction. This ID must match the user ID in the user access token. */
   broadcaster_id: string;
@@ -3292,8 +3146,6 @@ export interface CreatePredictionResponse {
     locked_at: string;
   }[];
 }
-
-
 
 export interface EndPredictionBody {
   /** The ID of the broadcaster that’s running the prediction. This ID must match the user ID in the user access token. */
@@ -3373,8 +3225,6 @@ export interface EndPredictionResponse {
   }[];
 }
 
-
-
 export interface StartRaidParams {
   /** The ID of the broadcaster that’s sending the raiding party. This ID must match the user ID associated with the user access token. */
   from_broadcaster_id: string;
@@ -3392,14 +3242,10 @@ export interface StartRaidResponse {
   }[];
 }
 
-
-
 export interface CancelRaidParams {
   /** The ID of the broadcaster that initiated the raid. This ID must match the user ID associated with the user access token. */
   broadcaster_id: string;
 }
-
-
 
 export interface GetChannelStreamScheduleParams {
   /** The ID of the broadcaster that owns the streaming schedule you want to get. */
@@ -3457,14 +3303,10 @@ export interface GetChannelStreamScheduleResponse {
   };
 }
 
-
-
 export interface GetChanneliCalendarParams {
   /** The ID of the broadcaster that owns the streaming schedule you want to get. */
   broadcaster_id: string;
 }
-
-
 
 export interface UpdateChannelStreamScheduleParams {
   /** The ID of the broadcaster whose schedule settings you want to update. The ID must match the user ID in the user access token. */
@@ -3478,8 +3320,6 @@ export interface UpdateChannelStreamScheduleParams {
   /** The time zone that the broadcaster broadcasts from. Specify the time zone using [IANA time zone database](https://www.iana.org/time-zones) format (for example, America/New\_York). Required if _is\_vacation\_enabled_ is **true**. */
   timezone?: string;
 }
-
-
 
 export interface CreateChannelStreamScheduleSegmentBody {
   /** The date and time that the broadcast segment starts. Specify the date and time in RFC3339 format (for example, 2021-07-01T18:00:00Z). */
@@ -3536,8 +3376,6 @@ export interface CreateChannelStreamScheduleSegmentResponse {
     };
   };
 }
-
-
 
 export interface UpdateChannelStreamScheduleSegmentBody {
   /**
@@ -3605,16 +3443,12 @@ export interface UpdateChannelStreamScheduleSegmentResponse {
   };
 }
 
-
-
 export interface DeleteChannelStreamScheduleSegmentParams {
   /** The ID of the broadcaster that owns the streaming schedule. This ID must match the user ID in the user access token. */
   broadcaster_id: string;
   /** The ID of the broadcast segment to remove. */
   id: string;
 }
-
-
 
 export interface SearchCategoriesParams {
   /** The URI-encoded search string. For example, encode _#archery_ as `%23archery` and search strings like _angel of death_ as `angel%20of%20death`. */
@@ -3636,8 +3470,6 @@ export interface SearchCategoriesResponse {
     id: string;
   }[];
 }
-
-
 
 export interface SearchChannelsParams {
   /** The URI-encoded search string. For example, encode search strings like _angel of death_ as `angel%20of%20death`. */
@@ -3678,8 +3510,6 @@ export interface SearchChannelsResponse {
   }[];
 }
 
-
-
 export interface GetSoundtrackCurrentTrackParams {
   /** The ID of the broadcaster that’s playing a Soundtrack track. */
   broadcaster_id: string;
@@ -3708,8 +3538,6 @@ export interface GetSoundtrackCurrentTrackResponse {
     };
   }[];
 }
-
-
 
 export interface GetSoundtrackPlaylistParams {
   /** The ID of the playlist to get. */
@@ -3757,8 +3585,6 @@ export interface GetSoundtrackPlaylistResponse {
   };
 }
 
-
-
 export interface GetSoundtrackPlaylistsParams {
   /** The ID of the playlist to get. Specify an ID only if you want to get a single playlist instead of all playlists. */
   id?: string;
@@ -3787,8 +3613,6 @@ export interface GetSoundtrackPlaylistsResponse {
   };
 }
 
-
-
 export interface GetStreamKeyParams {
   /** The ID of the broadcaster that owns the channel. The ID must match the user ID in the access token. */
   broadcaster_id: string;
@@ -3801,8 +3625,6 @@ export interface GetStreamKeyResponse {
     stream_key: string;
   }[];
 }
-
-
 
 export interface GetStreamsParams {
   /** A user ID used to filter the list of streams. Returns only the streams of those users that are broadcasting. You may specify a maximum of 100 IDs. To specify multiple IDs, include the _user\_id_ parameter for each user. For example, `&user_id=1234&user_id=5678`. */
@@ -3879,8 +3701,6 @@ export interface GetStreamsResponse {
   };
 }
 
-
-
 export interface GetFollowedStreamsParams {
   /** The ID of the user whose list of followed streams you want to get. This ID must match the user ID in the access token. */
   user_id: string;
@@ -3935,8 +3755,6 @@ export interface GetFollowedStreamsResponse {
   };
 }
 
-
-
 export interface CreateStreamMarkerBody {
   /** The ID of the broadcaster that’s streaming content. This ID must match the user ID in the access token or the user in the access token must be one of the broadcaster’s editors. */
   user_id: string;
@@ -3958,8 +3776,6 @@ export interface CreateStreamMarkerResponse {
     };
   }[];
 }
-
-
 
 export interface GetStreamMarkersResponse {
   /** The list of markers grouped by the user that created the marks. */
@@ -3994,8 +3810,6 @@ export interface GetStreamMarkersResponse {
     cursor: string;
   };
 }
-
-
 
 export interface GetBroadcasterSubscriptionsResponse {
   /** The list of users that subscribe to the broadcaster. The list is empty if the broadcaster has no subscribers. */
@@ -4042,8 +3856,6 @@ export interface GetBroadcasterSubscriptionsResponse {
   total: number;
 }
 
-
-
 export interface CheckUserSubscriptionParams {
   /** The ID of a partner or affiliate broadcaster. */
   broadcaster_id: string;
@@ -4079,8 +3891,6 @@ export interface CheckUserSubscriptionResponse {
   }[];
 }
 
-
-
 export interface GetAllStreamTagsParams {
   /** The ID of the tag to get. Used to filter the list of tags. To specify more than one tag, include the _tag\_id_ parameter for each tag to get. For example, `tag_id=1234&tag_id=5678`. The maximum number of IDs you may specify is 100\. Ignores invalid IDs but not duplicate IDs. */
   tag_id?: string | string[];
@@ -4109,8 +3919,6 @@ export interface GetAllStreamTagsResponse {
   };
 }
 
-
-
 export interface GetStreamTagsParams {
   /** The ID of the broadcaster whose stream tags you want to get. */
   broadcaster_id: string;
@@ -4130,8 +3938,6 @@ export interface GetStreamTagsResponse {
   }[];
 }
 
-
-
 export interface ReplaceStreamTagsBody {
   /**
    * A list of IDs that identify the tags to apply to the channel. You may specify a maximum of five tags.  
@@ -4145,8 +3951,6 @@ export interface ReplaceStreamTagsParams {
   /** The ID of the broadcaster that owns the channel to apply the tags to. This ID must match the user ID in the access token. */
   broadcaster_id: string;
 }
-
-
 
 export interface GetChannelTeamsParams {
   /** The ID of the broadcaster whose teams you want to get. */
@@ -4182,8 +3986,6 @@ export interface GetChannelTeamsResponse {
     id: string;
   }[];
 }
-
-
 
 export interface GetTeamsParams {
   /** The name of the team to get. This parameter and the _id_ parameter are mutually exclusive; you must specify the team’s name or ID but not both. */
@@ -4224,8 +4026,6 @@ export interface GetTeamsResponse {
     id: string;
   }[];
 }
-
-
 
 export interface GetUsersParams {
   /** The ID of the user to get. To specify more than one user, include the _id_ parameter for each user to get. For example, `id=1234&id=5678`. The maximum number of IDs you may specify is 100. */
@@ -4282,8 +4082,6 @@ export interface GetUsersResponse {
     created_at: string;
   }[];
 }
-
-
 
 export interface UpdateUserParams {
   /**
@@ -4343,8 +4141,6 @@ export interface UpdateUserResponse {
   }[];
 }
 
-
-
 export interface GetUsersFollowsParams {
   /**
    * A user ID. Specify this parameter to discover the users that this user is following.  
@@ -4397,8 +4193,6 @@ export interface GetUsersFollowsResponse {
   };
 }
 
-
-
 export interface GetUserBlockListParams {
   /** The ID of the broadcaster whose list of blocked users you want to get. */
   broadcaster_id: string;
@@ -4419,8 +4213,6 @@ export interface GetUserBlockListResponse {
     display_name: string;
   }[];
 }
-
-
 
 export interface BlockUserParams {
   /** The ID of the user to block. The API ignores the request if the broadcaster has already blocked the user. */
@@ -4444,14 +4236,10 @@ export interface BlockUserParams {
   reason?: 'harassment' | 'spam' | 'other';
 }
 
-
-
 export interface UnblockUserParams {
   /** The ID of the user to remove from the broadcaster’s list of blocked users. The API ignores the request if the broadcaster hasn’t blocked the user. */
   target_user_id: string;
 }
-
-
 
 export interface GetUserExtensionsResponse {
   /** The list of extensions that the user has installed. */
@@ -4475,8 +4263,6 @@ export interface GetUserExtensionsResponse {
     type: 'component' | 'mobile' | 'overlay' | 'panel'[];
   }[];
 }
-
-
 
 export interface GetUserActiveExtensionsParams {
   /**
@@ -4529,8 +4315,6 @@ export interface GetUserActiveExtensionsResponse {
     };
   };
 }
-
-
 
 export interface UpdateUserExtensionsBody {
   /**
@@ -4585,8 +4369,6 @@ export interface UpdateUserExtensionsResponse {
     };
   };
 }
-
-
 
 export interface GetVideosParams {
   /**
@@ -4727,8 +4509,6 @@ export interface GetVideosResponse {
   };
 }
 
-
-
 export interface DeleteVideosParams {
   /**
    * The list of videos to delete. To specify more than one video, include the _id_ parameter for each video to delete. For example, `id=1234&id=5678`. You can delete a maximum of 5 videos per request. Ignores invalid video IDs.  
@@ -4743,14 +4523,10 @@ export interface DeleteVideosResponse {
   data: string[];
 }
 
-
-
 export interface SendWhisperParams {
   /** The ID of the user sending the whisper. This user must have a verified phone number. This ID must match the user ID in the user access token. */
   from_user_id: string;
   /** The ID of the user to receive the whisper. */
   to_user_id: string;
 }
-
-
 

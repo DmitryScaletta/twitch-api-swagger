@@ -117,8 +117,6 @@ const generateTypes = (apiEndpoints: ApiEndpoint[]): string => {
       if (responseBody.parameters.length > 0) {
         renderInterface(getResponseInterfaceName(name), responseBody);
       }
-
-      types += '\n\n';
     },
   );
 
