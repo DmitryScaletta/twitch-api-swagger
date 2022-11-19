@@ -50,7 +50,7 @@ const updateAutoModSettings = async (
     },
   });
 
-  return response.json() as UpdateAutoModSettingsResponse;
+  return response.json() as Promise<UpdateAutoModSettingsResponse>;
 }
 ```
 
