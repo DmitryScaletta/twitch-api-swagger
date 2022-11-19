@@ -246,6 +246,12 @@ const parseDocs = (html: string): ApiEndpoint[] => {
                 changeRequiredIfNull(p, false),
               );
             }
+
+            // Wrong type: map[string]string => map[string]Object
+            // https://dev.twitch.tv/docs/api/reference#update-user-extensions
+            if (id === 'update-user-extensions') {
+              requestBody.parameters[0]!.type = 'map[string]Object';
+            }
           } else {
             requestBody.description.push(parseMarkdown(el.innerHTML));
           }

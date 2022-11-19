@@ -15,7 +15,6 @@ const typesMap: Record<string, string> = {
   float: 'number',
   Boolean: 'boolean',
   Dictionary: 'Record<string, any>',
-  // TODO: looks like docs mistake: https://dev.twitch.tv/docs/api/reference#update-user-extensions
   'map[string]string': 'Record<string, string>',
   'map[string]Object': 'Record<string, Record<string, any>>',
   'map[string,string]': 'Record<string, string>',
@@ -78,7 +77,7 @@ const generateTypes = (apiEndpoints: ApiEndpoint[]): string => {
             finalType = possibleValues;
           }
         }
-        const required = p.required !== true ? '?' : '';
+        const required = p.required ? '' : '?';
 
         if (p.children.length > 0) {
           types += `${offset}${p.name}${required}: {\n`;
