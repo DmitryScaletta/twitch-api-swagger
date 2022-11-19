@@ -2,31 +2,31 @@ export interface StartCommercialBody {
   /**
    * The ID of the broadcaster that wants to run the commercial. This ID must match the user ID found in the OAuth token.
    */
-  broadcaster_id?: string;
+  broadcaster_id: string;
   /**
    * The length of the commercial to run, in seconds. Twitch tries to serve a commercial that’s the requested length, but it may be shorter or longer. The maximum length you should request is 180 seconds.
    */
-  length?: number;
+  length: number;
 }
 
 export interface StartCommercialResponse {
   /**
    * An array that contains a single object with the status of your start commercial request.
    */
-  data?: {
+  data: {
     /**
      * The length of the commercial you requested. If you request a commercial that’s longer than 180 seconds, the API uses 180 seconds.
      */
-    length?: number;
+    length: number;
     /**
      * A message that indicates whether Twitch was able to serve an ad.
      */
-    message?: string;
+    message: string;
     /**
      * The number of seconds you must wait before running another commercial.
      */
-    retry_after?: number;
-  }[]
+    retry_after: number;
+  }[];
 }
 
 
@@ -74,42 +74,42 @@ export interface GetExtensionAnalyticsResponse {
   /**
    * A list of reports. The reports are returned in no particular order; however, the data within each report is in ascending order by date (newest first). The report contains one row of data per day of the reporting window; the report contains rows for only those days that the extension was used. The array is empty if there are no reports.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the extension that the report was generated for.
      */
-    extension_id?: string;
+    extension_id: string;
     /**
      * The URL that you use to download the report. The URL is valid for 5 minutes.
      */
-    URL?: string;
+    URL: string;
     /**
      * The type of report.
      */
-    type?: string;
+    type: string;
     /**
      * The reporting window’s start and end dates, in RFC3339 format.
      */
-    date_range?: {
+    date_range: {
       /**
        * The reporting window’s start date.
        */
-      started_at?: string;
+      started_at: string;
       /**
        * The reporting window’s end date.
        */
-      ended_at?: string;
-    }
-  }[]
+      ended_at: string;
+    };
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -157,42 +157,42 @@ export interface GetGameAnalyticsResponse {
   /**
    * A list of reports. The reports are returned in no particular order; however, the data within each report is in ascending order by date (newest first). The report contains one row of data per day of the reporting window; the report contains rows for only those days that the game was used. A report is available only if the game was broadcast for at least 5 hours over the reporting period. The array is empty if there are no reports.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the game that the report was generated for.
      */
-    game_id?: string;
+    game_id: string;
     /**
      * The URL that you use to download the report. The URL is valid for 5 minutes.
      */
-    URL?: string;
+    URL: string;
     /**
      * The type of report.
      */
-    type?: string;
+    type: string;
     /**
      * The reporting window’s start and end dates, in RFC3339 format.
      */
-    date_range?: {
+    date_range: {
       /**
        * The reporting window’s start date.
        */
-      started_at?: string;
+      started_at: string;
       /**
        * The reporting window’s end date.
        */
-      ended_at?: string;
-    }
-  }[]
+      ended_at: string;
+    };
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -232,45 +232,45 @@ export interface GetBitsLeaderboardResponse {
   /**
    * A list of leaderboard leaders. The leaders are returned in rank order. The array is empty if nobody has cheered bits.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies a user on the leaderboard.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The user’s login name.
      */
-    user_login?: string;
+    user_login: string;
     /**
      * The user’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The user’s position on the leaderboard.
      */
-    rank?: number;
+    rank: number;
     /**
      * The number of Bits the user has cheered.
      */
-    score?: number;
-  }[]
+    score: number;
+  }[];
   /**
    * The reporting window’s start and end dates, in RFC3339 format. The dates are calculated by using the _started\_at_ and _period_ query parameters. If you don’t specify the _started\_at_ query parameter, the fields contain empty strings.
    */
-  date_range?: {
+  date_range: {
     /**
      * The reporting window’s start date.
      */
-    started_at?: string;
+    started_at: string;
     /**
      * The reporting window’s end date.
      */
-    ended_at?: string;
-  }
+    ended_at: string;
+  };
   /**
    * The number of ranked users in `data`. This is the value in the _count_ query parameter or the total number of entries on the leaderboard, whichever is less.
    */
-  total?: number;
+  total: number;
 }
 
 
@@ -288,19 +288,19 @@ export interface GetCheermotesResponse {
   /**
    * The list of Cheermotes. The list is in ascending order by the `order` field’s value.
    */
-  data?: {
+  data: {
     /**
      * The name portion of the Cheermote string that you use in chat to cheer Bits. The full Cheermote string is the concatenation of {prefix} + {number of Bits}. For example, if the prefix is “Cheer” and you want to cheer 100 Bits, the full Cheermote string is Cheer100\. When the Cheermote string is entered in chat, Twitch converts it to the image associated with the Bits tier that was cheered.
      */
-    prefix?: string;
+    prefix: string;
     /**
      * A list of tier levels that the Cheermote supports. Each tier identifies the range of Bits that you can cheer at that tier level and an image that graphically identifies the tier level.
      */
-    tiers?: {
+    tiers: {
       /**
        * The minimum number of Bits that you must cheer at this tier level. The maximum number of Bits that you can cheer at this level is determined by the required minimum Bits of the next tier level minus 1\. For example, if `min_bits` is 1 and `min_bits` for the next tier is 100, the Bits range for this tier level is 1 through 99\. The minimum Bits value of the last tier is the maximum number of Bits you can cheer using this Cheermote. For example, 10000.
        */
-      min_bits?: number;
+      min_bits: number;
       /**
        * The tier level. Possible tiers are:  
        *   
@@ -312,24 +312,24 @@ export interface GetCheermotesResponse {
        * * 10000
        * * 100000
        */
-      id?: '1' | '100' | '500' | '1000' | '5000' | '10000' | '100000';
+      id: '1' | '100' | '500' | '1000' | '5000' | '10000' | '100000';
       /**
        * The hex code of the color associated with this tier level (for example, #979797).
        */
-      color?: string;
+      color: string;
       /**
        * The animated and static image sets for the Cheermote. The dictionary of images is organized by theme, format, and size. The theme keys are _dark_ and _light_. Each theme is a dictionary of formats: _animated_ and _static_. Each format is a dictionary of sizes: 1, 1.5, 2, 3, and 4\. The value of each size contains the URL to the image.
        */
-      images?: Record<string, any>;
+      images: Record<string, any>;
       /**
        * A Boolean value that determines whether users can cheer at this tier level.
        */
-      can_cheer?: boolean;
+      can_cheer: boolean;
       /**
        * A Boolean value that determines whether this tier level is shown in the Bits card. Is **true** if this tier level is shown in the Bits card.
        */
-      show_in_bits_card?: boolean;
-    }[]
+      show_in_bits_card: boolean;
+    }[];
     /**
      * The type of Cheermote. Possible values are:  
      *   
@@ -339,20 +339,20 @@ export interface GetCheermotesResponse {
      * * display\_only — Do not use; for internal use only.
      * * sponsored — A sponsor-defined Cheermote. When used, the sponsor adds additional Bits to the amount that the user cheered. For example, if the user cheered Terminator100, the broadcaster might receive 110 Bits, which includes the sponsor's 10 Bits contribution.
      */
-    type?: 'global_first_party' | 'global_third_party' | 'channel_custom' | 'display_only' | 'sponsored';
+    type: 'global_first_party' | 'global_third_party' | 'channel_custom' | 'display_only' | 'sponsored';
     /**
      * The order that the Cheermotes are shown in the Bits card. The numbers may not be consecutive. For example, the numbers may jump from 1 to 7 to 13\. The order numbers are unique within a Cheermote type (for example, global\_first\_party) but may not be unique amongst all Cheermotes in the response.
      */
-    order?: number;
+    order: number;
     /**
      * The date and time, in RFC3339 format, when this Cheermote was last updated.
      */
-    last_updated?: string;
+    last_updated: string;
     /**
      * A Boolean value that indicates whether this Cheermote provides a charitable contribution match during charity campaigns.
      */
-    is_charitable?: boolean;
-  }[]
+    is_charitable: boolean;
+  }[];
 }
 
 
@@ -380,88 +380,88 @@ export interface GetExtensionTransactionsResponse {
   /**
    * The list of transactions.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the transaction.
      */
-    id?: string;
+    id: string;
     /**
      * The UTC date and time (in RFC3339 format) of the transaction.
      */
-    timestamp?: string;
+    timestamp: string;
     /**
      * The ID of the broadcaster that owns the channel where the transaction occurred.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The ID of the user that purchased the digital product.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The user’s login name.
      */
-    user_login?: string;
+    user_login: string;
     /**
      * The user’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The type of transaction. Possible values are:  
      *   
      * * BITS\_IN\_EXTENSION
      */
-    product_type?: 'BITS_IN_EXTENSION';
+    product_type: 'BITS_IN_EXTENSION';
     /**
      * Contains details about the digital product.
      */
-    product_data?: {
+    product_data: {
       /**
        * An ID that identifies the digital product.
        */
-      sku?: string;
+      sku: string;
       /**
        * Set to `twitch.ext.` \+ `<the extension's ID>`.
        */
-      domain?: string;
+      domain: string;
       /**
        * Contains details about the digital product’s cost.
        */
-      cost?: Object;
+      cost: Object;
       /**
        * A Boolean value that determines whether the product is in development. Is **true** if the digital product is in development and cannot be exchanged.
        */
-      inDevelopment?: boolean;
+      inDevelopment: boolean;
       /**
        * The name of the digital product.
        */
-      displayName?: string;
+      displayName: string;
       /**
        * This field is always empty since you may purchase only unexpired products.
        */
-      expiration?: string;
+      expiration: string;
       /**
        * A Boolean value that determines whether the data was broadcast to all instances of the extension. Is **true** if the data was broadcast to all instances.
        */
-      broadcast?: boolean;
-    }
-  }[]
+      broadcast: boolean;
+    };
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -477,40 +477,40 @@ export interface GetChannelInformationResponse {
   /**
    * A list that contains information about the specified channels. The list is empty if the specified channels weren’t found.
    */
-  data?: {
+  data: {
     /**
      * An ID that uniquely identifies the broadcaster.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The broadcaster’s preferred language. The value is an ISO 639-1 two-letter language code (for example, _en_ for English). The value is set to “other” if the language is not a Twitch supported language.
      */
-    broadcaster_language?: string;
+    broadcaster_language: string;
     /**
      * The name of the game that the broadcaster is playing or last played. The value is an empty string if the broadcaster has never played a game.
      */
-    game_name?: string;
+    game_name: string;
     /**
      * An ID that uniquely identifies the game that the broadcaster is playing or last played. The value is an empty string if the broadcaster has never played a game.
      */
-    game_id?: string;
+    game_id: string;
     /**
      * The title of the stream that the broadcaster is currently streaming or last streamed. The value is an empty string if the broadcaster has never streamed.
      */
-    title?: string;
+    title: string;
     /**
      * The value of the broadcaster’s stream delay setting, in seconds. Reserved for users with Partner status.
      */
-    delay?: number;
-  }[]
+    delay: number;
+  }[];
 }
 
 
@@ -557,20 +557,20 @@ export interface GetChannelEditorsResponse {
   /**
    * A list of users that are editors for the specified broadcaster. The list is empty if the broadcaster doesn’t have editors.
    */
-  data?: {
+  data: {
     /**
      * An ID that uniquely identifies a user with editor permissions.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The user’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The date and time, in RFC3339 format, when the user became one of the broadcaster’s editors.
      */
-    created_at?: string;
-  }[]
+    created_at: string;
+  }[];
 }
 
 
@@ -641,141 +641,141 @@ export interface CreateCustomRewardsResponse {
   /**
    * A list that contains the single custom reward you created.
    */
-  data?: {
+  data: {
     /**
      * The ID that uniquely identifies the broadcaster.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The ID that uniquely identifies this custom reward.
      */
-    id?: string;
+    id: string;
     /**
      * The title of the reward.
      */
-    title?: string;
+    title: string;
     /**
      * The prompt shown to the viewer when they redeem the reward if user input is required (see the `is_user_input_required` field).
      */
-    prompt?: string;
+    prompt: string;
     /**
      * The cost of the reward in Channel Points.
      */
-    cost?: number;
+    cost: number;
     /**
      * A set of custom images for the reward. This field is set to **null** if the broadcaster didn’t upload images.
      */
-    image?: {
+    image: {
       /**
        * The URL to a small version of the image.
        */
-      url_1x?: string;
+      url_1x: string;
       /**
        * The URL to a medium version of the image.
        */
-      url_2x?: string;
+      url_2x: string;
       /**
        * The URL to a large version of the image.
        */
-      url_4x?: string;
-    }
+      url_4x: string;
+    };
     /**
      * A set of default images for the reward.
      */
-    default_image?: {
+    default_image: {
       /**
        * The URL to a small version of the image.
        */
-      url_1x?: string;
+      url_1x: string;
       /**
        * The URL to a medium version of the image.
        */
-      url_2x?: string;
+      url_2x: string;
       /**
        * The URL to a large version of the image.
        */
-      url_4x?: string;
-    }
+      url_4x: string;
+    };
     /**
      * The background color to use for the reward. The color is in Hex format (for example, #00E5CB).
      */
-    background_color?: string;
+    background_color: string;
     /**
      * A Boolean value that determines whether the reward is enabled. Is **true** if enabled; otherwise, **false**. Disabled rewards aren’t shown to the user.
      */
-    is_enabled?: boolean;
+    is_enabled: boolean;
     /**
      * A Boolean value that determines whether the user must enter information when redeeming the reward. Is **true** if the reward requires user input.
      */
-    is_user_input_required?: boolean;
+    is_user_input_required: boolean;
     /**
      * The settings used to determine whether to apply a maximum to the number to the redemptions allowed per live stream.
      */
-    max_per_stream_setting?: {
+    max_per_stream_setting: {
       /**
        * A Boolean value that determines whether the reward applies a limit on the number of redemptions allowed per live stream. Is **true** if the reward applies a limit.
        */
-      is_enabled?: boolean;
+      is_enabled: boolean;
       /**
        * The maximum number of redemptions allowed per live stream.
        */
-      max_per_stream?: number;
-    }
+      max_per_stream: number;
+    };
     /**
      * The settings used to determine whether to apply a maximum to the number of redemptions allowed per user per live stream.
      */
-    max_per_user_per_stream_setting?: {
+    max_per_user_per_stream_setting: {
       /**
        * A Boolean value that determines whether the reward applies a limit on the number of redemptions allowed per user per live stream. Is **true** if the reward applies a limit.
        */
-      is_enabled?: boolean;
+      is_enabled: boolean;
       /**
        * The maximum number of redemptions allowed per user per live stream.
        */
-      max_per_user_per_stream?: number;
-    }
+      max_per_user_per_stream: number;
+    };
     /**
      * The settings used to determine whether to apply a cooldown period between redemptions and the length of the cooldown.
      */
-    global_cooldown_setting?: {
+    global_cooldown_setting: {
       /**
        * A Boolean value that determines whether to apply a cooldown period. Is **true** if a cooldown period is enabled.
        */
-      is_enabled?: boolean;
+      is_enabled: boolean;
       /**
        * The cooldown period, in seconds.
        */
-      global_cooldown_seconds?: number;
-    }
+      global_cooldown_seconds: number;
+    };
     /**
      * A Boolean value that determines whether the reward is currently paused. Is **true** if the reward is paused. Viewers can’t redeem paused rewards.
      */
-    is_paused?: boolean;
+    is_paused: boolean;
     /**
      * A Boolean value that determines whether the reward is currently in stock. Is **true** if the reward is in stock. Viewers can’t redeem out of stock rewards.
      */
-    is_in_stock?: boolean;
+    is_in_stock: boolean;
     /**
      * A Boolean value that determines whether redemptions should be set to FULFILLED status immediately when a reward is redeemed. If **false**, status is UNFULFILLED and follows the normal request queue process.
      */
-    should_redemptions_skip_request_queue?: boolean;
+    should_redemptions_skip_request_queue: boolean;
     /**
      * The number of redemptions redeemed during the current live stream. The number counts against the `max_per_stream_setting` limit. This field is **null** if the broadcaster’s stream isn’t live or _max\_per\_stream\_setting_ isn’t enabled.
      */
-    redemptions_redeemed_current_stream?: number;
+    redemptions_redeemed_current_stream: number;
     /**
      * The timestamp of when the cooldown period expires. Is **null** if the reward isn’t in a cooldown state (see the `global_cooldown_setting` field).
      */
-    cooldown_expires_at?: string;
-  }[]
+    cooldown_expires_at: string;
+  }[];
 }
 
 
@@ -814,141 +814,141 @@ export interface GetCustomRewardResponse {
   /**
    * A list of custom rewards. The list is in ascending order by `id`. If the broadcaster hasn’t created custom rewards, the list is empty.
    */
-  data?: {
+  data: {
     /**
      * The ID that uniquely identifies the broadcaster.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The ID that uniquely identifies this custom reward.
      */
-    id?: string;
+    id: string;
     /**
      * The title of the reward.
      */
-    title?: string;
+    title: string;
     /**
      * The prompt shown to the viewer when they redeem the reward if user input is required (see the `is_user_input_required` field).
      */
-    prompt?: string;
+    prompt: string;
     /**
      * The cost of the reward in Channel Points.
      */
-    cost?: number;
+    cost: number;
     /**
      * A set of custom images for the reward. This field is **null** if the broadcaster didn’t upload images.
      */
-    image?: {
+    image: {
       /**
        * The URL to a small version of the image.
        */
-      url_1x?: string;
+      url_1x: string;
       /**
        * The URL to a medium version of the image.
        */
-      url_2x?: string;
+      url_2x: string;
       /**
        * The URL to a large version of the image.
        */
-      url_4x?: string;
-    }
+      url_4x: string;
+    };
     /**
      * A set of default images for the reward.
      */
-    default_image?: {
+    default_image: {
       /**
        * The URL to a small version of the image.
        */
-      url_1x?: string;
+      url_1x: string;
       /**
        * The URL to a medium version of the image.
        */
-      url_2x?: string;
+      url_2x: string;
       /**
        * The URL to a large version of the image.
        */
-      url_4x?: string;
-    }
+      url_4x: string;
+    };
     /**
      * The background color to use for the reward. The color is in Hex format (for example, #00E5CB).
      */
-    background_color?: string;
+    background_color: string;
     /**
      * A Boolean value that determines whether the reward is enabled. Is **true** if enabled; otherwise, **false**. Disabled rewards aren’t shown to the user.
      */
-    is_enabled?: boolean;
+    is_enabled: boolean;
     /**
      * A Boolean value that determines whether the user must enter information when redeeming the reward. Is **true** if the user is prompted.
      */
-    is_user_input_required?: boolean;
+    is_user_input_required: boolean;
     /**
      * The settings used to determine whether to apply a maximum to the number of redemptions allowed per live stream.
      */
-    max_per_stream_setting?: {
+    max_per_stream_setting: {
       /**
        * A Boolean value that determines whether the reward applies a limit on the number of redemptions allowed per live stream. Is **true** if the reward applies a limit.
        */
-      is_enabled?: boolean;
+      is_enabled: boolean;
       /**
        * The maximum number of redemptions allowed per live stream.
        */
-      max_per_stream?: number;
-    }
+      max_per_stream: number;
+    };
     /**
      * The settings used to determine whether to apply a maximum to the number of redemptions allowed per user per live stream.
      */
-    max_per_user_per_stream_setting?: {
+    max_per_user_per_stream_setting: {
       /**
        * A Boolean value that determines whether the reward applies a limit on the number of redemptions allowed per user per live stream. Is **true** if the reward applies a limit.
        */
-      is_enabled?: boolean;
+      is_enabled: boolean;
       /**
        * The maximum number of redemptions allowed per user per live stream.
        */
-      max_per_user_per_stream?: number;
-    }
+      max_per_user_per_stream: number;
+    };
     /**
      * The settings used to determine whether to apply a cooldown period between redemptions and the length of the cooldown.
      */
-    global_cooldown_setting?: {
+    global_cooldown_setting: {
       /**
        * A Boolean value that determines whether to apply a cooldown period. Is **true** if a cooldown period is enabled.
        */
-      is_enabled?: boolean;
+      is_enabled: boolean;
       /**
        * The cooldown period, in seconds.
        */
-      global_cooldown_seconds?: number;
-    }
+      global_cooldown_seconds: number;
+    };
     /**
      * A Boolean value that determines whether the reward is currently paused. Is **true** if the reward is paused. Viewers can’t redeem paused rewards.
      */
-    is_paused?: boolean;
+    is_paused: boolean;
     /**
      * A Boolean value that determines whether the reward is currently in stock. Is **true** if the reward is in stock. Viewers can’t redeem out of stock rewards.
      */
-    is_in_stock?: boolean;
+    is_in_stock: boolean;
     /**
      * A Boolean value that determines whether redemptions should be set to FULFILLED status immediately when a reward is redeemed. If **false**, status is set to UNFULFILLED and follows the normal request queue process.
      */
-    should_redemptions_skip_request_queue?: boolean;
+    should_redemptions_skip_request_queue: boolean;
     /**
      * The number of redemptions redeemed during the current live stream. The number counts against the `max_per_stream_setting` limit. This field is **null** if the broadcaster’s stream isn’t live or _max\_per\_stream\_setting_ isn’t enabled.
      */
-    redemptions_redeemed_current_stream?: number;
+    redemptions_redeemed_current_stream: number;
     /**
      * The timestamp of when the cooldown period expires. Is **null** if the reward isn’t in a cooldown state. See the `global_cooldown_setting` field.
      */
-    cooldown_expires_at?: string;
-  }[]
+    cooldown_expires_at: string;
+  }[];
 }
 
 
@@ -1001,39 +1001,39 @@ export interface GetCustomRewardRedemptionResponse {
   /**
    * The list of redemptions for the specified reward. The list is empty if there are no redemptions that match the redemption criteria.
    */
-  data?: {
+  data: {
     /**
      * The ID that uniquely identifies the broadcaster.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The ID that uniquely identifies this redemption.
      */
-    id?: string;
+    id: string;
     /**
      * The user’s login name.
      */
-    user_login?: string;
+    user_login: string;
     /**
      * The ID that uniquely identifies the user that redeemed the reward.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The user’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The text the user entered at the prompt when they redeemed the reward; otherwise, an empty string if user input was not required.
      */
-    user_input?: string;
+    user_input: string;
     /**
      * The state of the redemption. Possible values are:  
      *   
@@ -1041,33 +1041,33 @@ export interface GetCustomRewardRedemptionResponse {
      * * FULFILLED
      * * UNFULFILLED
      */
-    status?: 'CANCELED' | 'FULFILLED' | 'UNFULFILLED';
+    status: 'CANCELED' | 'FULFILLED' | 'UNFULFILLED';
     /**
      * The date and time of when the reward was redeemed, in RFC3339 format.
      */
-    redeemed_at?: string;
+    redeemed_at: string;
     /**
      * The reward that the user redeemed.
      */
-    reward?: {
+    reward: {
       /**
        * The ID that uniquely identifies the redeemed reward.
        */
-      id?: string;
+      id: string;
       /**
        * The reward’s title.
        */
-      title?: string;
+      title: string;
       /**
        * The prompt displayed to the viewer if user input is required.
        */
-      prompt?: string;
+      prompt: string;
       /**
        * The reward’s cost, in Channel Points.
        */
-      reward?: number;
-    }
-  }[]
+      reward: number;
+    };
+  }[];
 }
 
 
@@ -1149,137 +1149,137 @@ export interface UpdateCustomRewardResponse {
   /**
    * The list contains the single reward that you updated.
    */
-  data?: {
+  data: {
     /**
      * The ID that uniquely identifies the broadcaster.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The ID that uniquely identifies this custom reward.
      */
-    id?: string;
+    id: string;
     /**
      * The title of the reward.
      */
-    title?: string;
+    title: string;
     /**
      * The prompt shown to the viewer when they redeem the reward if user input is required. See the `is_user_input_required` field.
      */
-    prompt?: string;
+    prompt: string;
     /**
      * The cost of the reward in Channel Points.
      */
-    cost?: number;
+    cost: number;
     /**
      * A set of custom images for the reward. This field is **null** if the broadcaster didn’t upload images.
      */
-    image?: {
+    image: {
       /**
        * The URL to a small version of the image.
        */
-      url_1x?: string;
+      url_1x: string;
       /**
        * The URL to a medium version of the image.
        */
-      url_2x?: string;
+      url_2x: string;
       /**
        * The URL to a large version of the image.
        */
-      url_4x?: string;
-    }
+      url_4x: string;
+    };
     /**
      * A set of default images for the reward.
      */
-    default_image?: {
+    default_image: {
       /**
        * The URL to a small version of the image.
        */
-      url_1x?: string;
+      url_1x: string;
       /**
        * The URL to a medium version of the image.
        */
-      url_2x?: string;
+      url_2x: string;
       /**
        * The URL to a large version of the image.
        */
-      url_4x?: string;
-    }
+      url_4x: string;
+    };
     /**
      * The background color to use for the reward. The color is in Hex format (for example, #00E5CB).
      */
-    background_color?: string;
+    background_color: string;
     /**
      * A Boolean value that determines whether the reward is enabled. Is **true** if enabled; otherwise, **false**. Disabled rewards aren’t shown to the user.
      */
-    is_enabled?: boolean;
+    is_enabled: boolean;
     /**
      * A Boolean value that determines whether the user must enter information when they redeem the reward. Is **true** if the user is prompted.
      */
-    is_user_input_required?: boolean;
+    is_user_input_required: boolean;
     /**
      * The settings used to determine whether to apply a maximum to the number of redemptions allowed per live stream.
      */
-    max_per_stream_setting?: {
+    max_per_stream_setting: {
       /**
        * A Boolean value that determines whether the reward applies a limit on the number of redemptions allowed per live stream. Is **true** if the reward applies a limit.
        */
-      is_enabled?: boolean;
+      is_enabled: boolean;
       /**
        * The maximum number of redemptions allowed per live stream.
        */
-      max_per_stream?: number;
-    }
+      max_per_stream: number;
+    };
     /**
      * The settings used to determine whether to apply a maximum to the number of redemptions allowed per user per live stream.
      */
-    max_per_user_per_stream_setting?: {
+    max_per_user_per_stream_setting: {
       /**
        * A Boolean value that determines whether the reward applies a limit on the number of redemptions allowed per user per live stream. Is **true** if the reward applies a limit.
        */
-      is_enabled?: boolean;
+      is_enabled: boolean;
       /**
        * The maximum number of redemptions allowed per user per live stream.
        */
-      max_per_user_per_stream?: number;
-    }
+      max_per_user_per_stream: number;
+    };
     /**
      * The settings used to determine whether to apply a cooldown period between redemptions and the length of the cooldown.
      */
-    global_cooldown_setting?: {
+    global_cooldown_setting: {
       /**
        * A Boolean value that determines whether to apply a cooldown period. Is **true** if a cooldown period is enabled.
        */
-      is_enabled?: boolean;
-    }
+      is_enabled: boolean;
+    };
     /**
      * A Boolean value that determines whether the reward is currently paused. Is **true** if the reward is paused. Viewers can’t redeem paused rewards.
      */
-    is_paused?: boolean;
+    is_paused: boolean;
     /**
      * A Boolean value that determines whether the reward is currently in stock. Is **true** if the reward is in stock. Viewers can’t redeem out of stock rewards.
      */
-    is_in_stock?: boolean;
+    is_in_stock: boolean;
     /**
      * A Boolean value that determines whether redemptions should be set to FULFILLED status immediately when a reward is redeemed. If **false**, status is set to UNFULFILLED and follows the normal request queue process.
      */
-    should_redemptions_skip_request_queue?: boolean;
+    should_redemptions_skip_request_queue: boolean;
     /**
      * The number of redemptions redeemed during the current live stream. The number counts against the `max_per_stream_setting` limit. This field is **null** if the broadcaster’s stream isn’t live or _max\_per\_stream\_setting_ isn’t enabled.
      */
-    redemptions_redeemed_current_stream?: number;
+    redemptions_redeemed_current_stream: number;
     /**
      * The timestamp of when the cooldown period expires. Is **null** if the reward isn’t in a cooldown state. See the `global_cooldown_setting` field.
      */
-    cooldown_expires_at?: string;
-  }[]
+    cooldown_expires_at: string;
+  }[];
 }
 
 
@@ -1315,60 +1315,60 @@ export interface UpdateRedemptionStatusResponse {
   /**
    * The list contains the single redemption that you updated.
    */
-  data?: {
+  data: {
     /**
      * The ID that uniquely identifies the broadcaster.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The ID that uniquely identifies this redemption..
      */
-    id?: string;
+    id: string;
     /**
      * The ID of the user that redeemed the reward.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The user’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The user’s login name.
      */
-    user_login?: string;
+    user_login: string;
     /**
      * An object that describes the reward that the user redeemed.
      */
-    reward?: {
+    reward: {
       /**
        * The ID that uniquely identifies the reward.
        */
-      id?: string;
+      id: string;
       /**
        * The reward’s title.
        */
-      title?: string;
+      title: string;
       /**
        * The prompt displayed to the viewer if user input is required.
        */
-      prompt?: string;
+      prompt: string;
       /**
        * The reward’s cost, in Channel Points.
        */
-      cost?: number;
-    }
+      cost: number;
+    };
     /**
      * The text that the user entered at the prompt when they redeemed the reward; otherwise, an empty string if user input was not required.
      */
-    user_input?: string;
+    user_input: string;
     /**
      * The state of the redemption. Possible values are:  
      *   
@@ -1376,12 +1376,12 @@ export interface UpdateRedemptionStatusResponse {
      * * FULFILLED
      * * UNFULFILLED
      */
-    status?: 'CANCELED' | 'FULFILLED' | 'UNFULFILLED';
+    status: 'CANCELED' | 'FULFILLED' | 'UNFULFILLED';
     /**
      * The date and time of when the reward was redeemed, in RFC3339 format.
      */
-    redeemed_at?: string;
-  }[]
+    redeemed_at: string;
+  }[];
 }
 
 
@@ -1397,78 +1397,78 @@ export interface GetCharityCampaignResponse {
   /**
    * A list that contains the charity campaign that the broadcaster is currently running. The array is empty if the broadcaster is not running a charity campaign; the campaign information is no longer available as soon as the campaign ends.
    */
-  data?: {
+  data: {
     /**
      * An ID that uniquely identifies the charity campaign.
      */
-    id?: string;
+    id: string;
     /**
      * An ID that uniquely identifies the broadcaster that’s running the campaign.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The charity’s name.
      */
-    charity_name?: string;
+    charity_name: string;
     /**
      * A description of the charity.
      */
-    charity_description?: string;
+    charity_description: string;
     /**
      * A URL to an image of the charity’s logo. The image’s type is PNG and its size is 100px X 100px.
      */
-    charity_logo?: string;
+    charity_logo: string;
     /**
      * A URL to the charity’s website.
      */
-    charity_website?: string;
+    charity_website: string;
     /**
      * The current amount of donations that the campaign has received.
      */
-    current_amount?: {
+    current_amount: {
       /**
        * The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, `value` is set to 550.
        */
-      value?: number;
+      value: number;
       /**
        * The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate `value` from minor units to major units by using the formula:  
        *   
        * `value / 10^decimal_places`
        */
-      decimal_places?: number;
+      decimal_places: number;
       /**
        * The ISO-4217 three-letter currency code that identifies the type of currency in `value`.
        */
-      currency?: string;
-    }
+      currency: string;
+    };
     /**
      * The amount of money that the campaign is trying to raise. This field may be **null** if the broadcaster has not defined a target goal.
      */
-    target_amount?: {
+    target_amount: {
       /**
        * The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, `value` is set to 550.
        */
-      value?: number;
+      value: number;
       /**
        * The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate `value` from minor units to major units by using the formula:  
        *   
        * `value / 10^decimal_places`
        */
-      decimal_places?: number;
+      decimal_places: number;
       /**
        * The ISO-4217 three-letter currency code that identifies the type of currency in `value`.
        */
-      currency?: string;
-    }
-  }[]
+      currency: string;
+    };
+  }[];
 }
 
 
@@ -1498,7 +1498,7 @@ export interface GetChattersResponse {
   /**
    * The list of users that are connected to the specified broadcaster’s chat room. The list is empty if no users are connected to the chat room.
    */
-  data?: {
+  data: {
     /**
      * The login name of a user that’s connected to the broadcaster’s chat room.  
      *   
@@ -1506,21 +1506,21 @@ export interface GetChattersResponse {
      *   
      * To determine whether the user is a moderator or VIP, use the [Get Moderators](https://dev.twitch.tv/docs/api/reference#get-moderators) and [Get VIPs](https://dev.twitch.tv/docs/api/reference#get-vips) endpoints. You can check the roles of up to 100 users (after getting their IDs).
      */
-    user_login?: string;
-  }[]
+    user_login: string;
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
   /**
    * The total number of users that are connected to the broadcaster’s chat room. As you page through the list, the number of users may change as users join and leave the chat room.
    */
-  total?: number;
+  total: number;
 }
 
 
@@ -1536,38 +1536,38 @@ export interface GetChannelEmotesResponse {
   /**
    * The list of emotes that the specified broadcaster created. If the broadcaster hasn’t created custom emotes, the list is empty.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies this emote.
      */
-    id?: string;
+    id: string;
     /**
      * The name of the emote. This is the name that viewers type in the chat window to get the emote to appear.
      */
-    name?: string;
+    name: string;
     /**
      * The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.  
      *   
      * **NOTE:** You should use the templated URL in the `template` field to fetch the image instead of using these URLs.
      */
-    images?: {
+    images: {
       /**
        * A URL to the small version (28px x 28px) of the emote.
        */
-      url_1x?: string;
+      url_1x: string;
       /**
        * A URL to the medium version (56px x 56px) of the emote.
        */
-      url_2x?: string;
+      url_2x: string;
       /**
        * A URL to the large version (112px x 112px) of the emote.
        */
-      url_4x?: string;
-    }
+      url_4x: string;
+    };
     /**
      * The subscriber tier at which the emote is unlocked. This field contains the tier information only if `emote_type` is set to `subscriptions`, otherwise, it’s an empty string.
      */
-    tier?: string;
+    tier: string;
     /**
      * The type of emote. The possible values are:   
      *   
@@ -1575,18 +1575,18 @@ export interface GetChannelEmotesResponse {
      * * follower — A custom follower emote.
      * * subscriptions — A custom subscriber emote.
      */
-    emote_type?: 'bitstier' | 'follower' | 'subscriptions';
+    emote_type: 'bitstier' | 'follower' | 'subscriptions';
     /**
      * An ID that identifies the emote set that the emote belongs to.
      */
-    emote_set_id?: string;
+    emote_set_id: string;
     /**
      * The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only `static`. But if the emote is available as a static PNG and an animated GIF, the array contains `static` and `animated`. The possible formats are:   
      *   
      * * animated — An animated GIF is available for this emote.
      * * static — A static PNG file is available for this emote.
      */
-    format?: 'animated' | 'static'[];
+    format: 'animated' | 'static'[];
     /**
      * The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0\. Possible sizes are:   
      *   
@@ -1594,19 +1594,19 @@ export interface GetChannelEmotesResponse {
      * * 2.0 — A medium version (56px x 56px) is available.
      * * 3.0 — A large version (112px x 112px) is available.
      */
-    scale?: '1.0' | '2.0' | '3.0'[];
+    scale: '1.0' | '2.0' | '3.0'[];
     /**
      * The background themes that the emote is available in. Possible themes are:   
      *   
      * * dark
      * * light
      */
-    theme_mode?: 'dark' | 'light'[];
-  }[]
+    theme_mode: 'dark' | 'light'[];
+  }[];
   /**
    * A templated URL. Use the values from the `id`, `format`, `scale`, and `theme_mode` fields to replace the like-named placeholder strings in the templated URL to create a CDN (content delivery network) URL that you use to fetch the emote. For information about what the template looks like and how to use it to fetch emotes, see [Emote CDN URL format](https://dev.twitch.tv/docs/irc/emotes#cdn-template). You should use this template instead of using the URLs in the `images` object.
    */
-  template?: string;
+  template: string;
 }
 
 
@@ -1615,41 +1615,41 @@ export interface GetGlobalEmotesResponse {
   /**
    * The list of global emotes.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies this emote.
      */
-    id?: string;
+    id: string;
     /**
      * The name of the emote. This is the name that viewers type in the chat window to get the emote to appear.
      */
-    name?: string;
+    name: string;
     /**
      * The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.  
      *   
      * **NOTE:** You should use the templated URL in the `template` field to fetch the image instead of using these URLs.
      */
-    images?: {
+    images: {
       /**
        * A URL to the small version (28px x 28px) of the emote.
        */
-      url_1x?: string;
+      url_1x: string;
       /**
        * A URL to the medium version (56px x 56px) of the emote.
        */
-      url_2x?: string;
+      url_2x: string;
       /**
        * A URL to the large version (112px x 112px) of the emote.
        */
-      url_4x?: string;
-    }
+      url_4x: string;
+    };
     /**
      * The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only `static`. But if the emote is available as a static PNG and an animated GIF, the array contains `static` and `animated`. The possible formats are:   
      *   
      * * animated — An animated GIF is available for this emote.
      * * static — A static PNG file is available for this emote.
      */
-    format?: 'animated' | 'static'[];
+    format: 'animated' | 'static'[];
     /**
      * The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0\. Possible sizes are:   
      *   
@@ -1657,19 +1657,19 @@ export interface GetGlobalEmotesResponse {
      * * 2.0 — A medium version (56px x 56px) is available.
      * * 3.0 — A large version (112px x 112px) is available.
      */
-    scale?: '1.0' | '2.0' | '3.0'[];
+    scale: '1.0' | '2.0' | '3.0'[];
     /**
      * The background themes that the emote is available in. Possible themes are:   
      *   
      * * dark
      * * light
      */
-    theme_mode?: 'dark' | 'light'[];
-  }[]
+    theme_mode: 'dark' | 'light'[];
+  }[];
   /**
    * A templated URL. Use the values from the `id`, `format`, `scale`, and `theme_mode` fields to replace the like-named placeholder strings in the templated URL to create a CDN (content delivery network) URL that you use to fetch the emote. For information about what the template looks like and how to use it to fetch emotes, see [Emote CDN URL format](https://dev.twitch.tv/docs/irc/emotes#cdn-template). You should use this template instead of using the URLs in the `images` object.
    */
-  template?: string;
+  template: string;
 }
 
 
@@ -1687,34 +1687,34 @@ export interface GetEmoteSetsResponse {
   /**
    * The list of emotes found in the specified emote sets. The list is empty if none of the IDs were found. The list is in the same order as the set IDs specified in the request. Each set contains one or more emoticons.
    */
-  data?: {
+  data: {
     /**
      * An ID that uniquely identifies this emote.
      */
-    id?: string;
+    id: string;
     /**
      * The name of the emote. This is the name that viewers type in the chat window to get the emote to appear.
      */
-    name?: string;
+    name: string;
     /**
      * The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.  
      *   
      * **NOTE:** You should use the templated URL in the `template` field to fetch the image instead of using these URLs.
      */
-    images?: {
+    images: {
       /**
        * A URL to the small version (28px x 28px) of the emote.
        */
-      url_1x?: string;
+      url_1x: string;
       /**
        * A URL to the medium version (56px x 56px) of the emote.
        */
-      url_2x?: string;
+      url_2x: string;
       /**
        * A URL to the large version (112px x 112px) of the emote.
        */
-      url_4x?: string;
-    }
+      url_4x: string;
+    };
     /**
      * The type of emote. The possible values are:   
      *   
@@ -1722,22 +1722,22 @@ export interface GetEmoteSetsResponse {
      * * follower — A follower emote.
      * * subscriptions — A subscriber emote.
      */
-    emote_type?: 'bitstier' | 'follower' | 'subscriptions';
+    emote_type: 'bitstier' | 'follower' | 'subscriptions';
     /**
      * An ID that identifies the emote set that the emote belongs to.
      */
-    emote_set_id?: string;
+    emote_set_id: string;
     /**
      * The ID of the broadcaster who owns the emote.
      */
-    owner_id?: string;
+    owner_id: string;
     /**
      * The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only `static`. But if the emote is available as a static PNG and an animated GIF, the array contains `static` and `animated`. The possible formats are:   
      *   
      * * animated — An animated GIF is available for this emote.
      * * static — A static PNG file is available for this emote.
      */
-    format?: 'animated' | 'static'[];
+    format: 'animated' | 'static'[];
     /**
      * The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0\. Possible sizes are:   
      *   
@@ -1745,19 +1745,19 @@ export interface GetEmoteSetsResponse {
      * * 2.0 — A medium version (56px x 56px) is available.
      * * 3.0 — A large version (112px x 112px) is available.
      */
-    scale?: '1.0' | '2.0' | '3.0'[];
+    scale: '1.0' | '2.0' | '3.0'[];
     /**
      * The background themes that the emote is available in. Possible themes are:   
      *   
      * * dark
      * * light
      */
-    theme_mode?: 'dark' | 'light'[];
-  }[]
+    theme_mode: 'dark' | 'light'[];
+  }[];
   /**
    * A templated URL. Use the values from the `id`, `format`, `scale`, and `theme_mode` fields to replace the like-named placeholder strings in the templated URL to create a CDN (content delivery network) URL that you use to fetch the emote. For information about what the template looks like and how to use it to fetch emotes, see [Emote CDN URL format](https://dev.twitch.tv/docs/irc/emotes#cdn-template). You should use this template instead of using the URLs in the `images` object.
    */
-  template?: string;
+  template: string;
 }
 
 
@@ -1766,33 +1766,33 @@ export interface GetChannelChatBadgesResponse {
   /**
    * The list of chat badges. The list is sorted in ascending order by `set_id`, and within a set, the list is sorted in ascending order by `id`.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies this set of chat badges. For example, Bits or Subscriber.
      */
-    set_id?: string;
+    set_id: string;
     /**
      * The list of chat badges in this set.
      */
-    versions?: {
+    versions: {
       /**
        * An ID that identifies this version of the badge. The ID can be any value. For example, for Bits, the ID is the Bits tier level, but for World of Warcraft, it could be Alliance or Horde.
        */
-      id?: string;
+      id: string;
       /**
        * A URL to the small version (18px x 18px) of the badge.
        */
-      image_url_1x?: string;
+      image_url_1x: string;
       /**
        * A URL to the medium version (36px x 36px) of the badge.
        */
-      image_url_2x?: string;
+      image_url_2x: string;
       /**
        * A URL to the large version (72px x 72px) of the badge.
        */
-      image_url_4x?: string;
-    }[]
-  }[]
+      image_url_4x: string;
+    }[];
+  }[];
 }
 
 
@@ -1801,33 +1801,33 @@ export interface GetGlobalChatBadgesResponse {
   /**
    * The list of chat badges. The list is sorted in ascending order by `set_id`, and within a set, the list is sorted in ascending order by `id`.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies this set of chat badges. For example, Bits or Subscriber.
      */
-    set_id?: string;
+    set_id: string;
     /**
      * The list of chat badges in this set.
      */
-    versions?: {
+    versions: {
       /**
        * An ID that identifies this version of the badge. The ID can be any value. For example, for Bits, the ID is the Bits tier level, but for World of Warcraft, it could be Alliance or Horde.
        */
-      id?: string;
+      id: string;
       /**
        * A URL to the small version (18px x 18px) of the badge.
        */
-      image_url_1x?: string;
+      image_url_1x: string;
       /**
        * A URL to the medium version (36px x 36px) of the badge.
        */
-      image_url_2x?: string;
+      image_url_2x: string;
       /**
        * A URL to the large version (72px x 72px) of the badge.
        */
-      image_url_4x?: string;
-    }[]
-  }[]
+      image_url_4x: string;
+    }[];
+  }[];
 }
 
 
@@ -1851,15 +1851,15 @@ export interface GetChatSettingsResponse {
   /**
    * The list of chat settings. The list contains a single object with all the settings.
    */
-  data?: {
+  data: {
     /**
      * The ID of the broadcaster specified in the request.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * A Boolean value that determines whether chat messages must contain only emotes. Is **true** if chat messages may contain only emotes; otherwise, **false**.
      */
-    emote_mode?: boolean;
+    emote_mode: boolean;
     /**
      * A Boolean value that determines whether the broadcaster restricts the chat room to followers only.  
      *   
@@ -1867,27 +1867,27 @@ export interface GetChatSettingsResponse {
      *   
      * See the `follower_mode_duration` field for how long users must follow the broadcaster before being able to participate in the chat room.
      */
-    follower_mode?: boolean;
+    follower_mode: boolean;
     /**
      * The length of time, in minutes, that users must follow the broadcaster before being able to participate in the chat room. Is **null** if `follower_mode` is **false**.
      */
-    follower_mode_duration?: number;
+    follower_mode_duration: number;
     /**
      * The moderator’s ID. The response includes this field only if the request specifies a user access token that includes the **moderator:read:chat\_settings** scope.
      */
-    moderator_id?: string;
+    moderator_id: string;
     /**
      * A Boolean value that determines whether the broadcaster adds a short delay before chat messages appear in the chat room. This gives chat moderators and bots a chance to remove them before viewers can see the message. See the `non_moderator_chat_delay_duration` field for the length of the delay. Is **true** if the broadcaster applies a delay; otherwise, **false**.  
      *   
      * The response includes this field only if the request specifies a user access token that includes the **moderator:read:chat\_settings** scope and the user in the _moderator\_id_ query parameter is one of the broadcaster’s moderators.
      */
-    non_moderator_chat_delay?: boolean;
+    non_moderator_chat_delay: boolean;
     /**
      * The amount of time, in seconds, that messages are delayed before appearing in chat. Is **null** if `non_moderator_chat_delay` is **false**.  
      *   
      * The response includes this field only if the request specifies a user access token that includes the **moderator:read:chat\_settings** scope and the user in the _moderator\_id_ query parameter is one of the broadcaster’s moderators.
      */
-    non_moderator_chat_delay_duration?: number;
+    non_moderator_chat_delay_duration: number;
     /**
      * A Boolean value that determines whether the broadcaster limits how often users in the chat room are allowed to send messages.  
      *   
@@ -1895,26 +1895,26 @@ export interface GetChatSettingsResponse {
      *   
      * See the `slow_mode_wait_time` field for the delay.
      */
-    slow_mode?: boolean;
+    slow_mode: boolean;
     /**
      * The amount of time, in seconds, that users must wait between sending messages.  
      *   
      * Is **null** if slow\_mode is **false**.
      */
-    slow_mode_wait_time?: number;
+    slow_mode_wait_time: number;
     /**
      * A Boolean value that determines whether only users that subscribe to the broadcaster’s channel may talk in the chat room.  
      *   
      * Is **true** if the broadcaster restricts the chat room to subscribers only; otherwise, **false**.
      */
-    subscriber_mode?: boolean;
+    subscriber_mode: boolean;
     /**
      * A Boolean value that determines whether the broadcaster requires users to post only unique messages in the chat room.  
      *   
      * Is **true** if the broadcaster requires unique messages only; otherwise, **false**.
      */
-    unique_chat_mode?: boolean;
-  }[]
+    unique_chat_mode: boolean;
+  }[];
 }
 
 
@@ -2004,15 +2004,15 @@ export interface UpdateChatSettingsResponse {
   /**
    * The list of chat settings. The list contains a single object with all the settings.
    */
-  data?: {
+  data: {
     /**
      * The ID of the broadcaster specified in the request.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * A Boolean value that determines whether chat messages must contain only emotes. Is **true** if chat messages may contain only emotes; otherwise, **false**.
      */
-    emote_mode?: boolean;
+    emote_mode: boolean;
     /**
      * A Boolean value that determines whether the broadcaster restricts the chat room to followers only.  
      *   
@@ -2020,23 +2020,23 @@ export interface UpdateChatSettingsResponse {
      *   
      * See the `follower_mode_duration` field for how long users must follow the broadcaster before being able to participate in the chat room.
      */
-    follower_mode?: boolean;
+    follower_mode: boolean;
     /**
      * The length of time, in minutes, that users must follow the broadcaster before being able to participate in the chat room. Is **null** if `follower_mode` is **false**.
      */
-    follower_mode_duration?: number;
+    follower_mode_duration: number;
     /**
      * The moderator’s ID. The response includes this field only if the request specifies a user access token that includes the **moderator:read:chat\_settings** scope.
      */
-    moderator_id?: string;
+    moderator_id: string;
     /**
      * A Boolean value that determines whether the broadcaster adds a short delay before chat messages appear in the chat room. This gives chat moderators and bots a chance to remove them before viewers can see the message. See the `non_moderator_chat_delay_duration` field for the length of the delay. Is **true** if the broadcaster applies a delay; otherwise, **false**.
      */
-    non_moderator_chat_delay?: boolean;
+    non_moderator_chat_delay: boolean;
     /**
      * The amount of time, in seconds, that messages are delayed before appearing in chat. Is **null** if `non_moderator_chat_delay` is **false**.
      */
-    non_moderator_chat_delay_duration?: number;
+    non_moderator_chat_delay_duration: number;
     /**
      * A Boolean value that determines whether the broadcaster limits how often users in the chat room are allowed to send messages.  
      *   
@@ -2044,26 +2044,26 @@ export interface UpdateChatSettingsResponse {
      *   
      * See the `slow_mode_wait_time` field for the delay.
      */
-    slow_mode?: boolean;
+    slow_mode: boolean;
     /**
      * The amount of time, in seconds, that users must wait between sending messages.  
      *   
      * Is **null** if slow\_mode is **false**.
      */
-    slow_mode_wait_time?: number;
+    slow_mode_wait_time: number;
     /**
      * A Boolean value that determines whether only users that subscribe to the broadcaster’s channel may talk in the chat room.  
      *   
      * Is **true** if the broadcaster restricts the chat room to subscribers only; otherwise, **false**.
      */
-    subscriber_mode?: boolean;
+    subscriber_mode: boolean;
     /**
      * A Boolean value that determines whether the broadcaster requires users to post only unique messages in the chat room.  
      *   
      * Is **true** if the broadcaster requires unique messages only; otherwise, **false**.
      */
-    unique_chat_mode?: boolean;
-  }[]
+    unique_chat_mode: boolean;
+  }[];
 }
 
 
@@ -2113,24 +2113,24 @@ export interface GetUserChatColorResponse {
   /**
    * The list of users and the color code they use for their name.
    */
-  data?: {
+  data: {
     /**
      * An ID that uniquely identifies the user.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The user’s login name.
      */
-    user_login?: string;
+    user_login: string;
     /**
      * The user’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The Hex color code that the user uses in chat for their name. If the user hasn’t specified a color in their settings, the string is empty.
      */
-    color?: string;
-  }[]
+    color: string;
+  }[];
 }
 
 
@@ -2183,11 +2183,11 @@ export interface CreateClipResponse {
    *   
    * The URL is valid for up to 24 hours or until the clip is published, whichever comes first.
    */
-  edit_url?: string;
+  edit_url: string;
   /**
    * An ID that uniquely identifies the clip.
    */
-  id?: string;
+  id: string;
 }
 
 
@@ -2234,83 +2234,83 @@ export interface GetClipsResponse {
   /**
    * The list of video clips. For clips returned by _game\_id_ or _broadcaster\_id_, the list is in descending order by view count. For lists returned by _id_, the list is in the same order as the input IDs.
    */
-  data?: {
+  data: {
     /**
      * An ID that uniquely identifies the clip.
      */
-    id?: string;
+    id: string;
     /**
      * A URL to the clip.
      */
-    url?: string;
+    url: string;
     /**
      * A URL that you can use in an iframe to embed the clip (see [Embedding Video and Clips](https://dev.twitch.tv/docs/embed/video-and-clips)).
      */
-    embed_url?: string;
+    embed_url: string;
     /**
      * An ID that identifies the broadcaster that the video was clipped from.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * An ID that identifies the user that created the clip.
      */
-    creator_id?: string;
+    creator_id: string;
     /**
      * The user’s display name.
      */
-    creator_name?: string;
+    creator_name: string;
     /**
      * An ID that identifies the video that the clip came from. This field contains an empty string if the video is not available.
      */
-    video_id?: string;
+    video_id: string;
     /**
      * The ID of the game that was being played when the clip was created.
      */
-    game_id?: string;
+    game_id: string;
     /**
      * The ISO 639-1 two-letter language code that the broadcaster broadcasts in. For example, _en_ for English. The value is _other_ if the broadcaster uses a language that Twitch doesn’t support.
      */
-    language?: string;
+    language: string;
     /**
      * The title of the clip.
      */
-    title?: string;
+    title: string;
     /**
      * The number of times the clip has been viewed.
      */
-    view_count?: number;
+    view_count: number;
     /**
      * The date and time of when the clip was created. The date and time is in RFC3339 format.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * A URL to a thumbnail image of the clip.
      */
-    thumbnail_url?: string;
+    thumbnail_url: string;
     /**
      * The length of the clip, in seconds. Precision is 0.1.
      */
-    duration?: number;
+    duration: number;
     /**
      * The zero-based offset, in seconds, to where the clip starts in the video (VOD). Is **null** if the video is not available or hasn’t been created yet from the live stream (see `video_id`).  
      *   
      * Note that there’s a delay between when a clip is created during a broadcast and when the offset is set. During the delay period, `vod_offset` is **null**. The delay is indeterminant but is typically minutes long.
      */
-    vod_offset?: number;
-  }[]
+    vod_offset: number;
+  }[];
   /**
    * The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Set the request’s _after_ or _before_ query parameter to this value depending on whether you’re paging forwards or backwards.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -2330,11 +2330,11 @@ export interface GetCodeStatusResponse {
   /**
    * The list of redemption codes and their status values.
    */
-  data?: {
+  data: {
     /**
      * The redemption code.
      */
-    code?: string;
+    code: string;
     /**
      * The redemption code’s status. Possible values are:   
      *   
@@ -2347,8 +2347,8 @@ export interface GetCodeStatusResponse {
      * * UNUSED — The code has not been claimed.
      * * USER\_NOT\_ELIGIBLE — The user is not eligible to redeem this code.
      */
-    status?: 'ALREADY_CLAIMED' | 'EXPIRED' | 'INACTIVE' | 'INCORRECT_FORMAT' | 'INTERNAL_ERROR' | 'NOT_FOUND' | 'UNUSED' | 'USER_NOT_ELIGIBLE';
-  }[]
+    status: 'ALREADY_CLAIMED' | 'EXPIRED' | 'INACTIVE' | 'INCORRECT_FORMAT' | 'INTERNAL_ERROR' | 'NOT_FOUND' | 'UNUSED' | 'USER_NOT_ELIGIBLE';
+  }[];
 }
 
 
@@ -2387,48 +2387,48 @@ export interface GetDropsEntitlementsResponse {
   /**
    * The list of entitlements.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the entitlement.
      */
-    id?: string;
+    id: string;
     /**
      * An ID that identifies the benefit (reward).
      */
-    benefit_id?: string;
+    benefit_id: string;
     /**
      * The UTC date and time (in RFC3339 format) of when the entitlement was granted.
      */
-    timestamp?: string;
+    timestamp: string;
     /**
      * An ID that identifies the user who was granted the entitlement.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * An ID that identifies the game the user was playing when the reward was entitled.
      */
-    game_id?: string;
+    game_id: string;
     /**
      * The entitlement’s fulfillment status. Possible values are:   
      *   
      * * CLAIMED
      * * FULFILLED
      */
-    fulfillment_status?: 'CLAIMED' | 'FULFILLED';
+    fulfillment_status: 'CLAIMED' | 'FULFILLED';
     /**
      * The UTC date and time (in RFC3339 format) of when the entitlement was last updated.
      */
-    last_updated?: string;
-  }[]
+    last_updated: string;
+  }[];
   /**
    * The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Set the request’s _after_ query parameter to this value to page forward through the results.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -2437,7 +2437,7 @@ export interface UpdateDropsEntitlementsResponse {
   /**
    * A list that indicates which entitlements were successfully updated and those that weren’t.
    */
-  data?: {
+  data: {
     /**
      * A string that indicates whether the status of the entitlements in the `ids` field were successfully updated. Possible values are:  
      *   
@@ -2447,12 +2447,12 @@ export interface UpdateDropsEntitlementsResponse {
      * * UNAUTHORIZED — The user or organization identified by the user access token is not authorized to update the entitlements.
      * * UPDATE\_FAILED — The update failed. These are considered transient errors and the request should be retried later.
      */
-    status?: 'INVALID_ID' | 'NOT_FOUND' | 'SUCCESS' | 'UNAUTHORIZED' | 'UPDATE_FAILED';
+    status: 'INVALID_ID' | 'NOT_FOUND' | 'SUCCESS' | 'UNAUTHORIZED' | 'UPDATE_FAILED';
     /**
      * The list of entitlements that the status in the `status` field applies to.
      */
-    ids?: string[];
-  }[]
+    ids: string[];
+  }[];
 }
 
 
@@ -2472,11 +2472,11 @@ export interface RedeemCodeResponse {
   /**
    * The list of redeemed codes.
    */
-  data?: {
+  data: {
     /**
      * The redemption code.
      */
-    code?: string;
+    code: string;
     /**
      * The redemption code’s status. Possible values are:  
      *   
@@ -2490,8 +2490,8 @@ export interface RedeemCodeResponse {
      * * UNUSED — The code has not been claimed.
      * * USER\_NOT\_ELIGIBLE — The user is not eligible to redeem this code.
      */
-    status?: 'ALREADY_CLAIMED' | 'EXPIRED' | 'INACTIVE' | 'INCORRECT_FORMAT' | 'INTERNAL_ERROR' | 'NOT_FOUND' | 'SUCCESSFULLY_REDEEMED' | 'UNUSED' | 'USER_NOT_ELIGIBLE';
-  }[]
+    status: 'ALREADY_CLAIMED' | 'EXPIRED' | 'INACTIVE' | 'INCORRECT_FORMAT' | 'INTERNAL_ERROR' | 'NOT_FOUND' | 'SUCCESSFULLY_REDEEMED' | 'UNUSED' | 'USER_NOT_ELIGIBLE';
+  }[];
 }
 
 
@@ -2521,7 +2521,7 @@ export interface GetExtensionConfigurationSegmentResponse {
   /**
    * The list of requested configuration segments. The list is returned in the same order that you specified the list of segments in the request.
    */
-  data?: {
+  data: {
     /**
      * The type of segment. Possible values are:   
      *   
@@ -2529,20 +2529,20 @@ export interface GetExtensionConfigurationSegmentResponse {
      * * developer
      * * global
      */
-    segment?: 'broadcaster' | 'developer' | 'global';
+    segment: 'broadcaster' | 'developer' | 'global';
     /**
      * The ID of the broadcaster that installed the extension. The object includes this field only if the `segment` query parameter is set to developer or broadcaster.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The contents of the segment. This string may be a plain-text string or a string-encoded JSON object.
      */
-    content?: string;
+    content: string;
     /**
      * The version number that identifies this definition of the segment’s data.
      */
-    version?: string;
-  }[]
+    version: string;
+  }[];
 }
 
 
@@ -2646,32 +2646,32 @@ export interface GetExtensionLiveChannelsResponse {
   /**
    * The list of broadcasters that are streaming live and that have installed or activated the extension.
    */
-  data?: {
+  data: {
     /**
      * The ID of the broadcaster that is streaming live and has installed or activated the extension.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The name of the category or game being streamed.
      */
-    game_name?: string;
+    game_name: string;
     /**
      * The ID of the category or game being streamed.
      */
-    game_id?: string;
+    game_id: string;
     /**
      * The title of the broadcaster’s stream. May be an empty string if not specified.
      */
-    title?: string;
-  }[]
+    title: string;
+  }[];
   /**
    * This field contains the cursor used to page through the results. The field is empty if there are no more pages left to page through. Note that this field is a string compared to other endpoints that use a **Pagination** object. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: string;
+  pagination: string;
 }
 
 
@@ -2680,29 +2680,29 @@ export interface GetExtensionSecretsResponse {
   /**
    * The list of shared secrets that the extension created.
    */
-  data?: {
+  data: {
     /**
      * The version number that identifies this definition of the secret’s data.
      */
-    format_version?: number;
+    format_version: number;
     /**
      * The list of secrets.
      */
-    secrets?: {
+    secrets: {
       /**
        * The raw secret that you use with JWT encoding.
        */
-      content?: string;
+      content: string;
       /**
        * The UTC date and time (in RFC3339 format) that you may begin using this secret to sign a JWT.
        */
-      active_at?: string;
+      active_at: string;
       /**
        * The UTC date and time (in RFC3339 format) that you must stop using this secret to decode a JWT.
        */
-      expires_at?: string;
-    }[]
-  }[]
+      expires_at: string;
+    }[];
+  }[];
 }
 
 
@@ -2722,29 +2722,29 @@ export interface CreateExtensionSecretResponse {
   /**
    * A list that contains the newly added secrets.
    */
-  data?: {
+  data: {
     /**
      * The version number that identifies this definition of the secret’s data.
      */
-    format_version?: number;
+    format_version: number;
     /**
      * The list of secrets.
      */
-    secrets?: {
+    secrets: {
       /**
        * The raw secret that you use with JWT encoding.
        */
-      content?: string;
+      content: string;
       /**
        * The UTC date and time (in RFC3339 format) that you may begin using this secret to sign a JWT.
        */
-      active_at?: string;
+      active_at: string;
       /**
        * The UTC date and time (in RFC3339 format) that you must stop using this secret to decode a JWT.
        */
-      expires_at?: string;
-    }[]
-  }[]
+      expires_at: string;
+    }[];
+  }[];
 }
 
 
@@ -2788,21 +2788,21 @@ export interface GetExtensionsResponse {
   /**
    * A list that contains the specified extension.
    */
-  data?: {
+  data: {
     /**
      * The name of the user or organization that owns the extension.
      */
-    author_name?: string;
+    author_name: string;
     /**
      * A Boolean value that determines whether the extension has features that use Bits. Is **true** if the extension has features that use Bits.
      */
-    bits_enabled?: boolean;
+    bits_enabled: boolean;
     /**
      * A Boolean value that determines whether a user can install the extension on their channel. Is **true** if a user can install the extension.  
      *   
      * Typically, this is set to **false** if the extension is currently in testing mode and requires users to be allowlisted (the allowlist is configured on Twitch’s [developer site](https://dev.twitch.tv/console/extensions) under the **Extensions** \-> **Extension** \-> **Version** \-> **Access**).
      */
-    can_install?: boolean;
+    can_install: boolean;
     /**
      * The location of where the extension’s configuration is stored. Possible values are:  
      *   
@@ -2810,47 +2810,47 @@ export interface GetExtensionsResponse {
      * * custom — The Extension Backend Service (EBS) hosts the configuration.
      * * none — The extension doesn't require configuration.
      */
-    configuration_location?: 'hosted' | 'custom' | 'none';
+    configuration_location: 'hosted' | 'custom' | 'none';
     /**
      * A longer description of the extension. It appears on the details page.
      */
-    description?: string;
+    description: string;
     /**
      * A URL to the extension’s Terms of Service.
      */
-    eula_tos_url?: string;
+    eula_tos_url: string;
     /**
      * A Boolean value that determines whether the extension can communicate with the installed channel’s chat. Is **true** if the extension can communicate with the channel’s chat room.
      */
-    has_chat_support?: boolean;
+    has_chat_support: boolean;
     /**
      * A URL to the default icon that’s displayed in the Extensions directory.
      */
-    icon_url?: string;
+    icon_url: string;
     /**
      * A dictionary that contains URLs to different sizes of the default icon. The dictionary’s key identifies the icon’s size (for example, 24x24), and the dictionary’s value contains the URL to the icon.
      */
-    icon_urls?: Record<string, string>;
+    icon_urls: Record<string, string>;
     /**
      * The extension’s ID.
      */
-    id?: string;
+    id: string;
     /**
      * The extension’s name.
      */
-    name?: string;
+    name: string;
     /**
      * A URL to the extension’s privacy policy.
      */
-    privacy_policy_url?: string;
+    privacy_policy_url: string;
     /**
      * A Boolean value that determines whether the extension wants to explicitly ask viewers to link their Twitch identity.
      */
-    request_identity_link?: boolean;
+    request_identity_link: boolean;
     /**
      * A list of URLs to screenshots that are shown in the Extensions marketplace.
      */
-    screenshot_urls?: string[];
+    screenshot_urls: string[];
     /**
      * The extension’s state. Possible values are:  
      *   
@@ -2864,64 +2864,64 @@ export interface GetExtensionsResponse {
      * * Rejected
      * * Released
      */
-    state?: 'Approved' | 'AssetsUploaded' | 'Deleted' | 'Deprecated' | 'InReview' | 'InTest' | 'PendingAction' | 'Rejected' | 'Released';
+    state: 'Approved' | 'AssetsUploaded' | 'Deleted' | 'Deprecated' | 'InReview' | 'InTest' | 'PendingAction' | 'Rejected' | 'Released';
     /**
      * Indicates whether the extension can view the user’s subscription level on the channel that the extension is installed on. Possible values are:  
      *   
      * * none — The extension can't view the user’s subscription level.
      * * optional — The extension can view the user’s subscription level.
      */
-    subscriptions_support_level?: 'none' | 'optional';
+    subscriptions_support_level: 'none' | 'optional';
     /**
      * A short description of the extension that streamers see when hovering over the discovery splash screen in the Extensions manager.
      */
-    summary?: string;
+    summary: string;
     /**
      * The email address that users use to get support for the extension.
      */
-    support_email?: string;
+    support_email: string;
     /**
      * The extension’s version number.
      */
-    version?: string;
+    version: string;
     /**
      * A brief description displayed on the channel to explain how the extension works.
      */
-    viewer_summary?: string;
+    viewer_summary: string;
     /**
      * Describes all views-related information such as how the extension is displayed on mobile devices.
      */
-    views?: {
+    views: {
       /**
        * Describes how the extension is displayed on mobile devices.
        */
-      mobile?: Object;
+      mobile: Object;
       /**
        * Describes how the extension is rendered if the extension may be activated as a panel extension.
        */
-      panel?: Object;
+      panel: Object;
       /**
        * Describes how the extension is rendered if the extension may be activated as a video-overlay extension.
        */
-      video_overlay?: Object;
+      video_overlay: Object;
       /**
        * Describes how the extension is rendered if the extension may be activated as a video-component extension.
        */
-      component?: Object;
+      component: Object;
       /**
        * Describes the view that is shown to broadcasters while they are configuring your extension within the Extension Manager.
        */
-      config?: Object;
-    }
+      config: Object;
+    };
     /**
      * Allowlisted configuration URLs for displaying the extension (the allowlist is configured on Twitch’s [developer site](https://dev.twitch.tv/console/extensions) under the **Extensions** \-> **Extension** \-> **Version** \-> **Capabilities**).
      */
-    allowlisted_config_urls?: string[];
+    allowlisted_config_urls: string[];
     /**
      * Allowlisted panel URLs for displaying the extension (the allowlist is configured on Twitch’s [developer site](https://dev.twitch.tv/console/extensions) under the **Extensions** \-> **Extension** \-> **Version** \-> **Capabilities**).
      */
-    allowlisted_panel_urls?: string[];
-  }[]
+    allowlisted_panel_urls: string[];
+  }[];
 }
 
 
@@ -2941,21 +2941,21 @@ export interface GetReleasedExtensionsResponse {
   /**
    * A list that contains the specified extension.
    */
-  data?: {
+  data: {
     /**
      * The name of the user or organization that owns the extension.
      */
-    author_name?: string;
+    author_name: string;
     /**
      * A Boolean value that determines whether the extension has features that use Bits. Is **true** if the extension has features that use Bits.
      */
-    bits_enabled?: boolean;
+    bits_enabled: boolean;
     /**
      * A Boolean value that determines whether a user can install the extension on their channel. Is **true** if a user can install the extension.  
      *   
      * Typically, this is set to **false** if the extension is currently in testing mode and requires users to be allowlisted (the allowlist is configured on Twitch’s [developer site](https://dev.twitch.tv/console/extensions) under the **Extensions** \-> **Extension** \-> **Version** \-> **Access**).
      */
-    can_install?: boolean;
+    can_install: boolean;
     /**
      * The location of where the extension’s configuration is stored. Possible values are:  
      *   
@@ -2963,47 +2963,47 @@ export interface GetReleasedExtensionsResponse {
      * * custom — The Extension Backend Service (EBS) hosts the configuration.
      * * none — The extension doesn't require configuration.
      */
-    configuration_location?: 'hosted' | 'custom' | 'none';
+    configuration_location: 'hosted' | 'custom' | 'none';
     /**
      * A longer description of the extension. It appears on the details page.
      */
-    description?: string;
+    description: string;
     /**
      * A URL to the extension’s Terms of Service.
      */
-    eula_tos_url?: string;
+    eula_tos_url: string;
     /**
      * A Boolean value that determines whether the extension can communicate with the installed channel’s chat. Is **true** if the extension can communicate with the channel’s chat room.
      */
-    has_chat_support?: boolean;
+    has_chat_support: boolean;
     /**
      * A URL to the default icon that’s displayed in the Extensions directory.
      */
-    icon_url?: string;
+    icon_url: string;
     /**
      * A dictionary that contains URLs to different sizes of the default icon. The dictionary’s key identifies the icon’s size (for example, 24x24), and the dictionary’s value contains the URL to the icon.
      */
-    icon_urls?: Record<string, string>;
+    icon_urls: Record<string, string>;
     /**
      * The extension’s ID.
      */
-    id?: string;
+    id: string;
     /**
      * The extension’s name.
      */
-    name?: string;
+    name: string;
     /**
      * A URL to the extension’s privacy policy.
      */
-    privacy_policy_url?: string;
+    privacy_policy_url: string;
     /**
      * A Boolean value that determines whether the extension wants to explicitly ask viewers to link their Twitch identity.
      */
-    request_identity_link?: boolean;
+    request_identity_link: boolean;
     /**
      * A list of URLs to screenshots that are shown in the Extensions marketplace.
      */
-    screenshot_urls?: string[];
+    screenshot_urls: string[];
     /**
      * The extension’s state. Possible values are:  
      *   
@@ -3017,64 +3017,64 @@ export interface GetReleasedExtensionsResponse {
      * * Rejected
      * * Released
      */
-    state?: 'Approved' | 'AssetsUploaded' | 'Deleted' | 'Deprecated' | 'InReview' | 'InTest' | 'PendingAction' | 'Rejected' | 'Released';
+    state: 'Approved' | 'AssetsUploaded' | 'Deleted' | 'Deprecated' | 'InReview' | 'InTest' | 'PendingAction' | 'Rejected' | 'Released';
     /**
      * Indicates whether the extension can view the user’s subscription level on the channel that the extension is installed on. Possible values are:  
      *   
      * * none — The extension can't view the user’s subscription level.
      * * optional — The extension can view the user’s subscription level.
      */
-    subscriptions_support_level?: 'none' | 'optional';
+    subscriptions_support_level: 'none' | 'optional';
     /**
      * A short description of the extension that streamers see when hovering over the discovery splash screen in the Extensions manager.
      */
-    summary?: string;
+    summary: string;
     /**
      * The email address that users use to get support for the extension.
      */
-    support_email?: string;
+    support_email: string;
     /**
      * The extension’s version number.
      */
-    version?: string;
+    version: string;
     /**
      * A brief description displayed on the channel to explain how the extension works.
      */
-    viewer_summary?: string;
+    viewer_summary: string;
     /**
      * Describes all views-related information such as how the extension is displayed on mobile devices.
      */
-    views?: {
+    views: {
       /**
        * Describes how the extension is displayed on mobile devices.
        */
-      mobile?: Object;
+      mobile: Object;
       /**
        * Describes how the extension is rendered if the extension may be activated as a panel extension.
        */
-      panel?: Object;
+      panel: Object;
       /**
        * Describes how the extension is rendered if the extension may be activated as a video-overlay extension.
        */
-      video_overlay?: Object;
+      video_overlay: Object;
       /**
        * Describes how the extension is rendered if the extension may be activated as a video-component extension.
        */
-      component?: Object;
+      component: Object;
       /**
        * Describes the view that is shown to broadcasters while they are configuring your extension within the Extension Manager.
        */
-      config?: Object;
-    }
+      config: Object;
+    };
     /**
      * Allowlisted configuration URLs for displaying the extension (the allowlist is configured on Twitch’s [developer site](https://dev.twitch.tv/console/extensions) under the **Extensions** \-> **Extension** \-> **Version** \-> **Capabilities**).
      */
-    allowlisted_config_urls?: string[];
+    allowlisted_config_urls: string[];
     /**
      * Allowlisted panel URLs for displaying the extension (the allowlist is configured on Twitch’s [developer site](https://dev.twitch.tv/console/extensions) under the **Extensions** \-> **Extension** \-> **Version** \-> **Capabilities**).
      */
-    allowlisted_panel_urls?: string[];
-  }[]
+    allowlisted_panel_urls: string[];
+  }[];
 }
 
 
@@ -3090,43 +3090,43 @@ export interface GetExtensionBitsProductsResponse {
   /**
    * A list of Bits products that the extension created. The list is in ascending SKU order. The list is empty if the extension hasn’t created any products or they’re all expired or disabled.
    */
-  data?: {
+  data: {
     /**
      * The product’s SKU. The SKU is unique across an extension’s products.
      */
-    sku?: string;
+    sku: string;
     /**
      * An object that contains the product’s cost information.
      */
-    cost?: {
+    cost: {
       /**
        * The product’s price.
        */
-      amount?: number;
+      amount: number;
       /**
        * The type of currency. Possible values are:  
        *   
        * * bits
        */
-      type?: 'bits';
-    }
+      type: 'bits';
+    };
     /**
      * A Boolean value that indicates whether the product is in development. If **true**, the product is not available for public use.
      */
-    in_development?: boolean;
+    in_development: boolean;
     /**
      * The product’s name as displayed in the extension.
      */
-    display_name?: string;
+    display_name: string;
     /**
      * The date and time, in RFC3339 format, when the product expires.
      */
-    expiration?: string;
+    expiration: string;
     /**
      * A Boolean value that determines whether Bits product purchase events are broadcast to all instances of an extension on a channel. The events are broadcast via the `onTransactionComplete` helper callback. Is **true** if the event is broadcast to all instances.
      */
-    is_broadcast?: boolean;
-  }[]
+    is_broadcast: boolean;
+  }[];
 }
 
 
@@ -3135,43 +3135,43 @@ export interface UpdateExtensionBitsProductResponse {
   /**
    * A list of Bits products that the extension created. The list is in ascending SKU order. The list is empty if the extension hasn’t created any products or they’re all expired or disabled.
    */
-  data?: {
+  data: {
     /**
      * The product’s SKU. The SKU is unique across an extension’s products.
      */
-    sku?: string;
+    sku: string;
     /**
      * An object that contains the product’s cost information.
      */
-    cost?: {
+    cost: {
       /**
        * The product’s price.
        */
-      amount?: number;
+      amount: number;
       /**
        * The type of currency. Possible values are:  
        *   
        * * bits
        */
-      type?: 'bits';
-    }
+      type: 'bits';
+    };
     /**
      * A Boolean value that indicates whether the product is in development. If **true**, the product is not available for public use.
      */
-    in_development?: boolean;
+    in_development: boolean;
     /**
      * The product’s name as displayed in the extension.
      */
-    display_name?: string;
+    display_name: string;
     /**
      * The date and time, in RFC3339 format, when the product expires.
      */
-    expiration?: string;
+    expiration: string;
     /**
      * A Boolean value that determines whether Bits product purchase events are broadcast to all instances of an extension on a channel. The events are broadcast via the `onTransactionComplete` helper callback. Is **true** if the event is broadcast to all instances.
      */
-    is_broadcast?: boolean;
-  }[]
+    is_broadcast: boolean;
+  }[];
 }
 
 
@@ -3220,18 +3220,18 @@ export interface CreateEventSubSubscriptionBody {
      * Specify this field only if `method` is set to **websocket**.
      */
     session_id?: string;
-  }
+  };
 }
 
 export interface CreateEventSubSubscriptionResponse {
   /**
    * A list that contains the single subscription that you created.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the subscription.
      */
-    id?: string;
+    id: string;
     /**
      * The subscription’s status. Possible values are:   
      *   
@@ -3242,64 +3242,64 @@ export interface CreateEventSubSubscriptionResponse {
      * * authorization\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.
      * * user\_removed — One of the users specified in the **Condition** object was removed.
      */
-    status?: 'enabled' | 'webhook_callback_verification_pending' | 'webhook_callback_verification_failed' | 'notification_failures_exceeded' | 'authorization_revoked' | 'user_removed';
+    status: 'enabled' | 'webhook_callback_verification_pending' | 'webhook_callback_verification_failed' | 'notification_failures_exceeded' | 'authorization_revoked' | 'user_removed';
     /**
      * The subscription’s type. See [Subscription Types](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#subscription-types).
      */
-    type?: string;
+    type: string;
     /**
      * The version number that identifies this definition of the subscription’s data.
      */
-    version?: string;
+    version: string;
     /**
      * The subscription’s parameter values. This is a string-encoded JSON object whose contents are determined by the subscription type.
      */
-    condition?: Object;
+    condition: Object;
     /**
      * The date and time (in RFC3339 format) of when the subscription was created.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * The transport details used to send the notifications.
      */
-    transport?: {
+    transport: {
       /**
        * The transport method. Possible values are:   
        *   
        * * webhook
        * * websocket
        */
-      method?: 'webhook' | 'websocket';
+      method: 'webhook' | 'websocket';
       /**
        * The callback URL where the notifications are sent. Included only if `method` is set to **webhook**.
        */
-      callback?: string;
+      callback: string;
       /**
        * An ID that identifies the WebSocket that notifications are sent to. Included only if `method` is set to **websocket**.
        */
-      session_id?: string;
+      session_id: string;
       /**
        * The UTC date and time that the WebSocket connection was established. Included only if `method` is set to **websocket**.
        */
-      connected_at?: string;
-    }
+      connected_at: string;
+    };
     /**
      * The amount that the subscription counts against your limit. [Learn More](https://dev.twitch.tv/docs/eventsub/manage-subscriptions/#subscription-limits)
      */
-    cost?: number;
-  }[]
+    cost: number;
+  }[];
   /**
    * The total number of subscriptions you’ve created.
    */
-  total?: number;
+  total: number;
   /**
    * The sum of all of your subscription costs. [Learn More](https://dev.twitch.tv/docs/eventsub/manage-subscriptions/#subscription-limits)
    */
-  total_cost?: number;
+  total_cost: number;
   /**
    * The maximum total cost that you’re allowed to incur for all subscriptions you create.
    */
-  max_total_cost?: number;
+  max_total_cost: number;
 }
 
 
@@ -3346,11 +3346,11 @@ export interface GetEventSubSubscriptionsResponse {
   /**
    * The list of subscriptions. The list is ordered by the oldest subscription first. The list is empty if the client hasn’t created subscriptions or there are no subscriptions that match the specified filter criteria.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the subscription.
      */
-    id?: string;
+    id: string;
     /**
      * The subscription’s status. Possible values are:   
      *   
@@ -3361,77 +3361,77 @@ export interface GetEventSubSubscriptionsResponse {
      * * authorization\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.
      * * user\_removed — One of the users specified in the **Condition** object was removed.
      */
-    status?: 'enabled' | 'webhook_callback_verification_pending' | 'webhook_callback_verification_failed' | 'notification_failures_exceeded' | 'authorization_revoked' | 'user_removed';
+    status: 'enabled' | 'webhook_callback_verification_pending' | 'webhook_callback_verification_failed' | 'notification_failures_exceeded' | 'authorization_revoked' | 'user_removed';
     /**
      * The subscription’s type. See [Subscription Types](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#subscription-types).
      */
-    type?: string;
+    type: string;
     /**
      * The version number that identifies this definition of the subscription’s data.
      */
-    version?: string;
+    version: string;
     /**
      * The subscription’s parameter values. This is a string-encoded JSON object whose contents are determined by the subscription type.
      */
-    condition?: Object;
+    condition: Object;
     /**
      * The date and time (in RFC3339 format) of when the subscription was created.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * The transport details used to send the notifications.
      */
-    transport?: {
+    transport: {
       /**
        * The transport method. Possible values are:   
        *   
        * * webhook
        * * websocket
        */
-      method?: 'webhook' | 'websocket';
+      method: 'webhook' | 'websocket';
       /**
        * The callback URL where the notifications are sent. Included only if `method` is set to **webhook**.
        */
-      callback?: string;
+      callback: string;
       /**
        * An ID that identifies the WebSocket that notifications are sent to. Included only if `method` is set to **websocket**.
        */
-      session_id?: string;
+      session_id: string;
       /**
        * The UTC date and time that the WebSocket connection was established. Included only if `method` is set to **websocket**.
        */
-      connected_at?: string;
+      connected_at: string;
       /**
        * The UTC date and time that the WebSocket connection was lost. Included only if `method` is set to **websocket**.
        */
-      disconnected_at?: string;
-    }
+      disconnected_at: string;
+    };
     /**
      * The amount that the subscription counts against your limit. [Learn More](https://dev.twitch.tv/docs/eventsub/manage-subscriptions/#subscription-limits)
      */
-    cost?: number;
-  }[]
+    cost: number;
+  }[];
   /**
    * The total number of subscriptions that you’ve created.
    */
-  total?: number;
+  total: number;
   /**
    * The sum of all of your subscription costs. [Learn More](https://dev.twitch.tv/docs/eventsub/manage-subscriptions/#subscription-limits)
    */
-  total_cost?: number;
+  total_cost: number;
   /**
    * The maximum total cost that you’re allowed to incur for all subscriptions that you create.
    */
-  max_total_cost?: number;
+  max_total_cost: number;
   /**
    * An object that contains the cursor used to get the next page of subscriptions. The object is empty if there are no more pages to get. The number of subscriptions returned per page is undertermined.
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor value that you set the _after_ query parameter to.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -3455,29 +3455,29 @@ export interface GetTopGamesResponse {
   /**
    * The list of broadcasts. The broadcasts are sorted by the number of viewers, with the most popular first.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the category or game.
      */
-    id?: string;
+    id: string;
     /**
      * The category’s or game’s name.
      */
-    name?: string;
+    name: string;
     /**
      * A URL to the category’s or game’s box art. You must replace the `{width}x{height}` placeholder with the size of image you want.
      */
-    box_art_url?: string;
-  }[]
+    box_art_url: string;
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ or _before_ query parameter to get the next or previous page of results.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -3497,20 +3497,20 @@ export interface GetGamesResponse {
   /**
    * The list of categories and games. The list is empty if the specified categories and games weren’t found.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the category or game.
      */
-    id?: string;
+    id: string;
     /**
      * The category’s or game’s name.
      */
-    name?: string;
+    name: string;
     /**
      * A URL to the category’s or game’s box art. You must replace the `{width}x{height}` placeholder with the size of image you want.
      */
-    box_art_url?: string;
-  }[]
+    box_art_url: string;
+  }[];
 }
 
 
@@ -3526,23 +3526,23 @@ export interface GetCreatorGoalsResponse {
   /**
    * The list of goals. The list is empty if the broadcaster hasn’t created goals.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies this goal.
      */
-    id?: string;
+    id: string;
     /**
      * An ID that identifies the broadcaster that created the goal.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The type of goal. Possible values are:   
      *   
@@ -3552,11 +3552,11 @@ export interface GetCreatorGoalsResponse {
      * * new\_subscription — The goal is to increase subscriptions. This type shows only the net increase in tier points associated with the subscriptions (it does not account for users that unsubscribed since the goal started).
      * * new\_subscription\_count — The goal is to increase subscriptions. This type shows only the net increase in the number of subscriptions (it does not account for users that unsubscribed since the goal started).
      */
-    type?: 'follower' | 'subscription' | 'subscription_count' | 'new_subscription' | 'new_subscription_count';
+    type: 'follower' | 'subscription' | 'subscription_count' | 'new_subscription' | 'new_subscription_count';
     /**
      * A description of the goal. Is an empty string if not specified.
      */
-    description?: string;
+    description: string;
     /**
      * The goal’s current value.  
      *   
@@ -3568,16 +3568,16 @@ export interface GetCreatorGoalsResponse {
      * * If `type` is new\_subscription, this field is increased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased by 2, not 1.
      * * If `type` is new\_subscription\_count, this field is increased by 1 for each new subscription.
      */
-    current_amount?: number;
+    current_amount: number;
     /**
      * The goal’s target value. For example, if the broadcaster has 200 followers before creating the goal, and their goal is to double that number, this field is set to 400.
      */
-    target_amount?: number;
+    target_amount: number;
     /**
      * The UTC date and time (in RFC3339 format) that the broadcaster created the goal.
      */
-    created_at?: string;
-  }[]
+    created_at: string;
+  }[];
 }
 
 
@@ -3601,78 +3601,78 @@ export interface GetHypeTrainEventsResponse {
   /**
    * The list of Hype Train events. The list is empty if the broadcaster hasn’t run a Hype Train within the last 5 days.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies this event.
      */
-    id?: string;
+    id: string;
     /**
      * The type of event. The string is in the form, hypetrain.{event\_name}. The request returns only progress event types (i.e., hypetrain.progression).
      */
-    event_type?: string;
+    event_type: string;
     /**
      * The UTC date and time (in RFC3339 format) that the event occurred.
      */
-    event_timestamp?: string;
+    event_timestamp: string;
     /**
      * The version number of the definition of the event’s data. For example, the value is 1 if the data in `event_data` uses the first definition of the event’s data.
      */
-    version?: string;
+    version: string;
     /**
      * The event’s data.
      */
-    event_data?: {
+    event_data: {
       /**
        * The ID of the broadcaster that’s running the Hype Train.
        */
-      broadcaster_id?: string;
+      broadcaster_id: string;
       /**
        * The UTC date and time (in RFC3339 format) that another Hype Train can start.
        */
-      cooldown_end_time?: string;
+      cooldown_end_time: string;
       /**
        * The UTC date and time (in RFC3339 format) that the Hype Train ends.
        */
-      expires_at?: string;
+      expires_at: string;
       /**
        * The value needed to reach the next level.
        */
-      goal?: number;
+      goal: number;
       /**
        * An ID that identifies this Hype Train.
        */
-      id?: string;
+      id: string;
       /**
        * The most recent contribution towards the Hype Train’s goal.
        */
-      last_contribution?: Object;
+      last_contribution: Object;
       /**
        * The highest level that the Hype Train reached (the levels are 1 through 5).
        */
-      level?: number;
+      level: number;
       /**
        * The UTC date and time (in RFC3339 format) that this Hype Train started.
        */
-      started_at?: string;
+      started_at: string;
       /**
        * The top contributors for each contribution type. For example, the top contributor using BITS (by aggregate) and the top contributor using SUBS (by count).
        */
-      top_contributions?: Object[];
+      top_contributions: Object[];
       /**
        * The current total amount raised.
        */
-      total?: number;
-    }
-  }[]
+      total: number;
+    };
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -3690,7 +3690,7 @@ export interface CheckAutoModStatusBody {
      * The message to check.
      */
     msg_text: string;
-  }[]
+  }[];
 }
 
 export interface CheckAutoModStatusParams {
@@ -3704,16 +3704,16 @@ export interface CheckAutoModStatusResponse {
   /**
    * The list of messages and whether Twitch would approve them for chat.
    */
-  data?: {
+  data: {
     /**
      * The caller-defined ID passed in the request.
      */
-    msg_id?: string;
+    msg_id: string;
     /**
      * A Boolean value that indicates whether Twitch would approve the message for chat or hold it for moderator review or block it from chat. Is **true** if Twitch would approve the message; otherwise, **false** if Twitch would hold the message for moderator review or block it from chat.
      */
-    is_permitted?: boolean;
-  }[]
+    is_permitted: boolean;
+  }[];
 }
 
 
@@ -3753,52 +3753,52 @@ export interface GetAutoModSettingsResponse {
   /**
    * The list of AutoMod settings. The list contains a single object that contains all the AutoMod settings.
    */
-  data?: {
+  data: {
     /**
      * The broadcaster’s ID.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The moderator’s ID.
      */
-    moderator_id?: string;
+    moderator_id: string;
     /**
      * The default AutoMod level for the broadcaster. This field is **null** if the broadcaster has set one or more of the individual settings.
      */
-    overall_level?: number;
+    overall_level: number;
     /**
      * The Automod level for discrimination against disability.
      */
-    disability?: number;
+    disability: number;
     /**
      * The Automod level for hostility involving aggression.
      */
-    aggression?: number;
+    aggression: number;
     /**
      * The AutoMod level for discrimination based on sexuality, sex, or gender.
      */
-    sexuality_sex_or_gender?: number;
+    sexuality_sex_or_gender: number;
     /**
      * The Automod level for discrimination against women.
      */
-    misogyny?: number;
+    misogyny: number;
     /**
      * The Automod level for hostility involving name calling or insults.
      */
-    bullying?: number;
+    bullying: number;
     /**
      * The Automod level for profanity.
      */
-    swearing?: number;
+    swearing: number;
     /**
      * The Automod level for racial discrimination.
      */
-    race_ethnicity_or_religion?: number;
+    race_ethnicity_or_religion: number;
     /**
      * The Automod level for sexual content.
      */
-    sex_based_terms?: number;
-  }[]
+    sex_based_terms: number;
+  }[];
 }
 
 
@@ -3870,52 +3870,52 @@ export interface UpdateAutoModSettingsResponse {
   /**
    * The list of AutoMod settings. The list contains a single object that contains all the AutoMod settings.
    */
-  data?: {
+  data: {
     /**
      * The broadcaster’s ID.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The moderator’s ID.
      */
-    moderator_id?: string;
+    moderator_id: string;
     /**
      * The default AutoMod level for the broadcaster. This field is **null** if the broadcaster has set one or more of the individual settings.
      */
-    overall_level?: number;
+    overall_level: number;
     /**
      * The Automod level for discrimination against disability.
      */
-    disability?: number;
+    disability: number;
     /**
      * The Automod level for hostility involving aggression.
      */
-    aggression?: number;
+    aggression: number;
     /**
      * The AutoMod level for discrimination based on sexuality, sex, or gender.
      */
-    sexuality_sex_or_gender?: number;
+    sexuality_sex_or_gender: number;
     /**
      * The Automod level for discrimination against women.
      */
-    misogyny?: number;
+    misogyny: number;
     /**
      * The Automod level for hostility involving name calling or insults.
      */
-    bullying?: number;
+    bullying: number;
     /**
      * The Automod level for profanity.
      */
-    swearing?: number;
+    swearing: number;
     /**
      * The Automod level for racial discrimination.
      */
-    race_ethnicity_or_religion?: number;
+    race_ethnicity_or_religion: number;
     /**
      * The Automod level for sexual content.
      */
-    sex_based_terms?: number;
-  }[]
+    sex_based_terms: number;
+  }[];
 }
 
 
@@ -3949,53 +3949,53 @@ export interface GetBannedUsersResponse {
   /**
    * The list of users that were banned or put in a timeout.
    */
-  data?: {
+  data: {
     /**
      * The ID of the banned user.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The banned user’s login name.
      */
-    user_login?: string;
+    user_login: string;
     /**
      * The banned user’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The UTC date and time (in RFC3339 format) of when the timeout expires, or an empty string if the user is permanently banned.
      */
-    expires_at?: string;
+    expires_at: string;
     /**
      * The UTC date and time (in RFC3339 format) of when the user was banned.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * The reason the user was banned or put in a timeout if the moderator provided one.
      */
-    reason?: string;
+    reason: string;
     /**
      * The ID of the moderator that banned the user or put them in a timeout.
      */
-    moderator_id?: string;
+    moderator_id: string;
     /**
      * The moderator’s login name.
      */
-    moderator_login?: string;
+    moderator_login: string;
     /**
      * The moderator’s display name.
      */
-    moderator_name?: string;
-  }[]
+    moderator_name: string;
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -4021,7 +4021,7 @@ export interface BanUserBody {
      * The reason the you’re banning the user or putting them in a timeout. The text is user defined and is limited to a maximum of 500 characters.
      */
     reason?: string;
-  }
+  };
 }
 
 export interface BanUserParams {
@@ -4039,28 +4039,28 @@ export interface BanUserResponse {
   /**
    * A list that contains the user you successfully banned or put in a timeout.
    */
-  data?: {
+  data: {
     /**
      * The broadcaster whose chat room the user was banned from chatting in.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The moderator that banned or put the user in the timeout.
      */
-    moderator_id?: string;
+    moderator_id: string;
     /**
      * The user that was banned or put in a timeout.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The UTC date and time (in RFC3339 format) that the ban or timeout was placed.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * The UTC date and time (in RFC3339 format) that the timeout will end. Is **null** if the user was banned instead of being put in a timeout.
      */
-    end_time?: string;
-  }[]
+    end_time: string;
+  }[];
 }
 
 
@@ -4105,16 +4105,16 @@ export interface GetBlockedTermsResponse {
   /**
    * The list of blocked terms. The list is in descending order of when they were created (see the `created_at` timestamp).
    */
-  data?: Object[];
+  data: Object[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -4145,40 +4145,40 @@ export interface AddBlockedTermResponse {
   /**
    * A list that contains the single blocked term that the broadcaster added.
    */
-  data?: {
+  data: {
     /**
      * The broadcaster that owns the list of blocked terms.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The moderator that blocked the word or phrase from being used in the broadcaster’s chat room.
      */
-    moderator_id?: string;
+    moderator_id: string;
     /**
      * An ID that identifies this blocked term.
      */
-    id?: string;
+    id: string;
     /**
      * The blocked word or phrase.
      */
-    text?: string;
+    text: string;
     /**
      * The UTC date and time (in RFC3339 format) that the term was blocked.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * The UTC date and time (in RFC3339 format) that the term was updated.  
      *   
      * When the term is added, this timestamp is the same as `created_at`. The timestamp changes as AutoMod continues to deny the term.
      */
-    updated_at?: string;
+    updated_at: string;
     /**
      * The UTC date and time (in RFC3339 format) that the blocked term is set to expire. After the block expires, users may use the term in the broadcaster’s chat room.  
      *   
      * This field is **null** if the term was added manually or was permanently blocked by AutoMod.
      */
-    expires_at?: string;
-  }[]
+    expires_at: string;
+  }[];
 }
 
 
@@ -4248,29 +4248,29 @@ export interface GetModeratorsResponse {
   /**
    * The list of moderators.
    */
-  data?: {
+  data: {
     /**
      * The ID of the user that has permission to moderate the broadcaster’s channel.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The user’s login name.
      */
-    user_login?: string;
+    user_login: string;
     /**
      * The user’s display name.
      */
-    user_name?: string;
-  }[]
+    user_name: string;
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -4324,29 +4324,29 @@ export interface GetVIPsResponse {
   /**
    * The list of VIPs. The list is empty if the broadcaster doesn’t have VIP users.
    */
-  data?: {
+  data: {
     /**
      * An ID that uniquely identifies the VIP user.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The user’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The user’s login name.
      */
-    user_login?: string;
-  }[]
+    user_login: string;
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -4402,68 +4402,68 @@ export interface GetPollsResponse {
   /**
    * A list of polls. The polls are returned in descending order of start time unless you specify IDs in the request, in which case they’re returned in the same order as you passed them in the request. The list is empty if the broadcaster hasn’t created polls.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the poll.
      */
-    id?: string;
+    id: string;
     /**
      * An ID that identifies the broadcaster that created the poll.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The question that viewers are voting on. For example, _What game should I play next?_ The title may contain a maximum of 60 characters.
      */
-    title?: string;
+    title: string;
     /**
      * A list of choices that viewers can choose from. The list will contain a minimum of two choices and up to a maximum of five choices.
      */
-    choices?: {
+    choices: {
       /**
        * An ID that identifies this choice.
        */
-      id?: string;
+      id: string;
       /**
        * The choice’s title. The title may contain a maximum of 25 characters.
        */
-      title?: string;
+      title: string;
       /**
        * The total number of votes cast for this choice.
        */
-      votes?: number;
+      votes: number;
       /**
        * The number of votes cast using Channel Points.
        */
-      channel_points_votes?: number;
+      channel_points_votes: number;
       /**
        * Not used; will be set to 0.
        */
-      bits_votes?: number;
-    }[]
+      bits_votes: number;
+    }[];
     /**
      * Not used; will be set to **false**.
      */
-    bits_voting_enabled?: boolean;
+    bits_voting_enabled: boolean;
     /**
      * Not used; will be set to 0.
      */
-    bits_per_vote?: number;
+    bits_per_vote: number;
     /**
      * A Boolean value that indicates whether viewers may cast additional votes using Channel Points. For information about Channel Points, see [Channel Points Guide](https://help.twitch.tv/s/article/channel-points-guide).
      */
-    channel_points_voting_enabled?: boolean;
+    channel_points_voting_enabled: boolean;
     /**
      * The number of points the viewer must spend to cast one additional vote.
      */
-    channel_points_per_vote?: number;
+    channel_points_per_vote: number;
     /**
      * The poll’s status. Valid values are:  
      *   
@@ -4474,29 +4474,29 @@ export interface GetPollsResponse {
      * * MODERATED — The poll was deleted.
      * * INVALID — Something went wrong while determining the state.
      */
-    status?: 'ACTIVE' | 'COMPLETED' | 'TERMINATED' | 'ARCHIVED' | 'MODERATED' | 'INVALID';
+    status: 'ACTIVE' | 'COMPLETED' | 'TERMINATED' | 'ARCHIVED' | 'MODERATED' | 'INVALID';
     /**
      * The length of time (in seconds) that the poll will run for.
      */
-    duration?: number;
+    duration: number;
     /**
      * The UTC date and time (in RFC3339 format) of when the poll began.
      */
-    started_at?: string;
+    started_at: string;
     /**
      * The UTC date and time (in RFC3339 format) of when the poll ended. If `status` is ACTIVE, this field is set to **null**.
      */
-    ended_at?: string;
-  }[]
+    ended_at: string;
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -4518,7 +4518,7 @@ export interface CreatePollBody {
      * One of the choices the viewer may select. The choice may contain a maximum of 25 characters.
      */
     title: string;
-  }[]
+  }[];
   /**
    * The length of time (in seconds) that the poll will run for. The minimum is 15 seconds and the maximum is 1800 seconds (30 minutes).
    */
@@ -4537,68 +4537,68 @@ export interface CreatePollResponse {
   /**
    * A list that contains the single poll that you created.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the poll.
      */
-    id?: string;
+    id: string;
     /**
      * An ID that identifies the broadcaster that created the poll.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The question that viewers are voting on. For example, _What game should I play next?_ The title may contain a maximum of 60 characters.
      */
-    title?: string;
+    title: string;
     /**
      * A list of choices that viewers can choose from. The list will contain a minimum of two choices and up to a maximum of five choices.
      */
-    choices?: {
+    choices: {
       /**
        * An ID that identifies this choice.
        */
-      id?: string;
+      id: string;
       /**
        * The choice’s title. The title may contain a maximum of 25 characters.
        */
-      title?: string;
+      title: string;
       /**
        * The total number of votes cast for this choice.
        */
-      votes?: number;
+      votes: number;
       /**
        * The number of votes cast using Channel Points.
        */
-      channel_points_votes?: number;
+      channel_points_votes: number;
       /**
        * Not used; will be set to 0.
        */
-      bits_votes?: number;
-    }[]
+      bits_votes: number;
+    }[];
     /**
      * Not used; will be set to **false**.
      */
-    bits_voting_enabled?: boolean;
+    bits_voting_enabled: boolean;
     /**
      * Not used; will be set to 0.
      */
-    bits_per_vote?: number;
+    bits_per_vote: number;
     /**
      * A Boolean value that indicates whether viewers may cast additional votes using Channel Points. For information about Channel Points, see [Channel Points Guide](https://help.twitch.tv/s/article/channel-points-guide).
      */
-    channel_points_voting_enabled?: boolean;
+    channel_points_voting_enabled: boolean;
     /**
      * The number of points the viewer must spend to cast one additional vote.
      */
-    channel_points_per_vote?: number;
+    channel_points_per_vote: number;
     /**
      * The poll’s status. Valid values are:  
      *   
@@ -4609,20 +4609,20 @@ export interface CreatePollResponse {
      * * MODERATED — The poll was deleted.
      * * INVALID — Something went wrong while determining the state.
      */
-    status?: 'ACTIVE' | 'COMPLETED' | 'TERMINATED' | 'ARCHIVED' | 'MODERATED' | 'INVALID';
+    status: 'ACTIVE' | 'COMPLETED' | 'TERMINATED' | 'ARCHIVED' | 'MODERATED' | 'INVALID';
     /**
      * The length of time (in seconds) that the poll will run for.
      */
-    duration?: number;
+    duration: number;
     /**
      * The UTC date and time (in RFC3339 format) of when the poll began.
      */
-    started_at?: string;
+    started_at: string;
     /**
      * The UTC date and time (in RFC3339 format) of when the poll ended. If `status` is ACTIVE, this field is set to **null**.
      */
-    ended_at?: string;
-  }[]
+    ended_at: string;
+  }[];
 }
 
 
@@ -4649,68 +4649,68 @@ export interface EndPollResponse {
   /**
    * A list that contains the poll that you ended.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the poll.
      */
-    id?: string;
+    id: string;
     /**
      * An ID that identifies the broadcaster that created the poll.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The question that viewers are voting on. For example, _What game should I play next?_ The title may contain a maximum of 60 characters.
      */
-    title?: string;
+    title: string;
     /**
      * A list of choices that viewers can choose from. The list will contain a minimum of two choices and up to a maximum of five choices.
      */
-    choices?: {
+    choices: {
       /**
        * An ID that identifies this choice.
        */
-      id?: string;
+      id: string;
       /**
        * The choice’s title. The title may contain a maximum of 25 characters.
        */
-      title?: string;
+      title: string;
       /**
        * The total number of votes cast for this choice.
        */
-      votes?: number;
+      votes: number;
       /**
        * The number of votes cast using Channel Points.
        */
-      channel_points_votes?: number;
+      channel_points_votes: number;
       /**
        * Not used; will be set to 0.
        */
-      bits_votes?: number;
-    }[]
+      bits_votes: number;
+    }[];
     /**
      * Not used; will be set to **false**.
      */
-    bits_voting_enabled?: boolean;
+    bits_voting_enabled: boolean;
     /**
      * Not used; will be set to 0.
      */
-    bits_per_vote?: number;
+    bits_per_vote: number;
     /**
      * A Boolean value that indicates whether viewers may cast additional votes using Channel Points. For information about Channel Points, see [Channel Points Guide](https://help.twitch.tv/s/article/channel-points-guide).
      */
-    channel_points_voting_enabled?: boolean;
+    channel_points_voting_enabled: boolean;
     /**
      * The number of points the viewer must spend to cast one additional vote.
      */
-    channel_points_per_vote?: number;
+    channel_points_per_vote: number;
     /**
      * The poll’s status. Valid values are:  
      *   
@@ -4721,20 +4721,20 @@ export interface EndPollResponse {
      * * MODERATED — The poll was deleted.
      * * INVALID — Something went wrong while determining the state.
      */
-    status?: 'ACTIVE' | 'COMPLETED' | 'TERMINATED' | 'ARCHIVED' | 'MODERATED' | 'INVALID';
+    status: 'ACTIVE' | 'COMPLETED' | 'TERMINATED' | 'ARCHIVED' | 'MODERATED' | 'INVALID';
     /**
      * The length of time (in seconds) that the poll will run for.
      */
-    duration?: number;
+    duration: number;
     /**
      * The UTC date and time (in RFC3339 format) of when the poll began.
      */
-    started_at?: string;
+    started_at: string;
     /**
      * The UTC date and time (in RFC3339 format) of when the poll ended. If `status` is ACTIVE, this field is set to **null**.
      */
-    ended_at?: string;
-  }[]
+    ended_at: string;
+  }[];
 }
 
 
@@ -4762,55 +4762,55 @@ export interface GetPredictionsResponse {
   /**
    * The broadcaster’s list of Channel Points Predictions. The list is sorted in descending ordered by when the prediction began (the most recent prediction is first). The list is empty if the broadcaster hasn’t created predictions.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies this prediction.
      */
-    id?: string;
+    id: string;
     /**
      * An ID that identifies the broadcaster that created the prediction.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The question that the prediction asks. For example, _Will I finish this entire pizza?_
      */
-    title?: string;
+    title: string;
     /**
      * The ID of the winning outcome. Is **null** unless `status` is RESOLVED.
      */
-    winning_outcome_id?: string;
+    winning_outcome_id: string;
     /**
      * The list of possible outcomes for the prediction.
      */
-    outcomes?: {
+    outcomes: {
       /**
        * An ID that identifies this outcome.
        */
-      id?: string;
+      id: string;
       /**
        * The outcome’s text.
        */
-      title?: string;
+      title: string;
       /**
        * The number of unique viewers that chose this outcome.
        */
-      users?: number;
+      users: number;
       /**
        * The number of Channel Points spent by viewers on this outcome.
        */
-      channel_points?: number;
+      channel_points: number;
       /**
        * A list of viewers who were the top predictors; otherwise, **null** if none.
        */
-      top_predictors?: Object[];
+      top_predictors: Object[];
       /**
        * The color that visually identifies this outcome in the UX. Possible values are:  
        *   
@@ -4819,12 +4819,12 @@ export interface GetPredictionsResponse {
        *   
        * If the number of outcomes is two, the color is BLUE for the first outcome and PINK for the second outcome. If there are more than two outcomes, the color is BLUE for all outcomes.
        */
-      color?: 'BLUE' | 'PINK';
-    }[]
+      color: 'BLUE' | 'PINK';
+    }[];
     /**
      * The length of time (in seconds) that the prediction will run for.
      */
-    prediction_window?: number;
+    prediction_window: number;
     /**
      * The prediction’s status. Valid values are:  
      *   
@@ -4833,29 +4833,29 @@ export interface GetPredictionsResponse {
      * * LOCKED — The broadcaster locked the Prediction, which means viewers can no longer make predictions.
      * * RESOLVED — The winning outcome was determined and the Channel Points were distributed to the viewers who predicted the correct outcome.
      */
-    status?: 'ACTIVE' | 'CANCELED' | 'LOCKED' | 'RESOLVED';
+    status: 'ACTIVE' | 'CANCELED' | 'LOCKED' | 'RESOLVED';
     /**
      * The UTC date and time of when the Prediction began.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * The UTC date and time of when the Prediction ended. If `status` is ACTIVE, this is set to **null**.
      */
-    ended_at?: string;
+    ended_at: string;
     /**
      * The UTC date and time of when the Prediction was locked. If `status` is not LOCKED, this is set to **null**.
      */
-    locked_at?: string;
-  }[]
+    locked_at: string;
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -4877,7 +4877,7 @@ export interface CreatePredictionBody {
      * The text of one of the outcomes that the viewer may select. The title is limited to a maximum of 25 characters.
      */
     title: string;
-  }[]
+  }[];
   /**
    * The length of time (in seconds) that the prediction will run for. The minimum is 30 seconds and the maximum is 1800 seconds (30 minutes).
    */
@@ -4888,55 +4888,55 @@ export interface CreatePredictionResponse {
   /**
    * A list that contains the single prediction that you created.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies this prediction.
      */
-    id?: string;
+    id: string;
     /**
      * An ID that identifies the broadcaster that created the prediction.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The question that the prediction asks. For example, _Will I finish this entire pizza?_
      */
-    title?: string;
+    title: string;
     /**
      * The ID of the winning outcome. Is **null** unless `status` is RESOLVED.
      */
-    winning_outcome_id?: string;
+    winning_outcome_id: string;
     /**
      * The list of possible outcomes for the prediction.
      */
-    outcomes?: {
+    outcomes: {
       /**
        * An ID that identifies this outcome.
        */
-      id?: string;
+      id: string;
       /**
        * The outcome’s text.
        */
-      title?: string;
+      title: string;
       /**
        * The number of unique viewers that chose this outcome.
        */
-      users?: number;
+      users: number;
       /**
        * The number of Channel Points spent by viewers on this outcome.
        */
-      channel_points?: number;
+      channel_points: number;
       /**
        * A list of viewers who were the top predictors; otherwise, **null** if none.
        */
-      top_predictors?: Object[];
+      top_predictors: Object[];
       /**
        * The color that visually identifies this outcome in the UX. Possible values are:  
        *   
@@ -4945,12 +4945,12 @@ export interface CreatePredictionResponse {
        *   
        * If the number of outcomes is two, the color is BLUE for the first outcome and PINK for the second outcome. If there are more than two outcomes, the color is BLUE for all outcomes.
        */
-      color?: 'BLUE' | 'PINK';
-    }[]
+      color: 'BLUE' | 'PINK';
+    }[];
     /**
      * The length of time (in seconds) that the prediction will run for.
      */
-    prediction_window?: number;
+    prediction_window: number;
     /**
      * The prediction’s status. Valid values are:  
      *   
@@ -4959,20 +4959,20 @@ export interface CreatePredictionResponse {
      * * LOCKED — The broadcaster locked the Prediction, which means viewers can no longer make predictions.
      * * RESOLVED — The winning outcome was determined and the Channel Points were distributed to the viewers who predicted the correct outcome.
      */
-    status?: 'ACTIVE' | 'CANCELED' | 'LOCKED' | 'RESOLVED';
+    status: 'ACTIVE' | 'CANCELED' | 'LOCKED' | 'RESOLVED';
     /**
      * The UTC date and time of when the Prediction began.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * The UTC date and time of when the Prediction ended. If `status` is ACTIVE, this is set to **null**.
      */
-    ended_at?: string;
+    ended_at: string;
     /**
      * The UTC date and time of when the Prediction was locked. If `status` is not LOCKED, this is set to **null**.
      */
-    locked_at?: string;
-  }[]
+    locked_at: string;
+  }[];
 }
 
 
@@ -5008,55 +5008,55 @@ export interface EndPredictionResponse {
   /**
    * A list that contains the single prediction that you updated.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies this prediction.
      */
-    id?: string;
+    id: string;
     /**
      * An ID that identifies the broadcaster that created the prediction.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The question that the prediction asks. For example, _Will I finish this entire pizza?_
      */
-    title?: string;
+    title: string;
     /**
      * The ID of the winning outcome. Is **null** unless `status` is RESOLVED.
      */
-    winning_outcome_id?: string;
+    winning_outcome_id: string;
     /**
      * The list of possible outcomes for the prediction.
      */
-    outcomes?: {
+    outcomes: {
       /**
        * An ID that identifies this outcome.
        */
-      id?: string;
+      id: string;
       /**
        * The outcome’s text.
        */
-      title?: string;
+      title: string;
       /**
        * The number of unique viewers that chose this outcome.
        */
-      users?: number;
+      users: number;
       /**
        * The number of Channel Points spent by viewers on this outcome.
        */
-      channel_points?: number;
+      channel_points: number;
       /**
        * A list of viewers who were the top predictors; otherwise, **null** if none.
        */
-      top_predictors?: Object[];
+      top_predictors: Object[];
       /**
        * The color that visually identifies this outcome in the UX. Possible values are:  
        *   
@@ -5065,12 +5065,12 @@ export interface EndPredictionResponse {
        *   
        * If the number of outcomes is two, the color is BLUE for the first outcome and PINK for the second outcome. If there are more than two outcomes, the color is BLUE for all outcomes.
        */
-      color?: 'BLUE' | 'PINK';
-    }[]
+      color: 'BLUE' | 'PINK';
+    }[];
     /**
      * The length of time (in seconds) that the prediction will run for.
      */
-    prediction_window?: number;
+    prediction_window: number;
     /**
      * The prediction’s status. Valid values are:  
      *   
@@ -5079,20 +5079,20 @@ export interface EndPredictionResponse {
      * * LOCKED — The broadcaster locked the Prediction, which means viewers can no longer make predictions.
      * * RESOLVED — The winning outcome was determined and the Channel Points were distributed to the viewers who predicted the correct outcome.
      */
-    status?: 'ACTIVE' | 'CANCELED' | 'LOCKED' | 'RESOLVED';
+    status: 'ACTIVE' | 'CANCELED' | 'LOCKED' | 'RESOLVED';
     /**
      * The UTC date and time of when the Prediction began.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * The UTC date and time of when the Prediction ended. If `status` is ACTIVE, this is set to **null**.
      */
-    ended_at?: string;
+    ended_at: string;
     /**
      * The UTC date and time of when the Prediction was locked. If `status` is not LOCKED, this is set to **null**.
      */
-    locked_at?: string;
-  }[]
+    locked_at: string;
+  }[];
 }
 
 
@@ -5112,16 +5112,16 @@ export interface StartRaidResponse {
   /**
    * A list that contains a single object with information about the pending raid.
    */
-  data?: {
+  data: {
     /**
      * The UTC date and time, in RFC3339 format, of when the raid was requested.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * A Boolean value that indicates whether the channel being raided contains mature content.
      */
-    is_mature?: boolean;
-  }[]
+    is_mature: boolean;
+  }[];
 }
 
 
@@ -5166,75 +5166,75 @@ export interface GetChannelStreamScheduleResponse {
   /**
    * The broadcaster’s streaming schedule.
    */
-  data?: {
+  data: {
     /**
      * The list of broadcasts in the broadcaster’s streaming schedule.
      */
-    segments?: {
+    segments: {
       /**
        * An ID that identifies this broadcast segment.
        */
-      id?: string;
+      id: string;
       /**
        * The UTC date and time (in RFC3339 format) of when the broadcast starts.
        */
-      start_time?: string;
+      start_time: string;
       /**
        * The UTC date and time (in RFC3339 format) of when the broadcast ends.
        */
-      end_time?: string;
+      end_time: string;
       /**
        * The broadcast segment’s title.
        */
-      title?: string;
+      title: string;
       /**
        * Indicates whether the broadcaster canceled this segment of a recurring broadcast. If the broadcaster canceled this segment, this field is set to the same value that’s in the `end_time` field; otherwise, it’s set to **null**.
        */
-      canceled_until?: string;
+      canceled_until: string;
       /**
        * The type of content that the broadcaster plans to stream or **null** if not specified.
        */
-      category?: Object;
+      category: Object;
       /**
        * A Boolean value that determines whether the broadcast is part of a recurring series that streams at the same time each week or is a one-time broadcast. Is **true** if the broadcast is part of a recurring series.
        */
-      is_recurring?: boolean;
-    }[]
+      is_recurring: boolean;
+    }[];
     /**
      * The ID of the broadcaster that owns the broadcast schedule.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The dates when the broadcaster is on vacation and not streaming. Is set to **null** if vacation mode is not enabled.
      */
-    vacation?: {
+    vacation: {
       /**
        * The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation starts.
        */
-      start_time?: string;
+      start_time: string;
       /**
        * The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation ends.
        */
-      end_time?: string;
-    }
+      end_time: string;
+    };
     /**
      * The information used to page through a list of results. The object is empty if there are no more pages left to page through. [Read more](https://dev.twitch.tv/docs/api/guide#pagination).
      */
-    pagination?: {
+    pagination: {
       /**
        * The cursor used to get the next page of results. Set the request’s _after_ query parameter to this value.
        */
-      cursor?: string;
-    }
-  }
+      cursor: string;
+    };
+  };
 }
 
 
@@ -5311,66 +5311,66 @@ export interface CreateChannelStreamScheduleSegmentResponse {
   /**
    * The broadcaster’s streaming scheduled.
    */
-  data?: {
+  data: {
     /**
      * A list that contains the single broadcast segment that you added.
      */
-    segments?: {
+    segments: {
       /**
        * An ID that identifies this broadcast segment.
        */
-      id?: string;
+      id: string;
       /**
        * The UTC date and time (in RFC3339 format) of when the broadcast starts.
        */
-      start_time?: string;
+      start_time: string;
       /**
        * The UTC date and time (in RFC3339 format) of when the broadcast ends.
        */
-      end_time?: string;
+      end_time: string;
       /**
        * The broadcast segment’s title.
        */
-      title?: string;
+      title: string;
       /**
        * Indicates whether the broadcaster canceled this segment of a recurring broadcast. If the broadcaster canceled this segment, this field is set to the same value that’s in the `end_time` field; otherwise, it’s set to **null**.
        */
-      canceled_until?: string;
+      canceled_until: string;
       /**
        * The type of content that the broadcaster plans to stream or **null** if not specified.
        */
-      category?: Object;
+      category: Object;
       /**
        * A Boolean value that determines whether the broadcast is part of a recurring series that streams at the same time each week or is a one-time broadcast. Is **true** if the broadcast is part of a recurring series.
        */
-      is_recurring?: boolean;
-    }[]
+      is_recurring: boolean;
+    }[];
     /**
      * The ID of the broadcaster that owns the broadcast schedule.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The dates when the broadcaster is on vacation and not streaming. Is set to **null** if vacation mode is not enabled.
      */
-    vacation?: {
+    vacation: {
       /**
        * The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation starts.
        */
-      start_time?: string;
+      start_time: string;
       /**
        * The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation ends.
        */
-      end_time?: string;
-    }
-  }
+      end_time: string;
+    };
+  };
 }
 
 
@@ -5421,66 +5421,66 @@ export interface UpdateChannelStreamScheduleSegmentResponse {
   /**
    * The broadcaster’s streaming scheduled.
    */
-  data?: {
+  data: {
     /**
      * A list that contains the single broadcast segment that you updated.
      */
-    segments?: {
+    segments: {
       /**
        * An ID that identifies this broadcast segment.
        */
-      id?: string;
+      id: string;
       /**
        * The UTC date and time (in RFC3339 format) of when the broadcast starts.
        */
-      start_time?: string;
+      start_time: string;
       /**
        * The UTC date and time (in RFC3339 format) of when the broadcast ends.
        */
-      end_time?: string;
+      end_time: string;
       /**
        * The broadcast segment’s title.
        */
-      title?: string;
+      title: string;
       /**
        * Indicates whether the broadcaster canceled this segment of a recurring broadcast. If the broadcaster canceled this segment, this field is set to the same value that’s in the `end_time` field; otherwise, it’s set to **null**.
        */
-      canceled_until?: string;
+      canceled_until: string;
       /**
        * The type of content that the broadcaster plans to stream or **null** if not specified.
        */
-      category?: Object;
+      category: Object;
       /**
        * A Boolean value that determines whether the broadcast is part of a recurring series that streams at the same time each week or is a one-time broadcast. Is **true** if the broadcast is part of a recurring series.
        */
-      is_recurring?: boolean;
-    }[]
+      is_recurring: boolean;
+    }[];
     /**
      * The ID of the broadcaster that owns the broadcast schedule.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The dates when the broadcaster is on vacation and not streaming. Is set to **null** if vacation mode is not enabled.
      */
-    vacation?: {
+    vacation: {
       /**
        * The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation starts.
        */
-      start_time?: string;
+      start_time: string;
       /**
        * The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation ends.
        */
-      end_time?: string;
-    }
-  }
+      end_time: string;
+    };
+  };
 }
 
 
@@ -5517,20 +5517,20 @@ export interface SearchCategoriesResponse {
   /**
    * The list of games or categories that match the query. The list is empty if there are no matches.
    */
-  data?: {
+  data: {
     /**
      * A URL to an image of the game’s box art or streaming category.
      */
-    box_art_url?: string;
+    box_art_url: string;
     /**
      * The name of the game or category.
      */
-    name?: string;
+    name: string;
     /**
      * An ID that uniquely identifies the game or category.
      */
-    id?: string;
-  }[]
+    id: string;
+  }[];
 }
 
 
@@ -5558,52 +5558,52 @@ export interface SearchChannelsResponse {
   /**
    * The list of channels that match the query. The list is empty if there are no matches.
    */
-  data?: {
+  data: {
     /**
      * The ISO 639-1 two-letter language code of the language used by the broadcaster. For example, _en_ for English. If the broadcaster uses a language not in the list of [supported stream languages](https://help.twitch.tv/s/article/languages-on-twitch#streamlang), the value is _other_.
      */
-    broadcaster_language?: string;
+    broadcaster_language: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The broadcaster’s display name.
      */
-    display_name?: string;
+    display_name: string;
     /**
      * The ID of the game that the broadcaster is playing or last played.
      */
-    game_id?: string;
+    game_id: string;
     /**
      * The name of the game that the broadcaster is playing or last played.
      */
-    game_name?: string;
+    game_name: string;
     /**
      * An ID that uniquely identifies the channel (this is the broadcaster’s ID).
      */
-    id?: string;
+    id: string;
     /**
      * A Boolean value that determines whether the broadcaster is streaming live. Is **true** if the broadcaster is streaming live; otherwise, **false**.
      */
-    is_live?: boolean;
+    is_live: boolean;
     /**
      * The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags). The list doesn’t include Category Tags.
      */
-    tag_ids?: string[];
+    tag_ids: string[];
     /**
      * A URL to a thumbnail of the broadcaster’s profile image.
      */
-    thumbnail_url?: string;
+    thumbnail_url: string;
     /**
      * The stream’s title. Is an empty string if the broadcaster didn’t set it.
      */
-    title?: string;
+    title: string;
     /**
      * The UTC date and time (in RFC3339 format) of when the broadcaster started streaming. The string is empty if the broadcaster is not streaming live.
      */
-    started_at?: string;
-  }[]
+    started_at: string;
+  }[];
 }
 
 
@@ -5619,42 +5619,42 @@ export interface GetSoundtrackCurrentTrackResponse {
   /**
    * A list that contains the single Soundtrack track that the broadcaster is playing.
    */
-  data?: {
+  data: {
     /**
      * Describes a track.
      */
-    track?: {
+    track: {
       /**
        * Describes the album that the track is found on.
        */
-      album?: Object;
-    }
+      album: Object;
+    };
     /**
      * The source of the track that’s currently playing. For example, a playlist or station.
      */
-    source?: {
+    source: {
       /**
        * The playlist’s or station’s ASIN (Amazon Standard Identification Number).
        */
-      id?: string;
+      id: string;
       /**
        * A URL to the playlist’s or station’s image art.
        */
-      image_url?: string;
+      image_url: string;
       /**
        * A URL to the playlist on Soundtrack. The string is empty if `content-type` is STATION.
        */
-      soundtrack_url?: string;
+      soundtrack_url: string;
       /**
        * A URL to the playlist on Spotify. The string is empty if `content-type` is STATION.
        */
-      spotify_url?: string;
+      spotify_url: string;
       /**
        * The playlist’s or station’s title.
        */
-      title?: string;
-    }
-  }[]
+      title: string;
+    };
+  }[];
 }
 
 
@@ -5678,67 +5678,67 @@ export interface GetSoundtrackPlaylistResponse {
   /**
    * The playlist’s list of tracks.
    */
-  data?: {
+  data: {
     /**
      * The album that includes this track.
      */
-    album?: {
+    album: {
       /**
        * The album’s ASIN (Amazon Standard Identification Number).
        */
-      id?: string;
+      id: string;
       /**
        * A URL to the album’s cover art.
        */
-      image_url?: string;
+      image_url: string;
       /**
        * The album’s name. If the album contains explicit content, the name will contain **\[Explicit\]** in the string. For example, Let It Die \[Explicit\].
        */
-      name?: string;
-    }
+      name: string;
+    };
     /**
      * The artists included on the track.
      */
-    artists?: {
+    artists: {
       /**
        * The ID of the Twitch user that created the track. The string is empty if a Twitch user didn’t create the track.
        */
-      creator_channel_id?: string;
+      creator_channel_id: string;
       /**
        * The artist’s ASIN (Amazon Standard Identification Number).
        */
-      id?: string;
+      id: string;
       /**
        * The artist’s name. This can be the band’s name or the solo artist’s name.
        */
-      name?: string;
-    }[]
+      name: string;
+    }[];
     /**
      * The duration of the track, in seconds.
      */
-    duration?: number;
+    duration: number;
     /**
      * The track’s ASIN (Amazon Standard Identification Number).
      */
-    id?: string;
+    id: string;
     /**
      * The track’s ISRC (International Standard Recording Code).
      */
-    isrc?: string;
+    isrc: string;
     /**
      * The track’s title. If the track contains explicit content, the title will contain **\[Explicit\]** in the string. For example, Let It Die \[Explicit\].
      */
-    title?: string;
-  }[]
+    title: string;
+  }[];
   /**
    * Contains the information used to page through a list of results. The object is empty if there are no more pages to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -5762,33 +5762,33 @@ export interface GetSoundtrackPlaylistsResponse {
   /**
    * The list of Soundtrack playlists.
    */
-  data?: {
+  data: {
     /**
      * A short description about the music that the playlist includes.
      */
-    description?: string;
+    description: string;
     /**
      * The playlist’s ASIN (Amazon Standard Identification Number).
      */
-    id?: string;
+    id: string;
     /**
      * A URL to the playlist’s image art. Is empty if the playlist doesn’t include art.
      */
-    image_url?: string;
+    image_url: string;
     /**
      * The playlist’s title.
      */
-    title?: string;
-  }[]
+    title: string;
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -5804,12 +5804,12 @@ export interface GetStreamKeyResponse {
   /**
    * A list that contains the channel’s stream key.
    */
-  data?: {
+  data: {
     /**
      * The channel’s stream key.
      */
-    stream_key?: string;
-  }[]
+    stream_key: string;
+  }[];
 }
 
 
@@ -5860,31 +5860,31 @@ export interface GetStreamsResponse {
   /**
    * The list of streams.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the stream. You can use this ID later to look up the video on demand (VOD).
      */
-    id?: string;
+    id: string;
     /**
      * The ID of the user that’s broadcasting the stream.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The user’s login name.
      */
-    user_login?: string;
+    user_login: string;
     /**
      * The user’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The ID of the category or game being played.
      */
-    game_id?: string;
+    game_id: string;
     /**
      * The name of the category or game being played.
      */
-    game_name?: string;
+    game_name: string;
     /**
      * The type of stream. Possible values are:  
      *   
@@ -5892,45 +5892,45 @@ export interface GetStreamsResponse {
      *   
      * If an error occurs, this field is set to an empty string.
      */
-    type?: 'live';
+    type: 'live';
     /**
      * The stream’s title. Is an empty string if not set.
      */
-    title?: string;
+    title: string;
     /**
      * The number of users watching the stream.
      */
-    viewer_count?: number;
+    viewer_count: number;
     /**
      * The UTC date and time (in RFC3339 format) of when the broadcast began.
      */
-    started_at?: string;
+    started_at: string;
     /**
      * The language that the stream uses. This is an ISO 639-1 two-letter language code or _other_ if the stream uses a language not in the list of [supported stream languages](https://help.twitch.tv/s/article/languages-on-twitch#streamlang).
      */
-    language?: string;
+    language: string;
     /**
      * A URL to an image of a frame from the last 5 minutes of the stream. Replace the width and height placeholders in the URL (`{width}x{height}`) with the size of the image you want, in pixels.
      */
-    thumbnail_url?: string;
+    thumbnail_url: string;
     /**
      * The IDs of the tags applied to the stream. To get a tag’s name, use the [Get All Stream Tags](https://dev.twitch.tv/docs/api/reference#get-all-stream-tags) endpoint. For a list of possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags).
      */
-    tag_ids?: string;
+    tag_ids: string;
     /**
      * A Boolean value that indicates whether the stream is meant for mature audiences.
      */
-    is_mature?: boolean;
-  }[]
+    is_mature: boolean;
+  }[];
   /**
    * The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Set the request’s _after_ or _before_ query parameter to this value depending on whether you’re paging forwards or backwards.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -5954,31 +5954,31 @@ export interface GetFollowedStreamsResponse {
   /**
    * The list of live streams of broadcasters that the specified user follows. The list is in descending order by the number of viewers watching the stream. Because viewers come and go during a stream, it’s possible to find duplicate or missing streams in the list as you page through the results. The list is empty if none of the followed broadcasters are streaming live.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the stream. You can use this ID later to look up the video on demand (VOD).
      */
-    id?: string;
+    id: string;
     /**
      * The ID of the user that’s broadcasting the stream.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The user’s login name.
      */
-    user_login?: string;
+    user_login: string;
     /**
      * The user’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The ID of the category or game being played.
      */
-    game_id?: string;
+    game_id: string;
     /**
      * The ID of the category or game being played.
      */
-    game_name?: string;
+    game_name: string;
     /**
      * The type of stream. Possible values are:  
      *   
@@ -5986,45 +5986,45 @@ export interface GetFollowedStreamsResponse {
      *   
      * If an error occurs, this field is set to an empty string.
      */
-    type?: 'live';
+    type: 'live';
     /**
      * The stream’s title. Is an empty string if not set.
      */
-    title?: string;
+    title: string;
     /**
      * The number of users watching the stream.
      */
-    viewer_count?: number;
+    viewer_count: number;
     /**
      * The UTC date and time (in RFC3339 format) of when the broadcast began.
      */
-    started_at?: string;
+    started_at: string;
     /**
      * The language that the stream uses. This is an ISO 639-1 two-letter language code or _other_ if the stream uses a language not in the list of [supported stream languages](https://help.twitch.tv/s/article/languages-on-twitch#streamlang).
      */
-    language?: string;
+    language: string;
     /**
      * A URL to an image of a frame from the last 5 minutes of the stream. Replace the width and height placeholders in the URL (`{width}x{height}`) with the size of the image you want, in pixels.
      */
-    thumbnail_url?: string;
+    thumbnail_url: string;
     /**
      * The IDs of the tags applied to the stream. To get a tag’s name, use the [Get All Stream Tags](https://dev.twitch.tv/docs/api/reference#get-all-stream-tags) endpoint. For a list of possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags).
      */
-    tag_ids?: string;
+    tag_ids: string;
     /**
      * A Boolean value that indicates whether the stream is meant for mature audiences.
      */
-    is_mature?: boolean;
-  }[]
+    is_mature: boolean;
+  }[];
   /**
    * The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Set the request’s _after_ query parameter to this value.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -6044,25 +6044,25 @@ export interface CreateStreamMarkerResponse {
   /**
    * A list that contains the single marker that you added.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies this marker.
      */
-    id?: {
+    id: {
       /**
        * The UTC date and time (in RFC3339 format) of when the user created the marker.
        */
-      created_at?: string;
+      created_at: string;
       /**
        * The relative offset (in seconds) of the marker from the beginning of the stream.
        */
-      position_seconds?: number;
+      position_seconds: number;
       /**
        * A description that the user gave the marker to help them remember why they marked the location.
        */
-      description?: string;
-    }
-  }[]
+      description: string;
+    };
+  }[];
 }
 
 
@@ -6071,62 +6071,62 @@ export interface GetStreamMarkersResponse {
   /**
    * The list of markers grouped by the user that created the marks.
    */
-  data?: {
+  data: {
     /**
      * The ID of the user that created the marker.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The user’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The user’s login name.
      */
-    user_login?: string;
+    user_login: string;
     /**
      * A list of videos that contain markers. The list contains a single video.
      */
-    videos?: Object[];
+    videos: Object[];
     /**
      * An ID that identifies this video.
      */
-    video_id?: string;
+    video_id: string;
     /**
      * The list of markers in this video. The list in ascending order by when the marker was created.
      */
-    markers?: {
+    markers: {
       /**
        * An ID that identifies this marker.
        */
-      id?: string;
+      id: string;
       /**
        * The UTC date and time (in RFC3339 format) of when the user created the marker.
        */
-      created_at?: string;
+      created_at: string;
       /**
        * The description that the user gave the marker to help them remember why they marked the location. Is an empty string if the user didn’t provide one.
        */
-      description?: string;
+      description: string;
       /**
        * The relative offset (in seconds) of the marker from the beginning of the stream.
        */
-      position_seconds?: number;
+      position_seconds: number;
       /**
        * A URL to the video.
        */
-      url?: string;
-    }[]
-  }[]
+      url: string;
+    }[];
+  }[];
   /**
    * The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Set the request’s _after_ or _before_ query parameter to this value depending on whether you’re paging forwards or backwards.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -6135,39 +6135,39 @@ export interface GetBroadcasterSubscriptionsResponse {
   /**
    * The list of users that subscribe to the broadcaster. The list is empty if the broadcaster has no subscribers.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the broadcaster.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The ID of the user that gifted the subscription to the user. Is an empty string if `is_gift` is **false**.
      */
-    gifter_id?: string;
+    gifter_id: string;
     /**
      * The gifter’s login name. Is an empty string if `is_gift` is **false**.
      */
-    gifter_login?: string;
+    gifter_login: string;
     /**
      * The gifter’s display name. Is an empty string if `is_gift` is **false**.
      */
-    gifter_name?: string;
+    gifter_name: string;
     /**
      * A Boolean value that determines whether the subscription is a gift subscription. Is **true** if the subscription was gifted.
      */
-    is_gift?: boolean;
+    is_gift: boolean;
     /**
      * The name of the subscription.
      */
-    plan_name?: string;
+    plan_name: string;
     /**
      * The type of subscription. Possible values are:  
      *   
@@ -6175,37 +6175,37 @@ export interface GetBroadcasterSubscriptionsResponse {
      * * 2000 — Tier 2
      * * 3000 — Tier 3
      */
-    tier?: '1000' | '2000' | '3000';
+    tier: '1000' | '2000' | '3000';
     /**
      * An ID that identifies the subscribing user.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The user’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The user’s login name.
      */
-    user_login?: string;
-  }[]
+    user_login: string;
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next or previous page of results. Use the cursor to set the request’s _after_ or _before_ query parameter depending on whether you’re paging forwards or backwards.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
   /**
    * The current number of subscriber points earned by this broadcaster. Points are based on the subscription tier of each user that subscribes to this broadcaster. For example, a Tier 1 subscription is worth 1 point, Tier 2 is worth 2 points, and Tier 3 is worth 6 points. The number of points determines the number of emote slots that are unlocked for the broadcaster (see [Subscriber Emote Slots](https://help.twitch.tv/s/article/subscriber-emote-guide#emoteslots)).
    */
-  points?: number;
+  points: number;
   /**
    * The total number of users that subscribe to this broadcaster.
    */
-  total?: number;
+  total: number;
 }
 
 
@@ -6216,7 +6216,7 @@ export interface CheckUserSubscriptionParams {
    */
   broadcaster_id: string;
   /**
-   * The ID of the user that you’re checking to see whether they subscribe to the broadcaster in _broadcaster\_id_. This ID must match the user ID in the access Token.
+   * The ID of the user that you’re checking to see whether they subscribe to the broadcaster in broadcaster_id. This ID must match the user ID in the access Token.
    */
   user_id: string;
 }
@@ -6225,35 +6225,35 @@ export interface CheckUserSubscriptionResponse {
   /**
    * A list that contains a single object with information about the user’s subscription.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the broadcaster.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * The ID of the user that gifted the subscription. The object includes this field only if `is_gift` is **true**.
      */
-    gifter_id?: string;
+    gifter_id: string;
     /**
      * The gifter’s login name. The object includes this field only if `is_gift` is **true**.
      */
-    gifter_login?: string;
+    gifter_login: string;
     /**
      * The gifter’s display name. The object includes this field only if `is_gift` is **true**.
      */
-    gifter_name?: string;
+    gifter_name: string;
     /**
      * A Boolean value that determines whether the subscription is a gift subscription. Is **true** if the subscription was gifted.
      */
-    is_gift?: boolean;
+    is_gift: boolean;
     /**
      * The type of subscription. Possible values are:  
      *   
@@ -6261,8 +6261,8 @@ export interface CheckUserSubscriptionResponse {
      * * 2000 — Tier 2
      * * 3000 — Tier 3
      */
-    tier?: '1000' | '2000' | '3000';
-  }[]
+    tier: '1000' | '2000' | '3000';
+  }[];
 }
 
 
@@ -6286,33 +6286,33 @@ export interface GetAllStreamTagsResponse {
   /**
    * The list of stream tags that the broadcaster can apply to their channel.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies this tag.
      */
-    tag_id?: string;
+    tag_id: string;
     /**
      * A Boolean value that determines whether the tag is an automatic tag. An automatic tag is one that Twitch adds to the stream. Broadcasters may not add automatic tags to their channel. The value is **true** if the tag is an automatic tag; otherwise, **false**.
      */
-    is_auto?: boolean;
+    is_auto: boolean;
     /**
      * A dictionary that contains the localized names of the tag. The key is in the form, <locale>-<country/region>. For example, en-us. The value is the localized name.
      */
-    localization_names?: Record<string, string>;
+    localization_names: Record<string, string>;
     /**
      * A dictionary that contains the localized descriptions of the tag. The key is in the form, <locale>-<country/region>. For example, en-us. The value is the localized description.
      */
-    localization_descriptions?: Record<string, string>;
-  }[]
+    localization_descriptions: Record<string, string>;
+  }[];
   /**
    * The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Set the request’s _after_ query parameter to this value to page forwards through the results.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -6328,24 +6328,24 @@ export interface GetStreamTagsResponse {
   /**
    * The list of stream tags. The list is empty if the broadcaster or Twitch hasn’t added tags to the broadcaster’s channel.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies this tag.
      */
-    tag_id?: string;
+    tag_id: string;
     /**
      * A Boolean value that determines whether the tag is an automatic tag. An automatic tag is one that Twitch adds to the stream. Broadcasters may not add automatic tags to their channel. The value is **true** if the tag is an automatic tag; otherwise, **false**.
      */
-    is_auto?: boolean;
+    is_auto: boolean;
     /**
      * A dictionary that contains the localized names of the tag. The key is in the form, <locale>-<coutry/region>. For example, en-us. The value is the localized name.
      */
-    localization_names?: Record<string, string>;
+    localization_names: Record<string, string>;
     /**
      * A dictionary that contains the localized descriptions of the tag. The key is in the form, <locale>-<coutry/region>. For example, en-us. The value is the localized description.
      */
-    localization_descriptions?: Record<string, string>;
-  }[]
+    localization_descriptions: Record<string, string>;
+  }[];
 }
 
 
@@ -6379,56 +6379,56 @@ export interface GetChannelTeamsResponse {
   /**
    * The list of teams that the broadcaster is a member of.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the broadcaster.
      */
-    broadcaster_id?: string;
+    broadcaster_id: string;
     /**
      * The broadcaster’s login name.
      */
-    broadcaster_login?: string;
+    broadcaster_login: string;
     /**
      * The broadcaster’s display name.
      */
-    broadcaster_name?: string;
+    broadcaster_name: string;
     /**
      * A URL to the team’s background image.
      */
-    background_image_url?: string;
+    background_image_url: string;
     /**
      * A URL to the team’s banner.
      */
-    banner?: string;
+    banner: string;
     /**
      * The UTC date and time (in RFC3339 format) of when the team was created.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * The UTC date and time (in RFC3339 format) of the last time the team was updated.
      */
-    updated_at?: string;
+    updated_at: string;
     /**
      * The team’s description. The description may contain formatting such as Markdown, HTML, newline (\\n) characters, etc.
      */
-    info?: string;
+    info: string;
     /**
      * A URL to a thumbnail image of the team’s logo.
      */
-    thumbnail_url?: string;
+    thumbnail_url: string;
     /**
      * The team’s name.
      */
-    team_name?: string;
+    team_name: string;
     /**
      * The team’s display name.
      */
-    team_display_name?: string;
+    team_display_name: string;
     /**
      * An ID that identifies the team.
      */
-    id?: string;
-  }[]
+    id: string;
+  }[];
 }
 
 
@@ -6448,61 +6448,61 @@ export interface GetTeamsResponse {
   /**
    * A list that contains the single team that you requested.
    */
-  data?: {
+  data: {
     /**
      * The list of team members.
      */
-    users?: {
+    users: {
       /**
        * An ID that identifies the team member.
        */
-      user_id?: string;
+      user_id: string;
       /**
        * The team member’s login name.
        */
-      user_login?: string;
+      user_login: string;
       /**
        * The team member’s display name.
        */
-      user_name?: string;
-    }[]
+      user_name: string;
+    }[];
     /**
      * A URL to the team’s background image.
      */
-    background_image_url?: string;
+    background_image_url: string;
     /**
      * A URL to the team’s banner.
      */
-    banner?: string;
+    banner: string;
     /**
      * The UTC date and time (in RFC3339 format) of when the team was created.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * The UTC date and time (in RFC3339 format) of the last time the team was updated.
      */
-    updated_at?: string;
+    updated_at: string;
     /**
      * The team’s description. The description may contain formatting such as Markdown, HTML, newline (\\n) characters, etc.
      */
-    info?: string;
+    info: string;
     /**
      * A URL to a thumbnail image of the team’s logo.
      */
-    thumbnail_url?: string;
+    thumbnail_url: string;
     /**
      * The team’s name.
      */
-    team_name?: string;
+    team_name: string;
     /**
      * The team’s display name.
      */
-    team_display_name?: string;
+    team_display_name: string;
     /**
      * An ID that identifies the team.
      */
-    id?: string;
-  }[]
+    id: string;
+  }[];
 }
 
 
@@ -6522,19 +6522,19 @@ export interface GetUsersResponse {
   /**
    * The list of users.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the user.
      */
-    id?: string;
+    id: string;
     /**
      * The user’s login name.
      */
-    login?: string;
+    login: string;
     /**
      * The user’s display name.
      */
-    display_name?: string;
+    display_name: string;
     /**
      * The type of user. Possible values are:  
      *   
@@ -6543,7 +6543,7 @@ export interface GetUsersResponse {
      * * staff — Twitch staff
      * * "" — Normal user
      */
-    type?: 'admin' | 'global_mod' | 'staff' | '';
+    type: 'admin' | 'global_mod' | 'staff' | '';
     /**
      * The type of broadcaster. Possible values are:  
      *   
@@ -6551,36 +6551,36 @@ export interface GetUsersResponse {
      * * partner — A [partner broadcaster](https://help.twitch.tv/s/article/partner-program-overview)
      * * "" — A normal broadcaster
      */
-    broadcaster_type?: 'affiliate' | 'partner' | '';
+    broadcaster_type: 'affiliate' | 'partner' | '';
     /**
      * The user’s description of their channel.
      */
-    description?: string;
+    description: string;
     /**
      * A URL to the user’s profile image.
      */
-    profile_image_url?: string;
+    profile_image_url: string;
     /**
      * A URL to the user’s offline image.
      */
-    offline_image_url?: string;
+    offline_image_url: string;
     /**
      * The number of times the user’s channel has been viewed.  
      *   
      * **NOTE**: This field has been deprecated (see [Get Users API endpoint – “view\_count” deprecation](https://discuss.dev.twitch.tv/t/get-users-api-endpoint-view-count-deprecation/37777)). Any data in this field is not valid and should not be used.
      */
-    view_count?: number;
+    view_count: number;
     /**
      * The user’s verified email address. The object includes this field only if the user access token includes the **user:read:email** scope.  
      *   
      * If the request contains more than one user, only the user associated with the access token that provided consent will include an email address — the email address for all other users will be empty.
      */
-    email?: string;
+    email: string;
     /**
      * The UTC date and time that the user’s account was created. The timestamp is in RFC3339 format.
      */
-    created_at?: string;
-  }[]
+    created_at: string;
+  }[];
 }
 
 
@@ -6598,19 +6598,19 @@ export interface UpdateUserResponse {
   /**
    * A list contains the single user that you updated.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the user.
      */
-    id?: string;
+    id: string;
     /**
      * The user’s login name.
      */
-    login?: string;
+    login: string;
     /**
      * The user’s display name.
      */
-    display_name?: string;
+    display_name: string;
     /**
      * The type of user. Possible values are:  
      *   
@@ -6619,7 +6619,7 @@ export interface UpdateUserResponse {
      * * staff — Twitch staff
      * * "" — Normal user
      */
-    type?: 'admin' | 'global_mod' | 'staff' | '';
+    type: 'admin' | 'global_mod' | 'staff' | '';
     /**
      * The type of broadcaster. Possible values are:  
      *   
@@ -6627,36 +6627,36 @@ export interface UpdateUserResponse {
      * * partner — A [partner broadcaster](https://help.twitch.tv/s/article/partner-program-overview)
      * * "" — A normal broadcaster
      */
-    broadcaster_type?: 'affiliate' | 'partner' | '';
+    broadcaster_type: 'affiliate' | 'partner' | '';
     /**
      * The user’s description of their channel.
      */
-    description?: string;
+    description: string;
     /**
      * A URL to the user’s profile image.
      */
-    profile_image_url?: string;
+    profile_image_url: string;
     /**
      * A URL to the user’s offline image.
      */
-    offline_image_url?: string;
+    offline_image_url: string;
     /**
      * The number of times the user’s channel has been viewed.  
      *   
      * **NOTE**: This field has been deprecated (see [Get Users API endpoint – “view\_count” deprecation](https://discuss.dev.twitch.tv/t/get-users-api-endpoint-view-count-deprecation/37777)). Any data in this field is not valid and should not be used.
      */
-    view_count?: number;
+    view_count: number;
     /**
      * The user’s verified email address. The object includes this field only if the user access token includes the **user:read:email** scope.  
      *   
      * If the request contains more than one user, only the user associated with the access token that provided consent will include an email address — the email address for all other users will be empty.
      */
-    email?: string;
+    email: string;
     /**
      * The UTC date and time that the user’s account was created. The timestamp is in RFC3339 format.
      */
-    created_at?: string;
-  }[]
+    created_at: string;
+  }[];
 }
 
 
@@ -6692,49 +6692,49 @@ export interface GetUsersFollowsResponse {
    * * If the request includes only _to\_id_, this is the total number of followers.
    * * If the request specifies both _from\_id_ and _to\_id_, the total is 1 if the "from" user follows the "to" user; otherwise, the total is 0.
    */
-  total?: number;
+  total: number;
   /**
    * The list of follower-followee relationship information. The list is in descending order by when the follow occurred (most recent follow first).
    */
-  data?: {
+  data: {
     /**
      * The ID of the user that’s following the user in `to_id`.
      */
-    from_id?: string;
+    from_id: string;
     /**
      * The follower’s login name.
      */
-    from_login?: string;
+    from_login: string;
     /**
      * The follower’s display name.
      */
-    from_name?: string;
+    from_name: string;
     /**
      * The ID of the user that’s being followed by the user in `from_id`.
      */
-    to_id?: string;
+    to_id: string;
     /**
      * The login name of the user that’s being followed.
      */
-    to_login?: string;
+    to_login: string;
     /**
      * The display name of the user that’s being followed.
      */
-    to_name?: string;
+    to_name: string;
     /**
      * The UTC date and time (in RFC3339 format) of when the user in `from_id` began following the user in `to_id`.
      */
-    followed_at?: string;
-  }[]
+    followed_at: string;
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -6758,20 +6758,20 @@ export interface GetUserBlockListResponse {
   /**
    * The list of blocked users. The list is in descending order by when the user was blocked.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the blocked user.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The blocked user’s login name.
      */
-    user_login?: string;
+    user_login: string;
     /**
      * The blocked user’s display name.
      */
-    display_name?: string;
-  }[]
+    display_name: string;
+  }[];
 }
 
 
@@ -6815,23 +6815,23 @@ export interface GetUserExtensionsResponse {
   /**
    * The list of extensions that the user has installed.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the extension.
      */
-    id?: string;
+    id: string;
     /**
      * The extension’s version.
      */
-    version?: string;
+    version: string;
     /**
      * The extension’s name.
      */
-    name?: string;
+    name: string;
     /**
      * A Boolean value that determines whether the extension is configured and can be activated. Is **true** if the extension is configured and can be activated.
      */
-    can_activate?: boolean;
+    can_activate: boolean;
     /**
      * The extension types that you can activate for this extension. Possible values are:  
      *   
@@ -6840,8 +6840,8 @@ export interface GetUserExtensionsResponse {
      * * overlay
      * * panel
      */
-    type?: 'component' | 'mobile' | 'overlay' | 'panel'[];
-  }[]
+    type: 'component' | 'mobile' | 'overlay' | 'panel'[];
+  }[];
 }
 
 
@@ -6859,79 +6859,79 @@ export interface GetUserActiveExtensionsResponse {
   /**
    * The active extensions that the broadcaster has installed.
    */
-  data?: {
+  data: {
     /**
      * A dictionary that contains the data for a panel extension. The dictionary’s key is a sequential number beginning with 1\. The following fields contain the panel’s data for each key.
      */
-    panel?: {
+    panel: {
       /**
        * A Boolean value that determines the extension’s activation state. If **false**, the user has not configured this panel extension.
        */
-      active?: boolean;
+      active: boolean;
       /**
        * An ID that identifies the extension.
        */
-      id?: string;
+      id: string;
       /**
        * The extension’s version.
        */
-      version?: string;
+      version: string;
       /**
        * The extension’s name.
        */
-      name?: string;
-    }
+      name: string;
+    };
     /**
      * A dictionary that contains the data for a video-overlay extension. The dictionary’s key is a sequential number beginning with 1\. The following fields contain the overlay’s data for each key.
      */
-    overlay?: {
+    overlay: {
       /**
        * A Boolean value that determines the extension’s activation state. If **false**, the user has not configured this overlay extension.
        */
-      active?: boolean;
+      active: boolean;
       /**
        * An ID that identifies the extension.
        */
-      id?: string;
+      id: string;
       /**
        * The extension’s version.
        */
-      version?: string;
+      version: string;
       /**
        * The extension’s name.
        */
-      name?: string;
-    }
+      name: string;
+    };
     /**
      * A dictionary that contains the data for a video-component extension. The dictionary’s key is a sequential number beginning with 1\. The following fields contain the component’s data for each key.
      */
-    component?: {
+    component: {
       /**
        * A Boolean value that determines the extension’s activation state. If **false**, the user has not configured this component extension.
        */
-      active?: boolean;
+      active: boolean;
       /**
        * An ID that identifies the extension.
        */
-      id?: string;
+      id: string;
       /**
        * The extension’s version.
        */
-      version?: string;
+      version: string;
       /**
        * The extension’s name.
        */
-      name?: string;
+      name: string;
       /**
        * The x-coordinate where the extension is placed.
        */
-      x?: number;
+      x: number;
       /**
        * The y-coordinate where the extension is placed.
        */
-      y?: number;
-    }
-  }
+      y: number;
+    };
+  };
 }
 
 
@@ -6951,79 +6951,79 @@ export interface UpdateUserExtensionsResponse {
   /**
    * The extensions that the broadcaster updated.
    */
-  data?: {
+  data: {
     /**
      * A dictionary that contains the data for a panel extension. The dictionary’s key is a sequential number beginning with 1\. The following fields contain the panel’s data for each key.
      */
-    panel?: {
+    panel: {
       /**
        * A Boolean value that determines the extension’s activation state. If **false**, the user has not configured a panel extension.
        */
-      active?: boolean;
+      active: boolean;
       /**
        * An ID that identifies the extension.
        */
-      id?: string;
+      id: string;
       /**
        * The extension’s version.
        */
-      version?: string;
+      version: string;
       /**
        * The extension’s name.
        */
-      name?: string;
-    }
+      name: string;
+    };
     /**
      * A dictionary that contains the data for a video-overlay extension. The dictionary’s key is a sequential number beginning with 1\. The following fields contain the overlay’s data for each key.
      */
-    overlay?: {
+    overlay: {
       /**
        * A Boolean value that determines the extension’s activation state. If **false**, the user has not configured an overlay extension.
        */
-      active?: boolean;
+      active: boolean;
       /**
        * An ID that identifies the extension.
        */
-      id?: string;
+      id: string;
       /**
        * The extension’s version.
        */
-      version?: string;
+      version: string;
       /**
        * The extension’s name.
        */
-      name?: string;
-    }
+      name: string;
+    };
     /**
      * A dictionary that contains the data for a video-component extension. The dictionary’s key is a sequential number beginning with 1\. The following fields contain the component’s data for each key.
      */
-    component?: {
+    component: {
       /**
        * A Boolean value that determines the extension’s activation state. If **false**, the user has not configured a component extension.
        */
-      active?: boolean;
+      active: boolean;
       /**
        * An ID that identifies the extension.
        */
-      id?: string;
+      id: string;
       /**
        * The extension’s version.
        */
-      version?: string;
+      version: string;
       /**
        * The extension’s name.
        */
-      name?: string;
+      name: string;
       /**
        * The x-coordinate where the extension is placed.
        */
-      x?: number;
+      x: number;
       /**
        * The y-coordinate where the extension is placed.
        */
-      y?: number;
-    }
-  }
+      y: number;
+    };
+  };
 }
 
 
@@ -7115,63 +7115,63 @@ export interface GetVideosResponse {
   /**
    * The list of published videos that match the filter criteria.
    */
-  data?: {
+  data: {
     /**
      * An ID that identifies the video.
      */
-    id?: string;
+    id: string;
     /**
      * The ID of the stream that the video originated from if the video’s type is “archive;” otherwise, **null**.
      */
-    stream_id?: string;
+    stream_id: string;
     /**
      * The ID of the broadcaster that owns the video.
      */
-    user_id?: string;
+    user_id: string;
     /**
      * The broadcaster’s login name.
      */
-    user_login?: string;
+    user_login: string;
     /**
      * The broadcaster’s display name.
      */
-    user_name?: string;
+    user_name: string;
     /**
      * The video’s title.
      */
-    title?: string;
+    title: string;
     /**
      * The video’s description.
      */
-    description?: string;
+    description: string;
     /**
      * The date and time, in UTC, of when the video was created. The timestamp is in RFC3339 format.
      */
-    created_at?: string;
+    created_at: string;
     /**
      * The date and time, in UTC, of when the video was published. The timestamp is in RFC3339 format.
      */
-    published_at?: string;
+    published_at: string;
     /**
      * The video’s URL.
      */
-    url?: string;
+    url: string;
     /**
      * A URL to a thumbnail image of the video. Before using the URL, you must replace the `%{width}` and `%{height}` placeholders with the width and height of the thumbnail you want returned. Specify the width and height in pixels. Because the CDN preserves the thumbnail’s ratio, the thumbnail may not be the exact size you requested.
      */
-    thumbnail_url?: string;
+    thumbnail_url: string;
     /**
      * The video’s viewable state. Always set to **public**.
      */
-    viewable?: string;
+    viewable: string;
     /**
      * The number of times that users have watched the video.
      */
-    view_count?: number;
+    view_count: number;
     /**
      * The ISO 639-1 two-letter language code that the video was broadcast in. For example, the language code is DE if the video was broadcast in German. For a list of supported languages, see [Supported Stream Language](https://help.twitch.tv/s/article/languages-on-twitch#streamlang). The language value is “other” if the video was broadcast in a language not in the list of supported languages.
      */
-    language?: string;
+    language: string;
     /**
      * The video’s type. Possible values are:  
      *   
@@ -7179,34 +7179,34 @@ export interface GetVideosResponse {
      * * highlight — A highlight reel of one of the broadcaster's past streams. See [Creating Highlights](https://help.twitch.tv/s/article/creating-highlights-and-stream-markers).
      * * upload — A video that the broadcaster uploaded to their video library. See Upload under [Video Producer](https://help.twitch.tv/s/article/video-on-demand?language=en%5FUS#videoproducer).
      */
-    type?: 'archive' | 'highlight' | 'upload';
+    type: 'archive' | 'highlight' | 'upload';
     /**
      * The video’s length in ISO 8601 duration format. For example, 3m21s represents 3 minutes, 21 seconds.
      */
-    duration?: string;
+    duration: string;
     /**
      * The segments that Twitch Audio Recognition muted; otherwise, **null**.
      */
-    muted_segments?: {
+    muted_segments: {
       /**
        * The duration of the muted segment, in seconds.
        */
-      duration?: number;
+      duration: number;
       /**
        * The offset, in seconds, from the beginning of the video to where the muted segment begins.
        */
-      offset?: number;
-    }[]
-  }[]
+      offset: number;
+    }[];
+  }[];
   /**
    * Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
    */
-  pagination?: {
+  pagination: {
     /**
      * The cursor used to get the next page of results. Use the cursor to set the request’s _after_ or _before_ query parameter depending on whether you’re paging forwards or backwards through the results.
      */
-    cursor?: string;
-  }
+    cursor: string;
+  };
 }
 
 
@@ -7224,7 +7224,7 @@ export interface DeleteVideosResponse {
   /**
    * The list of IDs of the videos that were deleted.
    */
-  data?: string[];
+  data: string[];
 }
 
 
