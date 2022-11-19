@@ -13,17 +13,10 @@ const fetchDocs = async () => {
 };
 
 const main = async () => {
-  let html = '';
-
-  try {
-    html = await fs.readFile(REFERENCE_FILENAME, 'utf8');
-  } catch (e) {
-    html = await fetchDocs();
-    await fs.mkdir('./tmp');
-    await fs.writeFile(REFERENCE_FILENAME, html);
-  }
-
-  const templatesText = await fs.readFile('./scripts/templates.md', 'utf8');
+  const [html, templatesText] = await Promise.all([
+    fetchDocs(),
+    fs.readFile('./scripts/templates.md', 'utf8'),
+  ]);
 
   const apiEndpoints = parseDocs(html);
   const templates = parseTemplates(templatesText);
@@ -31,6 +24,7 @@ const main = async () => {
   const api = generateApi(apiEndpoints, templates);
 
   await Promise.all([
+    fs.writeFile(REFERENCE_FILENAME, html),
     fs.writeFile('./api.json', JSON.stringify(apiEndpoints, null, 2)),
     fs.writeFile('./types.ts', types),
     fs.writeFile('./api.ts', api),
