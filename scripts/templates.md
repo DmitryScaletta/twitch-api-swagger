@@ -1,16 +1,12 @@
 # templates
 
-## imports
+## main
 
 ```ts
 import type {
 %IMPORTS%
 } from './types';
-```
 
-## main
-
-```ts
 export type ApiResponse<T> = Promise<{
   ok: boolean;
   status: number;

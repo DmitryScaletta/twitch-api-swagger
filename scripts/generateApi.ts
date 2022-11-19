@@ -24,7 +24,6 @@ const generateApi = (
   const imports: string[] = [];
   let api: Line[] = [];
 
-  const importsTemplate = templates['imports']!;
   const mainTemplate = templates['main']!;
   const methodCommentTemplate = templates['method-comment']!;
 
@@ -152,14 +151,11 @@ const generateApi = (
     api.push([1, '};']);
   }
 
-  const [beforeContent, afterContent] = mainTemplate.split('%CONTENT%');
+  const [beforeContent, afterContent] = mainTemplate
+    .replace('%IMPORTS%', imports.map((line) => `  ${line},`).join('\n'))
+    .split('%CONTENT%');
 
   api = [
-    ...importsTemplate
-      .replace('%IMPORTS%', imports.map((line) => `  ${line},`).join('\n'))
-      .split('\n')
-      .map((l) => [0, l] as Line),
-    [0, ''],
     ...beforeContent!.split('\n').map((l) => [0, l] as Line),
     ...api,
     ...afterContent!.split('\n').map((l) => [0, l] as Line),
