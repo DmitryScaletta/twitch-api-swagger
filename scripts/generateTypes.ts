@@ -85,7 +85,7 @@ const generateTypes = (apiEndpoints: ApiEndpoint[]): string => {
           p.children.forEach((p1) =>
             renderParameter(interfaceName, p1, depth + 1),
           );
-          types += `${offset}}${isArray ? '[]' : ''}\n`;
+          types += `${offset}}${isArray ? '[];' : ';'}\n`;
         } else {
           types += `${offset}${p.name}${required}: ${finalType};\n`;
         }

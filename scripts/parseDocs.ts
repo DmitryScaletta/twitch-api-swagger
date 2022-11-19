@@ -192,6 +192,11 @@ const parseDocs = (html: string): ApiEndpoint[] => {
 
       let currentSection = sections.description;
 
+      const changeRequiredIfNull = (p: Parameter, newValue: boolean) => {
+        if (p.required === null) p.required = newValue;
+        p.children.forEach((p1) => changeRequiredIfNull(p1, true));
+      };
+
       for (const el of leftDocs!.children) {
         if (el.tagName === 'H2' || el.className === 'editor-link') continue;
         if (el.tagName === 'H3') {
@@ -222,13 +227,58 @@ const parseDocs = (html: string): ApiEndpoint[] => {
         if (currentSection === sections.requestBody) {
           if (el.tagName === 'TABLE') {
             requestBody.parameters = parseParameters(el);
+            // All fields are required
+            // https://dev.twitch.tv/docs/api/reference#start-commercial
+            if (id === 'start-commercial') {
+              requestBody.parameters.forEach((p) =>
+                changeRequiredIfNull(p, true),
+              );
+            }
+
+            // All fields are optional
+            // https://dev.twitch.tv/docs/api/reference#update-chat-settings
+            // https://dev.twitch.tv/docs/api/reference#update-automod-settings
+            if (
+              id === 'update-chat-settings' ||
+              id === 'update-automod-settings'
+            ) {
+              requestBody.parameters.forEach((p) =>
+                changeRequiredIfNull(p, false),
+              );
+            }
           } else {
             requestBody.description.push(parseMarkdown(el.innerHTML));
           }
         }
 
         if (currentSection.endsWith(sections.requestQueryParams)) {
-          if (el.tagName === 'TABLE') {
+          // Not a table
+          // https://dev.twitch.tv/docs/api/reference#check-user-subscription
+          const checkUserSubscriptionParams: Parameter[] = [
+            {
+              name: 'broadcaster_id',
+              type: 'String',
+              possibleValues: [],
+              required: true,
+              depth: 0,
+              description: 'The ID of a partner or affiliate broadcaster.',
+              children: [],
+            },
+            {
+              name: 'user_id',
+              type: 'String',
+              possibleValues: [],
+              required: true,
+              depth: 0,
+              description:
+                'The ID of the user that you’re checking to see whether they subscribe to the broadcaster in broadcaster_id. This ID must match the user ID in the access Token.',
+              children: [],
+            },
+          ];
+
+          if (id === 'check-user-subscription') {
+            requestQueryParams.parameters = checkUserSubscriptionParams;
+          } else if (el.tagName === 'TABLE') {
             requestQueryParams.parameters = parseParameters(el);
           } else {
             requestQueryParams.description.push(parseMarkdown(el.innerHTML));
@@ -238,6 +288,10 @@ const parseDocs = (html: string): ApiEndpoint[] => {
         if (currentSection === sections.responseBody) {
           if (el.tagName === 'TABLE') {
             responseBody.parameters = parseParameters(el);
+            // if there is no required column in the table - set all parameters to required
+            responseBody.parameters.forEach((p) =>
+              changeRequiredIfNull(p, true),
+            );
           } else {
             responseBody.description.push(parseMarkdown(el.innerHTML));
           }
