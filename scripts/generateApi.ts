@@ -5,7 +5,7 @@ import {
   getParamsInterfaceName,
   getResponseInterfaceName,
   lowerFirstLetter,
-  moreThanOneIds,
+  moreThanOneValues,
 } from './utils.js';
 
 type Line = [ident: number, text: string];
@@ -134,7 +134,7 @@ const generateApi = (
       }
 
       if (hasParams) {
-        const possibleArrays = moreThanOneIds[id]! || [];
+        const possibleArrays = moreThanOneValues[id]! || [];
         methodSignature = methodSignature
           .replace('%PARAMS_TYPE%', paramsType)
           .replace('%POSSIBLE_ARRAYS%', JSON.stringify(possibleArrays));

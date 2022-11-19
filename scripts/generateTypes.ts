@@ -3,7 +3,7 @@ import {
   getBodyInterfaceName,
   getParamsInterfaceName,
   getResponseInterfaceName,
-  moreThanOneIds,
+  moreThanOneValues,
 } from './utils.js';
 
 const typesMap: Record<string, string> = {
@@ -51,7 +51,7 @@ const generateTypes = (apiEndpoints: ApiEndpoint[]): string => {
         let isArray = type.includes('[]');
 
         if (interfaceName.endsWith('Params')) {
-          const isMoreThanOneIds = moreThanOneIds[id]?.includes(p.name);
+          const isMoreThanOneIds = moreThanOneValues[id]?.includes(p.name);
           if (isMoreThanOneIds) {
             finalType = `${type} | ${type}[]`;
           }

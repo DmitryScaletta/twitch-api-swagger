@@ -20,7 +20,8 @@ export const getResponseInterfaceName = (endpointName: string) =>
 export const getMethodName = (endpointName: string) =>
   lowerFirstLetter(getInterfaceNamePrefix(endpointName));
 
-export const moreThanOneIds: Record<string, string[]> = {
+// only for query parameters
+export const moreThanOneValues: Record<string, string[]> = {
   'get-extension-transactions': ['id'],
   'get-channel-information': ['broadcaster_id'],
   'get-custom-reward': ['id'],
