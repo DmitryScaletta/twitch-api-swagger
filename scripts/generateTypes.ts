@@ -35,13 +35,14 @@ const generateTypes = (apiEndpoints: ApiEndpoint[]): string => {
         const offset = Array.from({ length: depth + 1 }, () => '  ').join('');
 
         if (p.description) {
-          types += `${offset}/**\n`;
-          types +=
-            p.description
-              .split('\n')
-              .map((s) => `${offset} * ${s}`)
-              .join('\n') + '\n';
-          types += `${offset} */\n`;
+          const desc = p.description.split('\n');
+          if (desc.length === 1) {
+            types += `${offset}/** ${desc[0]} */\n`;
+          } else {
+            types += `${offset}/**\n`;
+            types += desc.map((s) => `${offset} * ${s}`).join('\n') + '\n';
+            types += `${offset} */\n`;
+          }
         }
 
         const type = parseType(p.type);

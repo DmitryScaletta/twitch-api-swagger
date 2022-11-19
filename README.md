@@ -97,9 +97,7 @@ if (streams.ok) {
 
 ```ts
 export interface GetChatSettingsParams {
-  /**
-   * The ID of the broadcaster whose chat settings you want to get.
-   */
+  /** The ID of the broadcaster whose chat settings you want to get. */
   broadcaster_id: string;
   /**
    * The ID of a user that has permission to moderate the broadcaster’s chat room, or the broadcaster’s ID if they’re getting the settings.  
@@ -112,17 +110,11 @@ export interface GetChatSettingsParams {
 }
 
 export interface GetChatSettingsResponse {
-  /**
-   * The list of chat settings. The list contains a single object with all the settings.
-   */
+  /** The list of chat settings. The list contains a single object with all the settings. */
   data: {
-    /**
-     * The ID of the broadcaster specified in the request.
-     */
+    /** The ID of the broadcaster specified in the request. */
     broadcaster_id: string;
-    /**
-     * A Boolean value that determines whether chat messages must contain only emotes. Is **true** if chat messages may contain only emotes; otherwise, **false**.
-     */
+    /** A Boolean value that determines whether chat messages must contain only emotes. Is **true** if chat messages may contain only emotes; otherwise, **false**. */
     emote_mode: boolean;
     /**
      * A Boolean value that determines whether the broadcaster restricts the chat room to followers only.  
@@ -132,13 +124,9 @@ export interface GetChatSettingsResponse {
      * See the `follower_mode_duration` field for how long users must follow the broadcaster before being able to participate in the chat room.
      */
     follower_mode: boolean;
-    /**
-     * The length of time, in minutes, that users must follow the broadcaster before being able to participate in the chat room. Is **null** if `follower_mode` is **false**.
-     */
+    /** The length of time, in minutes, that users must follow the broadcaster before being able to participate in the chat room. Is **null** if `follower_mode` is **false**. */
     follower_mode_duration: number;
-    /**
-     * The moderator’s ID. The response includes this field only if the request specifies a user access token that includes the **moderator:read:chat\_settings** scope.
-     */
+    /** The moderator’s ID. The response includes this field only if the request specifies a user access token that includes the **moderator:read:chat\_settings** scope. */
     moderator_id: string;
     /**
      * A Boolean value that determines whether the broadcaster adds a short delay before chat messages appear in the chat room. This gives chat moderators and bots a chance to remove them before viewers can see the message. See the `non_moderator_chat_delay_duration` field for the length of the delay. Is **true** if the broadcaster applies a delay; otherwise, **false**.  
