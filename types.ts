@@ -6944,7 +6944,7 @@ export interface UpdateUserExtensionsBody {
    *   
    * For component extensions, the key’s value includes the above fields plus the `x` and `y` fields, which identify the coordinate where the extension is placed.
    */
-  data: Record<string, string>;
+  data: Record<string, Record<string, any>>;
 }
 
 export interface UpdateUserExtensionsResponse {

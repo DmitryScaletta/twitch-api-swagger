@@ -17828,7 +17828,7 @@
       "parameters": [
         {
           "name": "data",
-          "type": "map[string]string",
+          "type": "map[string]Object",
           "possibleValues": [],
           "required": true,
           "depth": 0,
