@@ -33,6 +33,8 @@ import type {
   UpdateRedemptionStatusBody,
   GetCharityCampaignResponse,
   GetCharityCampaignParams,
+  GetCharityCampaignDonationsResponse,
+  GetCharityCampaignDonationsParams,
   GetChattersResponse,
   GetChattersParams,
   GetChannelEmotesResponse,
@@ -1987,9 +1989,9 @@ export class TwitchApi {
   };
   charity = {
     /**
-     * [BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets information about the charity campaign that a broadcaster is running, such as their fundraising goal and the amount that’s been donated so far.
+     * [BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets information about the charity campaign that a broadcaster is running. For example, the campaign’s fundraising goal and the current amount of donations.
      *
-     * To receive events as donations occur, use the [channel.charity\_campaign.donate](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelcharity%5Fcampaigndonate) subscription type.
+     * To receive events when progress is made towards the campaign’s goal or the broadcaster changes the fundraising goal, subscribe to the [channel.charity\_campaign.progress](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelcharity%5Fcampaignprogress) subscription type.
      *
      * ## Authorization
      *
@@ -2059,12 +2061,12 @@ export class TwitchApi {
      * * The ID in the _broadcaster\_id_ query parameter must match the user ID in the access token.
      * * The Authorization header is required and must contain a user access token.
      * * The user access token must include the **channel:read:charity** scope.
-     * * The OAuth token is not valid.
-     * * The client ID specified in the Client-Id header must match the client ID specified in the OAuth token.
+     * * The access token is not valid.
+     * * The client ID specified in the Client-Id header must match the client ID specified in the access token.
      *
      * ### 403 Forbidden
      *
-     * * The broadcaster must be a partner or affiliate.
+     * * The broadcaster is not a partner or affiliate.
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-charity-campaign
      */
@@ -2080,12 +2082,114 @@ export class TwitchApi {
       });
       return getApiResponse(response);
     },
+    /**
+     * [BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets the list of donations that users have made to the broadcaster’s active charity campaign.
+     *
+     * To receive events as donations occur, subscribe to the [channel.charity\_campaign.donate](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelcharity%5Fcampaigndonate) subscription type.
+     *
+     * ## Authorization
+     *
+     * Requires a user access token that includes the **channel:read:charity** scope.
+     *
+     * ## URL
+     *
+     * `GET https://api.twitch.tv/helix/charity/donations`
+     *
+     * ## Examples
+     *
+     * ### Example Request
+     *
+     * Gets the broadcaster’s active charity campaign.
+     *
+     * ```
+     * curl -X GET 'https://api.twitch.tv/helix/charity/donations?broadcaster_id=123456' \
+     * -H 'Authorization: Bearer kpvy3cjboyptmiacwr0c19hotn5s' \
+     * -H 'Client-Id: hof5gwx0su6owfn0nyan9c87zr6t'
+     *
+     * ```
+     *
+     * ### Example Response
+     *
+     * ```
+     *
+     * {
+     *   "data": [
+     *     {
+     *       "campaign_id": "123-abc-456-def",
+     *       "user_id": "5678",
+     *       "user_login": "cool_user",
+     *       "user_name": "Cool_User",
+     *       "amount": {
+     *         "value": 500,
+     *         "decimal_places": 2,
+     *         "currency": "USD"
+     *       }
+     *     },
+     *     {
+     *       "campaign_id": "123-abc-456-def",
+     *       "user_id": "8765",
+     *       "user_login": "cool_user2",
+     *       "user_name": "Cool_User2",
+     *       "amount": {
+     *         "value": 10000,
+     *         "decimal_places": 2,
+     *         "currency": "USD"
+     *       }
+     *     },
+     *     . . .
+     *   ],
+     *   "pagination" : {
+     *       "cursor" : "eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6NX19"
+     *   }
+     * }
+     *
+     * ```
+     *
+     * ## Response codes
+     *
+     * ### 200 OK
+     *
+     * Successfully retrieved the list of donations that users contributed to the broadcaster’s charity campaign.
+     *
+     * ### 400 Bad Request
+     *
+     * * The _broadcaster\_id_ query parameter is required.
+     * * The _broadcaster\_id_ query parameter is not valid.
+     *
+     * ### 401 Unauthorized
+     *
+     * * The ID in the _broadcaster\_id_ query parameter must match the user ID in the access token.
+     * * The Authorization header is required and must contain a user access token.
+     * * The user access token must include the **channel:read:charity** scope.
+     * * The access token is not valid.
+     * * The client ID specified in the Client-Id header must match the client ID specified in the access token.
+     *
+     * ### 403 Forbidden
+     *
+     * * The broadcaster is not a partner or affiliate.
+     *
+     * @see https://dev.twitch.tv/docs/api/reference#get-charity-campaign-donations
+     */
+    getCharityCampaignDonations: async (
+      params: GetCharityCampaignDonationsParams,
+      accessToken = '',
+      clientId = '',
+    ): ApiResponse<GetCharityCampaignDonationsResponse> => {
+      const s = getSearchParams(params, []);
+      const url = `https://api.twitch.tv/helix/charity/donations?${s}`;
+      const response = await fetch(url, {
+        headers: this.getAuthHeaders(accessToken, clientId),
+      });
+      return getApiResponse(response);
+    },
   };
   chat = {
     /**
-     * [BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets the list of users that are connected to the specified broadcaster’s chat session.
+     * [BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets the list of users that are connected to the broadcaster’s chat session.
      *
-     * Note that there is a delay between when users join and leave a chat and when the list is updated accordingly.
+     * **NOTE**: There is a delay between when users join and leave a chat and when the list is updated accordingly.
+     *
+     * To determine whether a user is a moderator or VIP, use the [Get Moderators](https://dev.twitch.tv/docs/api/reference#get-moderators) and [Get VIPs](https://dev.twitch.tv/docs/api/reference#get-vips) endpoints. You can check the roles of up to 100 users.
      *
      * ## Authorization
      *
@@ -2115,7 +2219,9 @@ export class TwitchApi {
      * {
      *   "data": [
      *     {
-     *       "user_login": "smittysmithers"
+     *       "user_id": "128393656",
+     *       "user_login": "smittysmithers",
+     *       "user_name": "smittysmithers"
      *     },
      *     ...
      *   ],
@@ -2150,7 +2256,7 @@ export class TwitchApi {
      *
      * ### 403 Forbidden
      *
-     * * The user identified in the _moderator\_id_ query parameter is not one of the broadcaster's moderators.
+     * * The user in the _moderator\_id_ query parameter is not one of the broadcaster's moderators.
      *
      * @see https://dev.twitch.tv/docs/api/reference#get-chatters
      */
@@ -2801,8 +2907,8 @@ export class TwitchApi {
      * * The ID in the _moderator\_id_ query parameter must match the user ID in the user access token.
      * * The Authorization header is required and must contain a user access token.
      * * The user access token must include the **moderator:manage:chat\_settings** scope.
-     * * The OAuth token is not valid.
-     * * The ID in the Client-Id header must match the client ID in the OAuth token.
+     * * The access token is not valid.
+     * * The ID in the Client-Id header must match the client ID in the access token.
      *
      * ### 403 Forbidden
      *

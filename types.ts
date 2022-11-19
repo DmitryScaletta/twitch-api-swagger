@@ -835,12 +835,12 @@ export interface UpdateRedemptionStatusResponse {
 }
 
 export interface GetCharityCampaignParams {
-  /** The ID of the broadcaster that’s actively running a charity campaign. This ID must match the user ID in the access token. */
+  /** The ID of the broadcaster that’s currently running a charity campaign. This ID must match the user ID in the access token. */
   broadcaster_id: string;
 }
 
 export interface GetCharityCampaignResponse {
-  /** A list that contains the charity campaign that the broadcaster is currently running. The array is empty if the broadcaster is not running a charity campaign; the campaign information is no longer available as soon as the campaign ends. */
+  /** A list that contains the charity campaign that the broadcaster is currently running. The list is empty if the broadcaster is not running a charity campaign; the campaign information is not available after the campaign ends. */
   data: {
     /** An ID that uniquely identifies the charity campaign. */
     id: string;
@@ -887,14 +887,51 @@ export interface GetCharityCampaignResponse {
   }[];
 }
 
+export interface GetCharityCampaignDonationsParams {
+  /** The ID of the broadcaster that’s currently running a charity campaign. This ID must match the user ID in the access token. */
+  broadcaster_id: string;
+  /** The maximum number of items to return per page in the response. The minimum page size is 1 item per page and the maximum is 100\. The default is 20. */
+  first?: number;
+  /** The cursor used to get the next page of results. The **Pagination** object in the response contains the cursor’s value. [Read More](https://dev.twitch.tv/docs/api/guide#pagination) */
+  after?: string;
+}
+
+export interface GetCharityCampaignDonationsResponse {
+  /** A list that contains the donations that users have made to the broadcaster’s charity campaign. The list is empty if the broadcaster is not currently running a charity campaign; the donation information is not available after the campaign ends. */
+  data: {
+    /** An ID that identifies the charity campaign that the donation applies to. */
+    campaign_id: string;
+    /** An ID that identifies a user that donated money to the campaign. */
+    user_id: string;
+    /** The user’s login name. */
+    user_login: string;
+    /** The user’s display name. */
+    user_name: string;
+    /** An object that contains the amount of money that the user donated. */
+    amount: {
+      /** The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, `value` is set to 550. */
+      value: number;
+      /**
+       * The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate `value` from minor units to major units by using the formula:  
+       *   
+       * `value / 10^decimal_places`
+       */
+      decimal_places: number;
+      /** The ISO-4217 three-letter currency code that identifies the type of currency in `value`. */
+      currency: string;
+    };
+  }[];
+  /** An object that contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination) */
+  pagination: {
+    /** The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter. */
+    cursor: string;
+  };
+}
+
 export interface GetChattersParams {
   /** The ID of the broadcaster whose list of chatters you want to get. */
   broadcaster_id: string;
-  /**
-   * The ID of the moderator or the specified broadcaster that’s requesting the list of chatters. This ID must match the user ID associated with the user access token.  
-   *   
-   * The moderator must have permission to moderate the broadcaster’s chat room.
-   */
+  /** The ID of the broadcaster or one of the broadcaster’s moderators. This ID must match the user ID in the user access token. */
   moderator_id: string;
   /** The maximum number of items to return per page in the response. The minimum page size is 1 item per page and the maximum is 1,000\. The default is 100. */
   first?: number;
@@ -903,16 +940,14 @@ export interface GetChattersParams {
 }
 
 export interface GetChattersResponse {
-  /** The list of users that are connected to the specified broadcaster’s chat room. The list is empty if no users are connected to the chat room. */
+  /** The list of users that are connected to the broadcaster’s chat room. The list is empty if no users are connected to the chat room. */
   data: {
-    /**
-     * The login name of a user that’s connected to the broadcaster’s chat room.  
-     *   
-     * To get the user’s ID and display name, use the [Get Users](https://dev.twitch.tv/docs/api/reference#get-users) endpoint. You can get the IDs associated with up to 100 login names.  
-     *   
-     * To determine whether the user is a moderator or VIP, use the [Get Moderators](https://dev.twitch.tv/docs/api/reference#get-moderators) and [Get VIPs](https://dev.twitch.tv/docs/api/reference#get-vips) endpoints. You can check the roles of up to 100 users (after getting their IDs).
-     */
+    /** The ID of a user that’s connected to the broadcaster’s chat room. */
+    user_id: string;
+    /** The user’s login name. */
     user_login: string;
+    /** The user’s display name. */
+    user_name: string;
   }[];
   /** Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination) */
   pagination: {
@@ -2103,8 +2138,9 @@ export interface CreateEventSubSubscriptionResponse {
      * * notification\_failures\_exceeded — The notification delivery failure rate was too high.
      * * authorization\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.
      * * user\_removed — One of the users specified in the **Condition** object was removed.
+     * * version\_removed — The subscribed to subscription type and version is no longer supported.
      */
-    status: 'enabled' | 'webhook_callback_verification_pending' | 'webhook_callback_verification_failed' | 'notification_failures_exceeded' | 'authorization_revoked' | 'user_removed';
+    status: 'enabled' | 'webhook_callback_verification_pending' | 'webhook_callback_verification_failed' | 'notification_failures_exceeded' | 'authorization_revoked' | 'user_removed' | 'version_removed';
     /** The subscription’s type. See [Subscription Types](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#subscription-types). */
     type: string;
     /** The version number that identifies this definition of the subscription’s data. */
@@ -2158,8 +2194,9 @@ export interface GetEventSubSubscriptionsParams {
    * * notification\_failures\_exceeded — The notification delivery failure rate was too high.
    * * authorization\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.
    * * user\_removed — One of the users specified in the **Condition** object was removed.
+   * * version\_removed — The subscribed to subscription type and version is no longer supported.
    */
-  status?: 'enabled' | 'webhook_callback_verification_pending' | 'webhook_callback_verification_failed' | 'notification_failures_exceeded' | 'authorization_revoked' | 'user_removed';
+  status?: 'enabled' | 'webhook_callback_verification_pending' | 'webhook_callback_verification_failed' | 'notification_failures_exceeded' | 'authorization_revoked' | 'user_removed' | 'version_removed';
   /** Filter subscriptions by subscription type. For a list of subscription types, see [Subscription Types](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#subscription-types). */
   type?: string;
   /** Filter subscriptions by user ID. The response contains subscriptions where this ID matches a user ID that you specified in the **Condition** object when you [created the subscription](https://dev.twitch.tv/docs/api/reference#create-eventsub-subscription). */

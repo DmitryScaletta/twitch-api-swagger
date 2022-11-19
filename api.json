@@ -3415,8 +3415,8 @@
     "resource": "Charity",
     "description": "BETA Gets information about the broadcaster’s active charity campaign.",
     "descriptionFull": [
-      "[BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets information about the charity campaign that a broadcaster is running, such as their fundraising goal and the amount that’s been donated so far.",
-      "To receive events as donations occur, use the [channel.charity\\_campaign.donate](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelcharity%5Fcampaigndonate) subscription type."
+      "[BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets information about the charity campaign that a broadcaster is running. For example, the campaign’s fundraising goal and the current amount of donations.",
+      "To receive events when progress is made towards the campaign’s goal or the broadcaster changes the fundraising goal, subscribe to the [channel.charity\\_campaign.progress](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelcharity%5Fcampaignprogress) subscription type."
     ],
     "authentication": [],
     "authorization": [
@@ -3437,7 +3437,7 @@
           "possibleValues": [],
           "required": true,
           "depth": 0,
-          "description": "The ID of the broadcaster that’s actively running a charity campaign. This ID must match the user ID in the access token.",
+          "description": "The ID of the broadcaster that’s currently running a charity campaign. This ID must match the user ID in the access token.",
           "children": []
         }
       ]
@@ -3451,7 +3451,7 @@
           "possibleValues": [],
           "required": true,
           "depth": 0,
-          "description": "A list that contains the charity campaign that the broadcaster is currently running. The array is empty if the broadcaster is not running a charity campaign; the campaign information is no longer available as soon as the campaign ends.",
+          "description": "A list that contains the charity campaign that the broadcaster is currently running. The list is empty if the broadcaster is not running a charity campaign; the campaign information is not available after the campaign ends.",
           "children": [
             {
               "name": "id",
@@ -3614,23 +3614,202 @@
       ],
       [
         "401 Unauthorized",
-        "* The ID in the _broadcaster\\_id_ query parameter must match the user ID in the access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:read:charity** scope.\n* The OAuth token is not valid.\n* The client ID specified in the Client-Id header must match the client ID specified in the OAuth token."
+        "* The ID in the _broadcaster\\_id_ query parameter must match the user ID in the access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:read:charity** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header must match the client ID specified in the access token."
       ],
       [
         "403 Forbidden",
-        "* The broadcaster must be a partner or affiliate."
+        "* The broadcaster is not a partner or affiliate."
       ]
     ],
     "examples": "### Example Request\n\nGets the broadcaster’s active charity campaign.\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/charity/campaigns?broadcaster_id=123456' \\\n-H 'Authorization: Bearer kpvy3cjboyptmiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfn0nyan9c87zr6t'\n\n```\n\n### Example Response\n\n```\n\n{\n  \"data\": [\n    {\n      \"id\": \"123-abc-456-def\",\n      \"broadcaster_id\": \"123456\",\n      \"broadcaster_name\": \"SunnySideUp\",\n      \"broadcaster_login\": \"sunnysideup\",\n      \"charity_name\": \"Example name\",\n      \"charity_description\": \"Example description\",\n      \"charity_logo\": \"https://abc.cloudfront.net/ppgf/1000/100.png\",\n      \"charity_website\": \"https://www.example.com\",\n      \"current_amount\": {\n        \"value\": 86000,\n        \"decimal_places\": 2,\n        \"currency\": \"USD\"\n      },\n      \"target_amount\": {\n        \"value\": 1500000,\n        \"decimal_places\": 2,\n        \"currency\": \"USD\"\n      }\n    }\n  ]\n}\n\n```"
   },
   {
+    "id": "get-charity-campaign-donations",
+    "name": "Get Charity Campaign Donations",
+    "resource": "Charity",
+    "description": "BETA Gets the list of donations that users have made to the broadcaster’s active charity campaign.",
+    "descriptionFull": [
+      "[BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets the list of donations that users have made to the broadcaster’s active charity campaign.",
+      "To receive events as donations occur, subscribe to the [channel.charity\\_campaign.donate](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelcharity%5Fcampaigndonate) subscription type."
+    ],
+    "authentication": [],
+    "authorization": [
+      "Requires a user access token that includes the **channel:read:charity** scope."
+    ],
+    "url": "https://api.twitch.tv/helix/charity/donations",
+    "method": "GET",
+    "requestBody": {
+      "description": [],
+      "parameters": []
+    },
+    "requestQueryParams": {
+      "description": [],
+      "parameters": [
+        {
+          "name": "broadcaster_id",
+          "type": "String",
+          "possibleValues": [],
+          "required": true,
+          "depth": 0,
+          "description": "The ID of the broadcaster that’s currently running a charity campaign. This ID must match the user ID in the access token.",
+          "children": []
+        },
+        {
+          "name": "first",
+          "type": "Integer",
+          "possibleValues": [],
+          "required": false,
+          "depth": 0,
+          "description": "The maximum number of items to return per page in the response. The minimum page size is 1 item per page and the maximum is 100\\. The default is 20.",
+          "children": []
+        },
+        {
+          "name": "after",
+          "type": "String",
+          "possibleValues": [],
+          "required": false,
+          "depth": 0,
+          "description": "The cursor used to get the next page of results. The **Pagination** object in the response contains the cursor’s value. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
+          "children": []
+        }
+      ]
+    },
+    "responseBody": {
+      "description": [],
+      "parameters": [
+        {
+          "name": "data",
+          "type": "Object[]",
+          "possibleValues": [],
+          "required": true,
+          "depth": 0,
+          "description": "A list that contains the donations that users have made to the broadcaster’s charity campaign. The list is empty if the broadcaster is not currently running a charity campaign; the donation information is not available after the campaign ends.",
+          "children": [
+            {
+              "name": "campaign_id",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "An ID that identifies the charity campaign that the donation applies to.",
+              "children": []
+            },
+            {
+              "name": "user_id",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "An ID that identifies a user that donated money to the campaign.",
+              "children": []
+            },
+            {
+              "name": "user_login",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The user’s login name.",
+              "children": []
+            },
+            {
+              "name": "user_name",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The user’s display name.",
+              "children": []
+            },
+            {
+              "name": "amount",
+              "type": "Object",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "An object that contains the amount of money that the user donated.",
+              "children": [
+                {
+                  "name": "value",
+                  "type": "Integer",
+                  "possibleValues": [],
+                  "required": true,
+                  "depth": 2,
+                  "description": "The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, `value` is set to 550.",
+                  "children": []
+                },
+                {
+                  "name": "decimal_places",
+                  "type": "Integer",
+                  "possibleValues": [],
+                  "required": true,
+                  "depth": 2,
+                  "description": "The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate `value` from minor units to major units by using the formula:  \n  \n`value / 10^decimal_places`",
+                  "children": []
+                },
+                {
+                  "name": "currency",
+                  "type": "String",
+                  "possibleValues": [],
+                  "required": true,
+                  "depth": 2,
+                  "description": "The ISO-4217 three-letter currency code that identifies the type of currency in `value`.",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "pagination",
+          "type": "Object",
+          "possibleValues": [],
+          "required": true,
+          "depth": 0,
+          "description": "An object that contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
+          "children": [
+            {
+              "name": "cursor",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter.",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    "responseCodes": [
+      [
+        "200 OK",
+        "Successfully retrieved the list of donations that users contributed to the broadcaster’s charity campaign."
+      ],
+      [
+        "400 Bad Request",
+        "* The _broadcaster\\_id_ query parameter is required.\n* The _broadcaster\\_id_ query parameter is not valid."
+      ],
+      [
+        "401 Unauthorized",
+        "* The ID in the _broadcaster\\_id_ query parameter must match the user ID in the access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:read:charity** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header must match the client ID specified in the access token."
+      ],
+      [
+        "403 Forbidden",
+        "* The broadcaster is not a partner or affiliate."
+      ]
+    ],
+    "examples": "### Example Request\n\nGets the broadcaster’s active charity campaign.\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/charity/donations?broadcaster_id=123456' \\\n-H 'Authorization: Bearer kpvy3cjboyptmiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfn0nyan9c87zr6t'\n\n```\n\n### Example Response\n\n```\n\n{\n  \"data\": [\n    {\n      \"campaign_id\": \"123-abc-456-def\",\n      \"user_id\": \"5678\",\n      \"user_login\": \"cool_user\",\n      \"user_name\": \"Cool_User\",\n      \"amount\": {\n        \"value\": 500,\n        \"decimal_places\": 2,\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"campaign_id\": \"123-abc-456-def\",\n      \"user_id\": \"8765\",\n      \"user_login\": \"cool_user2\",\n      \"user_name\": \"Cool_User2\",\n      \"amount\": {\n        \"value\": 10000,\n        \"decimal_places\": 2,\n        \"currency\": \"USD\"\n      }\n    },\n    . . .\n  ],\n  \"pagination\" : {\n      \"cursor\" : \"eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6NX19\"\n  }\n}\n\n```"
+  },
+  {
     "id": "get-chatters",
     "name": "Get Chatters",
     "resource": "Chat",
-    "description": "BETA Gets the list of users that are connected to the specified broadcaster’s chat session.",
+    "description": "BETA Gets the list of users that are connected to the broadcaster’s chat session.",
     "descriptionFull": [
-      "[BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets the list of users that are connected to the specified broadcaster’s chat session.",
-      "Note that there is a delay between when users join and leave a chat and when the list is updated accordingly."
+      "[BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets the list of users that are connected to the broadcaster’s chat session.",
+      "**NOTE**: There is a delay between when users join and leave a chat and when the list is updated accordingly.",
+      "To determine whether a user is a moderator or VIP, use the [Get Moderators](https://dev.twitch.tv/docs/api/reference#get-moderators) and [Get VIPs](https://dev.twitch.tv/docs/api/reference#get-vips) endpoints. You can check the roles of up to 100 users."
     ],
     "authentication": [],
     "authorization": [
@@ -3660,7 +3839,7 @@
           "possibleValues": [],
           "required": true,
           "depth": 0,
-          "description": "The ID of the moderator or the specified broadcaster that’s requesting the list of chatters. This ID must match the user ID associated with the user access token.  \n  \nThe moderator must have permission to moderate the broadcaster’s chat room.",
+          "description": "The ID of the broadcaster or one of the broadcaster’s moderators. This ID must match the user ID in the user access token.",
           "children": []
         },
         {
@@ -3692,15 +3871,33 @@
           "possibleValues": [],
           "required": true,
           "depth": 0,
-          "description": "The list of users that are connected to the specified broadcaster’s chat room. The list is empty if no users are connected to the chat room.",
+          "description": "The list of users that are connected to the broadcaster’s chat room. The list is empty if no users are connected to the chat room.",
           "children": [
+            {
+              "name": "user_id",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The ID of a user that’s connected to the broadcaster’s chat room.",
+              "children": []
+            },
             {
               "name": "user_login",
               "type": "String",
               "possibleValues": [],
               "required": true,
               "depth": 1,
-              "description": "The login name of a user that’s connected to the broadcaster’s chat room.  \n  \nTo get the user’s ID and display name, use the [Get Users](https://dev.twitch.tv/docs/api/reference#get-users) endpoint. You can get the IDs associated with up to 100 login names.  \n  \nTo determine whether the user is a moderator or VIP, use the [Get Moderators](https://dev.twitch.tv/docs/api/reference#get-moderators) and [Get VIPs](https://dev.twitch.tv/docs/api/reference#get-vips) endpoints. You can check the roles of up to 100 users (after getting their IDs).",
+              "description": "The user’s login name.",
+              "children": []
+            },
+            {
+              "name": "user_name",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The user’s display name.",
               "children": []
             }
           ]
@@ -3750,10 +3947,10 @@
       ],
       [
         "403 Forbidden",
-        "* The user identified in the _moderator\\_id_ query parameter is not one of the broadcaster's moderators."
+        "* The user in the _moderator\\_id_ query parameter is not one of the broadcaster's moderators."
       ]
     ],
-    "examples": "### Example Request\n\nGets the list of users that are connected to the specified broadcaster’s chat room.\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/chat/chatters?broadcaster_id=123456&moderator_id=654321' \\\n-H 'Authorization: Bearer kpvy3cjboyptmiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfn0nyan9c87zr6t'\n\n```\n\n### Example Response\n\n```\n\n{\n  \"data\": [\n    {\n      \"user_login\": \"smittysmithers\"\n    },\n    ...\n  ],\n  \"pagination\": {\n    \"cursor\": \"eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6NX19\"\n  },\n  \"total\": 8\n}\n\n```"
+    "examples": "### Example Request\n\nGets the list of users that are connected to the specified broadcaster’s chat room.\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/chat/chatters?broadcaster_id=123456&moderator_id=654321' \\\n-H 'Authorization: Bearer kpvy3cjboyptmiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfn0nyan9c87zr6t'\n\n```\n\n### Example Response\n\n```\n\n{\n  \"data\": [\n    {\n      \"user_id\": \"128393656\",\n      \"user_login\": \"smittysmithers\",\n      \"user_name\": \"smittysmithers\"\n    },\n    ...\n  ],\n  \"pagination\": {\n    \"cursor\": \"eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6NX19\"\n  },\n  \"total\": 8\n}\n\n```"
   },
   {
     "id": "get-channel-emotes",
@@ -4945,7 +5142,7 @@
       ],
       [
         "401 Unauthorized",
-        "* The ID in the _moderator\\_id_ query parameter must match the user ID in the user access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **moderator:manage:chat\\_settings** scope.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the client ID in the OAuth token."
+        "* The ID in the _moderator\\_id_ query parameter must match the user ID in the user access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **moderator:manage:chat\\_settings** scope.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
       ],
       [
         "403 Forbidden",
@@ -8012,11 +8209,12 @@
                 "webhook_callback_verification_failed",
                 "notification_failures_exceeded",
                 "authorization_revoked",
-                "user_removed"
+                "user_removed",
+                "version_removed"
               ],
               "required": true,
               "depth": 1,
-              "description": "The subscription’s status. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* user\\_removed — One of the users specified in the **Condition** object was removed.",
+              "description": "The subscription’s status. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscribed to subscription type and version is no longer supported.",
               "children": []
             },
             {
@@ -8262,11 +8460,12 @@
             "webhook_callback_verification_failed",
             "notification_failures_exceeded",
             "authorization_revoked",
-            "user_removed"
+            "user_removed",
+            "version_removed"
           ],
           "required": false,
           "depth": 0,
-          "description": "Filter subscriptions by its status. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* user\\_removed — One of the users specified in the **Condition** object was removed.",
+          "description": "Filter subscriptions by its status. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscribed to subscription type and version is no longer supported.",
           "children": []
         },
         {
