@@ -1034,7 +1034,28 @@
                   "required": true,
                   "depth": 2,
                   "description": "Contains details about the digital product’s cost.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "amount",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The amount exchanged for the digital product.",
+                      "children": []
+                    },
+                    {
+                      "name": "type",
+                      "type": "String",
+                      "possibleValues": [
+                        "bits"
+                      ],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The type of currency exchanged. Possible values are:  \n  \n* bits",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "inDevelopment",
@@ -3084,6 +3105,15 @@
                   "required": true,
                   "depth": 2,
                   "description": "A Boolean value that determines whether to apply a cooldown period. Is **true** if a cooldown period is enabled.",
+                  "children": []
+                },
+                {
+                  "name": "global_cooldown_seconds",
+                  "type": "Int64",
+                  "possibleValues": [],
+                  "required": true,
+                  "depth": 2,
+                  "description": "The cooldown period, in seconds.",
                   "children": []
                 }
               ]
@@ -7388,7 +7418,17 @@
                   "required": true,
                   "depth": 2,
                   "description": "Describes how the extension is displayed on mobile devices.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "viewer_url",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The HTML file that is shown to viewers on mobile devices. This page is presented to viewers as a panel behind the chat area of the mobile app.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "panel",
@@ -7397,7 +7437,35 @@
                   "required": true,
                   "depth": 2,
                   "description": "Describes how the extension is rendered if the extension may be activated as a panel extension.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "viewer_url",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The HTML file that is shown to viewers on the channel page when the extension is activated in a Panel slot.",
+                      "children": []
+                    },
+                    {
+                      "name": "height",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The height, in pixels, of the panel component that the extension is rendered in.",
+                      "children": []
+                    },
+                    {
+                      "name": "can_link_external_content",
+                      "type": "Boolean",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "A Boolean value that determines whether the extension can link to non-Twitch domains.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "video_overlay",
@@ -7406,7 +7474,26 @@
                   "required": true,
                   "depth": 2,
                   "description": "Describes how the extension is rendered if the extension may be activated as a video-overlay extension.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "viewer_url",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The HTML file that is shown to viewers on the channel page when the extension is activated on the Video - Overlay slot.",
+                      "children": []
+                    },
+                    {
+                      "name": "can_link_external_content",
+                      "type": "Boolean",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "A Boolean value that determines whether the extension can link to non-Twitch domains.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "component",
@@ -7415,7 +7502,71 @@
                   "required": true,
                   "depth": 2,
                   "description": "Describes how the extension is rendered if the extension may be activated as a video-component extension.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "viewer_url",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The HTML file that is shown to viewers on the channel page when the extension is activated in a Video - Component slot.",
+                      "children": []
+                    },
+                    {
+                      "name": "aspect_ratio_x",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The width value of the ratio (width : height) which determines the extension’s width, and how the extension’s iframe will resize in different video player environments.",
+                      "children": []
+                    },
+                    {
+                      "name": "aspect_ratio_y",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The height value of the ratio (width : height) which determines the extension’s height, and how the extension’s iframe will resize in different video player environments.",
+                      "children": []
+                    },
+                    {
+                      "name": "autoscale",
+                      "type": "Boolean",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "A Boolean value that determines whether to apply CSS zoom. If **true**, a CSS zoom is applied such that the size of the extension is variable but the inner dimensions are fixed based on Scale Pixels. This allows your extension to render as if it is of fixed width and height. If **false**, the inner dimensions of the extension iframe are variable, meaning your extension must implement responsiveness.",
+                      "children": []
+                    },
+                    {
+                      "name": "scale_pixels",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The base width, in pixels, of the extension to use when scaling (see `autoscale`). This value is ignored if `autoscale` is **false**.",
+                      "children": []
+                    },
+                    {
+                      "name": "target_height",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The height as a percent of the maximum height of a video component extension. Values are between 1% - 100%.",
+                      "children": []
+                    },
+                    {
+                      "name": "can_link_external_content",
+                      "type": "Boolean",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "A Boolean value that determines whether the extension can link to non-Twitch domains.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "config",
@@ -7424,7 +7575,26 @@
                   "required": true,
                   "depth": 2,
                   "description": "Describes the view that is shown to broadcasters while they are configuring your extension within the Extension Manager.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "viewer_url",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The HTML file shown to broadcasters while they are configuring your extension within the Extension Manager.",
+                      "children": []
+                    },
+                    {
+                      "name": "can_link_external_content",
+                      "type": "Boolean",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "A Boolean value that determines whether the extension can link to non-Twitch domains.",
+                      "children": []
+                    }
+                  ]
                 }
               ]
             },
@@ -7734,7 +7904,17 @@
                   "required": true,
                   "depth": 2,
                   "description": "Describes how the extension is displayed on mobile devices.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "viewer_url",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The HTML file that is shown to viewers on mobile devices. This page is presented to viewers as a panel behind the chat area of the mobile app.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "panel",
@@ -7743,7 +7923,35 @@
                   "required": true,
                   "depth": 2,
                   "description": "Describes how the extension is rendered if the extension may be activated as a panel extension.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "viewer_url",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The HTML file that is shown to viewers on the channel page when the extension is activated in a Panel slot.",
+                      "children": []
+                    },
+                    {
+                      "name": "height",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The height, in pixels, of the panel component that the extension is rendered in.",
+                      "children": []
+                    },
+                    {
+                      "name": "can_link_external_content",
+                      "type": "Boolean",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "A Boolean value that determines whether the extension can link to non-Twitch domains.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "video_overlay",
@@ -7752,7 +7960,26 @@
                   "required": true,
                   "depth": 2,
                   "description": "Describes how the extension is rendered if the extension may be activated as a video-overlay extension.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "viewer_url",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The HTML file that is shown to viewers on the channel page when the extension is activated on the Video - Overlay slot.",
+                      "children": []
+                    },
+                    {
+                      "name": "can_link_external_content",
+                      "type": "Boolean",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "A Boolean value that determines whether the extension can link to non-Twitch domains.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "component",
@@ -7761,7 +7988,71 @@
                   "required": true,
                   "depth": 2,
                   "description": "Describes how the extension is rendered if the extension may be activated as a video-component extension.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "viewer_url",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The HTML file that is shown to viewers on the channel page when the extension is activated in a Video - Component slot.",
+                      "children": []
+                    },
+                    {
+                      "name": "aspect_ratio_x",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The width value of the ratio (width : height) which determines the extension’s width, and how the extension’s iframe will resize in different video player environments.",
+                      "children": []
+                    },
+                    {
+                      "name": "aspect_ratio_y",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The height value of the ratio (width : height) which determines the extension’s height, and how the extension’s iframe will resize in different video player environments.",
+                      "children": []
+                    },
+                    {
+                      "name": "autoscale",
+                      "type": "Boolean",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "A Boolean value that determines whether to apply CSS zoom. If **true**, a CSS zoom is applied such that the size of the extension is variable but the inner dimensions are fixed based on Scale Pixels. This allows your extension to render as if it is of fixed width and height. If **false**, the inner dimensions of the extension iframe are variable, meaning your extension must implement responsiveness.",
+                      "children": []
+                    },
+                    {
+                      "name": "scale_pixels",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The base width, in pixels, of the extension to use when scaling (see `autoscale`). This value is ignored if `autoscale` is **false**.",
+                      "children": []
+                    },
+                    {
+                      "name": "target_height",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The height as a percent of the maximum height of a video component extension. Values are between 1% - 100%.",
+                      "children": []
+                    },
+                    {
+                      "name": "can_link_external_content",
+                      "type": "Boolean",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "A Boolean value that determines whether the extension can link to non-Twitch domains.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "config",
@@ -7770,7 +8061,26 @@
                   "required": true,
                   "depth": 2,
                   "description": "Describes the view that is shown to broadcasters while they are configuring your extension within the Extension Manager.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "viewer_url",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The HTML file shown to broadcasters while they are configuring your extension within the Extension Manager.",
+                      "children": []
+                    },
+                    {
+                      "name": "can_link_external_content",
+                      "type": "Boolean",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "A Boolean value that determines whether the extension can link to non-Twitch domains.",
+                      "children": []
+                    }
+                  ]
                 }
               ]
             },
@@ -9240,7 +9550,39 @@
                   "required": true,
                   "depth": 2,
                   "description": "The most recent contribution towards the Hype Train’s goal.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "total",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The total amount contributed. If `type` is BITS, `total` represents the amount of Bits used. If `type` is SUBS, `total` is 500, 1000, or 2500 to represent tier 1, 2, or 3 subscriptions, respectively.",
+                      "children": []
+                    },
+                    {
+                      "name": "type",
+                      "type": "String",
+                      "possibleValues": [
+                        "BITS",
+                        "SUBS",
+                        "OTHER"
+                      ],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The contribution method used. Possible values are:  \n  \n* BITS — Cheering with Bits.\n* SUBS — Subscription activity like subscribing or gifting subscriptions.\n* OTHER — Covers other contribution methods not listed.",
+                      "children": []
+                    },
+                    {
+                      "name": "user",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The ID of the user that made the contribution.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "level",
@@ -9267,7 +9609,39 @@
                   "required": true,
                   "depth": 2,
                   "description": "The top contributors for each contribution type. For example, the top contributor using BITS (by aggregate) and the top contributor using SUBS (by count).",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "total",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The total amount contributed. If `type` is BITS, `total` represents the amount of Bits used. If `type` is SUBS, `total` is 500, 1000, or 2500 to represent tier 1, 2, or 3 subscriptions, respectively.",
+                      "children": []
+                    },
+                    {
+                      "name": "type",
+                      "type": "String",
+                      "possibleValues": [
+                        "BITS",
+                        "SUBS",
+                        "OTHER"
+                      ],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The contribution method used. Possible values are:  \n  \n* BITS — Cheering with Bits.\n* SUBS — Subscription activity like subscribing or gifting subscriptions.\n* OTHER — Covers other contribution methods not listed.",
+                      "children": []
+                    },
+                    {
+                      "name": "user",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The ID of the user that made the contribution.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "total",
@@ -10479,7 +10853,71 @@
           "required": true,
           "depth": 0,
           "description": "The list of blocked terms. The list is in descending order of when they were created (see the `created_at` timestamp).",
-          "children": []
+          "children": [
+            {
+              "name": "broadcaster_id",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The broadcaster that owns the list of blocked terms.",
+              "children": []
+            },
+            {
+              "name": "moderator_id",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The moderator that blocked the word or phrase from being used in the broadcaster’s chat room.",
+              "children": []
+            },
+            {
+              "name": "id",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "An ID that identifies this blocked term.",
+              "children": []
+            },
+            {
+              "name": "text",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The blocked word or phrase.",
+              "children": []
+            },
+            {
+              "name": "created_at",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The UTC date and time (in RFC3339 format) that the term was blocked.",
+              "children": []
+            },
+            {
+              "name": "updated_at",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The UTC date and time (in RFC3339 format) that the term was updated.  \n  \nWhen the term is added, this timestamp is the same as `created_at`. The timestamp changes as AutoMod continues to deny the term.",
+              "children": []
+            },
+            {
+              "name": "expires_at",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The UTC date and time (in RFC3339 format) that the blocked term is set to expire. After the block expires, users may use the term in the broadcaster’s chat room.  \n  \nThis field is **null** if the term was added manually or was permanently blocked by AutoMod.",
+              "children": []
+            }
+          ]
         },
         {
           "name": "pagination",
@@ -12429,7 +12867,53 @@
                   "required": true,
                   "depth": 2,
                   "description": "A list of viewers who were the top predictors; otherwise, **null** if none.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "user_id",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "An ID that identifies the viewer.",
+                      "children": []
+                    },
+                    {
+                      "name": "user_name",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The viewer’s display name.",
+                      "children": []
+                    },
+                    {
+                      "name": "user_login",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The viewer’s login name.",
+                      "children": []
+                    },
+                    {
+                      "name": "channel_points_used",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The number of Channel Points the viewer spent.",
+                      "children": []
+                    },
+                    {
+                      "name": "channel_points_won",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The number of Channel Points distributed to the viewer.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "color",
@@ -12720,7 +13204,53 @@
                   "required": true,
                   "depth": 2,
                   "description": "A list of viewers who were the top predictors; otherwise, **null** if none.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "user_id",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "An ID that identifies the viewer.",
+                      "children": []
+                    },
+                    {
+                      "name": "user_name",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The viewer’s display name.",
+                      "children": []
+                    },
+                    {
+                      "name": "user_login",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The viewer’s login name.",
+                      "children": []
+                    },
+                    {
+                      "name": "channel_points_used",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The number of Channel Points the viewer spent.",
+                      "children": []
+                    },
+                    {
+                      "name": "channel_points_won",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The number of Channel Points distributed to the viewer.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "color",
@@ -12989,7 +13519,53 @@
                   "required": true,
                   "depth": 2,
                   "description": "A list of viewers who were the top predictors; otherwise, **null** if none.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "user_id",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "An ID that identifies the viewer.",
+                      "children": []
+                    },
+                    {
+                      "name": "user_name",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The viewer’s display name.",
+                      "children": []
+                    },
+                    {
+                      "name": "user_login",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The viewer’s login name.",
+                      "children": []
+                    },
+                    {
+                      "name": "channel_points_used",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The number of Channel Points the viewer spent.",
+                      "children": []
+                    },
+                    {
+                      "name": "channel_points_won",
+                      "type": "Integer",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The number of Channel Points distributed to the viewer.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "color",
@@ -13395,7 +13971,26 @@
                   "required": true,
                   "depth": 2,
                   "description": "The type of content that the broadcaster plans to stream or **null** if not specified.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "id",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "An ID that identifies the category that best represents the content that the broadcaster plans to stream. For example, the game’s ID if the broadcaster will play a game or the Just Chatting ID if the broadcaster will host a talk show.",
+                      "children": []
+                    },
+                    {
+                      "name": "name",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The name of the category. For example, the game’s title if the broadcaster will playing a game or Just Chatting if the broadcaster will host a talk show.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "is_recurring",
@@ -13811,7 +14406,26 @@
                   "required": true,
                   "depth": 2,
                   "description": "The type of content that the broadcaster plans to stream or **null** if not specified.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "id",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "An ID that identifies the category that best represents the content that the broadcaster plans to stream. For example, the game’s ID if the broadcaster will play a game or the Just Chatting ID if the broadcaster will host a talk show.",
+                      "children": []
+                    },
+                    {
+                      "name": "name",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The name of the category. For example, the game’s title if the broadcaster will play a game or Just Chatting if the broadcaster will host a talk show.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "is_recurring",
@@ -14071,7 +14685,26 @@
                   "required": true,
                   "depth": 2,
                   "description": "The type of content that the broadcaster plans to stream or **null** if not specified.",
-                  "children": []
+                  "children": [
+                    {
+                      "name": "id",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "An ID that identifies the category that best represents the content that the broadcaster plans to stream. For example, the game’s ID if the broadcaster will play a game or the Just Chatting ID if the broadcaster will host a talk show.",
+                      "children": []
+                    },
+                    {
+                      "name": "name",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The name of the category. For example, the game’s title if the broadcaster will play a game or Just Chatting if the broadcaster will host a talk show.",
+                      "children": []
+                    }
+                  ]
                 },
                 {
                   "name": "is_recurring",
@@ -14584,6 +15217,107 @@
                   "required": true,
                   "depth": 2,
                   "description": "Describes the album that the track is found on.",
+                  "children": [
+                    {
+                      "name": "id",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The album’s ASIN (Amazon Standard Identification Number).",
+                      "children": []
+                    },
+                    {
+                      "name": "image_url",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "A URL to the album’s cover art.",
+                      "children": []
+                    },
+                    {
+                      "name": "name",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The album’s name. If the album contains explicit content, the name will contain **\\[Explicit\\]** in the string. For example, Let It Die \\[Explicit\\].",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "artists",
+                  "type": "Object[]",
+                  "possibleValues": [],
+                  "required": true,
+                  "depth": 2,
+                  "description": "The artists included on the track.",
+                  "children": [
+                    {
+                      "name": "creator_channel_id",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The ID of the Twitch user that created the track. The string is empty if a Twitch user didn’t create the track.",
+                      "children": []
+                    },
+                    {
+                      "name": "id",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The artist’s ASIN (Amazon Standard Identification Number).",
+                      "children": []
+                    },
+                    {
+                      "name": "name",
+                      "type": "String",
+                      "possibleValues": [],
+                      "required": true,
+                      "depth": 3,
+                      "description": "The artist’s name. This can be the band’s name or the solo artist’s name.",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "duration",
+                  "type": "Integer",
+                  "possibleValues": [],
+                  "required": true,
+                  "depth": 2,
+                  "description": "The duration of the track, in seconds.",
+                  "children": []
+                },
+                {
+                  "name": "id",
+                  "type": "String",
+                  "possibleValues": [],
+                  "required": true,
+                  "depth": 2,
+                  "description": "The track’s ASIN (Amazon Standard Identification Number).",
+                  "children": []
+                },
+                {
+                  "name": "isrc",
+                  "type": "String",
+                  "possibleValues": [],
+                  "required": true,
+                  "depth": 2,
+                  "description": "The track’s ISRC (International Standard Recording Code).",
+                  "children": []
+                },
+                {
+                  "name": "title",
+                  "type": "String",
+                  "possibleValues": [],
+                  "required": true,
+                  "depth": 2,
+                  "description": "The track’s title. If the track contains explicit content, the title will contain **\\[Explicit\\]** in the string. For example, Let It Die \\[Explicit\\].",
                   "children": []
                 }
               ]
@@ -14596,6 +15330,18 @@
               "depth": 1,
               "description": "The source of the track that’s currently playing. For example, a playlist or station.",
               "children": [
+                {
+                  "name": "content_type",
+                  "type": "String",
+                  "possibleValues": [
+                    "PLAYLIST",
+                    "STATION"
+                  ],
+                  "required": true,
+                  "depth": 2,
+                  "description": "The type of content that `id` maps to. Possible values are:   \n  \n* PLAYLIST\n* STATION",
+                  "children": []
+                },
                 {
                   "name": "id",
                   "type": "String",

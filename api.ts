@@ -11059,5 +11059,4 @@ export class TwitchApi {
       return getApiResponse(response);
     },
   };
-
 }

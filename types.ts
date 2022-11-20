@@ -290,7 +290,16 @@ export interface GetExtensionTransactionsResponse {
       /** Set to `twitch.ext.` \+ `<the extension's ID>`. */
       domain: string;
       /** Contains details about the digital product’s cost. */
-      cost: Object;
+      cost: {
+        /** The amount exchanged for the digital product. */
+        amount: number;
+        /**
+         * The type of currency exchanged. Possible values are:  
+         *   
+         * * bits
+         */
+        type: 'bits';
+      };
       /** A Boolean value that determines whether the product is in development. Is **true** if the digital product is in development and cannot be exchanged. */
       inDevelopment: boolean;
       /** The name of the digital product. */
@@ -756,6 +765,8 @@ export interface UpdateCustomRewardResponse {
     global_cooldown_setting: {
       /** A Boolean value that determines whether to apply a cooldown period. Is **true** if a cooldown period is enabled. */
       is_enabled: boolean;
+      /** The cooldown period, in seconds. */
+      global_cooldown_seconds: number;
     };
     /** A Boolean value that determines whether the reward is currently paused. Is **true** if the reward is paused. Viewers can’t redeem paused rewards. */
     is_paused: boolean;
@@ -1912,15 +1923,50 @@ export interface GetExtensionsResponse {
     /** Describes all views-related information such as how the extension is displayed on mobile devices. */
     views: {
       /** Describes how the extension is displayed on mobile devices. */
-      mobile: Object;
+      mobile: {
+        /** The HTML file that is shown to viewers on mobile devices. This page is presented to viewers as a panel behind the chat area of the mobile app. */
+        viewer_url: string;
+      };
       /** Describes how the extension is rendered if the extension may be activated as a panel extension. */
-      panel: Object;
+      panel: {
+        /** The HTML file that is shown to viewers on the channel page when the extension is activated in a Panel slot. */
+        viewer_url: string;
+        /** The height, in pixels, of the panel component that the extension is rendered in. */
+        height: number;
+        /** A Boolean value that determines whether the extension can link to non-Twitch domains. */
+        can_link_external_content: boolean;
+      };
       /** Describes how the extension is rendered if the extension may be activated as a video-overlay extension. */
-      video_overlay: Object;
+      video_overlay: {
+        /** The HTML file that is shown to viewers on the channel page when the extension is activated on the Video - Overlay slot. */
+        viewer_url: string;
+        /** A Boolean value that determines whether the extension can link to non-Twitch domains. */
+        can_link_external_content: boolean;
+      };
       /** Describes how the extension is rendered if the extension may be activated as a video-component extension. */
-      component: Object;
+      component: {
+        /** The HTML file that is shown to viewers on the channel page when the extension is activated in a Video - Component slot. */
+        viewer_url: string;
+        /** The width value of the ratio (width : height) which determines the extension’s width, and how the extension’s iframe will resize in different video player environments. */
+        aspect_ratio_x: number;
+        /** The height value of the ratio (width : height) which determines the extension’s height, and how the extension’s iframe will resize in different video player environments. */
+        aspect_ratio_y: number;
+        /** A Boolean value that determines whether to apply CSS zoom. If **true**, a CSS zoom is applied such that the size of the extension is variable but the inner dimensions are fixed based on Scale Pixels. This allows your extension to render as if it is of fixed width and height. If **false**, the inner dimensions of the extension iframe are variable, meaning your extension must implement responsiveness. */
+        autoscale: boolean;
+        /** The base width, in pixels, of the extension to use when scaling (see `autoscale`). This value is ignored if `autoscale` is **false**. */
+        scale_pixels: number;
+        /** The height as a percent of the maximum height of a video component extension. Values are between 1% - 100%. */
+        target_height: number;
+        /** A Boolean value that determines whether the extension can link to non-Twitch domains. */
+        can_link_external_content: boolean;
+      };
       /** Describes the view that is shown to broadcasters while they are configuring your extension within the Extension Manager. */
-      config: Object;
+      config: {
+        /** The HTML file shown to broadcasters while they are configuring your extension within the Extension Manager. */
+        viewer_url: string;
+        /** A Boolean value that determines whether the extension can link to non-Twitch domains. */
+        can_link_external_content: boolean;
+      };
     };
     /** Allowlisted configuration URLs for displaying the extension (the allowlist is configured on Twitch’s [developer site](https://dev.twitch.tv/console/extensions) under the **Extensions** \-> **Extension** \-> **Version** \-> **Capabilities**). */
     allowlisted_config_urls: string[];
@@ -2009,15 +2055,50 @@ export interface GetReleasedExtensionsResponse {
     /** Describes all views-related information such as how the extension is displayed on mobile devices. */
     views: {
       /** Describes how the extension is displayed on mobile devices. */
-      mobile: Object;
+      mobile: {
+        /** The HTML file that is shown to viewers on mobile devices. This page is presented to viewers as a panel behind the chat area of the mobile app. */
+        viewer_url: string;
+      };
       /** Describes how the extension is rendered if the extension may be activated as a panel extension. */
-      panel: Object;
+      panel: {
+        /** The HTML file that is shown to viewers on the channel page when the extension is activated in a Panel slot. */
+        viewer_url: string;
+        /** The height, in pixels, of the panel component that the extension is rendered in. */
+        height: number;
+        /** A Boolean value that determines whether the extension can link to non-Twitch domains. */
+        can_link_external_content: boolean;
+      };
       /** Describes how the extension is rendered if the extension may be activated as a video-overlay extension. */
-      video_overlay: Object;
+      video_overlay: {
+        /** The HTML file that is shown to viewers on the channel page when the extension is activated on the Video - Overlay slot. */
+        viewer_url: string;
+        /** A Boolean value that determines whether the extension can link to non-Twitch domains. */
+        can_link_external_content: boolean;
+      };
       /** Describes how the extension is rendered if the extension may be activated as a video-component extension. */
-      component: Object;
+      component: {
+        /** The HTML file that is shown to viewers on the channel page when the extension is activated in a Video - Component slot. */
+        viewer_url: string;
+        /** The width value of the ratio (width : height) which determines the extension’s width, and how the extension’s iframe will resize in different video player environments. */
+        aspect_ratio_x: number;
+        /** The height value of the ratio (width : height) which determines the extension’s height, and how the extension’s iframe will resize in different video player environments. */
+        aspect_ratio_y: number;
+        /** A Boolean value that determines whether to apply CSS zoom. If **true**, a CSS zoom is applied such that the size of the extension is variable but the inner dimensions are fixed based on Scale Pixels. This allows your extension to render as if it is of fixed width and height. If **false**, the inner dimensions of the extension iframe are variable, meaning your extension must implement responsiveness. */
+        autoscale: boolean;
+        /** The base width, in pixels, of the extension to use when scaling (see `autoscale`). This value is ignored if `autoscale` is **false**. */
+        scale_pixels: number;
+        /** The height as a percent of the maximum height of a video component extension. Values are between 1% - 100%. */
+        target_height: number;
+        /** A Boolean value that determines whether the extension can link to non-Twitch domains. */
+        can_link_external_content: boolean;
+      };
       /** Describes the view that is shown to broadcasters while they are configuring your extension within the Extension Manager. */
-      config: Object;
+      config: {
+        /** The HTML file shown to broadcasters while they are configuring your extension within the Extension Manager. */
+        viewer_url: string;
+        /** A Boolean value that determines whether the extension can link to non-Twitch domains. */
+        can_link_external_content: boolean;
+      };
     };
     /** Allowlisted configuration URLs for displaying the extension (the allowlist is configured on Twitch’s [developer site](https://dev.twitch.tv/console/extensions) under the **Extensions** \-> **Extension** \-> **Version** \-> **Capabilities**). */
     allowlisted_config_urls: string[];
@@ -2388,13 +2469,39 @@ export interface GetHypeTrainEventsResponse {
       /** An ID that identifies this Hype Train. */
       id: string;
       /** The most recent contribution towards the Hype Train’s goal. */
-      last_contribution: Object;
+      last_contribution: {
+        /** The total amount contributed. If `type` is BITS, `total` represents the amount of Bits used. If `type` is SUBS, `total` is 500, 1000, or 2500 to represent tier 1, 2, or 3 subscriptions, respectively. */
+        total: number;
+        /**
+         * The contribution method used. Possible values are:  
+         *   
+         * * BITS — Cheering with Bits.
+         * * SUBS — Subscription activity like subscribing or gifting subscriptions.
+         * * OTHER — Covers other contribution methods not listed.
+         */
+        type: 'BITS' | 'SUBS' | 'OTHER';
+        /** The ID of the user that made the contribution. */
+        user: string;
+      };
       /** The highest level that the Hype Train reached (the levels are 1 through 5). */
       level: number;
       /** The UTC date and time (in RFC3339 format) that this Hype Train started. */
       started_at: string;
       /** The top contributors for each contribution type. For example, the top contributor using BITS (by aggregate) and the top contributor using SUBS (by count). */
-      top_contributions: Object[];
+      top_contributions: {
+        /** The total amount contributed. If `type` is BITS, `total` represents the amount of Bits used. If `type` is SUBS, `total` is 500, 1000, or 2500 to represent tier 1, 2, or 3 subscriptions, respectively. */
+        total: number;
+        /**
+         * The contribution method used. Possible values are:  
+         *   
+         * * BITS — Cheering with Bits.
+         * * SUBS — Subscription activity like subscribing or gifting subscriptions.
+         * * OTHER — Covers other contribution methods not listed.
+         */
+        type: 'BITS' | 'SUBS' | 'OTHER';
+        /** The ID of the user that made the contribution. */
+        user: string;
+      }[];
       /** The current total amount raised. */
       total: number;
     };
@@ -2658,7 +2765,30 @@ export interface GetBlockedTermsParams {
 
 export interface GetBlockedTermsResponse {
   /** The list of blocked terms. The list is in descending order of when they were created (see the `created_at` timestamp). */
-  data: Object[];
+  data: {
+    /** The broadcaster that owns the list of blocked terms. */
+    broadcaster_id: string;
+    /** The moderator that blocked the word or phrase from being used in the broadcaster’s chat room. */
+    moderator_id: string;
+    /** An ID that identifies this blocked term. */
+    id: string;
+    /** The blocked word or phrase. */
+    text: string;
+    /** The UTC date and time (in RFC3339 format) that the term was blocked. */
+    created_at: string;
+    /**
+     * The UTC date and time (in RFC3339 format) that the term was updated.  
+     *   
+     * When the term is added, this timestamp is the same as `created_at`. The timestamp changes as AutoMod continues to deny the term.
+     */
+    updated_at: string;
+    /**
+     * The UTC date and time (in RFC3339 format) that the blocked term is set to expire. After the block expires, users may use the term in the broadcaster’s chat room.  
+     *   
+     * This field is **null** if the term was added manually or was permanently blocked by AutoMod.
+     */
+    expires_at: string;
+  }[];
   /** Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination) */
   pagination: {
     /** The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter. */
@@ -3077,7 +3207,18 @@ export interface GetPredictionsResponse {
       /** The number of Channel Points spent by viewers on this outcome. */
       channel_points: number;
       /** A list of viewers who were the top predictors; otherwise, **null** if none. */
-      top_predictors: Object[];
+      top_predictors: {
+        /** An ID that identifies the viewer. */
+        user_id: string;
+        /** The viewer’s display name. */
+        user_name: string;
+        /** The viewer’s login name. */
+        user_login: string;
+        /** The number of Channel Points the viewer spent. */
+        channel_points_used: number;
+        /** The number of Channel Points distributed to the viewer. */
+        channel_points_won: number;
+      }[];
       /**
        * The color that visually identifies this outcome in the UX. Possible values are:  
        *   
@@ -3153,7 +3294,18 @@ export interface CreatePredictionResponse {
       /** The number of Channel Points spent by viewers on this outcome. */
       channel_points: number;
       /** A list of viewers who were the top predictors; otherwise, **null** if none. */
-      top_predictors: Object[];
+      top_predictors: {
+        /** An ID that identifies the viewer. */
+        user_id: string;
+        /** The viewer’s display name. */
+        user_name: string;
+        /** The viewer’s login name. */
+        user_login: string;
+        /** The number of Channel Points the viewer spent. */
+        channel_points_used: number;
+        /** The number of Channel Points distributed to the viewer. */
+        channel_points_won: number;
+      }[];
       /**
        * The color that visually identifies this outcome in the UX. Possible values are:  
        *   
@@ -3231,7 +3383,18 @@ export interface EndPredictionResponse {
       /** The number of Channel Points spent by viewers on this outcome. */
       channel_points: number;
       /** A list of viewers who were the top predictors; otherwise, **null** if none. */
-      top_predictors: Object[];
+      top_predictors: {
+        /** An ID that identifies the viewer. */
+        user_id: string;
+        /** The viewer’s display name. */
+        user_name: string;
+        /** The viewer’s login name. */
+        user_login: string;
+        /** The number of Channel Points the viewer spent. */
+        channel_points_used: number;
+        /** The number of Channel Points distributed to the viewer. */
+        channel_points_won: number;
+      }[];
       /**
        * The color that visually identifies this outcome in the UX. Possible values are:  
        *   
@@ -3315,7 +3478,12 @@ export interface GetChannelStreamScheduleResponse {
       /** Indicates whether the broadcaster canceled this segment of a recurring broadcast. If the broadcaster canceled this segment, this field is set to the same value that’s in the `end_time` field; otherwise, it’s set to **null**. */
       canceled_until: string;
       /** The type of content that the broadcaster plans to stream or **null** if not specified. */
-      category: Object;
+      category: {
+        /** An ID that identifies the category that best represents the content that the broadcaster plans to stream. For example, the game’s ID if the broadcaster will play a game or the Just Chatting ID if the broadcaster will host a talk show. */
+        id: string;
+        /** The name of the category. For example, the game’s title if the broadcaster will playing a game or Just Chatting if the broadcaster will host a talk show. */
+        name: string;
+      };
       /** A Boolean value that determines whether the broadcast is part of a recurring series that streams at the same time each week or is a one-time broadcast. Is **true** if the broadcast is part of a recurring series. */
       is_recurring: boolean;
     }[];
@@ -3394,7 +3562,12 @@ export interface CreateChannelStreamScheduleSegmentResponse {
       /** Indicates whether the broadcaster canceled this segment of a recurring broadcast. If the broadcaster canceled this segment, this field is set to the same value that’s in the `end_time` field; otherwise, it’s set to **null**. */
       canceled_until: string;
       /** The type of content that the broadcaster plans to stream or **null** if not specified. */
-      category: Object;
+      category: {
+        /** An ID that identifies the category that best represents the content that the broadcaster plans to stream. For example, the game’s ID if the broadcaster will play a game or the Just Chatting ID if the broadcaster will host a talk show. */
+        id: string;
+        /** The name of the category. For example, the game’s title if the broadcaster will play a game or Just Chatting if the broadcaster will host a talk show. */
+        name: string;
+      };
       /** A Boolean value that determines whether the broadcast is part of a recurring series that streams at the same time each week or is a one-time broadcast. Is **true** if the broadcast is part of a recurring series. */
       is_recurring: boolean;
     }[];
@@ -3460,7 +3633,12 @@ export interface UpdateChannelStreamScheduleSegmentResponse {
       /** Indicates whether the broadcaster canceled this segment of a recurring broadcast. If the broadcaster canceled this segment, this field is set to the same value that’s in the `end_time` field; otherwise, it’s set to **null**. */
       canceled_until: string;
       /** The type of content that the broadcaster plans to stream or **null** if not specified. */
-      category: Object;
+      category: {
+        /** An ID that identifies the category that best represents the content that the broadcaster plans to stream. For example, the game’s ID if the broadcaster will play a game or the Just Chatting ID if the broadcaster will host a talk show. */
+        id: string;
+        /** The name of the category. For example, the game’s title if the broadcaster will play a game or Just Chatting if the broadcaster will host a talk show. */
+        name: string;
+      };
       /** A Boolean value that determines whether the broadcast is part of a recurring series that streams at the same time each week or is a one-time broadcast. Is **true** if the broadcast is part of a recurring series. */
       is_recurring: boolean;
     }[];
@@ -3558,10 +3736,41 @@ export interface GetSoundtrackCurrentTrackResponse {
     /** Describes a track. */
     track: {
       /** Describes the album that the track is found on. */
-      album: Object;
+      album: {
+        /** The album’s ASIN (Amazon Standard Identification Number). */
+        id: string;
+        /** A URL to the album’s cover art. */
+        image_url: string;
+        /** The album’s name. If the album contains explicit content, the name will contain **\[Explicit\]** in the string. For example, Let It Die \[Explicit\]. */
+        name: string;
+      };
+      /** The artists included on the track. */
+      artists: {
+        /** The ID of the Twitch user that created the track. The string is empty if a Twitch user didn’t create the track. */
+        creator_channel_id: string;
+        /** The artist’s ASIN (Amazon Standard Identification Number). */
+        id: string;
+        /** The artist’s name. This can be the band’s name or the solo artist’s name. */
+        name: string;
+      }[];
+      /** The duration of the track, in seconds. */
+      duration: number;
+      /** The track’s ASIN (Amazon Standard Identification Number). */
+      id: string;
+      /** The track’s ISRC (International Standard Recording Code). */
+      isrc: string;
+      /** The track’s title. If the track contains explicit content, the title will contain **\[Explicit\]** in the string. For example, Let It Die \[Explicit\]. */
+      title: string;
     };
     /** The source of the track that’s currently playing. For example, a playlist or station. */
     source: {
+      /**
+       * The type of content that `id` maps to. Possible values are:   
+       *   
+       * * PLAYLIST
+       * * STATION
+       */
+      content_type: 'PLAYLIST' | 'STATION';
       /** The playlist’s or station’s ASIN (Amazon Standard Identification Number). */
       id: string;
       /** A URL to the playlist’s or station’s image art. */
@@ -3824,7 +4033,7 @@ export interface GetStreamMarkersResponse {
     /** The user’s login name. */
     user_login: string;
     /** A list of videos that contain markers. The list contains a single video. */
-    videos: Object[];
+    videos: Record<string, any>;
     /** An ID that identifies this video. */
     video_id: string;
     /** The list of markers in this video. The list in ascending order by when the marker was created. */
