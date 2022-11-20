@@ -56,7 +56,8 @@ const parseParameters = (table: Element): Parameter[] => {
       if (parameterText[i] === '\xa0') nbspCount += 1;
       else break;
     }
-    const depth = nbspCount / 3;
+    // sometimes ident can be 2 so use Math.ceil
+    const depth = Math.ceil(nbspCount / 3);
 
     const description = parseMarkdown(descriptionEl!.innerHTML!);
 
@@ -188,18 +189,7 @@ const parseDocs = (html: string): ApiEndpoint[] => {
 
       const examples = parseMarkdown(rightDocs!.innerHTML);
 
-      const sections = {
-        description: '',
-        authentication: 'Authentication',
-        authorization: 'Authorization',
-        url: 'URL', // URL | URLs
-        requestBody: 'Request Body',
-        requestQueryParams: 'Query Parameters', // Request Query Parameters | Required Query Parameters
-        responseBody: 'Response Body',
-        responseCodes: 'Response Codes', // Response codes
-      };
-
-      let currentSection = sections.description;
+      let currentSection = 'description';
 
       const changeRequiredIfNull = (p: Parameter, newValue: boolean) => {
         if (p.required === null) p.required = newValue;
@@ -213,7 +203,7 @@ const parseDocs = (html: string): ApiEndpoint[] => {
           continue;
         }
 
-        if (currentSection === sections.description) {
+        if (currentSection === 'description') {
           if (el.tagName === 'TABLE') {
             descriptionFull.push(parseTableAsMarkdown(el));
           } else {
@@ -221,19 +211,20 @@ const parseDocs = (html: string): ApiEndpoint[] => {
           }
         }
 
-        if (currentSection === sections.authentication) {
+        if (currentSection === 'Authentication') {
           authentication.push(parseMarkdown(el.innerHTML));
         }
 
-        if (currentSection === sections.authorization) {
+        if (currentSection === 'Authorization') {
           authorization.push(parseMarkdown(el.innerHTML));
         }
 
-        if (currentSection.startsWith(sections.url)) {
+        // URL | URLs
+        if (currentSection.startsWith('URL')) {
           [method, url] = el.textContent!.trim().split(' ') as [string, string];
         }
 
-        if (currentSection === sections.requestBody) {
+        if (currentSection === 'Request Body') {
           if (el.tagName === 'TABLE') {
             requestBody.parameters = parseParameters(el);
             // All fields are required
@@ -266,7 +257,8 @@ const parseDocs = (html: string): ApiEndpoint[] => {
           }
         }
 
-        if (currentSection.endsWith(sections.requestQueryParams)) {
+        // Request Query Parameters | Required Query Parameters
+        if (currentSection.endsWith('Query Parameters')) {
           // Not a table
           // https://dev.twitch.tv/docs/api/reference#check-user-subscription
           const checkUserSubscriptionParams: Parameter[] = [
@@ -300,28 +292,8 @@ const parseDocs = (html: string): ApiEndpoint[] => {
           }
         }
 
-        if (currentSection === sections.responseBody) {
+        if (currentSection === 'Response Body') {
           if (el.tagName === 'TABLE') {
-            // indent: 2
-            // https://dev.twitch.tv/docs/api/reference#get-blocked-terms
-            if (id === 'get-blocked-terms') {
-              el.querySelectorAll('tbody tr').forEach((tr) => {
-                const ident2Ids = [
-                  'broadcaster_id',
-                  'moderator_id',
-                  'id',
-                  'text',
-                  'created_at',
-                  'updated_at',
-                  'expires_at',
-                ];
-                if (ident2Ids.includes(tr.children[0]!.textContent!)) {
-                  tr.children[0]!.textContent =
-                    '\xa0' + tr.children[0]!.textContent;
-                }
-              });
-            }
-
             responseBody.parameters = parseParameters(el);
             // if there is no required column in the table - set all parameters to required
             responseBody.parameters.forEach((p) =>
@@ -332,9 +304,8 @@ const parseDocs = (html: string): ApiEndpoint[] => {
           }
         }
 
-        if (
-          currentSection.toLowerCase() === sections.responseCodes.toLowerCase()
-        ) {
+        // Response Codes | Response codes
+        if (currentSection.toLowerCase() === 'response codes') {
           responseCodes = parseResponseCodes(el);
         }
       }
