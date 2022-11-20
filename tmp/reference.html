@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-11-17T17:37:15-08:00">
+<meta property="article:published_time" content="2022-11-18T13:55:14-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","@type":"BlogPosting","url":"https://dev.twitch.tv/api/reference/","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","headline":"Reference","dateModified":"2022-11-17T17:37:15-08:00","datePublished":"2022-11-17T17:37:15-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","@type":"BlogPosting","url":"https://dev.twitch.tv/api/reference/","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","headline":"Reference","dateModified":"2022-11-18T13:55:14-08:00","datePublished":"2022-11-18T13:55:14-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -2007,11 +2007,15 @@
 			<h2 id="start-commercial">Start Commercial</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[0]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Starts a commercial on the specified channel. To start a commercial, the channel must be live.</p>
+				<p>Starts a commercial on the specified channel.</p>
+
+<p><strong>NOTE</strong>: Only partners and affiliates may run commercials and they must be streaming live at the time.</p>
+
+<p><strong>NOTE</strong>: Only the broadcaster may start a commercial; the broadcaster’s editors and moderators may not start commercials on behalf of the broadcaster.</p>
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:edit:commercial</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:edit:commercial</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -2031,7 +2035,7 @@
     <tr>
       <td>broadcaster_id</td>
       <td>String</td>
-      <td>The ID of the broadcaster that wants to run the commercial. This ID must match the user ID found in the OAuth token.</td>
+      <td>The ID of the partner or affiliate broadcaster that wants to run the commercial. This ID must match the user ID found in the OAuth token.</td>
     </tr>
     <tr>
       <td>length</td>
@@ -2153,7 +2157,7 @@
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>analytics:read:extensions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>analytics:read:extensions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -2344,7 +2348,7 @@
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>analytics:read:games</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>analytics:read:games</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -2557,11 +2561,11 @@
 			<h2 id="get-bits-leaderboard">Get Bits Leaderboard</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[3]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets the Bits leaderboard for the authenticated broadcaster. The users are ranked by how much they’ve cheered.</p>
+				<p>Gets the Bits leaderboard for the authenticated broadcaster.</p>
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>bits:read</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>bits:read</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -2595,7 +2599,7 @@
       <td>started_at</td>
       <td>String</td>
       <td>No</td>
-      <td>The start date, in RFC3339 format, used for determining the aggregation period. Specify this parameter only if you specify the <em>period</em> query parameter. The start date is ignored if <em>period</em> is all.<br><br>If you don’t specify a start date, the time period specified by <em>period</em> is assumed. For example, if <em>period</em> is <em>month</em>, the data is aggregated for the current month.<br><br>Note that the date is converted to PST before being used, so if you set the start time to <code class="highlighter-rouge">2022-01-01T00:00:00.0Z</code> and <em>period</em> to month, the actual reporting period is December 2021, not January 2022. If you want the reporting period to be January 2022, you must set the start time to <code class="highlighter-rouge">2022-01-01T08:00:00.0Z</code> or <code class="highlighter-rouge">2022-01-01T00:00:00.0-08:00</code>.<br><br>If your start date uses the ‘+’ offset operator (for example, <code class="highlighter-rouge">2022-01-01T00:00:00.0+05:00</code>), you must URL encode the start date.</td>
+      <td>The start date, in RFC3339 format, used for determining the aggregation period. Specify this parameter only if you specify the <em>period</em> query parameter. The start date is ignored if <em>period</em> is all.<br><br>Note that the date is converted to PST before being used, so if you set the start time to <code class="highlighter-rouge">2022-01-01T00:00:00.0Z</code> and <em>period</em> to month, the actual reporting period is December 2021, not January 2022. If you want the reporting period to be January 2022, you must set the start time to <code class="highlighter-rouge">2022-01-01T08:00:00.0Z</code> or <code class="highlighter-rouge">2022-01-01T00:00:00.0-08:00</code>.<br><br>If your start date uses the ‘+’ offset operator (for example, <code class="highlighter-rouge">2022-01-01T00:00:00.0+05:00</code>), you must URL encode the start date.</td>
     </tr>
     <tr>
       <td>user_id</td>
@@ -2620,7 +2624,7 @@
     <tr>
       <td>data</td>
       <td>Object[]</td>
-      <td>A list of leaderboard leaders. The leaders are returned in rank order. The array is empty if nobody has cheered bits.</td>
+      <td>A list of leaderboard leaders. The leaders are returned in rank order by how much they’ve cheered. The array is empty if nobody has cheered bits.</td>
     </tr>
     <tr>
       <td>   user_id</td>
@@ -2686,11 +2690,11 @@
     </tr>
     <tr>
       <td>400 Bad Request</td>
-      <td><ul><li>The time period specified in the <i>period</i> query parameter is not valid.</li><li>The value in the <i>count</i> query parameter is outside the range of allowed values.</li></ul></td>
+      <td><ul><li>The time period specified in the <i>period</i> query parameter is not valid.</li><li>The <i>started_at</i> query parameter is required if <i>period</i> is not set to <i>all</i>.</li><li>The value in the <i>count</i> query parameter is outside the range of allowed values.</li></ul></td>
     </tr>
     <tr>
       <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must specify a user access token.</li><li>The user access token must include the the <b>bits:read</b> scope.</li><li>The OAuth token is not valid.</li><li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li></ul></td>
+      <td><ul><li>The Authorization header is required and must specify a user access token.</li><li>The user access token must include the the <b>bits:read</b> scope.</li><li>The access token is not valid.</li><li>The ID in the Client-Id header must match the client ID in the access token.</li></ul></td>
     </tr>
     <tr>
       <td>403 Forbidden</td>
@@ -2706,9 +2710,9 @@
 			<section class="right-code">
 				<h3>Example Request</h3>
 
-<p>Gets information about the authenticated broadcaster’s top two Bits leaderboard entries for the current week.</p>
+<p>Gets information about the authenticated broadcaster’s top two Bits leaderboard entries for the specified week.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/bits/leaderboard?count=2&amp;period=week'</span> <span class="se">\</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/bits/leaderboard?count=2&amp;period=week&amp;started_at=2018-02-05T08%3A00%3A00Z'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
 </code></pre></div></div>
@@ -2757,7 +2761,7 @@
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>Request Query Parameters</h3>
 
@@ -2974,7 +2978,7 @@
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -3256,7 +3260,7 @@
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -3418,7 +3422,7 @@
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:broadcast</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:broadcast</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -3548,7 +3552,7 @@
 				<p>Gets a list of users that are editors for the specified broadcaster.</p>
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:read:editors</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:editors</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -3679,7 +3683,7 @@
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:redemptions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:redemptions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -4088,7 +4092,7 @@
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:redemptions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:redemptions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -4189,7 +4193,7 @@
 				<p>Gets a list of custom rewards that the specified broadcaster created.</p>
 
 <h3>Authentication</h3>
-<p>Requires a user access token that includes the <strong>channel:read:redemptions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:redemptions</strong> scope.</p>
 
 <p><strong>NOTE</strong>: A channel may offer a maximum of 50 rewards, which includes both enabled and disabled rewards.</p>
 
@@ -4618,7 +4622,7 @@
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:read:redemptions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:redemptions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -4652,7 +4656,7 @@
       <td>status</td>
       <td>String</td>
       <td>Yes</td>
-      <td>The status of the redemptions to return. The possible case-sensitive values are:<ul><li>CANCELED</li><li>FULFILLED</li><li>UNFULFILLED</li></ul><strong>NOTE</strong>: This field is required only if you don’t specify the <em>id</em> query parameter.</td>
+      <td>The status of the redemptions to return. The possible case-sensitive values are:<ul><li>CANCELED</li><li>FULFILLED</li><li>UNFULFILLED</li></ul><strong>NOTE</strong>: This field is required only if you don’t specify the <em>id</em> query parameter.<br><br><strong>NOTE</strong>: Canceled and fulfilled redemptions are returned for only a few days after they’re canceled or fulfilled.</td>
     </tr>
     <tr>
       <td>id</td>
@@ -4902,7 +4906,7 @@
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:redemptions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:redemptions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -5383,7 +5387,7 @@
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:redemptions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:redemptions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -5633,7 +5637,7 @@
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:read:charity</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:charity</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -6049,7 +6053,7 @@
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>moderator:read:chatters</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:read:chatters</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -6222,7 +6226,7 @@
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -6452,7 +6456,7 @@ twitch api get /chat/emotes <span class="nt">-q</span> <span class="nv">broadcas
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -6620,7 +6624,7 @@ twitch api get /chat/emotes/global
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -6823,7 +6827,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -6982,7 +6986,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -7112,7 +7116,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -7289,7 +7293,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <code class="highlighter-rouge">moderator:manage:chat_settings</code> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <code class="highlighter-rouge">moderator:manage:chat_settings</code> scope.</p>
 
 <h3>URL</h3>
 
@@ -7551,7 +7555,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>moderator:manage:announcements</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:announcements</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -7669,7 +7673,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -7807,7 +7811,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>user:manage:chat_color</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:manage:chat_color</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -7909,7 +7913,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>clips:edit</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>clips:edit</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -8035,7 +8039,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -8342,7 +8346,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token. The client ID in the access token must match a client ID that Twitch has approved to provide entitlements.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a>. The client ID in the access token must match a client ID that Twitch has approved to provide entitlements.</p>
 
 <h3>Request Query Parameters</h3>
 
@@ -8523,7 +8527,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token. The client ID in the access token must own the game.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>. The client ID in the access token must own the game.</p>
 
 <h3>URL</h3>
 
@@ -8762,7 +8766,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token. The client ID in the access token must own the game.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>. The client ID in the access token must own the game.</p>
 
 <h3>URL</h3>
 
@@ -8920,7 +8924,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token. Only client IDs approved by Twitch may redeem codes on behalf of any Twitch user account.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a>. Only client IDs approved by Twitch may redeem codes on behalf of any Twitch user account.</p>
 
 <h3>Request Query Parameters</h3>
 
@@ -9587,7 +9591,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -10553,7 +10557,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -10940,7 +10944,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token. The client ID in the app access token must be the extension’s client ID.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a>. The client ID in the app access token must be the extension’s client ID.</p>
 
 <h3>URL</h3>
 
@@ -11097,7 +11101,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token. The client ID in the app access token must be the extension’s client ID.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a>. The client ID in the app access token must be the extension’s client ID.</p>
 
 <h3>URL</h3>
 
@@ -11486,15 +11490,15 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
     </tr>
     <tr>
       <td>400 Bad Request</td>
-      <td><ul><li>The <code>condition</code> field is required.</li><li>The user specified in the <code>condition</code> object does not exist.</li><li>The <code>condition</code> object is missing one or more required fields.</li><li>The combination of values in the <code>version</code> and <code>type</code> fields is not valid.</li><li>The length of the string in the <code>secret</code> field is not valid.</li><li>The URL in the transport's <code>callback</code> field is not valid. The URL must use the HTTPS protocol and the 443 port number.</li><li>The value specified in the <code>method</code> field is not valid.</li><li>The <code>callback</code> field is required if you specify the webhook transport method.</li></ul></td>
+      <td><ul><li>The <code>condition</code> field is required.</li><li>The user specified in the <code>condition</code> object does not exist.</li><li>The <code>condition</code> object is missing one or more required fields.</li><li>The combination of values in the <code>version</code> and <code>type</code> fields is not valid.</li><li>The length of the string in the <code>secret</code> field is not valid.</li><li>The URL in the transport's <code>callback</code> field is not valid. The URL must use the HTTPS protocol and the 443 port number.</li><li>The value specified in the <code>method</code> field is not valid.</li><li>The <code>callback</code> field is required if you specify the webhook transport method.</li><li>The <code>session_id</code> field is required if you specify the WebSocket transport method.</li><li>The combination of subscription type and version is not valid.</li></ul></td>
     </tr>
     <tr>
       <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must specify an app access token.</li><li>The access token is not valid.</li><li>The ID in the Client-Id header must match the client ID in the access token.</li></ul></td>
+      <td><ul><li>The Authorization header is required and must specify an app access token if the transport method is webhook.</li><li>The Authorization header is required and must specify a user access token if the transport method is WebSocket.</li><li>The access token is not valid.</li><li>The ID in the Client-Id header must match the client ID in the access token.</li></ul></td>
     </tr>
     <tr>
       <td>403 Forbidden</td>
-      <td><ul><li>The subscription requires scopes that were not found in the client ID of the access token.</li></ul></td>
+      <td><ul><li>The access token is missing the required scopes.</li></ul></td>
     </tr>
     <tr>
       <td>409 Conflict</td>
@@ -11916,7 +11920,7 @@ twitch api get /eventsub/subscriptions
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -12066,7 +12070,7 @@ twitch api get /eventsub/subscriptions
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -12202,7 +12206,7 @@ twitch api get /eventsub/subscriptions
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:read:goals</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:goals</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -12368,7 +12372,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:read:hype_train</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:hype_train</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -12660,7 +12664,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>moderation:read</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderation:read</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -12838,7 +12842,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>moderator:manage:automod</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:automod</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -12941,7 +12945,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>moderator:read:automod_settings</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:read:automod_settings</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -13127,7 +13131,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>moderator:manage:automod_settings</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:automod_settings</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -13407,7 +13411,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>moderation:read</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderation:read</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -13622,7 +13626,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>moderator:manage:banned_users</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:banned_users</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -13869,7 +13873,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>moderator:manage:banned_users</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:banned_users</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -13990,7 +13994,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>moderator:read:blocked_terms</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:read:blocked_terms</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -14178,7 +14182,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>moderator:manage:blocked_terms</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:blocked_terms</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -14389,7 +14393,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>moderator:manage:blocked_terms</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:blocked_terms</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -14484,7 +14488,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>moderator:manage:chat_messages</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:chat_messages</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -14590,7 +14594,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>moderation:read</strong> scope. If your app also adds and removes moderators, you can use the <strong>channel:manage:moderators</strong> scope instead.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderation:read</strong> scope. If your app also adds and removes moderators, you can use the <strong>channel:manage:moderators</strong> scope instead.</p>
 
 <h3>URL</h3>
 
@@ -14748,7 +14752,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:moderators</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:moderators</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -14841,7 +14845,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:moderators</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:moderators</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -14928,7 +14932,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:read:vips</strong> scope. If your app also adds and removes VIP status, you can use the <strong>channel:manage:vips</strong> scope instead.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:vips</strong> scope. If your app also adds and removes VIP status, you can use the <strong>channel:manage:vips</strong> scope instead.</p>
 
 <h3>URL</h3>
 
@@ -15095,7 +15099,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:vips</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:vips</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -15212,7 +15216,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:vips</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:vips</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -15319,7 +15323,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:read:polls</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:polls</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -15585,7 +15589,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:polls</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:polls</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -15778,7 +15782,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
     </tr>
     <tr>
       <td>400 Bad Request</td>
-      <td><ul><li>The <code>broadcaster_id</code> field is required.</li><li>The <code>title</code> field is required.</li><li>The <code>choices</code> field is required.</li><li>The <code>duration</code> field is required.</li><li>The value in <code>duration</code> is outside the allowed range of values.</li><li>The value in <code>channel_points_per_vote</code> is outside the allowed range of values.</li><li>The value in <code>bits_per_vote</code> is outside the allowed range of values.</li><li>The poll's <code>title</code> is too long.</li><li>The choice's <code>title</code> is too long.</li><li>The number of choices in the poll may not be less than 2 or greater that 5.</li><li>The broadcaster already has a poll that's running; you may not create another poll until the current poll completes.</li></ul></td>
+      <td><ul><li>The <code>broadcaster_id</code> field is required.</li><li>The <code>title</code> field is required.</li><li>The <code>choices</code> field is required.</li><li>The <code>duration</code> field is required.</li><li>The value in <code>duration</code> is outside the allowed range of values.</li><li>The value in <code>channel_points_per_vote</code> is outside the allowed range of values.</li><li>The value in <code>bits_per_vote</code> is outside the allowed range of values.</li><li>The poll's <code>title</code> is too long.</li><li>The choice's <code>title</code> is too long.</li><li>The choice's <code>title</code> failed AutoMod checks.</li><li>The number of choices in the poll may not be less than 2 or greater that 5.</li><li>The broadcaster already has a poll that's running; you may not create another poll until the current poll completes.</li></ul></td>
     </tr>
     <tr>
       <td>401 Unauthorized</td>
@@ -15866,7 +15870,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:polls</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:polls</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -16116,7 +16120,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:read:predictions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:predictions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -16399,7 +16403,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:predictions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:predictions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -16600,7 +16604,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
     </tr>
     <tr>
       <td>400 Bad Request</td>
-      <td><ul><li>The <code>broadcaster_id</code> field is required.</li><li>The <code>title</code> field is required.</li><li>The <code>outcomes</code> field is required.</li><li>The <code>prediction_window</code> field is required.</li><li>The value in <code>prediction_window</code> is outside the allowed range of values.</li><li>The prediction's <code>title</code> is too long.</li><li>The outcome's <code>title</code> is too long.</li><li>There must be 2 outcomes in the prediction.</li><li>The broadcaster already has a prediction that's running; you may not create another prediction until the current prediction is resolved or canceled.</li></ul></td>
+      <td><ul><li>The <code>broadcaster_id</code> field is required.</li><li>The <code>title</code> field is required.</li><li>The <code>outcomes</code> field is required.</li><li>The <code>prediction_window</code> field is required.</li><li>The value in <code>prediction_window</code> is outside the allowed range of values.</li><li>The prediction's <code>title</code> is too long.</li><li>The outcome's <code>title</code> is too long.</li><li>The outcome's <code>title</code> failed AutoMod checks.</li><li>There must be 2 outcomes in the prediction.</li><li>The broadcaster already has a prediction that's running; you may not create another prediction until the current prediction is resolved or canceled.</li></ul></td>
     </tr>
     <tr>
       <td>401 Unauthorized</td>
@@ -16693,7 +16697,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:predictions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:predictions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -16982,7 +16986,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:raids</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:raids</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -17122,7 +17126,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:raids</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:raids</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -17207,7 +17211,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -17560,7 +17564,7 @@ END:VCALENDAR%
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:schedule</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:schedule</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -17667,7 +17671,7 @@ END:VCALENDAR%
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:schedule</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:schedule</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -17937,7 +17941,7 @@ END:VCALENDAR%
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:schedule</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:schedule</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -18208,7 +18212,7 @@ END:VCALENDAR%
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:schedule</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:schedule</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -18295,7 +18299,7 @@ END:VCALENDAR%
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -18443,7 +18447,7 @@ END:VCALENDAR%
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -18593,7 +18597,7 @@ END:VCALENDAR%
 	
 			<section class="right-code">
 				<h3>Example Request</h3>
-<p>Gets the list of live and offline channels where the broadcaster’s name contains <em>loserfruit</em>.:</p>
+<p>Gets the list of live and offline channels where the broadcaster’s name contains <em>loserfruit</em>.</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/search/channels?query=loserfruit'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'</span>
@@ -18626,7 +18630,7 @@ END:VCALENDAR%
 
 <h3>Example Request</h3>
 
-<p>Gets the list of live channels where the broadcaster’s name or category name contains <em>a_seagull</em>.:</p>
+<p>Gets the list of live channels where the broadcaster’s name or category name contains <em>a_seagull</em>.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/search/channels?query=a_seagull&amp;live_only=true'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'</span> <span class="se">\</span>
@@ -18670,7 +18674,7 @@ END:VCALENDAR%
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -18906,7 +18910,7 @@ END:VCALENDAR%
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -19056,6 +19060,10 @@ END:VCALENDAR%
       <td>401 Unauthorized</td>
       <td><ul><li>The Authorization header is required and must specify an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID in the Client-Id header must match the client ID in the access token.</li></ul></td>
     </tr>
+    <tr>
+      <td>404 Not Found</td>
+      <td><ul><li>The specified playlist was not found.</li></ul></td>
+    </tr>
   </tbody>
 </table>
 
@@ -19138,7 +19146,7 @@ END:VCALENDAR%
 
 <h3>Authorization</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -19333,7 +19341,7 @@ END:VCALENDAR%
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:read:stream_key</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:stream_key</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -19445,7 +19453,7 @@ END:VCALENDAR%
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -19733,7 +19741,7 @@ END:VCALENDAR%
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>user:read:follows</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:read:follows</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -19961,7 +19969,7 @@ END:VCALENDAR%
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:broadcast</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:broadcast</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -20109,7 +20117,7 @@ END:VCALENDAR%
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>user:read:broadcast</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:read:broadcast</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -20229,7 +20237,7 @@ END:VCALENDAR%
     <tr>
       <td>      url</td>
       <td>String</td>
-      <td>A URL to the video.</td>
+      <td>A URL that opens the video in Twitch Highlighter.</td>
     </tr>
     <tr>
       <td>pagination</td>
@@ -20336,7 +20344,7 @@ END:VCALENDAR%
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:read:subscriptions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:subscriptions</strong> scope.</p>
 
 <p>A Twitch extensions may use an app access token if the broadcaster has granted the <strong>channel:read:subscriptions</strong> scope from within the Twitch Extensions manager.</p>
 
@@ -20566,7 +20574,7 @@ END:VCALENDAR%
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>user:read:subscriptions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:read:subscriptions</strong> scope.</p>
 
 <p>A Twitch extensions may use an app access token if the broadcaster has granted the <strong>user:read:subscriptions</strong> scope from within the Twitch Extensions manager.</p>
 
@@ -20712,7 +20720,7 @@ END:VCALENDAR%
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -20892,7 +20900,7 @@ twitch api get /tags/streams <span class="nt">-q</span> <span class="nv">tag_id<
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -21046,7 +21054,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:broadcast</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:broadcast</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -21158,7 +21166,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -21342,7 +21350,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -21553,7 +21561,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -21735,7 +21743,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>user:edit</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:edit</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -21907,7 +21915,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URLs</h3>
 
@@ -22103,7 +22111,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>user:read:blocked_users</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:read:blocked_users</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -22248,7 +22256,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>user:manage:blocked_users</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:manage:blocked_users</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -22339,7 +22347,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>user:manage:blocked_users</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:manage:blocked_users</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -22418,7 +22426,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>user:read:broadcast</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:read:broadcast</strong> or <strong>user:edit:broadcast</strong> scope. To include inactive extensions, you must include the <strong>user:edit:broadcast</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -22576,7 +22584,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -22810,7 +22818,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>user:edit:broadcast</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:edit:broadcast</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -23089,7 +23097,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires an app access token or user access token.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
 <h3>URL</h3>
 
@@ -23383,7 +23391,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authentication</h3>
 
-<p>Requires a user access token that includes the <strong>channel:manage:videos</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:videos</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -23497,7 +23505,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Authorization</h3>
 
-<p>Requires a user access token that includes the <strong>user:manage:whispers</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:manage:whispers</strong> scope.</p>
 
 <h3>URL</h3>
 
