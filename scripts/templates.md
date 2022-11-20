@@ -55,7 +55,7 @@ export class TwitchApi {
     };
   }
 
-%CONTENT%
+  %CONTENT%
 }
 ```
 

@@ -50,9 +50,10 @@ const parseParameters = (table: Element): Parameter[] => {
     }
 
     // depth
+    const parameterText = parameterEl.textContent!;
     let nbspCount = 0;
-    for (let i = 0; i < parameterEl.textContent!.length; i += 1) {
-      if (parameterEl.textContent![i] === '\xa0') nbspCount += 1;
+    for (let i = 0; i < parameterText.length; i += 1) {
+      if (parameterText[i] === '\xa0') nbspCount += 1;
       else break;
     }
     const depth = nbspCount / 3;
@@ -108,6 +109,14 @@ const parseParameters = (table: Element): Parameter[] => {
       } else {
         result.at(-1)!.children.push(param);
       }
+    }
+
+    if (param.depth === 3) {
+      result.at(-1)!.children.at(-1)!.children.at(-1)!.children.push(param);
+    }
+
+    if (param.depth >= 4) {
+      throw new Error(`Unhandled depth level: ${param.depth}`);
     }
   }
 
@@ -293,6 +302,26 @@ const parseDocs = (html: string): ApiEndpoint[] => {
 
         if (currentSection === sections.responseBody) {
           if (el.tagName === 'TABLE') {
+            // indent: 2
+            // https://dev.twitch.tv/docs/api/reference#get-blocked-terms
+            if (id === 'get-blocked-terms') {
+              el.querySelectorAll('tbody tr').forEach((tr) => {
+                const ident2Ids = [
+                  'broadcaster_id',
+                  'moderator_id',
+                  'id',
+                  'text',
+                  'created_at',
+                  'updated_at',
+                  'expires_at',
+                ];
+                if (ident2Ids.includes(tr.children[0]!.textContent!)) {
+                  tr.children[0]!.textContent =
+                    '\xa0' + tr.children[0]!.textContent;
+                }
+              });
+            }
+
             responseBody.parameters = parseParameters(el);
             // if there is no required column in the table - set all parameters to required
             responseBody.parameters.forEach((p) =>

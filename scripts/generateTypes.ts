@@ -15,6 +15,8 @@ const typesMap: Record<string, string> = {
   float: 'number',
   Boolean: 'boolean',
   Dictionary: 'Record<string, any>',
+  // https://dev.twitch.tv/docs/api/reference#get-stream-markers
+  'Object[]': 'Record<string, any>',
   'map[string]string': 'Record<string, string>',
   'map[string]Object': 'Record<string, Record<string, any>>',
   'map[string,string]': 'Record<string, string>',
@@ -48,7 +50,7 @@ const generateTypes = (apiEndpoints: ApiEndpoint[]): string => {
         const type = parseType(p.type);
         let finalType = type;
 
-        let isArray = type.includes('[]');
+        let isArray = p.type.includes('[]');
 
         if (interfaceName.endsWith('Params')) {
           const isMoreThanOneIds = moreThanOneValues[id]?.includes(p.name);
