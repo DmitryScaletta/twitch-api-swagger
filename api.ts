@@ -258,11 +258,15 @@ export class TwitchApi {
 
   ads = {
     /**
-     * Starts a commercial on the specified channel. To start a commercial, the channel must be live.
+     * Starts a commercial on the specified channel.
+     *
+     * **NOTE**: Only partners and affiliates may run commercials and they must be streaming live at the time.
+     *
+     * **NOTE**: Only the broadcaster may start a commercial; the broadcaster’s editors and moderators may not start commercials on behalf of the broadcaster.
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:edit:commercial** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:edit:commercial** scope.
      *
      * ## URL
      *
@@ -356,7 +360,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **analytics:read:extensions** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **analytics:read:extensions** scope.
      *
      * ## URL
      *
@@ -441,7 +445,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **analytics:read:games** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **analytics:read:games** scope.
      *
      * ## URL
      *
@@ -554,11 +558,11 @@ export class TwitchApi {
   };
   bits = {
     /**
-     * Gets the Bits leaderboard for the authenticated broadcaster. The users are ranked by how much they’ve cheered.
+     * Gets the Bits leaderboard for the authenticated broadcaster.
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **bits:read** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **bits:read** scope.
      *
      * ## URL
      *
@@ -568,10 +572,10 @@ export class TwitchApi {
      *
      * ### Example Request
      *
-     * Gets information about the authenticated broadcaster’s top two Bits leaderboard entries for the current week.
+     * Gets information about the authenticated broadcaster’s top two Bits leaderboard entries for the specified week.
      *
      * ```
-     * curl -X GET 'https://api.twitch.tv/helix/bits/leaderboard?count=2&period=week' \
+     * curl -X GET 'https://api.twitch.tv/helix/bits/leaderboard?count=2&period=week&started_at=2018-02-05T08%3A00%3A00Z' \
      * -H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \
      * -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
      *
@@ -615,14 +619,15 @@ export class TwitchApi {
      * ### 400 Bad Request
      *
      * * The time period specified in the _period_ query parameter is not valid.
+     * * The _started\_at_ query parameter is required if _period_ is not set to _all_.
      * * The value in the _count_ query parameter is outside the range of allowed values.
      *
      * ### 401 Unauthorized
      *
      * * The Authorization header is required and must specify a user access token.
      * * The user access token must include the the **bits:read** scope.
-     * * The OAuth token is not valid.
-     * * The ID in the Client-Id header must match the Client ID in the OAuth token.
+     * * The access token is not valid.
+     * * The ID in the Client-Id header must match the client ID in the access token.
      *
      * ### 403 Forbidden
      *
@@ -645,7 +650,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -765,7 +770,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).
      *
      * ## URL
      *
@@ -887,7 +892,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -973,7 +978,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:manage:broadcast** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:broadcast** scope.
      *
      * ## URL
      *
@@ -1048,7 +1053,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:read:editors** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:editors** scope.
      *
      * ## URL
      *
@@ -1126,7 +1131,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:manage:redemptions** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.
      *
      * ## URL
      *
@@ -1255,7 +1260,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:manage:redemptions** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.
      *
      * ## URL
      *
@@ -1330,7 +1335,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:read:redemptions** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:redemptions** scope.
      *
      * **NOTE**: A channel may offer a maximum of 50 rewards, which includes both enabled and disabled rewards.
      *
@@ -1553,7 +1558,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:read:redemptions** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:redemptions** scope.
      *
      * ## URL
      *
@@ -1692,7 +1697,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:manage:redemptions** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.
      *
      * ## URL
      *
@@ -1883,7 +1888,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:manage:redemptions** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.
      *
      * ## URL
      *
@@ -1995,7 +2000,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:read:charity** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:charity** scope.
      *
      * ## URL
      *
@@ -2193,7 +2198,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **moderator:read:chatters** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:chatters** scope.
      *
      * ## URL
      *
@@ -2281,7 +2286,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -2407,7 +2412,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -2501,7 +2506,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -2601,7 +2606,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -2686,7 +2691,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -2759,7 +2764,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -2833,7 +2838,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the `moderator:manage:chat_settings` scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the `moderator:manage:chat_settings` scope.
      *
      * ## URL
      *
@@ -2939,7 +2944,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **moderator:manage:announcements** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:announcements** scope.
      *
      * ## URL
      *
@@ -3003,7 +3008,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -3079,7 +3084,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **user:manage:chat\_color** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:manage:chat\_color** scope.
      *
      * ## URL
      *
@@ -3156,7 +3161,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **clips:edit** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **clips:edit** scope.
      *
      * ## URL
      *
@@ -3233,7 +3238,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -3367,7 +3372,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token. The client ID in the access token must match a client ID that Twitch has approved to provide entitlements.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). The client ID in the access token must match a client ID that Twitch has approved to provide entitlements.
      *
      * ## URL
      *
@@ -3459,7 +3464,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token. The client ID in the access token must own the game.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens). The client ID in the access token must own the game.
      *
      * ## URL
      *
@@ -3570,7 +3575,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token. The client ID in the access token must own the game.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens). The client ID in the access token must own the game.
      *
      * ## URL
      *
@@ -3665,7 +3670,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token. Only client IDs approved by Twitch may redeem codes on behalf of any Twitch user account.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). Only client IDs approved by Twitch may redeem codes on behalf of any Twitch user account.
      *
      * ## URL
      *
@@ -4084,7 +4089,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -4518,7 +4523,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -4642,7 +4647,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token. The client ID in the app access token must be the extension’s client ID.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). The client ID in the app access token must be the extension’s client ID.
      *
      * ## URL
      *
@@ -4717,7 +4722,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token. The client ID in the app access token must be the extension’s client ID.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). The client ID in the app access token must be the extension’s client ID.
      *
      * ## URL
      *
@@ -4886,16 +4891,19 @@ export class TwitchApi {
      * * The URL in the transport's `callback` field is not valid. The URL must use the HTTPS protocol and the 443 port number.
      * * The value specified in the `method` field is not valid.
      * * The `callback` field is required if you specify the webhook transport method.
+     * * The `session_id` field is required if you specify the WebSocket transport method.
+     * * The combination of subscription type and version is not valid.
      *
      * ### 401 Unauthorized
      *
-     * * The Authorization header is required and must specify an app access token.
+     * * The Authorization header is required and must specify an app access token if the transport method is webhook.
+     * * The Authorization header is required and must specify a user access token if the transport method is WebSocket.
      * * The access token is not valid.
      * * The ID in the Client-Id header must match the client ID in the access token.
      *
      * ### 403 Forbidden
      *
-     * * The subscription requires scopes that were not found in the client ID of the access token.
+     * * The access token is missing the required scopes.
      *
      * ### 409 Conflict
      *
@@ -5113,7 +5121,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -5185,7 +5193,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -5261,7 +5269,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:read:goals** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:goals** scope.
      *
      * ## URL
      *
@@ -5347,7 +5355,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:read:hype\_train** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:hype\_train** scope.
      *
      * ## URL
      *
@@ -5454,7 +5462,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **moderation:read** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** scope.
      *
      * ## URL
      *
@@ -5557,7 +5565,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **moderator:manage:automod** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:automod** scope.
      *
      * ## URL
      *
@@ -5632,7 +5640,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **moderator:read:automod\_settings** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:automod\_settings** scope.
      *
      * ## URL
      *
@@ -5718,7 +5726,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **moderator:manage:automod\_settings** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:automod\_settings** scope.
      *
      * ## URL
      *
@@ -5837,7 +5845,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **moderation:read** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** scope.
      *
      * ## URL
      *
@@ -5933,7 +5941,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **moderator:manage:banned\_users** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\_users** scope.
      *
      * ## URL
      *
@@ -6091,7 +6099,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **moderator:manage:banned\_users** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\_users** scope.
      *
      * ## URL
      *
@@ -6185,7 +6193,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **moderator:read:blocked\_terms** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:blocked\_terms** scope.
      *
      * ## URL
      *
@@ -6271,7 +6279,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **moderator:manage:blocked\_terms** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\_terms** scope.
      *
      * ## URL
      *
@@ -6393,7 +6401,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **moderator:manage:blocked\_terms** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\_terms** scope.
      *
      * ## URL
      *
@@ -6456,7 +6464,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **moderator:manage:chat\_messages** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\_messages** scope.
      *
      * ## URL
      *
@@ -6531,7 +6539,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **moderation:read** scope. If your app also adds and removes moderators, you can use the **channel:manage:moderators** scope instead.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** scope. If your app also adds and removes moderators, you can use the **channel:manage:moderators** scope instead.
      *
      * ## URL
      *
@@ -6606,7 +6614,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:moderators** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:moderators** scope.
      *
      * ## URL
      *
@@ -6674,7 +6682,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:moderators** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:moderators** scope.
      *
      * ## URL
      *
@@ -6735,7 +6743,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:read:vips** scope. If your app also adds and removes VIP status, you can use the **channel:manage:vips** scope instead.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:vips** scope. If your app also adds and removes VIP status, you can use the **channel:manage:vips** scope instead.
      *
      * ## URL
      *
@@ -6823,7 +6831,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:vips** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:vips** scope.
      *
      * ## URL
      *
@@ -6912,7 +6920,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:vips** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:vips** scope.
      *
      * ## URL
      *
@@ -6991,7 +6999,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:read:polls** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:polls** scope.
      *
      * ## URL
      *
@@ -7094,7 +7102,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:polls** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:polls** scope.
      *
      * ## URL
      *
@@ -7184,6 +7192,7 @@ export class TwitchApi {
      * * The value in `bits_per_vote` is outside the allowed range of values.
      * * The poll's `title` is too long.
      * * The choice's `title` is too long.
+     * * The choice's `title` failed AutoMod checks.
      * * The number of choices in the poll may not be less than 2 or greater that 5.
      * * The broadcaster already has a poll that's running; you may not create another poll until the current poll completes.
      *
@@ -7218,7 +7227,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:polls** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:polls** scope.
      *
      * ## URL
      *
@@ -7331,7 +7340,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:read:predictions** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:predictions** scope.
      *
      * ## URL
      *
@@ -7431,7 +7440,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:predictions** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:predictions** scope.
      *
      * ## URL
      *
@@ -7520,6 +7529,7 @@ export class TwitchApi {
      * * The value in `prediction_window` is outside the allowed range of values.
      * * The prediction's `title` is too long.
      * * The outcome's `title` is too long.
+     * * The outcome's `title` failed AutoMod checks.
      * * There must be 2 outcomes in the prediction.
      * * The broadcaster already has a prediction that's running; you may not create another prediction until the current prediction is resolved or canceled.
      *
@@ -7556,7 +7566,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:predictions** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:predictions** scope.
      *
      * ## URL
      *
@@ -7685,7 +7695,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:raids** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:raids** scope.
      *
      * ## URL
      *
@@ -7775,7 +7785,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:raids** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:raids** scope.
      *
      * ## URL
      *
@@ -7840,7 +7850,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -8004,7 +8014,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:schedule** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:schedule** scope.
      *
      * ## URL
      *
@@ -8069,7 +8079,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:schedule** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:schedule** scope.
      *
      * ## URL
      *
@@ -8180,7 +8190,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:schedule** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:schedule** scope.
      *
      * ## URL
      *
@@ -8288,7 +8298,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **channel:manage:schedule** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:schedule** scope.
      *
      * ## URL
      *
@@ -8352,7 +8362,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -8431,7 +8441,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -8441,7 +8451,7 @@ export class TwitchApi {
      *
      * ### Example Request
      *
-     * Gets the list of live and offline channels where the broadcaster’s name contains _loserfruit_.:
+     * Gets the list of live and offline channels where the broadcaster’s name contains _loserfruit_.
      *
      * ```
      * curl -X GET 'https://api.twitch.tv/helix/search/channels?query=loserfruit' \
@@ -8479,7 +8489,7 @@ export class TwitchApi {
      *
      * ### Example Request
      *
-     * Gets the list of live channels where the broadcaster’s name or category name contains _a\_seagull_.:
+     * Gets the list of live channels where the broadcaster’s name or category name contains _a\_seagull_.
      *
      * ```
      * curl -X GET 'https://api.twitch.tv/helix/search/channels?query=a_seagull&live_only=true' \
@@ -8551,7 +8561,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -8645,7 +8655,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -8733,6 +8743,10 @@ export class TwitchApi {
      * * The access token is not valid.
      * * The ID in the Client-Id header must match the client ID in the access token.
      *
+     * ### 404 Not Found
+     *
+     * * The specified playlist was not found.
+     *
      * @see https://dev.twitch.tv/docs/api/reference#get-soundtrack-playlist
      */
     getSoundtrackPlaylist: async (
@@ -8754,7 +8768,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -8873,7 +8887,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:read:stream\_key** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:stream\_key** scope.
      *
      * ## URL
      *
@@ -8942,7 +8956,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -9070,7 +9084,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **user:read:follows** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:follows** scope.
      *
      * ## URL
      *
@@ -9164,7 +9178,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:manage:broadcast** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:broadcast** scope.
      *
      * ## URL
      *
@@ -9252,7 +9266,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **user:read:broadcast** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:broadcast** scope.
      *
      * ## URL
      *
@@ -9349,7 +9363,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:read:subscriptions** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:subscriptions** scope.
      *
      * A Twitch extensions may use an app access token if the broadcaster has granted the **channel:read:subscriptions** scope from within the Twitch Extensions manager.
      *
@@ -9433,7 +9447,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **user:read:subscriptions** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:subscriptions** scope.
      *
      * A Twitch extensions may use an app access token if the broadcaster has granted the **user:read:subscriptions** scope from within the Twitch Extensions manager.
      *
@@ -9517,7 +9531,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -9617,7 +9631,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -9713,7 +9727,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:manage:broadcast** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:broadcast** scope.
      *
      * ## URL
      *
@@ -9793,7 +9807,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -9876,7 +9890,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -9978,7 +9992,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -10058,7 +10072,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **user:edit** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:edit** scope.
      *
      * ## URL
      *
@@ -10135,7 +10149,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -10223,7 +10237,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **user:read:blocked\_users** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:blocked\_users** scope.
      *
      * ## URL
      *
@@ -10301,7 +10315,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **user:manage:blocked\_users** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:manage:blocked\_users** scope.
      *
      * ## URL
      *
@@ -10360,7 +10374,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **user:manage:blocked\_users** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:manage:blocked\_users** scope.
      *
      * ## URL
      *
@@ -10416,7 +10430,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **user:read:broadcast** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:broadcast** or **user:edit:broadcast** scope. To include inactive extensions, you must include the **user:edit:broadcast** scope.
      *
      * ## URL
      *
@@ -10527,7 +10541,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -10634,7 +10648,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **user:edit:broadcast** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:edit:broadcast** scope.
      *
      * ## URL
      *
@@ -10793,7 +10807,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires an app access token or user access token.
+     * Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
      *
      * ## URL
      *
@@ -10893,7 +10907,7 @@ export class TwitchApi {
      *
      * ## Authentication
      *
-     * Requires a user access token that includes the **channel:manage:videos** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:videos** scope.
      *
      * ## URL
      *
@@ -10971,7 +10985,7 @@ export class TwitchApi {
      *
      * ## Authorization
      *
-     * Requires a user access token that includes the **user:manage:whispers** scope.
+     * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:manage:whispers** scope.
      *
      * ## URL
      *

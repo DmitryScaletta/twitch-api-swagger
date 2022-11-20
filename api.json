@@ -5,10 +5,12 @@
     "resource": "Ads",
     "description": "Starts a commercial on the specified channel.",
     "descriptionFull": [
-      "Starts a commercial on the specified channel. To start a commercial, the channel must be live."
+      "Starts a commercial on the specified channel.",
+      "**NOTE**: Only partners and affiliates may run commercials and they must be streaming live at the time.",
+      "**NOTE**: Only the broadcaster may start a commercial; the broadcaster’s editors and moderators may not start commercials on behalf of the broadcaster."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:edit:commercial** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:edit:commercial** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/channels/commercial",
@@ -22,7 +24,7 @@
           "possibleValues": [],
           "required": true,
           "depth": 0,
-          "description": "The ID of the broadcaster that wants to run the commercial. This ID must match the user ID found in the OAuth token.",
+          "description": "The ID of the partner or affiliate broadcaster that wants to run the commercial. This ID must match the user ID found in the OAuth token.",
           "children": []
         },
         {
@@ -115,7 +117,7 @@
       "Gets an analytics report for one or more extensions. The response contains the URLs used to download the reports (CSV files). [Learn More](https://dev.twitch.tv/docs/insights)"
     ],
     "authentication": [
-      "Requires a user access token that includes the **analytics:read:extensions** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **analytics:read:extensions** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/analytics/extensions",
@@ -303,7 +305,7 @@
       "Gets an analytics report for one or more games. The response contains the URLs used to download the reports (CSV files). [Learn more](https://dev.twitch.tv/docs/insights)"
     ],
     "authentication": [
-      "Requires a user access token that includes the **analytics:read:games** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **analytics:read:games** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/analytics/games",
@@ -488,10 +490,10 @@
     "resource": "Bits",
     "description": "Gets the Bits leaderboard for the authenticated broadcaster.",
     "descriptionFull": [
-      "Gets the Bits leaderboard for the authenticated broadcaster. The users are ranked by how much they’ve cheered."
+      "Gets the Bits leaderboard for the authenticated broadcaster."
     ],
     "authentication": [
-      "Requires a user access token that includes the **bits:read** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **bits:read** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/bits/leaderboard",
@@ -533,7 +535,7 @@
           "possibleValues": [],
           "required": false,
           "depth": 0,
-          "description": "The start date, in RFC3339 format, used for determining the aggregation period. Specify this parameter only if you specify the _period_ query parameter. The start date is ignored if _period_ is all.  \n  \nIf you don’t specify a start date, the time period specified by _period_ is assumed. For example, if _period_ is _month_, the data is aggregated for the current month.  \n  \nNote that the date is converted to PST before being used, so if you set the start time to `2022-01-01T00:00:00.0Z` and _period_ to month, the actual reporting period is December 2021, not January 2022\\. If you want the reporting period to be January 2022, you must set the start time to `2022-01-01T08:00:00.0Z` or `2022-01-01T00:00:00.0-08:00`.  \n  \nIf your start date uses the ‘+’ offset operator (for example, `2022-01-01T00:00:00.0+05:00`), you must URL encode the start date.",
+          "description": "The start date, in RFC3339 format, used for determining the aggregation period. Specify this parameter only if you specify the _period_ query parameter. The start date is ignored if _period_ is all.  \n  \nNote that the date is converted to PST before being used, so if you set the start time to `2022-01-01T00:00:00.0Z` and _period_ to month, the actual reporting period is December 2021, not January 2022\\. If you want the reporting period to be January 2022, you must set the start time to `2022-01-01T08:00:00.0Z` or `2022-01-01T00:00:00.0-08:00`.  \n  \nIf your start date uses the ‘+’ offset operator (for example, `2022-01-01T00:00:00.0+05:00`), you must URL encode the start date.",
           "children": []
         },
         {
@@ -556,7 +558,7 @@
           "possibleValues": [],
           "required": true,
           "depth": 0,
-          "description": "A list of leaderboard leaders. The leaders are returned in rank order. The array is empty if nobody has cheered bits.",
+          "description": "A list of leaderboard leaders. The leaders are returned in rank order by how much they’ve cheered. The array is empty if nobody has cheered bits.",
           "children": [
             {
               "name": "user_id",
@@ -651,18 +653,18 @@
       ],
       [
         "400 Bad Request",
-        "* The time period specified in the _period_ query parameter is not valid.\n* The value in the _count_ query parameter is outside the range of allowed values."
+        "* The time period specified in the _period_ query parameter is not valid.\n* The _started\\_at_ query parameter is required if _period_ is not set to _all_.\n* The value in the _count_ query parameter is outside the range of allowed values."
       ],
       [
         "401 Unauthorized",
-        "* The Authorization header is required and must specify a user access token.\n* The user access token must include the the **bits:read** scope.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
+        "* The Authorization header is required and must specify a user access token.\n* The user access token must include the the **bits:read** scope.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
       ],
       [
         "403 Forbidden",
         ""
       ]
     ],
-    "examples": "### Example Request\n\nGets information about the authenticated broadcaster’s top two Bits leaderboard entries for the current week.\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/bits/leaderboard?count=2&period=week' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n\n```\n\n### Example Response\n\n```\n{\n  \"data\": [\n    {\n      \"user_id\": \"158010205\",\n      \"user_login\": \"tundracowboy\",\n      \"user_name\": \"TundraCowboy\",\n      \"rank\": 1,\n      \"score\": 12543\n    },\n    {\n      \"user_id\": \"7168163\",\n      \"user_login\": \"topramens\",\n      \"user_name\": \"Topramens\",\n      \"rank\": 2,\n      \"score\": 6900\n    }\n  ],\n  \"date_range\": {\n    \"started_at\": \"2018-02-05T08:00:00Z\",\n    \"ended_at\": \"2018-02-12T08:00:00Z\"\n  },\n  \"total\": 2\n}\n\n```"
+    "examples": "### Example Request\n\nGets information about the authenticated broadcaster’s top two Bits leaderboard entries for the specified week.\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/bits/leaderboard?count=2&period=week&started_at=2018-02-05T08%3A00%3A00Z' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n\n```\n\n### Example Response\n\n```\n{\n  \"data\": [\n    {\n      \"user_id\": \"158010205\",\n      \"user_login\": \"tundracowboy\",\n      \"user_name\": \"TundraCowboy\",\n      \"rank\": 1,\n      \"score\": 12543\n    },\n    {\n      \"user_id\": \"7168163\",\n      \"user_login\": \"topramens\",\n      \"user_name\": \"Topramens\",\n      \"rank\": 2,\n      \"score\": 6900\n    }\n  ],\n  \"date_range\": {\n    \"started_at\": \"2018-02-05T08:00:00Z\",\n    \"ended_at\": \"2018-02-12T08:00:00Z\"\n  },\n  \"total\": 2\n}\n\n```"
   },
   {
     "id": "get-cheermotes",
@@ -673,7 +675,7 @@
       "Gets a list of Cheermotes that users can use to cheer Bits in any Bits-enabled channel’s chat room. Cheermotes are animated emotes that viewers can assign Bits to."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/bits/cheermotes",
@@ -855,7 +857,7 @@
       "Gets a list of transactions for an extension. A transaction records the exchange of a currency (for example, Bits) for a digital product."
     ],
     "authentication": [
-      "Requires an app access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/extensions/transactions",
@@ -1124,7 +1126,7 @@
       "Gets information about one or more channels."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/channels",
@@ -1271,7 +1273,7 @@
       "Updates a channel’s properties."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:manage:broadcast** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:broadcast** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/channels",
@@ -1366,7 +1368,7 @@
       "Gets a list of users that are editors for the specified broadcaster."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:read:editors** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:editors** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/channels/editors",
@@ -1456,7 +1458,7 @@
       "Creates a Custom Reward in the broadcaster’s channel. The maximum number of custom rewards per channel is 50, which includes both enabled and disabled rewards."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:manage:redemptions** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/channel_points/custom_rewards",
@@ -1939,7 +1941,7 @@
       "The app used to create the reward is the only app that may delete it. If the reward’s redemption status is UNFULFILLED at the time the reward is deleted, its redemption status is marked as FULFILLED."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:manage:redemptions** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/channel_points/custom_rewards",
@@ -2012,7 +2014,7 @@
       "Gets a list of custom rewards that the specified broadcaster created."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:read:redemptions** scope.",
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:redemptions** scope.",
       "**NOTE**: A channel may offer a maximum of 50 rewards, which includes both enabled and disabled rewards."
     ],
     "authorization": [],
@@ -2399,7 +2401,7 @@
       "Gets a list of redemptions for the specified custom reward. The app used to create the reward is the only app that may get the redemptions."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:read:redemptions** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:redemptions** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/channel_points/custom_rewards/redemptions",
@@ -2439,7 +2441,7 @@
           ],
           "required": true,
           "depth": 0,
-          "description": "The status of the redemptions to return. The possible case-sensitive values are:  \n  \n* CANCELED\n* FULFILLED\n* UNFULFILLED\n  \n**NOTE**: This field is required only if you don’t specify the _id_ query parameter.",
+          "description": "The status of the redemptions to return. The possible case-sensitive values are:  \n  \n* CANCELED\n* FULFILLED\n* UNFULFILLED\n  \n**NOTE**: This field is required only if you don’t specify the _id_ query parameter.  \n  \n**NOTE**: Canceled and fulfilled redemptions are returned for only a few days after they’re canceled or fulfilled.",
           "children": []
         },
         {
@@ -2675,7 +2677,7 @@
       "Updates a custom reward. The app used to create the reward is the only app that may update the reward."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:manage:redemptions** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/channel_points/custom_rewards",
@@ -3172,7 +3174,7 @@
       "Updates a redemption’s status. You may update a redemption only if its status is UNFULFILLED. The app used to create the reward is the only app that may update the redemption."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:manage:redemptions** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/channel_points/custom_rewards/redemptions",
@@ -3420,7 +3422,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:read:charity** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:charity** scope."
     ],
     "url": "https://api.twitch.tv/helix/charity/campaigns",
     "method": "GET",
@@ -3813,7 +3815,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **moderator:read:chatters** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:chatters** scope."
     ],
     "url": "https://api.twitch.tv/helix/chat/chatters",
     "method": "GET",
@@ -3964,7 +3966,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/chat/emotes",
     "method": "GET",
@@ -4160,7 +4162,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/chat/emotes/global",
     "method": "GET",
@@ -4314,7 +4316,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/chat/emotes/set",
     "method": "GET",
@@ -4509,7 +4511,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/chat/badges",
     "method": "GET",
@@ -4617,7 +4619,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/chat/badges/global",
     "method": "GET",
@@ -4724,7 +4726,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/chat/settings",
     "method": "GET",
@@ -4894,7 +4896,7 @@
       "Updates the broadcaster’s chat settings."
     ],
     "authentication": [
-      "Requires a user access token that includes the `moderator:manage:chat_settings` scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the `moderator:manage:chat_settings` scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/chat/settings",
@@ -5161,7 +5163,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **moderator:manage:announcements** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:announcements** scope."
     ],
     "url": "https://api.twitch.tv/helix/chat/announcements",
     "method": "POST",
@@ -5249,7 +5251,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/chat/color",
     "method": "GET",
@@ -5348,7 +5350,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **user:manage:chat\\_color** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:manage:chat\\_color** scope."
     ],
     "url": "https://api.twitch.tv/helix/chat/color",
     "method": "PUT",
@@ -5413,7 +5415,7 @@
       "Creating a clip is an asynchronous process that can take a short amount of time to complete. To determine whether the clip was successfully created, call [Get Clips](https://dev.twitch.tv/docs/api/reference#get-clips) using the clip ID that this request returned. If Get Clips returns the clip, the clip was successfully created. If after 15 seconds Get Clips hasn’t returned the clip, assume it failed."
     ],
     "authentication": [
-      "Requires a user access token that includes the **clips:edit** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **clips:edit** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/clips",
@@ -5501,7 +5503,7 @@
       "Gets one or more video clips that were captured from streams. For information about clips, see [How to use clips](https://help.twitch.tv/s/article/how-to-use-clips)."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/clips",
@@ -5797,7 +5799,7 @@
       "Rate limit: You may send at most one request per second per user."
     ],
     "authentication": [
-      "Requires an app access token. The client ID in the access token must match a client ID that Twitch has approved to provide entitlements."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). The client ID in the access token must match a client ID that Twitch has approved to provide entitlements."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/entitlements/codes",
@@ -5902,7 +5904,7 @@
       "| Access token type | Parameter | Description |\n| - | - | - |\n| App | None | If you don’t specify request parameters, the request returns all entitlements that your organization owns. |\n| App | user_id | The request returns all entitlements for any game that the organization granted to the specified user. |\n| App | user_id, game_id | The request returns all entitlements that the specified game granted to the specified user. |\n| App | game_id | The request returns all entitlements that the specified game granted to all entitled users. |\n| User | None | If you don’t specify request parameters, the request returns all entitlements for any game that the organization granted to the user identified in the access token. |\n| User | user_id | Invalid. |\n| User | user_id, game_id | Invalid. |\n| User | game_id | The request returns all entitlements that the specified game granted to the user identified in the access token. |\n"
     ],
     "authentication": [
-      "Requires an app access token or user access token. The client ID in the access token must own the game."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens). The client ID in the access token must own the game."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/entitlements/drops",
@@ -6108,7 +6110,7 @@
       "| Access token type | Data that’s updated |\n| - | - |\n| App | Updates all entitlements with benefits owned by the organization in the access token. |\n| User | Updates all entitlements owned by the user in the access token and where the benefits are owned by the organization in the access token. |\n"
     ],
     "authentication": [
-      "Requires an app access token or user access token. The client ID in the access token must own the game."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens). The client ID in the access token must own the game."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/entitlements/drops",
@@ -6190,7 +6192,7 @@
       "Rate limit: You may send at most one request per second per user."
     ],
     "authentication": [
-      "Requires an app access token. Only client IDs approved by Twitch may redeem codes on behalf of any Twitch user account."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). Only client IDs approved by Twitch may redeem codes on behalf of any Twitch user account."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/entitlements/codes",
@@ -6695,7 +6697,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/extensions/live",
     "method": "GET",
@@ -7478,7 +7480,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/extensions/released",
     "method": "GET",
@@ -7824,7 +7826,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token. The client ID in the app access token must be the extension’s client ID."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). The client ID in the app access token must be the extension’s client ID."
     ],
     "url": "https://api.twitch.tv/helix/bits/extensions",
     "method": "GET",
@@ -7962,7 +7964,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token. The client ID in the app access token must be the extension’s client ID."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). The client ID in the app access token must be the extension’s client ID."
     ],
     "url": "https://api.twitch.tv/helix/bits/extensions",
     "method": "PUT",
@@ -8349,15 +8351,15 @@
       ],
       [
         "400 Bad Request",
-        "* The `condition` field is required.\n* The user specified in the `condition` object does not exist.\n* The `condition` object is missing one or more required fields.\n* The combination of values in the `version` and `type` fields is not valid.\n* The length of the string in the `secret` field is not valid.\n* The URL in the transport's `callback` field is not valid. The URL must use the HTTPS protocol and the 443 port number.\n* The value specified in the `method` field is not valid.\n* The `callback` field is required if you specify the webhook transport method."
+        "* The `condition` field is required.\n* The user specified in the `condition` object does not exist.\n* The `condition` object is missing one or more required fields.\n* The combination of values in the `version` and `type` fields is not valid.\n* The length of the string in the `secret` field is not valid.\n* The URL in the transport's `callback` field is not valid. The URL must use the HTTPS protocol and the 443 port number.\n* The value specified in the `method` field is not valid.\n* The `callback` field is required if you specify the webhook transport method.\n* The `session_id` field is required if you specify the WebSocket transport method.\n* The combination of subscription type and version is not valid."
       ],
       [
         "401 Unauthorized",
-        "* The Authorization header is required and must specify an app access token.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
+        "* The Authorization header is required and must specify an app access token if the transport method is webhook.\n* The Authorization header is required and must specify a user access token if the transport method is WebSocket.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
       ],
       [
         "403 Forbidden",
-        "* The subscription requires scopes that were not found in the client ID of the access token."
+        "* The access token is missing the required scopes."
       ],
       [
         "409 Conflict",
@@ -8711,7 +8713,7 @@
       "Gets information about all broadcasts on Twitch."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/games/top",
@@ -8839,7 +8841,7 @@
       "You may get up to 100 categories or games by specifying their ID or name. You may specify all IDs, all names, or a combination of IDs and names. If you specify a combination of IDs and names, the total number of IDs and names must not exceed 100."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/games",
@@ -8940,7 +8942,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:read:goals** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:goals** scope."
     ],
     "url": "https://api.twitch.tv/helix/goals",
     "method": "GET",
@@ -9090,7 +9092,7 @@
       "Instead of polling for events, consider [subscribing](https://dev.twitch.tv/docs/eventsub/manage-subscriptions) to Hype Train events ([Begin](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainbegin), [Progress](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainprogress), [End](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainend))."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:read:hype\\_train** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:hype\\_train** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/hypetrain/events",
@@ -9327,7 +9329,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **moderation:read** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** scope."
     ],
     "url": "https://api.twitch.tv/helix/moderation/enforcements/status",
     "method": "POST",
@@ -9446,7 +9448,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **moderator:manage:automod** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:automod** scope."
     ],
     "url": "https://api.twitch.tv/helix/moderation/automod/message",
     "method": "POST",
@@ -9527,7 +9529,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **moderator:read:automod\\_settings** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:automod\\_settings** scope."
     ],
     "url": "https://api.twitch.tv/helix/moderation/automod/settings",
     "method": "GET",
@@ -9702,7 +9704,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **moderator:manage:automod\\_settings** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:automod\\_settings** scope."
     ],
     "url": "https://api.twitch.tv/helix/moderation/automod/settings",
     "method": "PUT",
@@ -9965,7 +9967,7 @@
       "Gets all users that the broadcaster banned or put in a timeout."
     ],
     "authentication": [
-      "Requires a user access token that includes the **moderation:read** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/moderation/banned",
@@ -10167,7 +10169,7 @@
       "To remove a ban or end a timeout, see [Unban user](https://dev.twitch.tv/docs/api/reference#unban-user)."
     ],
     "authentication": [
-      "Requires a user access token that includes the **moderator:manage:banned\\_users** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\\_users** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/moderation/bans",
@@ -10335,7 +10337,7 @@
       "To ban a user, see [Ban user](https://dev.twitch.tv/docs/api/reference#ban-user)."
     ],
     "authentication": [
-      "Requires a user access token that includes the **moderator:manage:banned\\_users** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\\_users** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/moderation/bans",
@@ -10418,7 +10420,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **moderator:read:blocked\\_terms** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:blocked\\_terms** scope."
     ],
     "url": "https://api.twitch.tv/helix/moderation/blocked_terms",
     "method": "GET",
@@ -10529,7 +10531,7 @@
       "Adds a word or phrase to the broadcaster’s list of blocked terms. These are the terms that the broadcaster doesn’t want used in their chat room."
     ],
     "authentication": [
-      "Requires a user access token that includes the **moderator:manage:blocked\\_terms** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\\_terms** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/moderation/blocked_terms",
@@ -10678,7 +10680,7 @@
       "Removes the word or phrase from the broadcaster’s list of blocked terms."
     ],
     "authentication": [
-      "Requires a user access token that includes the **moderator:manage:blocked\\_terms** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\\_terms** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/moderation/blocked_terms",
@@ -10752,7 +10754,7 @@
       "Removes a single chat message or all chat messages from the broadcaster’s chat room."
     ],
     "authentication": [
-      "Requires a user access token that includes the **moderator:manage:chat\\_messages** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_messages** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/moderation/chat",
@@ -10831,7 +10833,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **moderation:read** scope. If your app also adds and removes moderators, you can use the **channel:manage:moderators** scope instead."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** scope. If your app also adds and removes moderators, you can use the **channel:manage:moderators** scope instead."
     ],
     "url": "https://api.twitch.tv/helix/moderation/moderators",
     "method": "GET",
@@ -10968,7 +10970,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:moderators** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:moderators** scope."
     ],
     "url": "https://api.twitch.tv/helix/moderation/moderators",
     "method": "POST",
@@ -11038,7 +11040,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:moderators** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:moderators** scope."
     ],
     "url": "https://api.twitch.tv/helix/moderation/moderators",
     "method": "DELETE",
@@ -11103,7 +11105,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:read:vips** scope. If your app also adds and removes VIP status, you can use the **channel:manage:vips** scope instead."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:vips** scope. If your app also adds and removes VIP status, you can use the **channel:manage:vips** scope instead."
     ],
     "url": "https://api.twitch.tv/helix/channels/vips",
     "method": "GET",
@@ -11240,7 +11242,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:vips** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:vips** scope."
     ],
     "url": "https://api.twitch.tv/helix/channels/vips",
     "method": "POST",
@@ -11329,7 +11331,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:vips** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:vips** scope."
     ],
     "url": "https://api.twitch.tv/helix/channels/vips",
     "method": "DELETE",
@@ -11409,7 +11411,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:read:polls** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:polls** scope."
     ],
     "url": "https://api.twitch.tv/helix/polls",
     "method": "GET",
@@ -11702,7 +11704,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:polls** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:polls** scope."
     ],
     "url": "https://api.twitch.tv/helix/polls",
     "method": "POST",
@@ -11980,7 +11982,7 @@
       ],
       [
         "400 Bad Request",
-        "* The `broadcaster_id` field is required.\n* The `title` field is required.\n* The `choices` field is required.\n* The `duration` field is required.\n* The value in `duration` is outside the allowed range of values.\n* The value in `channel_points_per_vote` is outside the allowed range of values.\n* The value in `bits_per_vote` is outside the allowed range of values.\n* The poll's `title` is too long.\n* The choice's `title` is too long.\n* The number of choices in the poll may not be less than 2 or greater that 5.\n* The broadcaster already has a poll that's running; you may not create another poll until the current poll completes."
+        "* The `broadcaster_id` field is required.\n* The `title` field is required.\n* The `choices` field is required.\n* The `duration` field is required.\n* The value in `duration` is outside the allowed range of values.\n* The value in `channel_points_per_vote` is outside the allowed range of values.\n* The value in `bits_per_vote` is outside the allowed range of values.\n* The poll's `title` is too long.\n* The choice's `title` is too long.\n* The choice's `title` failed AutoMod checks.\n* The number of choices in the poll may not be less than 2 or greater that 5.\n* The broadcaster already has a poll that's running; you may not create another poll until the current poll completes."
       ],
       [
         "401 Unauthorized",
@@ -11999,7 +12001,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:polls** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:polls** scope."
     ],
     "url": "https://api.twitch.tv/helix/polls",
     "method": "PATCH",
@@ -12262,7 +12264,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:read:predictions** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:predictions** scope."
     ],
     "url": "https://api.twitch.tv/helix/predictions",
     "method": "GET",
@@ -12543,7 +12545,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:predictions** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:predictions** scope."
     ],
     "url": "https://api.twitch.tv/helix/predictions",
     "method": "POST",
@@ -12795,7 +12797,7 @@
       ],
       [
         "400 Bad Request",
-        "* The `broadcaster_id` field is required.\n* The `title` field is required.\n* The `outcomes` field is required.\n* The `prediction_window` field is required.\n* The value in `prediction_window` is outside the allowed range of values.\n* The prediction's `title` is too long.\n* The outcome's `title` is too long.\n* There must be 2 outcomes in the prediction.\n* The broadcaster already has a prediction that's running; you may not create another prediction until the current prediction is resolved or canceled."
+        "* The `broadcaster_id` field is required.\n* The `title` field is required.\n* The `outcomes` field is required.\n* The `prediction_window` field is required.\n* The value in `prediction_window` is outside the allowed range of values.\n* The prediction's `title` is too long.\n* The outcome's `title` is too long.\n* The outcome's `title` failed AutoMod checks.\n* There must be 2 outcomes in the prediction.\n* The broadcaster already has a prediction that's running; you may not create another prediction until the current prediction is resolved or canceled."
       ],
       [
         "401 Unauthorized",
@@ -12818,7 +12820,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:predictions** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:predictions** scope."
     ],
     "url": "https://api.twitch.tv/helix/predictions",
     "method": "PATCH",
@@ -13091,7 +13093,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:raids** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:raids** scope."
     ],
     "url": "https://api.twitch.tv/helix/raids",
     "method": "POST",
@@ -13195,7 +13197,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:raids** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:raids** scope."
     ],
     "url": "https://api.twitch.tv/helix/raids",
     "method": "DELETE",
@@ -13255,7 +13257,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/schedule",
     "method": "GET",
@@ -13569,7 +13571,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:schedule** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:schedule** scope."
     ],
     "url": "https://api.twitch.tv/helix/schedule/settings",
     "method": "PATCH",
@@ -13661,7 +13663,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:schedule** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:schedule** scope."
     ],
     "url": "https://api.twitch.tv/helix/schedule/segment",
     "method": "POST",
@@ -13912,7 +13914,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:schedule** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:schedule** scope."
     ],
     "url": "https://api.twitch.tv/helix/schedule/segment",
     "method": "PATCH",
@@ -14172,7 +14174,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **channel:manage:schedule** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:schedule** scope."
     ],
     "url": "https://api.twitch.tv/helix/schedule/segment",
     "method": "DELETE",
@@ -14233,7 +14235,7 @@
       "To match, the category’s name must contain all parts of the query string. For example, if the query string is 42, the response includes any category name that contains 42 in the title. If the query string is a phrase like _love computer_, the response includes any category name that contains the words love and computer anywhere in the name. The comparison is case insensitive."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/search/categories",
@@ -14344,7 +14346,7 @@
       "By default, the results include both live and offline channels. To get only live channels set the _live\\_only_ query parameter to **true**."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "helix/search/channels",
@@ -14522,7 +14524,7 @@
         "* The Authorization header is required and must contain an app access token or user access token.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
       ]
     ],
-    "examples": "### Example Request\n\nGets the list of live and offline channels where the broadcaster’s name contains _loserfruit_.:\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/search/channels?query=loserfruit' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'\n\n```\n\n### Example Response\n\n```\n{\n  \"data\": [\n    {\n      \"broadcaster_language\": \"en\",\n      \"broadcaster_login\": \"loserfruit\",\n      \"display_name\": \"Loserfruit\",\n      \"game_id\": \"498000\",\n      \"game_name\": \"House Flipper\",\n      \"id\": \"41245072\",\n      \"is_live\": false,\n      \"tags_ids\": [],\n      \"thumbnail_url\": \"https://static-cdn.jtvnw.net/jtv_user_pictures/fd17325a-7dc2-46c6-8617-e90ec259501c-profile_image-300x300.png\",\n      \"title\": \"loserfruit\",\n      \"started_at\": \"\"\n    },\n    ...\n  ],\n  \"pagination\": {\n    \"cursor\": \"Mg==\"\n  }\n}\n\n```\n\n### Example Request\n\nGets the list of live channels where the broadcaster’s name or category name contains _a\\_seagull_.:\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/search/channels?query=a_seagull&live_only=true' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'\n\n```\n\n### Example Response\n\n```\n{\n  \"data\": [\n    {\n      \"broadcaster_language\": \"en\",\n      \"broadcaster_login\": \"a_seagull\",\n      \"display_name\": \"A_Seagull\",\n      \"game_id\": \"506442\",\n      \"game_name\": \"DOOM Eternal\",\n      \"id\": \"19070311\",\n      \"is_live\": true,\n      \"tags_ids\": [\n        \"6ea6bca4-4712-4ab9-a906-e3336a9d8039\"\n      ],\n      \"thumbnail_url\": \"https://static-cdn.jtvnw.net/jtv_user_pictures/a_seagull-profile_image-4d2d235688c7dc66-300x300.png\",\n      \"title\": \"a_seagull\",\n      \"started_at\": \"2020-03-18T17:56:00Z\"\n    }\n  ],\n  \"pagination\": {}\n}\n\n```"
+    "examples": "### Example Request\n\nGets the list of live and offline channels where the broadcaster’s name contains _loserfruit_.\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/search/channels?query=loserfruit' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'\n\n```\n\n### Example Response\n\n```\n{\n  \"data\": [\n    {\n      \"broadcaster_language\": \"en\",\n      \"broadcaster_login\": \"loserfruit\",\n      \"display_name\": \"Loserfruit\",\n      \"game_id\": \"498000\",\n      \"game_name\": \"House Flipper\",\n      \"id\": \"41245072\",\n      \"is_live\": false,\n      \"tags_ids\": [],\n      \"thumbnail_url\": \"https://static-cdn.jtvnw.net/jtv_user_pictures/fd17325a-7dc2-46c6-8617-e90ec259501c-profile_image-300x300.png\",\n      \"title\": \"loserfruit\",\n      \"started_at\": \"\"\n    },\n    ...\n  ],\n  \"pagination\": {\n    \"cursor\": \"Mg==\"\n  }\n}\n\n```\n\n### Example Request\n\nGets the list of live channels where the broadcaster’s name or category name contains _a\\_seagull_.\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/search/channels?query=a_seagull&live_only=true' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'\n\n```\n\n### Example Response\n\n```\n{\n  \"data\": [\n    {\n      \"broadcaster_language\": \"en\",\n      \"broadcaster_login\": \"a_seagull\",\n      \"display_name\": \"A_Seagull\",\n      \"game_id\": \"506442\",\n      \"game_name\": \"DOOM Eternal\",\n      \"id\": \"19070311\",\n      \"is_live\": true,\n      \"tags_ids\": [\n        \"6ea6bca4-4712-4ab9-a906-e3336a9d8039\"\n      ],\n      \"thumbnail_url\": \"https://static-cdn.jtvnw.net/jtv_user_pictures/a_seagull-profile_image-4d2d235688c7dc66-300x300.png\",\n      \"title\": \"a_seagull\",\n      \"started_at\": \"2020-03-18T17:56:00Z\"\n    }\n  ],\n  \"pagination\": {}\n}\n\n```"
   },
   {
     "id": "get-soundtrack-current-track",
@@ -14534,7 +14536,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/soundtrack/current_track",
     "method": "GET",
@@ -14675,7 +14677,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/soundtrack/playlist",
     "method": "GET",
@@ -14871,6 +14873,10 @@
       [
         "401 Unauthorized",
         "* The Authorization header is required and must specify an app access token or user access token.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
+      ],
+      [
+        "404 Not Found",
+        "* The specified playlist was not found."
       ]
     ],
     "examples": "### Example Request\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/soundtrack/playlist?id=B0912YMKSL' \\\n-H 'Authorization: Bearer 4a4x78f5wqvkybms7mxfist3jmzul' \\\n-H 'Client-Id: t214nt8z1rdtbj69hyarjvh5mi6fh'\n\n```\n\n### Example Response\n\n```\n{\n  \"data\": [\n    {\n      \"artists\": [\n        {\n          \"id\": \"B002F8OLPK\",\n          \"name\": \"BJ The Chicago Kid\",\n          \"creator_channel_id\": \"\"\n        }\n      ],\n      \"id\": \"B09J7FZ92D\",\n      \"isrc\": \"QM24S2106597\",\n      \"duration\": 210,\n      \"title\": \"Smooth [Explicit]\",\n      \"album\": {\n        \"id\": \"B09J7B37VS\",\n        \"name\": \"Smooth [Explicit]\",\n        \"image_url\": \"https://m.media-amazon.com/images/I/316SDaD-XQL.jpg\"\n      }\n    },\n    {\n      \"artists\": [\n        {\n          \"id\": \"B071ZL7NDT\",\n          \"name\": \"23 Unofficial\",\n          \"creator_channel_id\": \"647990463\"\n        },\n        {\n          \"id\": \"B073PHDDSK\",\n          \"name\": \"KALLITECHNIS\",\n          \"creator_channel_id\": \"\"\n        }\n      ],\n      \"id\": \"B09C8344GZ\",\n      \"isrc\": \"QM24S2105530\",\n      \"duration\": 154,\n      \"title\": \"OUTTA MY WAY\",\n      \"album\": {\n        \"id\": \"B09C794J2L\",\n        \"name\": \"OUTTA MY WAY\",\n        \"image_url\": \"https://m.media-amazon.com/images/I/515HYAEtpeL.jpg\"\n      }\n    }\n  ],\n  \"pagination\": {\n    \"cursor\": \"eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6MjB9fQ\"\n  }\n}\n\n```"
@@ -14886,7 +14892,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "url": "https://api.twitch.tv/helix/soundtrack/playlists",
     "method": "GET",
@@ -15021,7 +15027,7 @@
       "Gets the channel’s stream key."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:read:stream\\_key** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:stream\\_key** scope."
     ],
     "authorization": [],
     "method": "https://api.twitch.tv/helix/streams/key",
@@ -15092,7 +15098,7 @@
       "Gets a list of all broadcasters that are streaming. The list is in descending order by the number of viewers watching the stream. Because viewers come and go during a stream, it’s possible to find duplicate or missing streams in the list as you page through the results."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/streams",
@@ -15368,7 +15374,7 @@
       "Gets a list of live streams of broadcasters that the specified user follows."
     ],
     "authentication": [
-      "Requires a user access token that includes the **user:read:follows** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:follows** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/streams/followed",
@@ -15598,7 +15604,7 @@
       "* If the stream is not live\n* If the stream has not enabled video on demand (VOD)\n* If the stream is a premiere (a live, first-viewing event that combines uploaded videos with live chat)\n* If the stream is a rerun of a past broadcast, including past premieres."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:manage:broadcast** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:broadcast** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/streams/markers",
@@ -15715,7 +15721,7 @@
       "Gets a list of markers from the user’s most recent stream or from the specified VOD/video. A marker is an arbitrary point in a live stream that the broadcaster or editor marked, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX)."
     ],
     "authentication": [
-      "Requires a user access token that includes the **user:read:broadcast** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:broadcast** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/streams/markers",
@@ -15834,7 +15840,7 @@
                   "possibleValues": [],
                   "required": true,
                   "depth": 2,
-                  "description": "A URL to the video.",
+                  "description": "A URL that opens the video in Twitch Highlighter.",
                   "children": []
                 }
               ]
@@ -15895,7 +15901,7 @@
       "Gets a list of users that subscribe to the specified broadcaster."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:read:subscriptions** scope.",
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:subscriptions** scope.",
       "A Twitch extensions may use an app access token if the broadcaster has granted the **channel:read:subscriptions** scope from within the Twitch Extensions manager."
     ],
     "authorization": [],
@@ -16098,7 +16104,7 @@
       "Checks whether the user subscribes to the broadcaster’s channel."
     ],
     "authentication": [
-      "Requires a user access token that includes the **user:read:subscriptions** scope.",
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:subscriptions** scope.",
       "A Twitch extensions may use an app access token if the broadcaster has granted the **user:read:subscriptions** scope from within the Twitch Extensions manager."
     ],
     "authorization": [],
@@ -16252,7 +16258,7 @@
       "For an online list of the possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags)."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/tags/streams",
@@ -16388,7 +16394,7 @@
       "Gets the list of stream tags that the broadcaster or Twitch added to their channel."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/streams/tags",
@@ -16488,7 +16494,7 @@
       "**NOTE**: You may not specify automatic tags; the call fails if you specify automatic tags. Automatic tags are tags that Twitch applies to the channel. For a list of automatic tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags). To get the list of possible tags programmatically, see [Get All Stream Tags](https://dev.twitch.tv/docs/api/reference#get-all-stream-tags)."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:manage:broadcast** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:broadcast** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/streams/tags",
@@ -16554,7 +16560,7 @@
       "Gets the list of Twitch teams that the broadcaster is a member of."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/teams/channel",
@@ -16729,7 +16735,7 @@
       "Gets information about the specified Twitch team. [Read More](https://help.twitch.tv/s/article/twitch-teams)"
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/teams",
@@ -16926,7 +16932,7 @@
       "To include the user’s verified email address in the response, you must use a user access token that includes the **user:read:email** scope."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/users",
@@ -17107,7 +17113,7 @@
       "To include the user’s verified email address in the response, the user access token must also include the **user:read:email** scope."
     ],
     "authentication": [
-      "Requires a user access token that includes the **user:edit** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:edit** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/users",
@@ -17278,7 +17284,7 @@
       "Gets information about users that are following other users. For example, you can use this endpoint to answer questions like “who is qotrok following,” “who is following qotrok,” or “is user X following user Y.”"
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/users/follows",
@@ -17459,7 +17465,7 @@
       "Gets the list of users that the broadcaster has blocked. [Read More](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat?language=en%5FUS#BlockWhispersandMessagesfromStrangers)"
     ],
     "authentication": [
-      "Requires a user access token that includes the **user:read:blocked\\_users** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:blocked\\_users** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/users/blocks",
@@ -17568,7 +17574,7 @@
       "To learn more about blocking users, see [Block Other Users on Twitch](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat?language=en%5FUS#BlockWhispersandMessagesfromStrangers)."
     ],
     "authentication": [
-      "Requires a user access token that includes the **user:manage:blocked\\_users** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:manage:blocked\\_users** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/users/blocks",
@@ -17645,7 +17651,7 @@
       "Removes the user from the broadcaster’s list of blocked users. The user ID in the OAuth token identifies the broadcaster who’s removing the block."
     ],
     "authentication": [
-      "Requires a user access token that includes the **user:manage:blocked\\_users** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:manage:blocked\\_users** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/users/blocks",
@@ -17697,7 +17703,7 @@
       "Gets a list of all extensions (both active and inactive) that the broadcaster has installed. The user ID in the access token identifies the broadcaster."
     ],
     "authentication": [
-      "Requires a user access token that includes the **user:read:broadcast** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:broadcast** or **user:edit:broadcast** scope. To include inactive extensions, you must include the **user:edit:broadcast** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/users/extensions/list",
@@ -17797,7 +17803,7 @@
       "NOTE: To include extensions that you have under development, you must specify a user access token that includes the **user:read:broadcast** or **user:edit:broadcast** scope."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/users/extensions",
@@ -18017,7 +18023,7 @@
       "NOTE: If you try to activate an extension under multiple extension types, the last write wins (and there is no guarantee of write order)."
     ],
     "authentication": [
-      "Requires a user access token that includes the **user:edit:broadcast** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:edit:broadcast** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/users/extensions",
@@ -18241,7 +18247,7 @@
       "You may apply several filters to get a subset of the videos. The filters are applied as an AND operation to each video. For example, if _language_ is set to ‘de’ and _game\\_id_ is set to 21779, the response includes only videos that show playing League of Legends by users that stream in German. The filters apply only if you get videos by user ID or game ID."
     ],
     "authentication": [
-      "Requires an app access token or user access token."
+      "Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/videos",
@@ -18598,7 +18604,7 @@
       "Deletes one or more videos. You may delete past broadcasts, highlights, or uploads."
     ],
     "authentication": [
-      "Requires a user access token that includes the **channel:manage:videos** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:videos** scope."
     ],
     "authorization": [],
     "url": "https://api.twitch.tv/helix/videos",
@@ -18664,7 +18670,7 @@
     ],
     "authentication": [],
     "authorization": [
-      "Requires a user access token that includes the **user:manage:whispers** scope."
+      "Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:manage:whispers** scope."
     ],
     "url": "https://api.twitch.tv/helix/whispers",
     "method": "POST",

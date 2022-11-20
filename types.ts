@@ -1,5 +1,5 @@
 export interface StartCommercialBody {
-  /** The ID of the broadcaster that wants to run the commercial. This ID must match the user ID found in the OAuth token. */
+  /** The ID of the partner or affiliate broadcaster that wants to run the commercial. This ID must match the user ID found in the OAuth token. */
   broadcaster_id: string;
   /** The length of the commercial to run, in seconds. Twitch tries to serve a commercial that’s the requested length, but it may be shorter or longer. The maximum length you should request is 180 seconds. */
   length: number;
@@ -155,8 +155,6 @@ export interface GetBitsLeaderboardParams {
   /**
    * The start date, in RFC3339 format, used for determining the aggregation period. Specify this parameter only if you specify the _period_ query parameter. The start date is ignored if _period_ is all.  
    *   
-   * If you don’t specify a start date, the time period specified by _period_ is assumed. For example, if _period_ is _month_, the data is aggregated for the current month.  
-   *   
    * Note that the date is converted to PST before being used, so if you set the start time to `2022-01-01T00:00:00.0Z` and _period_ to month, the actual reporting period is December 2021, not January 2022\. If you want the reporting period to be January 2022, you must set the start time to `2022-01-01T08:00:00.0Z` or `2022-01-01T00:00:00.0-08:00`.  
    *   
    * If your start date uses the ‘+’ offset operator (for example, `2022-01-01T00:00:00.0+05:00`), you must URL encode the start date.
@@ -167,7 +165,7 @@ export interface GetBitsLeaderboardParams {
 }
 
 export interface GetBitsLeaderboardResponse {
-  /** A list of leaderboard leaders. The leaders are returned in rank order. The array is empty if nobody has cheered bits. */
+  /** A list of leaderboard leaders. The leaders are returned in rank order by how much they’ve cheered. The array is empty if nobody has cheered bits. */
   data: {
     /** An ID that identifies a user on the leaderboard. */
     user_id: string;
@@ -589,7 +587,9 @@ export interface GetCustomRewardRedemptionParams {
    * * FULFILLED
    * * UNFULFILLED
    *   
-   * **NOTE**: This field is required only if you don’t specify the _id_ query parameter.
+   * **NOTE**: This field is required only if you don’t specify the _id_ query parameter.  
+   *   
+   * **NOTE**: Canceled and fulfilled redemptions are returned for only a few days after they’re canceled or fulfilled.
    */
   status: 'CANCELED' | 'FULFILLED' | 'UNFULFILLED';
   /**
@@ -3837,7 +3837,7 @@ export interface GetStreamMarkersResponse {
       description: string;
       /** The relative offset (in seconds) of the marker from the beginning of the stream. */
       position_seconds: number;
-      /** A URL to the video. */
+      /** A URL that opens the video in Twitch Highlighter. */
       url: string;
     }[];
   }[];
