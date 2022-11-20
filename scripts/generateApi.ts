@@ -151,17 +151,11 @@ const generateApi = (
     api.push([1, '};']);
   }
 
-  const [beforeContent, afterContent] = mainTemplate
-    .replace('%IMPORTS%', imports.map((line) => `  ${line},`).join('\n'))
-    .split('%CONTENT%');
-
-  api = [
-    ...beforeContent!.split('\n').map((l) => [0, l] as Line),
-    ...api,
-    ...afterContent!.split('\n').map((l) => [0, l] as Line),
-  ];
-
-  return joinLines(api);
+  return (
+    mainTemplate
+      .replace('%IMPORTS%', imports.map((line) => `  ${line},`).join('\n'))
+      .replace('%CONTENT%', joinLines(api).trim()) + '\n'
+  );
 };
 
 export default generateApi;

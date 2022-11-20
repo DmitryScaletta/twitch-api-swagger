@@ -54,6 +54,7 @@ export class TwitchApi {
       'Client-Id': clientId || this._clientId,
     };
   }
+
 %CONTENT%
 }
 ```
