@@ -1,0 +1,68 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Twitch API Swagger (Unofficial)",
+    "description": "All endpoints are generated automatically from the [docs](https://dev.twitch.tv/docs/api/reference) page.\n\nRepository: [github.com/DmitryScaletta/twitch-api-ts](https://github.com/DmitryScaletta/twitch-api-ts)",
+    "version": "helix"
+  },
+  "servers": [
+    {
+      "url": "https://api.twitch.tv/helix",
+      "description": "Helix"
+    }
+  ],
+  "security": [],
+  "tags": [],
+  "paths": {},
+  "components": {
+    "schemas": {
+      "CheermoteImageFormat": {
+        "type": "object",
+        "properties": {
+          "1": { "type": "string" },
+          "1.5": { "type": "string" },
+          "2": { "type": "string" },
+          "3": { "type": "string" },
+          "4": { "type": "string" }
+        }
+      },
+      "CheermoteImageTheme": {
+        "type": "object",
+        "properties": {
+          "animated": { "$ref": "#/components/schemas/CheermoteImageFormat" },
+          "static": { "$ref": "#/components/schemas/CheermoteImageFormat" }
+        }
+      },
+      "CheermoteImages": {
+        "type": "object",
+        "properties": {
+          "light": { "$ref": "#/components/schemas/CheermoteImageTheme" },
+          "dark": { "$ref": "#/components/schemas/CheermoteImageTheme" }
+        }
+      },
+      "ExtensionIconUrls": {
+        "type": "object",
+        "description": "A dictionary that contains URLs to different sizes of the default icon. The dictionary’s key identifies the icon’s size (for example, 24x24), and the dictionary’s value contains the URL to the icon.",
+        "properties": {
+          "100x100": { "type": "string" },
+          "24x24": { "type": "string" },
+          "300x200": { "type": "string" }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "apiKey",
+        "description": "Authorization",
+        "name": "Authorization",
+        "in": "header"
+      },
+      "Client-Id": {
+        "type": "apiKey",
+        "description": "Client-Id",
+        "name": "Client-Id",
+        "in": "header"
+      }
+    }
+  }
+}
