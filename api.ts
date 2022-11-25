@@ -5145,8 +5145,9 @@ export class TwitchApi {
      *   "data": [
      *     {
      *       "id": "493057",
-     *       "name": "PLAYERUNKNOWN'S BATTLEGROUNDS",
-     *       "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/PLAYERUNKNOWN%27S%20BATTLEGROUNDS-{width}x{height}.jpg"
+     *       "name": "PUBG: BATTLEGROUNDS",
+     *       "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/493057-{width}x{height}.jpg",
+     *       "igdb_id": "27789"
      *     },
      *     ...
      *   ],
@@ -5218,7 +5219,8 @@ export class TwitchApi {
      *     {
      *       "id": "33214",
      *       "name": "Fortnite",
-     *       "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/33214-{width}x{height}.jpg"
+     *       "box_art_url": "https://static-cdn.jtvnw.net/ttv-boxart/33214-{width}x{height}.jpg",
+     *       "igdb_id": "1905"
      *     }
      *     ...
      *   ],
@@ -5237,8 +5239,8 @@ export class TwitchApi {
      *
      * ### 400 Bad Request
      *
-     * * The request must specify the _id_ and/or _name_ query parameter.
-     * * The combined number of game IDs and game names that you specify in the request must not exceed 100.
+     * * The request must specify the _id_ or _name_ or _igdb\_id_ query parameter.
+     * * The combined number of game IDs (_id_ and _igdb\_id_) and game names that you specify in the request must not exceed 100.
      *
      * ### 401 Unauthorized
      *

@@ -882,7 +882,7 @@ export interface GetCharityCampaignResponse {
       /** The ISO-4217 three-letter currency code that identifies the type of currency in `value`. */
       currency: string;
     };
-    /** The amount of money that the campaign is trying to raise. This field may be **null** if the broadcaster has not defined a target goal. */
+    /** The campaign’s fundraising goal. This field is **null** if the broadcaster has not defined a fundraising goal. */
     target_amount: {
       /** The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, `value` is set to 550. */
       value: number;
@@ -1457,7 +1457,7 @@ export interface UpdateUserChatColorParams {
    *   
    * Turbo and Prime users may specify a named color or a Hex color code like #9146FF. If you use a Hex color code, remember to URL encode it.
    */
-  color: string;
+  color: 'blue' | 'blue_violet' | 'cadet_blue' | 'chocolate' | 'coral' | 'dodger_blue' | 'firebrick' | 'golden_rod' | 'green' | 'hot_pink' | 'orange_red' | 'red' | 'sea_green' | 'spring_green' | 'yellow_green';
 }
 
 export interface CreateClipParams {
@@ -2362,6 +2362,8 @@ export interface GetTopGamesResponse {
     name: string;
     /** A URL to the category’s or game’s box art. You must replace the `{width}x{height}` placeholder with the size of image you want. */
     box_art_url: string;
+    /** The ID that [IGDB](https://www.igdb.com/) uses to identify this game. If the IGDB ID is not available to Twitch, this field is set to an empty string. */
+    igdb_id: string;
   }[];
   /** Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination) */
   pagination: {
@@ -2375,6 +2377,8 @@ export interface GetGamesParams {
   id: string | string[];
   /** The name of the category or game to get. The name must exactly match the category’s or game’s title. Include this parameter for each category or game you want to get. For example, `&name=foo&name=bar`. You may specify a maximum of 100 names. The endpoint ignores duplicate names and names that weren’t found. */
   name: string | string[];
+  /** The [IGDB](https://www.igdb.com/) ID of the game to get. Include this parameter for each game you want to get. For example, `&igdb_id=1234&igdb_id=5678`. You may specify a maximum of 100 IDs. The endpoint ignores duplicate and invalid IDs or IDs that weren’t found. */
+  igdb_id: string;
 }
 
 export interface GetGamesResponse {
@@ -2386,6 +2390,8 @@ export interface GetGamesResponse {
     name: string;
     /** A URL to the category’s or game’s box art. You must replace the `{width}x{height}` placeholder with the size of image you want. */
     box_art_url: string;
+    /** The ID that [IGDB](https://www.igdb.com/) uses to identify this game. If the IGDB ID is not available to Twitch, this field is set to an empty string. */
+    igdb_id: string;
   }[];
 }
 

@@ -3600,7 +3600,7 @@
               "possibleValues": [],
               "required": true,
               "depth": 1,
-              "description": "The amount of money that the campaign is trying to raise. This field may be **null** if the broadcaster has not defined a target goal.",
+              "description": "The campaign’s fundraising goal. This field is **null** if the broadcaster has not defined a fundraising goal.",
               "children": [
                 {
                   "name": "value",
@@ -5403,7 +5403,23 @@
         {
           "name": "color",
           "type": "String",
-          "possibleValues": [],
+          "possibleValues": [
+            "blue",
+            "blue_violet",
+            "cadet_blue",
+            "chocolate",
+            "coral",
+            "dodger_blue",
+            "firebrick",
+            "golden_rod",
+            "green",
+            "hot_pink",
+            "orange_red",
+            "red",
+            "sea_green",
+            "spring_green",
+            "yellow_green"
+          ],
           "required": true,
           "depth": 0,
           "description": "The color to use for the user’s name in chat. All users may specify one of the following named color values.  \n  \n* blue\n* blue\\_violet\n* cadet\\_blue\n* chocolate\n* coral\n* dodger\\_blue\n* firebrick\n* golden\\_rod\n* green\n* hot\\_pink\n* orange\\_red\n* red\n* sea\\_green\n* spring\\_green\n* yellow\\_green\n  \nTurbo and Prime users may specify a named color or a Hex color code like #9146FF. If you use a Hex color code, remember to URL encode it.",
@@ -9101,6 +9117,15 @@
               "depth": 1,
               "description": "A URL to the category’s or game’s box art. You must replace the `{width}x{height}` placeholder with the size of image you want.",
               "children": []
+            },
+            {
+              "name": "igdb_id",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The ID that [IGDB](https://www.igdb.com/) uses to identify this game. If the IGDB ID is not available to Twitch, this field is set to an empty string.",
+              "children": []
             }
           ]
         },
@@ -9139,7 +9164,7 @@
         "* The Authorization header is required and must specify an app access token or user access token.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
       ]
     ],
-    "examples": "### Example Request\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/games/top' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n\n```\n\n### Example Response\n\n```\n{\n  \"data\": [\n    {\n      \"id\": \"493057\",\n      \"name\": \"PLAYERUNKNOWN'S BATTLEGROUNDS\",\n      \"box_art_url\": \"https://static-cdn.jtvnw.net/ttv-boxart/PLAYERUNKNOWN%27S%20BATTLEGROUNDS-{width}x{height}.jpg\"\n    },\n    ...\n  ],\n  \"pagination\":{\"cursor\":\"eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6MjB9fQ==\"}\n}\n\n```"
+    "examples": "### Example Request\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/games/top' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n\n```\n\n### Example Response\n\n```\n{\n  \"data\": [\n    {\n      \"id\": \"493057\",\n      \"name\": \"PUBG: BATTLEGROUNDS\",\n      \"box_art_url\": \"https://static-cdn.jtvnw.net/ttv-boxart/493057-{width}x{height}.jpg\",\n      \"igdb_id\": \"27789\"\n    },\n    ...\n  ],\n  \"pagination\":{\"cursor\":\"eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6MjB9fQ==\"}\n}\n\n```"
   },
   {
     "id": "get-games",
@@ -9179,6 +9204,15 @@
           "required": true,
           "depth": 0,
           "description": "The name of the category or game to get. The name must exactly match the category’s or game’s title. Include this parameter for each category or game you want to get. For example, `&name=foo&name=bar`. You may specify a maximum of 100 names. The endpoint ignores duplicate names and names that weren’t found.",
+          "children": []
+        },
+        {
+          "name": "igdb_id",
+          "type": "String",
+          "possibleValues": [],
+          "required": true,
+          "depth": 0,
+          "description": "The [IGDB](https://www.igdb.com/) ID of the game to get. Include this parameter for each game you want to get. For example, `&igdb_id=1234&igdb_id=5678`. You may specify a maximum of 100 IDs. The endpoint ignores duplicate and invalid IDs or IDs that weren’t found.",
           "children": []
         }
       ]
@@ -9220,6 +9254,15 @@
               "depth": 1,
               "description": "A URL to the category’s or game’s box art. You must replace the `{width}x{height}` placeholder with the size of image you want.",
               "children": []
+            },
+            {
+              "name": "igdb_id",
+              "type": "String",
+              "possibleValues": [],
+              "required": true,
+              "depth": 1,
+              "description": "The ID that [IGDB](https://www.igdb.com/) uses to identify this game. If the IGDB ID is not available to Twitch, this field is set to an empty string.",
+              "children": []
             }
           ]
         }
@@ -9232,14 +9275,14 @@
       ],
       [
         "400 Bad Request",
-        "* The request must specify the _id_ and/or _name_ query parameter.\n* The combined number of game IDs and game names that you specify in the request must not exceed 100."
+        "* The request must specify the _id_ or _name_ or _igdb\\_id_ query parameter.\n* The combined number of game IDs (_id_ and _igdb\\_id_) and game names that you specify in the request must not exceed 100."
       ],
       [
         "401 Unauthorized",
         "* The Authorization header is required and must specify an app access token or user access token.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
       ]
     ],
-    "examples": "### Example Request\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/games?id=33214' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n\n```\n\n### Example Response\n\n```\n{\n  \"data\": [\n    {\n      \"id\": \"33214\",\n      \"name\": \"Fortnite\",\n      \"box_art_url\": \"https://static-cdn.jtvnw.net/ttv-boxart/33214-{width}x{height}.jpg\"\n    }\n    ...\n  ],\n  \"pagination\": {\n    \"cursor\": \"eyJiIjpudWxsLCJhIjp7IkN\"\n  }\n}\n\n```"
+    "examples": "### Example Request\n\n```\ncurl -X GET 'https://api.twitch.tv/helix/games?id=33214' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n\n```\n\n### Example Response\n\n```\n{\n  \"data\": [\n    {\n      \"id\": \"33214\",\n      \"name\": \"Fortnite\",\n      \"box_art_url\": \"https://static-cdn.jtvnw.net/ttv-boxart/33214-{width}x{height}.jpg\",\n      \"igdb_id\": \"1905\"\n    }\n    ...\n  ],\n  \"pagination\": {\n    \"cursor\": \"eyJiIjpudWxsLCJhIjp7IkN\"\n  }\n}\n\n```"
   },
   {
     "id": "get-creator-goals",
