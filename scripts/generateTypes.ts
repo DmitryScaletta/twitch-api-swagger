@@ -1,11 +1,12 @@
 import type { ApiEndpoint, Interface, Parameter } from './types';
 import {
-  getBodyInterfaceName,
-  getParamsInterfaceName,
-  getResponseInterfaceName,
+  getBodySchemaName,
+  getParamsSchemaName,
+  getResponseSchemaName,
   moreThanOneValues,
 } from './utils.js';
 
+/** @deprecated */
 const typesMap: Record<string, string> = {
   String: 'string',
   'String[]': 'string[]',
@@ -22,8 +23,10 @@ const typesMap: Record<string, string> = {
   'map[string,string]': 'Record<string, string>',
 };
 
+/** @deprecated */
 const parseType = (rawType: string): string => typesMap[rawType] || rawType;
 
+/** @deprecated */
 const generateTypes = (apiEndpoints: ApiEndpoint[]): string => {
   let types = '';
 
@@ -109,15 +112,15 @@ const generateTypes = (apiEndpoints: ApiEndpoint[]): string => {
       };
 
       if (requestBody.parameters.length > 0) {
-        renderInterface(getBodyInterfaceName(name), requestBody);
+        renderInterface(getBodySchemaName(name), requestBody);
       }
 
       if (requestQueryParams.parameters.length > 0) {
-        renderInterface(getParamsInterfaceName(name), requestQueryParams);
+        renderInterface(getParamsSchemaName(name), requestQueryParams);
       }
 
       if (responseBody.parameters.length > 0) {
-        renderInterface(getResponseInterfaceName(name), responseBody);
+        renderInterface(getResponseSchemaName(name), responseBody);
       }
     },
   );

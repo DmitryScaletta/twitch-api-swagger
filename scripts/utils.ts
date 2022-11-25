@@ -5,20 +5,20 @@ const endpointNamesMap: Record<string, string> = {
   'Start a raid': 'StartRaid',
   'Cancel a raid': 'CancelRaid',
 };
-export const getInterfaceNamePrefix = (endpointName: string) =>
+export const getSchemaNamePrefix = (endpointName: string) =>
   endpointNamesMap[endpointName] || endpointName.replaceAll(' ', '');
 
-export const getBodyInterfaceName = (endpointName: string) =>
-  getInterfaceNamePrefix(endpointName) + 'Body';
+export const getBodySchemaName = (endpointName: string) =>
+  getSchemaNamePrefix(endpointName) + 'Body';
 
-export const getParamsInterfaceName = (endpointName: string) =>
-  getInterfaceNamePrefix(endpointName) + 'Params';
+export const getParamsSchemaName = (endpointName: string) =>
+  getSchemaNamePrefix(endpointName) + 'Params';
 
-export const getResponseInterfaceName = (endpointName: string) =>
-  getInterfaceNamePrefix(endpointName) + 'Response';
+export const getResponseSchemaName = (endpointName: string) =>
+  getSchemaNamePrefix(endpointName) + 'Response';
 
 export const getMethodName = (endpointName: string) =>
-  lowerFirstLetter(getInterfaceNamePrefix(endpointName));
+  lowerFirstLetter(getSchemaNamePrefix(endpointName));
 
 // only for query parameters
 export const moreThanOneValues: Record<string, string[]> = {

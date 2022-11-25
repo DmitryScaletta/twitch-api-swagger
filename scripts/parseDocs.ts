@@ -70,6 +70,7 @@ const parseParameters = (table: Element): Parameter[] => {
         'sizes are:',
         'tiers are:',
         'themes are:',
+        'following named color values',
       ].some((s) => descriptionEl.textContent!.includes(s))
     ) {
       descriptionEl.querySelectorAll('ul li').forEach((li) => {

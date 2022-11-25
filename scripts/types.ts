@@ -1,3 +1,4 @@
+/** @deprecated */
 export type Parameter = {
   name: string;
   type: string;
@@ -8,11 +9,13 @@ export type Parameter = {
   children: Parameter[];
 };
 
+/** @deprecated */
 export type Interface = {
   description: string[];
   parameters: Parameter[];
 };
 
+/** @deprecated */
 export type ApiEndpoint = {
   id: string;
   name: string;

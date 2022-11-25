@@ -1,15 +1,17 @@
 import type { ApiEndpoint, Templates } from './types';
 import {
-  getBodyInterfaceName,
+  getBodySchemaName,
   getMethodName,
-  getParamsInterfaceName,
-  getResponseInterfaceName,
+  getParamsSchemaName,
+  getResponseSchemaName,
   lowerFirstLetter,
   moreThanOneValues,
 } from './utils.js';
 
+/** @deprecated */
 type Line = [ident: number, text: string];
 
+/** @deprecated */
 const joinLines = (lines: Line[]) =>
   lines.reduce((acc, [ident, text]) => {
     acc += Array.from({ length: ident }, () => '  ').join('');
@@ -17,6 +19,7 @@ const joinLines = (lines: Line[]) =>
     return acc;
   }, '');
 
+/** @deprecated */
 const generateApi = (
   apiEndpoints: ApiEndpoint[],
   templates: Templates,
@@ -112,9 +115,9 @@ const generateApi = (
 
       const methodName = getMethodName(name);
 
-      const responseType = getResponseInterfaceName(name);
-      const paramsType = getParamsInterfaceName(name);
-      const bodyType = getBodyInterfaceName(name);
+      const responseType = getResponseSchemaName(name);
+      const paramsType = getParamsSchemaName(name);
+      const bodyType = getBodySchemaName(name);
 
       let methodSignature = methodTemplate
         .replace('%METHOD_NAME%', methodName)
