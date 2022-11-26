@@ -308,6 +308,14 @@ const parseSchemaObject = (
       };
     }
 
+    // https://dev.twitch.tv/docs/api/reference#get-soundtrack-current-track
+    // Response: data[] -> track
+    if (endpointId === 'get-soundtrack-current-track') {
+      schemaObject.properties!['data']!.items!.properties!['track'] = {
+        $ref: '#/components/schemas/SoundtrackTrack',
+      };
+    }
+
     const replaces = responseBodySchemaNames[endpointId];
     if (replaces) {
       replaces.reverse().forEach(([path, nestedSchemaName]) => {
