@@ -124,6 +124,12 @@ const parseSchemaObject = (
       if (typesMap[type]) {
         property = { ...property, ...parseType(type)! };
       }
+      if (
+        property.type === 'string' &&
+        (name.endsWith('_at') || description.includes('RFC3339'))
+      ) {
+        property.format = 'date-time';
+      }
 
       // required
       let _required = required === true;

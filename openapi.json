@@ -9538,11 +9538,13 @@
             "properties": {
               "started_at": {
                 "type": "string",
-                "description": "The reporting window’s start date."
+                "description": "The reporting window’s start date.",
+                "format": "date-time"
               },
               "ended_at": {
                 "type": "string",
-                "description": "The reporting window’s end date."
+                "description": "The reporting window’s end date.",
+                "format": "date-time"
               }
             }
           }
@@ -9593,11 +9595,13 @@
             "properties": {
               "started_at": {
                 "type": "string",
-                "description": "The reporting window’s start date."
+                "description": "The reporting window’s start date.",
+                "format": "date-time"
               },
               "ended_at": {
                 "type": "string",
-                "description": "The reporting window’s end date."
+                "description": "The reporting window’s end date.",
+                "format": "date-time"
               }
             }
           }
@@ -9671,11 +9675,13 @@
             "properties": {
               "started_at": {
                 "type": "string",
-                "description": "The reporting window’s start date."
+                "description": "The reporting window’s start date.",
+                "format": "date-time"
               },
               "ended_at": {
                 "type": "string",
-                "description": "The reporting window’s end date."
+                "description": "The reporting window’s end date.",
+                "format": "date-time"
               }
             }
           },
@@ -9797,7 +9803,8 @@
           },
           "last_updated": {
             "type": "string",
-            "description": "The date and time, in RFC3339 format, when this Cheermote was last updated."
+            "description": "The date and time, in RFC3339 format, when this Cheermote was last updated.",
+            "format": "date-time"
           },
           "is_charitable": {
             "type": "boolean",
@@ -9828,7 +9835,8 @@
           },
           "timestamp": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of the transaction."
+            "description": "The UTC date and time (in RFC3339 format) of the transaction.",
+            "format": "date-time"
           },
           "broadcaster_id": {
             "type": "string",
@@ -10023,7 +10031,8 @@
           },
           "created_at": {
             "type": "string",
-            "description": "The date and time, in RFC3339 format, when the user became one of the broadcaster’s editors."
+            "description": "The date and time, in RFC3339 format, when the user became one of the broadcaster’s editors.",
+            "format": "date-time"
           }
         }
       },
@@ -10250,7 +10259,8 @@
           },
           "cooldown_expires_at": {
             "type": "string",
-            "description": "The timestamp of when the cooldown period expires. Is **null** if the reward isn’t in a cooldown state. See the `global_cooldown_setting` field."
+            "description": "The timestamp of when the cooldown period expires. Is **null** if the reward isn’t in a cooldown state. See the `global_cooldown_setting` field.",
+            "format": "date-time"
           }
         }
       },
@@ -10350,7 +10360,8 @@
           },
           "redeemed_at": {
             "type": "string",
-            "description": "The date and time of when the reward was redeemed, in RFC3339 format."
+            "description": "The date and time of when the reward was redeemed, in RFC3339 format.",
+            "format": "date-time"
           }
         }
       },
@@ -11333,7 +11344,8 @@
           },
           "created_at": {
             "type": "string",
-            "description": "The date and time of when the clip was created. The date and time is in RFC3339 format."
+            "description": "The date and time of when the clip was created. The date and time is in RFC3339 format.",
+            "format": "date-time"
           },
           "thumbnail_url": {
             "type": "string",
@@ -11425,7 +11437,8 @@
           },
           "timestamp": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the entitlement was granted."
+            "description": "The UTC date and time (in RFC3339 format) of when the entitlement was granted.",
+            "format": "date-time"
           },
           "user_id": {
             "type": "string",
@@ -11445,7 +11458,8 @@
           },
           "last_updated": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the entitlement was last updated."
+            "description": "The UTC date and time (in RFC3339 format) of when the entitlement was last updated.",
+            "format": "date-time"
           }
         }
       },
@@ -11760,11 +11774,13 @@
                 },
                 "active_at": {
                   "type": "string",
-                  "description": "The UTC date and time (in RFC3339 format) that you may begin using this secret to sign a JWT."
+                  "description": "The UTC date and time (in RFC3339 format) that you may begin using this secret to sign a JWT.",
+                  "format": "date-time"
                 },
                 "expires_at": {
                   "type": "string",
-                  "description": "The UTC date and time (in RFC3339 format) that you must stop using this secret to decode a JWT."
+                  "description": "The UTC date and time (in RFC3339 format) that you must stop using this secret to decode a JWT.",
+                  "format": "date-time"
                 }
               }
             }
@@ -12119,7 +12135,8 @@
           },
           "expiration": {
             "type": "string",
-            "description": "The date and time, in RFC3339 format, when the product expires."
+            "description": "The date and time, in RFC3339 format, when the product expires.",
+            "format": "date-time"
           },
           "is_broadcast": {
             "type": "boolean",
@@ -12183,7 +12200,8 @@
           },
           "expiration": {
             "type": "string",
-            "description": "The date and time, in RFC3339 format, when the product expires. If not set, the product does not expire. To disable the product, set the expiration date to a date in the past."
+            "description": "The date and time, in RFC3339 format, when the product expires. If not set, the product does not expire. To disable the product, set the expiration date to a date in the past.",
+            "format": "date-time"
           },
           "is_broadcast": {
             "type": "boolean",
@@ -12289,7 +12307,8 @@
           },
           "created_at": {
             "type": "string",
-            "description": "The date and time (in RFC3339 format) of when the subscription was created."
+            "description": "The date and time (in RFC3339 format) of when the subscription was created.",
+            "format": "date-time"
           },
           "transport": {
             "type": "object",
@@ -12313,11 +12332,13 @@
               },
               "connected_at": {
                 "type": "string",
-                "description": "The UTC date and time that the WebSocket connection was established. Included only if `method` is set to **websocket**."
+                "description": "The UTC date and time that the WebSocket connection was established. Included only if `method` is set to **websocket**.",
+                "format": "date-time"
               },
               "disconnected_at": {
                 "type": "string",
-                "description": "The UTC date and time that the WebSocket connection was lost. Included only if `method` is set to **websocket**."
+                "description": "The UTC date and time that the WebSocket connection was lost. Included only if `method` is set to **websocket**.",
+                "format": "date-time"
               }
             }
           },
@@ -12499,7 +12520,8 @@
           },
           "created_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) that the broadcaster created the goal."
+            "description": "The UTC date and time (in RFC3339 format) that the broadcaster created the goal.",
+            "format": "date-time"
           }
         }
       },
@@ -12530,7 +12552,8 @@
           },
           "event_timestamp": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) that the event occurred."
+            "description": "The UTC date and time (in RFC3339 format) that the event occurred.",
+            "format": "date-time"
           },
           "version": {
             "type": "string",
@@ -12546,11 +12569,13 @@
               },
               "cooldown_end_time": {
                 "type": "string",
-                "description": "The UTC date and time (in RFC3339 format) that another Hype Train can start."
+                "description": "The UTC date and time (in RFC3339 format) that another Hype Train can start.",
+                "format": "date-time"
               },
               "expires_at": {
                 "type": "string",
-                "description": "The UTC date and time (in RFC3339 format) that the Hype Train ends."
+                "description": "The UTC date and time (in RFC3339 format) that the Hype Train ends.",
+                "format": "date-time"
               },
               "goal": {
                 "type": "integer",
@@ -12592,7 +12617,8 @@
               },
               "started_at": {
                 "type": "string",
-                "description": "The UTC date and time (in RFC3339 format) that this Hype Train started."
+                "description": "The UTC date and time (in RFC3339 format) that this Hype Train started.",
+                "format": "date-time"
               },
               "top_contributions": {
                 "type": "array",
@@ -12890,11 +12916,13 @@
           },
           "expires_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the timeout expires, or an empty string if the user is permanently banned."
+            "description": "The UTC date and time (in RFC3339 format) of when the timeout expires, or an empty string if the user is permanently banned.",
+            "format": "date-time"
           },
           "created_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the user was banned."
+            "description": "The UTC date and time (in RFC3339 format) of when the user was banned.",
+            "format": "date-time"
           },
           "reason": {
             "type": "string",
@@ -12991,11 +13019,13 @@
                 },
                 "created_at": {
                   "type": "string",
-                  "description": "The UTC date and time (in RFC3339 format) that the ban or timeout was placed."
+                  "description": "The UTC date and time (in RFC3339 format) that the ban or timeout was placed.",
+                  "format": "date-time"
                 },
                 "end_time": {
                   "type": "string",
-                  "description": "The UTC date and time (in RFC3339 format) that the timeout will end. Is **null** if the user was banned instead of being put in a timeout."
+                  "description": "The UTC date and time (in RFC3339 format) that the timeout will end. Is **null** if the user was banned instead of being put in a timeout.",
+                  "format": "date-time"
                 }
               }
             }
@@ -13024,15 +13054,18 @@
           },
           "created_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) that the term was blocked."
+            "description": "The UTC date and time (in RFC3339 format) that the term was blocked.",
+            "format": "date-time"
           },
           "updated_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) that the term was updated.  \n  \nWhen the term is added, this timestamp is the same as `created_at`. The timestamp changes as AutoMod continues to deny the term."
+            "description": "The UTC date and time (in RFC3339 format) that the term was updated.  \n  \nWhen the term is added, this timestamp is the same as `created_at`. The timestamp changes as AutoMod continues to deny the term.",
+            "format": "date-time"
           },
           "expires_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) that the blocked term is set to expire. After the block expires, users may use the term in the broadcaster’s chat room.  \n  \nThis field is **null** if the term was added manually or was permanently blocked by AutoMod."
+            "description": "The UTC date and time (in RFC3339 format) that the blocked term is set to expire. After the block expires, users may use the term in the broadcaster’s chat room.  \n  \nThis field is **null** if the term was added manually or was permanently blocked by AutoMod.",
+            "format": "date-time"
           }
         }
       },
@@ -13260,11 +13293,13 @@
           },
           "started_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the poll began."
+            "description": "The UTC date and time (in RFC3339 format) of when the poll began.",
+            "format": "date-time"
           },
           "ended_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the poll ended. If `status` is ACTIVE, this field is set to **null**."
+            "description": "The UTC date and time (in RFC3339 format) of when the poll ended. If `status` is ACTIVE, this field is set to **null**.",
+            "format": "date-time"
           }
         }
       },
@@ -13508,15 +13543,18 @@
           },
           "created_at": {
             "type": "string",
-            "description": "The UTC date and time of when the Prediction began."
+            "description": "The UTC date and time of when the Prediction began.",
+            "format": "date-time"
           },
           "ended_at": {
             "type": "string",
-            "description": "The UTC date and time of when the Prediction ended. If `status` is ACTIVE, this is set to **null**."
+            "description": "The UTC date and time of when the Prediction ended. If `status` is ACTIVE, this is set to **null**.",
+            "format": "date-time"
           },
           "locked_at": {
             "type": "string",
-            "description": "The UTC date and time of when the Prediction was locked. If `status` is not LOCKED, this is set to **null**."
+            "description": "The UTC date and time of when the Prediction was locked. If `status` is not LOCKED, this is set to **null**.",
+            "format": "date-time"
           }
         }
       },
@@ -13653,7 +13691,8 @@
               "properties": {
                 "created_at": {
                   "type": "string",
-                  "description": "The UTC date and time, in RFC3339 format, of when the raid was requested."
+                  "description": "The UTC date and time, in RFC3339 format, of when the raid was requested.",
+                  "format": "date-time"
                 },
                 "is_mature": {
                   "type": "boolean",
@@ -13674,11 +13713,13 @@
           },
           "start_time": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the broadcast starts."
+            "description": "The UTC date and time (in RFC3339 format) of when the broadcast starts.",
+            "format": "date-time"
           },
           "end_time": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the broadcast ends."
+            "description": "The UTC date and time (in RFC3339 format) of when the broadcast ends.",
+            "format": "date-time"
           },
           "title": {
             "type": "string",
@@ -13741,11 +13782,13 @@
                 "properties": {
                   "start_time": {
                     "type": "string",
-                    "description": "The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation starts."
+                    "description": "The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation starts.",
+                    "format": "date-time"
                   },
                   "end_time": {
                     "type": "string",
-                    "description": "The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation ends."
+                    "description": "The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation ends.",
+                    "format": "date-time"
                   }
                 }
               },
@@ -13774,7 +13817,8 @@
         "properties": {
           "start_time": {
             "type": "string",
-            "description": "The date and time that the broadcast segment starts. Specify the date and time in RFC3339 format (for example, 2021-07-01T18:00:00Z)."
+            "description": "The date and time that the broadcast segment starts. Specify the date and time in RFC3339 format (for example, 2021-07-01T18:00:00Z).",
+            "format": "date-time"
           },
           "timezone": {
             "type": "string",
@@ -13831,11 +13875,13 @@
                 "properties": {
                   "start_time": {
                     "type": "string",
-                    "description": "The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation starts."
+                    "description": "The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation starts.",
+                    "format": "date-time"
                   },
                   "end_time": {
                     "type": "string",
-                    "description": "The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation ends."
+                    "description": "The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation ends.",
+                    "format": "date-time"
                   }
                 }
               }
@@ -13849,7 +13895,8 @@
         "properties": {
           "start_time": {
             "type": "string",
-            "description": "The date and time that the broadcast segment starts. Specify the date and time in RFC3339 format (for example, 2022-08-02T06:00:00Z).  \n  \n**NOTE**: Only partners and affiliates may update a broadcast’s start time and only for non-recurring segments."
+            "description": "The date and time that the broadcast segment starts. Specify the date and time in RFC3339 format (for example, 2022-08-02T06:00:00Z).  \n  \n**NOTE**: Only partners and affiliates may update a broadcast’s start time and only for non-recurring segments.",
+            "format": "date-time"
           },
           "duration": {
             "type": "string",
@@ -13906,11 +13953,13 @@
                 "properties": {
                   "start_time": {
                     "type": "string",
-                    "description": "The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation starts."
+                    "description": "The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation starts.",
+                    "format": "date-time"
                   },
                   "end_time": {
                     "type": "string",
-                    "description": "The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation ends."
+                    "description": "The UTC date and time (in RFC3339 format) of when the broadcaster’s vacation ends.",
+                    "format": "date-time"
                   }
                 }
               }
@@ -13998,7 +14047,8 @@
           },
           "started_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the broadcaster started streaming. The string is empty if the broadcaster is not streaming live."
+            "description": "The UTC date and time (in RFC3339 format) of when the broadcaster started streaming. The string is empty if the broadcaster is not streaming live.",
+            "format": "date-time"
           }
         }
       },
@@ -14328,7 +14378,8 @@
           },
           "started_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the broadcast began."
+            "description": "The UTC date and time (in RFC3339 format) of when the broadcast began.",
+            "format": "date-time"
           },
           "language": {
             "type": "string",
@@ -14420,7 +14471,8 @@
           },
           "created_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the user created the marker."
+            "description": "The UTC date and time (in RFC3339 format) of when the user created the marker.",
+            "format": "date-time"
           },
           "position_seconds": {
             "type": "integer",
@@ -14486,7 +14538,8 @@
                 },
                 "created_at": {
                   "type": "string",
-                  "description": "The UTC date and time (in RFC3339 format) of when the user created the marker."
+                  "description": "The UTC date and time (in RFC3339 format) of when the user created the marker.",
+                  "format": "date-time"
                 },
                 "description": {
                   "type": "string",
@@ -14774,11 +14827,13 @@
           },
           "created_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the team was created."
+            "description": "The UTC date and time (in RFC3339 format) of when the team was created.",
+            "format": "date-time"
           },
           "updated_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of the last time the team was updated."
+            "description": "The UTC date and time (in RFC3339 format) of the last time the team was updated.",
+            "format": "date-time"
           },
           "info": {
             "type": "string",
@@ -14851,11 +14906,13 @@
           },
           "created_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the team was created."
+            "description": "The UTC date and time (in RFC3339 format) of when the team was created.",
+            "format": "date-time"
           },
           "updated_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of the last time the team was updated."
+            "description": "The UTC date and time (in RFC3339 format) of the last time the team was updated.",
+            "format": "date-time"
           },
           "info": {
             "type": "string",
@@ -14950,7 +15007,8 @@
           },
           "created_at": {
             "type": "string",
-            "description": "The UTC date and time that the user’s account was created. The timestamp is in RFC3339 format."
+            "description": "The UTC date and time that the user’s account was created. The timestamp is in RFC3339 format.",
+            "format": "date-time"
           }
         }
       },
@@ -15010,7 +15068,8 @@
           },
           "followed_at": {
             "type": "string",
-            "description": "The UTC date and time (in RFC3339 format) of when the user in `from_id` began following the user in `to_id`."
+            "description": "The UTC date and time (in RFC3339 format) of when the user in `from_id` began following the user in `to_id`.",
+            "format": "date-time"
           }
         }
       },
@@ -15392,11 +15451,13 @@
           },
           "created_at": {
             "type": "string",
-            "description": "The date and time, in UTC, of when the video was created. The timestamp is in RFC3339 format."
+            "description": "The date and time, in UTC, of when the video was created. The timestamp is in RFC3339 format.",
+            "format": "date-time"
           },
           "published_at": {
             "type": "string",
-            "description": "The date and time, in UTC, of when the video was published. The timestamp is in RFC3339 format."
+            "description": "The date and time, in UTC, of when the video was published. The timestamp is in RFC3339 format.",
+            "format": "date-time"
           },
           "url": {
             "type": "string",
