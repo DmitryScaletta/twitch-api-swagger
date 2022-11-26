@@ -271,7 +271,7 @@ const generateOpenApi = (html: string, openApi: OpenApi): OpenApi => {
     if (id === 'get-channel-icalendar') {
       responseObjectOk.content = {
         'text/calendar': {
-          example: examples[0],
+          examples: { Example: examples[0]! },
         },
       };
     } else if (responseCodeOk === '200' || responseCodeOk === '202') {

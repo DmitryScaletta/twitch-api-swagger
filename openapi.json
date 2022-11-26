@@ -6771,9 +6771,11 @@
             "description": "Successfully retrieved the broadcaster’s schedule as an iCalendar.",
             "content": {
               "text/calendar": {
-                "example": {
-                  "description": "_Request:_\n\nGets the specified broadcaster’s streaming schedule as an iCalendar.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/schedule/icalendar?broadcaster_id=141981764'\n```",
-                  "value": "BEGIN:VCALENDAR\nPRODID:-//twitch.tv//StreamSchedule//1.0\nVERSION:2.0\nCALSCALE:GREGORIAN\nREFRESH-INTERVAL;VALUE=DURATION:PT1H\nNAME:TwitchDev\nBEGIN:VEVENT\nUID:e4acc724-371f-402c-81ca-23ada79759d4\nDTSTAMP:20210323T040131Z\nDTSTART;TZID=/America/New_York:20210701T140000\nDTEND;TZID=/America/New_York:20210701T150000\nSUMMARY:TwitchDev Monthly Update // July 1, 2021\nDESCRIPTION:Science & Technology.\nCATEGORIES:Science & Technology\nEND:VEVENT\nEND:VCALENDAR%"
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\nGets the specified broadcaster’s streaming schedule as an iCalendar.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/schedule/icalendar?broadcaster_id=141981764'\n```",
+                    "value": "BEGIN:VCALENDAR\nPRODID:-//twitch.tv//StreamSchedule//1.0\nVERSION:2.0\nCALSCALE:GREGORIAN\nREFRESH-INTERVAL;VALUE=DURATION:PT1H\nNAME:TwitchDev\nBEGIN:VEVENT\nUID:e4acc724-371f-402c-81ca-23ada79759d4\nDTSTAMP:20210323T040131Z\nDTSTART;TZID=/America/New_York:20210701T140000\nDTEND;TZID=/America/New_York:20210701T150000\nSUMMARY:TwitchDev Monthly Update // July 1, 2021\nDESCRIPTION:Science & Technology.\nCATEGORIES:Science & Technology\nEND:VEVENT\nEND:VCALENDAR%"
+                  }
                 }
               }
             }
