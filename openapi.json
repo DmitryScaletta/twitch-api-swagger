@@ -9533,6 +9533,7 @@
             "description": "The type of report."
           },
           "date_range": {
+            "description": "The reporting window’s start and end dates, in RFC3339 format.",
             "type": "object",
             "required": [],
             "properties": {
@@ -9562,6 +9563,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -9590,6 +9592,7 @@
             "description": "The type of report."
           },
           "date_range": {
+            "description": "The reporting window’s start and end dates, in RFC3339 format.",
             "type": "object",
             "required": [],
             "properties": {
@@ -9619,6 +9622,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -9670,6 +9674,7 @@
             }
           },
           "date_range": {
+            "description": "The reporting window’s start and end dates, in RFC3339 format. The dates are calculated by using the _started\\_at_ and _period_ query parameters. If you don’t specify the _started\\_at_ query parameter, the fields contain empty strings.",
             "type": "object",
             "required": [],
             "properties": {
@@ -9870,6 +9875,7 @@
             ]
           },
           "product_data": {
+            "description": "Contains details about the digital product.",
             "type": "object",
             "required": [],
             "properties": {
@@ -9882,6 +9888,7 @@
                 "description": "Set to `twitch.ext.` \\+ `<the extension's ID>`."
               },
               "cost": {
+                "description": "Contains details about the digital product’s cost.",
                 "type": "object",
                 "required": [],
                 "properties": {
@@ -9931,6 +9938,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -10148,6 +10156,7 @@
             "format": "int64"
           },
           "image": {
+            "description": "A set of custom images for the reward. This field is **null** if the broadcaster didn’t upload images.",
             "type": "object",
             "required": [],
             "properties": {
@@ -10166,6 +10175,7 @@
             }
           },
           "default_image": {
+            "description": "A set of default images for the reward.",
             "type": "object",
             "required": [],
             "properties": {
@@ -10196,6 +10206,7 @@
             "description": "A Boolean value that determines whether the user must enter information when they redeem the reward. Is **true** if the user is prompted."
           },
           "max_per_stream_setting": {
+            "description": "The settings used to determine whether to apply a maximum to the number of redemptions allowed per live stream.",
             "type": "object",
             "required": [],
             "properties": {
@@ -10211,6 +10222,7 @@
             }
           },
           "max_per_user_per_stream_setting": {
+            "description": "The settings used to determine whether to apply a maximum to the number of redemptions allowed per user per live stream.",
             "type": "object",
             "required": [],
             "properties": {
@@ -10226,6 +10238,7 @@
             }
           },
           "global_cooldown_setting": {
+            "description": "The settings used to determine whether to apply a cooldown period between redemptions and the length of the cooldown.",
             "type": "object",
             "required": [],
             "properties": {
@@ -10323,6 +10336,7 @@
             "description": "The user’s login name."
           },
           "reward": {
+            "description": "An object that describes the reward that the user redeemed.",
             "type": "object",
             "required": [],
             "properties": {
@@ -10523,6 +10537,7 @@
             "description": "A URL to the charity’s website."
           },
           "current_amount": {
+            "description": "The current amount of donations that the campaign has received.",
             "type": "object",
             "required": [],
             "properties": {
@@ -10543,6 +10558,7 @@
             }
           },
           "target_amount": {
+            "description": "The campaign’s fundraising goal. This field is **null** if the broadcaster has not defined a fundraising goal.",
             "type": "object",
             "required": [],
             "properties": {
@@ -10598,6 +10614,7 @@
             "description": "The user’s display name."
           },
           "amount": {
+            "description": "An object that contains the amount of money that the user donated.",
             "type": "object",
             "required": [],
             "properties": {
@@ -10631,6 +10648,7 @@
             }
           },
           "pagination": {
+            "description": "An object that contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -10672,6 +10690,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -10701,6 +10720,7 @@
             "description": "The name of the emote. This is the name that viewers type in the chat window to get the emote to appear."
           },
           "images": {
+            "description": "The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.  \n  \n**NOTE:** You should use the templated URL in the `template` field to fetch the image instead of using these URLs.",
             "type": "object",
             "required": [],
             "properties": {
@@ -10801,6 +10821,7 @@
             "description": "The name of the emote. This is the name that viewers type in the chat window to get the emote to appear."
           },
           "images": {
+            "description": "The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.  \n  \n**NOTE:** You should use the templated URL in the `template` field to fetch the image instead of using these URLs.",
             "type": "object",
             "required": [],
             "properties": {
@@ -10884,6 +10905,7 @@
             "description": "The name of the emote. This is the name that viewers type in the chat window to get the emote to appear."
           },
           "images": {
+            "description": "The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.  \n  \n**NOTE:** You should use the templated URL in the `template` field to fetch the image instead of using these URLs.",
             "type": "object",
             "required": [],
             "properties": {
@@ -11375,6 +11397,7 @@
             }
           },
           "pagination": {
+            "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -11475,6 +11498,7 @@
             }
           },
           "pagination": {
+            "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -11957,10 +11981,12 @@
             "description": "A brief description displayed on the channel to explain how the extension works."
           },
           "views": {
+            "description": "Describes all views-related information such as how the extension is displayed on mobile devices.",
             "type": "object",
             "required": [],
             "properties": {
               "mobile": {
+                "description": "Describes how the extension is displayed on mobile devices.",
                 "type": "object",
                 "required": [],
                 "properties": {
@@ -11971,6 +11997,7 @@
                 }
               },
               "panel": {
+                "description": "Describes how the extension is rendered if the extension may be activated as a panel extension.",
                 "type": "object",
                 "required": [],
                 "properties": {
@@ -11990,6 +12017,7 @@
                 }
               },
               "video_overlay": {
+                "description": "Describes how the extension is rendered if the extension may be activated as a video-overlay extension.",
                 "type": "object",
                 "required": [],
                 "properties": {
@@ -12004,6 +12032,7 @@
                 }
               },
               "component": {
+                "description": "Describes how the extension is rendered if the extension may be activated as a video-component extension.",
                 "type": "object",
                 "required": [],
                 "properties": {
@@ -12042,6 +12071,7 @@
                 }
               },
               "config": {
+                "description": "Describes the view that is shown to broadcasters while they are configuring your extension within the Extension Manager.",
                 "type": "object",
                 "required": [],
                 "properties": {
@@ -12108,6 +12138,7 @@
             "description": "The product’s SKU. The SKU is unique across an extension’s products."
           },
           "cost": {
+            "description": "An object that contains the product’s cost information.",
             "type": "object",
             "required": [],
             "properties": {
@@ -12170,6 +12201,7 @@
             "description": "The product’s SKU. The SKU must be unique within an extension. The product’s SKU cannot be changed. The SKU may contain only alphanumeric characters, dashes (-), underscores (\\_), and periods (.) and is limited to a maximum of 255 characters. No spaces."
           },
           "cost": {
+            "description": "An object that contains the product’s cost information.",
             "type": "object",
             "required": [
               "amount",
@@ -12244,6 +12276,7 @@
             "description": "A JSON object that contains the parameter values that are specific to the specified subscription type. For the object’s required and optional fields, see the subscription type’s documentation."
           },
           "transport": {
+            "description": "The transport details that you want Twitch to use when sending you notifications.",
             "type": "object",
             "required": [
               "method"
@@ -12311,6 +12344,7 @@
             "format": "date-time"
           },
           "transport": {
+            "description": "The transport details used to send the notifications.",
             "type": "object",
             "required": [],
             "properties": {
@@ -12404,6 +12438,7 @@
             "format": "int32"
           },
           "pagination": {
+            "description": "An object that contains the cursor used to get the next page of subscriptions. The object is empty if there are no more pages to get. The number of subscriptions returned per page is undertermined.",
             "type": "object",
             "required": [],
             "properties": {
@@ -12449,6 +12484,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -12560,6 +12596,7 @@
             "description": "The version number of the definition of the event’s data. For example, the value is 1 if the data in `event_data` uses the first definition of the event’s data."
           },
           "event_data": {
+            "description": "The event’s data.",
             "type": "object",
             "required": [],
             "properties": {
@@ -12587,6 +12624,7 @@
                 "description": "An ID that identifies this Hype Train."
               },
               "last_contribution": {
+                "description": "The most recent contribution towards the Hype Train’s goal.",
                 "type": "object",
                 "required": [],
                 "properties": {
@@ -12669,6 +12707,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -12954,6 +12993,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -12972,6 +13012,7 @@
         ],
         "properties": {
           "data": {
+            "description": "Identifies the user and type of ban.",
             "type": "object",
             "required": [
               "user_id"
@@ -13081,6 +13122,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -13147,6 +13189,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -13188,6 +13231,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -13315,6 +13359,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -13570,6 +13615,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -13730,6 +13776,7 @@
             "description": "Indicates whether the broadcaster canceled this segment of a recurring broadcast. If the broadcaster canceled this segment, this field is set to the same value that’s in the `end_time` field; otherwise, it’s set to **null**."
           },
           "category": {
+            "description": "The type of content that the broadcaster plans to stream or **null** if not specified.",
             "type": "object",
             "required": [],
             "properties": {
@@ -13754,6 +13801,7 @@
         "required": [],
         "properties": {
           "data": {
+            "description": "The broadcaster’s streaming schedule.",
             "type": "object",
             "required": [],
             "properties": {
@@ -13777,6 +13825,7 @@
                 "description": "The broadcaster’s login name."
               },
               "vacation": {
+                "description": "The dates when the broadcaster is on vacation and not streaming. Is set to **null** if vacation mode is not enabled.",
                 "type": "object",
                 "required": [],
                 "properties": {
@@ -13793,6 +13842,7 @@
                 }
               },
               "pagination": {
+                "description": "The information used to page through a list of results. The object is empty if there are no more pages left to page through. [Read more](https://dev.twitch.tv/docs/api/guide#pagination).",
                 "type": "object",
                 "required": [],
                 "properties": {
@@ -13847,6 +13897,7 @@
         "required": [],
         "properties": {
           "data": {
+            "description": "The broadcaster’s streaming scheduled.",
             "type": "object",
             "required": [],
             "properties": {
@@ -13870,6 +13921,7 @@
                 "description": "The broadcaster’s login name."
               },
               "vacation": {
+                "description": "The dates when the broadcaster is on vacation and not streaming. Is set to **null** if vacation mode is not enabled.",
                 "type": "object",
                 "required": [],
                 "properties": {
@@ -13925,6 +13977,7 @@
         "required": [],
         "properties": {
           "data": {
+            "description": "The broadcaster’s streaming scheduled.",
             "type": "object",
             "required": [],
             "properties": {
@@ -13948,6 +14001,7 @@
                 "description": "The broadcaster’s login name."
               },
               "vacation": {
+                "description": "The dates when the broadcaster is on vacation and not streaming. Is set to **null** if vacation mode is not enabled.",
                 "type": "object",
                 "required": [],
                 "properties": {
@@ -14073,6 +14127,7 @@
             "$ref": "#/components/schemas/SoundtrackTrack"
           },
           "source": {
+            "description": "The source of the track that’s currently playing. For example, a playlist or station.",
             "type": "object",
             "required": [],
             "properties": {
@@ -14126,6 +14181,7 @@
         "required": [],
         "properties": {
           "album": {
+            "description": "The album that includes this track.",
             "type": "object",
             "required": [],
             "properties": {
@@ -14196,6 +14252,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through a list of results. The object is empty if there are no more pages to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -14241,6 +14298,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -14351,6 +14409,7 @@
             }
           },
           "pagination": {
+            "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -14374,6 +14433,7 @@
             }
           },
           "pagination": {
+            "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -14511,6 +14571,7 @@
             }
           },
           "pagination": {
+            "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -14593,6 +14654,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -14704,6 +14766,7 @@
             }
           },
           "pagination": {
+            "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -15030,6 +15093,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {
@@ -15265,6 +15329,7 @@
         "required": [],
         "properties": {
           "data": {
+            "description": "The active extensions that the broadcaster has installed.",
             "type": "object",
             "required": [],
             "properties": {
@@ -15329,6 +15394,7 @@
         "required": [],
         "properties": {
           "data": {
+            "description": "The extensions that the broadcaster updated.",
             "type": "object",
             "required": [],
             "properties": {
@@ -15467,6 +15533,7 @@
             }
           },
           "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
             "required": [],
             "properties": {

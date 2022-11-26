@@ -194,7 +194,10 @@ const parseSchemaObject = (
 
         // object
         else if (property.type === 'object') {
-          property = parseProperties(children);
+          property = {
+            description,
+            ...parseProperties(children),
+          };
         }
 
         if (property.type !== 'array' && property.type !== 'object') {
