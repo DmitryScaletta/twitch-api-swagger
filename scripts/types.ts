@@ -128,10 +128,10 @@ export type SchemaObject = {
   enum?: any[];
 
   type?: string;
-  // allOf?: SchemaObject;
-  // oneOf?: SchemaObject;
-  // anyOf?: SchemaObject;
-  // not?: SchemaObject;
+  allOf?: SchemaObject[];
+  oneOf?: SchemaObject[];
+  anyOf?: SchemaObject[];
+  not?: SchemaObject[];
   items?: SchemaObject;
   properties?: Record<string, SchemaObject>;
   additionalProperties?: SchemaObject;

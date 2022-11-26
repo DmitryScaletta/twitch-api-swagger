@@ -4424,7 +4424,6 @@
                 "type": "string"
               }
             },
-            "required": true,
             "explode": true
           },
           {
@@ -4437,7 +4436,6 @@
                 "type": "string"
               }
             },
-            "required": true,
             "explode": true
           },
           {
@@ -4446,8 +4444,7 @@
             "description": "The [IGDB](https://www.igdb.com/) ID of the game to get. Include this parameter for each game you want to get. For example, `&igdb_id=1234&igdb_id=5678`. You may specify a maximum of 100 IDs. The endpoint ignores duplicate and invalid IDs or IDs that weren’t found.",
             "schema": {
               "type": "string"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
@@ -7175,7 +7172,7 @@
         "description": "Gets the games or categories that match the specified query.\n\nTo match, the category’s name must contain all parts of the query string. For example, if the query string is 42, the response includes any category name that contains 42 in the title. If the query string is a phrase like _love computer_, the response includes any category name that contains the words love and computer anywhere in the name. The comparison is case insensitive.\n\n__Authentication:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)."
       }
     },
-    "helix/search/channels": {
+    "/search/channels": {
       "get": {
         "tags": [
           "Search"

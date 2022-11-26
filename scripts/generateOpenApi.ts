@@ -162,6 +162,15 @@ const generateOpenApi = (html: string, openApi: OpenApi): OpenApi => {
           el.textContent = 'GET ' + el.textContent;
         }
 
+        // not full url
+        // https://dev.twitch.tv/docs/api/reference#search-channels
+        if (id === 'search-channels') {
+          el.textContent = el.textContent!.replace(
+            'helix',
+            'https://api.twitch.tv/helix',
+          );
+        }
+
         [method, url] = el.textContent!.trim().split(' ') as [string, string];
       }
 

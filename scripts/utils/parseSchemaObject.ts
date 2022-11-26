@@ -68,11 +68,22 @@ const parseSchemaObject = (
     if (typesMap[type]) {
       parameter.schema = { ...parameter.schema, ...parseType(type)! };
     }
+    // date-time
     if (
       (parameter.schema! as SchemaObject).type === 'string' &&
       (name.endsWith('_at') || description.includes('RFC3339'))
     ) {
       (parameter.schema! as SchemaObject).format = 'date-time';
+    }
+
+    // color can be either enum or string
+    // https://dev.twitch.tv/docs/api/reference#update-user-chat-color
+    if (endpointId === 'update-user-chat-color' && name === 'color') {
+      // TODO: oneOf doesn't work with parameters
+      // const colorEnum = parameter.schema!;
+      // parameter.schema = {
+      //   oneOf: [colorEnum, { type: 'string' }],
+      // };
     }
 
     // required
@@ -82,11 +93,13 @@ const parseSchemaObject = (
     // https://dev.twitch.tv/docs/api/reference#get-stream-markers
     // https://dev.twitch.tv/docs/api/reference#get-teams
     // https://dev.twitch.tv/docs/api/reference#get-videos
+    // https://dev.twitch.tv/docs/api/reference#get-games
     const mutuallyExclusiveIds = [
       'get-clips',
       'get-stream-markers',
       'get-teams',
       'get-videos',
+      'get-games',
     ];
     if (mutuallyExclusiveIds.includes(endpointId)) _required = false;
     if (_required) parameter.required = _required;

@@ -91,8 +91,6 @@ const parseExamples = (endpointId: string, examplesEl: Element) => {
     res?: string[];
   };
 
-  // one response with description
-  // https://dev.twitch.tv/docs/api/reference#get-automod-settings
   const reqResPairs: ExampleRequestResponse[] = [];
   exampleItems.forEach(({ type, content }) => {
     let last = reqResPairs.at(-1);
