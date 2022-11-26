@@ -11,7 +11,7 @@ __Features:__
 * Some additional schemas like _Clip_, _ChatBadge_, _Prediction_, _Game_, _Channel_, _Video_ etc.
 * Response codes and examples
 
-__Repository:__ [github.com/DmitryScaletta/twitch-api-ts](https://github.com/DmitryScaletta/twitch-api-ts)
+__Repository:__ [github.com/DmitryScaletta/twitch-api-swagger](https://github.com/DmitryScaletta/twitch-api-swagger)
 `.trim();
 
 export const HTML_DESCRIPTION =
