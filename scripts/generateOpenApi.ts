@@ -319,9 +319,9 @@ const generateOpenApi = (html: string, openApi: OpenApi): OpenApi => {
   });
 
   // TODO: delete this debug code
-  fs.writeFile('./dist/examples.json', JSON.stringify(examplesDebug, null, 2));
+  fs.writeFile('./out/examples.json', JSON.stringify(examplesDebug, null, 2));
   fs.writeFile(
-    './dist/examples.md',
+    './out/examples.md',
     Object.entries(examplesDebug).reduce((acc, [key, value]) => {
       let i = 0;
       acc += `## # ${key}\n\n`;
