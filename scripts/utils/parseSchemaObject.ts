@@ -1,9 +1,13 @@
-import type { FieldSchema, ParameterObject, SchemaObject } from '../types';
+import type {
+  FieldSchema,
+  ParameterObject,
+  SchemaObject,
+  SchemaObjectType,
+} from '../types';
 import { getBodySchemaName, getResponseSchemaName } from './getSchemaName.js';
 import {
   PARAMS_MORE_THAN_ONE_VALUES,
   RESPONSE_BODY_SCHEMA_NAMES,
-  SchemaObjectType,
   SCHEMA_OBJECT_TYPE,
 } from './constants.js';
 import parseTableSchema from './parseTableSchema.js';

@@ -1,4 +1,3 @@
-import fs from 'fs/promises';
 import { JSDOM } from 'jsdom';
 import type {
   ExampleObject,
@@ -17,7 +16,7 @@ import {
   OPEN_API_TITLE,
   SCHEMA_OBJECT_TYPE,
 } from './utils/constants.js';
-import parseExamples, { ExampleItem } from './utils/parseExamples.js';
+import parseExamples from './utils/parseExamples.js';
 import parseMarkdown from './utils/parseMarkdown.js';
 import parseResponses from './utils/parseResponses.js';
 import parseSchemaObject from './utils/parseSchemaObject.js';

@@ -1,5 +1,5 @@
-import type { FieldSchema } from '../types';
-import { SchemaObjectType, SCHEMA_OBJECT_TYPE } from './constants.js';
+import type { FieldSchema, SchemaObjectType } from '../types';
+import { SCHEMA_OBJECT_TYPE } from './constants.js';
 import parseMarkdown from './parseMarkdown.js';
 
 // Not a table

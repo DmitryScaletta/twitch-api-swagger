@@ -23,9 +23,6 @@ export const SCHEMA_OBJECT_TYPE = {
   response: 'response',
 } as const;
 
-export type SchemaObjectType =
-  typeof SCHEMA_OBJECT_TYPE[keyof typeof SCHEMA_OBJECT_TYPE];
-
 export const PARAMS_MORE_THAN_ONE_VALUES: Record<string, string[]> = {
   'get-extension-transactions': ['id'],
   'get-channel-information': ['broadcaster_id'],
