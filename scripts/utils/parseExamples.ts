@@ -12,7 +12,6 @@ const BODY_REGEX = /(?:--data-raw|-d) '(.+)'/gs;
 const parseJson = (text: string) => eval(`(() => (${text}))()`);
 
 const parseExamples = (endpointId: string, examplesEl: Element, debug: any) => {
-  // const body: Record<string, ExampleObject> = {};
   const bodyObjects: ExampleObject[] = [];
   const examples: ExampleObject[] = [];
 
@@ -25,16 +24,10 @@ const parseExamples = (endpointId: string, examplesEl: Element, debug: any) => {
     );
   }
 
-  // "Example Request" is actually "Example Response"
-  // https://dev.twitch.tv/docs/api/reference#get-vips
-
   const examplesText: string[] = [];
   for (const el of examplesEl.children) {
     examplesText.push(parseMarkdown(el.innerHTML).trim());
   }
-
-  // type ExampleRequest = [body: any, description: string];
-  // type ExampleResponse = [body: any, description: string];
 
   const exampleItems: ExampleItem[] = [];
   for (const exampleText of examplesText) {
@@ -85,6 +78,12 @@ const parseExamples = (endpointId: string, examplesEl: Element, debug: any) => {
     }
 
     lastExample.content.push(md);
+  }
+
+  // "Example Request" is actually "Example Response"
+  // https://dev.twitch.tv/docs/api/reference#get-vips
+  if (endpointId === 'get-vips') {
+    exampleItems[1]!.type = 'example-response';
   }
 
   debug[endpointId] = exampleItems;

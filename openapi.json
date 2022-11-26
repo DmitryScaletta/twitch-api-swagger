@@ -5814,11 +5814,20 @@
                   "$ref": "#/components/schemas/GetVIPsResponse"
                 },
                 "examples": {
-                  "Example 1": {
-                    "description": "_Request:_\n\nGets a list of the broadcaster’s VIPs\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/channels/vips?broadcaster_id=123' \\\n-H 'Authorization: Bearer kpvy3cjboyptmdkiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t'\n```\n\nGets a filtered list of the broadcaster’s VIPs. The list in the response contains only those users that are VIPs.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/channels/vips?broadcaster_id=123&user_id=456&user_id=678' \\\n-H 'Authorization: Bearer kpvy3cjboyptmdkiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t'\n```"
-                  },
-                  "Example 2": {
-                    "description": "_Request:_\n\n```json\n{\n  \"data\": [\n    {\n      \"user_id\": \"11111\",\n      \"user_name\": \"UserDisplayName\",\n      \"user_login\": \"userloginname\"\n    },\n  ],\n  \"pagination\": {\n    \"cursor\": \"eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6NX19\"\n  }\n}\n```"
+                  "Example": {
+                    "description": "_Request:_\n\nGets a list of the broadcaster’s VIPs\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/channels/vips?broadcaster_id=123' \\\n-H 'Authorization: Bearer kpvy3cjboyptmdkiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t'\n```\n\nGets a filtered list of the broadcaster’s VIPs. The list in the response contains only those users that are VIPs.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/channels/vips?broadcaster_id=123&user_id=456&user_id=678' \\\n-H 'Authorization: Bearer kpvy3cjboyptmdkiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "user_id": "11111",
+                          "user_name": "UserDisplayName",
+                          "user_login": "userloginname"
+                        }
+                      ],
+                      "pagination": {
+                        "cursor": "eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6NX19"
+                      }
+                    }
                   }
                 }
               }
