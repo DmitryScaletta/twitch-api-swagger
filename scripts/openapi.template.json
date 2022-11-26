@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Twitch API Swagger (Unofficial)",
-    "description": "All endpoints are generated automatically from the [docs](https://dev.twitch.tv/docs/api/reference) page.\n\nRepository: [github.com/DmitryScaletta/twitch-api-ts](https://github.com/DmitryScaletta/twitch-api-ts)",
+    "description": "",
     "version": "helix"
   },
   "servers": [

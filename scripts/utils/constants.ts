@@ -1,3 +1,15 @@
+export const OPEN_API_DESCRIPTION = `
+All endpoints are generated automatically from the [docs](https://dev.twitch.tv/docs/api/reference) page.
+
+__Features:__
+
+* Schemas for _Request Query Parameters_, _Request Body_, _Response Body_
+* Some additional schemas like _Clip_, _ChatBadge_, _Prediction_, _Game_, _Channel_, _Video_ etc.
+* Response codes and examples
+
+__Repository:__ [github.com/DmitryScaletta/twitch-api-ts](https://github.com/DmitryScaletta/twitch-api-ts)
+`.trim();
+
 export const SCHEMA_OBJECT_TYPE = {
   body: 'body',
   params: 'params',
