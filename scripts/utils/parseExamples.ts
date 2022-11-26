@@ -6,8 +6,8 @@ export type ExampleItem = {
   content: string[];
 };
 
-// https://regex101.com/r/rksx7n/1
-const BODY_REGEX = /(?:--data-raw|-d) '(.+)'/gs;
+// https://regex101.com/r/r1G4sO/1
+const BODY_REGEX = /(?:--data-raw|-d) '(.+)'/s;
 
 const parseJson = (text: string) => eval(`(() => (${text}))()`);
 

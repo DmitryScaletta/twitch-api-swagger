@@ -1417,11 +1417,17 @@
                 "$ref": "#/components/schemas/UpdateCustomRewardBody"
               },
               "examples": {
-                "Example": {
+                "Example 1": {
                   "value": {
                     "is_enabled": false
                   },
                   "description": "Disables the specified custom reward."
+                },
+                "Example 2": {
+                  "value": {
+                    "title": "game analysis 2v2"
+                  },
+                  "description": "Updates the reward’s title."
                 }
               }
             }
@@ -2463,11 +2469,18 @@
                 "$ref": "#/components/schemas/UpdateChatSettingsBody"
               },
               "examples": {
-                "Example": {
+                "Example 1": {
                   "value": {
                     "follower_mode": false
                   },
                   "description": "This example disables `follower_mode` by setting it to false."
+                },
+                "Example 2": {
+                  "value": {
+                    "slow_mode": true,
+                    "slow_mode_wait_time": 10
+                  },
+                  "description": "This example disables `follower_mode` by setting it to false.\n\nTo change a setting’s value, the request must specify the mode field and its corresponding value field. For example, to change the value of `slow_mode_wait_time`, the request must also specify `slow_mode` even if it’s already **true**."
                 }
               }
             }
@@ -3423,6 +3436,15 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/SetExtensionRequiredConfigurationBody"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "required_configuration": "RCS",
+                    "extension_id": "uo6dggojyb8d6soh92zknwmi5ej1q2",
+                    "extension_version": "0.0.1"
+                  }
+                }
               }
             }
           }
@@ -4766,6 +4788,15 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ManageHeldAutoModMessagesBody"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "user_id": "9327994",
+                    "msg_id": "836013710",
+                    "action": "ALLOW"
+                  }
+                }
               }
             }
           }
@@ -4945,7 +4976,13 @@
                 "$ref": "#/components/schemas/UpdateAutoModSettingsBody"
               },
               "examples": {
-                "Example": {
+                "Example 1": {
+                  "value": {
+                    "overall_level": 3
+                  },
+                  "description": "This example updates the `overall_level` setting to 3."
+                },
+                "Example 2": {
                   "value": {
                     "overall_level": 3
                   },
@@ -5187,6 +5224,16 @@
                   "description": "Bans a user (it doesn’t include the `duration` field)."
                 },
                 "Example 2": {
+                  "value": {
+                    "data": {
+                      "user_id": "9876",
+                      "duration": 300,
+                      "reason": "no reason"
+                    }
+                  },
+                  "description": "Puts a user in a 5-minute timeout."
+                },
+                "Example 3": {
                   "value": {
                     "data": {
                       "user_id": "9876",
@@ -5456,11 +5503,17 @@
                 "$ref": "#/components/schemas/AddBlockedTermBody"
               },
               "examples": {
-                "Example": {
+                "Example 1": {
                   "value": {
                     "text": "A phrase I’m not fond of"
                   },
                   "description": "Adds a blocked term. Adding the same term again will return the previously added term."
+                },
+                "Example 2": {
+                  "value": {
+                    "text": "crac*"
+                  },
+                  "description": "Adds a term that uses the wildcard character (\\*)."
                 }
               }
             }
@@ -6235,6 +6288,16 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/EndPollBody"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "broadcaster_id": "141981764",
+                    "id": "ed961efd-8a3f-4cf5-a9d0-e616c590cd2a",
+                    "status": "TERMINATED"
+                  },
+                  "description": "Ends the specific poll, but allows the results to be visible for viewers."
+                }
               }
             }
           }
@@ -7048,6 +7111,14 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateChannelStreamScheduleSegmentBody"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "duration": "120"
+                  },
+                  "description": "Updates the duration of a non-recurring broadcast segment."
+                }
               }
             }
           }
