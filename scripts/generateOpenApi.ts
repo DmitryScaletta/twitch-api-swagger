@@ -9,7 +9,11 @@ import type {
   ResponseObject,
 } from './types';
 import { getBodySchemaName, getResponseSchemaName } from './utils.js';
-import { OPEN_API_DESCRIPTION, SCHEMA_OBJECT_TYPE } from './utils/constants.js';
+import {
+  OPEN_API_DESCRIPTION,
+  OPEN_API_TITLE,
+  SCHEMA_OBJECT_TYPE,
+} from './utils/constants.js';
 import parseExamples, { ExampleItem } from './utils/parseExamples.js';
 import parseMarkdown from './utils/parseMarkdown.js';
 import parseResponses from './utils/parseResponses.js';
@@ -88,6 +92,7 @@ const generateOpenApi = (html: string, openApi: OpenApi): OpenApi => {
   const tags = new Set<string>();
   apiReference.forEach(({ tag }) => tags.add(tag));
   openApi.tags = [...tags.values()].map((name) => ({ name }));
+  openApi.info.title = OPEN_API_TITLE;
   openApi.info.description = OPEN_API_DESCRIPTION;
 
   const endpointsEls = [

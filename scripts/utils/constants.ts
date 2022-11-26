@@ -1,14 +1,21 @@
+export const OPEN_API_TITLE = 'Twitch API Swagger UI (Unofficial)';
 export const OPEN_API_DESCRIPTION = `
-All endpoints are generated automatically from the [docs](https://dev.twitch.tv/docs/api/reference) page.
+Unofficial Swagger UI (OpenAPI 3) for Twitch API.
+
+All endpoints are generated automatically from the [twitch docs](https://dev.twitch.tv/docs/api/reference) page.
 
 __Features:__
 
+* Swagger UI for all Twitch API endpoints
 * Schemas for _Request Query Parameters_, _Request Body_, _Response Body_
 * Some additional schemas like _Clip_, _ChatBadge_, _Prediction_, _Game_, _Channel_, _Video_ etc.
 * Response codes and examples
 
 __Repository:__ [github.com/DmitryScaletta/twitch-api-ts](https://github.com/DmitryScaletta/twitch-api-ts)
 `.trim();
+
+export const HTML_DESCRIPTION =
+  'Unofficial Swagger UI (OpenAPI 3) for Twitch API. All endpoints are generated automatically from the twitch docs page. Features: Swagger UI for all Twitch API endpoints; Schemas for Request Query Parameters, Request Body, Response Body; Some additional schemas like Clip, ChatBadge, Prediction, Game, Channel, Video etc.; Response codes and examples';
 
 export const SCHEMA_OBJECT_TYPE = {
   body: 'body',

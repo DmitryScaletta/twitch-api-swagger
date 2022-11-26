@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Twitch API Swagger (Unofficial)",
+    "title": "",
     "description": "",
     "version": "helix"
   },
@@ -19,13 +19,12 @@
     "securitySchemes": {
       "Authorization": {
         "type": "apiKey",
-        "description": "Authorization",
+        "description": "Example: Bearer <access_token>",
         "name": "Authorization",
         "in": "header"
       },
       "Client-Id": {
         "type": "apiKey",
-        "description": "Client-Id",
         "name": "Client-Id",
         "in": "header"
       }

@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Twitch API Swagger (Unofficial)",
-    "description": "All endpoints are generated automatically from the [docs](https://dev.twitch.tv/docs/api/reference) page.\n\n__Features:__\n\n* Schemas for _Request Query Parameters_, _Request Body_, _Response Body_\n* Some additional schemas like _Clip_, _ChatBadge_, _Prediction_, _Game_, _Channel_, _Video_ etc.\n* Response codes and examples\n\n__Repository:__ [github.com/DmitryScaletta/twitch-api-ts](https://github.com/DmitryScaletta/twitch-api-ts)",
+    "title": "Twitch API Swagger UI (Unofficial)",
+    "description": "Unofficial Swagger UI (OpenAPI 3) for Twitch API.\n\nAll endpoints are generated automatically from the [twitch docs](https://dev.twitch.tv/docs/api/reference) page.\n\n__Features:__\n\n* Swagger UI for all Twitch API endpoints\n* Schemas for _Request Query Parameters_, _Request Body_, _Response Body_\n* Some additional schemas like _Clip_, _ChatBadge_, _Prediction_, _Game_, _Channel_, _Video_ etc.\n* Response codes and examples\n\n__Repository:__ [github.com/DmitryScaletta/twitch-api-ts](https://github.com/DmitryScaletta/twitch-api-ts)",
     "version": "helix"
   },
   "servers": [
@@ -15586,13 +15586,12 @@
     "securitySchemes": {
       "Authorization": {
         "type": "apiKey",
-        "description": "Authorization",
+        "description": "Example: Bearer <access_token>",
         "name": "Authorization",
         "in": "header"
       },
       "Client-Id": {
         "type": "apiKey",
-        "description": "Client-Id",
         "name": "Client-Id",
         "in": "header"
       }
