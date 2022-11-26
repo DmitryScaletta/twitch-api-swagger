@@ -13,8 +13,8 @@ const fetchDocs = async () => {
 const main = async () => {
   const [html, openApiTemplate, indexHtmlTemplate] = await Promise.all([
     fetchDocs(),
-    fs.readFile('./scripts/openapi.template.json', 'utf8'),
-    fs.readFile('./scripts/index.template.html', 'utf8'),
+    fs.readFile('./scripts/templates/openapi.template.json', 'utf8'),
+    fs.readFile('./scripts/templates/index.template.html', 'utf8'),
   ]);
 
   const openapi = generateOpenApi(html, JSON.parse(openApiTemplate));
