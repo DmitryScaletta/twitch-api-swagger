@@ -26,8 +26,35 @@ export const SCHEMA_OBJECT_TYPE = {
 export type SchemaObjectType =
   typeof SCHEMA_OBJECT_TYPE[keyof typeof SCHEMA_OBJECT_TYPE];
 
+export const PARAMS_MORE_THAN_ONE_VALUES: Record<string, string[]> = {
+  'get-extension-transactions': ['id'],
+  'get-channel-information': ['broadcaster_id'],
+  'get-custom-reward': ['id'],
+  'get-custom-reward-redemption': ['id'],
+  'update-redemption-status': ['id'],
+  'get-emote-sets': ['emote_set_id'],
+  'get-user-chat-color': ['user_id'],
+  'get-clips': ['id'],
+  'get-code-status': ['code'],
+  'get-drops-entitlements': ['id'],
+  'redeem-code': ['code'],
+  'get-games': ['id', 'name'],
+  'get-banned-users': ['user_id'],
+  'get-moderators': ['user_id'],
+  'get-vips': ['user_id'],
+  'get-polls': ['id'],
+  'get-predictions': ['id'],
+  'get-channel-stream-schedule': ['id'],
+  'get-streams': ['user_id', 'user_login', 'game_id', 'language'],
+  'get-broadcaster-subscriptions': ['user_id'],
+  'get-all-stream-tags': ['tag_id'],
+  'get-users': ['id', 'login'],
+  'get-videos': ['id'],
+  'delete-videos': ['id'],
+};
+
 // prettier-ignore
-export const responseBodySchemaNames: Record<string, [path: string, name: string][]> = {
+export const RESPONSE_BODY_SCHEMA_NAMES: Record<string, [path: string, name: string][]> = {
   'get-extension-analytics':                [['data[0]', 'ExtensionAnalytics']],
   'get-game-analytics':                     [['data[0]', 'GameAnalytics']],
   'get-bits-leaderboard':                   [['data[0]', 'BitsLeaderboard']],

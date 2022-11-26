@@ -8,7 +8,10 @@ import type {
   OperationObject,
   ResponseObject,
 } from './types';
-import { getBodySchemaName, getResponseSchemaName } from './utils.js';
+import {
+  getBodySchemaName,
+  getResponseSchemaName,
+} from './utils/getSchemaName.js';
 import {
   OPEN_API_DESCRIPTION,
   OPEN_API_TITLE,

@@ -1,11 +1,8 @@
 import type { FieldSchema, ParameterObject, SchemaObject } from '../types';
+import { getBodySchemaName, getResponseSchemaName } from './getSchemaName.js';
 import {
-  getBodySchemaName,
-  getResponseSchemaName,
-  moreThanOneValues,
-} from '../utils.js';
-import {
-  responseBodySchemaNames,
+  PARAMS_MORE_THAN_ONE_VALUES,
+  RESPONSE_BODY_SCHEMA_NAMES,
   SchemaObjectType,
   SCHEMA_OBJECT_TYPE,
 } from './constants.js';
@@ -91,7 +88,7 @@ const parseSchemaObject = (
     if (_required) parameter.required = _required;
 
     // array
-    const possibleArrays = moreThanOneValues[endpointId];
+    const possibleArrays = PARAMS_MORE_THAN_ONE_VALUES[endpointId];
     if (possibleArrays && possibleArrays.includes(name)) {
       const s = parameter.schema as SchemaObject;
       s.items = { type: s.type! };
@@ -325,7 +322,7 @@ const parseSchemaObject = (
       };
     }
 
-    const replaces = responseBodySchemaNames[endpointId];
+    const replaces = RESPONSE_BODY_SCHEMA_NAMES[endpointId];
     if (replaces) {
       replaces.reverse().forEach(([path, nestedSchemaName]) => {
         let prop: SchemaObject = schemaObject;
