@@ -11,7 +11,7 @@ const BODY_REGEX = /(?:--data-raw|-d) '(.+)'/gs;
 
 const parseJson = (text: string) => eval(`(() => (${text}))()`);
 
-const parseExamples = (endpointId: string, examplesEl: Element, debug: any) => {
+const parseExamples = (endpointId: string, examplesEl: Element) => {
   const bodyObjects: ExampleObject[] = [];
   const examples: ExampleObject[] = [];
 
@@ -85,8 +85,6 @@ const parseExamples = (endpointId: string, examplesEl: Element, debug: any) => {
   if (endpointId === 'get-vips') {
     exampleItems[1]!.type = 'example-response';
   }
-
-  debug[endpointId] = exampleItems;
 
   type ExampleRequestResponse = {
     req?: string[];

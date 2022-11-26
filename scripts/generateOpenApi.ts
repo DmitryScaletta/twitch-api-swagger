@@ -63,8 +63,6 @@ const renderDescription = (descriptions: Descriptions): string => {
   return result.join('\n\n');
 };
 
-const examplesDebug: Record<string, ExampleItem[]> = {};
-
 const generateOpenApi = (html: string, openApi: OpenApi): OpenApi => {
   type ApiReference = {
     id: string;
@@ -118,11 +116,7 @@ const generateOpenApi = (html: string, openApi: OpenApi): OpenApi => {
       url: `https://dev.twitch.tv/docs/api/reference#${id}`,
     };
 
-    const { bodyObjects, examples } = parseExamples(
-      id,
-      rightDocs!,
-      examplesDebug,
-    );
+    const { bodyObjects, examples } = parseExamples(id, rightDocs!);
 
     const descriptions: Descriptions = {
       main: [],
@@ -326,24 +320,6 @@ const generateOpenApi = (html: string, openApi: OpenApi): OpenApi => {
     if (!openApi.paths[path]) openApi.paths[path] = {} as any;
     openApi.paths[path]![method.toLowerCase() as Method] = operationObject;
   });
-
-  // TODO: delete this debug code
-  fs.writeFile('./out/examples.json', JSON.stringify(examplesDebug, null, 2));
-  fs.writeFile(
-    './out/examples.md',
-    Object.entries(examplesDebug).reduce((acc, [key, value]) => {
-      let i = 0;
-      acc += `## # ${key}\n\n`;
-      value.forEach(({ type, content }) => {
-        if (type === 'example-request') i += 1;
-        acc += `### ${type}-${i}\n\n`;
-        acc += content.join('\n\n');
-        acc += '\n\n';
-      });
-      acc += '\n<!-- --- -->\n\n';
-      return acc;
-    }, ''),
-  );
 
   return openApi;
 };
