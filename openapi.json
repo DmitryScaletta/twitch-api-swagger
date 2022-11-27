@@ -107,8 +107,10 @@
           "Ads"
         ],
         "externalDocs": {
+          "description": "Start Commercial",
           "url": "https://dev.twitch.tv/docs/api/reference#start-commercial"
         },
+        "operationId": "start-commercial",
         "requestBody": {
           "content": {
             "application/json": {
@@ -175,8 +177,10 @@
           "Analytics"
         ],
         "externalDocs": {
+          "description": "Get Extension Analytics",
           "url": "https://dev.twitch.tv/docs/api/reference#get-extension-analytics"
         },
+        "operationId": "get-extension-analytics",
         "parameters": [
           {
             "name": "extension_id",
@@ -285,8 +289,10 @@
           "Analytics"
         ],
         "externalDocs": {
+          "description": "Get Game Analytics",
           "url": "https://dev.twitch.tv/docs/api/reference#get-game-analytics"
         },
+        "operationId": "get-game-analytics",
         "parameters": [
           {
             "name": "game_id",
@@ -411,8 +417,10 @@
           "Bits"
         ],
         "externalDocs": {
+          "description": "Get Bits Leaderboard",
           "url": "https://dev.twitch.tv/docs/api/reference#get-bits-leaderboard"
         },
+        "operationId": "get-bits-leaderboard",
         "parameters": [
           {
             "name": "count",
@@ -515,8 +523,10 @@
           "Bits"
         ],
         "externalDocs": {
+          "description": "Get Cheermotes",
           "url": "https://dev.twitch.tv/docs/api/reference#get-cheermotes"
         },
+        "operationId": "get-cheermotes",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -611,8 +621,10 @@
           "Bits"
         ],
         "externalDocs": {
+          "description": "Get Extension Transactions",
           "url": "https://dev.twitch.tv/docs/api/reference#get-extension-transactions"
         },
+        "operationId": "get-extension-transactions",
         "parameters": [
           {
             "name": "extension_id",
@@ -742,8 +754,10 @@
           "Channels"
         ],
         "externalDocs": {
+          "description": "Get Channel Information",
           "url": "https://dev.twitch.tv/docs/api/reference#get-channel-information"
         },
+        "operationId": "get-channel-information",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -810,8 +824,10 @@
           "Channels"
         ],
         "externalDocs": {
+          "description": "Modify Channel Information",
           "url": "https://dev.twitch.tv/docs/api/reference#modify-channel-information"
         },
+        "operationId": "modify-channel-information",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -865,8 +881,10 @@
           "Channels"
         ],
         "externalDocs": {
+          "description": "Get Channel Editors",
           "url": "https://dev.twitch.tv/docs/api/reference#get-channel-editors"
         },
+        "operationId": "get-channel-editors",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -925,8 +943,10 @@
           "Channel Points"
         ],
         "externalDocs": {
+          "description": "Create Custom Rewards",
           "url": "https://dev.twitch.tv/docs/api/reference#create-custom-rewards"
         },
+        "operationId": "create-custom-rewards",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -1032,8 +1052,10 @@
           "Channel Points"
         ],
         "externalDocs": {
+          "description": "Delete Custom Reward",
           "url": "https://dev.twitch.tv/docs/api/reference#delete-custom-reward"
         },
+        "operationId": "delete-custom-reward",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -1082,8 +1104,10 @@
           "Channel Points"
         ],
         "externalDocs": {
+          "description": "Get Custom Reward",
           "url": "https://dev.twitch.tv/docs/api/reference#get-custom-reward"
         },
+        "operationId": "get-custom-reward",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -1276,8 +1300,10 @@
           "Channel Points"
         ],
         "externalDocs": {
+          "description": "Update Custom Reward",
           "url": "https://dev.twitch.tv/docs/api/reference#update-custom-reward"
         },
+        "operationId": "update-custom-reward",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -1444,8 +1470,10 @@
           "Channel Points"
         ],
         "externalDocs": {
+          "description": "Get Custom Reward Redemption",
           "url": "https://dev.twitch.tv/docs/api/reference#get-custom-reward-redemption"
         },
+        "operationId": "get-custom-reward-redemption",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -1610,8 +1638,10 @@
           "Channel Points"
         ],
         "externalDocs": {
+          "description": "Update Redemption Status",
           "url": "https://dev.twitch.tv/docs/api/reference#update-redemption-status"
         },
+        "operationId": "update-redemption-status",
         "parameters": [
           {
             "name": "id",
@@ -1726,8 +1756,10 @@
           "Charity"
         ],
         "externalDocs": {
+          "description": "Get Charity Campaign",
           "url": "https://dev.twitch.tv/docs/api/reference#get-charity-campaign"
         },
+        "operationId": "get-charity-campaign",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -1799,8 +1831,10 @@
           "Charity"
         ],
         "externalDocs": {
+          "description": "Get Charity Campaign Donations",
           "url": "https://dev.twitch.tv/docs/api/reference#get-charity-campaign-donations"
         },
+        "operationId": "get-charity-campaign-donations",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -1894,8 +1928,10 @@
           "Chat"
         ],
         "externalDocs": {
+          "description": "Get Chatters",
           "url": "https://dev.twitch.tv/docs/api/reference#get-chatters"
         },
+        "operationId": "get-chatters",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -1982,8 +2018,10 @@
           "Chat"
         ],
         "externalDocs": {
+          "description": "Get Channel Emotes",
           "url": "https://dev.twitch.tv/docs/api/reference#get-channel-emotes"
         },
+        "operationId": "get-channel-emotes",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -2082,8 +2120,10 @@
           "Chat"
         ],
         "externalDocs": {
+          "description": "Get Global Emotes",
           "url": "https://dev.twitch.tv/docs/api/reference#get-global-emotes"
         },
+        "operationId": "get-global-emotes",
         "responses": {
           "200": {
             "description": "Successfully retrieved the global emotes.",
@@ -2140,8 +2180,10 @@
           "Chat"
         ],
         "externalDocs": {
+          "description": "Get Emote Sets",
           "url": "https://dev.twitch.tv/docs/api/reference#get-emote-sets"
         },
+        "operationId": "get-emote-sets",
         "parameters": [
           {
             "name": "emote_set_id",
@@ -2219,8 +2261,10 @@
           "Chat"
         ],
         "externalDocs": {
+          "description": "Get Channel Chat Badges",
           "url": "https://dev.twitch.tv/docs/api/reference#get-channel-chat-badges"
         },
+        "operationId": "get-channel-chat-badges",
         "responses": {
           "200": {
             "description": "Successfully retrieved the broadcaster’s custom chat badges.",
@@ -2280,8 +2324,10 @@
           "Chat"
         ],
         "externalDocs": {
+          "description": "Get Global Chat Badges",
           "url": "https://dev.twitch.tv/docs/api/reference#get-global-chat-badges"
         },
+        "operationId": "get-global-chat-badges",
         "responses": {
           "200": {
             "description": "Successfully retrieved the list of global chat badges.",
@@ -2327,8 +2373,10 @@
           "Chat"
         ],
         "externalDocs": {
+          "description": "Get Chat Settings",
           "url": "https://dev.twitch.tv/docs/api/reference#get-chat-settings"
         },
+        "operationId": "get-chat-settings",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -2395,8 +2443,10 @@
           "Chat"
         ],
         "externalDocs": {
+          "description": "Update Chat Settings",
           "url": "https://dev.twitch.tv/docs/api/reference#update-chat-settings"
         },
+        "operationId": "update-chat-settings",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -2494,8 +2544,10 @@
           "Chat"
         ],
         "externalDocs": {
+          "description": "Send Chat Announcement",
           "url": "https://dev.twitch.tv/docs/api/reference#send-chat-announcement"
         },
+        "operationId": "send-chat-announcement",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -2555,8 +2607,10 @@
           "Chat"
         ],
         "externalDocs": {
+          "description": "Get User Chat Color",
           "url": "https://dev.twitch.tv/docs/api/reference#get-user-chat-color"
         },
+        "operationId": "get-user-chat-color",
         "parameters": [
           {
             "name": "user_id",
@@ -2619,8 +2673,10 @@
           "Chat"
         ],
         "externalDocs": {
+          "description": "Update User Chat Color",
           "url": "https://dev.twitch.tv/docs/api/reference#update-user-chat-color"
         },
+        "operationId": "update-user-chat-color",
         "parameters": [
           {
             "name": "user_id",
@@ -2679,8 +2735,10 @@
           "Clips"
         ],
         "externalDocs": {
+          "description": "Create Clip",
           "url": "https://dev.twitch.tv/docs/api/reference#create-clip"
         },
+        "operationId": "create-clip",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -2745,8 +2803,10 @@
           "Clips"
         ],
         "externalDocs": {
+          "description": "Get Clips",
           "url": "https://dev.twitch.tv/docs/api/reference#get-clips"
         },
+        "operationId": "get-clips",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -2906,8 +2966,10 @@
           "Entitlements"
         ],
         "externalDocs": {
+          "description": "Get Code Status",
           "url": "https://dev.twitch.tv/docs/api/reference#get-code-status"
         },
+        "operationId": "get-code-status",
         "parameters": [
           {
             "name": "code",
@@ -2979,8 +3041,10 @@
           "Entitlements"
         ],
         "externalDocs": {
+          "description": "Redeem Code",
           "url": "https://dev.twitch.tv/docs/api/reference#redeem-code"
         },
+        "operationId": "redeem-code",
         "parameters": [
           {
             "name": "code",
@@ -3056,8 +3120,10 @@
           "Entitlements"
         ],
         "externalDocs": {
+          "description": "Get Drops Entitlements",
           "url": "https://dev.twitch.tv/docs/api/reference#get-drops-entitlements"
         },
+        "operationId": "get-drops-entitlements",
         "parameters": [
           {
             "name": "id",
@@ -3188,8 +3254,10 @@
           "Entitlements"
         ],
         "externalDocs": {
+          "description": "Update Drops Entitlements",
           "url": "https://dev.twitch.tv/docs/api/reference#update-drops-entitlements"
         },
+        "operationId": "update-drops-entitlements",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3271,8 +3339,10 @@
           "Extensions"
         ],
         "externalDocs": {
+          "description": "Get Extension Configuration Segment",
           "url": "https://dev.twitch.tv/docs/api/reference#get-extension-configuration-segment"
         },
+        "operationId": "get-extension-configuration-segment",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -3361,8 +3431,10 @@
           "Extensions"
         ],
         "externalDocs": {
+          "description": "Set Extension Configuration Segment",
           "url": "https://dev.twitch.tv/docs/api/reference#set-extension-configuration-segment"
         },
+        "operationId": "set-extension-configuration-segment",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3403,8 +3475,10 @@
           "Extensions"
         ],
         "externalDocs": {
+          "description": "Set Extension Required Configuration",
           "url": "https://dev.twitch.tv/docs/api/reference#set-extension-required-configuration"
         },
+        "operationId": "set-extension-required-configuration",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -3455,8 +3529,10 @@
           "Extensions"
         ],
         "externalDocs": {
+          "description": "Send Extension PubSub Message",
           "url": "https://dev.twitch.tv/docs/api/reference#send-extension-pubsub-message"
         },
+        "operationId": "send-extension-pubsub-message",
         "requestBody": {
           "content": {
             "application/json": {
@@ -3501,8 +3577,10 @@
           "Extensions"
         ],
         "externalDocs": {
+          "description": "Get Extension Live Channels",
           "url": "https://dev.twitch.tv/docs/api/reference#get-extension-live-channels"
         },
+        "operationId": "get-extension-live-channels",
         "parameters": [
           {
             "name": "extension_id",
@@ -3593,8 +3671,10 @@
           "Extensions"
         ],
         "externalDocs": {
+          "description": "Get Extension Secrets",
           "url": "https://dev.twitch.tv/docs/api/reference#get-extension-secrets"
         },
+        "operationId": "get-extension-secrets",
         "responses": {
           "200": {
             "description": "Successfully retrieved the list of secrets.",
@@ -3640,8 +3720,10 @@
           "Extensions"
         ],
         "externalDocs": {
+          "description": "Create Extension Secret",
           "url": "https://dev.twitch.tv/docs/api/reference#create-extension-secret"
         },
+        "operationId": "create-extension-secret",
         "parameters": [
           {
             "name": "extension_id",
@@ -3714,8 +3796,10 @@
           "Extensions"
         ],
         "externalDocs": {
+          "description": "Send Extension Chat Message",
           "url": "https://dev.twitch.tv/docs/api/reference#send-extension-chat-message"
         },
+        "operationId": "send-extension-chat-message",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -3757,8 +3841,10 @@
           "Extensions"
         ],
         "externalDocs": {
+          "description": "Get Extensions",
           "url": "https://dev.twitch.tv/docs/api/reference#get-extensions"
         },
+        "operationId": "get-extensions",
         "parameters": [
           {
             "name": "extension_id",
@@ -3876,8 +3962,10 @@
           "Extensions"
         ],
         "externalDocs": {
+          "description": "Get Released Extensions",
           "url": "https://dev.twitch.tv/docs/api/reference#get-released-extensions"
         },
+        "operationId": "get-released-extensions",
         "parameters": [
           {
             "name": "extension_id",
@@ -3995,8 +4083,10 @@
           "Extensions"
         ],
         "externalDocs": {
+          "description": "Get Extension Bits Products",
           "url": "https://dev.twitch.tv/docs/api/reference#get-extension-bits-products"
         },
+        "operationId": "get-extension-bits-products",
         "parameters": [
           {
             "name": "should_include_all",
@@ -4053,8 +4143,10 @@
           "Extensions"
         ],
         "externalDocs": {
+          "description": "Update Extension Bits Product",
           "url": "https://dev.twitch.tv/docs/api/reference#update-extension-bits-product"
         },
+        "operationId": "update-extension-bits-product",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4112,8 +4204,10 @@
           "EventSub"
         ],
         "externalDocs": {
+          "description": "Create EventSub Subscription",
           "url": "https://dev.twitch.tv/docs/api/reference#create-eventsub-subscription"
         },
+        "operationId": "create-eventsub-subscription",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4202,8 +4296,10 @@
           "EventSub"
         ],
         "externalDocs": {
+          "description": "Delete EventSub Subscription",
           "url": "https://dev.twitch.tv/docs/api/reference#delete-eventsub-subscription"
         },
+        "operationId": "delete-eventsub-subscription",
         "parameters": [
           {
             "name": "id",
@@ -4237,8 +4333,10 @@
           "EventSub"
         ],
         "externalDocs": {
+          "description": "Get EventSub Subscriptions",
           "url": "https://dev.twitch.tv/docs/api/reference#get-eventsub-subscriptions"
         },
+        "operationId": "get-eventsub-subscriptions",
         "parameters": [
           {
             "name": "status",
@@ -4353,8 +4451,10 @@
           "Games"
         ],
         "externalDocs": {
+          "description": "Get Top Games",
           "url": "https://dev.twitch.tv/docs/api/reference#get-top-games"
         },
+        "operationId": "get-top-games",
         "parameters": [
           {
             "name": "first",
@@ -4428,8 +4528,10 @@
           "Games"
         ],
         "externalDocs": {
+          "description": "Get Games",
           "url": "https://dev.twitch.tv/docs/api/reference#get-games"
         },
+        "operationId": "get-games",
         "parameters": [
           {
             "name": "id",
@@ -4510,8 +4612,10 @@
           "Goals"
         ],
         "externalDocs": {
+          "description": "Get Creator Goals",
           "url": "https://dev.twitch.tv/docs/api/reference#get-creator-goals"
         },
+        "operationId": "get-creator-goals",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -4571,8 +4675,10 @@
           "Hype Train"
         ],
         "externalDocs": {
+          "description": "Get Hype Train Events",
           "url": "https://dev.twitch.tv/docs/api/reference#get-hype-train-events"
         },
+        "operationId": "get-hype-train-events",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -4666,8 +4772,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Check AutoMod Status",
           "url": "https://dev.twitch.tv/docs/api/reference#check-automod-status"
         },
+        "operationId": "check-automod-status",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -4755,8 +4863,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Manage Held AutoMod Messages",
           "url": "https://dev.twitch.tv/docs/api/reference#manage-held-automod-messages"
         },
+        "operationId": "manage-held-automod-messages",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4802,8 +4912,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Get AutoMod Settings",
           "url": "https://dev.twitch.tv/docs/api/reference#get-automod-settings"
         },
+        "operationId": "get-automod-settings",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -4875,8 +4987,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Update AutoMod Settings",
           "url": "https://dev.twitch.tv/docs/api/reference#update-automod-settings"
         },
+        "operationId": "update-automod-settings",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -4993,8 +5107,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Get Banned Users",
           "url": "https://dev.twitch.tv/docs/api/reference#get-banned-users"
         },
+        "operationId": "get-banned-users",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -5105,8 +5221,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Ban User",
           "url": "https://dev.twitch.tv/docs/api/reference#ban-user"
         },
+        "operationId": "ban-user",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -5246,8 +5364,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Unban User",
           "url": "https://dev.twitch.tv/docs/api/reference#unban-user"
         },
+        "operationId": "unban-user",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -5321,8 +5441,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Get Blocked Terms",
           "url": "https://dev.twitch.tv/docs/api/reference#get-blocked-terms"
         },
+        "operationId": "get-blocked-terms",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -5410,8 +5532,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Add Blocked Term",
           "url": "https://dev.twitch.tv/docs/api/reference#add-blocked-term"
         },
+        "operationId": "add-blocked-term",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -5518,8 +5642,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Remove Blocked Term",
           "url": "https://dev.twitch.tv/docs/api/reference#remove-blocked-term"
         },
+        "operationId": "remove-blocked-term",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -5573,8 +5699,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Delete Chat Messages",
           "url": "https://dev.twitch.tv/docs/api/reference#delete-chat-messages"
         },
+        "operationId": "delete-chat-messages",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -5630,8 +5758,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Get Moderators",
           "url": "https://dev.twitch.tv/docs/api/reference#get-moderators"
         },
+        "operationId": "get-moderators",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -5714,8 +5844,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Add Channel Moderator",
           "url": "https://dev.twitch.tv/docs/api/reference#add-channel-moderator"
         },
+        "operationId": "add-channel-moderator",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -5761,8 +5893,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Remove Channel Moderator",
           "url": "https://dev.twitch.tv/docs/api/reference#remove-channel-moderator"
         },
+        "operationId": "remove-channel-moderator",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -5807,8 +5941,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Get VIPs",
           "url": "https://dev.twitch.tv/docs/api/reference#get-vips"
         },
+        "operationId": "get-vips",
         "parameters": [
           {
             "name": "user_id",
@@ -5892,8 +6028,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Add Channel VIP",
           "url": "https://dev.twitch.tv/docs/api/reference#add-channel-vip"
         },
+        "operationId": "add-channel-vip",
         "parameters": [
           {
             "name": "user_id",
@@ -5951,8 +6089,10 @@
           "Moderation"
         ],
         "externalDocs": {
+          "description": "Remove Channel VIP",
           "url": "https://dev.twitch.tv/docs/api/reference#remove-channel-vip"
         },
+        "operationId": "remove-channel-vip",
         "parameters": [
           {
             "name": "user_id",
@@ -6006,8 +6146,10 @@
           "Polls"
         ],
         "externalDocs": {
+          "description": "Get Polls",
           "url": "https://dev.twitch.tv/docs/api/reference#get-polls"
         },
+        "operationId": "get-polls",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -6116,8 +6258,10 @@
           "Polls"
         ],
         "externalDocs": {
+          "description": "Create Poll",
           "url": "https://dev.twitch.tv/docs/api/reference#create-poll"
         },
+        "operationId": "create-poll",
         "requestBody": {
           "content": {
             "application/json": {
@@ -6212,8 +6356,10 @@
           "Polls"
         ],
         "externalDocs": {
+          "description": "End Poll",
           "url": "https://dev.twitch.tv/docs/api/reference#end-poll"
         },
+        "operationId": "end-poll",
         "requestBody": {
           "content": {
             "application/json": {
@@ -6301,8 +6447,10 @@
           "Predictions"
         ],
         "externalDocs": {
+          "description": "Get Predictions",
           "url": "https://dev.twitch.tv/docs/api/reference#get-predictions"
         },
+        "operationId": "get-predictions",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -6409,8 +6557,10 @@
           "Predictions"
         ],
         "externalDocs": {
+          "description": "Create Prediction",
           "url": "https://dev.twitch.tv/docs/api/reference#create-prediction"
         },
+        "operationId": "create-prediction",
         "requestBody": {
           "content": {
             "application/json": {
@@ -6507,8 +6657,10 @@
           "Predictions"
         ],
         "externalDocs": {
+          "description": "End Prediction",
           "url": "https://dev.twitch.tv/docs/api/reference#end-prediction"
         },
+        "operationId": "end-prediction",
         "requestBody": {
           "content": {
             "application/json": {
@@ -6589,8 +6741,10 @@
           "Raids"
         ],
         "externalDocs": {
+          "description": "Start a raid",
           "url": "https://dev.twitch.tv/docs/api/reference#start-a-raid"
         },
+        "operationId": "start-a-raid",
         "parameters": [
           {
             "name": "from_broadcaster_id",
@@ -6659,8 +6813,10 @@
           "Raids"
         ],
         "externalDocs": {
+          "description": "Cancel a raid",
           "url": "https://dev.twitch.tv/docs/api/reference#cancel-a-raid"
         },
+        "operationId": "cancel-a-raid",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -6699,8 +6855,10 @@
           "Schedule"
         ],
         "externalDocs": {
+          "description": "Get Channel Stream Schedule",
           "url": "https://dev.twitch.tv/docs/api/reference#get-channel-stream-schedule"
         },
+        "operationId": "get-channel-stream-schedule",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -6820,8 +6978,10 @@
           "Schedule"
         ],
         "externalDocs": {
+          "description": "Get Channel iCalendar",
           "url": "https://dev.twitch.tv/docs/api/reference#get-channel-icalendar"
         },
+        "operationId": "get-channel-icalendar",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -6861,8 +7021,10 @@
           "Schedule"
         ],
         "externalDocs": {
+          "description": "Update Channel Stream Schedule",
           "url": "https://dev.twitch.tv/docs/api/reference#update-channel-stream-schedule"
         },
+        "operationId": "update-channel-stream-schedule",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -6932,8 +7094,10 @@
           "Schedule"
         ],
         "externalDocs": {
+          "description": "Create Channel Stream Schedule Segment",
           "url": "https://dev.twitch.tv/docs/api/reference#create-channel-stream-schedule-segment"
         },
+        "operationId": "create-channel-stream-schedule-segment",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -7023,8 +7187,10 @@
           "Schedule"
         ],
         "externalDocs": {
+          "description": "Update Channel Stream Schedule Segment",
           "url": "https://dev.twitch.tv/docs/api/reference#update-channel-stream-schedule-segment"
         },
+        "operationId": "update-channel-stream-schedule-segment",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -7118,8 +7284,10 @@
           "Schedule"
         ],
         "externalDocs": {
+          "description": "Delete Channel Stream Schedule Segment",
           "url": "https://dev.twitch.tv/docs/api/reference#delete-channel-stream-schedule-segment"
         },
+        "operationId": "delete-channel-stream-schedule-segment",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -7161,8 +7329,10 @@
           "Search"
         ],
         "externalDocs": {
+          "description": "Search Categories",
           "url": "https://dev.twitch.tv/docs/api/reference#search-categories"
         },
+        "operationId": "search-categories",
         "parameters": [
           {
             "name": "query",
@@ -7236,8 +7406,10 @@
           "Search"
         ],
         "externalDocs": {
+          "description": "Search Channels",
           "url": "https://dev.twitch.tv/docs/api/reference#search-channels"
         },
+        "operationId": "search-channels",
         "parameters": [
           {
             "name": "query",
@@ -7350,8 +7522,10 @@
           "Music"
         ],
         "externalDocs": {
+          "description": "Get Soundtrack Current Track",
           "url": "https://dev.twitch.tv/docs/api/reference#get-soundtrack-current-track"
         },
+        "operationId": "get-soundtrack-current-track",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -7431,8 +7605,10 @@
           "Music"
         ],
         "externalDocs": {
+          "description": "Get Soundtrack Playlist",
           "url": "https://dev.twitch.tv/docs/api/reference#get-soundtrack-playlist"
         },
+        "operationId": "get-soundtrack-playlist",
         "parameters": [
           {
             "name": "id",
@@ -7545,8 +7721,10 @@
           "Music"
         ],
         "externalDocs": {
+          "description": "Get Soundtrack Playlists",
           "url": "https://dev.twitch.tv/docs/api/reference#get-soundtrack-playlists"
         },
+        "operationId": "get-soundtrack-playlists",
         "parameters": [
           {
             "name": "id",
@@ -7652,8 +7830,10 @@
           "Streams"
         ],
         "externalDocs": {
+          "description": "Get Stream Key",
           "url": "https://dev.twitch.tv/docs/api/reference#get-stream-key"
         },
+        "operationId": "get-stream-key",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -7705,8 +7885,10 @@
           "Streams"
         ],
         "externalDocs": {
+          "description": "Get Streams",
           "url": "https://dev.twitch.tv/docs/api/reference#get-streams"
         },
+        "operationId": "get-streams",
         "parameters": [
           {
             "name": "user_id",
@@ -7878,8 +8060,10 @@
           "Streams"
         ],
         "externalDocs": {
+          "description": "Get Followed Streams",
           "url": "https://dev.twitch.tv/docs/api/reference#get-followed-streams"
         },
+        "operationId": "get-followed-streams",
         "parameters": [
           {
             "name": "user_id",
@@ -7965,8 +8149,10 @@
           "Streams"
         ],
         "externalDocs": {
+          "description": "Create Stream Marker",
           "url": "https://dev.twitch.tv/docs/api/reference#create-stream-marker"
         },
+        "operationId": "create-stream-marker",
         "requestBody": {
           "content": {
             "application/json": {
@@ -8032,8 +8218,10 @@
           "Streams"
         ],
         "externalDocs": {
+          "description": "Get Stream Markers",
           "url": "https://dev.twitch.tv/docs/api/reference#get-stream-markers"
         },
+        "operationId": "get-stream-markers",
         "responses": {
           "200": {
             "description": "Successfully retrieved the list of markers.",
@@ -8099,8 +8287,10 @@
           "Subscriptions"
         ],
         "externalDocs": {
+          "description": "Get Broadcaster Subscriptions",
           "url": "https://dev.twitch.tv/docs/api/reference#get-broadcaster-subscriptions"
         },
+        "operationId": "get-broadcaster-subscriptions",
         "responses": {
           "204": {
             "description": "Successfully retrieved the broadcaster’s list of subscribers.\n\n__Examples__\n\n_Request:_\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/subscriptions?broadcaster_id=141981764' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
@@ -8122,8 +8312,10 @@
           "Subscriptions"
         ],
         "externalDocs": {
+          "description": "Check User Subscription",
           "url": "https://dev.twitch.tv/docs/api/reference#check-user-subscription"
         },
+        "operationId": "check-user-subscription",
         "responses": {
           "200": {
             "description": "The user subscribes to the broadcaster.",
@@ -8171,8 +8363,10 @@
           "Tags"
         ],
         "externalDocs": {
+          "description": "Get All Stream Tags",
           "url": "https://dev.twitch.tv/docs/api/reference#get-all-stream-tags"
         },
+        "operationId": "get-all-stream-tags",
         "parameters": [
           {
             "name": "tag_id",
@@ -8264,8 +8458,10 @@
           "Tags"
         ],
         "externalDocs": {
+          "description": "Get Stream Tags",
           "url": "https://dev.twitch.tv/docs/api/reference#get-stream-tags"
         },
+        "operationId": "get-stream-tags",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -8332,8 +8528,10 @@
           "Tags"
         ],
         "externalDocs": {
+          "description": "Replace Stream Tags",
           "url": "https://dev.twitch.tv/docs/api/reference#replace-stream-tags"
         },
+        "operationId": "replace-stream-tags",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -8389,8 +8587,10 @@
           "Teams"
         ],
         "externalDocs": {
+          "description": "Get Channel Teams",
           "url": "https://dev.twitch.tv/docs/api/reference#get-channel-teams"
         },
+        "operationId": "get-channel-teams",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -8456,8 +8656,10 @@
           "Teams"
         ],
         "externalDocs": {
+          "description": "Get Teams",
           "url": "https://dev.twitch.tv/docs/api/reference#get-teams"
         },
+        "operationId": "get-teams",
         "parameters": [
           {
             "name": "name",
@@ -8539,8 +8741,10 @@
           "Users"
         ],
         "externalDocs": {
+          "description": "Get Users",
           "url": "https://dev.twitch.tv/docs/api/reference#get-users"
         },
+        "operationId": "get-users",
         "parameters": [
           {
             "name": "id",
@@ -8615,8 +8819,10 @@
           "Users"
         ],
         "externalDocs": {
+          "description": "Update User",
           "url": "https://dev.twitch.tv/docs/api/reference#update-user"
         },
+        "operationId": "update-user",
         "parameters": [
           {
             "name": "description",
@@ -8677,8 +8883,10 @@
           "Users"
         ],
         "externalDocs": {
+          "description": "Get Users Follows",
           "url": "https://dev.twitch.tv/docs/api/reference#get-users-follows"
         },
+        "operationId": "get-users-follows",
         "parameters": [
           {
             "name": "from_id",
@@ -8771,8 +8979,10 @@
           "Users"
         ],
         "externalDocs": {
+          "description": "Get User Block List",
           "url": "https://dev.twitch.tv/docs/api/reference#get-user-block-list"
         },
+        "operationId": "get-user-block-list",
         "parameters": [
           {
             "name": "broadcaster_id",
@@ -8846,8 +9056,10 @@
           "Users"
         ],
         "externalDocs": {
+          "description": "Block User",
           "url": "https://dev.twitch.tv/docs/api/reference#block-user"
         },
+        "operationId": "block-user",
         "parameters": [
           {
             "name": "target_user_id",
@@ -8903,8 +9115,10 @@
           "Users"
         ],
         "externalDocs": {
+          "description": "Unblock User",
           "url": "https://dev.twitch.tv/docs/api/reference#unblock-user"
         },
+        "operationId": "unblock-user",
         "parameters": [
           {
             "name": "target_user_id",
@@ -8937,8 +9151,10 @@
           "Users"
         ],
         "externalDocs": {
+          "description": "Get User Extensions",
           "url": "https://dev.twitch.tv/docs/api/reference#get-user-extensions"
         },
+        "operationId": "get-user-extensions",
         "responses": {
           "200": {
             "description": "Successfully retrieved the user’s installed extensions.",
@@ -9023,8 +9239,10 @@
           "Users"
         ],
         "externalDocs": {
+          "description": "Get User Active Extensions",
           "url": "https://dev.twitch.tv/docs/api/reference#get-user-active-extensions"
         },
+        "operationId": "get-user-active-extensions",
         "parameters": [
           {
             "name": "user_id",
@@ -9111,8 +9329,10 @@
           "Users"
         ],
         "externalDocs": {
+          "description": "Update User Extensions",
           "url": "https://dev.twitch.tv/docs/api/reference#update-user-extensions"
         },
+        "operationId": "update-user-extensions",
         "requestBody": {
           "content": {
             "application/json": {
@@ -9248,8 +9468,10 @@
           "Videos"
         ],
         "externalDocs": {
+          "description": "Get Videos",
           "url": "https://dev.twitch.tv/docs/api/reference#get-videos"
         },
+        "operationId": "get-videos",
         "parameters": [
           {
             "name": "id",
@@ -9416,8 +9638,10 @@
           "Videos"
         ],
         "externalDocs": {
+          "description": "Delete Videos",
           "url": "https://dev.twitch.tv/docs/api/reference#delete-videos"
         },
+        "operationId": "delete-videos",
         "parameters": [
           {
             "name": "id",
@@ -9472,8 +9696,10 @@
           "Whispers"
         ],
         "externalDocs": {
+          "description": "Send Whisper",
           "url": "https://dev.twitch.tv/docs/api/reference#send-whisper"
         },
+        "operationId": "send-whisper",
         "parameters": [
           {
             "name": "from_user_id",

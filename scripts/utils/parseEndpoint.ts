@@ -227,7 +227,11 @@ const parseEndpoint =
       summary,
       description: getDescriptionText(descriptions),
       tags: [tag],
-      externalDocs: { url: `https://dev.twitch.tv/docs/api/reference#${id}` },
+      externalDocs: {
+        description: name,
+        url: `https://dev.twitch.tv/docs/api/reference#${id}`,
+      },
+      operationId: id,
     };
     if (parameters.length > 0) operationObject.parameters = parameters;
     if (requestBody!) operationObject.requestBody = requestBody;
@@ -235,7 +239,8 @@ const parseEndpoint =
 
     const path = url.replace('https://api.twitch.tv/helix', '');
     if (!openApi.paths[path]) openApi.paths[path] = {} as PathItemObject;
-    openApi.paths[path]![method.toLowerCase() as Method] = operationObject;
+    const methodLower = method.toLowerCase() as Method;
+    openApi.paths[path]![methodLower] = operationObject;
   };
 
 export default parseEndpoint;
