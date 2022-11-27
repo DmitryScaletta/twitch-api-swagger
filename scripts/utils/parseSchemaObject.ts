@@ -173,6 +173,49 @@ const parseSchemaObject = (
           _required = false;
         }
       }
+      if (
+        schemaObjectType === SCHEMA_OBJECT_TYPE.response &&
+        required === null
+      ) {
+        _required = true;
+
+        // pagination is always optional
+        if (name === 'pagination') _required = false;
+
+        // https://dev.twitch.tv/docs/api/reference#get-extension-configuration-segment
+        if (
+          endpointId === 'get-extension-configuration-segment' &&
+          name === 'broadcaster_id'
+        ) {
+          _required = false;
+        }
+
+        // https://dev.twitch.tv/docs/api/reference#create-eventsub-subscription
+        // https://dev.twitch.tv/docs/api/reference#get-eventsub-subscriptions
+        if (
+          (endpointId === 'create-eventsub-subscription' ||
+            endpointId === 'get-eventsub-subscriptions') &&
+          [
+            'callback',
+            'session_id',
+            'connected_at',
+            'disconnected_at',
+          ].includes(name)
+        ) {
+          _required = false;
+        }
+
+        // only "active" is required
+        // https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
+        // https://dev.twitch.tv/docs/api/reference#update-user-extensions
+        if (
+          endpointId === 'get-user-active-extensions' ||
+          (endpointId === 'update-user-extensions' &&
+            ['id', 'version', 'name', 'x', 'y'].includes(name))
+        ) {
+          _required = false;
+        }
+      }
       if (_required!) {
         schemaObject.required!.push(name);
       }

@@ -9556,14 +9556,20 @@
       },
       "StartCommercialResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
             "description": "An array that contains a single object with the status of your start commercial request.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "length",
+                "message",
+                "retry_after"
+              ],
               "properties": {
                 "length": {
                   "type": "integer",
@@ -9586,7 +9592,12 @@
       },
       "ExtensionAnalytics": {
         "type": "object",
-        "required": [],
+        "required": [
+          "extension_id",
+          "URL",
+          "type",
+          "date_range"
+        ],
         "properties": {
           "extension_id": {
             "type": "string",
@@ -9603,7 +9614,10 @@
           "date_range": {
             "description": "The reporting window’s start and end dates, in RFC3339 format.",
             "type": "object",
-            "required": [],
+            "required": [
+              "started_at",
+              "ended_at"
+            ],
             "properties": {
               "started_at": {
                 "type": "string",
@@ -9621,7 +9635,9 @@
       },
       "GetExtensionAnalyticsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -9633,7 +9649,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -9645,7 +9663,12 @@
       },
       "GameAnalytics": {
         "type": "object",
-        "required": [],
+        "required": [
+          "game_id",
+          "URL",
+          "type",
+          "date_range"
+        ],
         "properties": {
           "game_id": {
             "type": "string",
@@ -9662,7 +9685,10 @@
           "date_range": {
             "description": "The reporting window’s start and end dates, in RFC3339 format.",
             "type": "object",
-            "required": [],
+            "required": [
+              "started_at",
+              "ended_at"
+            ],
             "properties": {
               "started_at": {
                 "type": "string",
@@ -9680,7 +9706,9 @@
       },
       "GetGameAnalyticsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -9692,7 +9720,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -9704,7 +9734,13 @@
       },
       "BitsLeaderboard": {
         "type": "object",
-        "required": [],
+        "required": [
+          "user_id",
+          "user_login",
+          "user_name",
+          "rank",
+          "score"
+        ],
         "properties": {
           "user_id": {
             "type": "string",
@@ -9732,7 +9768,11 @@
       },
       "GetBitsLeaderboardResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data",
+          "date_range",
+          "total"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -9744,7 +9784,10 @@
           "date_range": {
             "description": "The reporting window’s start and end dates, in RFC3339 format. The dates are calculated by using the _started\\_at_ and _period_ query parameters. If you don’t specify the _started\\_at_ query parameter, the fields contain empty strings.",
             "type": "object",
-            "required": [],
+            "required": [
+              "started_at",
+              "ended_at"
+            ],
             "properties": {
               "started_at": {
                 "type": "string",
@@ -9809,7 +9852,14 @@
       },
       "Cheermote": {
         "type": "object",
-        "required": [],
+        "required": [
+          "prefix",
+          "tiers",
+          "type",
+          "order",
+          "last_updated",
+          "is_charitable"
+        ],
         "properties": {
           "prefix": {
             "type": "string",
@@ -9820,7 +9870,14 @@
             "description": "A list of tier levels that the Cheermote supports. Each tier identifies the range of Bits that you can cheer at that tier level and an image that graphically identifies the tier level.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "min_bits",
+                "id",
+                "color",
+                "images",
+                "can_cheer",
+                "show_in_bits_card"
+              ],
               "properties": {
                 "min_bits": {
                   "type": "integer",
@@ -9887,7 +9944,9 @@
       },
       "GetCheermotesResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -9900,7 +9959,18 @@
       },
       "ExtensionTransaction": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "timestamp",
+          "broadcaster_id",
+          "broadcaster_login",
+          "broadcaster_name",
+          "user_id",
+          "user_login",
+          "user_name",
+          "product_type",
+          "product_data"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -9945,7 +10015,15 @@
           "product_data": {
             "description": "Contains details about the digital product.",
             "type": "object",
-            "required": [],
+            "required": [
+              "sku",
+              "domain",
+              "cost",
+              "inDevelopment",
+              "displayName",
+              "expiration",
+              "broadcast"
+            ],
             "properties": {
               "sku": {
                 "type": "string",
@@ -9958,7 +10036,10 @@
               "cost": {
                 "description": "Contains details about the digital product’s cost.",
                 "type": "object",
-                "required": [],
+                "required": [
+                  "amount",
+                  "type"
+                ],
                 "properties": {
                   "amount": {
                     "type": "integer",
@@ -9996,7 +10077,9 @@
       },
       "GetExtensionTransactionsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10008,7 +10091,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -10020,7 +10105,16 @@
       },
       "ChannelInformation": {
         "type": "object",
-        "required": [],
+        "required": [
+          "broadcaster_id",
+          "broadcaster_login",
+          "broadcaster_name",
+          "broadcaster_language",
+          "game_name",
+          "game_id",
+          "title",
+          "delay"
+        ],
         "properties": {
           "broadcaster_id": {
             "type": "string",
@@ -10059,7 +10153,9 @@
       },
       "GetChannelInformationResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10095,7 +10191,11 @@
       },
       "ChannelEditor": {
         "type": "object",
-        "required": [],
+        "required": [
+          "user_id",
+          "user_name",
+          "created_at"
+        ],
         "properties": {
           "user_id": {
             "type": "string",
@@ -10114,7 +10214,9 @@
       },
       "GetChannelEditorsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10192,7 +10294,28 @@
       },
       "CustomReward": {
         "type": "object",
-        "required": [],
+        "required": [
+          "broadcaster_id",
+          "broadcaster_login",
+          "broadcaster_name",
+          "id",
+          "title",
+          "prompt",
+          "cost",
+          "image",
+          "default_image",
+          "background_color",
+          "is_enabled",
+          "is_user_input_required",
+          "max_per_stream_setting",
+          "max_per_user_per_stream_setting",
+          "global_cooldown_setting",
+          "is_paused",
+          "is_in_stock",
+          "should_redemptions_skip_request_queue",
+          "redemptions_redeemed_current_stream",
+          "cooldown_expires_at"
+        ],
         "properties": {
           "broadcaster_id": {
             "type": "string",
@@ -10226,7 +10349,11 @@
           "image": {
             "description": "A set of custom images for the reward. This field is **null** if the broadcaster didn’t upload images.",
             "type": "object",
-            "required": [],
+            "required": [
+              "url_1x",
+              "url_2x",
+              "url_4x"
+            ],
             "properties": {
               "url_1x": {
                 "type": "string",
@@ -10245,7 +10372,11 @@
           "default_image": {
             "description": "A set of default images for the reward.",
             "type": "object",
-            "required": [],
+            "required": [
+              "url_1x",
+              "url_2x",
+              "url_4x"
+            ],
             "properties": {
               "url_1x": {
                 "type": "string",
@@ -10276,7 +10407,10 @@
           "max_per_stream_setting": {
             "description": "The settings used to determine whether to apply a maximum to the number of redemptions allowed per live stream.",
             "type": "object",
-            "required": [],
+            "required": [
+              "is_enabled",
+              "max_per_stream"
+            ],
             "properties": {
               "is_enabled": {
                 "type": "boolean",
@@ -10292,7 +10426,10 @@
           "max_per_user_per_stream_setting": {
             "description": "The settings used to determine whether to apply a maximum to the number of redemptions allowed per user per live stream.",
             "type": "object",
-            "required": [],
+            "required": [
+              "is_enabled",
+              "max_per_user_per_stream"
+            ],
             "properties": {
               "is_enabled": {
                 "type": "boolean",
@@ -10308,7 +10445,10 @@
           "global_cooldown_setting": {
             "description": "The settings used to determine whether to apply a cooldown period between redemptions and the length of the cooldown.",
             "type": "object",
-            "required": [],
+            "required": [
+              "is_enabled",
+              "global_cooldown_seconds"
+            ],
             "properties": {
               "is_enabled": {
                 "type": "boolean",
@@ -10347,7 +10487,9 @@
       },
       "CreateCustomRewardsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10360,7 +10502,9 @@
       },
       "GetCustomRewardResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10373,7 +10517,19 @@
       },
       "CustomRewardRedemption": {
         "type": "object",
-        "required": [],
+        "required": [
+          "broadcaster_id",
+          "broadcaster_login",
+          "broadcaster_name",
+          "id",
+          "user_id",
+          "user_name",
+          "user_login",
+          "reward",
+          "user_input",
+          "status",
+          "redeemed_at"
+        ],
         "properties": {
           "broadcaster_id": {
             "type": "string",
@@ -10406,7 +10562,12 @@
           "reward": {
             "description": "An object that describes the reward that the user redeemed.",
             "type": "object",
-            "required": [],
+            "required": [
+              "id",
+              "title",
+              "prompt",
+              "cost"
+            ],
             "properties": {
               "id": {
                 "type": "string",
@@ -10449,7 +10610,9 @@
       },
       "GetCustomRewardRedemptionResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10528,7 +10691,9 @@
       },
       "UpdateCustomRewardResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10557,7 +10722,9 @@
       },
       "UpdateRedemptionStatusResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10570,7 +10737,18 @@
       },
       "CharityCampaign": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "broadcaster_id",
+          "broadcaster_login",
+          "broadcaster_name",
+          "charity_name",
+          "charity_description",
+          "charity_logo",
+          "charity_website",
+          "current_amount",
+          "target_amount"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -10607,7 +10785,11 @@
           "current_amount": {
             "description": "The current amount of donations that the campaign has received.",
             "type": "object",
-            "required": [],
+            "required": [
+              "value",
+              "decimal_places",
+              "currency"
+            ],
             "properties": {
               "value": {
                 "type": "integer",
@@ -10628,7 +10810,11 @@
           "target_amount": {
             "description": "The campaign’s fundraising goal. This field is **null** if the broadcaster has not defined a fundraising goal.",
             "type": "object",
-            "required": [],
+            "required": [
+              "value",
+              "decimal_places",
+              "currency"
+            ],
             "properties": {
               "value": {
                 "type": "integer",
@@ -10650,7 +10836,9 @@
       },
       "GetCharityCampaignResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10663,7 +10851,13 @@
       },
       "CharityCampaignDonation": {
         "type": "object",
-        "required": [],
+        "required": [
+          "campaign_id",
+          "user_id",
+          "user_login",
+          "user_name",
+          "amount"
+        ],
         "properties": {
           "campaign_id": {
             "type": "string",
@@ -10684,7 +10878,11 @@
           "amount": {
             "description": "An object that contains the amount of money that the user donated.",
             "type": "object",
-            "required": [],
+            "required": [
+              "value",
+              "decimal_places",
+              "currency"
+            ],
             "properties": {
               "value": {
                 "type": "integer",
@@ -10706,7 +10904,9 @@
       },
       "GetCharityCampaignDonationsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10718,7 +10918,9 @@
           "pagination": {
             "description": "An object that contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -10730,7 +10932,11 @@
       },
       "Chatter": {
         "type": "object",
-        "required": [],
+        "required": [
+          "user_id",
+          "user_login",
+          "user_name"
+        ],
         "properties": {
           "user_id": {
             "type": "string",
@@ -10748,7 +10954,10 @@
       },
       "GetChattersResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data",
+          "total"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10760,7 +10969,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -10777,7 +10988,17 @@
       },
       "ChannelEmote": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "name",
+          "images",
+          "tier",
+          "emote_type",
+          "emote_set_id",
+          "format",
+          "scale",
+          "theme_mode"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -10790,7 +11011,11 @@
           "images": {
             "description": "The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.  \n  \n**NOTE:** You should use the templated URL in the `template` field to fetch the image instead of using these URLs.",
             "type": "object",
-            "required": [],
+            "required": [
+              "url_1x",
+              "url_2x",
+              "url_4x"
+            ],
             "properties": {
               "url_1x": {
                 "type": "string",
@@ -10861,7 +11086,10 @@
       },
       "GetChannelEmotesResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data",
+          "template"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10878,7 +11106,14 @@
       },
       "GlobalEmote": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "name",
+          "images",
+          "format",
+          "scale",
+          "theme_mode"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -10891,7 +11126,11 @@
           "images": {
             "description": "The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.  \n  \n**NOTE:** You should use the templated URL in the `template` field to fetch the image instead of using these URLs.",
             "type": "object",
-            "required": [],
+            "required": [
+              "url_1x",
+              "url_2x",
+              "url_4x"
+            ],
             "properties": {
               "url_1x": {
                 "type": "string",
@@ -10945,7 +11184,10 @@
       },
       "GetGlobalEmotesResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data",
+          "template"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -10962,7 +11204,17 @@
       },
       "EmoteSet": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "name",
+          "images",
+          "emote_type",
+          "emote_set_id",
+          "owner_id",
+          "format",
+          "scale",
+          "theme_mode"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -10975,7 +11227,11 @@
           "images": {
             "description": "The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.  \n  \n**NOTE:** You should use the templated URL in the `template` field to fetch the image instead of using these URLs.",
             "type": "object",
-            "required": [],
+            "required": [
+              "url_1x",
+              "url_2x",
+              "url_4x"
+            ],
             "properties": {
               "url_1x": {
                 "type": "string",
@@ -11046,7 +11302,10 @@
       },
       "GetEmoteSetsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data",
+          "template"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11063,7 +11322,10 @@
       },
       "ChatBadge": {
         "type": "object",
-        "required": [],
+        "required": [
+          "set_id",
+          "versions"
+        ],
         "properties": {
           "set_id": {
             "type": "string",
@@ -11074,7 +11336,12 @@
             "description": "The list of chat badges in this set.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "id",
+                "image_url_1x",
+                "image_url_2x",
+                "image_url_4x"
+              ],
               "properties": {
                 "id": {
                   "type": "string",
@@ -11099,7 +11366,9 @@
       },
       "GetChannelChatBadgesResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11112,7 +11381,9 @@
       },
       "GetGlobalChatBadgesResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11125,7 +11396,19 @@
       },
       "ChatSettings": {
         "type": "object",
-        "required": [],
+        "required": [
+          "broadcaster_id",
+          "emote_mode",
+          "follower_mode",
+          "follower_mode_duration",
+          "moderator_id",
+          "non_moderator_chat_delay",
+          "non_moderator_chat_delay_duration",
+          "slow_mode",
+          "slow_mode_wait_time",
+          "subscriber_mode",
+          "unique_chat_mode"
+        ],
         "properties": {
           "broadcaster_id": {
             "type": "string",
@@ -11178,7 +11461,9 @@
       },
       "GetChatSettingsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11243,7 +11528,19 @@
       },
       "ChatSettingsUpdated": {
         "type": "object",
-        "required": [],
+        "required": [
+          "broadcaster_id",
+          "emote_mode",
+          "follower_mode",
+          "follower_mode_duration",
+          "moderator_id",
+          "non_moderator_chat_delay",
+          "non_moderator_chat_delay_duration",
+          "slow_mode",
+          "slow_mode_wait_time",
+          "subscriber_mode",
+          "unique_chat_mode"
+        ],
         "properties": {
           "broadcaster_id": {
             "type": "string",
@@ -11296,7 +11593,9 @@
       },
       "UpdateChatSettingsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11332,7 +11631,12 @@
       },
       "UserChatColor": {
         "type": "object",
-        "required": [],
+        "required": [
+          "user_id",
+          "user_login",
+          "user_name",
+          "color"
+        ],
         "properties": {
           "user_id": {
             "type": "string",
@@ -11354,7 +11658,9 @@
       },
       "GetUserChatColorResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11367,7 +11673,10 @@
       },
       "CreateClipResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "edit_url",
+          "id"
+        ],
         "properties": {
           "edit_url": {
             "type": "string",
@@ -11381,7 +11690,24 @@
       },
       "Clip": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "url",
+          "embed_url",
+          "broadcaster_id",
+          "broadcaster_name",
+          "creator_id",
+          "creator_name",
+          "video_id",
+          "game_id",
+          "language",
+          "title",
+          "view_count",
+          "created_at",
+          "thumbnail_url",
+          "duration",
+          "vod_offset"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -11455,7 +11781,9 @@
       },
       "GetClipsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11467,7 +11795,9 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -11479,7 +11809,10 @@
       },
       "CodeStatus": {
         "type": "object",
-        "required": [],
+        "required": [
+          "code",
+          "status"
+        ],
         "properties": {
           "code": {
             "type": "string",
@@ -11503,7 +11836,9 @@
       },
       "GetCodeStatusResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11516,7 +11851,15 @@
       },
       "DropsEntitlement": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "benefit_id",
+          "timestamp",
+          "user_id",
+          "game_id",
+          "fulfillment_status",
+          "last_updated"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -11556,7 +11899,9 @@
       },
       "GetDropsEntitlementsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11568,7 +11913,9 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -11601,7 +11948,10 @@
       },
       "DropsEntitlementUpdated": {
         "type": "object",
-        "required": [],
+        "required": [
+          "status",
+          "ids"
+        ],
         "properties": {
           "status": {
             "type": "string",
@@ -11625,7 +11975,9 @@
       },
       "UpdateDropsEntitlementsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11638,14 +11990,19 @@
       },
       "RedeemCodeResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
             "description": "The list of redeemed codes.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "code",
+                "status"
+              ],
               "properties": {
                 "code": {
                   "type": "string",
@@ -11673,7 +12030,11 @@
       },
       "ExtensionConfigurationSegment": {
         "type": "object",
-        "required": [],
+        "required": [
+          "segment",
+          "content",
+          "version"
+        ],
         "properties": {
           "segment": {
             "type": "string",
@@ -11700,7 +12061,9 @@
       },
       "GetExtensionConfigurationSegmentResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11803,7 +12166,13 @@
       },
       "ExtensionLiveChannel": {
         "type": "object",
-        "required": [],
+        "required": [
+          "broadcaster_id",
+          "broadcaster_name",
+          "game_name",
+          "game_id",
+          "title"
+        ],
         "properties": {
           "broadcaster_id": {
             "type": "string",
@@ -11829,7 +12198,9 @@
       },
       "GetExtensionLiveChannelsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11846,7 +12217,10 @@
       },
       "ExtensionSecret": {
         "type": "object",
-        "required": [],
+        "required": [
+          "format_version",
+          "secrets"
+        ],
         "properties": {
           "format_version": {
             "type": "integer",
@@ -11858,7 +12232,11 @@
             "description": "The list of secrets.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "content",
+                "active_at",
+                "expires_at"
+              ],
               "properties": {
                 "content": {
                   "type": "string",
@@ -11881,7 +12259,9 @@
       },
       "GetExtensionSecretsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11894,7 +12274,9 @@
       },
       "CreateExtensionSecretResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -11944,7 +12326,31 @@
       },
       "Extension": {
         "type": "object",
-        "required": [],
+        "required": [
+          "author_name",
+          "bits_enabled",
+          "can_install",
+          "configuration_location",
+          "description",
+          "eula_tos_url",
+          "has_chat_support",
+          "icon_url",
+          "icon_urls",
+          "id",
+          "name",
+          "privacy_policy_url",
+          "request_identity_link",
+          "screenshot_urls",
+          "state",
+          "subscriptions_support_level",
+          "summary",
+          "support_email",
+          "version",
+          "viewer_summary",
+          "views",
+          "allowlisted_config_urls",
+          "allowlisted_panel_urls"
+        ],
         "properties": {
           "author_name": {
             "type": "string",
@@ -12051,12 +12457,20 @@
           "views": {
             "description": "Describes all views-related information such as how the extension is displayed on mobile devices.",
             "type": "object",
-            "required": [],
+            "required": [
+              "mobile",
+              "panel",
+              "video_overlay",
+              "component",
+              "config"
+            ],
             "properties": {
               "mobile": {
                 "description": "Describes how the extension is displayed on mobile devices.",
                 "type": "object",
-                "required": [],
+                "required": [
+                  "viewer_url"
+                ],
                 "properties": {
                   "viewer_url": {
                     "type": "string",
@@ -12067,7 +12481,11 @@
               "panel": {
                 "description": "Describes how the extension is rendered if the extension may be activated as a panel extension.",
                 "type": "object",
-                "required": [],
+                "required": [
+                  "viewer_url",
+                  "height",
+                  "can_link_external_content"
+                ],
                 "properties": {
                   "viewer_url": {
                     "type": "string",
@@ -12087,7 +12505,10 @@
               "video_overlay": {
                 "description": "Describes how the extension is rendered if the extension may be activated as a video-overlay extension.",
                 "type": "object",
-                "required": [],
+                "required": [
+                  "viewer_url",
+                  "can_link_external_content"
+                ],
                 "properties": {
                   "viewer_url": {
                     "type": "string",
@@ -12102,7 +12523,15 @@
               "component": {
                 "description": "Describes how the extension is rendered if the extension may be activated as a video-component extension.",
                 "type": "object",
-                "required": [],
+                "required": [
+                  "viewer_url",
+                  "aspect_ratio_x",
+                  "aspect_ratio_y",
+                  "autoscale",
+                  "scale_pixels",
+                  "target_height",
+                  "can_link_external_content"
+                ],
                 "properties": {
                   "viewer_url": {
                     "type": "string",
@@ -12141,7 +12570,10 @@
               "config": {
                 "description": "Describes the view that is shown to broadcasters while they are configuring your extension within the Extension Manager.",
                 "type": "object",
-                "required": [],
+                "required": [
+                  "viewer_url",
+                  "can_link_external_content"
+                ],
                 "properties": {
                   "viewer_url": {
                     "type": "string",
@@ -12173,7 +12605,9 @@
       },
       "GetExtensionsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -12186,7 +12620,9 @@
       },
       "GetReleasedExtensionsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -12199,7 +12635,14 @@
       },
       "ExtensionBitsProduct": {
         "type": "object",
-        "required": [],
+        "required": [
+          "sku",
+          "cost",
+          "in_development",
+          "display_name",
+          "expiration",
+          "is_broadcast"
+        ],
         "properties": {
           "sku": {
             "type": "string",
@@ -12208,7 +12651,10 @@
           "cost": {
             "description": "An object that contains the product’s cost information.",
             "type": "object",
-            "required": [],
+            "required": [
+              "amount",
+              "type"
+            ],
             "properties": {
               "amount": {
                 "type": "integer",
@@ -12245,7 +12691,9 @@
       },
       "GetExtensionBitsProductsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -12311,7 +12759,9 @@
       },
       "UpdateExtensionBitsProductResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -12376,7 +12826,16 @@
       },
       "EventSubSubscription": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "status",
+          "type",
+          "version",
+          "condition",
+          "created_at",
+          "transport",
+          "cost"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -12414,7 +12873,9 @@
           "transport": {
             "description": "The transport details used to send the notifications.",
             "type": "object",
-            "required": [],
+            "required": [
+              "method"
+            ],
             "properties": {
               "method": {
                 "type": "string",
@@ -12453,7 +12914,12 @@
       },
       "CreateEventSubSubscriptionResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data",
+          "total",
+          "total_cost",
+          "max_total_cost"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -12481,7 +12947,12 @@
       },
       "GetEventSubSubscriptionsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data",
+          "total",
+          "total_cost",
+          "max_total_cost"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -12508,7 +12979,9 @@
           "pagination": {
             "description": "An object that contains the cursor used to get the next page of subscriptions. The object is empty if there are no more pages to get. The number of subscriptions returned per page is undertermined.",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -12520,7 +12993,12 @@
       },
       "Game": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "name",
+          "box_art_url",
+          "igdb_id"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -12542,7 +13020,9 @@
       },
       "GetTopGamesResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -12554,7 +13034,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -12566,7 +13048,9 @@
       },
       "GetGamesResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -12579,7 +13063,17 @@
       },
       "CreatorGoal": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "broadcaster_id",
+          "broadcaster_name",
+          "broadcaster_login",
+          "type",
+          "description",
+          "current_amount",
+          "target_amount",
+          "created_at"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -12631,7 +13125,9 @@
       },
       "GetCreatorGoalsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -12644,7 +13140,13 @@
       },
       "HypeTrainEvent": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "event_type",
+          "event_timestamp",
+          "version",
+          "event_data"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -12666,7 +13168,18 @@
           "event_data": {
             "description": "The event’s data.",
             "type": "object",
-            "required": [],
+            "required": [
+              "broadcaster_id",
+              "cooldown_end_time",
+              "expires_at",
+              "goal",
+              "id",
+              "last_contribution",
+              "level",
+              "started_at",
+              "top_contributions",
+              "total"
+            ],
             "properties": {
               "broadcaster_id": {
                 "type": "string",
@@ -12694,7 +13207,11 @@
               "last_contribution": {
                 "description": "The most recent contribution towards the Hype Train’s goal.",
                 "type": "object",
-                "required": [],
+                "required": [
+                  "total",
+                  "type",
+                  "user"
+                ],
                 "properties": {
                   "total": {
                     "type": "integer",
@@ -12731,7 +13248,11 @@
                 "description": "The top contributors for each contribution type. For example, the top contributor using BITS (by aggregate) and the top contributor using SUBS (by count).",
                 "items": {
                   "type": "object",
-                  "required": [],
+                  "required": [
+                    "total",
+                    "type",
+                    "user"
+                  ],
                   "properties": {
                     "total": {
                       "type": "integer",
@@ -12765,7 +13286,9 @@
       },
       "GetHypeTrainEventsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -12777,7 +13300,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -12818,7 +13343,10 @@
       },
       "AutoModStatus": {
         "type": "object",
-        "required": [],
+        "required": [
+          "msg_id",
+          "is_permitted"
+        ],
         "properties": {
           "msg_id": {
             "type": "string",
@@ -12832,7 +13360,9 @@
       },
       "CheckAutoModStatusResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -12871,7 +13401,19 @@
       },
       "AutoModSettings": {
         "type": "object",
-        "required": [],
+        "required": [
+          "broadcaster_id",
+          "moderator_id",
+          "overall_level",
+          "disability",
+          "aggression",
+          "sexuality_sex_or_gender",
+          "misogyny",
+          "bullying",
+          "swearing",
+          "race_ethnicity_or_religion",
+          "sex_based_terms"
+        ],
         "properties": {
           "broadcaster_id": {
             "type": "string",
@@ -12930,7 +13472,9 @@
       },
       "GetAutoModSettingsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -12994,7 +13538,9 @@
       },
       "UpdateAutoModSettingsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -13007,7 +13553,17 @@
       },
       "BannedUser": {
         "type": "object",
-        "required": [],
+        "required": [
+          "user_id",
+          "user_login",
+          "user_name",
+          "expires_at",
+          "created_at",
+          "reason",
+          "moderator_id",
+          "moderator_login",
+          "moderator_name"
+        ],
         "properties": {
           "user_id": {
             "type": "string",
@@ -13051,7 +13607,9 @@
       },
       "GetBannedUsersResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -13063,7 +13621,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13105,14 +13665,22 @@
       },
       "BanUserResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
             "description": "A list that contains the user you successfully banned or put in a timeout.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "broadcaster_id",
+                "moderator_id",
+                "user_id",
+                "created_at",
+                "end_time"
+              ],
               "properties": {
                 "broadcaster_id": {
                   "type": "string",
@@ -13143,7 +13711,15 @@
       },
       "BlockedTerm": {
         "type": "object",
-        "required": [],
+        "required": [
+          "broadcaster_id",
+          "moderator_id",
+          "id",
+          "text",
+          "created_at",
+          "updated_at",
+          "expires_at"
+        ],
         "properties": {
           "broadcaster_id": {
             "type": "string",
@@ -13180,7 +13756,9 @@
       },
       "GetBlockedTermsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -13192,7 +13770,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13216,7 +13796,9 @@
       },
       "AddBlockedTermResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -13229,7 +13811,11 @@
       },
       "UserModerator": {
         "type": "object",
-        "required": [],
+        "required": [
+          "user_id",
+          "user_login",
+          "user_name"
+        ],
         "properties": {
           "user_id": {
             "type": "string",
@@ -13247,7 +13833,9 @@
       },
       "GetModeratorsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -13259,7 +13847,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13271,7 +13861,11 @@
       },
       "UserVip": {
         "type": "object",
-        "required": [],
+        "required": [
+          "user_id",
+          "user_name",
+          "user_login"
+        ],
         "properties": {
           "user_id": {
             "type": "string",
@@ -13289,7 +13883,9 @@
       },
       "GetVIPsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -13301,7 +13897,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13313,7 +13911,22 @@
       },
       "Poll": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "broadcaster_id",
+          "broadcaster_name",
+          "broadcaster_login",
+          "title",
+          "choices",
+          "bits_voting_enabled",
+          "bits_per_vote",
+          "channel_points_voting_enabled",
+          "channel_points_per_vote",
+          "status",
+          "duration",
+          "started_at",
+          "ended_at"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -13340,7 +13953,13 @@
             "description": "A list of choices that viewers can choose from. The list will contain a minimum of two choices and up to a maximum of five choices.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "id",
+                "title",
+                "votes",
+                "channel_points_votes",
+                "bits_votes"
+              ],
               "properties": {
                 "id": {
                   "type": "string",
@@ -13417,7 +14036,9 @@
       },
       "GetPollsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -13429,7 +14050,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13490,7 +14113,9 @@
       },
       "CreatePollResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -13529,7 +14154,9 @@
       },
       "EndPollResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -13542,7 +14169,14 @@
       },
       "PredictionOutcome": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "title",
+          "users",
+          "channel_points",
+          "top_predictors",
+          "color"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -13567,7 +14201,13 @@
             "description": "A list of viewers who were the top predictors; otherwise, **null** if none.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "user_id",
+                "user_name",
+                "user_login",
+                "channel_points_used",
+                "channel_points_won"
+              ],
               "properties": {
                 "user_id": {
                   "type": "string",
@@ -13606,7 +14246,20 @@
       },
       "Prediction": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "broadcaster_id",
+          "broadcaster_name",
+          "broadcaster_login",
+          "title",
+          "winning_outcome_id",
+          "outcomes",
+          "prediction_window",
+          "status",
+          "created_at",
+          "ended_at",
+          "locked_at"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -13673,7 +14326,9 @@
       },
       "GetPredictionsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -13685,7 +14340,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13737,7 +14394,9 @@
       },
       "CreatePredictionResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -13781,7 +14440,9 @@
       },
       "EndPredictionResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -13794,14 +14455,19 @@
       },
       "StartRaidResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
             "description": "A list that contains a single object with information about the pending raid.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "created_at",
+                "is_mature"
+              ],
               "properties": {
                 "created_at": {
                   "type": "string",
@@ -13819,7 +14485,15 @@
       },
       "ChannelStreamScheduleSegment": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "start_time",
+          "end_time",
+          "title",
+          "canceled_until",
+          "category",
+          "is_recurring"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -13846,7 +14520,10 @@
           "category": {
             "description": "The type of content that the broadcaster plans to stream or **null** if not specified.",
             "type": "object",
-            "required": [],
+            "required": [
+              "id",
+              "name"
+            ],
             "properties": {
               "id": {
                 "type": "string",
@@ -13866,12 +14543,20 @@
       },
       "GetChannelStreamScheduleResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "description": "The broadcaster’s streaming schedule.",
             "type": "object",
-            "required": [],
+            "required": [
+              "segments",
+              "broadcaster_id",
+              "broadcaster_name",
+              "broadcaster_login",
+              "vacation"
+            ],
             "properties": {
               "segments": {
                 "type": "array",
@@ -13895,7 +14580,10 @@
               "vacation": {
                 "description": "The dates when the broadcaster is on vacation and not streaming. Is set to **null** if vacation mode is not enabled.",
                 "type": "object",
-                "required": [],
+                "required": [
+                  "start_time",
+                  "end_time"
+                ],
                 "properties": {
                   "start_time": {
                     "type": "string",
@@ -13912,7 +14600,9 @@
               "pagination": {
                 "description": "The information used to page through a list of results. The object is empty if there are no more pages left to page through. [Read more](https://dev.twitch.tv/docs/api/guide#pagination).",
                 "type": "object",
-                "required": [],
+                "required": [
+                  "cursor"
+                ],
                 "properties": {
                   "cursor": {
                     "type": "string",
@@ -13962,12 +14652,20 @@
       },
       "CreateChannelStreamScheduleSegmentResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "description": "The broadcaster’s streaming scheduled.",
             "type": "object",
-            "required": [],
+            "required": [
+              "segments",
+              "broadcaster_id",
+              "broadcaster_name",
+              "broadcaster_login",
+              "vacation"
+            ],
             "properties": {
               "segments": {
                 "type": "array",
@@ -13991,7 +14689,10 @@
               "vacation": {
                 "description": "The dates when the broadcaster is on vacation and not streaming. Is set to **null** if vacation mode is not enabled.",
                 "type": "object",
-                "required": [],
+                "required": [
+                  "start_time",
+                  "end_time"
+                ],
                 "properties": {
                   "start_time": {
                     "type": "string",
@@ -14042,12 +14743,20 @@
       },
       "UpdateChannelStreamScheduleSegmentResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "description": "The broadcaster’s streaming scheduled.",
             "type": "object",
-            "required": [],
+            "required": [
+              "segments",
+              "broadcaster_id",
+              "broadcaster_name",
+              "broadcaster_login",
+              "vacation"
+            ],
             "properties": {
               "segments": {
                 "type": "array",
@@ -14071,7 +14780,10 @@
               "vacation": {
                 "description": "The dates when the broadcaster is on vacation and not streaming. Is set to **null** if vacation mode is not enabled.",
                 "type": "object",
-                "required": [],
+                "required": [
+                  "start_time",
+                  "end_time"
+                ],
                 "properties": {
                   "start_time": {
                     "type": "string",
@@ -14091,7 +14803,11 @@
       },
       "Category": {
         "type": "object",
-        "required": [],
+        "required": [
+          "box_art_url",
+          "name",
+          "id"
+        ],
         "properties": {
           "box_art_url": {
             "type": "string",
@@ -14109,7 +14825,9 @@
       },
       "SearchCategoriesResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14122,7 +14840,19 @@
       },
       "Channel": {
         "type": "object",
-        "required": [],
+        "required": [
+          "broadcaster_language",
+          "broadcaster_login",
+          "display_name",
+          "game_id",
+          "game_name",
+          "id",
+          "is_live",
+          "tag_ids",
+          "thumbnail_url",
+          "title",
+          "started_at"
+        ],
         "properties": {
           "broadcaster_language": {
             "type": "string",
@@ -14176,7 +14906,9 @@
       },
       "SearchChannelsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14189,7 +14921,10 @@
       },
       "SoundtrackCurrentTrack": {
         "type": "object",
-        "required": [],
+        "required": [
+          "track",
+          "source"
+        ],
         "properties": {
           "track": {
             "$ref": "#/components/schemas/SoundtrackTrack"
@@ -14197,7 +14932,14 @@
           "source": {
             "description": "The source of the track that’s currently playing. For example, a playlist or station.",
             "type": "object",
-            "required": [],
+            "required": [
+              "content_type",
+              "id",
+              "image_url",
+              "soundtrack_url",
+              "spotify_url",
+              "title"
+            ],
             "properties": {
               "content_type": {
                 "type": "string",
@@ -14233,7 +14975,9 @@
       },
       "GetSoundtrackCurrentTrackResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14246,12 +14990,23 @@
       },
       "SoundtrackTrack": {
         "type": "object",
-        "required": [],
+        "required": [
+          "album",
+          "artists",
+          "duration",
+          "id",
+          "isrc",
+          "title"
+        ],
         "properties": {
           "album": {
             "description": "The album that includes this track.",
             "type": "object",
-            "required": [],
+            "required": [
+              "id",
+              "image_url",
+              "name"
+            ],
             "properties": {
               "id": {
                 "type": "string",
@@ -14272,7 +15027,11 @@
             "description": "The artists included on the track.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "creator_channel_id",
+                "id",
+                "name"
+              ],
               "properties": {
                 "creator_channel_id": {
                   "type": "string",
@@ -14310,7 +15069,9 @@
       },
       "GetSoundtrackPlaylistResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14322,7 +15083,9 @@
           "pagination": {
             "description": "Contains the information used to page through a list of results. The object is empty if there are no more pages to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14334,7 +15097,12 @@
       },
       "SoundtrackPlaylist": {
         "type": "object",
-        "required": [],
+        "required": [
+          "description",
+          "id",
+          "image_url",
+          "title"
+        ],
         "properties": {
           "description": {
             "type": "string",
@@ -14356,7 +15124,9 @@
       },
       "GetSoundtrackPlaylistsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14368,7 +15138,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14380,14 +15152,18 @@
       },
       "GetStreamKeyResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
             "description": "A list that contains the channel’s stream key.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "stream_key"
+              ],
               "properties": {
                 "stream_key": {
                   "type": "string",
@@ -14400,7 +15176,22 @@
       },
       "Stream": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "user_id",
+          "user_login",
+          "user_name",
+          "game_id",
+          "game_name",
+          "type",
+          "title",
+          "viewer_count",
+          "started_at",
+          "language",
+          "thumbnail_url",
+          "tag_ids",
+          "is_mature"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -14467,7 +15258,9 @@
       },
       "GetStreamsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14479,7 +15272,9 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14491,7 +15286,9 @@
       },
       "GetFollowedStreamsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14503,7 +15300,9 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14531,7 +15330,12 @@
       },
       "StreamMarkerCreated": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "created_at",
+          "position_seconds",
+          "description"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -14555,7 +15359,9 @@
       },
       "CreateStreamMarkerResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14568,7 +15374,14 @@
       },
       "StreamMarkers": {
         "type": "object",
-        "required": [],
+        "required": [
+          "user_id",
+          "user_name",
+          "user_login",
+          "videos",
+          "video_id",
+          "markers"
+        ],
         "properties": {
           "user_id": {
             "type": "string",
@@ -14598,7 +15411,13 @@
             "description": "The list of markers in this video. The list in ascending order by when the marker was created.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "id",
+                "created_at",
+                "description",
+                "position_seconds",
+                "url"
+              ],
               "properties": {
                 "id": {
                   "type": "string",
@@ -14629,7 +15448,9 @@
       },
       "GetStreamMarkersResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14641,7 +15462,9 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14653,7 +15476,20 @@
       },
       "BroadcasterSubscription": {
         "type": "object",
-        "required": [],
+        "required": [
+          "broadcaster_id",
+          "broadcaster_login",
+          "broadcaster_name",
+          "gifter_id",
+          "gifter_login",
+          "gifter_name",
+          "is_gift",
+          "plan_name",
+          "tier",
+          "user_id",
+          "user_name",
+          "user_login"
+        ],
         "properties": {
           "broadcaster_id": {
             "type": "string",
@@ -14712,7 +15548,11 @@
       },
       "GetBroadcasterSubscriptionsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data",
+          "points",
+          "total"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14724,7 +15564,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14746,7 +15588,16 @@
       },
       "UserSubscription": {
         "type": "object",
-        "required": [],
+        "required": [
+          "broadcaster_id",
+          "broadcaster_login",
+          "broadcaster_name",
+          "gifter_id",
+          "gifter_login",
+          "gifter_name",
+          "is_gift",
+          "tier"
+        ],
         "properties": {
           "broadcaster_id": {
             "type": "string",
@@ -14789,7 +15640,9 @@
       },
       "CheckUserSubscriptionResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14802,7 +15655,12 @@
       },
       "StreamTag": {
         "type": "object",
-        "required": [],
+        "required": [
+          "tag_id",
+          "is_auto",
+          "localization_names",
+          "localization_descriptions"
+        ],
         "properties": {
           "tag_id": {
             "type": "string",
@@ -14824,7 +15682,9 @@
       },
       "GetAllStreamTagsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14836,7 +15696,9 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14848,7 +15710,9 @@
       },
       "GetStreamTagsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14874,7 +15738,20 @@
       },
       "ChannelTeam": {
         "type": "object",
-        "required": [],
+        "required": [
+          "broadcaster_id",
+          "broadcaster_login",
+          "broadcaster_name",
+          "background_image_url",
+          "banner",
+          "created_at",
+          "updated_at",
+          "info",
+          "thumbnail_url",
+          "team_name",
+          "team_display_name",
+          "id"
+        ],
         "properties": {
           "broadcaster_id": {
             "type": "string",
@@ -14930,7 +15807,9 @@
       },
       "GetChannelTeamsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -14943,14 +15822,29 @@
       },
       "Team": {
         "type": "object",
-        "required": [],
+        "required": [
+          "users",
+          "background_image_url",
+          "banner",
+          "created_at",
+          "updated_at",
+          "info",
+          "thumbnail_url",
+          "team_name",
+          "team_display_name",
+          "id"
+        ],
         "properties": {
           "users": {
             "type": "array",
             "description": "The list of team members.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "user_id",
+                "user_login",
+                "user_name"
+              ],
               "properties": {
                 "user_id": {
                   "type": "string",
@@ -15009,7 +15903,9 @@
       },
       "GetTeamsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -15022,7 +15918,19 @@
       },
       "User": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "login",
+          "display_name",
+          "type",
+          "broadcaster_type",
+          "description",
+          "profile_image_url",
+          "offline_image_url",
+          "view_count",
+          "email",
+          "created_at"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -15085,7 +15993,9 @@
       },
       "GetUsersResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -15098,7 +16008,9 @@
       },
       "UpdateUserResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -15111,7 +16023,15 @@
       },
       "UsersFollow": {
         "type": "object",
-        "required": [],
+        "required": [
+          "from_id",
+          "from_login",
+          "from_name",
+          "to_id",
+          "to_login",
+          "to_name",
+          "followed_at"
+        ],
         "properties": {
           "from_id": {
             "type": "string",
@@ -15146,7 +16066,10 @@
       },
       "GetUsersFollowsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "total",
+          "data"
+        ],
         "properties": {
           "total": {
             "type": "integer",
@@ -15163,7 +16086,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15175,7 +16100,11 @@
       },
       "UserBlockList": {
         "type": "object",
-        "required": [],
+        "required": [
+          "user_id",
+          "user_login",
+          "display_name"
+        ],
         "properties": {
           "user_id": {
             "type": "string",
@@ -15193,7 +16122,9 @@
       },
       "GetUserBlockListResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -15206,7 +16137,13 @@
       },
       "UserExtension": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "version",
+          "name",
+          "can_activate",
+          "type"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -15241,7 +16178,9 @@
       },
       "GetUserExtensionsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -15254,7 +16193,9 @@
       },
       "UserExtensionPanel": {
         "type": "object",
-        "required": [],
+        "required": [
+          "active"
+        ],
         "properties": {
           "active": {
             "type": "boolean",
@@ -15276,7 +16217,9 @@
       },
       "UserExtensionPanelUpdate": {
         "type": "object",
-        "required": [],
+        "required": [
+          "active"
+        ],
         "properties": {
           "active": {
             "type": "boolean",
@@ -15294,7 +16237,9 @@
       },
       "UserExtensionOverlay": {
         "type": "object",
-        "required": [],
+        "required": [
+          "active"
+        ],
         "properties": {
           "active": {
             "type": "boolean",
@@ -15316,7 +16261,9 @@
       },
       "UserExtensionOverlayUpdate": {
         "type": "object",
-        "required": [],
+        "required": [
+          "active"
+        ],
         "properties": {
           "active": {
             "type": "boolean",
@@ -15334,7 +16281,9 @@
       },
       "UserExtensionComponent": {
         "type": "object",
-        "required": [],
+        "required": [
+          "active"
+        ],
         "properties": {
           "active": {
             "type": "boolean",
@@ -15366,7 +16315,9 @@
       },
       "UserExtensionComponentUpdate": {
         "type": "object",
-        "required": [],
+        "required": [
+          "active"
+        ],
         "properties": {
           "active": {
             "type": "boolean",
@@ -15459,12 +16410,18 @@
       },
       "UpdateUserExtensionsResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "description": "The extensions that the broadcaster updated.",
             "type": "object",
-            "required": [],
+            "required": [
+              "panel",
+              "overlay",
+              "component"
+            ],
             "properties": {
               "panel": {
                 "type": "object",
@@ -15493,7 +16450,25 @@
       },
       "Video": {
         "type": "object",
-        "required": [],
+        "required": [
+          "id",
+          "stream_id",
+          "user_id",
+          "user_login",
+          "user_name",
+          "title",
+          "description",
+          "created_at",
+          "published_at",
+          "url",
+          "thumbnail_url",
+          "viewable",
+          "view_count",
+          "language",
+          "type",
+          "duration",
+          "muted_segments"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -15572,7 +16547,10 @@
             "description": "The segments that Twitch Audio Recognition muted; otherwise, **null**.",
             "items": {
               "type": "object",
-              "required": [],
+              "required": [
+                "duration",
+                "offset"
+              ],
               "properties": {
                 "duration": {
                   "type": "integer",
@@ -15591,7 +16569,9 @@
       },
       "GetVideosResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -15603,7 +16583,9 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
+            "required": [
+              "cursor"
+            ],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15615,7 +16597,9 @@
       },
       "DeleteVideosResponse": {
         "type": "object",
-        "required": [],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
