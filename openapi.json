@@ -9649,9 +9649,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -9720,9 +9718,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -10091,9 +10087,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -10920,9 +10914,7 @@
           "pagination": {
             "description": "An object that contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -10971,9 +10963,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -11804,9 +11794,7 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -11922,9 +11910,7 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -12988,9 +12974,7 @@
           "pagination": {
             "description": "An object that contains the cursor used to get the next page of subscriptions. The object is empty if there are no more pages to get. The number of subscriptions returned per page is undertermined.",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13043,9 +13027,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13309,9 +13291,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13631,9 +13611,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13782,9 +13760,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13859,9 +13835,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13909,9 +13883,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14063,9 +14035,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14357,9 +14327,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14618,9 +14586,7 @@
               "pagination": {
                 "description": "The information used to page through a list of results. The object is empty if there are no more pages left to page through. [Read more](https://dev.twitch.tv/docs/api/guide#pagination).",
                 "type": "object",
-                "required": [
-                  "cursor"
-                ],
+                "required": [],
                 "properties": {
                   "cursor": {
                     "type": "string",
@@ -15101,9 +15067,7 @@
           "pagination": {
             "description": "Contains the information used to page through a list of results. The object is empty if there are no more pages to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15156,9 +15120,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15290,9 +15252,7 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15318,9 +15278,7 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15480,9 +15438,7 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15582,9 +15538,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15714,9 +15668,7 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -16104,9 +16056,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -16603,9 +16553,7 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [
-              "cursor"
-            ],
+            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",

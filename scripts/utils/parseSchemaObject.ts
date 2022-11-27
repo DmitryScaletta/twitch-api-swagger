@@ -184,8 +184,11 @@ const parseSchemaObject = (
       ) {
         _required = true;
 
-        // pagination is always optional
-        if (name === 'pagination') _required = false;
+        // "pagination" and "cursor" are always optional
+        // https://dev.twitch.tv/docs/api/guide#pagination
+        if (name === 'pagination' || name === 'cursor') {
+          _required = false;
+        }
 
         // https://dev.twitch.tv/docs/api/reference#get-extension-configuration-segment
         if (
