@@ -6,7 +6,11 @@ import type {
   Method,
   OpenApi,
   OperationObject,
+  ParameterObject,
+  PathItemObject,
+  RequestBodyObject,
   ResponseObject,
+  ResponsesObject,
 } from '../types';
 import { getBodySchemaName, getResponseSchemaName } from './getSchemaName.js';
 import { SCHEMA_OBJECT_TYPE } from './constants.js';
@@ -28,23 +32,13 @@ const getOpenApiExamples = (examples: ExampleObject[]) =>
 const parseEndpoint =
   (apiReference: Map<string, ApiReference>, openApi: OpenApi) =>
   (sectionEl: Element) => {
-    const operationObject: OperationObject = {
-      tags: [],
-      parameters: [],
-      responses: {},
-    };
-
     const [leftDocs, rightDocs] = sectionEl.children;
 
     const id = leftDocs!.querySelector('h2')!.getAttribute('id')!;
     const name = leftDocs!.querySelector('h2')!.textContent!.trim();
-
-    operationObject.externalDocs = {
-      url: `https://dev.twitch.tv/docs/api/reference#${id}`,
-    };
-
-    const { bodyObjects, examples } = parseExamples(id, rightDocs!);
-
+    let requestBody: RequestBodyObject;
+    let parameters: ParameterObject[] = [];
+    let responses: ResponsesObject = {};
     const descriptions: Descriptions = {
       main: [],
       authentication: [],
@@ -58,6 +52,8 @@ const parseEndpoint =
 
     let currentSection = 'description';
     let hasResponseSchema = false;
+
+    const { bodyObjects, examples } = parseExamples(id, rightDocs!);
 
     for (const el of leftDocs!.children) {
       if (el.tagName === 'H2' || el.className === 'editor-link') continue;
@@ -113,19 +109,17 @@ const parseEndpoint =
             openApi.components.schemas,
           );
           const schemaName = getBodySchemaName(name);
-          const examples = bodyObjects.reduce((acc, example, i) => {
-            let exampleTitle = 'Example';
-            if (bodyObjects.length > 1) exampleTitle += ` ${i + 1}`;
-            acc[exampleTitle] = example;
-            return acc;
-          }, {} as Record<string, ExampleObject>);
+          const examples =
+            bodyObjects.length > 0
+              ? getOpenApiExamples(bodyObjects)
+              : undefined;
 
-          operationObject.requestBody = {
+          requestBody = {
             content: {
               'application/json': {
                 schema: { $ref: `#/components/schemas/${schemaName}` },
-                ...(bodyObjects.length > 0 ? { examples } : {}),
-              },
+                examples,
+              } as MediaTypeObject,
             },
           };
         } else {
@@ -136,7 +130,7 @@ const parseEndpoint =
       // Request Query Parameters | Required Query Parameters
       if (currentSection.endsWith('Query Parameters')) {
         if (el.tagName === 'TABLE') {
-          operationObject.parameters = parseSchemaObject(
+          parameters = parseSchemaObject(
             id,
             name,
             el,
@@ -165,7 +159,7 @@ const parseEndpoint =
 
       // Response Codes | Response codes
       if (currentSection.toLowerCase() === 'response codes') {
-        operationObject.responses = parseResponses(el, id);
+        responses = parseResponses(el, id);
       }
     }
 
@@ -180,10 +174,8 @@ const parseEndpoint =
       };
     }
 
-    const responseCodeOk = Object.keys(operationObject.responses!)[0]!;
-    const responseObjectOk = operationObject.responses![
-      responseCodeOk
-    ] as ResponseObject;
+    const responseCodeOk = Object.keys(responses!)[0]!;
+    const responseObjectOk = responses![responseCodeOk] as ResponseObject;
 
     let examplesOk: ExampleObject[] = examples;
     let examplesError: ExampleObject[] = [];
@@ -221,8 +213,7 @@ const parseEndpoint =
     }
 
     if (examplesError.length > 0) {
-      const responseObjectError =
-        operationObject.responses![400]! as ResponseObject;
+      const responseObjectError = responses![400]! as ResponseObject;
       responseObjectError.content = {
         [mimeType]: {
           examples: getOpenApiExamples(examplesError),
@@ -231,12 +222,19 @@ const parseEndpoint =
     }
 
     const { tag, summary } = apiReference.get(id)!;
-    operationObject.tags!.push(tag);
-    operationObject.summary = summary;
-    operationObject.description = getDescriptionText(descriptions);
+
+    const operationObject: OperationObject = {
+      summary,
+      description: getDescriptionText(descriptions),
+      tags: [tag],
+      externalDocs: { url: `https://dev.twitch.tv/docs/api/reference#${id}` },
+    };
+    if (parameters.length > 0) operationObject.parameters = parameters;
+    if (requestBody!) operationObject.requestBody = requestBody;
+    operationObject.responses = responses;
 
     const path = url.replace('https://api.twitch.tv/helix', '');
-    if (!openApi.paths[path]) openApi.paths[path] = {} as any;
+    if (!openApi.paths[path]) openApi.paths[path] = {} as PathItemObject;
     openApi.paths[path]![method.toLowerCase() as Method] = operationObject;
   };
 

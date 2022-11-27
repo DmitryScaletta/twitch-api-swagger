@@ -121,7 +121,7 @@ export type Method =
   | 'patch'
   | 'trace';
 
-type PathItemObject = Record<Method, OperationObject>;
+export type PathItemObject = Record<Method, OperationObject>;
 
 // https://swagger.io/specification/#schema-object
 export type SchemaObject = {
