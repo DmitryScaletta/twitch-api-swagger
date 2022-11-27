@@ -12,6 +12,12 @@ export type Descriptions = {
   responseBody: string[];
 };
 
+export type ApiReference = {
+  id: string;
+  tag: string;
+  summary: string;
+};
+
 // Open API types
 
 export type ExternalDocumentationObject = {
