@@ -11043,35 +11043,35 @@
           "format": {
             "type": "array",
             "description": "The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only `static`. But if the emote is available as a static PNG and an animated GIF, the array contains `static` and `animated`. The possible formats are:   \n  \n* animated — An animated GIF is available for this emote.\n* static — A static PNG file is available for this emote.",
-            "enum": [
-              "animated",
-              "static"
-            ],
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "animated",
+                "static"
+              ]
             }
           },
           "scale": {
             "type": "array",
             "description": "The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0\\. Possible sizes are:   \n  \n* 1.0 — A small version (28px x 28px) is available.\n* 2.0 — A medium version (56px x 56px) is available.\n* 3.0 — A large version (112px x 112px) is available.",
-            "enum": [
-              "1.0",
-              "2.0",
-              "3.0"
-            ],
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "1.0",
+                "2.0",
+                "3.0"
+              ]
             }
           },
           "theme_mode": {
             "type": "array",
             "description": "The background themes that the emote is available in. Possible themes are:   \n  \n* dark\n* light",
-            "enum": [
-              "dark",
-              "light"
-            ],
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "dark",
+                "light"
+              ]
             }
           }
         }
@@ -11141,35 +11141,35 @@
           "format": {
             "type": "array",
             "description": "The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only `static`. But if the emote is available as a static PNG and an animated GIF, the array contains `static` and `animated`. The possible formats are:   \n  \n* animated — An animated GIF is available for this emote.\n* static — A static PNG file is available for this emote.",
-            "enum": [
-              "animated",
-              "static"
-            ],
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "animated",
+                "static"
+              ]
             }
           },
           "scale": {
             "type": "array",
             "description": "The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0\\. Possible sizes are:   \n  \n* 1.0 — A small version (28px x 28px) is available.\n* 2.0 — A medium version (56px x 56px) is available.\n* 3.0 — A large version (112px x 112px) is available.",
-            "enum": [
-              "1.0",
-              "2.0",
-              "3.0"
-            ],
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "1.0",
+                "2.0",
+                "3.0"
+              ]
             }
           },
           "theme_mode": {
             "type": "array",
             "description": "The background themes that the emote is available in. Possible themes are:   \n  \n* dark\n* light",
-            "enum": [
-              "dark",
-              "light"
-            ],
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "dark",
+                "light"
+              ]
             }
           }
         }
@@ -11259,35 +11259,35 @@
           "format": {
             "type": "array",
             "description": "The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only `static`. But if the emote is available as a static PNG and an animated GIF, the array contains `static` and `animated`. The possible formats are:   \n  \n* animated — An animated GIF is available for this emote.\n* static — A static PNG file is available for this emote.",
-            "enum": [
-              "animated",
-              "static"
-            ],
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "animated",
+                "static"
+              ]
             }
           },
           "scale": {
             "type": "array",
             "description": "The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0\\. Possible sizes are:   \n  \n* 1.0 — A small version (28px x 28px) is available.\n* 2.0 — A medium version (56px x 56px) is available.\n* 3.0 — A large version (112px x 112px) is available.",
-            "enum": [
-              "1.0",
-              "2.0",
-              "3.0"
-            ],
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "1.0",
+                "2.0",
+                "3.0"
+              ]
             }
           },
           "theme_mode": {
             "type": "array",
             "description": "The background themes that the emote is available in. Possible themes are:   \n  \n* dark\n* light",
-            "enum": [
-              "dark",
-              "light"
-            ],
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "dark",
+                "light"
+              ]
             }
           }
         }
@@ -11484,7 +11484,6 @@
           "follower_mode_duration": {
             "type": "integer",
             "description": "The length of time, in minutes, that users must follow the broadcaster before being able to participate in the chat room. Set only if `follower_mode` is **true**. Possible values are: 0 (no restriction) through 129600 (3 months). The default is 0.",
-            "enum": [],
             "format": "int32"
           },
           "non_moderator_chat_delay": {
@@ -11494,12 +11493,12 @@
           "non_moderator_chat_delay_duration": {
             "type": "integer",
             "description": "The amount of time, in seconds, that messages are delayed before appearing in chat. Set only if `non_moderator_chat_delay` is **true**. Possible values are:  \n  \n* 2 — 2 second delay (recommended)\n* 4 — 4 second delay\n* 6 — 6 second delay",
+            "format": "int32",
             "enum": [
-              "2",
-              "4",
-              "6"
-            ],
-            "format": "int32"
+              2,
+              4,
+              6
+            ]
           },
           "slow_mode": {
             "type": "boolean",
@@ -11508,7 +11507,6 @@
           "slow_mode_wait_time": {
             "type": "integer",
             "description": "The amount of time, in seconds, that users must wait between sending messages. Set only if `slow_mode` is **true**.  \n  \nPossible values are: 3 (3 second delay) through 120 (2 minute delay). The default is 30 seconds.",
-            "enum": [],
             "format": "int32"
           },
           "subscriber_mode": {
@@ -12136,13 +12134,13 @@
           "target": {
             "type": "array",
             "description": "The target of the message. Possible values are:  \n  \n* broadcast\n* global\n* whisper-<user-id>\n  \nIf `is_global_broadcast` is **true**, you must set this field to global. The broadcast and global values are mutually exclusive; specify only one of them.",
-            "enum": [
-              "broadcast",
-              "global",
-              "whisper-<user-id>"
-            ],
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "broadcast",
+                "global",
+                "whisper-<user-id>"
+              ]
             }
           },
           "broadcaster_id": {
@@ -16132,14 +16130,14 @@
           "type": {
             "type": "array",
             "description": "The extension types that you can activate for this extension. Possible values are:  \n  \n* component\n* mobile\n* overlay\n* panel",
-            "enum": [
-              "component",
-              "mobile",
-              "overlay",
-              "panel"
-            ],
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "component",
+                "mobile",
+                "overlay",
+                "panel"
+              ]
             }
           }
         }

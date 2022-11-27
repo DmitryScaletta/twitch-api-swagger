@@ -135,11 +135,6 @@ const parseSchemaObject = (
         description,
       };
 
-      // enum
-      if (enumValues !== null) {
-        property.enum = enumValues;
-      }
-
       // type
       if (typesMap[type]) {
         property = { ...property, ...parseType(type)! };
@@ -149,6 +144,15 @@ const parseSchemaObject = (
         (name.endsWith('_at') || description.includes('RFC3339'))
       ) {
         property.format = 'date-time';
+      }
+
+      // enum
+      if (enumValues !== null) {
+        if (property.type === 'array') {
+          property.items!.enum = enumValues;
+        } else {
+          property.enum = enumValues;
+        }
       }
 
       // nullable

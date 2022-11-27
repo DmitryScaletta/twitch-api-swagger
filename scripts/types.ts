@@ -31,7 +31,7 @@ export type FieldSchema = {
   required: boolean | null;
   description: string;
   depth: number;
-  enumValues: string[] | null;
+  enumValues: (string | number)[] | null;
   children: FieldSchema[];
 };
 

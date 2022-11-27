@@ -84,6 +84,7 @@ const parseTableSchema = (
     const description = parseMarkdown(descriptionEl!.innerHTML!);
 
     // enum
+    // TODO: whisper-<user-id>
     let enumValues: FieldSchema['enumValues'] = null;
     if (
       [
@@ -95,15 +96,22 @@ const parseTableSchema = (
         'following named color values',
       ].some((s) => descriptionEl.textContent!.includes(s))
     ) {
-      enumValues = [];
+      let liValues: string[] = [];
       descriptionEl.querySelectorAll('ul li').forEach((li) => {
         const value = li.textContent?.split('—')[0]?.trim();
-        if (value) enumValues!.push(value);
+        if (value) liValues!.push(value);
       });
 
       // "" in enum is an empty string
       // https://dev.twitch.tv/docs/api/reference#get-users
-      enumValues = enumValues.map((s) => (s === '""' ? '' : s));
+      liValues = liValues.map((s) => (s === '""' ? '' : s));
+
+      if (liValues.length > 0) {
+        enumValues =
+          type === 'Integer'
+            ? liValues.map((s) => Number.parseInt(s))
+            : liValues;
+      }
     }
 
     const fieldSchema: FieldSchema = {
