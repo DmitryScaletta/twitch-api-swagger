@@ -15921,7 +15921,7 @@
               "admin",
               "global_mod",
               "staff",
-              "\"\""
+              ""
             ]
           },
           "broadcaster_type": {
@@ -15930,7 +15930,7 @@
             "enum": [
               "affiliate",
               "partner",
-              "\"\""
+              ""
             ]
           },
           "description": {

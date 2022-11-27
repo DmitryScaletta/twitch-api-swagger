@@ -100,6 +100,10 @@ const parseTableSchema = (
         const value = li.textContent?.split('—')[0]?.trim();
         if (value) enumValues!.push(value);
       });
+
+      // "" in enum is an empty string
+      // https://dev.twitch.tv/docs/api/reference#get-users
+      enumValues = enumValues.map((s) => (s === '""' ? '' : s));
     }
 
     const fieldSchema: FieldSchema = {
