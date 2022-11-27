@@ -11194,7 +11194,7 @@
           }
         }
       },
-      "EmoteSet": {
+      "Emote": {
         "type": "object",
         "required": [
           "id",
@@ -11303,7 +11303,7 @@
             "type": "array",
             "description": "The list of emotes found in the specified emote sets. The list is empty if none of the IDs were found. The list is in the same order as the set IDs specified in the request. Each set contains one or more emoticons.",
             "items": {
-              "$ref": "#/components/schemas/EmoteSet"
+              "$ref": "#/components/schemas/Emote"
             }
           },
           "template": {

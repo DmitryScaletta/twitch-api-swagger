@@ -69,7 +69,7 @@ export const RESPONSE_BODY_SCHEMA_NAMES: Record<string, [path: string, name: str
   'get-chatters':                           [['data[0]', 'Chatter']],
   'get-channel-emotes':                     [['data[0]', 'ChannelEmote']],
   'get-global-emotes':                      [['data[0]', 'GlobalEmote']],
-  'get-emote-sets':                         [['data[0]', 'EmoteSet']],
+  'get-emote-sets':                         [['data[0]', 'Emote']],
   'get-channel-chat-badges':                [['data[0]', 'ChatBadge']],
   'get-global-chat-badges':                 [['data[0]', 'ChatBadge']],
   'get-chat-settings':                      [['data[0]', 'ChatSettings']],
