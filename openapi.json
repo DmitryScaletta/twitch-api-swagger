@@ -10476,12 +10476,14 @@
           "redemptions_redeemed_current_stream": {
             "type": "integer",
             "description": "The number of redemptions redeemed during the current live stream. The number counts against the `max_per_stream_setting` limit. This field is **null** if the broadcaster’s stream isn’t live or _max\\_per\\_stream\\_setting_ isn’t enabled.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "cooldown_expires_at": {
             "type": "string",
             "description": "The timestamp of when the cooldown period expires. Is **null** if the reward isn’t in a cooldown state. See the `global_cooldown_setting` field.",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
@@ -11425,7 +11427,8 @@
           "follower_mode_duration": {
             "type": "integer",
             "description": "The length of time, in minutes, that users must follow the broadcaster before being able to participate in the chat room. Is **null** if `follower_mode` is **false**.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "moderator_id": {
             "type": "string",
@@ -11438,7 +11441,8 @@
           "non_moderator_chat_delay_duration": {
             "type": "integer",
             "description": "The amount of time, in seconds, that messages are delayed before appearing in chat. Is **null** if `non_moderator_chat_delay` is **false**.  \n  \nThe response includes this field only if the request specifies a user access token that includes the **moderator:read:chat\\_settings** scope and the user in the _moderator\\_id_ query parameter is one of the broadcaster’s moderators.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "slow_mode": {
             "type": "boolean",
@@ -11447,7 +11451,8 @@
           "slow_mode_wait_time": {
             "type": "integer",
             "description": "The amount of time, in seconds, that users must wait between sending messages.  \n  \nIs **null** if slow\\_mode is **false**.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "subscriber_mode": {
             "type": "boolean",
@@ -11557,7 +11562,8 @@
           "follower_mode_duration": {
             "type": "integer",
             "description": "The length of time, in minutes, that users must follow the broadcaster before being able to participate in the chat room. Is **null** if `follower_mode` is **false**.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "moderator_id": {
             "type": "string",
@@ -11570,7 +11576,8 @@
           "non_moderator_chat_delay_duration": {
             "type": "integer",
             "description": "The amount of time, in seconds, that messages are delayed before appearing in chat. Is **null** if `non_moderator_chat_delay` is **false**.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "slow_mode": {
             "type": "boolean",
@@ -11579,7 +11586,8 @@
           "slow_mode_wait_time": {
             "type": "integer",
             "description": "The amount of time, in seconds, that users must wait between sending messages.  \n  \nIs **null** if slow\\_mode is **false**.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "subscriber_mode": {
             "type": "boolean",
@@ -11775,7 +11783,8 @@
           "vod_offset": {
             "type": "integer",
             "description": "The zero-based offset, in seconds, to where the clip starts in the video (VOD). Is **null** if the video is not available or hasn’t been created yet from the live stream (see `video_id`).  \n  \nNote that there’s a delay between when a clip is created during a broadcast and when the offset is set. During the delay period, `vod_offset` is **null**. The delay is indeterminant but is typically minutes long.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -13426,7 +13435,8 @@
           "overall_level": {
             "type": "integer",
             "description": "The default AutoMod level for the broadcaster. This field is **null** if the broadcaster has set one or more of the individual settings.",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "disability": {
             "type": "integer",
@@ -13702,7 +13712,8 @@
                 "end_time": {
                   "type": "string",
                   "description": "The UTC date and time (in RFC3339 format) that the timeout will end. Is **null** if the user was banned instead of being put in a timeout.",
-                  "format": "date-time"
+                  "format": "date-time",
+                  "nullable": true
                 }
               }
             }
@@ -13750,7 +13761,8 @@
           "expires_at": {
             "type": "string",
             "description": "The UTC date and time (in RFC3339 format) that the blocked term is set to expire. After the block expires, users may use the term in the broadcaster’s chat room.  \n  \nThis field is **null** if the term was added manually or was permanently blocked by AutoMod.",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
@@ -14030,7 +14042,8 @@
           "ended_at": {
             "type": "string",
             "description": "The UTC date and time (in RFC3339 format) of when the poll ended. If `status` is ACTIVE, this field is set to **null**.",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
@@ -14232,7 +14245,8 @@
                   "format": "int32"
                 }
               }
-            }
+            },
+            "nullable": true
           },
           "color": {
             "type": "string",
@@ -14283,7 +14297,8 @@
           },
           "winning_outcome_id": {
             "type": "string",
-            "description": "The ID of the winning outcome. Is **null** unless `status` is RESOLVED."
+            "description": "The ID of the winning outcome. Is **null** unless `status` is RESOLVED.",
+            "nullable": true
           },
           "outcomes": {
             "type": "array",
@@ -14315,12 +14330,14 @@
           "ended_at": {
             "type": "string",
             "description": "The UTC date and time of when the Prediction ended. If `status` is ACTIVE, this is set to **null**.",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "locked_at": {
             "type": "string",
             "description": "The UTC date and time of when the Prediction was locked. If `status` is not LOCKED, this is set to **null**.",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
@@ -14515,7 +14532,8 @@
           },
           "canceled_until": {
             "type": "string",
-            "description": "Indicates whether the broadcaster canceled this segment of a recurring broadcast. If the broadcaster canceled this segment, this field is set to the same value that’s in the `end_time` field; otherwise, it’s set to **null**."
+            "description": "Indicates whether the broadcaster canceled this segment of a recurring broadcast. If the broadcaster canceled this segment, this field is set to the same value that’s in the `end_time` field; otherwise, it’s set to **null**.",
+            "nullable": true
           },
           "category": {
             "description": "The type of content that the broadcaster plans to stream or **null** if not specified.",
@@ -16476,7 +16494,8 @@
           },
           "stream_id": {
             "type": "string",
-            "description": "The ID of the stream that the video originated from if the video’s type is “archive;” otherwise, **null**."
+            "description": "The ID of the stream that the video originated from if the video’s type is “archive;” otherwise, **null**.",
+            "nullable": true
           },
           "user_id": {
             "type": "string",
@@ -16563,7 +16582,8 @@
                   "format": "int32"
                 }
               }
-            }
+            },
+            "nullable": true
           }
         }
       },

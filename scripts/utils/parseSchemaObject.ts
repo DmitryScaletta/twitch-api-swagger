@@ -151,6 +151,11 @@ const parseSchemaObject = (
         property.format = 'date-time';
       }
 
+      // nullable
+      if (description.toLowerCase().includes('**null**')) {
+        property.nullable = true;
+      }
+
       // required
       let _required = required === true;
       if (schemaObjectType === SCHEMA_OBJECT_TYPE.body) {
