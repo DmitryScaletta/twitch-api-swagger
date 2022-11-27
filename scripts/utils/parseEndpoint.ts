@@ -17,6 +17,14 @@ import parseSchemaObject from './parseSchemaObject.js';
 import parseTableAsMarkdown from './parseTableAsMarkdown.js';
 import getDescriptionText from './getDescriptionText.js';
 
+const getOpenApiExamples = (examples: ExampleObject[]) =>
+  examples.reduce((acc, example, i) => {
+    let exampleTitle = 'Example';
+    if (examples.length > 1) exampleTitle += ` ${i + 1}`;
+    acc[exampleTitle] = example;
+    return acc;
+  }, {} as Record<string, ExampleObject>);
+
 const parseEndpoint =
   (apiReference: Map<string, ApiReference>, openApi: OpenApi) =>
   (sectionEl: Element) => {
@@ -162,34 +170,25 @@ const parseEndpoint =
     }
 
     // add examples
+    if (examples.length === 0) throw new Error('No examples: ' + id);
+
     let responseSchemaType: Pick<MediaTypeObject, 'schema'> = {};
-    let mimeType = 'none';
     if (hasResponseSchema) {
       const schemaName = getResponseSchemaName(name);
       responseSchemaType = {
         schema: { $ref: `#/components/schemas/${schemaName}` },
       };
-      mimeType = 'application/json';
     }
 
-    const responseCodeOk = Object.keys(operationObject.responses!)[0];
-    if (
-      responseCodeOk !== '200' &&
-      responseCodeOk !== '202' &&
-      responseCodeOk !== '204'
-    ) {
-      throw new Error('Wrong response code: ' + responseCodeOk + ' ' + id);
-    }
+    const responseCodeOk = Object.keys(operationObject.responses!)[0]!;
     const responseObjectOk = operationObject.responses![
       responseCodeOk
     ] as ResponseObject;
 
-    if (examples.length === 0) throw new Error('No examples: ' + id);
-
     let examplesOk: ExampleObject[] = examples;
     let examplesError: ExampleObject[] = [];
 
-    // Example for 400
+    // The last example is for 400
     // https://dev.twitch.tv/docs/api/reference#ban-user
     // https://dev.twitch.tv/docs/api/reference#unban-user
     if (id === 'ban-user' || id === 'unban-user') {
@@ -198,24 +197,14 @@ const parseEndpoint =
     }
 
     // https://dev.twitch.tv/docs/api/reference#get-channel-icalendar
-    if (id === 'get-channel-icalendar') {
-      responseObjectOk.content = {
-        'text/calendar': {
-          examples: { Example: examples[0]! },
-        },
-      };
-    } else if (responseCodeOk === '200' || responseCodeOk === '202') {
-      const examplesList = examplesOk.reduce((acc, example, i) => {
-        let exampleTitle = 'Example';
-        if (examples.length > 1) exampleTitle += ` ${i + 1}`;
-        acc[exampleTitle] = example;
-        return acc;
-      }, {} as Record<string, ExampleObject>);
+    let mimeType =
+      id === 'get-channel-icalendar' ? 'text/calendar' : 'application/json';
 
+    if (responseCodeOk === '200' || responseCodeOk === '202') {
       responseObjectOk.content = {
         [mimeType]: {
           ...responseSchemaType,
-          examples: examplesList,
+          examples: getOpenApiExamples(examplesOk),
         },
       };
     } else if (responseCodeOk === '204') {
@@ -227,14 +216,16 @@ const parseEndpoint =
         '__Examples__',
         examplesOk[0]!.description,
       ].join('\n\n');
+    } else {
+      throw new Error('Wrong response code: ' + responseCodeOk + ' ' + id);
     }
 
     if (examplesError.length > 0) {
       const responseObjectError =
         operationObject.responses![400]! as ResponseObject;
       responseObjectError.content = {
-        'application/json': {
-          examples: { Example: examplesError[0]! },
+        [mimeType]: {
+          examples: getOpenApiExamples(examplesError),
         },
       };
     }
