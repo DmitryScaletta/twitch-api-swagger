@@ -3,6 +3,17 @@ import type { SCHEMA_OBJECT_TYPE } from './utils/constants';
 export type SchemaObjectType =
   typeof SCHEMA_OBJECT_TYPE[keyof typeof SCHEMA_OBJECT_TYPE];
 
+export type Descriptions = {
+  main: string[];
+  authentication: string[];
+  authorization: string[];
+  queryParameters: string[];
+  requestBody: string[];
+  responseBody: string[];
+};
+
+// Open API types
+
 export type ExternalDocumentationObject = {
   description?: string;
   url: string;

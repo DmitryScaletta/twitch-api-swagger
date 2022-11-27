@@ -1,5 +1,6 @@
 import { JSDOM } from 'jsdom';
 import type {
+  Descriptions,
   ExampleObject,
   MediaTypeObject,
   Method,
@@ -21,54 +22,15 @@ import parseMarkdown from './utils/parseMarkdown.js';
 import parseResponses from './utils/parseResponses.js';
 import parseSchemaObject from './utils/parseSchemaObject.js';
 import parseTableAsMarkdown from './utils/parseTableAsMarkdown.js';
+import getDescriptionText from './utils/getDescriptionText.js';
 
-type Descriptions = {
-  main: string[];
-  authentication: string[];
-  authorization: string[];
-  queryParameters: string[];
-  requestBody: string[];
-  responseBody: string[];
-};
-
-const renderDescription = (descriptions: Descriptions): string => {
-  let result = [...descriptions.main];
-
-  if (descriptions.authentication.length > 0) {
-    result.push('__Authentication:__');
-    result.push(...descriptions.authentication);
-  }
-
-  if (descriptions.authorization.length > 0) {
-    result.push('__Authorization:__');
-    result.push(...descriptions.authorization);
-  }
-
-  if (descriptions.queryParameters.length > 0) {
-    result.push('__Request Query Parameters:__');
-    result.push(...descriptions.queryParameters);
-  }
-
-  if (descriptions.requestBody.length > 0) {
-    result.push('__Request Body:__');
-    result.push(...descriptions.requestBody);
-  }
-
-  if (descriptions.responseBody.length > 0) {
-    result.push('__Response Body:__');
-    result.push(...descriptions.responseBody);
-  }
-
-  return result.join('\n\n');
+type ApiReference = {
+  id: string;
+  tag: string;
+  summary: string;
 };
 
 const generateOpenApi = (html: string, openApi: OpenApi): OpenApi => {
-  type ApiReference = {
-    id: string;
-    tag: string;
-    summary: string;
-  };
-
   const apiReference = new Map<string, ApiReference>();
   const { document } = new JSDOM(html).window;
 
@@ -322,7 +284,7 @@ const generateOpenApi = (html: string, openApi: OpenApi): OpenApi => {
     const { tag, summary } = apiReference.get(id)!;
     operationObject.tags!.push(tag);
     operationObject.summary = summary;
-    operationObject.description = renderDescription(descriptions);
+    operationObject.description = getDescriptionText(descriptions);
 
     const path = url.replace('https://api.twitch.tv/helix', '');
     if (!openApi.paths[path]) openApi.paths[path] = {} as any;
