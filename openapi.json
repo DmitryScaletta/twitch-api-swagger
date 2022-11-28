@@ -17722,8 +17722,16 @@
       },
       "Badge": {
         "type": "object",
-        "additionalProperties": {
-          "$ref": "#/components/schemas/BadgeVersion"
+        "required": [
+          "versions"
+        ],
+        "properties": {
+          "versions": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/BadgeVersion"
+            }
+          }
         }
       },
       "GetGlobalBadgesResponse": {
