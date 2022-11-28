@@ -1,5 +1,6 @@
 import { JSDOM } from 'jsdom';
 import type { ApiReference, OpenApi } from './types';
+import addUndocumentedApi from './utils/addUndocumentedApi.js';
 import { OPEN_API_DESCRIPTION, OPEN_API_TITLE } from './utils/constants.js';
 import parseEndpoint from './utils/parseEndpoint.js';
 
@@ -40,6 +41,8 @@ const generateOpenApi = (
 
   openApi.components.securitySchemes['twitch_auth'].flows.implicit.scopes =
     allScopes;
+
+  addUndocumentedApi(openApi);
 
   return openApi;
 };
