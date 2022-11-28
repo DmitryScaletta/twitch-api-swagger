@@ -35,8 +35,6 @@ export type FieldSchema = {
   children: FieldSchema[];
 };
 
-export type Templates = Record<string, string>;
-
 export type ParameterObject = {
   name: string;
   in: string;
@@ -96,6 +94,14 @@ export type ReferenceObject = {
   $ref: `#/components/schemas/${string}`;
 };
 
+export type ServerObject = {
+  url: string;
+  description?: string;
+  // variables?: Record<string, ServerVariableObject>;
+};
+
+export type SecurityRequirementObject = Record<string, string[]>;
+
 export type OperationObject = {
   tags?: string[];
   summary?: string;
@@ -107,8 +113,8 @@ export type OperationObject = {
   responses?: ResponsesObject;
   // callbacks?: Record<string, CallbackObject | ReferenceObject>;
   // deprecated?: boolean;
-  // security? SecurityRequirementObject[];
-  // servers?: ServerObject[];
+  security?: SecurityRequirementObject[];
+  servers?: ServerObject[];
 };
 
 export type Method =
@@ -173,15 +179,12 @@ export type OpenApi = {
     description: string;
     version: string;
   };
-  servers: {
-    url: string;
-    description: string;
-  }[];
+  servers: ServerObject[];
   security: [];
   tags: { name: string; description?: string }[];
   paths: Record<string, PathItemObject>;
   components: {
     schemas: Record<string, SchemaObject>;
-    securitySchemes: {};
+    securitySchemes: Record<string, any>;
   };
 };

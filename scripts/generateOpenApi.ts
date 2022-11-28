@@ -3,7 +3,11 @@ import type { ApiReference, OpenApi } from './types';
 import { OPEN_API_DESCRIPTION, OPEN_API_TITLE } from './utils/constants.js';
 import parseEndpoint from './utils/parseEndpoint.js';
 
-const generateOpenApi = (html: string, openApi: OpenApi): OpenApi => {
+const generateOpenApi = (
+  html: string,
+  allScopes: Record<string, string>,
+  openApi: OpenApi,
+): OpenApi => {
   const apiReference = new Map<string, ApiReference>();
   const { document } = new JSDOM(html).window;
 
@@ -33,6 +37,9 @@ const generateOpenApi = (html: string, openApi: OpenApi): OpenApi => {
   [...document.querySelectorAll('.doc-content').values()]
     .slice(1)
     .forEach(parseEndpoint(apiReference, openApi));
+
+  openApi.components.securitySchemes['twitch_auth'].flows.implicit.scopes =
+    allScopes;
 
   return openApi;
 };

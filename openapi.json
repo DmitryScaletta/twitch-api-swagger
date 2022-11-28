@@ -166,7 +166,14 @@
           "429": {
             "description": "* The broadcaster may not run another commercial until the cooldown period expires. The `retry_after` field in the previous start commercial response specifies the amount of time the broadcaster must wait between running commercials."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:edit:commercial"
+            ]
+          }
+        ]
       }
     },
     "/analytics/extensions": {
@@ -278,7 +285,14 @@
           "404": {
             "description": "* The extension specified in the _extension\\_id_ query parameter was not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "analytics:read:extensions"
+            ]
+          }
+        ]
       }
     },
     "/analytics/games": {
@@ -406,7 +420,14 @@
           "404": {
             "description": "* The game specified in the _game\\_id_ query parameter was not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "analytics:read:games"
+            ]
+          }
+        ]
       }
     },
     "/bits/leaderboard": {
@@ -512,7 +533,14 @@
           "403": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "bits:read"
+            ]
+          }
+        ]
       }
     },
     "/bits/cheermotes": {
@@ -610,7 +638,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify an app access token or user access token.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/extensions/transactions": {
@@ -743,7 +776,12 @@
           "404": {
             "description": "* One or more of the transaction IDs specified using the _id_ query parameter were not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/channels": {
@@ -815,7 +853,12 @@
           "500": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "patch": {
         "summary": "Updates a channel’s properties.",
@@ -870,7 +913,14 @@
           "500": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:broadcast"
+            ]
+          }
+        ]
       }
     },
     "/channels/editors": {
@@ -932,7 +982,14 @@
           "401": {
             "description": "* The ID in the _broadcaster\\_id_ query parameter must match the user ID found in the OAuth token.\n* The Authorization header is required and must specify a user access token.\n* The OAuth token must include the **channel:read:editors** scope.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:editors"
+            ]
+          }
+        ]
       }
     },
     "/channel_points/custom_rewards": {
@@ -1043,7 +1100,14 @@
           "500": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:redemptions"
+            ]
+          }
+        ]
       },
       "delete": {
         "summary": "Deletes a custom reward that the broadcaster created.",
@@ -1095,7 +1159,14 @@
           "500": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:redemptions"
+            ]
+          }
+        ]
       },
       "get": {
         "summary": "Gets a list of custom rewards that the specified broadcaster created.",
@@ -1291,7 +1362,14 @@
           "500": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:redemptions"
+            ]
+          }
+        ]
       },
       "patch": {
         "summary": "Updates a custom reward.",
@@ -1459,7 +1537,14 @@
           "500": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:redemptions"
+            ]
+          }
+        ]
       }
     },
     "/channel_points/custom_rewards/redemptions": {
@@ -1629,7 +1714,14 @@
           "500": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:redemptions"
+            ]
+          }
+        ]
       },
       "patch": {
         "summary": "Updates a redemption’s status.",
@@ -1745,7 +1837,14 @@
           "500": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:redemptions"
+            ]
+          }
+        ]
       }
     },
     "/charity/campaigns": {
@@ -1820,7 +1919,14 @@
           "403": {
             "description": "* The broadcaster is not a partner or affiliate."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:charity"
+            ]
+          }
+        ]
       }
     },
     "/charity/donations": {
@@ -1917,7 +2023,14 @@
           "403": {
             "description": "* The broadcaster is not a partner or affiliate."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:charity"
+            ]
+          }
+        ]
       }
     },
     "/chat/chatters": {
@@ -2007,7 +2120,14 @@
           "403": {
             "description": "* The user in the _moderator\\_id_ query parameter is not one of the broadcaster's moderators."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderator:read:chatters"
+            ]
+          }
+        ]
       }
     },
     "/chat/emotes": {
@@ -2109,7 +2229,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify a valid app access token or user access token.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/chat/emotes/global": {
@@ -2169,7 +2294,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify a valid app access token or user access token.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/chat/emotes/set": {
@@ -2250,7 +2380,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify a valid app access token or user access token.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/chat/badges": {
@@ -2313,7 +2448,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify a valid app access token or user access token.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/chat/badges/global": {
@@ -2362,7 +2502,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify a valid app access token or user access token.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/chat/settings": {
@@ -2434,7 +2579,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify a valid app access token or user access token.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "patch": {
         "summary": "Updates the broadcaster’s chat settings.",
@@ -2533,7 +2683,14 @@
           "403": {
             "description": "* The user in the _moderator\\_id_ query parameter must have moderator privileges in the broadcaster's channel."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderator:manage:chat_settings"
+            ]
+          }
+        ]
       }
     },
     "/chat/announcements": {
@@ -2596,7 +2753,14 @@
           "401": {
             "description": "* The Authorization header is required and must contain a user access token.\n* The user access token is missing the **moderator:manage:announcements** scope.\n* The OAuth token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderator:manage:announcements"
+            ]
+          }
+        ]
       }
     },
     "/chat/color": {
@@ -2664,7 +2828,12 @@
           "401": {
             "description": "* The Authorization header is required and must contain an app access token or user access token.\n* The OAuth token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "put": {
         "summary": "Updates the color used for the user’s name in chat.",
@@ -2724,7 +2893,12 @@
           "401": {
             "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **user:manage:chat\\_color** scope.\n* The OAuth token is not valid.\n* The ID in the _user\\_id_ query parameter must match the user ID in the access token.\n* The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/clips": {
@@ -2794,7 +2968,14 @@
           "404": {
             "description": "* The broadcaster in the _broadcaster\\_id_ query parameter must be broadcasting live."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "clips:edit"
+            ]
+          }
+        ]
       },
       "get": {
         "summary": "Gets one or more video clips.",
@@ -2955,7 +3136,12 @@
           "404": {
             "description": "* The ID in _game\\_id_ was not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/entitlements/codes": {
@@ -3032,7 +3218,12 @@
           "403": {
             "description": "* The API accepts only app access tokens.\n* The client ID specified in the access token is not approved for getting the statuses of the redemption codes."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "post": {
         "summary": "Redeems one or more redemption codes.",
@@ -3109,7 +3300,12 @@
           "500": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/entitlements/drops": {
@@ -3245,7 +3441,12 @@
           "500": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "patch": {
         "summary": "Updates the Drop entitlement’s fulfillment status.",
@@ -3328,7 +3529,12 @@
           "500": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/extensions/configurations": {
@@ -3422,7 +3628,12 @@
           "429": {
             "description": "* The app exceeded the number of requests that it may make per minute. See Rate Limits above."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "put": {
         "summary": "Updates a configuration segment.",
@@ -3464,7 +3675,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify a JWT token.\n* The JWT token is not valid.\n* The Client-Id header is required."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/extensions/required_configuration": {
@@ -3518,7 +3734,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify a JWT token.\n* The JWT token is not valid.\n* The Client-Id header is required."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/extensions/pubsub": {
@@ -3566,7 +3787,12 @@
           "422": {
             "description": "* The message is too large."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/extensions/live": {
@@ -3660,7 +3886,12 @@
           "404": {
             "description": "* The extension specified in the _extension\\_id_ query parameter was not found or it's not being used in a live stream."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/extensions/jwt/secrets": {
@@ -3711,7 +3942,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify a JWT token.\n* The JWT token is not valid.\n* The Client-Id header is required."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "post": {
         "summary": "Creates a shared secret used to sign and verify JWT tokens.",
@@ -3785,7 +4021,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify a JWT token.\n* The JWT token is not valid.\n* The Client-Id header is required."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/extensions/chat": {
@@ -3830,7 +4071,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify a JWT token.\n* The ID in the _broadcaster\\_id_ query parameter must match the `channel_id` claim in the JWT.\n* The JWT token is not valid.\n* The Client-Id header is required."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/extensions": {
@@ -3951,7 +4197,12 @@
           "404": {
             "description": "* The extension in the _extension\\_id_ query parameter was not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/extensions/released": {
@@ -4072,7 +4323,12 @@
           "404": {
             "description": "* The extension specified in the _extension\\_id_ query parameter was not found or is not released."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/bits/extensions": {
@@ -4134,7 +4390,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify an app access token; you may not specify a user access token.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "put": {
         "summary": "Adds or updates a Bits product that the extension created.",
@@ -4193,7 +4454,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify an app access token; you may not specify a user access token.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/eventsub/subscriptions": {
@@ -4287,7 +4553,14 @@
           "429": {
             "description": "* The request exceeds the number of subscriptions that you may create with the same combination of `type` and `condition` values."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:subscriptions"
+            ]
+          }
+        ]
       },
       "delete": {
         "summary": "Deletes an EventSub subscription.",
@@ -4324,7 +4597,12 @@
           "404": {
             "description": "* The subscription was not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "get": {
         "summary": "Gets a list of EventSub subscriptions that the client in the access token created.",
@@ -4440,7 +4718,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify an app access token.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/games/top": {
@@ -4517,7 +4800,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify an app access token or user access token.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/games": {
@@ -4601,7 +4889,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify an app access token or user access token.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/goals": {
@@ -4664,7 +4957,14 @@
           "401": {
             "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:read:goals** scope.\n* The ID in _broadcaster\\_id_ must match the user ID in the user access token.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:goals"
+            ]
+          }
+        ]
       }
     },
     "/hypetrain/events": {
@@ -4761,7 +5061,12 @@
           "401": {
             "description": "* The ID in _broadcaster\\_id_ must match the user ID in the user access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:read:hype\\_train** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/moderation/enforcements/status": {
@@ -4852,7 +5157,14 @@
           "429": {
             "description": "* The broadcaster exceeded the number of chat message checks that they may make. See the endpoint's rate limits."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderation:read"
+            ]
+          }
+        ]
       }
     },
     "/moderation/automod/message": {
@@ -4901,7 +5213,14 @@
           "404": {
             "description": "* The message specified in the `msg_id` field was not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderator:manage:automod"
+            ]
+          }
+        ]
       }
     },
     "/moderation/automod/settings": {
@@ -4978,7 +5297,12 @@
           "403": {
             "description": "* The user in _moderator\\_id_ is not one of the broadcaster's moderators."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "put": {
         "summary": "Updates the broadcaster’s AutoMod settings.",
@@ -5096,7 +5420,12 @@
           "403": {
             "description": "* The user in _moderator\\_id_ is not one of the broadcaster's moderators."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/moderation/banned": {
@@ -5210,7 +5539,14 @@
           "401": {
             "description": "* The ID in _broadcaster\\_id_ must match the user ID in the user access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **moderation:read** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderation:read"
+            ]
+          }
+        ]
       }
     },
     "/moderation/bans": {
@@ -5355,7 +5691,12 @@
           "429": {
             "description": "* The app has exceeded the number of requests it may make per minute for this broadcaster."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "delete": {
         "summary": "Removes the ban or timeout that was placed on the specified user.",
@@ -5430,7 +5771,12 @@
           "429": {
             "description": "* The app has exceeded the number of requests it may make per minute for this broadcaster."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/moderation/blocked_terms": {
@@ -5523,7 +5869,12 @@
           "403": {
             "description": "* The user in _moderator\\_id_ is not one of the broadcaster's moderators."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "post": {
         "summary": "Adds a word or phrase to the broadcaster’s list of blocked terms.",
@@ -5633,7 +5984,12 @@
           "403": {
             "description": "* The user in _moderator\\_id_ is not one of the broadcaster's moderators."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "delete": {
         "summary": "Removes the word or phrase from the broadcaster’s list of blocked terms.",
@@ -5688,7 +6044,12 @@
           "403": {
             "description": "* The user in _moderator\\_id_ is not one of the broadcaster's moderators."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/moderation/chat": {
@@ -5747,7 +6108,12 @@
           "404": {
             "description": "* The ID in _message\\_id_ was not found.\n* The specified message was created more than 6 hours ago."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/moderation/moderators": {
@@ -5835,7 +6201,15 @@
           "401": {
             "description": "* The ID in _broadcaster\\_id_ must match the user ID found in the access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **moderation:read** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderation:read",
+              "channel:manage:moderators"
+            ]
+          }
+        ]
       },
       "post": {
         "summary": "Adds a moderator to the broadcaster’s chat room.",
@@ -5884,7 +6258,14 @@
           "429": {
             "description": "* The broadcaster has exceeded the number of requests allowed within a 10-second window. See this endpoint's rate limits."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:moderators"
+            ]
+          }
+        ]
       },
       "delete": {
         "summary": "Removes a moderator from the broadcaster’s chat room.",
@@ -5930,7 +6311,14 @@
           "429": {
             "description": "* The broadcaster has exceeded the number of requests allowed within a 10-second window. See this endpoint's rate limits."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:moderators"
+            ]
+          }
+        ]
       }
     },
     "/channels/vips": {
@@ -6019,7 +6407,15 @@
           "401": {
             "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:read:vips** or **channel:manage:vips** scope.\n* The OAuth token is not valid.\n* The ID in the _broadcaster\\_id_ query parameter must match the user ID in the access token.\n* The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:vips",
+              "channel:manage:vips"
+            ]
+          }
+        ]
       },
       "post": {
         "summary": "Adds the specified user as a VIP in the broadcaster’s channel.",
@@ -6080,7 +6476,14 @@
           "429": {
             "description": "The broadcaster exceeded the number of VIP that they may add within a 10-second window. See Rate Limits for this endpoint above."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:vips"
+            ]
+          }
+        ]
       },
       "delete": {
         "summary": "Removes the specified user as a VIP in the broadcaster’s channel.",
@@ -6135,7 +6538,14 @@
           "429": {
             "description": "The broadcaster exceeded the number of VIPs that they may remove within a 10-second window. See Rate Limits for this endpoint above."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:vips"
+            ]
+          }
+        ]
       }
     },
     "/polls": {
@@ -6249,7 +6659,14 @@
           "404": {
             "description": "* None of the IDs in the _id_ query parameters were found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:polls"
+            ]
+          }
+        ]
       },
       "post": {
         "summary": "Creates a poll that viewers in the broadcaster’s channel can vote on.",
@@ -6347,7 +6764,14 @@
           "401": {
             "description": "* The ID in `broadcaster_id` must match the user ID in the access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token is missing the **channel:manage:polls** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:polls"
+            ]
+          }
+        ]
       },
       "patch": {
         "summary": "End an active poll.",
@@ -6436,7 +6860,14 @@
           "401": {
             "description": "* The ID in `broadcaster_id` must match the user ID in the user access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:manage:polls** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header must match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:polls"
+            ]
+          }
+        ]
       }
     },
     "/predictions": {
@@ -6548,7 +6979,14 @@
           "401": {
             "description": "* The ID in _broadcaster\\_id_ must match the user ID in the access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:read:predictions** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:predictions"
+            ]
+          }
+        ]
       },
       "post": {
         "summary": "Create a Channel Points Prediction.",
@@ -6648,7 +7086,14 @@
           "429": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:predictions"
+            ]
+          }
+        ]
       },
       "patch": {
         "summary": "Locks, resolves, or cancels a Channel Points Prediction.",
@@ -6730,7 +7175,14 @@
           "404": {
             "description": "* The prediction in the `id` field was not found.\n* The outcome in the `winning_outcome_id` field was not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:predictions"
+            ]
+          }
+        ]
       }
     },
     "/raids": {
@@ -6804,7 +7256,14 @@
           "429": {
             "description": "* The broadcaster exceeded the number of raid requests that they may make. The limit is 10 requests within a 10-minute window."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:raids"
+            ]
+          }
+        ]
       },
       "delete": {
         "summary": "Cancel a pending raid.",
@@ -6844,7 +7303,14 @@
           "429": {
             "description": "* The broadcaster exceeded the number of raid requests that they may make. The limit is 10 requests within a 10-minute window."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:raids"
+            ]
+          }
+        ]
       }
     },
     "/schedule": {
@@ -6967,7 +7433,12 @@
           "404": {
             "description": "* The broadcaster has not created a streaming schedule."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/schedule/icalendar": {
@@ -7083,7 +7554,14 @@
           "404": {
             "description": "* The broadcaster's schedule was not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:schedule"
+            ]
+          }
+        ]
       }
     },
     "/schedule/segment": {
@@ -7178,7 +7656,14 @@
           "403": {
             "description": "* Only partners and affiliates may add non-recurring broadcast segments."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:schedule"
+            ]
+          }
+        ]
       },
       "patch": {
         "summary": "Updates a scheduled broadcast segment.",
@@ -7275,7 +7760,14 @@
           "404": {
             "description": "* The specified broadcast segment was not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:schedule"
+            ]
+          }
+        ]
       },
       "delete": {
         "summary": "Deletes a broadcast from the broadcaster’s streaming schedule.",
@@ -7318,7 +7810,14 @@
           "401": {
             "description": "* The ID in the _broadcaster\\_id_ query parameter must match the user ID in the user access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:manage:schedule** scope.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the OAuth token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:schedule"
+            ]
+          }
+        ]
       }
     },
     "/search/categories": {
@@ -7395,7 +7894,12 @@
           "401": {
             "description": "* The Authorization header is required and must contain an app access token or user access token.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/search/channels": {
@@ -7511,7 +8015,12 @@
           "401": {
             "description": "* The Authorization header is required and must contain an app access token or user access token.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/soundtrack/current_track": {
@@ -7594,7 +8103,12 @@
           "404": {
             "description": "* The broadcaster is not playing a track."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/soundtrack/playlist": {
@@ -7710,7 +8224,12 @@
           "404": {
             "description": "* The specified playlist was not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/soundtrack/playlists": {
@@ -7819,7 +8338,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify an app access token or user access token.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/streams/key": {
@@ -7874,7 +8398,12 @@
           "401": {
             "description": "* The ID in _broadcaster\\_id_ must match the user ID in the access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:read:stream\\_key** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header must match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/streams": {
@@ -8049,7 +8578,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify an app access token or user access token.\n* The access token is not valid.\n* The ID in the Client-Id header must match the Client ID in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/streams/followed": {
@@ -8138,7 +8672,14 @@
           "401": {
             "description": "* The ID in _user\\_id_ must match the user ID found in the access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **user:read:follows** scope.\n* The OAuth token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "user:read:follows"
+            ]
+          }
+        ]
       }
     },
     "/streams/markers": {
@@ -8209,7 +8750,14 @@
           "404": {
             "description": "* The user in the `user_id` field is not streaming live.\n* The ID in the user\\_id field is not valid.\n* The user hasn't enabled video on demand (VOD)."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:broadcast"
+            ]
+          }
+        ]
       },
       "get": {
         "summary": "Gets a list of markers from the user’s most recent stream or from the specified VOD/video.",
@@ -8276,7 +8824,14 @@
           "404": {
             "description": "* The user specified in the _user\\_id_ query parameter doesn't have videos."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "user:read:broadcast"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions": {
@@ -8301,7 +8856,15 @@
           "401": {
             "description": "* The ID in _broadcaster\\_id_ must match the user ID found in the request’s OAuth token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:read:subscriptions** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:subscriptions",
+              "channel:read:subscriptions"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/user": {
@@ -8352,7 +8915,15 @@
           "404": {
             "description": "* The user in _user\\_id_ does not subscribe to the broadcaster in _broadcaster\\_id_."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "user:read:subscriptions",
+              "user:read:subscriptions"
+            ]
+          }
+        ]
       }
     },
     "/tags/streams": {
@@ -8447,7 +9018,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify an app access token or user access token.\n* The access token is not valid.\n* The ID in the Client-Id header must match the Client ID in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/streams/tags": {
@@ -8519,7 +9095,12 @@
           "401": {
             "description": "* The Authorization header is required and must specify an app access token or user access token.\n* The access token is not valid.\n* The ID in the Client-Id header must match the Client ID in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "put": {
         "summary": "Applies one or more tags to the specified channel, overwriting existing tags.",
@@ -8576,7 +9157,14 @@
           "403": {
             "description": "* You may not add automatic tags."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:broadcast"
+            ]
+          }
+        ]
       }
     },
     "/teams/channel": {
@@ -8645,7 +9233,12 @@
           "404": {
             "description": "* The broadcaster was not found.\n* The broadcaster is not a member of a team."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/teams": {
@@ -8730,7 +9323,12 @@
           "404": {
             "description": "* The specified team was not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/users": {
@@ -8810,7 +9408,12 @@
           "401": {
             "description": "* The Authorization header is required and must contain an app access token or user access token.\n* The access token is not valid.\n* The ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "put": {
         "summary": "Updates the user’s information.",
@@ -8872,7 +9475,14 @@
           "401": {
             "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **user:edit** scope.\n* The access token is not valid.\n* The ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "user:edit"
+            ]
+          }
+        ]
       }
     },
     "/users/follows": {
@@ -8968,7 +9578,12 @@
           "401": {
             "description": "* The Authorization header is required and must contain an app access token or user access token.\n* The access token is not valid.\n* The ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/users/blocks": {
@@ -9047,7 +9662,12 @@
           "401": {
             "description": "* The ID in _broadcaster\\_id_ must match the user ID found in the request’s access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **user:read:blocked\\_users** scope.\n* The access token is not valid.\n* The ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "put": {
         "summary": "Blocks the specified user from interacting with or having contact with the broadcaster.",
@@ -9106,7 +9726,12 @@
           "401": {
             "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **user:manage:blocked\\_users** scope.\n* The access token is not valid.\n* The ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "delete": {
         "summary": "Removes the user from the broadcaster’s list of blocked users.",
@@ -9140,7 +9765,12 @@
           "401": {
             "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **user:read:blocked\\_users** scope.\n* The access token is not valid.\n* The ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       }
     },
     "/users/extensions/list": {
@@ -9228,7 +9858,16 @@
           "401": {
             "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **user:read:broadcast** scope.\n* The access token is not valid.\n* The ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "user:read:broadcast",
+              "user:edit:broadcast",
+              "user:edit:broadcast"
+            ]
+          }
+        ]
       }
     },
     "/users/extensions": {
@@ -9320,7 +9959,12 @@
           "401": {
             "description": "* The Authorization header is required and must contain an app access token or user access token.\n* The access token is not valid.\n* The ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "put": {
         "summary": "Updates an installed extension’s information.",
@@ -9457,7 +10101,14 @@
           "404": {
             "description": "* An extension with the specified `id` and `version` values was not found."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "user:edit:broadcast"
+            ]
+          }
+        ]
       }
     },
     "/videos": {
@@ -9629,7 +10280,12 @@
           "404": {
             "description": "* The ID in the _game\\_id_ query parameter was not found.\n* The ID in the _id_ query parameter was not found. Returned only if all the IDs were not found; otherwise, the ID is ignored."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
       },
       "delete": {
         "summary": "Deletes one or more videos.",
@@ -9685,7 +10341,14 @@
           "401": {
             "description": "* The caller is not authorized to delete the specified video.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:manage:videos** scope.\n* The access token is not valid.\n* The ID specified in the Client-Id header does not match the client ID specified in the access token."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:videos"
+            ]
+          }
+        ]
       }
     },
     "/whispers": {
@@ -9756,7 +10419,14 @@
           "429": {
             "description": "* The sending user exceeded the number of whisper requests that they may make. See Rate Limits for this endpoint above."
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "user:manage:whispers"
+            ]
+          }
+        ]
       }
     }
   },
@@ -16816,16 +17486,67 @@
       }
     },
     "securitySchemes": {
-      "Authorization": {
-        "type": "apiKey",
-        "description": "Example: Bearer <access_token>",
-        "name": "Authorization",
-        "in": "header"
-      },
-      "Client-Id": {
-        "type": "apiKey",
-        "name": "Client-Id",
-        "in": "header"
+      "twitch_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://id.twitch.tv/oauth2/authorize",
+            "refreshUrl": "https://id.twitch.tv/oauth2/token",
+            "scopes": {
+              "analytics:read:extensions": "View analytics data for the Twitch Extensions owned by the authenticated account.",
+              "analytics:read:games": "View analytics data for the games owned by the authenticated account.",
+              "bits:read": "View Bits information for a channel.",
+              "channel:edit:commercial": "Run commercials on a channel.",
+              "channel:manage:broadcast": "Manage a channel’s broadcast configuration, including updating channel configuration and managing stream markers and stream tags.",
+              "channel:read:charity": "Read charity campaign details and user donations on your channel.",
+              "channel:manage:extensions": "Manage a channel’s Extension configuration, including activating Extensions.",
+              "channel:manage:moderators": "Add or remove the moderator role from users in your channel.",
+              "channel:manage:polls": "Manage a channel’s polls.",
+              "channel:manage:predictions": "Manage of channel’s Channel Points Predictions",
+              "channel:manage:raids": "Manage a channel raiding another channel.",
+              "channel:manage:redemptions": "Manage Channel Points custom rewards and their redemptions on a channel.",
+              "channel:manage:schedule": "Manage a channel’s stream schedule.",
+              "channel:manage:videos": "Manage a channel’s videos, including deleting videos.",
+              "channel:read:editors": "View a list of users with the editor role for a channel.",
+              "channel:read:goals": "View Creator Goals for a channel.",
+              "channel:read:hype_train": "View Hype Train information for a channel.",
+              "channel:read:polls": "View a channel’s polls.",
+              "channel:read:predictions": "View a channel’s Channel Points Predictions.",
+              "channel:read:redemptions": "View Channel Points custom rewards and their redemptions on a channel.",
+              "channel:read:stream_key": "View an authorized user’s stream key.",
+              "channel:read:subscriptions": "View a list of all subscribers to a channel and check if a user is subscribed to a channel.",
+              "channel:read:vips": "Read the list of VIPs in your channel.",
+              "channel:manage:vips": "Add or remove the VIP role from users in your channel.",
+              "clips:edit": "Manage Clips for a channel.",
+              "moderation:read": "View a channel’s moderation data including Moderators, Bans, Timeouts, and Automod settings.",
+              "moderator:manage:announcements": "Send announcements in channels where you have the moderator role.",
+              "moderator:manage:automod": "Manage messages held for review by AutoMod in channels where you are a moderator.",
+              "moderator:read:automod_settings": "View a broadcaster’s AutoMod settings.",
+              "moderator:manage:automod_settings": "Manage a broadcaster’s AutoMod settings.",
+              "moderator:manage:banned_users": "Ban and unban users.",
+              "moderator:read:blocked_terms": "View a broadcaster’s list of blocked terms.",
+              "moderator:manage:blocked_terms": "Manage a broadcaster’s list of blocked terms.",
+              "moderator:manage:chat_messages": "Delete chat messages in channels where you have the moderator role",
+              "moderator:read:chat_settings": "View a broadcaster’s chat room settings.",
+              "moderator:manage:chat_settings": "Manage a broadcaster’s chat room settings.",
+              "moderator:read:chatters": "View the chatters in a broadcaster’s chat room.",
+              "user:edit": "Manage a user object.",
+              "user:manage:blocked_users": "Manage the block list of a user.",
+              "user:read:blocked_users": "View the block list of a user.",
+              "user:read:broadcast": "View a user’s broadcasting configuration, including Extension configurations.",
+              "user:manage:chat_color": "Update the color used for the user’s name in chat.",
+              "user:read:email": "View a user’s email address.",
+              "user:read:follows": "View the list of channels a user follows.",
+              "user:read:subscriptions": "View if an authorized user is subscribed to specific channels.",
+              "user:manage:whispers": "Read whispers that you send and receive, and send whispers on your behalf.",
+              "channel:moderate": "Perform moderation actions in a channel. The user requesting the scope must be a moderator in the channel.",
+              "chat:edit": "Send live stream chat messages.",
+              "chat:read": "View live stream chat messages.",
+              "whispers:read": "View your whisper messages.",
+              "whispers:edit": "Send whisper messages."
+            }
+          }
+        }
       }
     }
   }

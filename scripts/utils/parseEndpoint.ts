@@ -21,6 +21,21 @@ import parseSchemaObject from './parseSchemaObject.js';
 import parseTableAsMarkdown from './parseTableAsMarkdown.js';
 import getDescriptionText from './getDescriptionText.js';
 
+const SCOPE_REGEX = /(:?\*\*([a-z:_]+)\*\*|`([a-z:_]+)`)/g;
+
+const parseScopes = (lines: string[]) => {
+  const scopes: string[] = [];
+  for (const line of lines) {
+    let m = SCOPE_REGEX.exec(line);
+    while (m !== null) {
+      const scope = m[2] || m[3];
+      if (scope?.includes(':')) scopes.push(scope);
+      m = SCOPE_REGEX.exec(line);
+    }
+  }
+  return scopes;
+};
+
 const getOpenApiExamples = (examples: ExampleObject[]) =>
   examples.reduce((acc, example, i) => {
     let exampleTitle = 'Example';
@@ -221,6 +236,20 @@ const parseEndpoint =
       };
     }
 
+    // check auth
+    const authDesc = [
+      ...descriptions.authentication,
+      ...descriptions.authorization,
+    ];
+    const scopes = parseScopes(authDesc);
+    const requiresAuth = authDesc.some(
+      (line) =>
+        line.includes('user access token') ||
+        line.includes('app access token') ||
+        line.includes('JSON Web Token'),
+    );
+
+    // add to openApi
     const { tag, summary } = apiReference.get(id)!;
 
     const operationObject: OperationObject = {
@@ -236,6 +265,7 @@ const parseEndpoint =
     if (parameters.length > 0) operationObject.parameters = parameters;
     if (requestBody!) operationObject.requestBody = requestBody;
     operationObject.responses = responses;
+    if (requiresAuth) operationObject.security = [{ twitch_auth: scopes }];
 
     const path = url.replace('https://api.twitch.tv/helix', '');
     if (!openApi.paths[path]) openApi.paths[path] = {} as PathItemObject;

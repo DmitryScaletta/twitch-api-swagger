@@ -17,16 +17,15 @@
   "components": {
     "schemas": {},
     "securitySchemes": {
-      "Authorization": {
-        "type": "apiKey",
-        "description": "Example: Bearer <access_token>",
-        "name": "Authorization",
-        "in": "header"
-      },
-      "Client-Id": {
-        "type": "apiKey",
-        "name": "Client-Id",
-        "in": "header"
+      "twitch_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://id.twitch.tv/oauth2/authorize",
+            "refreshUrl": "https://id.twitch.tv/oauth2/token",
+            "scopes": []
+          }
+        }
       }
     }
   }
