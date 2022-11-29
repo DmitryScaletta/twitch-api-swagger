@@ -2,6 +2,7 @@ import type {
   ApiReference,
   Descriptions,
   ExampleObject,
+  FieldSchema,
   MediaTypeObject,
   Method,
   OpenApi,
@@ -17,10 +18,36 @@ import { SCHEMA_OBJECT_TYPE } from './constants.js';
 import parseExamples from './parseExamples.js';
 import parseMarkdown from './parseMarkdown.js';
 import parseResponses from './parseResponses.js';
+import parseTableSchema from './parseTableSchema.js';
 import parseSchemaObject from './parseSchemaObject.js';
 import parseTableAsMarkdown from './parseTableAsMarkdown.js';
 import getDescriptionText from './getDescriptionText.js';
 
+// Not a table
+// https://dev.twitch.tv/docs/api/reference#check-user-subscription
+const checkUserSubscriptionFields: FieldSchema[] = [
+  {
+    name: 'broadcaster_id',
+    type: 'String',
+    required: true,
+    depth: 0,
+    description: 'The ID of a partner or affiliate broadcaster.',
+    enumValues: null,
+    children: [],
+  },
+  {
+    name: 'user_id',
+    type: 'String',
+    required: true,
+    depth: 0,
+    description:
+      'The ID of the user that you’re checking to see whether they subscribe to the broadcaster in broadcaster_id. This ID must match the user ID in the access Token.',
+    enumValues: null,
+    children: [],
+  },
+];
+
+// https://regex101.com/r/g6DCKc/1
 const SCOPE_REGEX = /(:?\*\*([a-z:_]+)\*\*|`([a-z:_]+)`)/g;
 
 const parseScopes = (lines: string[]) => {
@@ -119,7 +146,7 @@ const parseEndpoint =
           parseSchemaObject(
             id,
             name,
-            el,
+            parseTableSchema(id, el, SCHEMA_OBJECT_TYPE.body),
             SCHEMA_OBJECT_TYPE.body,
             openApi.components.schemas,
           );
@@ -144,11 +171,17 @@ const parseEndpoint =
 
       // Request Query Parameters | Required Query Parameters
       if (currentSection.endsWith('Query Parameters')) {
-        if (el.tagName === 'TABLE') {
+        // not a table
+        // https://dev.twitch.tv/docs/api/reference#check-user-subscription
+        if (el.tagName === 'TABLE' || id === 'check-user-subscription') {
+          const fieldSchemas =
+            id === 'check-user-subscription'
+              ? checkUserSubscriptionFields
+              : parseTableSchema(id, el, SCHEMA_OBJECT_TYPE.params);
           parameters = parseSchemaObject(
             id,
             name,
-            el,
+            fieldSchemas,
             SCHEMA_OBJECT_TYPE.params,
             openApi.components.schemas,
           );
@@ -162,7 +195,7 @@ const parseEndpoint =
           parseSchemaObject(
             id,
             name,
-            el,
+            parseTableSchema(id, el, SCHEMA_OBJECT_TYPE.response),
             SCHEMA_OBJECT_TYPE.response,
             openApi.components.schemas,
           );

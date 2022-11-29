@@ -8870,7 +8870,7 @@
     "/subscriptions/user": {
       "get": {
         "summary": "Checks whether the user subscribes to the broadcaster’s channel.",
-        "description": "Checks whether the user subscribes to the broadcaster’s channel.\n\n__Authentication:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:subscriptions** scope.\n\nA Twitch extensions may use an app access token if the broadcaster has granted the **user:read:subscriptions** scope from within the Twitch Extensions manager.\n\n__Request Query Parameters:__\n\n| Parameter | Type | Required? | Description | | — | — | — | — | | broadcaster\\_id | String | Yes | The ID of a partner or affiliate broadcaster. | | user\\_id | String | Yes | The ID of the user that you’re checking to see whether they subscribe to the broadcaster in _broadcaster\\_id_. This ID must match the user ID in the access Token. |",
+        "description": "Checks whether the user subscribes to the broadcaster’s channel.\n\n__Authentication:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:subscriptions** scope.\n\nA Twitch extensions may use an app access token if the broadcaster has granted the **user:read:subscriptions** scope from within the Twitch Extensions manager.",
         "tags": [
           "Subscriptions"
         ],
@@ -8879,6 +8879,26 @@
           "url": "https://dev.twitch.tv/docs/api/reference#check-user-subscription"
         },
         "operationId": "check-user-subscription",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "The ID of a partner or affiliate broadcaster.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "The ID of the user that you’re checking to see whether they subscribe to the broadcaster in broadcaster_id. This ID must match the user ID in the access Token.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "The user subscribes to the broadcaster.",

@@ -10,7 +10,6 @@ import {
   RESPONSE_BODY_SCHEMA_NAMES,
   SCHEMA_OBJECT_TYPE,
 } from './constants.js';
-import parseTableSchema from './parseTableSchema.js';
 
 // prettier-ignore
 const typesMap: Record<string, SchemaObject> = {
@@ -37,12 +36,10 @@ const extensionSchemaNames = {
 const parseSchemaObject = (
   endpointId: string,
   endpointName: string,
-  table: Element,
+  fieldSchemas: FieldSchema[],
   schemaObjectType: SchemaObjectType,
   schemas: Record<string, SchemaObject>,
 ): ParameterObject[] => {
-  const fieldSchemas = parseTableSchema(endpointId, table, schemaObjectType);
-
   const parseParameter = ({
     name,
     type,

@@ -2,43 +2,12 @@ import type { FieldSchema, SchemaObjectType } from '../types';
 import { SCHEMA_OBJECT_TYPE } from './constants.js';
 import parseMarkdown from './parseMarkdown.js';
 
-// Not a table
-// https://dev.twitch.tv/docs/api/reference#check-user-subscription
-const checkUserSubscriptionFields: FieldSchema[] = [
-  {
-    name: 'broadcaster_id',
-    type: 'String',
-    required: true,
-    depth: 0,
-    description: 'The ID of a partner or affiliate broadcaster.',
-    enumValues: null,
-    children: [],
-  },
-  {
-    name: 'user_id',
-    type: 'String',
-    required: true,
-    depth: 0,
-    description:
-      'The ID of the user that you’re checking to see whether they subscribe to the broadcaster in broadcaster_id. This ID must match the user ID in the access Token.',
-    enumValues: null,
-    children: [],
-  },
-];
-
 const parseTableSchema = (
   endpointId: string,
   table: Element,
   schemaObjectType: SchemaObjectType,
 ): FieldSchema[] => {
   const fieldSchemas: FieldSchema[] = [];
-
-  if (schemaObjectType === SCHEMA_OBJECT_TYPE.params) {
-    // not a table
-    if (endpointId === 'check-user-subscription') {
-      return checkUserSubscriptionFields;
-    }
-  }
 
   table.querySelectorAll('tbody tr').forEach((tr) => {
     const parameterEl = tr.children[0]!;
