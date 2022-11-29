@@ -96,8 +96,8 @@ const parseEndpoint =
         descriptions.authorization.push(parseMarkdown(el.innerHTML));
       }
 
-      // URL | URLs
-      if (currentSection.startsWith('URL')) {
+      // URL
+      if (currentSection.toLowerCase().includes('url')) {
         // no method
         // https://dev.twitch.tv/docs/api/reference#get-stream-key
         if (id === 'get-stream-key') {
@@ -107,8 +107,8 @@ const parseEndpoint =
         [method, url] = el.textContent!.trim().split(' ') as [string, string];
       }
 
-      // Request Body | Request Body Fields
-      if (currentSection.startsWith('Request Body')) {
+      // Request Body
+      if (currentSection.toLocaleLowerCase().includes('request body')) {
         if (el.tagName === 'TABLE') {
           parseSchemaObject(
             id,
@@ -136,8 +136,8 @@ const parseEndpoint =
         }
       }
 
-      // Request Query Parameters | Required Query Parameters
-      if (currentSection.endsWith('Query Parameters')) {
+      // Request Query Parameters | Request Query Parameter
+      if (currentSection.toLowerCase().includes('query parameter')) {
         if (el.tagName === 'TABLE') {
           parameters = parseSchemaObject(
             id,
@@ -151,7 +151,7 @@ const parseEndpoint =
         }
       }
 
-      if (currentSection === 'Response Body') {
+      if (currentSection.toLowerCase().includes('response body')) {
         if (el.tagName === 'TABLE') {
           parseSchemaObject(
             id,
