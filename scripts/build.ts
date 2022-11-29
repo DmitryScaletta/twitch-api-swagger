@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import generateOpenApi from './generateOpenApi.js';
+import generateOpenApi from './utils/generateOpenApi.js';
 import { HTML_DESCRIPTION, OPEN_API_TITLE } from './utils/constants.js';
 import parseScopes from './utils/parseScopes.js';
 
