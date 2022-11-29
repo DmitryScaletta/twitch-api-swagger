@@ -2,7 +2,7 @@
 
 https://twitch-api-swagger.surge.sh
 
-Unofficial Swagger UI (OpenAPI 3) for Twitch API.
+Unofficial Swagger UI for Twitch API.
 
 All endpoints are generated automatically from the [twitch docs](https://dev.twitch.tv/docs/api/reference) page.
 
