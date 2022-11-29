@@ -15,15 +15,6 @@ const parseExamples = (endpointId: string, examplesEl: Element) => {
   const bodyObjects: ExampleObject[] = [];
   const examples: ExampleObject[] = [];
 
-  // Add missing "Example Request" header
-  // https://dev.twitch.tv/docs/api/reference#get-soundtrack-playlists
-  if (endpointId === 'get-soundtrack-playlists') {
-    examplesEl.innerHTML = examplesEl.innerHTML.replace(
-      '<p>Gets a single playlist.</p>',
-      '<h3>Example Request</h3><p>Gets a single playlist.</p>',
-    );
-  }
-
   const examplesText: string[] = [];
   for (const el of examplesEl.children) {
     examplesText.push(parseMarkdown(el.innerHTML).trim());
@@ -60,30 +51,7 @@ const parseExamples = (endpointId: string, examplesEl: Element) => {
 
     const lastExample = exampleItems.at(-1)!;
 
-    // Ignore "Example Response" if body equals
-    // "204 No Content"
-    // https://dev.twitch.tv/docs/api/reference#modify-channel-information
-    // https://dev.twitch.tv/docs/api/reference#delete-custom-reward
-    // "The response body is empty."
-    // https://dev.twitch.tv/docs/api/reference#delete-eventsub-subscription
-    if (lastExample.type === 'example-response') {
-      if (
-        md.includes('204 No Content') ||
-        md.includes('The response body is empty')
-      ) {
-        // remove last example
-        exampleItems.splice(1, exampleItems.length - 1);
-        continue;
-      }
-    }
-
     lastExample.content.push(md);
-  }
-
-  // "Example Request" is actually "Example Response"
-  // https://dev.twitch.tv/docs/api/reference#get-vips
-  if (endpointId === 'get-vips') {
-    exampleItems[1]!.type = 'example-response';
   }
 
   type ExampleRequestResponse = {

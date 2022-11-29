@@ -35,14 +35,6 @@ const parseTableSchema = (
     }
     // sometimes ident can be 2 so use Math.ceil
     let depth = Math.ceil(nbspCount / 3);
-    // wrong depth
-    // https://dev.twitch.tv/docs/api/reference#create-stream-marker
-    if (
-      schemaObjectType === SCHEMA_OBJECT_TYPE.response &&
-      endpointId === 'create-stream-marker'
-    ) {
-      if (depth === 2) depth = 1;
-    }
     if (schemaObjectType === SCHEMA_OBJECT_TYPE.params && depth > 0) {
       throw new Error("Query Parameters' depth cannot be greater than 0");
     }

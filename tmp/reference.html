@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-11-22T16:32:28-08:00">
+<meta property="article:published_time" content="2022-11-29T11:43:57-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","@type":"BlogPosting","url":"https://dev.twitch.tv/api/reference/","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","headline":"Reference","dateModified":"2022-11-22T16:32:28-08:00","datePublished":"2022-11-22T16:32:28-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","@type":"BlogPosting","url":"https://dev.twitch.tv/api/reference/","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","headline":"Reference","dateModified":"2022-11-29T11:43:57-08:00","datePublished":"2022-11-29T11:43:57-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -2079,7 +2079,7 @@
   </tbody>
 </table>
 
-<h3>Response codes</h3>
+<h3>Response Codes</h3>
 
 <table>
   <thead>
@@ -2273,7 +2273,7 @@
   </tbody>
 </table>
 
-<h3>Response codes</h3>
+<h3>Response Codes</h3>
 
 <table>
   <thead>
@@ -2464,7 +2464,7 @@
   </tbody>
 </table>
 
-<h3>Response codes</h3>
+<h3>Response Codes</h3>
 
 <table>
   <thead>
@@ -2674,7 +2674,7 @@
   </tbody>
 </table>
 
-<h3>Response codes</h3>
+<h3>Response Codes</h3>
 
 <table>
   <thead>
@@ -2863,7 +2863,7 @@
   </tbody>
 </table>
 
-<h3>Response codes</h3>
+<h3>Response Codes</h3>
 
 <table>
   <thead>
@@ -3349,11 +3349,13 @@
 <h3>Response Codes</h3>
 
 <table>
-  <tbody>
+  <thead>
     <tr>
-      <td>HTTP Code</td>
-      <td>Description</td>
+      <th>HTTP Code</th>
+      <th>Description</th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>200 OK</td>
       <td>Successfully retrieved the list of channels.</td>
@@ -3532,13 +3534,6 @@
 <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{"game_id":"33214", "title":"there are helicopters in the game? REASON TO PLAY FORTNITE found", "broadcaster_language":"en"}'</span>
 </code></pre></div></div>
-
-<h3>Example Response</h3>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">204</span><span class="w"> </span><span class="err">No</span><span class="w"> </span><span class="err">Content</span><span class="w">
-</span></code></pre></div></div>
-
-<p> </p>
 
 			</section>
 	
@@ -4176,11 +4171,6 @@
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer vjxv3i0l4zxru966wsnwji51tmpkj2'</span>
 </code></pre></div></div>
 
-<h3>Example Response</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>204 No Content
-</code></pre></div></div>
-
 			</section>
 	
 	</section>
@@ -4772,7 +4762,7 @@
       <td>The prompt displayed to the viewer if user input is required.</td>
     </tr>
     <tr>
-      <td>      reward</td>
+      <td>      cost</td>
       <td>Int64</td>
       <td>The reward’s cost, in Channel Points.</td>
     </tr>
@@ -7630,15 +7620,15 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
   </thead>
   <tbody>
     <tr>
-      <td>204<br>No Content</td>
+      <td>204 No Content</td>
       <td>Successfully sent the announcement.</td>
     </tr>
     <tr>
-      <td>400<br>Bad Request</td>
+      <td>400 Bad Request</td>
       <td><ul><li>The <code>message</code> field in the request's body is required.</li><li>The specified color is not valid.</li></ul></td>
     </tr>
     <tr>
-      <td>401<br>Unauthorized</td>
+      <td>401 Unauthorized</td>
       <td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token is missing the <b>moderator:manage:announcements</b> scope.</li><li>The OAuth token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.</li></ul></td>
     </tr>
   </tbody>
@@ -7750,15 +7740,15 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
   </thead>
   <tbody>
     <tr>
-      <td>200<br>OK</td>
+      <td>200 OK</td>
       <td>Successfully retrieved the chat color used by the specified users.</td>
     </tr>
     <tr>
-      <td>400<br>Bad Request</td>
+      <td>400 Bad Request</td>
       <td><ul><li>The ID in the <i>user_id</i> query parameter is not valid.</li></ul></td>
     </tr>
     <tr>
-      <td>401<br>Unauthorized</td>
+      <td>401 Unauthorized</td>
       <td><ul><li>The Authorization header is required and must contain an app access token or user access token.</li><li>The OAuth token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.</li></ul></td>
     </tr>
   </tbody>
@@ -7859,15 +7849,15 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
   </thead>
   <tbody>
     <tr>
-      <td>204<br>No Content</td>
+      <td>204 No Content</td>
       <td>Successfully updated the user’s chat color.</td>
     </tr>
     <tr>
-      <td>400<br>Bad Request</td>
+      <td>400 Bad Request</td>
       <td><ul><li>The ID in the <i>user_id</i> query parameter is not valid.</li><li>The <i>color</i> query parameter is required.</li><li>The named color in the <i>color</i> query parameter is not valid.</li><li>To specify a Hex color code, the user must be a Turbo or Prime user.</li></ul></td>
     </tr>
     <tr>
-      <td>401<br>Unauthorized</td>
+      <td>401 Unauthorized</td>
       <td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>user:manage:chat_color</b> scope.</li><li>The OAuth token is not valid.</li><li>The ID in the <i>user_id</i> query parameter must match the user ID in the access token.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.</li></ul></td>
     </tr>
   </tbody>
@@ -8772,7 +8762,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <p><code class="highlighter-rouge">PATCH https://api.twitch.tv/helix/entitlements/drops</code></p>
 
-<h3>Request Body Fields</h3>
+<h3>Request Body</h3>
 
 <table>
   <thead>
@@ -11647,10 +11637,6 @@ twitch api post /eventsub/subscriptions <span class="nt">-b</span> <span class="
 
 twitch api delete /eventsub/subscriptions <span class="nt">-q</span> <span class="nb">id</span><span class="o">=</span>c839a466-034a-4d77-8d4d-c9a751516e7
 </code></pre></div></div>
-
-<h3>Example Response</h3>
-
-<p>The response body is empty.</p>
 
 			</section>
 	
@@ -15050,15 +15036,15 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
   </thead>
   <tbody>
     <tr>
-      <td>204<br>No Content</td>
+      <td>200 OK</td>
       <td>Successfully retrieved the broadcaster’s list of VIPs.</td>
     </tr>
     <tr>
-      <td>400<br>Bad Request</td>
+      <td>400 Bad Request</td>
       <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li><li>The ID in the <i>user_id</i> query parameter is not valid.</li><li>The number of <i>user_id</i> query parameters exceeds the maximum allowed.</li></ul></td>
     </tr>
     <tr>
-      <td>401<br>Unauthorized</td>
+      <td>401 Unauthorized</td>
       <td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>channel:read:vips</b>  or <b>channel:manage:vips</b> scope.</li><li>The OAuth token is not valid.</li><li>The ID in the <i>broadcaster_id</i> query parameter must match the user ID in the access token.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.</li></ul></td>
     </tr>
   </tbody>
@@ -15085,7 +15071,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 <span class="nt">-H</span> <span class="s1">'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t'</span>
 </code></pre></div></div>
 
-<h3>Example Request</h3>
+<h3>Example Response</h3>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -15165,39 +15151,39 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
   </thead>
   <tbody>
     <tr>
-      <td>204<br>No Content</td>
+      <td>204 No Content</td>
       <td>Successfully added the VIP.</td>
     </tr>
     <tr>
-      <td>400<br>Bad Request</td>
+      <td>400 Bad Request</td>
       <td><ul><li>The user in the <i>user_id</i> query parameter is blocked from the broadcaster's channel.</li><li>The ID in the <i>broadcaster_id</i> query parameter is not valid.</li><li>The ID in the <i>user_id</i> query parameter is not valid.</li></ul></td>
     </tr>
     <tr>
-      <td>401<br>Unauthorized</td>
+      <td>401 Unauthorized</td>
       <td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>channel:manage:vips</b> scope.</li><li>The OAuth token is not valid.</li><li>The ID in the <i>broadcaster_id</i> query parameter must match the user ID in the access token.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.</li></ul></td>
     </tr>
     <tr>
-      <td>403<br>Forbidden</td>
+      <td>403 Forbidden</td>
       <td><ul><li>The ID in the <i>broadcaster_id</i> query parameter must match the user ID in the access token.</li></ul></td>
     </tr>
     <tr>
-      <td>404<br>Not Found</td>
+      <td>404 Not Found</td>
       <td><ul><li>The ID in <i>broadcaster_id</i> was not found.</li><li>The ID in <i>user_id</i> was not found.</li></ul></td>
     </tr>
     <tr>
-      <td>409<br>Conflict</td>
+      <td>409 Conflict</td>
       <td>The broadcaster doesn’t have available VIP slots. <a href="https://help.twitch.tv/s/article/Managing-Roles-for-your-Channel?language=en_US#types" target="_blank">Read More</a></td>
     </tr>
     <tr>
-      <td>422<br>Unprocessable Entity</td>
+      <td>422 Unprocessable Entity</td>
       <td><ul><li>The user in <i>user_id</i> is a moderator. To make them a VIP, you must first remove them as a moderator (see <a href="https://dev.twitch.tv/docs/api/reference#remove-channel-moderator">Remove Channel Moderator</a>).</li><li>The user in the <i>user_id</i> query parameter is already a VIP.</li></ul></td>
     </tr>
     <tr>
-      <td>425<br>Too Early</td>
+      <td>425 Too Early</td>
       <td>The broadcaster must complete the Build a Community requirement before they may assign VIPs.</td>
     </tr>
     <tr>
-      <td>429<br>Too Many Requests</td>
+      <td>429 Too Many Requests</td>
       <td>The broadcaster exceeded the number of VIP that they may add within a 10-second window. See Rate Limits for this endpoint above.</td>
     </tr>
   </tbody>
@@ -15282,31 +15268,31 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
   </thead>
   <tbody>
     <tr>
-      <td>204<br>No Content</td>
+      <td>204 No Content</td>
       <td>Successfully removed the VIP status from the user.</td>
     </tr>
     <tr>
-      <td>400<br>Bad Request</td>
+      <td>400 Bad Request</td>
       <td><ul><li>The ID in <i>broadcaster_id</i> is not valid.</li><li>The ID in <i>user_id</i> is not valid.</li></ul></td>
     </tr>
     <tr>
-      <td>401<br>Unauthorized</td>
+      <td>401 Unauthorized</td>
       <td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>channel:manage:vips</b> scope.</li><li>The OAuth token is not valid.</li><li>The ID in the <i>broadcaster_id</i> query parameter must match the user ID in the access token.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.</li></ul></td>
     </tr>
     <tr>
-      <td>403<br>Forbidden</td>
+      <td>403 Forbidden</td>
       <td><ul><li>The user in <i>broadcaster_id</i> doesn't have permission to remove the user's VIP status.</li></ul></td>
     </tr>
     <tr>
-      <td>404<br>Not Found</td>
+      <td>404 Not Found</td>
       <td><ul><li>The ID in <i>broadcaster_id</i> was not found.</li><li>The ID in <i>user_id</i> was not found.</li></ul></td>
     </tr>
     <tr>
-      <td>422<br>Unprocessable Entity</td>
+      <td>422 Unprocessable Entity</td>
       <td><ul><li>The user in <i>user_id</i> is not a VIP in the broadcaster's channel.</li></ul></td>
     </tr>
     <tr>
-      <td>429<br>Too Many Requests</td>
+      <td>429 Too Many Requests</td>
       <td>The broadcaster exceeded the number of VIPs that they may remove within a 10-second window. See Rate Limits for this endpoint above.</td>
     </tr>
   </tbody>
@@ -18469,7 +18455,7 @@ END:VCALENDAR%
 
 <h3>URL</h3>
 
-<p><code class="highlighter-rouge">GET helix/search/channels</code></p>
+<p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/search/channels</code></p>
 
 <h3>Request Query Parameters</h3>
 
@@ -19285,6 +19271,7 @@ END:VCALENDAR%
 				<h3>Example Request</h3>
 
 <p>Gets all playlists.</p>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/soundtrack/playlists'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer 4a4x78f5wqvkybms7mxfist3jmzul'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: t214nt8z1rdtbj69hyarjvh5mi6fh'</span>
@@ -19325,7 +19312,10 @@ END:VCALENDAR%
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
+<h3>Example Request</h3>
+
 <p>Gets a single playlist.</p>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/soundtrack/playlists?id=B0912YMKSL'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer 4a4x78f5wqvkybms7mxfist3jmzul'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: t214nt8z1rdtbj69hyarjvh5mi6fh'</span>
@@ -20037,22 +20027,22 @@ END:VCALENDAR%
       <td>A list that contains the single marker that you added.</td>
     </tr>
     <tr>
-      <td>      id</td>
+      <td>   id</td>
       <td>String</td>
       <td>An ID that identifies this marker.</td>
     </tr>
     <tr>
-      <td>      created_at</td>
+      <td>   created_at</td>
       <td>String</td>
       <td>The UTC date and time (in RFC3339 format) of when the user created the marker.</td>
     </tr>
     <tr>
-      <td>      position_seconds</td>
+      <td>   position_seconds</td>
       <td>Integer</td>
       <td>The relative offset (in seconds) of the marker from the beginning of the stream.</td>
     </tr>
     <tr>
-      <td>      description</td>
+      <td>   description</td>
       <td>String</td>
       <td>A description that the user gave the marker to help them remember why they marked the location.</td>
     </tr>
@@ -20525,7 +20515,7 @@ END:VCALENDAR%
   </thead>
   <tbody>
     <tr>
-      <td>204 No Content</td>
+      <td>200 OK</td>
       <td>Successfully retrieved the broadcaster’s list of subscribers.</td>
     </tr>
     <tr>
@@ -20601,10 +20591,31 @@ END:VCALENDAR%
 <p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/subscriptions/user</code></p>
 
 <h3>Request Query Parameters</h3>
-<p>| Parameter | Type | Required? | Description |
-| — | — | — | — |
-| broadcaster_id | String | Yes | The ID of a partner or affiliate broadcaster.  |
-| user_id | String | Yes | The ID of the user that you’re checking to see whether they subscribe to the broadcaster in <em>broadcaster_id</em>. This ID must match the user ID in the access Token.  |</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The ID of a partner or affiliate broadcaster.</td>
+    </tr>
+    <tr>
+      <td>user_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The ID of the user that you’re checking to see whether they subscribe to the broadcaster in <em>broadcaster_id</em>. This ID must match the user ID in the access Token.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3>Response Body</h3>
 
@@ -21585,7 +21596,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/users</code></p>
 
-<h3>Required Query Parameters</h3>
+<h3>Request Query Parameters</h3>
 
 <table>
   <thead>
@@ -21935,7 +21946,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
-<h3>URLs</h3>
+<h3>URL</h3>
 
 <p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/users/follows</code></p>
 
