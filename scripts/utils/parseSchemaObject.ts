@@ -33,14 +33,9 @@ const extensionSchemaNames = {
   component: 'UserExtensionComponent',
 } as const;
 
-const parseSchemaObject = (
-  endpointId: string,
-  endpointName: string,
-  fieldSchemas: FieldSchema[],
-  schemaObjectType: SchemaObjectType,
-  schemas: Record<string, SchemaObject>,
-): ParameterObject[] => {
-  const parseParameter = ({
+const parseParameter =
+  (endpointId: string) =>
+  ({
     name,
     type,
     required,
@@ -112,188 +107,209 @@ const parseSchemaObject = (
     return parameter;
   };
 
-  const parseProperties = (fieldSchemas: FieldSchema[]): SchemaObject => {
-    const schemaObject: SchemaObject = {
-      type: 'object',
-      required: [],
-      properties: {},
-    };
-
-    const parseProperty = ({
-      name,
-      type,
-      required,
-      description,
-      enumValues,
-      children,
-    }: FieldSchema) => {
-      let property: SchemaObject = {
-        type,
-        description,
-      };
-
-      // type
-      if (typesMap[type]) {
-        property = { ...property, ...parseType(type)! };
-      }
-      if (
-        property.type === 'string' &&
-        (name.endsWith('_at') || description.includes('RFC3339'))
-      ) {
-        property.format = 'date-time';
-      }
-
-      // enum
-      if (enumValues !== null) {
-        if (property.type === 'array') {
-          property.items!.enum = enumValues;
-        } else {
-          property.enum = enumValues;
-        }
-      }
-
-      // nullable
-      if (description.toLowerCase().includes('**null**')) {
-        property.nullable = true;
-      }
-
-      // required
-      let _required = required === true;
-      if (schemaObjectType === SCHEMA_OBJECT_TYPE.body) {
-        // if there is no required column in the table - set all parameters to required
-        if (required === null) _required = true;
-
-        // All fields are required
-        // https://dev.twitch.tv/docs/api/reference#start-commercial
-        if (endpointId === 'start-commercial') {
-          _required = true;
-        }
-
-        // All fields are optional
-        // https://dev.twitch.tv/docs/api/reference#update-chat-settings
-        // https://dev.twitch.tv/docs/api/reference#update-automod-settings
-        if (
-          endpointId === 'update-chat-settings' ||
-          endpointId === 'update-automod-settings'
-        ) {
-          _required = false;
-        }
-      }
-      if (
-        schemaObjectType === SCHEMA_OBJECT_TYPE.response &&
-        required === null
-      ) {
-        _required = true;
-
-        // "pagination" and "cursor" are always optional
-        // https://dev.twitch.tv/docs/api/guide#pagination
-        if (name === 'pagination' || name === 'cursor') {
-          _required = false;
-        }
-
-        // https://dev.twitch.tv/docs/api/reference#get-extension-configuration-segment
-        if (
-          endpointId === 'get-extension-configuration-segment' &&
-          name === 'broadcaster_id'
-        ) {
-          _required = false;
-        }
-
-        // https://dev.twitch.tv/docs/api/reference#create-eventsub-subscription
-        // https://dev.twitch.tv/docs/api/reference#get-eventsub-subscriptions
-        if (
-          (endpointId === 'create-eventsub-subscription' ||
-            endpointId === 'get-eventsub-subscriptions') &&
-          [
-            'callback',
-            'session_id',
-            'connected_at',
-            'disconnected_at',
-          ].includes(name)
-        ) {
-          _required = false;
-        }
-
-        // only "active" is required
-        // https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
-        // https://dev.twitch.tv/docs/api/reference#update-user-extensions
-        if (
-          endpointId === 'get-user-active-extensions' ||
-          (endpointId === 'update-user-extensions' &&
-            ['id', 'version', 'name', 'x', 'y'].includes(name))
-        ) {
-          _required = false;
-        }
-      }
-      if (_required!) {
-        schemaObject.required!.push(name);
-      }
-
-      // children
-      if (children.length > 0) {
-        // map[string]Object type
-        // https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
-        // https://dev.twitch.tv/docs/api/reference#update-user-extensions
-        if (property.type === 'map[string]Object') {
-          property.type = 'object';
-
-          if (!Object.keys(extensionSchemaNames).includes(name)) {
-            throw new Error(
-              'Wrong property name for type map[string]Object: ' + endpointId,
-            );
-          }
-
-          const schemaName =
-            extensionSchemaNames[name as keyof typeof extensionSchemaNames];
-
-          property.additionalProperties = {
-            $ref: `#/components/schemas/${schemaName}`,
-          };
-
-          const schema = parseProperties(children);
-          schemas[schemaName] = schema;
-
-          // UserExtension${type}Update
-          const updateSchema = structuredClone(schema);
-          delete updateSchema.properties!['name'];
-          schemas[schemaName + 'Update'] = updateSchema;
-        }
-
-        // array
-        else if (property.type === 'array') {
-          property.items = parseProperties(children);
-        }
-
-        // object
-        else if (property.type === 'object') {
-          property = {
-            description,
-            ...parseProperties(children),
-          };
-        }
-
-        if (property.type !== 'array' && property.type !== 'object') {
-          console.warn(
-            'Wrong nested property type: ' + property.type + ' ' + endpointId,
-          );
-        }
-      }
-
-      schemaObject.properties![name] = property;
-    };
-
-    fieldSchemas.forEach(parseProperty);
-
-    return schemaObject;
+const parseProperties = (
+  endpointId: string,
+  fieldSchemas: FieldSchema[],
+  schemaObjectType: SchemaObjectType,
+  schemas: Record<string, SchemaObject>,
+): SchemaObject => {
+  const schemaObject: SchemaObject = {
+    type: 'object',
+    required: [],
+    properties: {},
   };
 
+  const parseProperty = ({
+    name,
+    type,
+    required,
+    description,
+    enumValues,
+    children,
+  }: FieldSchema) => {
+    let property: SchemaObject = {
+      type,
+      description,
+    };
+
+    // type
+    if (typesMap[type]) {
+      property = { ...property, ...parseType(type)! };
+    }
+    if (
+      property.type === 'string' &&
+      (name.endsWith('_at') || description.includes('RFC3339'))
+    ) {
+      property.format = 'date-time';
+    }
+
+    // enum
+    if (enumValues !== null) {
+      if (property.type === 'array') {
+        property.items!.enum = enumValues;
+      } else {
+        property.enum = enumValues;
+      }
+    }
+
+    // nullable
+    if (description.toLowerCase().includes('**null**')) {
+      property.nullable = true;
+    }
+
+    // required
+    let _required = required === true;
+    if (schemaObjectType === SCHEMA_OBJECT_TYPE.body) {
+      // if there is no required column in the table - set all parameters to required
+      if (required === null) _required = true;
+
+      // All fields are required
+      // https://dev.twitch.tv/docs/api/reference#start-commercial
+      if (endpointId === 'start-commercial') {
+        _required = true;
+      }
+
+      // All fields are optional
+      // https://dev.twitch.tv/docs/api/reference#update-chat-settings
+      // https://dev.twitch.tv/docs/api/reference#update-automod-settings
+      if (
+        endpointId === 'update-chat-settings' ||
+        endpointId === 'update-automod-settings'
+      ) {
+        _required = false;
+      }
+    }
+    if (schemaObjectType === SCHEMA_OBJECT_TYPE.response && required === null) {
+      _required = true;
+
+      // "pagination" and "cursor" are always optional
+      // https://dev.twitch.tv/docs/api/guide#pagination
+      if (name === 'pagination' || name === 'cursor') {
+        _required = false;
+      }
+
+      // https://dev.twitch.tv/docs/api/reference#get-extension-configuration-segment
+      if (
+        endpointId === 'get-extension-configuration-segment' &&
+        name === 'broadcaster_id'
+      ) {
+        _required = false;
+      }
+
+      // https://dev.twitch.tv/docs/api/reference#create-eventsub-subscription
+      // https://dev.twitch.tv/docs/api/reference#get-eventsub-subscriptions
+      if (
+        (endpointId === 'create-eventsub-subscription' ||
+          endpointId === 'get-eventsub-subscriptions') &&
+        ['callback', 'session_id', 'connected_at', 'disconnected_at'].includes(
+          name,
+        )
+      ) {
+        _required = false;
+      }
+
+      // only "active" is required
+      // https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
+      // https://dev.twitch.tv/docs/api/reference#update-user-extensions
+      if (
+        endpointId === 'get-user-active-extensions' ||
+        (endpointId === 'update-user-extensions' &&
+          ['id', 'version', 'name', 'x', 'y'].includes(name))
+      ) {
+        _required = false;
+      }
+    }
+    if (_required!) {
+      schemaObject.required!.push(name);
+    }
+
+    // children
+    if (children.length > 0) {
+      // map[string]Object type
+      // https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
+      // https://dev.twitch.tv/docs/api/reference#update-user-extensions
+      if (property.type === 'map[string]Object') {
+        property.type = 'object';
+
+        if (!Object.keys(extensionSchemaNames).includes(name)) {
+          throw new Error(
+            'Wrong property name for type map[string]Object: ' + endpointId,
+          );
+        }
+
+        const schemaName =
+          extensionSchemaNames[name as keyof typeof extensionSchemaNames];
+
+        property.additionalProperties = {
+          $ref: `#/components/schemas/${schemaName}`,
+        };
+
+        const schema = parseProperties(
+          endpointId,
+          children,
+          schemaObjectType,
+          schemas,
+        );
+        schemas[schemaName] = schema;
+
+        // UserExtension${type}Update
+        const updateSchema = structuredClone(schema);
+        delete updateSchema.properties!['name'];
+        schemas[schemaName + 'Update'] = updateSchema;
+      }
+
+      // array
+      else if (property.type === 'array') {
+        property.items = parseProperties(
+          endpointId,
+          children,
+          schemaObjectType,
+          schemas,
+        );
+      }
+
+      // object
+      else if (property.type === 'object') {
+        property = {
+          description,
+          ...parseProperties(endpointId, children, schemaObjectType, schemas),
+        };
+      }
+
+      if (property.type !== 'array' && property.type !== 'object') {
+        console.warn(
+          'Wrong nested property type: ' + property.type + ' ' + endpointId,
+        );
+      }
+    }
+
+    schemaObject.properties![name] = property;
+  };
+
+  fieldSchemas.forEach(parseProperty);
+
+  return schemaObject;
+};
+
+const parseSchemaObject = (
+  endpointId: string,
+  endpointName: string,
+  fieldSchemas: FieldSchema[],
+  schemaObjectType: SchemaObjectType,
+  schemas: Record<string, SchemaObject>,
+): ParameterObject[] => {
   if (schemaObjectType === SCHEMA_OBJECT_TYPE.params) {
-    return fieldSchemas.map(parseParameter);
+    return fieldSchemas.map(parseParameter(endpointId));
   }
 
   if (schemaObjectType === SCHEMA_OBJECT_TYPE.body) {
     const schemaName = getBodySchemaName(endpointName);
-    const schemaObject = parseProperties(fieldSchemas);
+    const schemaObject = parseProperties(
+      endpointId,
+      fieldSchemas,
+      schemaObjectType,
+      schemas,
+    );
 
     // https://dev.twitch.tv/docs/api/reference#update-user-extensions
     if (endpointId === 'update-user-extensions') {
@@ -323,7 +339,12 @@ const parseSchemaObject = (
 
   if (schemaObjectType === SCHEMA_OBJECT_TYPE.response) {
     const schemaName = getResponseSchemaName(endpointName);
-    const schemaObject = parseProperties(fieldSchemas);
+    const schemaObject = parseProperties(
+      endpointId,
+      fieldSchemas,
+      schemaObjectType,
+      schemas,
+    );
 
     // https://dev.twitch.tv/docs/api/reference#get-cheermotes
     // Response: data[] -> tiers[] -> images
