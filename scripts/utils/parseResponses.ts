@@ -1,10 +1,7 @@
 import type { ResponseObject, ResponsesObject } from '../types';
 import parseMarkdown from './parseMarkdown.js';
 
-const parseResponses = (
-  table: Element,
-  endpointId: string,
-): ResponsesObject => {
+const parseResponses = (table: Element): ResponsesObject => {
   const responses: ResponsesObject = {};
   table.querySelectorAll('tbody tr').forEach((tr) => {
     const [codeEl, descriptionEl] = tr.children;

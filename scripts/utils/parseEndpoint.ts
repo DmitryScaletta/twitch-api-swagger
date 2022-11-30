@@ -168,7 +168,7 @@ const parseEndpoint =
 
       // Response Codes | Response codes
       if (currentSection.toLowerCase() === 'response codes') {
-        responses = parseResponses(el, id);
+        responses = parseResponses(el);
       }
     }
 
