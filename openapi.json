@@ -2908,7 +2908,7 @@
         "security": [
           {
             "twitch_auth": [
-              "user:manage:chat\\_color"
+              "user:manage:chat_color"
             ]
           }
         ]
@@ -5078,7 +5078,7 @@
         "security": [
           {
             "twitch_auth": [
-              "channel:read:hype\\_train"
+              "channel:read:hype_train"
             ]
           }
         ]
@@ -5316,7 +5316,7 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:read:automod\\_settings"
+              "moderator:read:automod_settings"
             ]
           }
         ]
@@ -5441,7 +5441,7 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:manage:automod\\_settings"
+              "moderator:manage:automod_settings"
             ]
           }
         ]
@@ -5714,7 +5714,7 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:manage:banned\\_users"
+              "moderator:manage:banned_users"
             ]
           }
         ]
@@ -5796,7 +5796,7 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:manage:banned\\_users"
+              "moderator:manage:banned_users"
             ]
           }
         ]
@@ -5896,7 +5896,7 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:read:blocked\\_terms"
+              "moderator:read:blocked_terms"
             ]
           }
         ]
@@ -6013,7 +6013,7 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:manage:blocked\\_terms"
+              "moderator:manage:blocked_terms"
             ]
           }
         ]
@@ -6075,7 +6075,7 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:manage:blocked\\_terms"
+              "moderator:manage:blocked_terms"
             ]
           }
         ]
@@ -6141,7 +6141,7 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:manage:chat\\_messages"
+              "moderator:manage:chat_messages"
             ]
           }
         ]
@@ -6669,7 +6669,7 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:manage:shield\\_mode"
+              "moderator:manage:shield_mode"
             ]
           }
         ]
@@ -6745,8 +6745,8 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:read:shield\\_mode",
-              "moderator:manage:shield\\_mode"
+              "moderator:read:shield_mode",
+              "moderator:manage:shield_mode"
             ]
           }
         ]
@@ -8606,7 +8606,7 @@
         "security": [
           {
             "twitch_auth": [
-              "channel:read:stream\\_key"
+              "channel:read:stream_key"
             ]
           }
         ]
@@ -10016,7 +10016,7 @@
         "security": [
           {
             "twitch_auth": [
-              "user:read:blocked\\_users"
+              "user:read:blocked_users"
             ]
           }
         ]
@@ -10082,7 +10082,7 @@
         "security": [
           {
             "twitch_auth": [
-              "user:manage:blocked\\_users"
+              "user:manage:blocked_users"
             ]
           }
         ]
@@ -10123,7 +10123,7 @@
         "security": [
           {
             "twitch_auth": [
-              "user:manage:blocked\\_users"
+              "user:manage:blocked_users"
             ]
           }
         ]

@@ -32,7 +32,9 @@ const parseScopes = (lines: string[]) => {
     let m = SCOPE_REGEX.exec(line);
     while (m !== null) {
       const scope = m[2] || m[3];
-      if (scope?.includes(':')) scopes.push(scope);
+      if (scope?.includes(':')) {
+        scopes.push(scope.replaceAll('\\', ''));
+      }
       m = SCOPE_REGEX.exec(line);
     }
   }
