@@ -2035,8 +2035,8 @@
     },
     "/chat/chatters": {
       "get": {
-        "summary": "BETA Gets the list of users that are connected to the broadcaster’s chat session.",
-        "description": "[BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets the list of users that are connected to the broadcaster’s chat session.\n\n**NOTE**: There is a delay between when users join and leave a chat and when the list is updated accordingly.\n\nTo determine whether a user is a moderator or VIP, use the [Get Moderators](https://dev.twitch.tv/docs/api/reference#get-moderators) and [Get VIPs](https://dev.twitch.tv/docs/api/reference#get-vips) endpoints. You can check the roles of up to 100 users.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:chatters** scope.",
+        "summary": "Gets the list of users that are connected to the broadcaster’s chat session.",
+        "description": "Gets the list of users that are connected to the broadcaster’s chat session.\n\n**NOTE**: There is a delay between when users join and leave a chat and when the list is updated accordingly.\n\nTo determine whether a user is a moderator or VIP, use the [Get Moderators](https://dev.twitch.tv/docs/api/reference#get-moderators) and [Get VIPs](https://dev.twitch.tv/docs/api/reference#get-vips) endpoints. You can check the roles of up to 100 users.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:chatters** scope.",
         "tags": [
           "Chat"
         ],
@@ -6555,6 +6555,174 @@
             "twitch_auth": [
               "channel:manage:vips"
             ]
+          }
+        ]
+      }
+    },
+    "/moderation/shield_mode": {
+      "put": {
+        "summary": "BETA Activates or deactivates the broadcaster’s Shield Mode.",
+        "description": "[BETA](https://dev.twitch.tv/docs/product-lifecycle) Activates or deactivates the broadcaster’s Shield Mode.\n\nTwitch’s Shield Mode feature is like a panic button that broadcasters can push to protect themselves from chat abuse coming from one or more accounts. When activated, Shield Mode applies the overrides that the broadcaster configured in the Twitch UX. If the broadcaster hasn’t configured Shield Mode, it applies default overrides.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:shield\\_mode** scope.",
+        "tags": [
+          "Moderation"
+        ],
+        "externalDocs": {
+          "description": "Update Shield Mode Status",
+          "url": "https://dev.twitch.tv/docs/api/reference#update-shield-mode-status"
+        },
+        "operationId": "update-shield-mode-status",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "The ID of the broadcaster whose Shield Mode you want to activate or deactivate.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "moderator_id",
+            "in": "query",
+            "description": "The ID of the broadcaster or a user that is one of the broadcaster’s moderators. This ID must match the user ID in the access token.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateShieldModeStatusBody"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "data": {
+                      "is_active": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated the broadcaster’s Shield Mode status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateShieldModeStatusResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -X PUT 'https://api.twitch.tv/helix/moderation/shield_mode?broadcaster_id=12345&moderator_id=98765' \\\n-H 'Authorization: Bearer kpvy3cjboypmiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfn0yan9c87zr6t' \\\n-H 'Client-Type: application/json' \\\n-d '{\"data\":{\"is_active\":false}}'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "is_active": false,
+                          "moderator_id": "98765",
+                          "moderator_name": "SimplySimple",
+                          "moderator_login": "simplysimple",
+                          "last_activated_at": "2022-07-26T17:16:03.123Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The ID in the _broadcaster\\_id_ query parameter is not valid.\n* The `is_active` field is required.\n* The value in the `is_active` field is not valid."
+          },
+          "401": {
+            "description": "* The ID in _moderator\\_id_ must match the user ID in the user access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **moderator:manage:shield\\_mode** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
+          },
+          "403": {
+            "description": "* The user in _moderator\\_id_ is not one of the broadcaster's moderators."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
+      },
+      "get": {
+        "summary": "BETA Gets the broadcaster’s Shield Mode activation status.",
+        "description": "[BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets the broadcaster’s Shield Mode activation status.\n\nTo receive notification when the broadcaster activates and deactivates Shield Mode, subscribe to the [channel.shield\\_mode.begin](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshield%5Fmodebegin) and [channel.shield\\_mode.end](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshield%5Fmodeend) subscription types.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:shield\\_mode** or **moderator:manage:shield\\_mode** scope.",
+        "tags": [
+          "Moderation"
+        ],
+        "externalDocs": {
+          "description": "Get Shield Mode Status",
+          "url": "https://dev.twitch.tv/docs/api/reference#get-shield-mode-status"
+        },
+        "operationId": "get-shield-mode-status",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "The ID of the broadcaster whose Shield Mode activation status you want to get.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "moderator_id",
+            "in": "query",
+            "description": "The ID of the broadcaster or a user that is one of the broadcaster’s moderators. This ID must match the user ID in the access token.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the broadcaster’s Shield Mode activation status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetShieldModeStatusResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/moderation/shield_mode?broadcaster_id=12345&moderator_id=98765' \\\n-H 'Authorization: Bearer kpvy3cjboypmiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfn0yan9c87zr6t'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "is_active": true,
+                          "moderator_id": "98765",
+                          "moderator_name": "SimplySimple",
+                          "moderator_login": "simplysimple",
+                          "last_activated_at": "2022-07-26T17:16:03.123Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The ID in the _broadcaster\\_id_ query parameter is not valid."
+          },
+          "401": {
+            "description": "* The ID in _moderator\\_id_ must match the user ID in the user access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **moderator:read:shield\\_mode** or **moderator:manage:shield\\_mode** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
+          },
+          "403": {
+            "description": "* The user in _moderator\\_id_ is not one of the broadcaster's moderators."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": []
           }
         ]
       }
@@ -11381,7 +11549,7 @@
           },
           "delay": {
             "type": "integer",
-            "description": "The value of the broadcaster’s stream delay setting, in seconds. Reserved for users with Partner status.",
+            "description": "The value of the broadcaster’s stream delay setting, in seconds. This field’s value defaults to zero unless 1) the request specifies a user access token, 2) the ID in the _broadcaster\\_id_ query parameter matches the user ID in the access token, and 3) the broadcaster has partner status and they set a non-zero stream delay value.",
             "format": "int32"
           }
         }
@@ -15132,6 +15300,108 @@
           }
         }
       },
+      "UpdateShieldModeStatusBody": {
+        "type": "object",
+        "required": [
+          "is_active"
+        ],
+        "properties": {
+          "is_active": {
+            "type": "boolean",
+            "description": "A Boolean value that determines whether to activate Shield Mode. Set to **true** to activate Shield Mode; otherwise, **false** to deactivate Shield Mode."
+          }
+        }
+      },
+      "UpdateShieldModeStatusResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "A list that contains a single object with the broadcaster’s updated Shield Mode status.",
+            "items": {
+              "type": "object",
+              "required": [
+                "is_active",
+                "moderator_id",
+                "moderator_login",
+                "moderator_name",
+                "last_activated_at"
+              ],
+              "properties": {
+                "is_active": {
+                  "type": "boolean",
+                  "description": "A Boolean value that determines whether Shield Mode is active. Is **true** if Shield Mode is active; otherwise, **false**."
+                },
+                "moderator_id": {
+                  "type": "string",
+                  "description": "An ID that identifies the moderator that last activated Shield Mode."
+                },
+                "moderator_login": {
+                  "type": "string",
+                  "description": "The moderator’s login name."
+                },
+                "moderator_name": {
+                  "type": "string",
+                  "description": "The moderator’s display name."
+                },
+                "last_activated_at": {
+                  "type": "string",
+                  "description": "The UTC timestamp (in RFC3339 format) of when Shield Mode was last activated.",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetShieldModeStatusResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "A list that contains a single object with the broadcaster’s Shield Mode status.",
+            "items": {
+              "type": "object",
+              "required": [
+                "is_active",
+                "moderator_id",
+                "moderator_login",
+                "moderator_name",
+                "last_activated_at"
+              ],
+              "properties": {
+                "is_active": {
+                  "type": "boolean",
+                  "description": "A Boolean value that determines whether Shield Mode is active. Is **true** if the broadcaster activated Shield Mode; otherwise, **false**."
+                },
+                "moderator_id": {
+                  "type": "string",
+                  "description": "An ID that identifies the moderator that last activated Shield Mode. Is an empty string if Shield Mode hasn’t been previously activated."
+                },
+                "moderator_login": {
+                  "type": "string",
+                  "description": "The moderator’s login name. Is an empty string if Shield Mode hasn’t been previously activated."
+                },
+                "moderator_name": {
+                  "type": "string",
+                  "description": "The moderator’s display name. Is an empty string if Shield Mode hasn’t been previously activated."
+                },
+                "last_activated_at": {
+                  "type": "string",
+                  "description": "The UTC timestamp (in RFC3339 format) of when Shield Mode was last activated. Is an empty string if Shield Mode hasn’t been previously activated.",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      },
       "Poll": {
         "type": "object",
         "required": [
@@ -17963,6 +18233,8 @@
               "moderator:read:chat_settings": "View a broadcaster’s chat room settings.",
               "moderator:manage:chat_settings": "Manage a broadcaster’s chat room settings.",
               "moderator:read:chatters": "View the chatters in a broadcaster’s chat room.",
+              "moderator:read:shield_mode": "View a broadcaster’s Shield Mode status.",
+              "moderator:manage:shield_mode": "Manage a broadcaster’s Shield Mode status.",
               "user:edit": "Manage a user object.",
               "user:manage:blocked_users": "Manage the block list of a user.",
               "user:read:blocked_users": "View the block list of a user.",
