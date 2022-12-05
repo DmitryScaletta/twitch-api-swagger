@@ -23,8 +23,8 @@ import parseSchemaObject from './parseSchemaObject.js';
 import parseTableAsMarkdown from './parseTableAsMarkdown.js';
 import getDescriptionText from './getDescriptionText.js';
 
-// https://regex101.com/r/g6DCKc/1
-const SCOPE_REGEX = /(:?\*\*([a-z:_]+)\*\*|`([a-z:_]+)`)/g;
+// https://regex101.com/r/omJKyZ/1
+const SCOPE_REGEX = /(:?\*\*([a-z:_\\]+)\*\*|`([a-z:_]+)`)/g;
 
 const parseScopes = (lines: string[]) => {
   const scopes: string[] = [];
