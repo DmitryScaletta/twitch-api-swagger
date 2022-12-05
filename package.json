@@ -15,6 +15,7 @@
   "type": "module",
   "scripts": {
     "build": "ts-node-esm ./scripts/build.ts",
+    "serve": "npx static-server dist -z",
     "deploy": "surge ./dist twitch-api-swagger.surge.sh"
   },
   "devDependencies": {
