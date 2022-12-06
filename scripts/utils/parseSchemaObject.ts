@@ -289,6 +289,17 @@ const parseProperties = (
 
   fieldSchemas.forEach(parseProperty);
 
+  if (schemaObject.type === 'object' && schemaObject.required!.length === 0) {
+    delete schemaObject.required;
+  }
+
+  if (
+    schemaObject.type === 'array' &&
+    schemaObject.items!.required!.length === 0
+  ) {
+    delete schemaObject.items!.required;
+  }
+
   return schemaObject;
 };
 

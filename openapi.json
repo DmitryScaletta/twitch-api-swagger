@@ -11095,7 +11095,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -11164,7 +11163,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -11533,7 +11531,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -11608,7 +11605,6 @@
       },
       "ModifyChannelInformationBody": {
         "type": "object",
-        "required": [],
         "properties": {
           "game_id": {
             "type": "string",
@@ -12067,7 +12063,6 @@
       },
       "UpdateCustomRewardBody": {
         "type": "object",
-        "required": [],
         "properties": {
           "title": {
             "type": "string",
@@ -12360,7 +12355,6 @@
           "pagination": {
             "description": "An object that contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -12409,7 +12403,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -12917,7 +12910,6 @@
       },
       "UpdateChatSettingsBody": {
         "type": "object",
-        "required": [],
         "properties": {
           "emote_mode": {
             "type": "boolean",
@@ -13238,7 +13230,6 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13354,7 +13345,6 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -13366,7 +13356,6 @@
       },
       "UpdateDropsEntitlementsBody": {
         "type": "object",
-        "required": [],
         "properties": {
           "entitlement_ids": {
             "type": "array",
@@ -14418,7 +14407,6 @@
           "pagination": {
             "description": "An object that contains the cursor used to get the next page of subscriptions. The object is empty if there are no more pages to get. The number of subscriptions returned per page is undertermined.",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14471,7 +14459,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14735,7 +14722,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -14921,7 +14907,6 @@
       },
       "UpdateAutoModSettingsBody": {
         "type": "object",
-        "required": [],
         "properties": {
           "aggression": {
             "type": "integer",
@@ -15055,7 +15040,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15204,7 +15188,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15279,7 +15262,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15327,7 +15309,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15581,7 +15562,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -15873,7 +15853,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -16132,7 +16111,6 @@
               "pagination": {
                 "description": "The information used to page through a list of results. The object is empty if there are no more pages left to page through. [Read more](https://dev.twitch.tv/docs/api/guide#pagination).",
                 "type": "object",
-                "required": [],
                 "properties": {
                   "cursor": {
                     "type": "string",
@@ -16242,7 +16220,6 @@
       },
       "UpdateChannelStreamScheduleSegmentBody": {
         "type": "object",
-        "required": [],
         "properties": {
           "start_time": {
             "type": "string",
@@ -16613,7 +16590,6 @@
           "pagination": {
             "description": "Contains the information used to page through a list of results. The object is empty if there are no more pages to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -16666,7 +16642,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -16798,7 +16773,6 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -16824,7 +16798,6 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -16984,7 +16957,6 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -17084,7 +17056,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -17220,7 +17191,6 @@
           "pagination": {
             "description": "The information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -17247,7 +17217,6 @@
       },
       "ReplaceStreamTagsBody": {
         "type": "object",
-        "required": [],
         "properties": {
           "tag_ids": {
             "type": "array",
@@ -17608,7 +17577,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
@@ -17865,12 +17833,10 @@
       },
       "GetUserActiveExtensionsResponse": {
         "type": "object",
-        "required": [],
         "properties": {
           "data": {
             "description": "The active extensions that the broadcaster has installed.",
             "type": "object",
-            "required": [],
             "properties": {
               "panel": {
                 "type": "object",
@@ -18105,7 +18071,6 @@
           "pagination": {
             "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. [Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
             "type": "object",
-            "required": [],
             "properties": {
               "cursor": {
                 "type": "string",
