@@ -13,15 +13,16 @@ import {
 
 // prettier-ignore
 const typesMap: Record<string, SchemaObject> = {
-  String:             { type: 'string' },
-  'String[]':         { type: 'array', items: { type: 'string' }},
-  Integer:            { type: 'integer', format: 'int32' },
-  'Unsigned Integer': { type: 'integer', format: 'int32' },
-  Int64:              { type: 'integer', format: 'int64' },
-  float:              { type: 'number', format: 'float' },
-  Boolean:            { type: 'boolean' },
-  'Object':           { type: 'object' },
-  'Object[]':         { type: 'array', items: { type: 'object' } },
+  String:               { type: 'string' },
+  'String[]':           { type: 'array', items: { type: 'string' }},
+  Integer:              { type: 'integer', format: 'int32' },
+  'Unsigned Integer':   { type: 'integer', format: 'int32' },
+  Int64:                { type: 'integer', format: 'int64' },
+  float:                { type: 'number', format: 'float' },
+  Boolean:              { type: 'boolean' },
+  'Object':             { type: 'object' },
+  'Object[]':           { type: 'array', items: { type: 'object' } },
+  'map[string,string]': { type: 'object', additionalProperties: { type: 'string' } },
 };
 
 const parseType = (rawType: string): SchemaObject | null =>
