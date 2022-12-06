@@ -36,7 +36,7 @@ export const PARAMS_MORE_THAN_ONE_VALUES: Record<string, string[]> = {
   'get-code-status': ['code'],
   'get-drops-entitlements': ['id'],
   'redeem-code': ['code'],
-  'get-games': ['id', 'name'],
+  'get-games': ['id', 'name', 'igdb_id'],
   'get-banned-users': ['user_id'],
   'get-moderators': ['user_id'],
   'get-vips': ['user_id'],
