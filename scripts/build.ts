@@ -1,4 +1,5 @@
 import fs from 'node:fs/promises';
+import YAML from 'yaml';
 import generateOpenApi from './utils/generateOpenApi.js';
 import { HTML_DESCRIPTION, OPEN_API_TITLE } from './utils/constants.js';
 import parseScopes from './utils/parseScopes.js';
@@ -36,6 +37,7 @@ const main = async () => {
     fs.writeFile(REFERENCE_FILENAME, referenceHtml),
     fs.writeFile(SCOPES_FILENAME, referenceHtml),
     fs.writeFile('./openapi.json', JSON.stringify(openApi, null, 2)),
+    fs.writeFile('./openapi.yaml', YAML.stringify(openApi)),
     fs.writeFile('./dist/openapi.json', JSON.stringify(openApi)),
     fs.writeFile('./dist/index.html', indexHtml),
   ]);
