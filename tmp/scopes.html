@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-12-05T10:49:45-08:00">
+<meta property="article:published_time" content="2022-12-08T07:23:47-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","@type":"BlogPosting","url":"https://dev.twitch.tv/api/reference/","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","headline":"Reference","dateModified":"2022-12-05T10:49:45-08:00","datePublished":"2022-12-05T10:49:45-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","@type":"BlogPosting","url":"https://dev.twitch.tv/api/reference/","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","headline":"Reference","dateModified":"2022-12-08T07:23:47-08:00","datePublished":"2022-12-08T07:23:47-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -819,7 +819,7 @@
 								<td>Bits</td>
 							
 							<td><a href="#get-extension-transactions">Get Extension Transactions</a></td>
-							<td><p>Gets a list of transactions for an extension.</p>
+							<td><p>Gets an extension’s list of transactions.</p>
 </td>
 						</tr>
 					
@@ -852,7 +852,7 @@
 								<td>Channels</td>
 							
 							<td><a href="#get-channel-editors">Get Channel Editors</a></td>
-							<td><p>Gets a list of users that are editors for the specified broadcaster.</p>
+							<td><p>Gets the broadcaster’s list editors.</p>
 </td>
 						</tr>
 					
@@ -962,7 +962,7 @@
 								<td>Chat</td>
 							
 							<td><a href="#get-channel-emotes">Get Channel Emotes</a></td>
-							<td><p>Gets all emotes that the specified Twitch channel created.</p>
+							<td><p>Gets the broadcaster’s list of custom emotes.</p>
 </td>
 						</tr>
 					
@@ -995,7 +995,7 @@
 								<td>Chat</td>
 							
 							<td><a href="#get-channel-chat-badges">Get Channel Chat Badges</a></td>
-							<td><p>Gets all badges that the specified broadcaster created.</p>
+							<td><p>Gets the broadcaster’s list of custom chat badges.</p>
 </td>
 						</tr>
 					
@@ -1006,7 +1006,7 @@
 								<td>Chat</td>
 							
 							<td><a href="#get-global-chat-badges">Get Global Chat Badges</a></td>
-							<td><p>Gets the list of chat badges that Twitch created.</p>
+							<td><p>Gets Twitch’s list of chat badges.</p>
 </td>
 						</tr>
 					
@@ -1776,7 +1776,7 @@
 								<td>Streams</td>
 							
 							<td><a href="#get-streams">Get Streams</a></td>
-							<td><p>Gets a list of all broadcasters that are streaming.</p>
+							<td><p>Gets a list of all streams.</p>
 </td>
 						</tr>
 					
@@ -1787,7 +1787,7 @@
 								<td>Streams</td>
 							
 							<td><a href="#get-followed-streams">Get Followed Streams</a></td>
-							<td><p>Gets a list of live streams of broadcasters that the specified user follows.</p>
+							<td><p>Gets the list of broadcasters that the user follows and that are streaming live.</p>
 </td>
 						</tr>
 					
@@ -3000,7 +3000,7 @@
 			<h2 id="get-extension-transactions">Get Extension Transactions</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[5]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets a list of transactions for an extension. A transaction records the exchange of a currency (for example, Bits) for a digital product.</p>
+				<p>Gets an extension’s list of transactions. A transaction records the exchange of a currency (for example, Bits) for a digital product.</p>
 
 <h3>Authentication</h3>
 
@@ -3185,7 +3185,7 @@
   <tbody>
     <tr>
       <td>200 OK</td>
-      <td>Sccessfully retrieved the list of transactions.</td>
+      <td>Successfully retrieved the list of transactions.</td>
     </tr>
     <tr>
       <td>400 Bad Request</td>
@@ -3570,7 +3570,7 @@
 			<h2 id="get-channel-editors">Get Channel Editors</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[8]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets a list of users that are editors for the specified broadcaster.</p>
+				<p>Gets the broadcaster’s list editors.</p>
 <h3>Authentication</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:editors</strong> scope.</p>
@@ -3646,7 +3646,7 @@
   <tbody>
     <tr>
       <td>200 OK</td>
-      <td>Successfully retrieved the list of editors.</td>
+      <td>Successfully retrieved the broadcaster’s list of editors.</td>
     </tr>
     <tr>
       <td>400 Bad Request</td>
@@ -4015,7 +4015,7 @@
   <tbody>
     <tr>
       <td>200 OK</td>
-      <td>Successfully created the Custom Reward.</td>
+      <td>Successfully created the custom reward.</td>
     </tr>
     <tr>
       <td>400 Bad Request</td>
@@ -4441,7 +4441,7 @@
   <tbody>
     <tr>
       <td>200 OK</td>
-      <td>Successfully retrieved the broadcaster’s list of the Custom Rewards.</td>
+      <td>Successfully retrieved the broadcaster’s list of custom rewards.</td>
     </tr>
     <tr>
       <td>400 Bad Request</td>
@@ -5247,7 +5247,7 @@
   <tbody>
     <tr>
       <td>200 OK</td>
-      <td>Successfully updated the Custom Reward.</td>
+      <td>Successfully updated the custom reward.</td>
     </tr>
     <tr>
       <td>400 Bad Request</td>
@@ -6234,7 +6234,7 @@
 			<h2 id="get-channel-emotes">Get Channel Emotes</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[18]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets all emotes that the specified Twitch channel created. Broadcasters create these custom emotes for users who subscribe to or follow the channel or cheer Bits in the channel’s chat window. <a href="/docs/irc/emotes">Learn More</a></p>
+				<p>Gets the broadcaster’s list of custom emotes. Broadcasters create these custom emotes for users who subscribe to or follow the channel or cheer Bits in the channel’s chat window. <a href="/docs/irc/emotes">Learn More</a></p>
 
 <p>For information about the custom emotes, see <a href="https://help.twitch.tv/s/article/subscriber-emote-guide" target="_blank">subscriber emotes</a>, <a href="https://help.twitch.tv/s/article/custom-bit-badges-guide?language=bg#slots" target="_blank">Bits tier emotes</a>, and <a href="https://blog.twitch.tv/en/2021/06/04/kicking-off-10-years-with-our-biggest-emote-update-ever/" target="_blank">follower emotes</a>.</p>
 
@@ -6365,7 +6365,7 @@
   <tbody>
     <tr>
       <td>200 OK</td>
-      <td>Successfully retrieved the custom emotes for the specified broadcaster.</td>
+      <td>Successfully retrieved broadcaster’s list of custom emotes.</td>
     </tr>
     <tr>
       <td>400 Bad Request</td>
@@ -6466,7 +6466,7 @@ twitch api get /chat/emotes <span class="nt">-q</span> <span class="nv">broadcas
 			<h2 id="get-global-emotes">Get Global Emotes</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[19]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets all <a href="https://www.twitch.tv/creatorcamp/en/learn-the-basics/emotes/" target="_blank">global emotes</a>. Global emotes are Twitch-created emotes that users can use in any Twitch chat.</p>
+				<p>Gets the list of <a href="https://www.twitch.tv/creatorcamp/en/learn-the-basics/emotes/" target="_blank">global emotes</a>. Global emotes are Twitch-created emotes that users can use in any Twitch chat.</p>
 
 <p><a href="/docs/irc/emotes">Learn More</a></p>
 
@@ -6563,7 +6563,7 @@ twitch api get /chat/emotes <span class="nt">-q</span> <span class="nv">broadcas
   <tbody>
     <tr>
       <td>200 OK</td>
-      <td>Successfully retrieved the global emotes.</td>
+      <td>Successfully retrieved Twitch’s list of global emotes.</td>
     </tr>
     <tr>
       <td>401 Unauthorized</td>
@@ -6839,7 +6839,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 			<h2 id="get-channel-chat-badges">Get Channel Chat Badges</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[21]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets all badges that the specified broadcaster created. The list is empty if the broadcaster hasn’t created custom chat badges. For information about custom badges, see <a href="https://help.twitch.tv/s/article/subscriber-badge-guide" target="_blank">subscriber badges</a> and <a href="https://help.twitch.tv/s/article/custom-bit-badges-guide" target="_blank">Bits badges</a>.</p>
+				<p>Gets the broadcaster’s list of custom chat badges. The list is empty if the broadcaster hasn’t created custom chat badges. For information about custom badges, see <a href="https://help.twitch.tv/s/article/subscriber-badge-guide" target="_blank">subscriber badges</a> and <a href="https://help.twitch.tv/s/article/custom-bit-badges-guide" target="_blank">Bits badges</a>.</p>
 
 <h3>Authorization</h3>
 
@@ -6998,7 +6998,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 			<h2 id="get-global-chat-badges">Get Global Chat Badges</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[22]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets the list of chat badges that Twitch created. Users can use these badges in any channel’s chat room. For information about chat badges, see <a href="https://help.twitch.tv/s/article/twitch-chat-badges-guide">Twitch Chat Badges Guide</a>.</p>
+				<p>Gets Twitch’s list of chat badges, which users may use in any channel’s chat room. For information about chat badges, see <a href="https://help.twitch.tv/s/article/twitch-chat-badges-guide">Twitch Chat Badges Guide</a>.</p>
 
 <h3>Authorization</h3>
 
@@ -10465,7 +10465,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
   <tbody>
     <tr>
       <td>200 OK</td>
-      <td>Sccessfully retrieved the list of extensions.</td>
+      <td>Successfully retrieved the list of extensions.</td>
     </tr>
     <tr>
       <td>400 Bad Request</td>
@@ -10569,7 +10569,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 			<h2 id="get-released-extensions">Get Released Extensions</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[43]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets information about a released extension. Returns extensions whose <code class="highlighter-rouge">state</code> is Released.</p>
+				<p>Gets information about a released extension. Returns the extension if its <code class="highlighter-rouge">state</code> is Released.</p>
 
 <h3>Authorization</h3>
 
@@ -13351,7 +13351,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
   <tbody>
     <tr>
       <td>200 Ok</td>
-      <td>Success.</td>
+      <td>Successfully updated the broadcaster’s AutoMod settings.</td>
     </tr>
     <tr>
       <td>400 Bad Request</td>
@@ -15490,8 +15490,8 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> PUT <span class="s1">'https://api.twitch.tv/helix/moderation/shield_mode?broadcaster_id=12345&amp;moderator_id=98765'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer kpvy3cjboypmiacwr0c19hotn5s'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: hof5gwx0su6owfn0yan9c87zr6t'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Client-Type: application/json'</span> <span class="se">\</span>
-<span class="nt">-d</span> <span class="s1">'{"data":{"is_active":false}}'</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{"is_active":false}'</span>
 </code></pre></div></div>
 
 <h3>Example Response</h3>
@@ -17237,7 +17237,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
   <tbody>
     <tr>
       <td>200 OK</td>
-      <td>Successfully updated the prediction.</td>
+      <td>Successfully ended the prediction.</td>
     </tr>
     <tr>
       <td>400 Bad Request</td>
@@ -18080,7 +18080,7 @@ END:VCALENDAR%
     <tr>
       <td>is_recurring</td>
       <td>Boolean</td>
-      <td>Yes</td>
+      <td>No</td>
       <td>A Boolean value that determines whether the broadcast recurs weekly. Is <strong>true</strong> if the broadcast recurs weekly. Only partners and affiliates may add non-recurring broadcasts.</td>
     </tr>
     <tr>
@@ -19802,7 +19802,7 @@ END:VCALENDAR%
 			<h2 id="get-streams">Get Streams</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[92]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets a list of all broadcasters that are streaming. The list is in descending order by the number of viewers watching the stream. Because viewers come and go during a stream, it’s possible to find duplicate or missing streams in the list as you page through the results.</p>
+				<p>Gets a list of all streams. The list is in descending order by the number of viewers watching the stream. Because viewers come and go during a stream, it’s possible to find duplicate or missing streams in the list as you page through the results.</p>
 
 <h3>Authentication</h3>
 
@@ -20090,7 +20090,7 @@ END:VCALENDAR%
 			<h2 id="get-followed-streams">Get Followed Streams</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[93]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets a list of live streams of broadcasters that the specified user follows.</p>
+				<p>Gets the list of broadcasters that the user follows and that are streaming live.</p>
 
 <h3>Authentication</h3>
 
@@ -20244,7 +20244,7 @@ END:VCALENDAR%
   <tbody>
     <tr>
       <td>200 OK</td>
-      <td>Successfully retrieved the list of tags.</td>
+      <td>Successfully retrieved the list of broadcasters that the user follows and that are streaming live.</td>
     </tr>
     <tr>
       <td>400 Bad Request</td>

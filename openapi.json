@@ -648,8 +648,8 @@
     },
     "/extensions/transactions": {
       "get": {
-        "summary": "Gets a list of transactions for an extension.",
-        "description": "Gets a list of transactions for an extension. A transaction records the exchange of a currency (for example, Bits) for a digital product.\n\n__Authentication:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).",
+        "summary": "Gets an extension’s list of transactions.",
+        "description": "Gets an extension’s list of transactions. A transaction records the exchange of a currency (for example, Bits) for a digital product.\n\n__Authentication:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).",
         "tags": [
           "Bits"
         ],
@@ -700,7 +700,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Sccessfully retrieved the list of transactions.",
+            "description": "Successfully retrieved the list of transactions.",
             "content": {
               "application/json": {
                 "schema": {
@@ -925,8 +925,8 @@
     },
     "/channels/editors": {
       "get": {
-        "summary": "Gets a list of users that are editors for the specified broadcaster.",
-        "description": "Gets a list of users that are editors for the specified broadcaster.\n\n__Authentication:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:editors** scope.",
+        "summary": "Gets the broadcaster’s list editors.",
+        "description": "Gets the broadcaster’s list editors.\n\n__Authentication:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:editors** scope.",
         "tags": [
           "Channels"
         ],
@@ -948,7 +948,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of editors.",
+            "description": "Successfully retrieved the broadcaster’s list of editors.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1035,7 +1035,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfully created the Custom Reward.",
+            "description": "Successfully created the custom reward.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1212,7 +1212,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the broadcaster’s list of the Custom Rewards.",
+            "description": "Successfully retrieved the broadcaster’s list of custom rewards.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1427,7 +1427,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfully updated the Custom Reward.",
+            "description": "Successfully updated the custom reward.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2132,8 +2132,8 @@
     },
     "/chat/emotes": {
       "get": {
-        "summary": "Gets all emotes that the specified Twitch channel created.",
-        "description": "Gets all emotes that the specified Twitch channel created. Broadcasters create these custom emotes for users who subscribe to or follow the channel or cheer Bits in the channel’s chat window. [Learn More](https://dev.twitch.tv/docs/irc/emotes)\n\nFor information about the custom emotes, see [subscriber emotes](https://help.twitch.tv/s/article/subscriber-emote-guide), [Bits tier emotes](https://help.twitch.tv/s/article/custom-bit-badges-guide?language=bg#slots), and [follower emotes](https://blog.twitch.tv/en/2021/06/04/kicking-off-10-years-with-our-biggest-emote-update-ever/).\n\n**NOTE:** With the exception of custom follower emotes, users may use custom emotes in any Twitch chat.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).",
+        "summary": "Gets the broadcaster’s list of custom emotes.",
+        "description": "Gets the broadcaster’s list of custom emotes. Broadcasters create these custom emotes for users who subscribe to or follow the channel or cheer Bits in the channel’s chat window. [Learn More](https://dev.twitch.tv/docs/irc/emotes)\n\nFor information about the custom emotes, see [subscriber emotes](https://help.twitch.tv/s/article/subscriber-emote-guide), [Bits tier emotes](https://help.twitch.tv/s/article/custom-bit-badges-guide?language=bg#slots), and [follower emotes](https://blog.twitch.tv/en/2021/06/04/kicking-off-10-years-with-our-biggest-emote-update-ever/).\n\n**NOTE:** With the exception of custom follower emotes, users may use custom emotes in any Twitch chat.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).",
         "tags": [
           "Chat"
         ],
@@ -2155,7 +2155,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the custom emotes for the specified broadcaster.",
+            "description": "Successfully retrieved broadcaster’s list of custom emotes.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2240,7 +2240,7 @@
     "/chat/emotes/global": {
       "get": {
         "summary": "Gets all global emotes.",
-        "description": "Gets all [global emotes](https://www.twitch.tv/creatorcamp/en/learn-the-basics/emotes/). Global emotes are Twitch-created emotes that users can use in any Twitch chat.\n\n[Learn More](https://dev.twitch.tv/docs/irc/emotes)\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).\n\n__Request Query Parameters:__\n\nNone",
+        "description": "Gets the list of [global emotes](https://www.twitch.tv/creatorcamp/en/learn-the-basics/emotes/). Global emotes are Twitch-created emotes that users can use in any Twitch chat.\n\n[Learn More](https://dev.twitch.tv/docs/irc/emotes)\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).\n\n__Request Query Parameters:__\n\nNone",
         "tags": [
           "Chat"
         ],
@@ -2251,7 +2251,7 @@
         "operationId": "get-global-emotes",
         "responses": {
           "200": {
-            "description": "Successfully retrieved the global emotes.",
+            "description": "Successfully retrieved Twitch’s list of global emotes.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2390,8 +2390,8 @@
     },
     "/chat/badges": {
       "get": {
-        "summary": "Gets all badges that the specified broadcaster created.",
-        "description": "Gets all badges that the specified broadcaster created. The list is empty if the broadcaster hasn’t created custom chat badges. For information about custom badges, see [subscriber badges](https://help.twitch.tv/s/article/subscriber-badge-guide) and [Bits badges](https://help.twitch.tv/s/article/custom-bit-badges-guide).\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).",
+        "summary": "Gets the broadcaster’s list of custom chat badges.",
+        "description": "Gets the broadcaster’s list of custom chat badges. The list is empty if the broadcaster hasn’t created custom chat badges. For information about custom badges, see [subscriber badges](https://help.twitch.tv/s/article/subscriber-badge-guide) and [Bits badges](https://help.twitch.tv/s/article/custom-bit-badges-guide).\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).",
         "tags": [
           "Chat"
         ],
@@ -2469,8 +2469,8 @@
     },
     "/chat/badges/global": {
       "get": {
-        "summary": "Gets the list of chat badges that Twitch created.",
-        "description": "Gets the list of chat badges that Twitch created. Users can use these badges in any channel’s chat room. For information about chat badges, see [Twitch Chat Badges Guide](https://help.twitch.tv/s/article/twitch-chat-badges-guide).\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).\n\n__Request Query Parameters:__\n\nNone",
+        "summary": "Gets Twitch’s list of chat badges.",
+        "description": "Gets Twitch’s list of chat badges, which users may use in any channel’s chat room. For information about chat badges, see [Twitch Chat Badges Guide](https://help.twitch.tv/s/article/twitch-chat-badges-guide).\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).\n\n__Request Query Parameters:__\n\nNone",
         "tags": [
           "Chat"
         ],
@@ -4125,7 +4125,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Sccessfully retrieved the list of extensions.",
+            "description": "Successfully retrieved the list of extensions.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4221,7 +4221,7 @@
     "/extensions/released": {
       "get": {
         "summary": "Gets information about a released extension.",
-        "description": "Gets information about a released extension. Returns extensions whose `state` is Released.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).",
+        "description": "Gets information about a released extension. Returns the extension if its `state` is Released.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).",
         "tags": [
           "Extensions"
         ],
@@ -5381,7 +5381,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success.",
+            "description": "Successfully updated the broadcaster’s AutoMod settings.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6624,9 +6624,7 @@
               "examples": {
                 "Example": {
                   "value": {
-                    "data": {
-                      "is_active": false
-                    }
+                    "is_active": false
                   }
                 }
               }
@@ -6643,7 +6641,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\n```bash\ncurl -X PUT 'https://api.twitch.tv/helix/moderation/shield_mode?broadcaster_id=12345&moderator_id=98765' \\\n-H 'Authorization: Bearer kpvy3cjboypmiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfn0yan9c87zr6t' \\\n-H 'Client-Type: application/json' \\\n-d '{\"data\":{\"is_active\":false}}'\n```",
+                    "description": "_Request:_\n\n```bash\ncurl -X PUT 'https://api.twitch.tv/helix/moderation/shield_mode?broadcaster_id=12345&moderator_id=98765' \\\n-H 'Authorization: Bearer kpvy3cjboypmiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfn0yan9c87zr6t' \\\n-H 'Content-Type: application/json' \\\n-d '{\"is_active\":false}'\n```",
                     "value": {
                       "data": [
                         {
@@ -7325,7 +7323,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfully updated the prediction.",
+            "description": "Successfully ended the prediction.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8618,8 +8616,8 @@
     },
     "/streams": {
       "get": {
-        "summary": "Gets a list of all broadcasters that are streaming.",
-        "description": "Gets a list of all broadcasters that are streaming. The list is in descending order by the number of viewers watching the stream. Because viewers come and go during a stream, it’s possible to find duplicate or missing streams in the list as you page through the results.\n\n__Authentication:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).",
+        "summary": "Gets a list of all streams.",
+        "description": "Gets a list of all streams. The list is in descending order by the number of viewers watching the stream. Because viewers come and go during a stream, it’s possible to find duplicate or missing streams in the list as you page through the results.\n\n__Authentication:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).",
         "tags": [
           "Streams"
         ],
@@ -8798,8 +8796,8 @@
     },
     "/streams/followed": {
       "get": {
-        "summary": "Gets a list of live streams of broadcasters that the specified user follows.",
-        "description": "Gets a list of live streams of broadcasters that the specified user follows.\n\n__Authentication:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:follows** scope.",
+        "summary": "Gets the list of broadcasters that the user follows and that are streaming live.",
+        "description": "Gets the list of broadcasters that the user follows and that are streaming live.\n\n__Authentication:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:follows** scope.",
         "tags": [
           "Streams"
         ],
@@ -8838,7 +8836,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the list of tags.",
+            "description": "Successfully retrieved the list of broadcasters that the user follows and that are streaming live.",
             "content": {
               "application/json": {
                 "schema": {
@@ -16127,8 +16125,7 @@
         "required": [
           "start_time",
           "timezone",
-          "duration",
-          "is_recurring"
+          "duration"
         ],
         "properties": {
           "start_time": {

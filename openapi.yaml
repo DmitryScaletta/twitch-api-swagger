@@ -736,10 +736,10 @@ paths:
         - twitch_auth: []
   /extensions/transactions:
     get:
-      summary: Gets a list of transactions for an extension.
+      summary: Gets an extension’s list of transactions.
       description: >-
-        Gets a list of transactions for an extension. A transaction records
-        the exchange of a currency (for example, Bits) for a digital product.
+        Gets an extension’s list of transactions. A transaction records the
+        exchange of a currency (for example, Bits) for a digital product.
 
 
         __Authentication:__
@@ -786,7 +786,7 @@ paths:
             type: string
       responses:
         "200":
-          description: Sccessfully retrieved the list of transactions.
+          description: Successfully retrieved the list of transactions.
           content:
             application/json:
               schema:
@@ -1055,10 +1055,9 @@ paths:
             - channel:manage:broadcast
   /channels/editors:
     get:
-      summary: Gets a list of users that are editors for the specified broadcaster.
+      summary: Gets the broadcaster’s list editors.
       description: >-
-        Gets a list of users that are editors for the specified
-        broadcaster.
+        Gets the broadcaster’s list editors.
 
 
         __Authentication:__
@@ -1081,7 +1080,7 @@ paths:
           required: true
       responses:
         "200":
-          description: Successfully retrieved the list of editors.
+          description: Successfully retrieved the broadcaster’s list of editors.
           content:
             application/json:
               schema:
@@ -1169,7 +1168,7 @@ paths:
                 description: Creates a custom reward.
       responses:
         "200":
-          description: Successfully created the Custom Reward.
+          description: Successfully created the custom reward.
           content:
             application/json:
               schema:
@@ -1407,7 +1406,7 @@ paths:
             type: boolean
       responses:
         "200":
-          description: Successfully retrieved the broadcaster’s list of the Custom Rewards.
+          description: Successfully retrieved the broadcaster’s list of custom rewards.
           content:
             application/json:
               schema:
@@ -1632,7 +1631,7 @@ paths:
                 description: Updates the reward’s title.
       responses:
         "200":
-          description: Successfully updated the Custom Reward.
+          description: Successfully updated the custom reward.
           content:
             application/json:
               schema:
@@ -2456,11 +2455,11 @@ paths:
             - moderator:read:chatters
   /chat/emotes:
     get:
-      summary: Gets all emotes that the specified Twitch channel created.
+      summary: Gets the broadcaster’s list of custom emotes.
       description: >-
-        Gets all emotes that the specified Twitch channel created.
-        Broadcasters create these custom emotes for users who subscribe to or
-        follow the channel or cheer Bits in the channel’s chat window. [Learn
+        Gets the broadcaster’s list of custom emotes. Broadcasters create
+        these custom emotes for users who subscribe to or follow the channel or
+        cheer Bits in the channel’s chat window. [Learn
         More](https://dev.twitch.tv/docs/irc/emotes)
 
 
@@ -2489,8 +2488,7 @@ paths:
           required: true
       responses:
         "200":
-          description: Successfully retrieved the custom emotes for the specified
-            broadcaster.
+          description: Successfully retrieved broadcaster’s list of custom emotes.
           content:
             application/json:
               schema:
@@ -2579,7 +2577,7 @@ paths:
     get:
       summary: Gets all global emotes.
       description: >-
-        Gets all [global
+        Gets the list of [global
         emotes](https://www.twitch.tv/creatorcamp/en/learn-the-basics/emotes/).
         Global emotes are Twitch-created emotes that users can use in any Twitch
         chat.
@@ -2606,7 +2604,7 @@ paths:
       operationId: get-global-emotes
       responses:
         "200":
-          description: Successfully retrieved the global emotes.
+          description: Successfully retrieved Twitch’s list of global emotes.
           content:
             application/json:
               schema:
@@ -2780,9 +2778,9 @@ paths:
         - twitch_auth: []
   /chat/badges:
     get:
-      summary: Gets all badges that the specified broadcaster created.
+      summary: Gets the broadcaster’s list of custom chat badges.
       description: >-
-        Gets all badges that the specified broadcaster created. The list is
+        Gets the broadcaster’s list of custom chat badges. The list is
         empty if the broadcaster hasn’t created custom chat badges. For
         information about custom badges, see [subscriber
         badges](https://help.twitch.tv/s/article/subscriber-badge-guide) and
@@ -2859,11 +2857,11 @@ paths:
         - twitch_auth: []
   /chat/badges/global:
     get:
-      summary: Gets the list of chat badges that Twitch created.
+      summary: Gets Twitch’s list of chat badges.
       description: >-
-        Gets the list of chat badges that Twitch created. Users can use
-        these badges in any channel’s chat room. For information about chat
-        badges, see [Twitch Chat Badges
+        Gets Twitch’s list of chat badges, which users may use in any
+        channel’s chat room. For information about chat badges, see [Twitch Chat
+        Badges
         Guide](https://help.twitch.tv/s/article/twitch-chat-badges-guide).
 
 
@@ -4971,7 +4969,7 @@ paths:
             type: string
       responses:
         "200":
-          description: Sccessfully retrieved the list of extensions.
+          description: Successfully retrieved the list of extensions.
           content:
             application/json:
               schema:
@@ -5059,8 +5057,8 @@ paths:
     get:
       summary: Gets information about a released extension.
       description: >-
-        Gets information about a released extension. Returns extensions
-        whose `state` is Released.
+        Gets information about a released extension. Returns the extension
+        if its `state` is Released.
 
 
         __Authorization:__
@@ -6468,7 +6466,7 @@ paths:
                 description: This example updates the `overall_level` setting to 3.
       responses:
         "200":
-          description: Success.
+          description: Successfully updated the broadcaster’s AutoMod settings.
           content:
             application/json:
               schema:
@@ -8117,8 +8115,7 @@ paths:
             examples:
               Example:
                 value:
-                  data:
-                    is_active: false
+                  is_active: false
       responses:
         "200":
           description: Successfully updated the broadcaster’s Shield Mode status.
@@ -8140,9 +8137,9 @@ paths:
 
                     -H 'Client-Id: hof5gwx0su6owfn0yan9c87zr6t' \
 
-                    -H 'Client-Type: application/json' \
+                    -H 'Content-Type: application/json' \
 
-                    -d '{"data":{"is_active":false}}'
+                    -d '{"is_active":false}'
 
                     ```
                   value:
@@ -8920,7 +8917,7 @@ paths:
               $ref: "#/components/schemas/EndPredictionBody"
       responses:
         "200":
-          description: Successfully updated the prediction.
+          description: Successfully ended the prediction.
           content:
             application/json:
               schema:
@@ -10467,12 +10464,12 @@ paths:
             - channel:read:stream_key
   /streams:
     get:
-      summary: Gets a list of all broadcasters that are streaming.
+      summary: Gets a list of all streams.
       description: >-
-        Gets a list of all broadcasters that are streaming. The list is in
-        descending order by the number of viewers watching the stream. Because
-        viewers come and go during a stream, it’s possible to find duplicate or
-        missing streams in the list as you page through the results.
+        Gets a list of all streams. The list is in descending order by the
+        number of viewers watching the stream. Because viewers come and go
+        during a stream, it’s possible to find duplicate or missing streams in
+        the list as you page through the results.
 
 
         __Authentication:__
@@ -10663,11 +10660,11 @@ paths:
         - twitch_auth: []
   /streams/followed:
     get:
-      summary: Gets a list of live streams of broadcasters that the specified user
-        follows.
+      summary: Gets the list of broadcasters that the user follows and that are
+        streaming live.
       description: >-
-        Gets a list of live streams of broadcasters that the specified user
-        follows.
+        Gets the list of broadcasters that the user follows and that are
+        streaming live.
 
 
         __Authentication:__
@@ -10705,7 +10702,8 @@ paths:
             type: string
       responses:
         "200":
-          description: Successfully retrieved the list of tags.
+          description: Successfully retrieved the list of broadcasters that the user
+            follows and that are streaming live.
           content:
             application/json:
               schema:
@@ -18186,7 +18184,6 @@ components:
         - start_time
         - timezone
         - duration
-        - is_recurring
       properties:
         start_time:
           type: string
