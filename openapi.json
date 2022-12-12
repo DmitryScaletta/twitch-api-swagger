@@ -4632,7 +4632,7 @@
           {
             "name": "status",
             "in": "query",
-            "description": "Filter subscriptions by its status. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscribed to subscription type and version is no longer supported.",
+            "description": "Filter subscriptions by its status. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* moderator\\_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscribed to subscription type and version is no longer supported.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_connection\\_unused — The client failed to subscribe to events within the required time.\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.",
             "schema": {
               "type": "string",
               "enum": [
@@ -4641,8 +4641,16 @@
                 "webhook_callback_verification_failed",
                 "notification_failures_exceeded",
                 "authorization_revoked",
+                "moderator_removed",
                 "user_removed",
-                "version_removed"
+                "version_removed",
+                "websocket_disconnected",
+                "websocket_failed_ping_pong",
+                "websocket_received_inbound_traffic",
+                "websocket_connection_unused",
+                "websocket_internal_error",
+                "websocket_network_timeout",
+                "websocket_network_error"
               ]
             }
           },
@@ -14269,14 +14277,23 @@
           },
           "status": {
             "type": "string",
-            "description": "The subscription’s status. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* user\\_removed — One of the users specified in the **Condition** object was removed.",
+            "description": "The subscription’s status. The subscriber receives events only for **enabled** subscriptions. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* moderator\\_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscribed to subscription type and version is no longer supported.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_connection\\_unused — The client failed to subscribe to events within the required time.\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.",
             "enum": [
               "enabled",
               "webhook_callback_verification_pending",
               "webhook_callback_verification_failed",
               "notification_failures_exceeded",
               "authorization_revoked",
-              "user_removed"
+              "moderator_removed",
+              "user_removed",
+              "version_removed",
+              "websocket_disconnected",
+              "websocket_failed_ping_pong",
+              "websocket_received_inbound_traffic",
+              "websocket_connection_unused",
+              "websocket_internal_error",
+              "websocket_network_timeout",
+              "websocket_network_error"
             ]
           },
           "type": {
