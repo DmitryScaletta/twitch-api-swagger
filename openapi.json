@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "Twitch API Swagger UI (Unofficial)",
     "description": "Unofficial Swagger UI for Twitch API.\n\nAll endpoints are generated automatically from the [twitch docs](https://dev.twitch.tv/docs/api/reference) page.\n\n__Features:__\n\n* Swagger UI for all Twitch API endpoints\n* Schemas for _Request Query Parameters_, _Request Body_, _Response Body_\n* Some additional schemas like _Clip_, _ChatBadge_, _Prediction_, _Game_, _Channel_, _Video_ etc.\n* Response codes and examples\n* Generated types for TypeScript: [twitch-api-ts](https://github.com/DmitryScaletta/twitch-api-ts)\n\n__Repository:__ [github.com/DmitryScaletta/twitch-api-swagger](https://github.com/DmitryScaletta/twitch-api-swagger)",
