@@ -15383,20 +15383,28 @@ components:
     CreateClipResponse:
       type: object
       required:
-        - edit_url
-        - id
+        - data
       properties:
-        edit_url:
-          type: string
-          description: >-
-            A URL that you can use to edit the clip’s title, identify the part
-            of the clip to publish, and publish the clip. [Learn
-            More](https://help.twitch.tv/s/article/how-to-use-clips)  
-              
-            The URL is valid for up to 24 hours or until the clip is published, whichever comes first.
-        id:
-          type: string
-          description: An ID that uniquely identifies the clip.
+        data:
+          type: array
+          description: ""
+          items:
+            type: object
+            required:
+              - edit_url
+              - id
+            properties:
+              edit_url:
+                type: string
+                description: >-
+                  A URL that you can use to edit the clip’s title, identify the part
+                  of the clip to publish, and publish the clip. [Learn
+                  More](https://help.twitch.tv/s/article/how-to-use-clips)  
+                    
+                  The URL is valid for up to 24 hours or until the clip is published, whichever comes first.
+              id:
+                type: string
+                description: An ID that uniquely identifies the clip.
     Clip:
       type: object
       required:

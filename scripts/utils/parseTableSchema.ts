@@ -100,6 +100,22 @@ const parseTableSchema = (
     addFieldSchema(fieldSchemas, fieldSchema, depth);
   });
 
+  // No "data" field in the response body
+  // https://dev.twitch.tv/docs/api/reference#create-clip
+  if (endpointId === 'create-clip' && schemaObjectType === 'response') {
+    return [
+      {
+        name: 'data',
+        type: 'Object[]',
+        required: true,
+        description: '',
+        depth: 0,
+        enumValues: null,
+        children: fieldSchemas,
+      },
+    ];
+  }
+
   return fieldSchemas;
 };
 
