@@ -1,3 +1,4 @@
+import https from 'node:https';
 import fs from 'node:fs/promises';
 import YAML from 'yaml';
 import generateOpenApi from './utils/generateOpenApi.js';
@@ -9,10 +10,17 @@ const SCOPES_URL = 'https://dev.twitch.tv/docs/authentication/scopes';
 const REFERENCE_FILENAME = './tmp/reference.html';
 const SCOPES_FILENAME = './tmp/scopes.html';
 
-const fetchHtml = async (url: string) => {
-  const response = await fetch(url);
-  return response.text();
-};
+const fetchHtml = (url: string): Promise<string> =>
+  new Promise((resolve) => {
+    https.get(url, (res) => {
+      let responseBody = '';
+      res.setEncoding('utf8');
+      res.on('data', (chunk) => {
+        responseBody += chunk;
+      });
+      res.on('end', () => resolve(responseBody));
+    });
+  });
 
 const main = async () => {
   const [referenceHtml, scopesHtml, openApiTemplate, indexHtmlTemplate] =
