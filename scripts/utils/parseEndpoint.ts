@@ -2,7 +2,6 @@ import type {
   ApiReference,
   Descriptions,
   ExampleObject,
-  FieldSchema,
   MediaTypeObject,
   Method,
   OpenApi,
