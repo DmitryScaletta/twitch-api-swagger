@@ -5630,6 +5630,51 @@ paths:
             Types](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#subscription-types).
           schema:
             type: string
+            enum:
+              &a1
+              - channel.update
+              - channel.follow
+              - channel.subscribe
+              - channel.subscription.end
+              - channel.subscription.gift
+              - channel.subscription.message
+              - channel.cheer
+              - channel.raid
+              - channel.ban
+              - channel.unban
+              - channel.moderator.add
+              - channel.moderator.remove
+              - channel.channel_points_custom_reward.add
+              - channel.channel_points_custom_reward.update
+              - channel.channel_points_custom_reward.remove
+              - channel.channel_points_custom_reward_redemption.add
+              - channel.channel_points_custom_reward_redemption.update
+              - channel.poll.begin
+              - channel.poll.progress
+              - channel.poll.end
+              - channel.prediction.begin
+              - channel.prediction.progress
+              - channel.prediction.lock
+              - channel.prediction.end
+              - channel.charity_campaign.donate
+              - channel.charity_campaign.start
+              - channel.charity_campaign.progress
+              - channel.charity_campaign.stop
+              - drop.entitlement.grant
+              - extension.bits_transaction.create
+              - channel.goal.begin
+              - channel.goal.progress
+              - channel.goal.end
+              - channel.hype_train.begin
+              - channel.hype_train.progress
+              - channel.hype_train.end
+              - channel.shield_mode.begin
+              - channel.shield_mode.end
+              - stream.online
+              - stream.offline
+              - user.authorization.grant
+              - user.authorization.revoke
+              - user.update
         - name: user_id
           in: query
           description: Filter subscriptions by user ID. The response contains
@@ -16458,6 +16503,7 @@ components:
             Types](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#subscription-types).
             Set this field to the value in the **Name** column of the
             Subscription Types table.
+          enum: *a1
         version:
           type: string
           description: The version number that identifies the definition of the
@@ -16583,6 +16629,7 @@ components:
           type: string
           description: The subscription’s type. See [Subscription
             Types](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#subscription-types).
+          enum: *a1
         version:
           type: string
           description: The version number that identifies this definition of the
