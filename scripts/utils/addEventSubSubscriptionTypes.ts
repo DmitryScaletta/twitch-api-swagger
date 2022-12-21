@@ -1,6 +1,12 @@
 import type { OpenApi, ParameterObject, SchemaObject } from '../types';
+import parseEventSubSubscriptionTypes from './parseEventSubSubscriptionTypes.js';
 
-const addEventSubSubscriptionTypes = (openApi: OpenApi, types: string[]) => {
+const addEventSubSubscriptionTypes = (
+  openApi: OpenApi,
+  eventSubSubscriptionTypesHtml: string,
+) => {
+  const types = parseEventSubSubscriptionTypes(eventSubSubscriptionTypesHtml);
+
   for (const schemaName of [
     'EventSubSubscription',
     'CreateEventSubSubscriptionBody',

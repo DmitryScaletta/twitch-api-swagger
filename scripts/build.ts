@@ -4,7 +4,6 @@ import YAML from 'yaml';
 import generateOpenApi from './utils/generateOpenApi.js';
 import { HTML_DESCRIPTION, OPEN_API_TITLE } from './utils/constants.js';
 import parseScopes from './utils/parseScopes.js';
-import parseEventSubSubscriptionTypes from './utils/parseEventSubSubscriptionTypes.js';
 
 const REFERENCE_URL = 'https://dev.twitch.tv/docs/api/reference';
 const SCOPES_URL = 'https://dev.twitch.tv/docs/authentication/scopes';
@@ -43,13 +42,10 @@ const main = async () => {
   ]);
 
   const allScopes = parseScopes(scopesHtml);
-  const eventSubSubscriptionTypes = parseEventSubSubscriptionTypes(
-    eventSubSubscriptionTypesHtml,
-  );
   const openApi = generateOpenApi(
     referenceHtml,
     allScopes,
-    eventSubSubscriptionTypes,
+    eventSubSubscriptionTypesHtml,
     JSON.parse(openApiTemplate),
   );
   const indexHtml = indexHtmlTemplate

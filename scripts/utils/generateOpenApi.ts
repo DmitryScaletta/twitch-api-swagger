@@ -9,7 +9,7 @@ import addEventSubSubscriptionTypes from './addEventSubSubscriptionTypes.js';
 const generateOpenApi = (
   html: string,
   allScopes: Record<string, string>,
-  eventSubSubscriptionTypes: string[],
+  eventSubSubscriptionHtml: string,
   openApi: OpenApi,
 ): OpenApi => {
   const { document } = new JSDOM(html).window;
@@ -24,7 +24,7 @@ const generateOpenApi = (
     .slice(1)
     .forEach(parseEndpoint(apiReference, openApi));
 
-  addEventSubSubscriptionTypes(openApi, eventSubSubscriptionTypes);
+  addEventSubSubscriptionTypes(openApi, eventSubSubscriptionHtml);
 
   openApi.components.securitySchemes['twitch_auth'].flows.implicit.scopes =
     allScopes;
