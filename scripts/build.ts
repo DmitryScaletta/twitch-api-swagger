@@ -1,6 +1,6 @@
-import https from 'node:https';
 import fs from 'node:fs/promises';
 import YAML from 'yaml';
+import fetchHtml from './utils/fetchHtml.js';
 import generateOpenApi from './utils/generateOpenApi.js';
 import { HTML_DESCRIPTION, OPEN_API_TITLE } from './utils/constants.js';
 import parseScopes from './utils/parseScopes.js';
@@ -13,18 +13,6 @@ const REFERENCE_FILENAME = './tmp/reference.html';
 const SCOPES_FILENAME = './tmp/scopes.html';
 const EVENT_SUB_SUBSCRIPTION_TYPES_FILENAME =
   './tmp/eventsub-subscription-types.html';
-
-const fetchHtml = (url: string): Promise<string> =>
-  new Promise((resolve) => {
-    https.get(url, (res) => {
-      let responseBody = '';
-      res.setEncoding('utf8');
-      res.on('data', (chunk) => {
-        responseBody += chunk;
-      });
-      res.on('end', () => resolve(responseBody));
-    });
-  });
 
 const main = async () => {
   const [
