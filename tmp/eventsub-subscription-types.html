@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2022-12-09T13:41:12-08:00">
+<meta property="article:published_time" content="2023-01-10T17:05:57-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","@type":"BlogPosting","url":"https://dev.twitch.tv/api/reference/","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","headline":"Reference","dateModified":"2022-12-09T13:41:12-08:00","datePublished":"2022-12-09T13:41:12-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2023-01-10T17:05:57-08:00","datePublished":"2023-01-10T17:05:57-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -1534,7 +1534,7 @@
 								<td>Moderation</td>
 							
 							<td><a href="#update-shield-mode-status">Update Shield Mode Status</a></td>
-							<td><p><a href="/docs/product-lifecycle"><span class="pill pill-beta">BETA</span></a> Activates or deactivates the broadcaster’s Shield Mode.</p>
+							<td><p>Activates or deactivates the broadcaster’s Shield Mode.</p>
 </td>
 						</tr>
 					
@@ -1545,7 +1545,7 @@
 								<td>Moderation</td>
 							
 							<td><a href="#get-shield-mode-status">Get Shield Mode Status</a></td>
-							<td><p><a href="/docs/product-lifecycle"><span class="pill pill-beta">BETA</span></a> Gets the broadcaster’s Shield Mode activation status.</p>
+							<td><p>Gets the broadcaster’s Shield Mode activation status.</p>
 </td>
 						</tr>
 					
@@ -2039,7 +2039,7 @@
 
 <p><strong>NOTE</strong>: Only the broadcaster may start a commercial; the broadcaster’s editors and moderators may not start commercials on behalf of the broadcaster.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:edit:commercial</strong> scope.</p>
 
@@ -2181,7 +2181,7 @@
 			
 				<p>Gets an analytics report for one or more extensions. The response contains the URLs used to download the reports (CSV files). <a href="/docs/insights">Learn More</a></p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>analytics:read:extensions</strong> scope.</p>
 
@@ -2372,7 +2372,7 @@
 			
 				<p>Gets an analytics report for one or more games. The response contains the URLs used to download the reports (CSV files). <a href="/docs/insights">Learn more</a></p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>analytics:read:games</strong> scope.</p>
 
@@ -2589,7 +2589,7 @@
 			
 				<p>Gets the Bits leaderboard for the authenticated broadcaster.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>bits:read</strong> scope.</p>
 
@@ -2785,7 +2785,7 @@
 
 <p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/bits/cheermotes</code></p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -3002,7 +3002,7 @@
 			
 				<p>Gets an extension’s list of transactions. A transaction records the exchange of a currency (for example, Bits) for a digital product.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a>.</p>
 
@@ -3284,7 +3284,7 @@
 			
 				<p>Gets information about one or more channels.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -3369,6 +3369,11 @@
       <td>Unsigned Integer</td>
       <td>The value of the broadcaster’s stream delay setting, in seconds. This field’s value defaults to zero unless 1) the request specifies a user access token, 2) the ID in the <em>broadcaster_id</em> query parameter matches the user ID in the access token, and 3) the broadcaster has partner status and they set a non-zero stream delay value.</td>
     </tr>
+    <tr>
+      <td>   tags</td>
+      <td>String[]</td>
+      <td>The tags applied to the channel.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3431,7 +3436,8 @@
       </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"509670"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Science &amp; Technology"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TwitchDev Monthly Update // May 6, 2021"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"delay"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+      </span><span class="s2">"delay"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"DevsInTheKnow"</span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -3448,7 +3454,7 @@
 			
 				<p>Updates a channel’s properties.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:broadcast</strong> scope.</p>
 
@@ -3472,7 +3478,7 @@
       <td>broadcaster_id</td>
       <td>String</td>
       <td>Yes</td>
-      <td>The ID of the broadcaster whose channel you want to update. This ID must match the user ID associated with the user access token.</td>
+      <td>The ID of the broadcaster whose channel you want to update. This ID must match the user ID in the user access token.</td>
     </tr>
   </tbody>
 </table>
@@ -3515,6 +3521,12 @@
       <td>No</td>
       <td>The number of seconds you want your broadcast buffered before streaming it live. The delay helps ensure fairness during competitive play. Only users with Partner status may set this field. The maximum delay is 900 seconds (15 minutes).</td>
     </tr>
+    <tr>
+      <td>tags</td>
+      <td>String[]</td>
+      <td>No</td>
+      <td>A list of channel-defined tags to apply to the channel. To remove all tags from the channel, set tags to an empty array. Tags help identify the content that the channel streams. <a href="https://help.twitch.tv/s/article/guide-to-tags">Learn More</a><br><br>A channel may specify a maximum of 10 tags. Each tag is limited to a maximum of 25 characters and may not be an empty string or contain spaces or special characters. Tags are case insensitive. For readability, consider using camelCasing or PascalCasing.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3534,7 +3546,7 @@
     </tr>
     <tr>
       <td>400 Bad Request</td>
-      <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li><li>The request must update at least one property.</li><li>The <code>title</code> field may not contain an empty string.</li><li>The ID in <code>game_id</code> is not valid.</li><li>To update the <code>delay</code> field, the broadcaster must have partner status.</li></ul></td>
+      <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li><li>The request must update at least one property.</li><li>The <code>title</code> field may not contain an empty string.</li><li>The ID in <code>game_id</code> is not valid.</li><li>To update the <code>delay</code> field, the broadcaster must have partner status.</li><li>The list in the <code>tags</code> field exceeds the maximum number of tags allowed.</li><li>A tag in the <code>tags</code> field exceeds the maximum length allowed.</li><li>A tag in the <code>tags</code> field is empty.</li><li>A tag in the <code>tags</code> field contains special characters or spaces.</li><li>One or more tags in the <code>tags</code> field failed AutoMod review.</li></ul></td>
     </tr>
     <tr>
       <td>401 Unauthorized</td>
@@ -3558,7 +3570,7 @@
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-<span class="nt">--data-raw</span> <span class="s1">'{"game_id":"33214", "title":"there are helicopters in the game? REASON TO PLAY FORTNITE found", "broadcaster_language":"en"}'</span>
+<span class="nt">--data-raw</span> <span class="s1">'{"game_id":"33214", "title":"there are helicopters in the game? REASON TO PLAY FORTNITE found", "broadcaster_language":"en", "tags":["LevelingUp"]}'</span>
 </code></pre></div></div>
 
 			</section>
@@ -3571,7 +3583,7 @@
 			<a class="editor-link" href="cloudcannon:#content_blocks[8]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s list editors.</p>
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:editors</strong> scope.</p>
 
@@ -3702,7 +3714,7 @@
 			
 				<p>Creates a Custom Reward in the broadcaster’s channel. The maximum number of custom rewards per channel is 50, which includes both enabled and disabled rewards.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:redemptions</strong> scope.</p>
 
@@ -4111,7 +4123,7 @@
 
 <p>The app used to create the reward is the only app that may delete it. If the reward’s redemption status is UNFULFILLED at the time the reward is deleted, its redemption status is marked as FULFILLED.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:redemptions</strong> scope.</p>
 
@@ -4208,10 +4220,11 @@
 			
 				<p>Gets a list of custom rewards that the specified broadcaster created.</p>
 
-<h3>Authentication</h3>
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:redemptions</strong> scope.</p>
-
 <p><strong>NOTE</strong>: A channel may offer a maximum of 50 rewards, which includes both enabled and disabled rewards.</p>
+
+<h3>Authorization</h3>
+
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:redemptions</strong> or <strong>channel:manage:redemptions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -4636,9 +4649,9 @@
 			
 				<p>Gets a list of redemptions for the specified custom reward. The app used to create the reward is the only app that may get the redemptions.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:redemptions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:redemptions</strong> or <strong>channel:manage:redemptions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -4920,7 +4933,7 @@
 			
 				<p>Updates a custom reward. The app used to create the reward is the only app that may update the reward.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:redemptions</strong> scope.</p>
 
@@ -5401,7 +5414,7 @@
 			
 				<p>Updates a redemption’s status. You may update a redemption only if its status is UNFULFILLED. The app used to create the reward is the only app that may update the redemption.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:redemptions</strong> scope.</p>
 
@@ -5431,7 +5444,7 @@
       <td>broadcaster_id</td>
       <td>String</td>
       <td>Yes</td>
-      <td>The ID of the broadcaster that’s updating the redemption. This ID must match the user ID associated with the user OAuth token.</td>
+      <td>The ID of the broadcaster that’s updating the redemption. This ID must match the user ID in the user access token.</td>
     </tr>
     <tr>
       <td>reward_id</td>
@@ -5699,12 +5712,12 @@
     <tr>
       <td>   id</td>
       <td>String</td>
-      <td>An ID that uniquely identifies the charity campaign.</td>
+      <td>An ID that identifies the charity campaign.</td>
     </tr>
     <tr>
       <td>   broadcaster_id</td>
       <td>String</td>
-      <td>An ID that uniquely identifies the broadcaster that’s running the campaign.</td>
+      <td>An ID that identifies the broadcaster that’s running the campaign.</td>
     </tr>
     <tr>
       <td>   broadcaster_login</td>
@@ -5922,6 +5935,11 @@
       <td>A list that contains the donations that users have made to the broadcaster’s charity campaign.  The list is empty if the broadcaster is not currently running a charity campaign; the donation information is not available after the campaign ends.</td>
     </tr>
     <tr>
+      <td>   id</td>
+      <td>String</td>
+      <td>An ID that identifies the donation. The ID is unique across campaigns.</td>
+    </tr>
+    <tr>
       <td>   campaign_id</td>
       <td>String</td>
       <td>An ID that identifies the charity campaign that the donation applies to.</td>
@@ -6023,6 +6041,7 @@
 </span><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a1b2c3-aabb-4455-d1e2f3"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"campaign_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123-abc-456-def"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5678"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="p">,</span><span class="w">
@@ -6034,6 +6053,7 @@
       </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"z1y2x3-ccdd-6677-d1e2f3"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"campaign_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123-abc-456-def"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8765"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user2"</span><span class="p">,</span><span class="w">
@@ -7160,7 +7180,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
       <td>moderator_id</td>
       <td>String</td>
       <td>No</td>
-      <td>The ID of a user that has permission to moderate the broadcaster’s chat room, or the broadcaster’s ID if they’re getting the settings.<br><br>This field is required only if you want to include the <code class="highlighter-rouge">non_moderator_chat_delay</code> and <code class="highlighter-rouge">non_moderator_chat_delay_duration</code> settings in the response.<br><br>If you specify this field, this ID must match the user ID in the user access token.</td>
+      <td>The ID of the broadcaster or one of the broadcaster’s moderators.<br><br>This field is required only if you want to include the <code class="highlighter-rouge">non_moderator_chat_delay</code> and <code class="highlighter-rouge">non_moderator_chat_delay_duration</code> settings in the response.<br><br>If you specify this field, this ID must match the user ID in the user access token.</td>
     </tr>
   </tbody>
 </table>
@@ -7307,9 +7327,9 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 			
 				<p>Updates the broadcaster’s chat settings.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <code class="highlighter-rouge">moderator:manage:chat_settings</code> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:chat_settings</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -7651,7 +7671,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
     </tr>
     <tr>
       <td>400 Bad Request</td>
-      <td><ul><li>The <code>message</code> field in the request's body is required.</li><li>The specified color is not valid.</li></ul></td>
+      <td><ul><li>The <code>message</code> field in the request's body is required.</li><li>The <code>message</code> field may not contain an empty string.</li><li>The <code>message</code> field may not contain an empty string.</li><li>The string in the <code>message</code> field failed review.</li><li>The specified color is not valid.</li></ul></td>
     </tr>
     <tr>
       <td>401 Unauthorized</td>
@@ -7927,7 +7947,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <p>Creating a clip is an asynchronous process that can take a short amount of time to complete. To determine whether the clip was successfully created, call <a href="#get-clips">Get Clips</a> using the clip ID that this request returned. If Get Clips returns the clip, the clip was successfully created. If after 15 seconds Get Clips hasn’t returned the clip, assume it failed.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>clips:edit</strong> scope.</p>
 
@@ -8053,7 +8073,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 			
 				<p>Gets one or more video clips that were captured from streams. For information about clips, see <a href="https://help.twitch.tv/s/article/how-to-use-clips">How to use clips</a>.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -8360,7 +8380,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/entitlements/codes</code></p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a>. The client ID in the access token must match a client ID that Twitch has approved to provide entitlements.</p>
 
@@ -8541,7 +8561,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
   </tbody>
 </table>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>. The client ID in the access token must own the game.</p>
 
@@ -8780,7 +8800,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
   </tbody>
 </table>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>. The client ID in the access token must own the game.</p>
 
@@ -8938,7 +8958,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <p><code class="highlighter-rouge">POST https://api.twitch.tv/helix/entitlements/codes</code></p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a>. Only client IDs approved by Twitch may redeem codes on behalf of any Twitch user account.</p>
 
@@ -11117,7 +11137,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 
 <h3>Authorization</h3>
 
-<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a>. The client ID in the app access token must be the extension’s client ID.</p>
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a>. The client ID in the app access token must match the extension’s client ID.</p>
 
 <h3>URL</h3>
 
@@ -11324,7 +11344,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 			
 				<p>Creates an EventSub subscription.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>If you use <a href="/docs/eventsub/handling-webhook-events">webhooks to receive events</a>, the request must specify an app access token. The request will fail if you use a user access token. If the subscription type requires user authorization, the user must have granted your app (client ID) permissions to receive those events before you subscribe to them. For example, to subscribe to <a href="/docs/eventsub/eventsub-subscription-types/#channelsubscribe">channel.subscribe</a> events, your app must get a user access token that includes the <code class="highlighter-rouge">channel:read:subscriptions</code> scope, which adds the required permission to your app access token’s client ID.</p>
 
@@ -11586,7 +11606,7 @@ twitch api post /eventsub/subscriptions <span class="nt">-b</span> <span class="
 			
 				<p>Deletes an EventSub subscription.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>If you use <a href="/docs/eventsub/handling-webhook-events">webhooks to receive events</a>, the request must specify an app access token. The request will fail if you use a user access token.</p>
 
@@ -11675,7 +11695,7 @@ twitch api delete /eventsub/subscriptions <span class="nt">-q</span> <span class
 			
 				<p>Gets a list of EventSub subscriptions that the client in the access token created.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>If you use <a href="/docs/eventsub/handling-webhook-events">webhooks to receive events</a>, the request must specify an app access token. The request will fail if you use a user access token.</p>
 
@@ -11930,7 +11950,7 @@ twitch api get /eventsub/subscriptions
 			
 				<p>Gets information about all broadcasts on Twitch.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -12086,7 +12106,7 @@ twitch api get /eventsub/subscriptions
 
 <p>You may get up to 100 categories or games by specifying their ID or name. You may specify all IDs, all names, or a combination of IDs and names. If you specify a combination of IDs and names, the total number of IDs and names must not exceed 100.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -12400,7 +12420,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <p>Instead of polling for events, consider <a href="/docs/eventsub/manage-subscriptions">subscribing</a> to Hype Train events (<a href="/docs/eventsub/eventsub-subscription-types#channelhype_trainbegin">Begin</a>, <a href="/docs/eventsub/eventsub-subscription-types#channelhype_trainprogress">Progress</a>, <a href="/docs/eventsub/eventsub-subscription-types#channelhype_trainend">End</a>).</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:hype_train</strong> scope.</p>
 
@@ -13439,9 +13459,9 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 			
 				<p>Gets all users that the broadcaster banned or put in a timeout.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderation:read</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderation:read</strong> or <strong>moderator:manage:banned_users</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -13654,7 +13674,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <p>To remove a ban or end a timeout, see <a href="#unban-user">Unban user</a>.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:banned_users</strong> scope.</p>
 
@@ -13901,7 +13921,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <p>To ban a user, see <a href="#ban-user">Ban user</a>.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:banned_users</strong> scope.</p>
 
@@ -14024,7 +14044,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:read:blocked_terms</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:read:blocked_terms</strong> or <strong>moderator:manage:blocked_terms</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -14210,7 +14230,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 			
 				<p>Adds a word or phrase to the broadcaster’s list of blocked terms. These are the terms that the broadcaster doesn’t want used in their chat room.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:blocked_terms</strong> scope.</p>
 
@@ -14421,7 +14441,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 			
 				<p>Removes the word or phrase from the broadcaster’s list of blocked terms.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:blocked_terms</strong> scope.</p>
 
@@ -14516,7 +14536,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 			
 				<p>Removes a single chat message or all chat messages from the broadcaster’s chat room.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:chat_messages</strong> scope.</p>
 
@@ -15347,7 +15367,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 			<h2 id="update-shield-mode-status">Update Shield Mode Status</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[70]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p><a href="/docs/product-lifecycle"><span class="pill pill-beta">BETA</span></a> Activates or deactivates the broadcaster’s Shield Mode.</p>
+				<p>Activates or deactivates the broadcaster’s Shield Mode.</p>
 
 <p>Twitch’s Shield Mode feature is like a panic button that broadcasters can push to protect themselves from chat abuse coming from one or more accounts. When activated, Shield Mode applies the overrides that the broadcaster configured in the Twitch UX. If the broadcaster hasn’t configured Shield Mode, it applies default overrides.</p>
 
@@ -15518,7 +15538,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 			<h2 id="get-shield-mode-status">Get Shield Mode Status</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[71]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p><a href="/docs/product-lifecycle"><span class="pill pill-beta">BETA</span></a> Gets the broadcaster’s Shield Mode activation status.</p>
+				<p>Gets the broadcaster’s Shield Mode activation status.</p>
 
 <p>To receive notification when the broadcaster activates and deactivates Shield Mode, subscribe to the <a href="/docs/eventsub/eventsub-subscription-types#channelshield_modebegin">channel.shield_mode.begin</a> and <a href="/docs/eventsub/eventsub-subscription-types#channelshield_modeend">channel.shield_mode.end</a> subscription types.</p>
 
@@ -15672,7 +15692,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:polls</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:polls</strong> or <strong>channel:manage:polls</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -16469,7 +16489,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Authorization</h3>
 
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:predictions</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:predictions</strong> or <strong>channel:manage:predictions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -16491,7 +16511,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
       <td>broadcaster_id</td>
       <td>String</td>
       <td>Yes</td>
-      <td>The ID of the broadcaster whose predictions you want to get. This ID must match the user ID associated with the user access token.</td>
+      <td>The ID of the broadcaster whose predictions you want to get. This ID must match the user ID in the user access token.</td>
     </tr>
     <tr>
       <td>id</td>
@@ -17357,7 +17377,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
       <td>from_broadcaster_id</td>
       <td>String</td>
       <td>Yes</td>
-      <td>The ID of the broadcaster that’s sending the raiding party. This ID must match the user ID associated with the user access token.</td>
+      <td>The ID of the broadcaster that’s sending the raiding party. This ID must match the user ID in the user access token.</td>
     </tr>
     <tr>
       <td>to_broadcaster_id</td>
@@ -17497,7 +17517,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
       <td>broadcaster_id</td>
       <td>String</td>
       <td>Yes</td>
-      <td>The ID of the broadcaster that initiated the raid. This ID must match the user ID associated with the user access token.</td>
+      <td>The ID of the broadcaster that initiated the raid. This ID must match the user ID in the user access token.</td>
     </tr>
   </tbody>
 </table>
@@ -18646,7 +18666,7 @@ END:VCALENDAR%
 
 <p>To match, the category’s name must contain all parts of the query string. For example, if the query string is 42, the response includes any category name that contains 42 in the title. If the query string is a phrase like <em>love computer</em>, the response includes any category name that contains the words love and computer anywhere in the name. The comparison is case insensitive.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -18794,7 +18814,7 @@ END:VCALENDAR%
 
 <p>By default, the results include both live and offline channels. To get only live channels set the <em>live_only</em> query parameter to <strong>true</strong>.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -18895,7 +18915,12 @@ END:VCALENDAR%
     <tr>
       <td>   tag_ids</td>
       <td>String[]</td>
-      <td>The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see <a href="https://www.twitch.tv/directory/all/tags">List of All Tags</a>. The list doesn’t include Category Tags.</td>
+      <td><strong>IMPORTANT</strong> Twitch is deprecating this field and will stop providing IDs in 2023 (Twitch will communicate the specific date in early 2023). If you use this field, consider updating your code at your earliest convenience to use the <code class="highlighter-rouge">tags</code> field.<br><br>The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see <a href="https://www.twitch.tv/directory/all/tags">List of All Tags</a>. The list doesn’t include Category Tags.</td>
+    </tr>
+    <tr>
+      <td>   tags</td>
+      <td>String[]</td>
+      <td>The tags applied to the channel.</td>
     </tr>
     <tr>
       <td>   thumbnail_url</td>
@@ -18965,6 +18990,7 @@ END:VCALENDAR%
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"41245072"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"is_live"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"tags_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
       </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/jtv_user_pictures/fd17325a-7dc2-46c6-8617-e90ec259501c-profile_image-300x300.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loserfruit"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
@@ -18998,9 +19024,8 @@ END:VCALENDAR%
       </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DOOM Eternal"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19070311"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"is_live"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"tags_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"6ea6bca4-4712-4ab9-a906-e3336a9d8039"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"tags_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"6ea6bca4-4712-4ab9-a906-e3336a9d8039"</span><span class="p">],</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"English"</span><span class="p">],</span><span class="w">
       </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/jtv_user_pictures/a_seagull-profile_image-4d2d235688c7dc66-300x300.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a_seagull"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-03-18T17:56:00Z"</span><span class="w">
@@ -19692,7 +19717,7 @@ END:VCALENDAR%
 			
 				<p>Gets the channel’s stream key.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:stream_key</strong> scope.</p>
 
@@ -19804,7 +19829,7 @@ END:VCALENDAR%
 			
 				<p>Gets a list of all streams. The list is in descending order by the number of viewers watching the stream. Because viewers come and go during a stream, it’s possible to find duplicate or missing streams in the list as you page through the results.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -19932,6 +19957,11 @@ END:VCALENDAR%
       <td>The stream’s title. Is an empty string if not set.</td>
     </tr>
     <tr>
+      <td>   tags</td>
+      <td>String[]</td>
+      <td>The tags applied to the stream.</td>
+    </tr>
+    <tr>
       <td>   viewer_count</td>
       <td>Integer</td>
       <td>The number of users watching the stream.</td>
@@ -19953,8 +19983,13 @@ END:VCALENDAR%
     </tr>
     <tr>
       <td>   tag_ids</td>
-      <td>String</td>
-      <td>The IDs of the tags applied to the stream. To get a tag’s name, use the <a href="#get-all-stream-tags">Get All Stream Tags</a> endpoint. For a list of possible tags, see <a href="https://www.twitch.tv/directory/all/tags" target="_blank">List of All Tags</a>.</td>
+      <td>String[]</td>
+      <td><strong>IMPORTANT</strong> Twitch is deprecating this field and will stop providing IDs in 2023 (Twitch will communicate the specific date in early 2023). If you use this field, consider updating your code at your earliest convenience to use the <code class="highlighter-rouge">tags</code> field.<br><br>The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see <a href="https://www.twitch.tv/directory/all/tags">List of All Tags</a>. The list doesn’t include Category Tags.</td>
+    </tr>
+    <tr>
+      <td>   is_mature</td>
+      <td>Boolean</td>
+      <td>A Boolean value that indicates whether the stream is meant for mature audiences.</td>
     </tr>
     <tr>
       <td>   is_mature</td>
@@ -20018,21 +20053,20 @@ END:VCALENDAR%
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"41375541868"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"459331509"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auronplay"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auronplay"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123456789"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98765"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sandysanderman"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SandySanderman"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"494131"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Little Nightmares"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"live"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hablamos y le damos a Little Nightmares 1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Español"</span><span class="p">],</span><span class="w">
       </span><span class="s2">"viewer_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">78365</span><span class="p">,</span><span class="w">
       </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-10T15:04:21Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/previews-ttv/live_user_auronplay-{width}x{height}.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"d4bb9c58-2141-4881-bcdc-3fe0505457d1"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"d4bb9c58-2141-4881-bcdc-3fe0505457d1"</span><span class="p">],</span><span class="w">
       </span><span class="s2">"is_mature"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="w">
@@ -20066,13 +20100,12 @@ END:VCALENDAR%
       </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grand Theft Auto V"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"live"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jacob: Digital Den Laptops &amp; Routers | NoPixel | !MAINGEAR !FCF"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"English"</span><span class="p">],</span><span class="w">
       </span><span class="s2">"viewer_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1490</span><span class="p">,</span><span class="w">
       </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-10T03:18:11Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/previews-ttv/live_user_afro-{width}x{height}.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"6ea6bca4-4712-4ab9-a906-e3336a9d8039"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"6ea6bca4-4712-4ab9-a906-e3336a9d8039"</span><span class="p">],</span><span class="w">
       </span><span class="s2">"is_mature"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="w">
@@ -20092,7 +20125,7 @@ END:VCALENDAR%
 			
 				<p>Gets the list of broadcasters that the user follows and that are streaming live.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:read:follows</strong> scope.</p>
 
@@ -20211,8 +20244,13 @@ END:VCALENDAR%
     </tr>
     <tr>
       <td>   tag_ids</td>
-      <td>String</td>
-      <td>The IDs of the tags applied to the stream. To get a tag’s name, use the <a href="#get-all-stream-tags">Get All Stream Tags</a> endpoint. For a list of possible tags, see <a href="https://www.twitch.tv/directory/all/tags" target="_blank">List of All Tags</a>.</td>
+      <td>String[]</td>
+      <td><strong>IMPORTANT</strong> Twitch is deprecating this field and will stop providing IDs in 2023 (Twitch will communicate the specific date in early 2023). If you use this field, consider updating your code at your earliest convenience to use the <code class="highlighter-rouge">tags</code> field.<br><br>The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see <a href="https://www.twitch.tv/directory/all/tags">List of All Tags</a>. The list doesn’t include Category Tags.</td>
+    </tr>
+    <tr>
+      <td>   tags</td>
+      <td>String[]</td>
+      <td>The tags applied to the stream.</td>
     </tr>
     <tr>
       <td>   is_mature</td>
@@ -20288,9 +20326,8 @@ END:VCALENDAR%
       </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-31T20:57:26Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/previews-ttv/live_user_aws-{width}x{height}.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"6ea6bca4-4712-4ab9-a906-e3336a9d8039"</span><span class="w">
-      </span><span class="p">]</span><span class="w">
+      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"6ea6bca4-4712-4ab9-a906-e3336a9d8039"</span><span class="p">],</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"English"</span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="w">
   </span><span class="p">],</span><span class="w">
@@ -20320,7 +20357,7 @@ END:VCALENDAR%
   <li>If the stream is a rerun of a past broadcast, including past premieres.</li>
 </ul>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:broadcast</strong> scope.</p>
 
@@ -20468,9 +20505,9 @@ END:VCALENDAR%
 			
 				<p>Gets a list of markers from the user’s most recent stream or from the specified VOD/video. A marker is an arbitrary point in a live stream that the broadcaster or editor marked, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:read:broadcast</strong> scope.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:read:broadcast</strong> or <strong>channel:manage:broadcast</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -20695,7 +20732,7 @@ END:VCALENDAR%
 			
 				<p>Gets a list of users that subscribe to the specified broadcaster.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:subscriptions</strong> scope.</p>
 
@@ -20925,7 +20962,7 @@ END:VCALENDAR%
 			
 				<p>Checks whether the user subscribes to the broadcaster’s channel.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:read:subscriptions</strong> scope.</p>
 
@@ -21088,11 +21125,11 @@ END:VCALENDAR%
 			<h2 id="get-all-stream-tags">Get All Stream Tags</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[98]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets a list of all stream tags that Twitch defines. The broadcaster may apply any of these to their channel except automatic tags.</p>
+				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. As part of this move, Twitch is deprecating this endpoint and will remove it in 2023 (Twitch will communicate the specific removal date in early 2023).</p>
 
-<p>For an online list of the possible tags, see <a href="https://www.twitch.tv/directory/all/tags" target="_blank">List of All Tags</a>.</p>
+<p>Gets a list of all stream tags that Twitch defines. The broadcaster may apply any of these to their channel except automatic tags. For an online list of the possible tags, see <a href="https://www.twitch.tv/directory/all/tags" target="_blank">List of All Tags</a>.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -21270,9 +21307,11 @@ twitch api get /tags/streams <span class="nt">-q</span> <span class="nv">tag_id<
 			<h2 id="get-stream-tags">Get Stream Tags</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[99]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets the list of stream tags that the broadcaster or Twitch added to their channel.</p>
+				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. As part of this move, Twitch is deprecating this endpoint and will remove it in 2023 (Twitch will communicate the specific removal date in early 2023). If you use this endpoint, consider updating your code at your earliest convenience to use <a href="#get-channel-information">Get Channel Information</a>.</p>
 
-<h3>Authentication</h3>
+<p>Gets the list of stream tags that the broadcaster or Twitch added to their channel.</p>
+
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -21422,11 +21461,13 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 			<h2 id="replace-stream-tags">Replace Stream Tags</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[100]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Applies one or more tags to the specified channel, overwriting existing tags.</p>
+				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. As part of this move, Twitch is deprecating this endpoint and will remove it in 2023 (Twitch will communicate the specific removal date in early 2023). If you use this endpoint, consider updating your code at your earliest convenience to use <a href="#modify-channel-information">Modify Channel Information</a>.</p>
+
+<p>Applies one or more tags to the specified channel, overwriting existing tags.</p>
 
 <p><strong>NOTE</strong>: You may not specify automatic tags; the call fails if you specify automatic tags. Automatic tags are tags that Twitch applies to the channel. For a list of automatic tags, see <a href="https://www.twitch.tv/directory/all/tags">List of All Tags</a>. To get the list of possible tags programmatically, see <a href="/docs/api/reference#get-all-stream-tags">Get All Stream Tags</a>.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:broadcast</strong> scope.</p>
 
@@ -21538,7 +21579,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 			
 				<p>Gets the list of Twitch teams that the broadcaster is a member of.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -21722,7 +21763,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 			
 				<p>Gets information about the specified Twitch team. <a href="https://help.twitch.tv/s/article/twitch-teams">Read More</a></p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -21933,7 +21974,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <p>To include the user’s verified email address in the response, you must use a user access token that includes the <strong>user:read:email</strong> scope.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -22115,7 +22156,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <p>To include the user’s verified email address in the response, the user access token must also include the <strong>user:read:email</strong> scope.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:edit</strong> scope.</p>
 
@@ -22287,7 +22328,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 			
 				<p>Gets information about users that are following other users. For example, you can use this endpoint to answer questions like “who is qotrok following,” “who is following qotrok,” or “is user X following user Y.”</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -22483,7 +22524,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 			
 				<p>Gets the list of users that the broadcaster has blocked. <a href="https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat?language=en_US#BlockWhispersandMessagesfromStrangers">Read More</a></p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:read:blocked_users</strong> scope.</p>
 
@@ -22628,7 +22669,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <p>To learn more about blocking users, see <a href="https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat?language=en_US#BlockWhispersandMessagesfromStrangers">Block Other Users on Twitch</a>.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:manage:blocked_users</strong> scope.</p>
 
@@ -22719,7 +22760,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 			
 				<p>Removes the user from the broadcaster’s list of blocked users. The user ID in the OAuth token identifies the broadcaster who’s removing the block.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:manage:blocked_users</strong> scope.</p>
 
@@ -22798,7 +22839,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 			
 				<p>Gets a list of all extensions (both active and inactive) that the broadcaster has installed. The user ID in the access token identifies the broadcaster.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:read:broadcast</strong> or <strong>user:edit:broadcast</strong> scope. To include inactive extensions, you must include the <strong>user:edit:broadcast</strong> scope.</p>
 
@@ -22956,7 +22997,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <p>NOTE: To include extensions that you have under development, you must specify a user access token that includes the <strong>user:read:broadcast</strong> or <strong>user:edit:broadcast</strong> scope.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -23190,7 +23231,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <p>NOTE: If you try to activate an extension under multiple extension types, the last write wins (and there is no guarantee of write order).</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>user:edit:broadcast</strong> scope.</p>
 
@@ -23469,7 +23510,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <p>You may apply several filters to get a subset of the videos. The filters are applied as an AND operation to each video. For example, if <em>language</em> is set to ‘de’ and <em>game_id</em> is set to 21779, the response includes only videos that show playing League of Legends by users that stream in German. The filters apply only if you get videos by user ID or game ID.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
 
@@ -23763,7 +23804,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 			
 				<p>Deletes one or more videos. You may delete past broadcasts, highlights, or uploads.</p>
 
-<h3>Authentication</h3>
+<h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:videos</strong> scope.</p>
 
@@ -24130,7 +24171,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
         <!-- <a href="#">Languages</a> -->
       </div>
       <div class="copyright">
-        &copy; 2022 Twitch Interactive, Inc.
+        &copy; 2023 Twitch Interactive, Inc.
       </div>
     </div>
   </div>

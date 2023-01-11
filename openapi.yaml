@@ -71,7 +71,7 @@ paths:
         **NOTE**: Only the broadcaster may start a commercial; the broadcaster’s editors and moderators may not start commercials on behalf of the broadcaster.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:edit:commercial** scope.
@@ -171,7 +171,7 @@ paths:
         More](https://dev.twitch.tv/docs/insights)
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **analytics:read:extensions** scope.
@@ -318,7 +318,7 @@ paths:
         more](https://dev.twitch.tv/docs/insights)
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **analytics:read:games** scope.
@@ -488,7 +488,7 @@ paths:
         Gets the Bits leaderboard for the authenticated broadcaster.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **bits:read** scope.
@@ -624,7 +624,7 @@ paths:
         viewers can assign Bits to.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -742,7 +742,7 @@ paths:
         exchange of a currency (for example, Bits) for a digital product.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).
@@ -877,7 +877,7 @@ paths:
         Gets information about one or more channels.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -936,6 +936,8 @@ paths:
                         game_name: Science & Technology
                         title: TwitchDev Monthly Update // May 6, 2021
                         delay: 0
+                        tags:
+                          - DevsInTheKnow
         "400":
           description: >-
             * The _broadcaster\_id_ query parameter is required.
@@ -965,7 +967,7 @@ paths:
         Updates a channel’s properties.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:broadcast** scope.
@@ -985,7 +987,7 @@ paths:
         - name: broadcaster_id
           in: query
           description: The ID of the broadcaster whose channel you want to update. This ID
-            must match the user ID associated with the user access token.
+            must match the user ID in the user access token.
           schema:
             type: string
           required: true
@@ -1000,6 +1002,8 @@ paths:
                   game_id: "33214"
                   title: there are helicopters in the game? REASON TO PLAY FORTNITE found
                   broadcaster_language: en
+                  tags:
+                    - LevelingUp
       responses:
         "204":
           description: >-
@@ -1022,7 +1026,7 @@ paths:
 
             -H 'Content-Type: application/json' \
 
-            --data-raw '{"game_id":"33214", "title":"there are helicopters in the game? REASON TO PLAY FORTNITE found", "broadcaster_language":"en"}'
+            --data-raw '{"game_id":"33214", "title":"there are helicopters in the game? REASON TO PLAY FORTNITE found", "broadcaster_language":"en", "tags":["LevelingUp"]}'
 
             ```
         "400":
@@ -1036,6 +1040,16 @@ paths:
             * The ID in `game_id` is not valid.
 
             * To update the `delay` field, the broadcaster must have partner status.
+
+            * The list in the `tags` field exceeds the maximum number of tags allowed.
+
+            * A tag in the `tags` field exceeds the maximum length allowed.
+
+            * A tag in the `tags` field is empty.
+
+            * A tag in the `tags` field contains special characters or spaces.
+
+            * One or more tags in the `tags` field failed AutoMod review.
         "401":
           description: >-
             * The ID in _broadcaster\_id_ must match the user ID found in the
@@ -1060,7 +1074,7 @@ paths:
         Gets the broadcaster’s list editors.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:editors** scope.
@@ -1137,7 +1151,7 @@ paths:
         and disabled rewards.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.
@@ -1279,7 +1293,7 @@ paths:
         The app used to create the reward is the only app that may delete it. If the reward’s redemption status is UNFULFILLED at the time the reward is deleted, its redemption status is marked as FULFILLED.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.
@@ -1362,13 +1376,13 @@ paths:
         created.
 
 
-        __Authentication:__
-
-
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:redemptions** scope.
-
-
         **NOTE**: A channel may offer a maximum of 50 rewards, which includes both enabled and disabled rewards.
+
+
+        __Authorization:__
+
+
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:redemptions** or **channel:manage:redemptions** scope.
       tags:
         - Channel Points
       externalDocs:
@@ -1578,6 +1592,7 @@ paths:
       security:
         - twitch_auth:
             - channel:read:redemptions
+            - channel:manage:redemptions
     patch:
       summary: Updates a custom reward.
       description: >-
@@ -1585,7 +1600,7 @@ paths:
         only app that may update the reward.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.
@@ -1794,10 +1809,10 @@ paths:
         used to create the reward is the only app that may get the redemptions.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:redemptions** scope.
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:redemptions** or **channel:manage:redemptions** scope.
       tags:
         - Channel Points
       externalDocs:
@@ -1998,6 +2013,7 @@ paths:
       security:
         - twitch_auth:
             - channel:read:redemptions
+            - channel:manage:redemptions
     patch:
       summary: Updates a redemption’s status.
       description: >-
@@ -2006,7 +2022,7 @@ paths:
         app that may update the redemption.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.
@@ -2032,7 +2048,7 @@ paths:
         - name: broadcaster_id
           in: query
           description: The ID of the broadcaster that’s updating the redemption. This ID
-            must match the user ID associated with the user OAuth token.
+            must match the user ID in the user access token.
           schema:
             type: string
           required: true
@@ -2303,7 +2319,8 @@ paths:
                     ```
                   value:
                     data:
-                      - campaign_id: 123-abc-456-def
+                      - id: a1b2c3-aabb-4455-d1e2f3
+                        campaign_id: 123-abc-456-def
                         user_id: "5678"
                         user_login: cool_user
                         user_name: Cool_User
@@ -2311,7 +2328,8 @@ paths:
                           value: 500
                           decimal_places: 2
                           currency: USD
-                      - campaign_id: 123-abc-456-def
+                      - id: z1y2x3-ccdd-6677-d1e2f3
+                        campaign_id: 123-abc-456-def
                         user_id: "8765"
                         user_login: cool_user2
                         user_name: Cool_User2
@@ -2954,9 +2972,7 @@ paths:
         - name: moderator_id
           in: query
           description: >-
-            The ID of a user that has permission to moderate the broadcaster’s
-            chat room, or the broadcaster’s ID if they’re getting the
-            settings.  
+            The ID of the broadcaster or one of the broadcaster’s moderators.  
               
             This field is required only if you want to include the `non_moderator_chat_delay` and `non_moderator_chat_delay_duration` settings in the response.  
               
@@ -3015,10 +3031,10 @@ paths:
         Updates the broadcaster’s chat settings.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the `moderator:manage:chat_settings` scope.
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\_settings** scope.
 
 
         __Request Body:__
@@ -3239,6 +3255,9 @@ paths:
         "400":
           description: |-
             * The `message` field in the request's body is required.
+            * The `message` field may not contain an empty string.
+            * The `message` field may not contain an empty string.
+            * The string in the `message` field failed review.
             * The specified color is not valid.
         "401":
           description: >-
@@ -3491,7 +3510,7 @@ paths:
         Creating a clip is an asynchronous process that can take a short amount of time to complete. To determine whether the clip was successfully created, call [Get Clips](https://dev.twitch.tv/docs/api/reference#get-clips) using the clip ID that this request returned. If Get Clips returns the clip, the clip was successfully created. If after 15 seconds Get Clips hasn’t returned the clip, assume it failed.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **clips:edit** scope.
@@ -3579,7 +3598,7 @@ paths:
         clips](https://help.twitch.tv/s/article/how-to-use-clips).
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -3769,7 +3788,7 @@ paths:
         Rate limit: You may send at most one request per second per user.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). The client ID in the access token must match a client ID that Twitch has approved to provide entitlements.
@@ -3861,7 +3880,7 @@ paths:
         Rate limit: You may send at most one request per second per user.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). Only client IDs approved by Twitch may redeem codes on behalf of any Twitch user account.
@@ -3977,7 +3996,7 @@ paths:
 
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens). The client ID in the access token must own the game.
@@ -4131,7 +4150,7 @@ paths:
 
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens). The client ID in the access token must own the game.
@@ -5255,7 +5274,7 @@ paths:
         __Authorization:__
 
 
-        Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). The client ID in the app access token must be the extension’s client ID.
+        Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). The client ID in the app access token must match the extension’s client ID.
       tags:
         - Extensions
       externalDocs:
@@ -5340,7 +5359,7 @@ paths:
         Creates an EventSub subscription.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         If you use [webhooks to receive events](https://dev.twitch.tv/docs/eventsub/handling-webhook-events), the request must specify an app access token. The request will fail if you use a user access token. If the subscription type requires user authorization, the user must have granted your app (client ID) permissions to receive those events before you subscribe to them. For example, to subscribe to [channel.subscribe](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscribe) events, your app must get a user access token that includes the `channel:read:subscriptions` scope, which adds the required permission to your app access token’s client ID.
@@ -5473,7 +5492,7 @@ paths:
         Deletes an EventSub subscription.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         If you use [webhooks to receive events](https://dev.twitch.tv/docs/eventsub/handling-webhook-events), the request must specify an app access token. The request will fail if you use a user access token.
@@ -5551,7 +5570,7 @@ paths:
         token created.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         If you use [webhooks to receive events](https://dev.twitch.tv/docs/eventsub/handling-webhook-events), the request must specify an app access token. The request will fail if you use a user access token.
@@ -5630,8 +5649,7 @@ paths:
             Types](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#subscription-types).
           schema:
             type: string
-            enum:
-              &a1
+            enum: &a1
               - channel.update
               - channel.follow
               - channel.subscribe
@@ -5779,7 +5797,7 @@ paths:
         Gets information about all broadcasts on Twitch.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -5862,7 +5880,7 @@ paths:
         You may get up to 100 categories or games by specifying their ID or name. You may specify all IDs, all names, or a combination of IDs and names. If you specify a combination of IDs and names, the total number of IDs and names must not exceed 100.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -6051,7 +6069,7 @@ paths:
         Instead of polling for events, consider [subscribing](https://dev.twitch.tv/docs/eventsub/manage-subscriptions) to Hype Train events ([Begin](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainbegin), [Progress](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainprogress), [End](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainend)).
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:hype\_train** scope.
@@ -6653,10 +6671,10 @@ paths:
         Gets all users that the broadcaster banned or put in a timeout.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** scope.
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** or **moderator:manage:banned\_users** scope.
       tags:
         - Moderation
       externalDocs:
@@ -6768,6 +6786,7 @@ paths:
       security:
         - twitch_auth:
             - moderation:read
+            - moderator:manage:banned_users
   /moderation/bans:
     post:
       summary: Bans a user from participating in a broadcaster’s chat room or puts
@@ -6786,7 +6805,7 @@ paths:
         To remove a ban or end a timeout, see [Unban user](https://dev.twitch.tv/docs/api/reference#unban-user).
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\_users** scope.
@@ -6993,7 +7012,7 @@ paths:
         To ban a user, see [Ban user](https://dev.twitch.tv/docs/api/reference#ban-user).
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\_users** scope.
@@ -7120,7 +7139,7 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:blocked\_terms** scope.
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:blocked\_terms** or **moderator:manage:blocked\_terms** scope.
       tags:
         - Moderation
       externalDocs:
@@ -7214,6 +7233,7 @@ paths:
       security:
         - twitch_auth:
             - moderator:read:blocked_terms
+            - moderator:manage:blocked_terms
     post:
       summary: Adds a word or phrase to the broadcaster’s list of blocked terms.
       description: >-
@@ -7222,7 +7242,7 @@ paths:
         room.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\_terms** scope.
@@ -7364,7 +7384,7 @@ paths:
         terms.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\_terms** scope.
@@ -7453,7 +7473,7 @@ paths:
         broadcaster’s chat room.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\_messages** scope.
@@ -8141,10 +8161,9 @@ paths:
             - channel:manage:vips
   /moderation/shield_mode:
     put:
-      summary: BETA Activates or deactivates the broadcaster’s Shield Mode.
+      summary: Activates or deactivates the broadcaster’s Shield Mode.
       description: >-
-        [BETA](https://dev.twitch.tv/docs/product-lifecycle) Activates or
-        deactivates the broadcaster’s Shield Mode.
+        Activates or deactivates the broadcaster’s Shield Mode.
 
 
         Twitch’s Shield Mode feature is like a panic button that broadcasters can push to protect themselves from chat abuse coming from one or more accounts. When activated, Shield Mode applies the overrides that the broadcaster configured in the Twitch UX. If the broadcaster hasn’t configured Shield Mode, it applies default overrides.
@@ -8243,10 +8262,9 @@ paths:
         - twitch_auth:
             - moderator:manage:shield_mode
     get:
-      summary: BETA Gets the broadcaster’s Shield Mode activation status.
+      summary: Gets the broadcaster’s Shield Mode activation status.
       description: >-
-        [BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets the
-        broadcaster’s Shield Mode activation status.
+        Gets the broadcaster’s Shield Mode activation status.
 
 
         To receive notification when the broadcaster activates and deactivates Shield Mode, subscribe to the [channel.shield\_mode.begin](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshield%5Fmodebegin) and [channel.shield\_mode.end](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshield%5Fmodeend) subscription types.
@@ -8344,7 +8362,7 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:polls** scope.
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:polls** or **channel:manage:polls** scope.
       tags:
         - Polls
       externalDocs:
@@ -8457,6 +8475,7 @@ paths:
       security:
         - twitch_auth:
             - channel:read:polls
+            - channel:manage:polls
     post:
       summary: Creates a poll that viewers in the broadcaster’s channel can vote on.
       description: >-
@@ -8714,7 +8733,7 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:predictions** scope.
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:predictions** or **channel:manage:predictions** scope.
       tags:
         - Predictions
       externalDocs:
@@ -8725,7 +8744,7 @@ paths:
         - name: broadcaster_id
           in: query
           description: The ID of the broadcaster whose predictions you want to get. This
-            ID must match the user ID associated with the user access token.
+            ID must match the user ID in the user access token.
           schema:
             type: string
           required: true
@@ -8824,6 +8843,7 @@ paths:
       security:
         - twitch_auth:
             - channel:read:predictions
+            - channel:manage:predictions
     post:
       summary: Create a Channel Points Prediction.
       description: >-
@@ -9113,7 +9133,7 @@ paths:
         - name: from_broadcaster_id
           in: query
           description: The ID of the broadcaster that’s sending the raiding party. This ID
-            must match the user ID associated with the user access token.
+            must match the user ID in the user access token.
           schema:
             type: string
           required: true
@@ -9215,7 +9235,7 @@ paths:
         - name: broadcaster_id
           in: query
           description: The ID of the broadcaster that initiated the raid. This ID must
-            match the user ID associated with the user access token.
+            match the user ID in the user access token.
           schema:
             type: string
           required: true
@@ -9928,7 +9948,7 @@ paths:
         To match, the category’s name must contain all parts of the query string. For example, if the query string is 42, the response includes any category name that contains 42 in the title. If the query string is a phrase like _love computer_, the response includes any category name that contains the words love and computer anywhere in the name. The comparison is case insensitive.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -10025,7 +10045,7 @@ paths:
         By default, the results include both live and offline channels. To get only live channels set the _live\_only_ query parameter to **true**.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -10102,6 +10122,7 @@ paths:
                         id: "41245072"
                         is_live: false
                         tags_ids: []
+                        tags: []
                         thumbnail_url: https://static-cdn.jtvnw.net/jtv_user_pictures/fd17325a-7dc2-46c6-8617-e90ec259501c-profile_image-300x300.png
                         title: loserfruit
                         started_at: ""
@@ -10135,6 +10156,8 @@ paths:
                         is_live: true
                         tags_ids:
                           - 6ea6bca4-4712-4ab9-a906-e3336a9d8039
+                        tags:
+                          - English
                         thumbnail_url: https://static-cdn.jtvnw.net/jtv_user_pictures/a_seagull-profile_image-4d2d235688c7dc66-300x300.png
                         title: a_seagull
                         started_at: 2020-03-18T17:56:00Z
@@ -10474,7 +10497,7 @@ paths:
         Gets the channel’s stream key.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:stream\_key** scope.
@@ -10541,7 +10564,7 @@ paths:
         the list as you page through the results.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -10661,14 +10684,16 @@ paths:
                     ```
                   value:
                     data:
-                      - id: "41375541868"
-                        user_id: "459331509"
-                        user_login: auronplay
-                        user_name: auronplay
+                      - id: "123456789"
+                        user_id: "98765"
+                        user_login: sandysanderman
+                        user_name: SandySanderman
                         game_id: "494131"
                         game_name: Little Nightmares
                         type: live
                         title: hablamos y le damos a Little Nightmares 1
+                        tags:
+                          - Español
                         viewer_count: 78365
                         started_at: 2021-03-10T15:04:21Z
                         language: es
@@ -10707,6 +10732,8 @@ paths:
                         game_name: Grand Theft Auto V
                         type: live
                         title: "Jacob: Digital Den Laptops & Routers | NoPixel | !MAINGEAR !FCF"
+                        tags:
+                          - English
                         viewer_count: 1490
                         started_at: 2021-03-10T03:18:11Z
                         language: en
@@ -10736,7 +10763,7 @@ paths:
         streaming live.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:follows** scope.
@@ -10811,6 +10838,8 @@ paths:
                         thumbnail_url: https://static-cdn.jtvnw.net/previews-ttv/live_user_aws-{width}x{height}.jpg
                         tag_ids:
                           - 6ea6bca4-4712-4ab9-a906-e3336a9d8039
+                        tags:
+                          - English
                     pagination:
                       cursor: eyJiIjp7IkN1cnNvciI6ImV5SnpJam8zT0RNMk5TNDBORFF4TlRjMU1UY3hOU3dpWkNJNlptRnNjMlVzSW5RaU9uUnlkV1Y5In0sImEiOnsiQ3Vyc29yIjoiZXlKeklqb3hOVGs0TkM0MU56RXhNekExTVRZNU1ESXNJbVFpT21aaGJITmxMQ0owSWpwMGNuVmxmUT09In19
         "400":
@@ -10852,7 +10881,7 @@ paths:
         * If the stream is a rerun of a past broadcast, including past premieres.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:broadcast** scope.
@@ -10946,10 +10975,10 @@ paths:
         Twitch UX).
 
 
-        __Authentication:__
+        __Authorization:__
 
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:broadcast** scope.
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:broadcast** or **channel:manage:broadcast** scope.
       tags:
         - Streams
       externalDocs:
@@ -11064,6 +11093,7 @@ paths:
       security:
         - twitch_auth:
             - user:read:broadcast
+            - channel:manage:broadcast
   /subscriptions:
     get:
       summary: Gets a list of users that subscribe to the specified broadcaster.
@@ -11071,7 +11101,7 @@ paths:
         Gets a list of users that subscribe to the specified broadcaster.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:subscriptions** scope.
@@ -11191,7 +11221,7 @@ paths:
         Checks whether the user subscribes to the broadcaster’s channel.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:subscriptions** scope.
@@ -11279,14 +11309,16 @@ paths:
       summary: Gets the list of all stream tags that Twitch defines. You can also
         filter the list by one or more tag IDs.
       description: >-
-        Gets a list of all stream tags that Twitch defines. The broadcaster
-        may apply any of these to their channel except automatic tags.
+        **IMPORTANT** Twitch is moving from Twitch-defined tags to
+        channel-defined tags. As part of this move, Twitch is deprecating this
+        endpoint and will remove it in 2023 (Twitch will communicate the
+        specific removal date in early 2023).
 
 
-        For an online list of the possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags).
+        Gets a list of all stream tags that Twitch defines. The broadcaster may apply any of these to their channel except automatic tags. For an online list of the possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags).
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -11409,11 +11441,18 @@ paths:
       summary: Gets the list of stream tags that the broadcaster or Twitch added to
         their channel.
       description: >-
-        Gets the list of stream tags that the broadcaster or Twitch added
-        to their channel.
+        **IMPORTANT** Twitch is moving from Twitch-defined tags to
+        channel-defined tags. As part of this move, Twitch is deprecating this
+        endpoint and will remove it in 2023 (Twitch will communicate the
+        specific removal date in early 2023). If you use this endpoint, consider
+        updating your code at your earliest convenience to use [Get Channel
+        Information](https://dev.twitch.tv/docs/api/reference#get-channel-information).
 
 
-        __Authentication:__
+        Gets the list of stream tags that the broadcaster or Twitch added to their channel.
+
+
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -11502,14 +11541,21 @@ paths:
       summary: Applies one or more tags to the specified channel, overwriting existing
         tags.
       description: >-
-        Applies one or more tags to the specified channel, overwriting
-        existing tags.
+        **IMPORTANT** Twitch is moving from Twitch-defined tags to
+        channel-defined tags. As part of this move, Twitch is deprecating this
+        endpoint and will remove it in 2023 (Twitch will communicate the
+        specific removal date in early 2023). If you use this endpoint, consider
+        updating your code at your earliest convenience to use [Modify Channel
+        Information](https://dev.twitch.tv/docs/api/reference#modify-channel-information).
+
+
+        Applies one or more tags to the specified channel, overwriting existing tags.
 
 
         **NOTE**: You may not specify automatic tags; the call fails if you specify automatic tags. Automatic tags are tags that Twitch applies to the channel. For a list of automatic tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags). To get the list of possible tags programmatically, see [Get All Stream Tags](https://dev.twitch.tv/docs/api/reference#get-all-stream-tags).
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:broadcast** scope.
@@ -11609,7 +11655,7 @@ paths:
         Gets the list of Twitch teams that the broadcaster is a member of.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -11691,7 +11737,7 @@ paths:
         More](https://help.twitch.tv/s/article/twitch-teams)
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -11788,7 +11834,7 @@ paths:
         To include the user’s verified email address in the response, you must use a user access token that includes the **user:read:email** scope.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -11885,7 +11931,7 @@ paths:
         To include the user’s verified email address in the response, the user access token must also include the **user:read:email** scope.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:edit** scope.
@@ -11968,7 +12014,7 @@ paths:
         user Y.”
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -12080,7 +12126,7 @@ paths:
         More](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat?language=en%5FUS#BlockWhispersandMessagesfromStrangers)
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:blocked\_users** scope.
@@ -12175,7 +12221,7 @@ paths:
         To learn more about blocking users, see [Block Other Users on Twitch](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat?language=en%5FUS#BlockWhispersandMessagesfromStrangers).
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:manage:blocked\_users** scope.
@@ -12280,7 +12326,7 @@ paths:
         block.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:manage:blocked\_users** scope.
@@ -12348,7 +12394,7 @@ paths:
         the broadcaster.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:broadcast** or **user:edit:broadcast** scope. To include inactive extensions, you must include the **user:edit:broadcast** scope.
@@ -12447,7 +12493,7 @@ paths:
         NOTE: To include extensions that you have under development, you must specify a user access token that includes the **user:read:broadcast** or **user:edit:broadcast** scope.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -12551,7 +12597,7 @@ paths:
         NOTE: If you try to activate an extension under multiple extension types, the last write wins (and there is no guarantee of write order).
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:edit:broadcast** scope.
@@ -12721,7 +12767,7 @@ paths:
         You may apply several filters to get a subset of the videos. The filters are applied as an AND operation to each video. For example, if _language_ is set to ‘de’ and _game\_id_ is set to 21779, the response includes only videos that show playing League of Legends by users that stream in German. The filters apply only if you get videos by user ID or game ID.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
@@ -12966,7 +13012,7 @@ paths:
         highlights, or uploads.
 
 
-        __Authentication:__
+        __Authorization:__
 
 
         Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:videos** scope.
@@ -13829,6 +13875,7 @@ components:
         - game_id
         - title
         - delay
+        - tags
       properties:
         broadcaster_id:
           type: string
@@ -13869,6 +13916,11 @@ components:
             broadcaster has partner status and they set a non-zero stream delay
             value.
           format: int32
+        tags:
+          type: array
+          description: The tags applied to the channel.
+          items:
+            type: string
     GetChannelInformationResponse:
       type: object
       required:
@@ -13906,6 +13958,17 @@ components:
             competitive play. Only users with Partner status may set this field.
             The maximum delay is 900 seconds (15 minutes).
           format: int32
+        tags:
+          type: array
+          description: >-
+            A list of channel-defined tags to apply to the channel. To remove
+            all tags from the channel, set tags to an empty array. Tags help
+            identify the content that the channel streams. [Learn
+            More](https://help.twitch.tv/s/article/guide-to-tags)  
+              
+            A channel may specify a maximum of 10 tags. Each tag is limited to a maximum of 25 characters and may not be an empty string or contain spaces or special characters. Tags are case insensitive. For readability, consider using camelCasing or PascalCasing.
+          items:
+            type: string
     ChannelEditor:
       type: object
       required:
@@ -14422,11 +14485,10 @@ components:
       properties:
         id:
           type: string
-          description: An ID that uniquely identifies the charity campaign.
+          description: An ID that identifies the charity campaign.
         broadcaster_id:
           type: string
-          description: An ID that uniquely identifies the broadcaster that’s running the
-            campaign.
+          description: An ID that identifies the broadcaster that’s running the campaign.
         broadcaster_login:
           type: string
           description: The broadcaster’s login name.
@@ -14517,12 +14579,17 @@ components:
     CharityCampaignDonation:
       type: object
       required:
+        - id
         - campaign_id
         - user_id
         - user_login
         - user_name
         - amount
       properties:
+        id:
+          type: string
+          description: An ID that identifies the donation. The ID is unique across
+            campaigns.
         campaign_id:
           type: string
           description: An ID that identifies the charity campaign that the donation
@@ -18493,6 +18560,7 @@ components:
         - id
         - is_live
         - tag_ids
+        - tags
         - thumbnail_url
         - title
         - started_at
@@ -18527,10 +18595,18 @@ components:
             otherwise, **false**.
         tag_ids:
           type: array
-          description: The list of tags that apply to the stream. The list contains IDs
-            only when the channel is steaming live. For a list of possible tags,
-            see [List of All Tags](https://www.twitch.tv/directory/all/tags).
-            The list doesn’t include Category Tags.
+          description: >-
+            **IMPORTANT** Twitch is deprecating this field and will stop
+            providing IDs in 2023 (Twitch will communicate the specific date in
+            early 2023). If you use this field, consider updating your code at
+            your earliest convenience to use the `tags` field.  
+              
+            The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags). The list doesn’t include Category Tags.
+          items:
+            type: string
+        tags:
+          type: array
+          description: The tags applied to the channel.
           items:
             type: string
         thumbnail_url:
@@ -18774,6 +18850,7 @@ components:
         - language
         - thumbnail_url
         - tag_ids
+        - tags
         - is_mature
       properties:
         id:
@@ -18829,12 +18906,21 @@ components:
             Replace the width and height placeholders in the URL
             (`{width}x{height}`) with the size of the image you want, in pixels.
         tag_ids:
-          type: string
-          description: The IDs of the tags applied to the stream. To get a tag’s name, use
-            the [Get All Stream
-            Tags](https://dev.twitch.tv/docs/api/reference#get-all-stream-tags)
-            endpoint. For a list of possible tags, see [List of All
-            Tags](https://www.twitch.tv/directory/all/tags).
+          type: array
+          description: >-
+            **IMPORTANT** Twitch is deprecating this field and will stop
+            providing IDs in 2023 (Twitch will communicate the specific date in
+            early 2023). If you use this field, consider updating your code at
+            your earliest convenience to use the `tags` field.  
+              
+            The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags). The list doesn’t include Category Tags.
+          items:
+            type: string
+        tags:
+          type: array
+          description: The tags applied to the stream.
+          items:
+            type: string
         is_mature:
           type: boolean
           description: A Boolean value that indicates whether the stream is meant for
