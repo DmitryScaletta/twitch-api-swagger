@@ -112,7 +112,7 @@ export type OperationObject = {
   requestBody?: RequestBodyObject | ReferenceObject;
   responses?: ResponsesObject;
   // callbacks?: Record<string, CallbackObject | ReferenceObject>;
-  // deprecated?: boolean;
+  deprecated?: boolean;
   security?: SecurityRequirementObject[];
   servers?: ServerObject[];
 };

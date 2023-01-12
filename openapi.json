@@ -9456,7 +9456,8 @@
           {
             "twitch_auth": []
           }
-        ]
+        ],
+        "deprecated": true
       }
     },
     "/streams/tags": {
@@ -9533,7 +9534,8 @@
           {
             "twitch_auth": []
           }
-        ]
+        ],
+        "deprecated": true
       },
       "put": {
         "summary": "Applies one or more tags to the specified channel, overwriting existing tags.",
@@ -9597,7 +9599,8 @@
               "channel:manage:broadcast"
             ]
           }
-        ]
+        ],
+        "deprecated": true
       }
     },
     "/teams/channel": {
@@ -16604,7 +16607,8 @@
             "description": "**IMPORTANT** Twitch is deprecating this field and will stop providing IDs in 2023 (Twitch will communicate the specific date in early 2023). If you use this field, consider updating your code at your earliest convenience to use the `tags` field.  \n  \nThe list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags). The list doesn’t include Category Tags.",
             "items": {
               "type": "string"
-            }
+            },
+            "deprecated": true
           },
           "tags": {
             "type": "array",
@@ -16970,7 +16974,8 @@
             "description": "**IMPORTANT** Twitch is deprecating this field and will stop providing IDs in 2023 (Twitch will communicate the specific date in early 2023). If you use this field, consider updating your code at your earliest convenience to use the `tags` field.  \n  \nThe list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags). The list doesn’t include Category Tags.",
             "items": {
               "type": "string"
-            }
+            },
+            "deprecated": true
           },
           "tags": {
             "type": "array",
@@ -17426,7 +17431,8 @@
               }
             }
           }
-        }
+        },
+        "deprecated": true
       },
       "GetStreamTagsResponse": {
         "type": "object",
@@ -17441,7 +17447,8 @@
               "$ref": "#/components/schemas/StreamTag"
             }
           }
-        }
+        },
+        "deprecated": true
       },
       "ReplaceStreamTagsBody": {
         "type": "object",
@@ -17453,7 +17460,8 @@
               "type": "string"
             }
           }
-        }
+        },
+        "deprecated": true
       },
       "ChannelTeam": {
         "type": "object",

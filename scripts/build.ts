@@ -5,10 +5,10 @@ import generateOpenApi from './utils/generateOpenApi.js';
 import { HTML_DESCRIPTION, OPEN_API_TITLE } from './utils/constants.js';
 import parseScopes from './utils/parseScopes.js';
 
-const REFERENCE_URL = 'https://dev.twitch.tv/docs/api/reference';
-const SCOPES_URL = 'https://dev.twitch.tv/docs/authentication/scopes';
+const REFERENCE_URL = 'https://dev.twitch.tv/docs/api/reference/';
+const SCOPES_URL = 'https://dev.twitch.tv/docs/authentication/scopes/';
 const EVENT_SUB_SUBSCRIPTION_TYPES_URL =
-  'https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types';
+  'https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/';
 const REFERENCE_FILENAME = './tmp/reference.html';
 const SCOPES_FILENAME = './tmp/scopes.html';
 const EVENT_SUB_SUBSCRIPTION_TYPES_FILENAME =

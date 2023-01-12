@@ -31,6 +31,17 @@ const generateOpenApi = (
 
   addUndocumentedApi(openApi);
 
+  // deprecations
+  const schemas = openApi.components.schemas;
+  openApi.paths['/tags/streams']!['get'].deprecated = true;
+  openApi.paths['/streams/tags']!['get'].deprecated = true;
+  openApi.paths['/streams/tags']!['put'].deprecated = true;
+  schemas['GetAllStreamTagsResponse']!.deprecated = true;
+  schemas['GetStreamTagsResponse']!.deprecated = true;
+  schemas['ReplaceStreamTagsBody']!.deprecated = true;
+  schemas['Channel']!.properties!['tag_ids']!.deprecated = true;
+  schemas['Stream']!.properties!['tag_ids']!.deprecated = true;
+
   return openApi;
 };
 

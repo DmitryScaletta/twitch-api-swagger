@@ -11436,6 +11436,7 @@ paths:
             * The ID in the Client-Id header must match the Client ID in the access token.
       security:
         - twitch_auth: []
+      deprecated: true
   /streams/tags:
     get:
       summary: Gets the list of stream tags that the broadcaster or Twitch added to
@@ -11537,6 +11538,7 @@ paths:
             * The ID in the Client-Id header must match the Client ID in the access token.
       security:
         - twitch_auth: []
+      deprecated: true
     put:
       summary: Applies one or more tags to the specified channel, overwriting existing
         tags.
@@ -11648,6 +11650,7 @@ paths:
       security:
         - twitch_auth:
             - channel:manage:broadcast
+      deprecated: true
   /teams/channel:
     get:
       summary: Gets the list of Twitch teams that the broadcaster is a member of.
@@ -18604,6 +18607,7 @@ components:
             The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags). The list doesn’t include Category Tags.
           items:
             type: string
+          deprecated: true
         tags:
           type: array
           description: The tags applied to the channel.
@@ -18916,6 +18920,7 @@ components:
             The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags). The list doesn’t include Category Tags.
           items:
             type: string
+          deprecated: true
         tags:
           type: array
           description: The tags applied to the stream.
@@ -19321,6 +19326,7 @@ components:
               description: The cursor used to get the next page of results. Set the request’s
                 _after_ query parameter to this value to page forwards through
                 the results.
+      deprecated: true
     GetStreamTagsResponse:
       type: object
       required:
@@ -19332,6 +19338,7 @@ components:
             Twitch hasn’t added tags to the broadcaster’s channel.
           items:
             $ref: "#/components/schemas/StreamTag"
+      deprecated: true
     ReplaceStreamTagsBody:
       type: object
       properties:
@@ -19344,6 +19351,7 @@ components:
             To remove all tags from the channel, set `tag_ids` to an empty array.
           items:
             type: string
+      deprecated: true
     ChannelTeam:
       type: object
       required:
