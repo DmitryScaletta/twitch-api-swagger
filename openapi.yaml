@@ -4086,21 +4086,21 @@ paths:
                         user_id: "25009227"
                         game_id: "33214"
                         fulfillment_status: CLAIMED
-                        updated_at: 2019-01-28T04:17:53.325Z
+                        last_updated: 2019-01-28T04:17:53.325Z
                       - id: 862750a5-265e-4ab6-9f0a-c64df3d54dd0
                         benefit_id: 74c52265-e214-48a6-91b9-23b6014e8041
                         timestamp: 2019-01-28T04:16:53.325Z
                         user_id: "25009227"
                         game_id: "33214"
                         fulfillment_status: CLAIMED
-                        updated_at: 2021-06-15T04:16:53.325Z
+                        last_updated: 2021-06-15T04:16:53.325Z
                       - id: d8879baa-3966-4d10-8856-15fdd62cce02
                         benefit_id: cdfdc5c3-65a2-43bc-8767-fde06eb4ab2c
                         timestamp: 2019-01-28T04:15:53.325Z
                         user_id: "25009227"
                         game_id: "33214"
                         fulfillment_status: FULFILLED
-                        updated_at: 2019-01-28T04:17:53.325Z
+                        last_updated: 2019-01-28T04:17:53.325Z
                     pagination:
                       cursor: eyJiIjpudW...
         "400":
@@ -10121,7 +10121,7 @@ paths:
                         game_name: House Flipper
                         id: "41245072"
                         is_live: false
-                        tags_ids: []
+                        tag_ids: []
                         tags: []
                         thumbnail_url: https://static-cdn.jtvnw.net/jtv_user_pictures/fd17325a-7dc2-46c6-8617-e90ec259501c-profile_image-300x300.png
                         title: loserfruit
@@ -10154,7 +10154,7 @@ paths:
                         game_name: DOOM Eternal
                         id: "19070311"
                         is_live: true
-                        tags_ids:
+                        tag_ids:
                           - 6ea6bca4-4712-4ab9-a906-e3336a9d8039
                         tags:
                           - English
