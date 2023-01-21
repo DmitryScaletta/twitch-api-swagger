@@ -2151,12 +2151,11 @@ paths:
             - channel:manage:redemptions
   /charity/campaigns:
     get:
-      summary: BETA Gets information about the broadcaster’s active charity campaign.
+      summary: Gets information about the broadcaster’s active charity campaign.
       description: >-
-        [BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets
-        information about the charity campaign that a broadcaster is running.
-        For example, the campaign’s fundraising goal and the current amount of
-        donations.
+        Gets information about the charity campaign that a broadcaster is
+        running. For example, the campaign’s fundraising goal and the current
+        amount of donations.
 
 
         To receive events when progress is made towards the campaign’s goal or the broadcaster changes the fundraising goal, subscribe to the [channel.charity\_campaign.progress](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelcharity%5Fcampaignprogress) subscription type.
@@ -2247,12 +2246,11 @@ paths:
             - channel:read:charity
   /charity/donations:
     get:
-      summary: BETA Gets the list of donations that users have made to the
-        broadcaster’s active charity campaign.
+      summary: Gets the list of donations that users have made to the broadcaster’s
+        active charity campaign.
       description: >-
-        [BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets the list
-        of donations that users have made to the broadcaster’s active charity
-        campaign.
+        Gets the list of donations that users have made to the
+        broadcaster’s active charity campaign.
 
 
         To receive events as donations occur, subscribe to the [channel.charity\_campaign.donate](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelcharity%5Fcampaigndonate) subscription type.
@@ -3272,6 +3270,118 @@ paths:
       security:
         - twitch_auth:
             - moderator:manage:announcements
+  /chat/shoutouts:
+    post:
+      summary: BETA Sends a Shoutout to the specified broadcaster.
+      description: >-
+        [BETA](https://dev.twitch.tv/docs/product-lifecycle) Sends a
+        Shoutout to the specified broadcaster. Typically, you send Shoutouts
+        when you or one of your moderators notice another broadcaster in your
+        chat, the other broadcaster is coming up in conversation, or after they
+        raid your broadcast.
+
+
+        Twitch’s Shoutout feature is a great way for you to show support for other broadcasters and help them grow. Viewers who do not follow the other broadcaster will see a pop-up Follow button in your chat that they can click to follow the other broadcaster. [Learn More](https://help.twitch.tv/s/article/shoutouts)
+
+
+        **Rate Limits** The broadcaster may send a Shoutout once every 2 minutes. They may send the same broadcaster a Shoutout once every 60 minutes.
+
+
+        To receive notifications when a Shoutout is sent or received, subscribe to the [channel.shoutout.create](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshoutoutcreate) and [channel.shoutout.receive](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshoutoutreceive) subscription types. The **channel.shoutout.create** event includes cooldown periods that indicate when the broadcaster may send another Shoutout without exceeding the endpoint’s rate limit.
+
+
+        __Authorization:__
+
+
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:shoutouts** scope.
+      tags:
+        - Chat
+      externalDocs:
+        description: Send a Shoutout
+        url: https://dev.twitch.tv/docs/api/reference#send-a-shoutout
+      operationId: send-a-shoutout
+      parameters:
+        - name: from_broadcaster_id
+          in: query
+          description: The ID of the broadcaster that’s sending the Shoutout.
+          schema:
+            type: string
+          required: true
+        - name: to_broadcaster_id
+          in: query
+          description: The ID of the broadcaster that’s receiving the Shoutout.
+          schema:
+            type: string
+          required: true
+        - name: moderator_id
+          in: query
+          description: The ID of the broadcaster or a user that is one of the
+            broadcaster’s moderators. This ID must match the user ID in the
+            access token.
+          schema:
+            type: string
+          required: true
+      responses:
+        "204":
+          description: >-
+            Successfully sent the specified broadcaster a Shoutout.
+
+
+            __Examples__
+
+
+            _Request:_
+
+
+            ```bash
+
+            curl -X POST 'https://api.twitch.tv/helix/chat/shoutouts?from_broadcaster_id=12345&to_broadcaster_id=626262&moderator_id=98765' \
+
+            -H 'Authorization: Bearer kpvy3cjboyptmdkiacwr0c19hotn5s' \
+
+            -H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t'
+
+            ```
+        "400":
+          description: >-
+            * The _from\_broadcaster\_id_ query parameter is required.
+
+            * The ID in the _from\_broadcaster\_id_ query parameter is not valid.
+
+            * The _to\_broadcaster\_id_ query parameter is required.
+
+            * The ID in the _to\_broadcaster\_id_ query parameter is not valid.
+
+            * The broadcaster may not give themselves a Shoutout.
+
+            * The broadcaster is not streaming live or does not have one or more viewers.
+        "401":
+          description: >-
+            * The ID in _moderator\_id_ must match the user ID in the user
+            access token.
+
+            * The Authorization header is required and must contain a user access token.
+
+            * The user access token must include the **moderator:manage:shoutouts** scope.
+
+            * The access token is not valid.
+
+            * The client ID specified in the Client-Id header does not match the client ID specified in the access token.
+        "403":
+          description: >-
+            * The user in _moderator\_id_ is not one of the broadcaster's
+            moderators.
+
+            * The broadcaster may not send the specified broadcaster a Shoutout.
+        "429":
+          description: >-
+            * The broadcaster exceeded the number of Shoutouts they may send
+            within a given window. See the endpoint's Rate Limits.
+
+            * The broadcaster exceeded the number of Shoutouts they may send the same broadcaster within a given window. See the endpoint's Rate Limits.
+      security:
+        - twitch_auth:
+            - moderator:manage:shoutouts
   /chat/color:
     get:
       summary: Gets the color used for the user’s name in chat.
@@ -5688,6 +5798,8 @@ paths:
               - channel.hype_train.end
               - channel.shield_mode.begin
               - channel.shield_mode.end
+              - channel.shoutout.create
+              - channel.shoutout.receive
               - stream.online
               - stream.offline
               - user.authorization.grant
@@ -20234,6 +20346,8 @@ components:
             moderator:read:chatters: View the chatters in a broadcaster’s chat room.
             moderator:read:shield_mode: View a broadcaster’s Shield Mode status.
             moderator:manage:shield_mode: Manage a broadcaster’s Shield Mode status.
+            moderator:read:shoutouts: View a broadcaster’s shoutouts.
+            moderator:manage:shoutouts: Manage a broadcaster’s shoutouts.
             user:edit: Manage a user object.
             user:manage:blocked_users: Manage the block list of a user.
             user:read:blocked_users: View the block list of a user.
