@@ -5,14 +5,24 @@ import generateOpenApi from './utils/generateOpenApi.js';
 import { HTML_DESCRIPTION, OPEN_API_TITLE } from './utils/constants.js';
 import parseScopes from './utils/parseScopes.js';
 
-const REFERENCE_URL = 'https://dev.twitch.tv/docs/api/reference/';
-const SCOPES_URL = 'https://dev.twitch.tv/docs/authentication/scopes/';
-const EVENT_SUB_SUBSCRIPTION_TYPES_URL =
-  'https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/';
-const REFERENCE_FILENAME = './tmp/reference.html';
-const SCOPES_FILENAME = './tmp/scopes.html';
-const EVENT_SUB_SUBSCRIPTION_TYPES_FILENAME =
-  './tmp/eventsub-subscription-types.html';
+const PAGES = {
+  reference: {
+    url: 'https://dev.twitch.tv/docs/api/reference/',
+    filename: './tmp/reference.html',
+  },
+  scopes: {
+    url: 'https://dev.twitch.tv/docs/authentication/scopes/',
+    filename: './tmp/scopes.html',
+  },
+  eventSubReference: {
+    url: 'https://dev.twitch.tv/docs/eventsub/eventsub-reference/',
+    filename: './tmp/eventsub-reference.html',
+  },
+  eventSubSubscriptionTypes: {
+    url: 'https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/',
+    filename: './tmp/eventsub-subscription-types.html',
+  },
+} as const;
 
 const main = async () => {
   const [
@@ -22,9 +32,9 @@ const main = async () => {
     openApiTemplate,
     indexHtmlTemplate,
   ] = await Promise.all([
-    fetchHtml(REFERENCE_URL),
-    fetchHtml(SCOPES_URL),
-    fetchHtml(EVENT_SUB_SUBSCRIPTION_TYPES_URL),
+    fetchHtml(PAGES.reference.url),
+    fetchHtml(PAGES.scopes.url),
+    fetchHtml(PAGES.eventSubSubscriptionTypes.url),
     fs.readFile('./scripts/templates/openapi.template.json', 'utf8'),
     fs.readFile('./scripts/templates/index.template.html', 'utf8'),
   ]);
@@ -41,9 +51,9 @@ const main = async () => {
     .replace('%DESCRIPTION%', HTML_DESCRIPTION);
 
   await Promise.all([
-    fs.writeFile(REFERENCE_FILENAME, referenceHtml),
-    fs.writeFile(SCOPES_FILENAME, referenceHtml),
-    fs.writeFile(EVENT_SUB_SUBSCRIPTION_TYPES_FILENAME, referenceHtml),
+    fs.writeFile(PAGES.reference.filename, referenceHtml),
+    fs.writeFile(PAGES.scopes.filename, referenceHtml),
+    fs.writeFile(PAGES.eventSubSubscriptionTypes.filename, referenceHtml),
     fs.writeFile('./openapi.json', JSON.stringify(openApi, null, 2)),
     fs.writeFile('./openapi.yaml', YAML.stringify(openApi)),
     fs.writeFile('./dist/openapi.json', JSON.stringify(openApi)),
