@@ -2,6 +2,7 @@ import type {
   ApiReference,
   Descriptions,
   ExampleObject,
+  FieldSchema,
   MediaTypeObject,
   Method,
   OpenApi,
@@ -14,20 +15,22 @@ import type {
   SchemaObject,
 } from '../types';
 import { getBodySchemaName, getResponseSchemaName } from './getSchemaName.js';
-import { RESPONSE_BODY_SCHEMA_NAMES, SCHEMA_OBJECT_TYPE } from './constants.js';
+import { RESPONSE_BODY_SCHEMA_NAMES } from './constants.js';
 import parseExamples from './parseExamples.js';
 import parseMarkdown from './parseMarkdown.js';
 import parseResponses from './parseResponses.js';
 import parseTableSchema from './parseTableSchema.js';
-import { parseParameter, parseSchemaObject } from './parseSchemaObject.js';
+import {
+  parseParameterObject,
+  parseSchemaObject,
+} from './parseSchemaObject.js';
 import parseTableAsMarkdown from './parseTableAsMarkdown.js';
 import getDescriptionText from './getDescriptionText.js';
 
 // https://regex101.com/r/omJKyZ/1
 const SCOPE_REGEX = /(:?\*\*([a-z:_\\]+)\*\*|`([a-z:_]+)`)/g;
 
-/** @deprecated */
-const extensionSchemaNames = {
+const EXTENSION_SCHEMA_NAMES = {
   panel: 'UserExtensionPanel',
   overlay: 'UserExtensionOverlay',
   component: 'UserExtensionComponent',
@@ -119,13 +122,37 @@ const parseEndpoint =
       // Request Body
       if (currentSection.toLocaleLowerCase().includes('request body')) {
         if (el.tagName === 'TABLE') {
+          const fieldSchemas = parseTableSchema(el);
+
+          // if there is no required column in the table - set all parameters to required
+          const setRequired = (f: FieldSchema) => {
+            if (f.required === null) f.required = true;
+            f.children.forEach(setRequired);
+          };
+          fieldSchemas.forEach(setRequired);
+
+          // All fields are required
+          // https://dev.twitch.tv/docs/api/reference#start-commercial
+          if (id === 'start-commercial') {
+            fieldSchemas.forEach((f) => {
+              f.required = true;
+            });
+          }
+
+          // All fields are optional
+          // https://dev.twitch.tv/docs/api/reference#update-chat-settings
+          // https://dev.twitch.c:\Program Files\Microsoft VS Code\resources\app\out\vs\code\electron-sandbox\workbench\workbench.htmltv/docs/api/reference#update-automod-settings
+          if (
+            id === 'update-chat-settings' ||
+            id === 'update-automod-settings'
+          ) {
+            fieldSchemas.forEach((f) => {
+              f.required = false;
+            });
+          }
+
           const schemaName = getBodySchemaName(name);
-          const schemaObject = parseSchemaObject(
-            id,
-            parseTableSchema(el),
-            SCHEMA_OBJECT_TYPE.body,
-            openApi.components.schemas,
-          );
+          const schemaObject = parseSchemaObject(fieldSchemas);
 
           // https://dev.twitch.tv/docs/api/reference#update-user-extensions
           if (id === 'update-user-extensions') {
@@ -136,15 +163,15 @@ const parseEndpoint =
               properties: {
                 panel: {
                   type: 'object',
-                  additionalProperties: { $ref: `#/components/schemas/${extensionSchemaNames.panel}Update` },
+                  additionalProperties: { $ref: `#/components/schemas/${EXTENSION_SCHEMA_NAMES.panel}Update` },
                 },
                 overlay: {
                   type: 'object',
-                  additionalProperties: { $ref: `#/components/schemas/${extensionSchemaNames.overlay}Update` },
+                  additionalProperties: { $ref: `#/components/schemas/${EXTENSION_SCHEMA_NAMES.overlay}Update` },
                 },
                 component: {
                   type: 'object',
-                  additionalProperties: { $ref: `#/components/schemas/${extensionSchemaNames.component}Update` },
+                  additionalProperties: { $ref: `#/components/schemas/${EXTENSION_SCHEMA_NAMES.component}Update` },
                 },
               },
             };
@@ -179,7 +206,7 @@ const parseEndpoint =
             throw new Error("Query Parameters can't have children");
           }
 
-          parameters = fieldSchemas.map(parseParameter(id));
+          parameters = fieldSchemas.map(parseParameterObject(id));
         } else {
           descriptions.queryParameters.push(parseMarkdown(el.innerHTML));
         }
@@ -205,13 +232,85 @@ const parseEndpoint =
             ];
           }
 
+          const setRequired = (f: FieldSchema) => {
+            if (f.required === null) {
+              f.required = true;
+
+              // "pagination" and "cursor" are always optional
+              // https://dev.twitch.tv/docs/api/guide#pagination
+              if (f.name === 'pagination' || f.name === 'cursor') {
+                f.required = false;
+              }
+
+              // https://dev.twitch.tv/docs/api/reference#get-extension-configuration-segment
+              if (
+                id === 'get-extension-configuration-segment' &&
+                f.name === 'broadcaster_id'
+              ) {
+                f.required = false;
+              }
+
+              // https://dev.twitch.tv/docs/api/reference#create-eventsub-subscription
+              // https://dev.twitch.tv/docs/api/reference#get-eventsub-subscriptions
+              if (
+                (id === 'create-eventsub-subscription' ||
+                  id === 'get-eventsub-subscriptions') &&
+                [
+                  'callback',
+                  'session_id',
+                  'connected_at',
+                  'disconnected_at',
+                ].includes(f.name)
+              ) {
+                f.required = false;
+              }
+
+              // only "active" is required
+              // https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
+              // https://dev.twitch.tv/docs/api/reference#update-user-extensions
+              if (
+                id === 'get-user-active-extensions' ||
+                (id === 'update-user-extensions' &&
+                  ['id', 'version', 'name', 'x', 'y'].includes(f.name))
+              ) {
+                f.required = false;
+              }
+            }
+
+            f.children.forEach(setRequired);
+          };
+          fieldSchemas.forEach(setRequired);
+
           const schemaName = getResponseSchemaName(name);
-          const schemaObject = parseSchemaObject(
-            id,
-            fieldSchemas,
-            SCHEMA_OBJECT_TYPE.response,
-            openApi.components.schemas,
-          );
+          const schemaObject = parseSchemaObject(fieldSchemas);
+
+          // map[string]Object type
+          // https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
+          // https://dev.twitch.tv/docs/api/reference#update-user-extensions
+          if (
+            id === 'get-user-active-extensions' ||
+            id === 'update-user-extensions'
+          ) {
+            const props = schemaObject.properties!['data']!.properties!;
+            const propNames = Object.keys(
+              EXTENSION_SCHEMA_NAMES,
+            ) as (keyof typeof EXTENSION_SCHEMA_NAMES)[];
+
+            for (const propName of propNames) {
+              const schemaName = EXTENSION_SCHEMA_NAMES[propName];
+              const schemaObject = props[propName]!.additionalProperties!;
+
+              openApi.components.schemas[schemaName] = schemaObject;
+              props[propName]!.additionalProperties = {
+                $ref: `#/components/schemas/${schemaName}`,
+              };
+
+              // Add update schemas UserExtension${type}Update
+              const updateSchema = structuredClone(schemaObject);
+              delete updateSchema.properties!['name'];
+              openApi.components.schemas[schemaName + 'Update'] = updateSchema;
+            }
+          }
 
           // https://dev.twitch.tv/docs/api/reference#get-cheermotes
           // Response: data[] -> tiers[] -> images

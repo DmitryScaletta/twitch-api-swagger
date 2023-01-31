@@ -18,12 +18,6 @@ __Repository:__ [github.com/DmitryScaletta/twitch-api-swagger](https://github.co
 export const HTML_DESCRIPTION =
   'Unofficial Swagger UI for Twitch API. All endpoints are generated automatically from the twitch docs page. Features: Swagger UI for all Twitch API endpoints; Schemas for Request Query Parameters, Request Body, Response Body; Some additional schemas like Clip, ChatBadge, Prediction, Game, Channel, Video etc.; Response codes and examples; Generated types for TypeScript';
 
-export const SCHEMA_OBJECT_TYPE = {
-  body: 'body',
-  params: 'params',
-  response: 'response',
-} as const;
-
 export const PARAMS_MORE_THAN_ONE_VALUES: Record<string, string[]> = {
   'get-extension-transactions': ['id'],
   'get-channel-information': ['broadcaster_id'],

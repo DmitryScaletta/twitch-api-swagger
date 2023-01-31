@@ -1,15 +1,5 @@
-import type {
-  FieldSchema,
-  ParameterObject,
-  SchemaObject,
-  SchemaObjectType,
-} from '../types';
-import { getBodySchemaName, getResponseSchemaName } from './getSchemaName.js';
-import {
-  PARAMS_MORE_THAN_ONE_VALUES,
-  RESPONSE_BODY_SCHEMA_NAMES,
-  SCHEMA_OBJECT_TYPE,
-} from './constants.js';
+import type { FieldSchema, ParameterObject, SchemaObject } from '../types';
+import { PARAMS_MORE_THAN_ONE_VALUES } from './constants.js';
 
 // prettier-ignore
 const TYPES_MAP: Record<string, SchemaObject> = {
@@ -23,19 +13,13 @@ const TYPES_MAP: Record<string, SchemaObject> = {
   'Object':             { type: 'object' },
   'Object[]':           { type: 'array', items: { type: 'object' } },
   'map[string,string]': { type: 'object', additionalProperties: { type: 'string' } },
+  'map[string]Object':  { type: 'object', additionalProperties: { type: 'object' } },
 };
 
 const parseType = (rawType: string): SchemaObject | null =>
   TYPES_MAP[rawType] ? structuredClone(TYPES_MAP[rawType]!) : null;
 
-/** @deprecated */
-const extensionSchemaNames = {
-  panel: 'UserExtensionPanel',
-  overlay: 'UserExtensionOverlay',
-  component: 'UserExtensionComponent',
-} as const;
-
-export const parseParameter =
+export const parseParameterObject =
   (endpointId: string) =>
   ({
     name,
@@ -109,14 +93,8 @@ export const parseParameter =
     return parameter;
   };
 
-const parseProperties = (
-  /** @deprecated */
-  endpointId: string,
+export const parseSchemaObject = (
   fieldSchemas: FieldSchema[],
-  /** @deprecated */
-  schemaObjectType: SchemaObjectType,
-  /** @deprecated */
-  schemas: Record<string, SchemaObject>,
 ): SchemaObject => {
   const schemaObject: SchemaObject = {
     type: 'object',
@@ -164,127 +142,31 @@ const parseProperties = (
 
     // required
     let _required = required === true;
-    if (schemaObjectType === SCHEMA_OBJECT_TYPE.body) {
-      // if there is no required column in the table - set all parameters to required
-      if (required === null) _required = true;
-
-      // All fields are required
-      // https://dev.twitch.tv/docs/api/reference#start-commercial
-      if (endpointId === 'start-commercial') {
-        _required = true;
-      }
-
-      // All fields are optional
-      // https://dev.twitch.tv/docs/api/reference#update-chat-settings
-      // https://dev.twitch.tv/docs/api/reference#update-automod-settings
-      if (
-        endpointId === 'update-chat-settings' ||
-        endpointId === 'update-automod-settings'
-      ) {
-        _required = false;
-      }
-    }
-    if (schemaObjectType === SCHEMA_OBJECT_TYPE.response && required === null) {
-      _required = true;
-
-      // "pagination" and "cursor" are always optional
-      // https://dev.twitch.tv/docs/api/guide#pagination
-      if (name === 'pagination' || name === 'cursor') {
-        _required = false;
-      }
-
-      // https://dev.twitch.tv/docs/api/reference#get-extension-configuration-segment
-      if (
-        endpointId === 'get-extension-configuration-segment' &&
-        name === 'broadcaster_id'
-      ) {
-        _required = false;
-      }
-
-      // https://dev.twitch.tv/docs/api/reference#create-eventsub-subscription
-      // https://dev.twitch.tv/docs/api/reference#get-eventsub-subscriptions
-      if (
-        (endpointId === 'create-eventsub-subscription' ||
-          endpointId === 'get-eventsub-subscriptions') &&
-        ['callback', 'session_id', 'connected_at', 'disconnected_at'].includes(
-          name,
-        )
-      ) {
-        _required = false;
-      }
-
-      // only "active" is required
-      // https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
-      // https://dev.twitch.tv/docs/api/reference#update-user-extensions
-      if (
-        endpointId === 'get-user-active-extensions' ||
-        (endpointId === 'update-user-extensions' &&
-          ['id', 'version', 'name', 'x', 'y'].includes(name))
-      ) {
-        _required = false;
-      }
-    }
     if (_required!) {
       schemaObject.required!.push(name);
     }
 
     // children
     if (children.length > 0) {
-      // map[string]Object type
-      // https://dev.twitch.tv/docs/api/reference#get-user-active-extensions
-      // https://dev.twitch.tv/docs/api/reference#update-user-extensions
-      if (property.type === 'map[string]Object') {
-        property.type = 'object';
-
-        if (!Object.keys(extensionSchemaNames).includes(name)) {
-          throw new Error(
-            'Wrong property name for type map[string]Object: ' + endpointId,
-          );
-        }
-
-        const schemaName =
-          extensionSchemaNames[name as keyof typeof extensionSchemaNames];
-
-        property.additionalProperties = {
-          $ref: `#/components/schemas/${schemaName}`,
-        };
-
-        const schema = parseProperties(
-          endpointId,
-          children,
-          schemaObjectType,
-          schemas,
-        );
-        schemas[schemaName] = schema;
-
-        // UserExtension${type}Update
-        const updateSchema = structuredClone(schema);
-        delete updateSchema.properties!['name'];
-        schemas[schemaName + 'Update'] = updateSchema;
-      }
-
       // array
-      else if (property.type === 'array') {
-        property.items = parseProperties(
-          endpointId,
-          children,
-          schemaObjectType,
-          schemas,
-        );
+      if (property.type === 'array') {
+        property.items = parseSchemaObject(children);
       }
 
       // object
-      else if (property.type === 'object') {
-        property = {
-          description,
-          ...parseProperties(endpointId, children, schemaObjectType, schemas),
-        };
+      if (property.type === 'object') {
+        if (type === 'map[string]Object') {
+          property.additionalProperties = parseSchemaObject(children);
+        } else {
+          property = {
+            description,
+            ...parseSchemaObject(children),
+          };
+        }
       }
 
       if (property.type !== 'array' && property.type !== 'object') {
-        console.warn(
-          'Wrong nested property type: ' + property.type + ' ' + endpointId,
-        );
+        console.warn('Wrong nested property type: ' + property.type);
       }
     }
 
@@ -305,16 +187,4 @@ const parseProperties = (
   }
 
   return schemaObject;
-};
-
-export const parseSchemaObject = (
-  /** @deprecated */
-  endpointId: string,
-  fieldSchemas: FieldSchema[],
-  /** @deprecated */
-  schemaObjectType: SchemaObjectType,
-  /** @deprecated */
-  schemas: Record<string, SchemaObject>,
-): SchemaObject => {
-  return parseProperties(endpointId, fieldSchemas, schemaObjectType, schemas);
 };
