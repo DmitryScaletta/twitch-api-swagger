@@ -11,19 +11,27 @@ import type {
   RequestBodyObject,
   ResponseObject,
   ResponsesObject,
+  SchemaObject,
 } from '../types';
 import { getBodySchemaName, getResponseSchemaName } from './getSchemaName.js';
-import { SCHEMA_OBJECT_TYPE } from './constants.js';
+import { RESPONSE_BODY_SCHEMA_NAMES, SCHEMA_OBJECT_TYPE } from './constants.js';
 import parseExamples from './parseExamples.js';
 import parseMarkdown from './parseMarkdown.js';
 import parseResponses from './parseResponses.js';
 import parseTableSchema from './parseTableSchema.js';
-import parseSchemaObject from './parseSchemaObject.js';
+import { parseParameter, parseSchemaObject } from './parseSchemaObject.js';
 import parseTableAsMarkdown from './parseTableAsMarkdown.js';
 import getDescriptionText from './getDescriptionText.js';
 
 // https://regex101.com/r/omJKyZ/1
 const SCOPE_REGEX = /(:?\*\*([a-z:_\\]+)\*\*|`([a-z:_]+)`)/g;
+
+/** @deprecated */
+const extensionSchemaNames = {
+  panel: 'UserExtensionPanel',
+  overlay: 'UserExtensionOverlay',
+  component: 'UserExtensionComponent',
+} as const;
 
 const parseScopes = (lines: string[]) => {
   const scopes: string[] = [];
@@ -111,14 +119,39 @@ const parseEndpoint =
       // Request Body
       if (currentSection.toLocaleLowerCase().includes('request body')) {
         if (el.tagName === 'TABLE') {
-          parseSchemaObject(
+          const schemaName = getBodySchemaName(name);
+          const schemaObject = parseSchemaObject(
             id,
-            name,
             parseTableSchema(el),
             SCHEMA_OBJECT_TYPE.body,
             openApi.components.schemas,
           );
-          const schemaName = getBodySchemaName(name);
+
+          // https://dev.twitch.tv/docs/api/reference#update-user-extensions
+          if (id === 'update-user-extensions') {
+            const description = schemaObject.properties!['data']!.description!;
+            // prettier-ignore
+            schemaObject.properties!['data'] = {
+              description,
+              properties: {
+                panel: {
+                  type: 'object',
+                  additionalProperties: { $ref: `#/components/schemas/${extensionSchemaNames.panel}Update` },
+                },
+                overlay: {
+                  type: 'object',
+                  additionalProperties: { $ref: `#/components/schemas/${extensionSchemaNames.overlay}Update` },
+                },
+                component: {
+                  type: 'object',
+                  additionalProperties: { $ref: `#/components/schemas/${extensionSchemaNames.component}Update` },
+                },
+              },
+            };
+          }
+
+          openApi.components.schemas[schemaName] = schemaObject;
+
           const examples =
             bodyObjects.length > 0
               ? getOpenApiExamples(bodyObjects)
@@ -146,13 +179,7 @@ const parseEndpoint =
             throw new Error("Query Parameters can't have children");
           }
 
-          parameters = parseSchemaObject(
-            id,
-            name,
-            fieldSchemas,
-            SCHEMA_OBJECT_TYPE.params,
-            openApi.components.schemas,
-          );
+          parameters = fieldSchemas.map(parseParameter(id));
         } else {
           descriptions.queryParameters.push(parseMarkdown(el.innerHTML));
         }
@@ -178,13 +205,113 @@ const parseEndpoint =
             ];
           }
 
-          parseSchemaObject(
+          const schemaName = getResponseSchemaName(name);
+          const schemaObject = parseSchemaObject(
             id,
-            name,
             fieldSchemas,
             SCHEMA_OBJECT_TYPE.response,
             openApi.components.schemas,
           );
+
+          // https://dev.twitch.tv/docs/api/reference#get-cheermotes
+          // Response: data[] -> tiers[] -> images
+          if (id === 'get-cheermotes') {
+            const cheermoteImagesSchemaName = 'CheermoteImages';
+            openApi.components.schemas['CheermoteImageFormat'] = {
+              type: 'object',
+              properties: {
+                '1': { type: 'string' },
+                '1.5': { type: 'string' },
+                '2': { type: 'string' },
+                '3': { type: 'string' },
+                '4': { type: 'string' },
+              },
+            };
+            openApi.components.schemas['CheermoteImageTheme'] = {
+              type: 'object',
+              properties: {
+                animated: { $ref: '#/components/schemas/CheermoteImageFormat' },
+                static: { $ref: '#/components/schemas/CheermoteImageFormat' },
+              },
+            };
+            openApi.components.schemas[cheermoteImagesSchemaName] = {
+              type: 'object',
+              properties: {
+                light: { $ref: '#/components/schemas/CheermoteImageTheme' },
+                dark: { $ref: '#/components/schemas/CheermoteImageTheme' },
+              },
+            };
+            // prettier-ignore
+            schemaObject.properties!['data']!.items!.properties!['tiers']!.items!.properties!['images'] = {
+              $ref: `#/components/schemas/${cheermoteImagesSchemaName}`,
+            };
+          }
+
+          // https://dev.twitch.tv/docs/api/reference#get-extensions
+          // https://dev.twitch.tv/docs/api/reference#get-released-extensions
+          // Response: data[] -> icon_urls
+          if (id === 'get-extensions' || id === 'get-released-extensions') {
+            const dataProps =
+              schemaObject.properties!['data']!.items!.properties!;
+            const extensionIconUrlsSchemaName = 'ExtensionIconUrls';
+            const extensionIconUrlsSchema = {
+              type: 'object',
+              description: dataProps['icon_urls']!.description!,
+              properties: {
+                '100x100': { type: 'string' },
+                '24x24': { type: 'string' },
+                '300x200': { type: 'string' },
+              },
+            };
+            openApi.components.schemas[extensionIconUrlsSchemaName] =
+              extensionIconUrlsSchema;
+            dataProps['icon_urls'] = {
+              $ref: `#/components/schemas/${extensionIconUrlsSchemaName}`,
+            };
+          }
+
+          // https://dev.twitch.tv/docs/api/reference#get-soundtrack-current-track
+          // Response: data[] -> track
+          if (id === 'get-soundtrack-current-track') {
+            schemaObject.properties!['data']!.items!.properties!['track'] = {
+              $ref: '#/components/schemas/SoundtrackTrack',
+            };
+          }
+
+          // TODO: move to separate function
+          const replaces = RESPONSE_BODY_SCHEMA_NAMES[id];
+          if (replaces) {
+            replaces.reverse().forEach(([path, nestedSchemaName]) => {
+              let prop: SchemaObject = schemaObject;
+              if (path === 'data[0]') {
+                prop = schemaObject.properties!['data']!;
+              } else {
+                const fullPath = path.split('.');
+                if (fullPath.length > 2)
+                  throw new Error('Invalid path: ' + path);
+                const [path1, path2] = fullPath;
+                prop =
+                  path1 === 'data[0]'
+                    ? schemaObject.properties!['data']!.items!.properties![
+                        path2!
+                      ]!
+                    : schemaObject.properties!['data']!.properties![path2!]!;
+              }
+
+              if (!prop) throw new Error('No property for replacing: ' + id);
+              if (prop.type !== 'array') {
+                throw new Error('Wrong property type: ' + id);
+              }
+
+              const nestedSchema = prop.items!;
+              prop.items = { $ref: `#/components/schemas/${nestedSchemaName}` };
+
+              openApi.components.schemas[nestedSchemaName] = nestedSchema;
+            });
+          }
+
+          openApi.components.schemas[schemaName] = schemaObject;
+
           hasResponseSchema = true;
         } else if (el.textContent!.trim().toLowerCase() !== 'none') {
           descriptions.responseBody.push(parseMarkdown(el.innerHTML));

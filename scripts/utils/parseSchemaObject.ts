@@ -12,7 +12,7 @@ import {
 } from './constants.js';
 
 // prettier-ignore
-const typesMap: Record<string, SchemaObject> = {
+const TYPES_MAP: Record<string, SchemaObject> = {
   String:               { type: 'string' },
   'String[]':           { type: 'array', items: { type: 'string' }},
   Integer:              { type: 'integer', format: 'int32' },
@@ -26,15 +26,16 @@ const typesMap: Record<string, SchemaObject> = {
 };
 
 const parseType = (rawType: string): SchemaObject | null =>
-  typesMap[rawType] ? structuredClone(typesMap[rawType]!) : null;
+  TYPES_MAP[rawType] ? structuredClone(TYPES_MAP[rawType]!) : null;
 
+/** @deprecated */
 const extensionSchemaNames = {
   panel: 'UserExtensionPanel',
   overlay: 'UserExtensionOverlay',
   component: 'UserExtensionComponent',
 } as const;
 
-const parseParameter =
+export const parseParameter =
   (endpointId: string) =>
   ({
     name,
@@ -58,7 +59,7 @@ const parseParameter =
     }
 
     // type
-    if (typesMap[type]) {
+    if (TYPES_MAP[type]) {
       parameter.schema = { ...parameter.schema, ...parseType(type)! };
     }
     // date-time
@@ -109,9 +110,12 @@ const parseParameter =
   };
 
 const parseProperties = (
+  /** @deprecated */
   endpointId: string,
   fieldSchemas: FieldSchema[],
+  /** @deprecated */
   schemaObjectType: SchemaObjectType,
+  /** @deprecated */
   schemas: Record<string, SchemaObject>,
 ): SchemaObject => {
   const schemaObject: SchemaObject = {
@@ -134,7 +138,7 @@ const parseProperties = (
     };
 
     // type
-    if (typesMap[type]) {
+    if (TYPES_MAP[type]) {
       property = { ...property, ...parseType(type)! };
     }
     if (
@@ -303,159 +307,14 @@ const parseProperties = (
   return schemaObject;
 };
 
-const parseSchemaObject = (
+export const parseSchemaObject = (
+  /** @deprecated */
   endpointId: string,
-  endpointName: string,
   fieldSchemas: FieldSchema[],
+  /** @deprecated */
   schemaObjectType: SchemaObjectType,
+  /** @deprecated */
   schemas: Record<string, SchemaObject>,
-): ParameterObject[] => {
-  if (schemaObjectType === SCHEMA_OBJECT_TYPE.params) {
-    return fieldSchemas.map(parseParameter(endpointId));
-  }
-
-  if (schemaObjectType === SCHEMA_OBJECT_TYPE.body) {
-    const schemaName = getBodySchemaName(endpointName);
-    const schemaObject = parseProperties(
-      endpointId,
-      fieldSchemas,
-      schemaObjectType,
-      schemas,
-    );
-
-    // https://dev.twitch.tv/docs/api/reference#update-user-extensions
-    if (endpointId === 'update-user-extensions') {
-      const description = schemaObject.properties!['data']!.description!;
-      // prettier-ignore
-      schemaObject.properties!['data'] = {
-        description,
-        properties: {
-          panel: {
-            type: 'object',
-            additionalProperties: { $ref: `#/components/schemas/${extensionSchemaNames.panel}Update` },
-          },
-          overlay: {
-            type: 'object',
-            additionalProperties: { $ref: `#/components/schemas/${extensionSchemaNames.overlay}Update` },
-          },
-          component: {
-            type: 'object',
-            additionalProperties: { $ref: `#/components/schemas/${extensionSchemaNames.component}Update` },
-          },
-        },
-      };
-    }
-
-    schemas[schemaName] = schemaObject;
-  }
-
-  if (schemaObjectType === SCHEMA_OBJECT_TYPE.response) {
-    const schemaName = getResponseSchemaName(endpointName);
-    const schemaObject = parseProperties(
-      endpointId,
-      fieldSchemas,
-      schemaObjectType,
-      schemas,
-    );
-
-    // https://dev.twitch.tv/docs/api/reference#get-cheermotes
-    // Response: data[] -> tiers[] -> images
-    if (endpointId === 'get-cheermotes') {
-      const cheermoteImagesSchemaName = 'CheermoteImages';
-      schemas['CheermoteImageFormat'] = {
-        type: 'object',
-        properties: {
-          '1': { type: 'string' },
-          '1.5': { type: 'string' },
-          '2': { type: 'string' },
-          '3': { type: 'string' },
-          '4': { type: 'string' },
-        },
-      };
-      schemas['CheermoteImageTheme'] = {
-        type: 'object',
-        properties: {
-          animated: { $ref: '#/components/schemas/CheermoteImageFormat' },
-          static: { $ref: '#/components/schemas/CheermoteImageFormat' },
-        },
-      };
-      schemas[cheermoteImagesSchemaName] = {
-        type: 'object',
-        properties: {
-          light: { $ref: '#/components/schemas/CheermoteImageTheme' },
-          dark: { $ref: '#/components/schemas/CheermoteImageTheme' },
-        },
-      };
-      // prettier-ignore
-      schemaObject.properties!['data']!.items!.properties!['tiers']!.items!.properties!['images'] = {
-        $ref: `#/components/schemas/${cheermoteImagesSchemaName}`,
-      };
-    }
-
-    // https://dev.twitch.tv/docs/api/reference#get-extensions
-    // https://dev.twitch.tv/docs/api/reference#get-released-extensions
-    // Response: data[] -> icon_urls
-    if (
-      endpointId === 'get-extensions' ||
-      endpointId === 'get-released-extensions'
-    ) {
-      const dataProps = schemaObject.properties!['data']!.items!.properties!;
-      const extensionIconUrlsSchemaName = 'ExtensionIconUrls';
-      const extensionIconUrlsSchema = {
-        type: 'object',
-        description: dataProps['icon_urls']!.description!,
-        properties: {
-          '100x100': { type: 'string' },
-          '24x24': { type: 'string' },
-          '300x200': { type: 'string' },
-        },
-      };
-      schemas[extensionIconUrlsSchemaName] = extensionIconUrlsSchema;
-      dataProps['icon_urls'] = {
-        $ref: `#/components/schemas/${extensionIconUrlsSchemaName}`,
-      };
-    }
-
-    // https://dev.twitch.tv/docs/api/reference#get-soundtrack-current-track
-    // Response: data[] -> track
-    if (endpointId === 'get-soundtrack-current-track') {
-      schemaObject.properties!['data']!.items!.properties!['track'] = {
-        $ref: '#/components/schemas/SoundtrackTrack',
-      };
-    }
-
-    const replaces = RESPONSE_BODY_SCHEMA_NAMES[endpointId];
-    if (replaces) {
-      replaces.reverse().forEach(([path, nestedSchemaName]) => {
-        let prop: SchemaObject = schemaObject;
-        if (path === 'data[0]') {
-          prop = schemaObject.properties!['data']!;
-        } else {
-          const fullPath = path.split('.');
-          if (fullPath.length > 2) throw new Error('Invalid path: ' + path);
-          const [path1, path2] = fullPath;
-          prop =
-            path1 === 'data[0]'
-              ? schemaObject.properties!['data']!.items!.properties![path2!]!
-              : schemaObject.properties!['data']!.properties![path2!]!;
-        }
-
-        if (!prop) throw new Error('No property for replacing: ' + endpointId);
-        if (prop.type !== 'array') {
-          throw new Error('Wrong property type: ' + endpointId);
-        }
-
-        const nestedSchema = prop.items!;
-        prop.items = { $ref: `#/components/schemas/${nestedSchemaName}` };
-
-        schemas[nestedSchemaName] = nestedSchema;
-      });
-    }
-
-    schemas[schemaName] = schemaObject;
-  }
-
-  return [];
+): SchemaObject => {
+  return parseProperties(endpointId, fieldSchemas, schemaObjectType, schemas);
 };
-
-export default parseSchemaObject;
