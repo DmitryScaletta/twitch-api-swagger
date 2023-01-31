@@ -1,5 +1,6 @@
 import { JSDOM } from 'jsdom';
 
+/** @deprecated */
 const parseEventSubSubscriptionTypes = (html: string) => {
   const { document } = new JSDOM(html).window;
   const typesTd = document.querySelectorAll(

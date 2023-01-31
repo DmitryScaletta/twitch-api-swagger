@@ -1,12 +1,7 @@
-import type { FieldSchema, SchemaObjectType } from '../types';
-import { SCHEMA_OBJECT_TYPE } from './constants.js';
+import type { FieldSchema } from '../types';
 import parseMarkdown from './parseMarkdown.js';
 
-const parseTableSchema = (
-  endpointId: string,
-  table: Element,
-  schemaObjectType: SchemaObjectType,
-): FieldSchema[] => {
+const parseTableSchema = (table: Element): FieldSchema[] => {
   const fieldSchemas: FieldSchema[] = [];
 
   table.querySelectorAll('tbody tr').forEach((tr) => {
@@ -33,13 +28,10 @@ const parseTableSchema = (
       if (parameterText[i] === '\xa0') nbspCount += 1;
       else break;
     }
-    // sometimes ident can be 2 so use Math.ceil
+    // sometimes indentation can be 2 so use Math.ceil
     let depth = Math.ceil(nbspCount / 3);
-    if (schemaObjectType === SCHEMA_OBJECT_TYPE.params && depth > 0) {
-      throw new Error("Query Parameters' depth cannot be greater than 0");
-    }
     if (depth > 3) {
-      throw new Error('Depth cannot be greater than 3: ' + endpointId);
+      throw new Error("Depth can't be greater than 3: " + name);
     }
 
     const description = parseMarkdown(descriptionEl!.innerHTML!);
@@ -99,22 +91,6 @@ const parseTableSchema = (
 
     addFieldSchema(fieldSchemas, fieldSchema, depth);
   });
-
-  // No "data" field in the response body
-  // https://dev.twitch.tv/docs/api/reference#create-clip
-  if (endpointId === 'create-clip' && schemaObjectType === 'response') {
-    return [
-      {
-        name: 'data',
-        type: 'Object[]',
-        required: true,
-        description: '',
-        depth: 0,
-        enumValues: null,
-        children: fieldSchemas,
-      },
-    ];
-  }
 
   return fieldSchemas;
 };

@@ -114,7 +114,7 @@ const parseEndpoint =
           parseSchemaObject(
             id,
             name,
-            parseTableSchema(id, el, SCHEMA_OBJECT_TYPE.body),
+            parseTableSchema(el),
             SCHEMA_OBJECT_TYPE.body,
             openApi.components.schemas,
           );
@@ -140,10 +140,16 @@ const parseEndpoint =
       // Request Query Parameters | Request Query Parameter
       if (currentSection.toLowerCase().includes('query parameter')) {
         if (el.tagName === 'TABLE') {
+          const fieldSchemas = parseTableSchema(el);
+
+          if (fieldSchemas.some((field) => field.children.length > 0)) {
+            throw new Error("Query Parameters can't have children");
+          }
+
           parameters = parseSchemaObject(
             id,
             name,
-            parseTableSchema(id, el, SCHEMA_OBJECT_TYPE.params),
+            fieldSchemas,
             SCHEMA_OBJECT_TYPE.params,
             openApi.components.schemas,
           );
@@ -154,10 +160,28 @@ const parseEndpoint =
 
       if (currentSection.toLowerCase().includes('response body')) {
         if (el.tagName === 'TABLE') {
+          let fieldSchemas = parseTableSchema(el);
+
+          // No "data" field in the response body
+          // https://dev.twitch.tv/docs/api/reference#create-clip
+          if (id === 'create-clip') {
+            fieldSchemas = [
+              {
+                name: 'data',
+                type: 'Object[]',
+                required: true,
+                description: '',
+                depth: 0,
+                enumValues: null,
+                children: fieldSchemas,
+              },
+            ];
+          }
+
           parseSchemaObject(
             id,
             name,
-            parseTableSchema(id, el, SCHEMA_OBJECT_TYPE.response),
+            fieldSchemas,
             SCHEMA_OBJECT_TYPE.response,
             openApi.components.schemas,
           );
