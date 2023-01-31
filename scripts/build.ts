@@ -28,12 +28,14 @@ const main = async () => {
   const [
     referenceHtml,
     scopesHtml,
+    eventSubReferenceHtml,
     eventSubSubscriptionTypesHtml,
     openApiTemplate,
     indexHtmlTemplate,
   ] = await Promise.all([
     fetchHtml(PAGES.reference.url),
     fetchHtml(PAGES.scopes.url),
+    fetchHtml(PAGES.eventSubReference.url),
     fetchHtml(PAGES.eventSubSubscriptionTypes.url),
     fs.readFile('./scripts/templates/openapi.template.json', 'utf8'),
     fs.readFile('./scripts/templates/index.template.html', 'utf8'),
@@ -50,10 +52,12 @@ const main = async () => {
     .replace('%TITLE%', OPEN_API_TITLE)
     .replace('%DESCRIPTION%', HTML_DESCRIPTION);
 
+  // prettier-ignore
   await Promise.all([
     fs.writeFile(PAGES.reference.filename, referenceHtml),
-    fs.writeFile(PAGES.scopes.filename, referenceHtml),
-    fs.writeFile(PAGES.eventSubSubscriptionTypes.filename, referenceHtml),
+    fs.writeFile(PAGES.scopes.filename, scopesHtml),
+    fs.writeFile(PAGES.eventSubReference.filename, eventSubReferenceHtml),
+    fs.writeFile(PAGES.eventSubSubscriptionTypes.filename, eventSubSubscriptionTypesHtml),
     fs.writeFile('./openapi.json', JSON.stringify(openApi, null, 2)),
     fs.writeFile('./openapi.yaml', YAML.stringify(openApi)),
     fs.writeFile('./dist/openapi.json', JSON.stringify(openApi)),
