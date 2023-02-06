@@ -1142,6 +1142,278 @@ paths:
       security:
         - twitch_auth:
             - channel:read:editors
+  /channels/followed:
+    get:
+      summary: BETA Gets a list of broadcasters that the specified user follows. You
+        can also use this endpoint to see whether a user follows a specific
+        broadcaster.
+      description: >-
+        [BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets a list of
+        broadcasters that the specified user follows. You can also use this
+        endpoint to see whether a user follows a specific broadcaster.
+
+
+        __Authorization:__
+
+
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:follows** scope.
+      tags:
+        - Channels
+      externalDocs:
+        description: Get Followed Channels
+        url: https://dev.twitch.tv/docs/api/reference#get-followed-channels
+      operationId: get-followed-channels
+      parameters:
+        - name: user_id
+          in: query
+          description: A user’s ID. Returns the list of broadcasters that this user
+            follows. This ID must match the user ID in the user OAuth token.
+          schema:
+            type: string
+          required: true
+        - name: broadcaster_id
+          in: query
+          description: A broadcaster’s ID. Use this parameter to see whether the user
+            follows this broadcaster. If specified, the response contains this
+            broadcaster if the user follows them. If not specified, the response
+            contains all broadcasters that the user follows.
+          schema:
+            type: string
+        - name: first
+          in: query
+          description: The maximum number of items to return per page in the response. The
+            minimum page size is 1 item per page and the maximum is 100\. The
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: The cursor used to get the next page of results. The **Pagination**
+            object in the response contains the cursor’s value. [Read
+            more](https://dev.twitch.tv/docs/api/guide#pagination).
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved the broadcaster’s list of followers.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetFollowedChannelsResponse"
+              examples:
+                Example 1:
+                  description: >-
+                    _Request:_
+
+
+                    Gets the list of broadcasters that the specified user follows.
+
+
+                    ```bash
+
+                    curl -X GET 'https://api.twitch.tv/helix/channels/followed?user_id=123456' \
+
+                    -H 'Authorization: Bearer kpvy3cjboyptmiacwr0c19hotn5s' \
+
+                    -H 'Client-Id: hof5gwx0su6owfn0nyan9c87zr6t'
+
+                    ```
+                  value:
+                    total: 8
+                    data:
+                      - broadcaster_id: "11111"
+                        broadcaster_login: userloginname
+                        broadcaster_name: UserDisplayName
+                        followed_at: 2022-05-24T22:22:08Z
+                    pagination:
+                      cursor: eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6NX19
+                Example 2:
+                  description: >-
+                    The `data` field is not an empty array, which means that the user
+                    does follow the specified broadcaster.
+
+
+                    _Request:_
+
+
+                    Checks whether the specified user follows the specified broadcaster.
+
+
+                    ```bash
+
+                    curl -X GET 'https://api.twitch.tv/helix/channels/followers?user_id=123456&broadcaster_id=654321' \
+
+                    -H 'Authorization: Bearer kpvy3cjboyptmiacwr0c19hotn5s' \
+
+                    -H 'Client-Id: hof5gwx0su6owfn0nyan9c87zr6t'
+
+                    ```
+                  value:
+                    total: 8
+                    data:
+                      - broadcaster_id: "654321"
+                        broadcaster_login: basketweaver101
+                        broadcaster_name: BasketWeaver101
+                        followed_at: 2022-05-24T22:22:08Z
+                    pagination: {}
+        "400":
+          description: |-
+            Possible reasons:  
+              
+            * The _user\_id_ query parameter is required.
+            * The _broadcaster\_id_ query parameter is not valid.
+            * The _user\_id_ query parameter is required.
+        "401":
+          description: >-
+            Possible reasons:  
+              
+            * The ID in the _user\_id_ query parameter must match the user ID in the access token.
+
+            * The Authorization header is required and must contain a user access token.
+
+            * The user access token is missing the **user:read:follows** scope.
+
+            * The OAuth token is not valid.
+
+            * The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.
+      security:
+        - twitch_auth:
+            - user:read:follows
+  /channels/followers:
+    get:
+      summary: BETA  a list of users that follow the specified broadcaster. You can
+        also use this endpoint to see whether a specific user follows the
+        broadcaster.
+      description: >-
+        [BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets a list of
+        users that follow the specified broadcaster. You can also use this
+        endpoint to see whether a specific user follows the broadcaster.
+
+
+        __Authorization:__
+
+
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:followers** scope. The ID in the broadcaster\_id query parameter must match the user ID in the access token or the user must be a moderator for the specified broadcaster. If a scope is not provided, only the total follower account will be included in the response.
+      tags:
+        - Channels
+      externalDocs:
+        description: Get Channel Followers
+        url: https://dev.twitch.tv/docs/api/reference#get-channel-followers
+      operationId: get-channel-followers
+      parameters:
+        - name: user_id
+          in: query
+          description: A user’s ID. Use this parameter to see whether the user follows
+            this broadcaster. If specified, the response contains this user if
+            they follow the broadcaster. If not specified, the response contains
+            all users that follow the broadcaster.
+          schema:
+            type: string
+        - name: broadcaster_id
+          in: query
+          description: The broadcaster’s ID. Returns the list of users that follow this
+            broadcaster.
+          schema:
+            type: string
+          required: true
+        - name: first
+          in: query
+          description: The maximum number of items to return per page in the response. The
+            minimum page size is 1 item per page and the maximum is 100\. The
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+        - name: after
+          in: query
+          description: The cursor used to get the next page of results. The **Pagination**
+            object in the response contains the cursor’s value. [Read
+            more](https://dev.twitch.tv/docs/api/guide#pagination).
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved the broadcaster’s list of followers.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetChannelFollowersResponse"
+              examples:
+                Example 1:
+                  description: >-
+                    _Request:_
+
+
+                    Gets the list of users that follow the specified broadcaster.
+
+
+                    ```bash
+
+                    curl -X GET 'https://api.twitch.tv/helix/channels/followers?broadcaster_id=123456' \
+
+                    -H 'Authorization: Bearer kpvy3cjboyptmiacwr0c19hotn5s' \
+
+                    -H 'Client-Id: hof5gwx0su6owfn0nyan9c87zr6t'
+
+                    ```
+                  value:
+                    total: 8
+                    data:
+                      - user_id: "11111"
+                        user_name: UserDisplayName
+                        user_login: userloginname
+                        followed_at: 2022-05-24T22:22:08Z
+                    pagination:
+                      cursor: eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6NX19
+                Example 2:
+                  description: >-
+                    The `data` field is an empty array, which means the user doesn’t
+                    follow the specified broadcaster.
+
+
+                    _Request:_
+
+
+                    Checks whether the specified user follows the specified broadcaster.
+
+
+                    ```bash
+
+                    curl -X GET 'https://api.twitch.tv/helix/channels/followers?broadcaster_id=123456&user_id=654321' \
+
+                    -H 'Authorization: Bearer kpvy3cjboyptmiacwr0c19hotn5s' \
+
+                    -H 'Client-Id: hof5gwx0su6owfn0nyan9c87zr6t'
+
+                    ```
+                  value:
+                    total: 8
+                    data: []
+                    pagination: {}
+        "400":
+          description: |-
+            Possible reasons:  
+              
+            * The _broadcaster\_id_ query parameter is required.
+            * The _broadcaster\_id_ query parameter is not valid.
+            * The _user\_id_ query parameter is required.
+        "401":
+          description: >-
+            Possible reasons:  
+              
+            * The ID in the _broadcaster\_id_ query parameter must match the user ID in the access token or the user must be a moderator for the specified broadcaster.
+
+            * The Authorization header is required and must contain a user access token.
+
+            * The user access token is missing the **moderator:read:followers** scope.
+
+            * The OAuth token is not valid.
+
+            * The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.
+      security:
+        - twitch_auth:
+            - moderator:read:followers
   /channel_points/custom_rewards:
     post:
       summary: Creates a Custom Reward in the broadcaster’s channel.
@@ -14113,6 +14385,106 @@ components:
             list is empty if the broadcaster doesn’t have editors.
           items:
             $ref: "#/components/schemas/ChannelEditor"
+    GetFollowedChannelsResponse:
+      type: object
+      required:
+        - data
+        - total
+      properties:
+        data:
+          type: array
+          description: The list of broadcasters that the user follows. The list is in
+            descending order by `followed_at` (with the most recently followed
+            broadcaster first). The list is empty if the user doesn’t follow
+            anyone.
+          items:
+            type: object
+            required:
+              - broadcaster_id
+              - broadcaster_login
+              - broadcaster_name
+              - followed_at
+            properties:
+              broadcaster_id:
+                type: string
+                description: An ID that uniquely identifies the broadcaster that this user is
+                  following.
+              broadcaster_login:
+                type: string
+                description: The broadcaster’s login name.
+              broadcaster_name:
+                type: string
+                description: The broadcaster’s display name.
+              followed_at:
+                type: string
+                description: The UTC timestamp when the user started following the broadcaster.
+                format: date-time
+        pagination:
+          description: Contains the information used to page through the list of results.
+            The object is empty if there are no more pages left to page through.
+            [Read more](https://dev.twitch.tv/docs/api/guide#pagination).
+          type: object
+          properties:
+            cursor:
+              type: string
+              description: The cursor used to get the next page of results. Use the cursor to
+                set the request’s _after_ query parameter.
+        total:
+          type: integer
+          description: The total number of broadcasters that the user follows. As someone
+            pages through the list, the number may change as the user follows or
+            unfollows broadcasters.
+          format: int32
+    GetChannelFollowersResponse:
+      type: object
+      required:
+        - data
+        - total
+      properties:
+        data:
+          type: array
+          description: The list of users that follow the specified broadcaster. The list
+            is in descending order by `followed_at` (with the most recent
+            follower first). The list is empty if nobody follows the
+            broadcaster.
+          items:
+            type: object
+            required:
+              - followed_at
+              - user_id
+              - user_login
+              - user_name
+            properties:
+              followed_at:
+                type: string
+                description: The UTC timestamp when the user started following the broadcaster.
+                format: date-time
+              user_id:
+                type: string
+                description: An ID that uniquely identifies the user that’s following the
+                  broadcaster.
+              user_login:
+                type: string
+                description: The user’s login name.
+              user_name:
+                type: string
+                description: The user’s display name.
+        pagination:
+          description: Contains the information used to page through the list of results.
+            The object is empty if there are no more pages left to page through.
+            [Read more](https://dev.twitch.tv/docs/api/guide#pagination).
+          type: object
+          properties:
+            cursor:
+              type: string
+              description: The cursor used to get the next page of results. Use the cursor to
+                set the request’s _after_ query parameter.
+        total:
+          type: integer
+          description: The total number of users that follow this broadcaster. As someone
+            pages through the list, the number of users may change as users
+            follow or unfollow the broadcaster.
+          format: int32
     CreateCustomRewardsBody:
       type: object
       required:
@@ -20344,6 +20716,7 @@ components:
             moderator:read:chat_settings: View a broadcaster’s chat room settings.
             moderator:manage:chat_settings: Manage a broadcaster’s chat room settings.
             moderator:read:chatters: View the chatters in a broadcaster’s chat room.
+            moderator:read:followers: Read the followers of a broadcaster.
             moderator:read:shield_mode: View a broadcaster’s Shield Mode status.
             moderator:manage:shield_mode: Manage a broadcaster’s Shield Mode status.
             moderator:read:shoutouts: View a broadcaster’s shoutouts.

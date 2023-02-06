@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-01-24T15:17:46-08:00">
+<meta property="article:published_time" content="2023-02-03T18:02:45-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Subscription Types","headline":"EventSub Subscription Types","dateModified":"2023-01-24T15:17:46-08:00","datePublished":"2023-01-24T15:17:46-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/"},"url":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/","@context":"http://schema.org"}</script>
+{"description":"Subscription Types","headline":"EventSub Subscription Types","dateModified":"2023-02-03T18:02:45-08:00","datePublished":"2023-02-03T18:02:45-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/"},"url":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -490,7 +490,7 @@
     <tr>
       <td><a href="#channelfollow">Channel Follow</a></td>
       <td><code class="highlighter-rouge">channel.follow</code></td>
-      <td><code class="highlighter-rouge">1</code></td>
+      <td><code class="highlighter-rouge">beta</code></td>
       <td>A specified channel receives a follow.</td>
     </tr>
     <tr>
@@ -886,7 +886,7 @@
 
 <h3 id="authorization-1">Authorization</h3>
 
-<p>No authorization required.</p>
+<p>Must have <code class="highlighter-rouge">moderator:read:followers</code> scope.</p>
 
 <h3 id="channel-follow-request-body">Channel Follow Request Body</h3>
 
@@ -910,7 +910,7 @@
       <td><code class="highlighter-rouge">version</code></td>
       <td>string</td>
       <td>yes</td>
-      <td>The subscription type version: <code class="highlighter-rouge">1</code>.</td>
+      <td>The subscription type version: <code class="highlighter-rouge">beta</code>.<br><code class="highlighter-rouge">beta</code> will be available February 3-17, 2023.<br>Version <code class="highlighter-rouge">2</code> will be available on or soon after February 17, 2023.<br>Version <code class="highlighter-rouge">1</code> has been deprecated and will be removed on August 3, 2023.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">condition</code></td>
