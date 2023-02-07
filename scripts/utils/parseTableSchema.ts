@@ -37,6 +37,7 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
     const description = parseMarkdown(descriptionEl!.innerHTML!);
 
     // enum
+    // TODO: "Valid values are", "Possible values are" without ul li
     // TODO: whisper-<user-id>
     let enumValues: FieldSchema['enumValues'] = null;
     if (
