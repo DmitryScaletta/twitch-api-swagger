@@ -124,7 +124,9 @@ const parseExamples = (endpointId: string, examplesEl: Element) => {
     if (res) {
       res.forEach((s) => {
         if (s.startsWith('```json\n')) {
-          const code = s.slice(8, -4);
+          // missing comma in the examples
+          // https://dev.twitch.tv/docs/api/reference/#get-followed-channels
+          const code = s.slice(8, -4).replace('"total": 8', '"total": 8,');
           value = parseJson(code);
         } else if (s.startsWith('```text\n')) {
           // not json response
