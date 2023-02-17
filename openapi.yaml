@@ -3544,13 +3544,12 @@ paths:
             - moderator:manage:announcements
   /chat/shoutouts:
     post:
-      summary: BETA Sends a Shoutout to the specified broadcaster.
+      summary: Sends a Shoutout to the specified broadcaster.
       description: >-
-        [BETA](https://dev.twitch.tv/docs/product-lifecycle) Sends a
-        Shoutout to the specified broadcaster. Typically, you send Shoutouts
-        when you or one of your moderators notice another broadcaster in your
-        chat, the other broadcaster is coming up in conversation, or after they
-        raid your broadcast.
+        Sends a Shoutout to the specified broadcaster. Typically, you send
+        Shoutouts when you or one of your moderators notice another broadcaster
+        in your chat, the other broadcaster is coming up in conversation, or
+        after they raid your broadcast.
 
 
         Twitch’s Shoutout feature is a great way for you to show support for other broadcasters and help them grow. Viewers who do not follow the other broadcaster will see a pop-up Follow button in your chat that they can click to follow the other broadcaster. [Learn More](https://help.twitch.tv/s/article/shoutouts)

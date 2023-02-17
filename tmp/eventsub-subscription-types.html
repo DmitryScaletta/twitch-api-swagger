@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-02-06T09:57:31-08:00">
+<meta property="article:published_time" content="2023-02-13T11:15:13-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Subscription Types","headline":"EventSub Subscription Types","dateModified":"2023-02-06T09:57:31-08:00","datePublished":"2023-02-06T09:57:31-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/"},"url":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/","@context":"http://schema.org"}</script>
+{"description":"Subscription Types","headline":"EventSub Subscription Types","dateModified":"2023-02-13T11:15:13-08:00","datePublished":"2023-02-13T11:15:13-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/"},"url":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -710,15 +710,15 @@
       <td>Sends a notification when the broadcaster deactivates Shield Mode.</td>
     </tr>
     <tr>
-      <td><a href="/docs/product-lifecycle"><span class="pill pill-beta">BETA</span></a> <a href="#channelshoutoutcreate">Shoutout Create</a></td>
+      <td><a href="#channelshoutoutcreate">Shoutout Create</a></td>
       <td><code class="highlighter-rouge">channel.shoutout.create</code></td>
-      <td><code class="highlighter-rouge">beta</code></td>
+      <td><code class="highlighter-rouge">1</code></td>
       <td>Sends a notification when the specified broadcaster sends a Shoutout.</td>
     </tr>
     <tr>
-      <td><a href="/docs/product-lifecycle"><span class="pill pill-beta">BETA</span></a> <a href="#channelshoutoutreceive">Shoutout Received</a></td>
+      <td><a href="#channelshoutoutreceive">Shoutout Received</a></td>
       <td><code class="highlighter-rouge">channel.shoutout.receive</code></td>
-      <td><code class="highlighter-rouge">beta</code></td>
+      <td><code class="highlighter-rouge">1</code></td>
       <td>Sends a notification when the specified broadcaster receives a Shoutout.</td>
     </tr>
     <tr>
@@ -4433,7 +4433,7 @@
       <td>version</td>
       <td>String</td>
       <td>Yes</td>
-      <td>The definition of the subscription request to use. Must be set to <strong>beta</strong>.</td>
+      <td>The definition of the subscription request to use. Must be set to <strong>1</strong>.</td>
     </tr>
     <tr>
       <td>condition</td>
@@ -4574,7 +4574,7 @@
       <td>version</td>
       <td>String</td>
       <td>Yes</td>
-      <td>The definition of the subscription request to use. Must be set to <strong>beta</strong>.</td>
+      <td>The definition of the subscription request to use. Must be set to <strong>1</strong>.</td>
     </tr>
     <tr>
       <td>condition</td>
@@ -4710,7 +4710,7 @@
       <td>version</td>
       <td>String</td>
       <td>Yes</td>
-      <td>The definition of the subscription request to use. Must be set to <strong>beta</strong>.</td>
+      <td>The definition of the subscription request to use. Must be set to <strong>1</strong>.</td>
     </tr>
     <tr>
       <td>condition</td>
@@ -5095,7 +5095,7 @@
 
 <h3 id="channelshoutoutcreate">channel.shoutout.create</h3>
 
-<p><a href="/docs/product-lifecycle"><span class="pill pill-beta">BETA</span></a> Sends a notification when the specified broadcaster sends a Shoutout.</p>
+<p>Sends a notification when the specified broadcaster sends a Shoutout.</p>
 
 <h3 id="authorization-33">Authorization</h3>
 
@@ -5129,7 +5129,7 @@
       <td>version</td>
       <td>String</td>
       <td>Yes</td>
-      <td>The definition of the subscription request to use. Must be set to <strong>beta</strong>.</td>
+      <td>The definition of the subscription request to use. Must be set to <strong>1</strong>.</td>
     </tr>
     <tr>
       <td>condition</td>
@@ -5162,7 +5162,7 @@
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.shoutout.create"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"moderator_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98765"</span><span class="w">
@@ -5205,7 +5205,7 @@
   </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.shoutout.create"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -5238,7 +5238,7 @@
 
 <h3 id="channelshoutoutreceive">channel.shoutout.receive</h3>
 
-<p><a href="/docs/product-lifecycle"><span class="pill pill-beta">BETA</span></a> Sends a notification when the specified broadcaster receives a Shoutout.</p>
+<p>Sends a notification when the specified broadcaster receives a Shoutout.</p>
 
 <p><strong>NOTE</strong> Sent only if Twitch posts the Shoutout to the broadcaster’s activity feed.</p>
 
@@ -5274,7 +5274,7 @@
       <td>version</td>
       <td>String</td>
       <td>Yes</td>
-      <td>The definition of the subscription request to use. Must be set to <strong>beta</strong>.</td>
+      <td>The definition of the subscription request to use. Must be set to <strong>1</strong>.</td>
     </tr>
     <tr>
       <td>condition</td>
@@ -5307,7 +5307,7 @@
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.shoutout.receive"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"626262"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"moderator_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"98765"</span><span class="w">
@@ -5350,7 +5350,7 @@
   </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.shoutout.receive"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
