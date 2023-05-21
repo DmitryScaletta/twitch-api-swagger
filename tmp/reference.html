@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-02-13T11:15:13-08:00">
+<meta property="article:published_time" content="2023-05-17T17:20:12-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2023-02-13T11:15:13-08:00","datePublished":"2023-02-13T11:15:13-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2023-05-17T17:20:12-07:00","datePublished":"2023-05-17T17:20:12-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -276,13 +276,9 @@
 		
 			<dd><a href="#get-clips">Get Clips</a></dd>
 		
-			<dd><a href="#get-code-status">Get Code Status</a></dd>
-		
 			<dd><a href="#get-drops-entitlements">Get Drops Entitlements</a></dd>
 		
 			<dd><a href="#update-drops-entitlements">Update Drops Entitlements</a></dd>
-		
-			<dd><a href="#redeem-code">Redeem Code</a></dd>
 		
 			<dd><a href="#get-extension-configuration-segment">Get Extension Configuration Segment</a></dd>
 		
@@ -319,6 +315,30 @@
 			<dd><a href="#get-games">Get Games</a></dd>
 		
 			<dd><a href="#get-creator-goals">Get Creator Goals</a></dd>
+		
+			<dd><a href="#get-channel-guest-star-settings">Get Channel Guest Star Settings</a></dd>
+		
+			<dd><a href="#update-channel-guest-star-settings">Update Channel Guest Star Settings</a></dd>
+		
+			<dd><a href="#get-guest-star-session">Get Guest Star Session</a></dd>
+		
+			<dd><a href="#create-guest-star-session">Create Guest Star Session</a></dd>
+		
+			<dd><a href="#end-guest-star-session">End Guest Star Session</a></dd>
+		
+			<dd><a href="#get-guest-star-invites">Get Guest Star Invites</a></dd>
+		
+			<dd><a href="#send-guest-star-invite">Send Guest Star Invite</a></dd>
+		
+			<dd><a href="#delete-guest-star-invite">Delete Guest Star Invite</a></dd>
+		
+			<dd><a href="#assign-guest-star-slot">Assign Guest Star Slot</a></dd>
+		
+			<dd><a href="#update-guest-star-slot">Update Guest Star Slot</a></dd>
+		
+			<dd><a href="#delete-guest-star-slot">Delete Guest Star Slot</a></dd>
+		
+			<dd><a href="#update-guest-star-slot-settings">Update Guest Star Slot Settings</a></dd>
 		
 			<dd><a href="#get-hype-train-events">Get Hype Train Events</a></dd>
 		
@@ -415,8 +435,6 @@
 			<dd><a href="#get-all-stream-tags">Get All Stream Tags</a></dd>
 		
 			<dd><a href="#get-stream-tags">Get Stream Tags</a></dd>
-		
-			<dd><a href="#replace-stream-tags">Replace Stream Tags</a></dd>
 		
 			<dd><a href="#get-channel-teams">Get Channel Teams</a></dd>
 		
@@ -869,7 +887,7 @@
 								<td>Channels</td>
 							
 							<td><a href="#get-followed-channels">Get Followed Channels</a></td>
-							<td><p><a href="/docs/product-lifecycle"><span class="pill pill-beta">BETA</span></a> Gets a list of broadcasters that the specified user follows. You can also use this endpoint to see whether a user follows a specific broadcaster.</p>
+							<td><p>Gets a list of broadcasters that the specified user follows. You can also use this endpoint to see whether a user follows a specific broadcaster.</p>
 </td>
 						</tr>
 					
@@ -880,7 +898,7 @@
 								<td>Channels</td>
 							
 							<td><a href="#get-channel-followers">Get Channel Followers</a></td>
-							<td><p><a href="/docs/product-lifecycle"><span class="pill pill-beta">BETA</span></a>  a list of users that follow the specified broadcaster. You can also use this endpoint to see whether a specific user follows the broadcaster.</p>
+							<td><p>Gets a list of users that follow the specified broadcaster. You can also use this endpoint to see whether a specific user follows the broadcaster.</p>
 </td>
 						</tr>
 					
@@ -1132,17 +1150,6 @@
 							
 								<td>Entitlements</td>
 							
-							<td><a href="#get-code-status">Get Code Status</a></td>
-							<td><p>Gets the status of one or more redemption codes for a Bits reward.</p>
-</td>
-						</tr>
-					
-				
-					
-						<tr>
-							
-								<td>Entitlements</td>
-							
 							<td><a href="#get-drops-entitlements">Get Drops Entitlements</a></td>
 							<td><p>Gets an organization’s list of entitlements that have been granted to a game, a user, or both.</p>
 </td>
@@ -1156,17 +1163,6 @@
 							
 							<td><a href="#update-drops-entitlements">Update Drops Entitlements</a></td>
 							<td><p>Updates the Drop entitlement’s fulfillment status.</p>
-</td>
-						</tr>
-					
-				
-					
-						<tr>
-							
-								<td>Entitlements</td>
-							
-							<td><a href="#redeem-code">Redeem Code</a></td>
-							<td><p>Redeems one or more redemption codes.</p>
 </td>
 						</tr>
 					
@@ -1365,6 +1361,138 @@
 							
 							<td><a href="#get-creator-goals">Get Creator Goals</a></td>
 							<td><p>Gets the broadcaster’s list of active goals.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Guest Star</td>
+							
+							<td><a href="#get-channel-guest-star-settings">Get Channel Guest Star Settings</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Gets the channel settings for configuration of the Guest Star feature for a particular host.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Guest Star</td>
+							
+							<td><a href="#update-channel-guest-star-settings">Update Channel Guest Star Settings</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Mutates the channel settings for configuration of the Guest Star feature for a particular host.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Guest Star</td>
+							
+							<td><a href="#get-guest-star-session">Get Guest Star Session</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Gets information about an ongoing Guest Star session for a particular channel.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Guest Star</td>
+							
+							<td><a href="#create-guest-star-session">Create Guest Star Session</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Programmatically creates a Guest Star session on behalf of the broadcaster.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Guest Star</td>
+							
+							<td><a href="#end-guest-star-session">End Guest Star Session</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Programmatically ends a Guest Star session on behalf of the broadcaster.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Guest Star</td>
+							
+							<td><a href="#get-guest-star-invites">Get Guest Star Invites</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Provides the caller with a list of pending invites to a Guest Star session.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Guest Star</td>
+							
+							<td><a href="#send-guest-star-invite">Send Guest Star Invite</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Sends an invite to a specified guest on behalf of the broadcaster for a Guest Star session in progress.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Guest Star</td>
+							
+							<td><a href="#delete-guest-star-invite">Delete Guest Star Invite</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Revokes a previously sent invite for a Guest Star session.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Guest Star</td>
+							
+							<td><a href="#assign-guest-star-slot">Assign Guest Star Slot</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Allows a previously invited user to be assigned a slot within the active Guest Star session.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Guest Star</td>
+							
+							<td><a href="#update-guest-star-slot">Update Guest Star Slot</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Allows a user to update the assigned slot for a particular user within the active Guest Star session.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Guest Star</td>
+							
+							<td><a href="#delete-guest-star-slot">Delete Guest Star Slot</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Allows a caller to remove a slot assignment from a user participating in an active Guest Star session.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Guest Star</td>
+							
+							<td><a href="#update-guest-star-slot-settings">Update Guest Star Slot Settings</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Allows a user to update slot settings for a particular guest within a Guest Star session.</p>
 </td>
 						</tr>
 					
@@ -1893,17 +2021,6 @@
 							
 							<td><a href="#get-stream-tags">Get Stream Tags</a></td>
 							<td><p>Gets the list of stream tags that the broadcaster or Twitch added to their channel.</p>
-</td>
-						</tr>
-					
-				
-					
-						<tr>
-							
-								<td>Tags</td>
-							
-							<td><a href="#replace-stream-tags">Replace Stream Tags</a></td>
-							<td><p>Applies one or more tags to the specified channel, overwriting existing tags.</p>
 </td>
 						</tr>
 					
@@ -3751,7 +3868,7 @@
 			<h2 id="get-followed-channels">Get Followed Channels</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[9]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p><a href="/docs/product-lifecycle"><span class="pill pill-beta">BETA</span></a> Gets a list of broadcasters that the specified user follows. You can also use this endpoint to see whether a user follows a specific broadcaster.</p>
+				<p>Gets a list of broadcasters that the specified user follows. You can also use this endpoint to see whether a user follows a specific broadcaster.</p>
 
 <h3>Authorization</h3>
 
@@ -3948,11 +4065,11 @@
 			<h2 id="get-channel-followers">Get Channel Followers</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[10]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p><a href="/docs/product-lifecycle"><span class="pill pill-beta">BETA</span></a> Gets a list of users that follow the specified broadcaster. You can also use this endpoint to see whether a specific user follows the broadcaster.</p>
+				<p>Gets a list of users that follow the specified broadcaster. You can also use this endpoint to see whether a specific user follows the broadcaster.</p>
 
 <h3>Authorization</h3>
 
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:read:followers</strong> scope. The ID in the broadcaster_id query parameter must match the user ID in the access token or the user must be a moderator for the specified broadcaster. If a scope is not provided, only the total follower account will be included in the response.</p>
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:read:followers</strong> scope. The ID in the broadcaster_id query parameter must match the user ID in the access token or the user must be a moderator for the specified broadcaster. If a scope is not provided, only the total follower count will be included in the response.</p>
 
 <h3>URL</h3>
 
@@ -7362,6 +7479,26 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
       <td>String</td>
       <td>A URL to the large version (72px x 72px) of the badge.</td>
     </tr>
+    <tr>
+      <td>      title</td>
+      <td>String</td>
+      <td>The title of the badge.</td>
+    </tr>
+    <tr>
+      <td>      description</td>
+      <td>String</td>
+      <td>The description of the badge.</td>
+    </tr>
+    <tr>
+      <td>      click_action</td>
+      <td>String</td>
+      <td>The action to take when clicking on the badge. Set to <code class="highlighter-rouge">null</code> if no action is specified.</td>
+    </tr>
+    <tr>
+      <td>      click_url</td>
+      <td>String</td>
+      <td>The URL to navigate to when clicking on the badge. Set to <code class="highlighter-rouge">null</code> if no URL is specified.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -7415,7 +7552,11 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
           </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"image_url_1x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/badges/v1/743a0f3b-84b3-450b-96a0-503d7f4a9764/1"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"image_url_2x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/badges/v1/743a0f3b-84b3-450b-96a0-503d7f4a9764/2"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"image_url_4x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/badges/v1/743a0f3b-84b3-450b-96a0-503d7f4a9764/3"</span><span class="w">
+          </span><span class="s2">"image_url_4x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/badges/v1/743a0f3b-84b3-450b-96a0-503d7f4a9764/3"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cheer 1"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cheer 1"</span><span class="w">
+          </span><span class="s2">"click_action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"visit_url"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"click_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://bits.twitch.tv"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -7426,9 +7567,12 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
           </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"image_url_1x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/badges/v1/eb4a8a4c-eacd-4f5e-b9f2-394348310442/1"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"image_url_2x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/badges/v1/eb4a8a4c-eacd-4f5e-b9f2-394348310442/2"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"image_url_4x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/badges/v1/eb4a8a4c-eacd-4f5e-b9f2-394348310442/3"</span><span class="w">
+          </span><span class="s2">"image_url_4x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/badges/v1/eb4a8a4c-eacd-4f5e-b9f2-394348310442/3"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subscriber"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Subscriber"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"click_action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe_to_channel"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"click_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="err">...</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -7504,6 +7648,26 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
       <td>String</td>
       <td>A URL to the large version (72px x 72px) of the badge.</td>
     </tr>
+    <tr>
+      <td>      title</td>
+      <td>String</td>
+      <td>The title of the badge.</td>
+    </tr>
+    <tr>
+      <td>      description</td>
+      <td>String</td>
+      <td>The description of the badge.</td>
+    </tr>
+    <tr>
+      <td>      click_action</td>
+      <td>String</td>
+      <td>The action to take when clicking on the badge. Set to <code class="highlighter-rouge">null</code> if no action is specified.</td>
+    </tr>
+    <tr>
+      <td>      click_url</td>
+      <td>String</td>
+      <td>The URL to navigate to when clicking on the badge. Set to <code class="highlighter-rouge">null</code> if no URL is specified.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -7554,7 +7718,11 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
           </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"image_url_1x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/1"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"image_url_2x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/2"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"image_url_4x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/3"</span><span class="w">
+          </span><span class="s2">"image_url_4x"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/3"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VIP"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"click_action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"visit_url"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"click_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://help.twitch.tv/customer/en/portal/articles/659115-twitch-chat-badges-guide"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -8902,141 +9070,8 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 	<section class="doc-content">
 		<section class="left-docs">
-			<h2 id="get-code-status">Get Code Status</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[33]" data-cms-editor-link-style="modal">&#x270E;</a>
-			
-				<p>Gets the status of one or more redemption codes for a Bits reward. Only client IDs approved by Twitch may request a redemption code’s status.</p>
-
-<p>Rate limit: You may send at most one request per second per user.</p>
-
-<h3>URL</h3>
-
-<p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/entitlements/codes</code></p>
-
-<h3>Authorization</h3>
-
-<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a>. The client ID in the access token must match a client ID that Twitch has approved to provide entitlements.</p>
-
-<h3>Request Query Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Type</th>
-      <th>Required?</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>code</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>The redemption code to check. Include this parameter for each redemption code whose status you want to check. For example, <code class="highlighter-rouge">code=1234&amp;code=5678</code>. You may specify a maximum of 20 codes.</td>
-    </tr>
-    <tr>
-      <td>user_id</td>
-      <td>Integer</td>
-      <td>Yes</td>
-      <td>The ID of the user that owns the redemption code.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Body</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>data</td>
-      <td>Object[]</td>
-      <td>The list of redemption codes and their status values.</td>
-    </tr>
-    <tr>
-      <td>   code</td>
-      <td>String</td>
-      <td>The redemption code.</td>
-    </tr>
-    <tr>
-      <td>   status</td>
-      <td>String</td>
-      <td>The redemption code’s status. Possible values are: <ul><li>ALREADY_CLAIMED &mdash; The code has already been claimed. All codes are single-use.</li><li>EXPIRED &mdash; The code has expired and can no longer be claimed.</li><li>INACTIVE &mdash; The code has not been activated.</li><li>INCORRECT_FORMAT &mdash; The code is not properly formatted.</li><li>INTERNAL_ERROR &mdash; An internal or unknown error occurred when checking the code. Retry later.</li><li>NOT_FOUND &mdash; The code was not found.</li><li>UNUSED &mdash; The code has not been claimed.</li><li>USER_NOT_ELIGIBLE &mdash; The user is not eligible to redeem this code.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Codes</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the statuses of the specified codes.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>user_id</i> query parameter is required.</li><li>The <i>code</i> query parameter is required.</li><li>The <i>code</i> query parameter may not contain a comma-delimited list of codes. Instead, repeat the parameter for each code. For example, <code>code=1234&code=5678</code>.</li><li>The <i>code</i> query parameter may not contain an empty string.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must specify an app access token.</li><li>The access token is not valid.</li><li>The ID in the Client-Id header must match the Client ID in the access token.</li></ul></td>
-    </tr>
-    <tr>
-      <td>403 Forbidden</td>
-      <td><ul><li>The API accepts only app access tokens.</li><li>The client ID specified in the access token is not approved for getting the statuses of the redemption codes.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
-
-			
-		</section>
-
-	
-			<section class="right-code">
-				<h3>Example Request</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/entitlements/codes?code=KUHXV-4GXYP-AKAKK&amp;code=XZDDZ-5SIQR-RT5M3&amp;user_id=156900877'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
-</code></pre></div></div>
-<h3>Example Response</h3>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"code"</span><span class="p">:</span><span class="s2">"KUHXV-4GXYP-AKAKK"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"UNUSED"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"code"</span><span class="p">:</span><span class="s2">"XZDDZ-5SIQR-RT5M3"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"ALREADY_CLAIMED"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-			</section>
-	
-	</section>
-
-	<section class="doc-content">
-		<section class="left-docs">
 			<h2 id="get-drops-entitlements">Get Drops Entitlements</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[34]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[33]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets an organization’s list of entitlements that have been granted to a game, a user, or both.</p>
 
@@ -9308,7 +9343,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-drops-entitlements">Update Drops Entitlements</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[35]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[34]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the Drop entitlement’s fulfillment status.</p>
 
@@ -9480,146 +9515,8 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 	<section class="doc-content">
 		<section class="left-docs">
-			<h2 id="redeem-code">Redeem Code</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[36]" data-cms-editor-link-style="modal">&#x270E;</a>
-			
-				<p>Redeems one or more redemption codes. Redeeming a code credits the user’s account with the entitlement; for example, a Bits reward earned by playing a game.</p>
-
-<p>Rate limit: You may send at most one request per second per user.</p>
-
-<h3>URL</h3>
-
-<p><code class="highlighter-rouge">POST https://api.twitch.tv/helix/entitlements/codes</code></p>
-
-<h3>Authorization</h3>
-
-<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a>. Only client IDs approved by Twitch may redeem codes on behalf of any Twitch user account.</p>
-
-<h3>Request Query Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Type</th>
-      <th>Required?</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>code</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>The redemption code to redeem. To redeem multiple codes, include this parameter for each redemption code. For example, <code class="highlighter-rouge">code=1234&amp;code=5678</code>. You may specify a maximum of 20 codes.</td>
-    </tr>
-    <tr>
-      <td>user_id</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>An ID of the user that owns the redemption code to redeem.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Body</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>data</td>
-      <td>Object[]</td>
-      <td>The list of redeemed codes.</td>
-    </tr>
-    <tr>
-      <td>   code</td>
-      <td>String</td>
-      <td>The redemption code.</td>
-    </tr>
-    <tr>
-      <td>   status</td>
-      <td>String</td>
-      <td>The redemption code’s status. Possible values are:<ul><li>ALREADY_CLAIMED &mdash; The code has already been claimed. All codes are single-use.</li><li>EXPIRED &mdash; The code has expired and can no longer be claimed.</li><li>INACTIVE &mdash; The code has not been activated.</li><li>INCORRECT_FORMAT &mdash; The code is not properly formatted.</li><li>INTERNAL_ERROR &mdash; An internal or unknown error occurred when accessing the code. Retry later.</li><li>NOT_FOUND &mdash; The code was not found.</li><li>SUCCESSFULLY_REDEEMED &mdash; Successfully redeemed the code and credited the user's account with the entitlement.</li><li>UNUSED &mdash; The code has not been claimed.</li><li>USER_NOT_ELIGIBLE &mdash; The user is not eligible to redeem this code.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Codes</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully redeemed the code.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>user_id</i> query parameter is required.</li><li>The <i>code</i> query parameter is required.</li><li>The <i>code</i> query parameter may not contain a comma-delimited list of codes. Instead, repeat the parameter for each code. For example, <code>code=1234&code=5678</code>.</li><li>The <i>code</i> query parameter may not contain an empty string.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must specify an app access token.</li><li>The access token is not valid.</li><li>The ID in the Client-Id header must match the Client ID in the access token.</li></ul></td>
-    </tr>
-    <tr>
-      <td>403 Forbidden</td>
-      <td><ul><li>The API accepts only app access tokens.</li><li>The client specified in the access token is not approved to redeem codes.</li></ul></td>
-    </tr>
-    <tr>
-      <td>500 Internal server error</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-			
-		</section>
-
-	
-			<section class="right-code">
-				<h3>Example Request</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.twitch.tv/helix/entitlements/codes?user_id=12345&amp;code=8CD5P-V3J92-2S6JY&amp;code=PUN4G-HYFVP-MMFET'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
-</code></pre></div></div>
-
-<h3>Example Response</h3>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"code"</span><span class="p">:</span><span class="s2">"8CD5P-V3J92-2S6JY"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"SUCCESSFULLY_REDEEMED"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"code"</span><span class="p">:</span><span class="s2">"PUN4G-HYFVP-MMFET"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"status"</span><span class="p">:</span><span class="s2">"ALREADY_CLAIMED"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-			</section>
-	
-	</section>
-
-	<section class="doc-content">
-		<section class="left-docs">
 			<h2 id="get-extension-configuration-segment">Get Extension Configuration Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[37]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[35]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the specified configuration segment from the specified extension.</p>
 
@@ -9789,7 +9686,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="set-extension-configuration-segment">Set Extension Configuration Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[38]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[36]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates a configuration segment. The segment is limited to 5 KB. Extensions that are active on a channel do not receive the updated configuration.</p>
 
@@ -9899,7 +9796,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="set-extension-required-configuration">Set Extension Required Configuration</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[39]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[37]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the extension’s required_configuration string. Use this endpoint if your extension requires the broadcaster to configure the extension before activating it (to require configuration, you must select <strong>Custom/My Own Service</strong> in Extension <a href="/docs/extensions/life-cycle/#capabilities">Capabilities</a>). For more information, see <a href="/docs/extensions/building#required-configurations">Required Configurations</a> and <a href="/docs/extensions/building#setting-required-configuration-with-the-configuration-service-optional">Setting Required Configuration</a>.</p>
 
@@ -10015,7 +9912,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="send-extension-pubsub-message">Send Extension PubSub Message</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[40]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[38]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Sends a message to one or more viewers. You can send messages to a specific channel or to all channels where your extension is active. This endpoint uses the same mechanism as the <a href="/docs/extensions/reference#send">send</a> JavaScript helper function used to send messages.</p>
 
@@ -10152,7 +10049,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-extension-live-channels">Get Extension Live Channels</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[41]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[39]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of broadcasters that are streaming live and have installed or activated the extension.</p>
 
@@ -10326,7 +10223,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-extension-secrets">Get Extension Secrets</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[42]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[40]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets an extension’s list of shared secrets.</p>
 
@@ -10465,7 +10362,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-extension-secret">Create Extension Secret</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[43]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[41]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Creates a shared secret used to sign and verify JWT tokens. Creating a new secret removes the current secrets from service. Use this function only when you are ready to use the new secret it returns.</p>
 
@@ -10615,7 +10512,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="send-extension-chat-message">Send Extension Chat Message</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[44]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[42]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Sends a message to the specified broadcaster’s chat room. The extension’s name is used as the username for the message in the chat room. To send a chat message, your extension must enable <strong>Chat Capabilities</strong> (under your extension’s <strong>Capabilities</strong> tab).</p>
 
@@ -10733,7 +10630,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-extensions">Get Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[45]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[43]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about an extension.</p>
 
@@ -11120,7 +11017,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-released-extensions">Get Released Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[46]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[44]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about a released extension. Returns the extension if its <code class="highlighter-rouge">state</code> is Released.</p>
 
@@ -11507,7 +11404,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-extension-bits-products">Get Extension Bits Products</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[47]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[45]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of Bits products that belongs to the extension. The client ID in the app access token identifies the extension.</p>
 
@@ -11664,7 +11561,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-extension-bits-product">Update Extension Bits Product</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[48]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[46]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds or updates a Bits product that the extension created. If the SKU doesn’t exist, the product is added. You may update all fields except the <code class="highlighter-rouge">sku</code> field.</p>
 
@@ -11873,7 +11770,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-eventsub-subscription">Create EventSub Subscription</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[49]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[47]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Creates an EventSub subscription.</p>
 
@@ -12135,7 +12032,7 @@ twitch api post /eventsub/subscriptions <span class="nt">-b</span> <span class="
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-eventsub-subscription">Delete EventSub Subscription</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[50]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[48]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Deletes an EventSub subscription.</p>
 
@@ -12224,7 +12121,7 @@ twitch api delete /eventsub/subscriptions <span class="nt">-q</span> <span class
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-eventsub-subscriptions">Get EventSub Subscriptions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[51]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[49]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of EventSub subscriptions that the client in the access token created.</p>
 
@@ -12479,7 +12376,7 @@ twitch api get /eventsub/subscriptions
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-top-games">Get Top Games</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[52]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[50]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about all broadcasts on Twitch.</p>
 
@@ -12633,7 +12530,7 @@ twitch api get /eventsub/subscriptions
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-games">Get Games</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[53]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[51]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about specified categories or games.</p>
 
@@ -12781,7 +12678,7 @@ twitch api get /eventsub/subscriptions
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-creator-goals">Get Creator Goals</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[54]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[52]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s list of active goals. Use this endpoint to get the current progress of each goal.</p>
 
@@ -12946,8 +12843,1797 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 	<section class="doc-content">
 		<section class="left-docs">
-			<h2 id="get-hype-train-events">Get Hype Train Events</h2>
+			<h2 id="get-channel-guest-star-settings">Get Channel Guest Star Settings</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[53]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Gets the channel settings for configuration of the Guest Star feature for a particular host.</p>
+
+<h3>Authorization</h3>
+
+<ul>
+  <li>Query parameter <code class="highlighter-rouge">broadcaster_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:read:guest_star</code> or <code class="highlighter-rouge">channel:manage:guest_star</code></li>
+</ul>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/guest_star/channel_settings</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster you want to get guest star settings for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>is_moderator_send_live_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining if Guest Star moderators have access to control whether a guest is live once assigned to a slot.</td>
+    </tr>
+    <tr>
+      <td>slot_count</td>
+      <td>Integer</td>
+      <td>Number of slots the Guest Star call interface will allow the host to add to a call. Required to be between 1 and 6.</td>
+    </tr>
+    <tr>
+      <td>is_browser_source_audio_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining if Browser Sources subscribed to sessions on this channel should output audio</td>
+    </tr>
+    <tr>
+      <td>group_layout</td>
+      <td>String</td>
+      <td>This setting determines how the guests within a session should be laid out within the browser source. Can be one of the following values: <ul><li><code>TILED_LAYOUT</code>: All live guests are tiled within the browser source with the same size.</li> <li><code>SCREENSHARE_LAYOUT</code>: All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.</li></ul></td>
+    </tr>
+    <tr>
+      <td>browser_source_token</td>
+      <td>String</td>
+      <td>View only token to generate browser source URLs</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>400 Bad Request</td>
+      <td>Missing <i>broadcaster_id</i></td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id<span class="o">=</span>9321049<span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Response</h3>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+	</span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"is_moderator_send_live_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"slot_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"is_browser_source_audio_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"layout"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TILED_LAYOUT"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"browser_source_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eihq8rew7q3hgierufhi3q"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="update-channel-guest-star-settings">Update Channel Guest Star Settings</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[54]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Mutates the channel settings for configuration of the Guest Star feature for a particular host.</p>
+
+<h3>Authorization</h3>
+
+<ul>
+  <li>Query parameter <code class="highlighter-rouge">broadcaster_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:manage:guest_star</code></li>
+</ul>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">PUT https://api.twitch.tv/helix/guest_star/channel_settings</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster you want to update Guest Star settings for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Request Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>is_moderator_send_live_enabled</td>
+      <td>No</td>
+      <td>Boolean</td>
+      <td>Flag determining if Guest Star moderators have access to control whether a guest is live once assigned to a slot.</td>
+    </tr>
+    <tr>
+      <td>slot_count</td>
+      <td>No</td>
+      <td>Integer</td>
+      <td>Number of slots the Guest Star call interface will allow the host to add to a call. Required to be between 1 and 6.</td>
+    </tr>
+    <tr>
+      <td>is_browser_source_audio_enabled</td>
+      <td>No</td>
+      <td>Boolean</td>
+      <td>Flag determining if Browser Sources subscribed to sessions on this channel should output audio</td>
+    </tr>
+    <tr>
+      <td>group_layout</td>
+      <td>No</td>
+      <td>String</td>
+      <td>This setting determines how the guests within a session should be laid out within the browser source. Can be one of the following values: <ul><li><code>TILED_LAYOUT</code>: All live guests are tiled within the browser source with the same size.</li> <li><code>SCREENSHARE_LAYOUT</code>: All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.</li> <li><code>HORIZONTAL_LAYOUT</code>: All live guests are arranged in a horizontal bar within the browser source</li> <li><code>VERTICAL_LAYOUT</code>: All live guests are arranged in a vertical bar within the browser source</li></ul></td>
+    </tr>
+    <tr>
+      <td>regenerate_browser_sources</td>
+      <td>No</td>
+      <td>Boolean</td>
+      <td>Flag determining if Guest Star should regenerate the auth token associated with the channel’s browser sources. Providing a true value for this will immediately invalidate all browser sources previously configured in your streaming software.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>204 No Content</td>
+      <td>Successfully updated channel settings</td>
+    </tr>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>Missing <i>broadcaster_id</i></li> <li>Invalid <i>slot_count</i></li> <li> Invalid <i>group_layout</i></li></ul></td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request 1</h3>
+
+<p>Update browser source layout settings</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> PUT <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id<span class="o">=</span>9321049&amp;group_layout<span class="o">=</span>TILED_LAYOUT<span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Request 2</h3>
+
+<p>Disable moderator control of slot live setting</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> PUT <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id<span class="o">=</span>9321049&amp;is_moderator_send_live_enabled<span class="o">=</span><span class="nb">false</span><span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Request 3</h3>
+
+<p>Update max slot count</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> PUT <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id<span class="o">=</span>9321049&amp;slot_count<span class="o">=</span>6<span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Request 4</h3>
+
+<p>Regenerate browser sources</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> PUT <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id<span class="o">=</span>9321049&amp;regenerate_browser_sources<span class="o">=</span><span class="nb">true</span><span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="get-guest-star-session">Get Guest Star Session</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[55]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Gets information about an ongoing Guest Star session for a particular channel.</p>
+
+<p>You may retrieve the session by a broadcaster channel ID, or by a previously retrieved session ID.</p>
+
+<h3>Authorization</h3>
+
+<ul>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:read:guest_star</code>, <code class="highlighter-rouge">channel:manage:guest_star</code>, <code class="highlighter-rouge">moderator:read:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code></li>
+  <li>Guests must be either invited or assigned a slot within the session</li>
+</ul>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/guest_star/session</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>ID for the user hosting the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room. This ID must match the user ID in the user access token.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>Session[]</td>
+      <td>Summary of the session details</td>
+    </tr>
+    <tr>
+      <td>   id</td>
+      <td>String</td>
+      <td>ID uniquely representing the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>   guests</td>
+      <td>Guest</td>
+      <td>List of guests currently interacting with the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>   slot_id</td>
+      <td>String</td>
+      <td>ID representing this guest’s slot assignment. <ul><li>Host is always in slot "0"</li> <li>Guests are assigned the following consecutive IDs (e.g, "1", "2", "3", etc)</li> <li>Screen Share is represented as a special guest with the ID "SCREENSHARE"</li> <li>The identifier here matches the ID referenced in browser source links used in broadcasting software.</li></ul></td>
+    </tr>
+    <tr>
+      <td>   is_live</td>
+      <td>Boolean</td>
+      <td>Flag determining whether or not the guest is visible in the browser source in the host’s streaming software.</td>
+    </tr>
+    <tr>
+      <td>   user_id</td>
+      <td>String</td>
+      <td>User ID of the guest assigned to this slot.</td>
+    </tr>
+    <tr>
+      <td>   user_display_name</td>
+      <td>String</td>
+      <td>Display name of the guest assigned to this slot.</td>
+    </tr>
+    <tr>
+      <td>   user_login</td>
+      <td>String</td>
+      <td>Login of the guest assigned to this slot.</td>
+    </tr>
+    <tr>
+      <td>   volume</td>
+      <td>Integer</td>
+      <td>Value from 0 to 100 representing the host’s volume setting for this guest.</td>
+    </tr>
+    <tr>
+      <td>   assigned_at</td>
+      <td>String</td>
+      <td>Timestamp when this guest was assigned a slot in the session.</td>
+    </tr>
+    <tr>
+      <td>   audio_settings</td>
+      <td>MediaSettings</td>
+      <td>Information about the guest’s audio settings</td>
+    </tr>
+    <tr>
+      <td>      is_host_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the host is allowing the guest’s audio to be seen or heard within the session.</td>
+    </tr>
+    <tr>
+      <td>      is_guest_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the guest is allowing their audio/video to be transmitted to the session.</td>
+    </tr>
+    <tr>
+      <td>      is_available</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session.</td>
+    </tr>
+    <tr>
+      <td>   video_settings</td>
+      <td>MediaSettings</td>
+      <td>Information about the guest’s video settings</td>
+    </tr>
+    <tr>
+      <td>      is_host_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the host is allowing the guest’s audio to be seen or heard within the session.</td>
+    </tr>
+    <tr>
+      <td>      is_guest_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the guest is allowing their audio/video to be transmitted to the session.</td>
+    </tr>
+    <tr>
+      <td>      is_available</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>Missing <i>broadcaster_id</i></li> <li>Missing <i>moderator_id</i></li></ul></td>
+    </tr>
+    <tr>
+      <td>401 Unauthenticated</td>
+      <td><i>moderator_id</i> and user token do not match</td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<p>Get session for host channel</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/session?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049<span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Response</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2KFRQbFtpmfyD3IevNRnCzOPRJI"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guests"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"slot_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9321049"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_User"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"is_live"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"assigned_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-01-02T04:16:53.325Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"audio_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"is_available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_host_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_guest_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"video_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"is_available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_host_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_guest_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"slot_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"144601104"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_Guest"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_guest"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"is_live"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"assigned_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-01-02T04:20:59.325Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"audio_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"is_available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_host_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_guest_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"video_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"is_available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_host_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_guest_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="create-guest-star-session">Create Guest Star Session</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[56]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Programmatically creates a Guest Star session on behalf of the broadcaster. Requires the broadcaster to be present in the call interface, or the call will be ended automatically.</p>
+
+<h3>Authorization</h3>
+
+<ul>
+  <li>Query parameter <code class="highlighter-rouge">broadcaster_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:manage:guest_star</code></li>
+</ul>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">POST https://api.twitch.tv/helix/guest_star/session</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster you want to create a Guest Star session for. Provided <code class="highlighter-rouge">broadcaster_id</code> must match the <code class="highlighter-rouge">user_id</code> in the auth token.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>Session[]</td>
+      <td>Summary of the session details.</td>
+    </tr>
+    <tr>
+      <td>   id</td>
+      <td>String</td>
+      <td>ID uniquely representing the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>   guests</td>
+      <td>Guest</td>
+      <td>List of guests currently interacting with the Guest Star session. On creation, the session will contain the broadcaster as a solo guest.</td>
+    </tr>
+    <tr>
+      <td>   slot_id</td>
+      <td>String</td>
+      <td>ID representing this guest’s slot assignment. <ul><li>Host is always in slot "0"</li> <li>Guests are assigned the following consecutive IDs (e.g, "1", "2", "3", etc)</li> <li>Screen Share is represented as a special guest with the ID "SCREENSHARE"</li> <li>The identifier here matches the ID referenced in browser source links used in broadcasting software.</li></ul></td>
+    </tr>
+    <tr>
+      <td>   is_live</td>
+      <td>Boolean</td>
+      <td>Flag determining whether or not the guest is visible in the browser source in the host’s streaming software.</td>
+    </tr>
+    <tr>
+      <td>   user_id</td>
+      <td>String</td>
+      <td>User ID of the guest assigned to this slot.</td>
+    </tr>
+    <tr>
+      <td>   user_display_name</td>
+      <td>String</td>
+      <td>Display name of the guest assigned to this slot.</td>
+    </tr>
+    <tr>
+      <td>   user_login</td>
+      <td>String</td>
+      <td>Login of the guest assigned to this slot.</td>
+    </tr>
+    <tr>
+      <td>   volume</td>
+      <td>Integer</td>
+      <td>Value from 0 to 100 representing the host’s volume setting for this guest.</td>
+    </tr>
+    <tr>
+      <td>   assigned_at</td>
+      <td>String</td>
+      <td>Timestamp when this guest was assigned a slot in the session.</td>
+    </tr>
+    <tr>
+      <td>   audio_settings</td>
+      <td>MediaSettings</td>
+      <td>Information about the guest’s audio settings</td>
+    </tr>
+    <tr>
+      <td>      is_host_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the host is allowing the guest’s audio to be seen or heard within the session.</td>
+    </tr>
+    <tr>
+      <td>      is_guest_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the guest is allowing their audio/video to be transmitted to the session.</td>
+    </tr>
+    <tr>
+      <td>      is_available</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session.</td>
+    </tr>
+    <tr>
+      <td>   video_settings</td>
+      <td>MediaSettings</td>
+      <td>Information about the guest’s video settings</td>
+    </tr>
+    <tr>
+      <td>      is_host_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the host is allowing the guest’s audio to be seen or heard within the session.</td>
+    </tr>
+    <tr>
+      <td>      is_guest_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the guest is allowing their audio/video to be transmitted to the session.</td>
+    </tr>
+    <tr>
+      <td>      is_available</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>Missing <i>broadcaster_id</i></li> <li>Session limit reached (1 active call)</li></ul></td>
+    </tr>
+    <tr>
+      <td>401 Unauthorized</td>
+      <td>Phone verification missing</td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td>Insufficient authorization for creating session</td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<p>Start Guest Star session</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> POST <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/session?broadcaster_id<span class="o">=</span>9321049<span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Response</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2KFRQbFtpmfyD3IevNRnCzOPRJI"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guests"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9321049"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_User"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"is_live"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"assigned_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-01-02T04:16:53.325Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"audio_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"is_available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_host_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_guest_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"video_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"is_available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_host_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_guest_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="end-guest-star-session">End Guest Star Session</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[57]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Programmatically ends a Guest Star session on behalf of the broadcaster. Performs the same action as if the host clicked the “End Call” button in the Guest Star UI.</p>
+
+<h3>Authorization</h3>
+
+<ul>
+  <li>Query parameter <code class="highlighter-rouge">broadcaster_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:manage:guest_star</code></li>
+</ul>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">DELETE https://api.twitch.tv/helix/guest_star/session</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster you want to end a Guest Star session for. Provided <code class="highlighter-rouge">broadcaster_id</code> must match the <code class="highlighter-rouge">user_id</code> in the auth token.</td>
+    </tr>
+    <tr>
+      <td>session_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>ID for the session to end on behalf of the broadcaster.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>Session[]</td>
+      <td>Summary of the session details when the session was ended.</td>
+    </tr>
+    <tr>
+      <td>   id</td>
+      <td>String</td>
+      <td>ID uniquely representing the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>   guests</td>
+      <td>Guest</td>
+      <td>List of guests currently interacting with the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>   slot_id</td>
+      <td>String</td>
+      <td>ID representing this guest’s slot assignment. <ul><li>Host is always in slot "0"</li> <li>Guests are assigned the following consecutive IDs (e.g, "1", "2", "3", etc)</li> <li>Screen Share is represented as a special guest with the ID "SCREENSHARE"</li> <li>The identifier here matches the ID referenced in browser source links used in broadcasting software.</li></ul></td>
+    </tr>
+    <tr>
+      <td>   is_live</td>
+      <td>Boolean</td>
+      <td>Flag determining whether or not the guest is visible in the browser source in the host’s streaming software.</td>
+    </tr>
+    <tr>
+      <td>   user_id</td>
+      <td>String</td>
+      <td>User ID of the guest assigned to this slot.</td>
+    </tr>
+    <tr>
+      <td>   user_display_name</td>
+      <td>String</td>
+      <td>Display name of the guest assigned to this slot.</td>
+    </tr>
+    <tr>
+      <td>   user_login</td>
+      <td>String</td>
+      <td>Login of the guest assigned to this slot.</td>
+    </tr>
+    <tr>
+      <td>   volume</td>
+      <td>Integer</td>
+      <td>Value from 0 to 100 representing the host’s volume setting for this guest.</td>
+    </tr>
+    <tr>
+      <td>   assigned_at</td>
+      <td>String</td>
+      <td>Timestamp when this guest was assigned a slot in the session.</td>
+    </tr>
+    <tr>
+      <td>   audio_settings</td>
+      <td>MediaSettings</td>
+      <td>Information about the guest’s audio settings</td>
+    </tr>
+    <tr>
+      <td>      is_host_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the host is allowing the guest’s audio to be seen or heard within the session.</td>
+    </tr>
+    <tr>
+      <td>      is_guest_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the guest is allowing their audio/video to be transmitted to the session.</td>
+    </tr>
+    <tr>
+      <td>      is_available</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session.</td>
+    </tr>
+    <tr>
+      <td>   video_settings</td>
+      <td>MediaSettings</td>
+      <td>Information about the guest’s video settings</td>
+    </tr>
+    <tr>
+      <td>      is_host_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the host is allowing the guest’s audio to be seen or heard within the session.</td>
+    </tr>
+    <tr>
+      <td>      is_guest_enabled</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the guest is allowing their audio/video to be transmitted to the session.</td>
+    </tr>
+    <tr>
+      <td>      is_available</td>
+      <td>Boolean</td>
+      <td>Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>Missing or invalid <i>broadcaster_id</i></li> <li>Missing or invalid <i>session_id</i></li> <li>Session has already been ended</li></ul></td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td>Insufficient authorization for ending session</td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<p>End Guest Star session</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> DELETE <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/session?broadcaster_id<span class="o">=</span>9321049&amp;session_id<span class="o">=</span>2KFRQbFtpmfyD3IevNRnCzOPRJI<span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Response</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2KFRQbFtpmfyD3IevNRnCzOPRJI"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"guests"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9321049"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_User"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"is_live"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"assigned_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-01-02T04:16:53.325Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"audio_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"is_available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_host_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_guest_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="s2">"video_settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"is_available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_host_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"is_guest_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="get-guest-star-invites">Get Guest Star Invites</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[58]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Provides the caller with a list of pending invites to a Guest Star session, including the invitee’s ready status while joining the waiting room.</p>
+
+<h3>Authorization</h3>
+
+<ul>
+  <li>Query parameter <code class="highlighter-rouge">broadcaster_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:read:guest_star</code>, <code class="highlighter-rouge">channel:manage:guest_star</code>, <code class="highlighter-rouge">moderator:read:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code></li>
+</ul>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/guest_star/invites</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster running the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room. This ID must match the <code class="highlighter-rouge">user_id</code> in the user access token.</td>
+    </tr>
+    <tr>
+      <td>session_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The session ID to query for invite status.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>Invite[]</td>
+      <td>A list of invite objects describing the invited user as well as their ready status.</td>
+    </tr>
+    <tr>
+      <td>   user_id</td>
+      <td>String</td>
+      <td>Twitch User ID corresponding to the invited guest</td>
+    </tr>
+    <tr>
+      <td>   invited_at</td>
+      <td>string</td>
+      <td>Timestamp when this user was invited to the session.</td>
+    </tr>
+    <tr>
+      <td>   status</td>
+      <td>string</td>
+      <td>Status representing the invited user’s join state. Can be one of the following: <ul><li><code>INVITED</code>: The user has been invited to the session but has not acknowledged it.</li> <li><code>ACCEPTED</code>: The invited user has acknowledged the invite and joined the waiting room, but may still be setting up their media devices or otherwise preparing to join the call.</li> <li><code>READY</code>: The invited user has signaled they are ready to join the call from the waiting room.</li></ul></td>
+    </tr>
+    <tr>
+      <td>   is_video_enabled</td>
+      <td>Boolean</td>
+      <td>Flag signaling that the invited user has chosen to disable their local video device. The user has hidden themselves, but they may choose to reveal their video feed upon joining the session.</td>
+    </tr>
+    <tr>
+      <td>   is_audio_enabled</td>
+      <td>Boolean</td>
+      <td>Flag signaling that the invited user has chosen to disable their local audio device. The user has muted themselves, but they may choose to unmute their audio feed upon joining the session.</td>
+    </tr>
+    <tr>
+      <td>   is_video_available</td>
+      <td>Boolean</td>
+      <td>Flag signaling that the invited user has a video device available for sharing.</td>
+    </tr>
+    <tr>
+      <td>   is_audio_available</td>
+      <td>Boolean</td>
+      <td>Flag signaling that the invited user has an audio device available for sharing.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>Missing <i>broadcaster_id</i></li> <li>Missing <i>session_id</i></li></ul></td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request 1</h3>
+
+<p>Get session invites</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/invites?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049&amp;session_id<span class="o">=</span>2KFRQbFtpmfyD3IevNRnCzOPRJI<span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Request 2</h3>
+
+<p>Get session for host channel</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/session?broadcaster_id<span class="o">=</span>9321049<span class="sb">`</span> <span class="se">\ </span><span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\ </span><span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Response 2</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"144601104"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"invited_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-01-02T04:16:53.325Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INVITED"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"is_audio_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"is_video_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"is_audio_available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"is_video_available"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="send-guest-star-invite">Send Guest Star Invite</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[59]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Sends an invite to a specified guest on behalf of the broadcaster for a Guest Star session in progress.</p>
+
+<h3>Authorization</h3>
+
+<ul>
+  <li>Query parameter <code class="highlighter-rouge">moderator_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:manage:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code></li>
+</ul>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">POST https://api.twitch.tv/helix/guest_star/invites</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster running the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room. This ID must match the <code class="highlighter-rouge">user_id</code> in the user access token.</td>
+    </tr>
+    <tr>
+      <td>session_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The session ID for the invite to be sent on behalf of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td>guest_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>Twitch User ID for the guest to invite to the Guest Star session.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>Missing <i>broadcaster_id</i></li> <li>Missing <i>moderator_id</i></li> <li>Missing <i>session_id</i></li> <li>Missing <i>guest_id</i></li> <li>Invalid <i>session_id</i></li></ul></td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td><ul><li>Unauthorized guest invited</li> <li>Guest already invited</li></ul></td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<p>Invite user to Guest Star session</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> POST <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/invites?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049&amp;session_id<span class="o">=</span>2KFRQbFtpmfyD3IevNRnCzOPRJI&amp;guest_id<span class="o">=</span>144601104<span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="delete-guest-star-invite">Delete Guest Star Invite</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[60]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Revokes a previously sent invite for a Guest Star session.</p>
+
+<h3>Authorization</h3>
+
+<ul>
+  <li>Query parameter <code class="highlighter-rouge">moderator_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:manage:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code></li>
+</ul>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">DELETE https://api.twitch.tv/helix/guest_star/invites</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster running the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room. This ID must match the <code class="highlighter-rouge">user_id</code> in the user access token.</td>
+    </tr>
+    <tr>
+      <td>session_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the session for the invite to be revoked on behalf of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td>guest_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>Twitch User ID for the guest to revoke the Guest Star session invite from.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>Missing <i>broadcaster_id</i></li> <li>Missing <i>session_id</i></li> <li>Missing <i>guest_id</i></li> <li>Invalid <i>session_id</i></li></ul></td>
+    </tr>
+    <tr>
+      <td>404 Not Found</td>
+      <td>No invite exists for specified <em>guest_id</em></td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<p>Remove invite to session</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> DELETE <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/invites?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049&amp;session_id<span class="o">=</span>2KFRQbFtpmfyD3IevNRnCzOPRJI&amp;guest_id<span class="o">=</span>144601104<span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="assign-guest-star-slot">Assign Guest Star Slot</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[61]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Allows a previously invited user to be assigned a slot within the active Guest Star session, once that guest has indicated they are ready to join.</p>
+
+<h3>Authorization</h3>
+
+<ul>
+  <li>Query parameter <code class="highlighter-rouge">moderator_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:manage:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code></li>
+</ul>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">POST https://api.twitch.tv/helix/guest_star/slot</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster running the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room. This ID must match the <code class="highlighter-rouge">user_id</code> in the user access token.</td>
+    </tr>
+    <tr>
+      <td>session_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the Guest Star session in which to assign the slot.</td>
+    </tr>
+    <tr>
+      <td>guest_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The Twitch User ID corresponding to the guest to assign a slot in the session. This user must already have an invite to this session, and have indicated that they are ready to join.</td>
+    </tr>
+    <tr>
+      <td>slot_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The slot assignment to give to the user. Must be a numeric identifier between “1” and “N” where N is the max number of slots for the session. Max number of slots allowed for the session is reported by <a href="#get-channel-guest-star-settings">Get Channel Guest Star Settings</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>204 No Content</td>
+      <td>Successfuly assigned guest to slot</td>
+    </tr>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>Missing <i>broadcaster_id</i></li> <li>Missing <i>moderator_id</i></li> <li>Missing <i>guest_id</i></li> <li>Missing or invalid <i>session_id</i> </li><li>Missing or invalid <i>slot_id</i></li></ul></td>
+    </tr>
+    <tr>
+      <td>401 Unauthorized</td>
+      <td><em>moderator_id</em> is not a guest star moderator</td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td><ul><li>Cannot assign host slot</li> <li>Guest not invited to session</li> <li>Guest already assigned to slot</li> <li>Guest is not ready to join</li></ul></td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<p>Assign invited user to slot</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> POST <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/slot?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049&amp;session_id<span class="o">=</span>2KFRQbFtpmfyD3IevNRnCzOPRJI&amp;guest_id<span class="o">=</span>144601104&amp;slot_id<span class="o">=</span>1<span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Response</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USER_NOT_READY"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="update-guest-star-slot">Update Guest Star Slot</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[62]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Allows a user to update the assigned slot for a particular user within the active Guest Star session.</p>
+
+<h3>Authorization</h3>
+
+<ul>
+  <li>Query parameter <code class="highlighter-rouge">moderator_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:manage:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code></li>
+</ul>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">PATCH https://api.twitch.tv/helix/guest_star/slot</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster running the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room. This ID must match the <code class="highlighter-rouge">user_id</code> in the user access token.</td>
+    </tr>
+    <tr>
+      <td>session_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the Guest Star session in which to update slot settings.</td>
+    </tr>
+    <tr>
+      <td>source_slot_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The slot assignment previously assigned to a user.</td>
+    </tr>
+    <tr>
+      <td>destination_slot_id</td>
+      <td>No</td>
+      <td>String</td>
+      <td>The slot to move this user assignment to. If the destination slot is occupied, the user assigned will be swapped into <code class="highlighter-rouge">source_slot_id</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>204 No Content</td>
+      <td>Successfuly updated slot(s)</td>
+    </tr>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>Missing <i>broadcaster_id</i></li> <li>Missing or invalid <i>session_id</i> </li><li>Missing or invalid <i>slot_id</i></li></ul></td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<p>Move slot assignment to a new slot ID</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> PATCH <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/slot?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049&amp;session_id<span class="o">=</span>2KFRQbFtpmfyD3IevNRnCzOPRJI&amp;source_slot_id<span class="o">=</span>1&amp;destination_slot_id<span class="o">=</span>2<span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="delete-guest-star-slot">Delete Guest Star Slot</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[63]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Allows a caller to remove a slot assignment from a user participating in an active Guest Star session. This revokes their access to the session immediately and disables their access to publish or subscribe to media within the session.</p>
+
+<h3>Authorization</h3>
+
+<ul>
+  <li>Query parameter <code class="highlighter-rouge">moderator_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:manage:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code></li>
+</ul>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">DELETE https://api.twitch.tv/helix/guest_star/slot</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster running the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room. This ID must match the user ID in the user access token.</td>
+    </tr>
+    <tr>
+      <td>session_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the Guest Star session in which to remove the slot assignment.</td>
+    </tr>
+    <tr>
+      <td>guest_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The Twitch User ID corresponding to the guest to remove from the session.</td>
+    </tr>
+    <tr>
+      <td>slot_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The slot ID representing the slot assignment to remove from the session.</td>
+    </tr>
+    <tr>
+      <td>should_reinvite_guest</td>
+      <td>No</td>
+      <td>String</td>
+      <td>Flag signaling that the guest should be reinvited to the session, sending them back to the invite queue.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>204 No Content</td>
+      <td>Successfuly removed user from slot</td>
+    </tr>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>Missing <i>broadcaster_id</i></li> <li>Missing <i>moderator_id</i></li> <li>Missing or invalid <i>session_id</i> </li><li>Missing or invalid <i>slot_id</i></li></ul></td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td><ul><li><i>moderator_id</i> is not a Guest Star moderator</li> <li>The request is attempting to modify a restricted slot</li></ul></td>
+    </tr>
+    <tr>
+      <td>404 Not Found</td>
+      <td><em>guest_id</em> or <em>slot_id</em> not found</td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<p>Remove user from slot</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> DELETE <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/slot?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049&amp;session_id<span class="o">=</span>2KFRQbFtpmfyD3IevNRnCzOPRJI&amp;session_id<span class="o">=</span>2KFRQbFtpmfyD3IevNRnCzOPRJI&amp;guest_id<span class="o">=</span>144601104&amp;slot_id<span class="o">=</span>1<span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="update-guest-star-slot-settings">Update Guest Star Slot Settings</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[64]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Allows a user to update slot settings for a particular guest within a Guest Star session, such as allowing the user to share audio or video within the call as a host. These settings will be broadcasted to all subscribers which control their view of the guest in that slot. One or more of the optional parameters to this API can be specified at any time.</p>
+
+<h3>Authorization</h3>
+
+<ul>
+  <li>Query parameter <code class="highlighter-rouge">moderator_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:manage:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code></li>
+</ul>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">PATCH https://api.twitch.tv/helix/guest_star/slot_settings</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster running the Guest Star session.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room. This ID must match the user ID in the user access token.</td>
+    </tr>
+    <tr>
+      <td>session_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the Guest Star session in which to update a slot’s settings.</td>
+    </tr>
+    <tr>
+      <td>slot_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The slot assignment that has previously been assigned to a user.</td>
+    </tr>
+    <tr>
+      <td>is_audio_enabled</td>
+      <td>No</td>
+      <td>Boolean</td>
+      <td>Flag indicating whether the slot is allowed to share their audio with the rest of the session. If false, the slot will be muted in any views containing the slot.</td>
+    </tr>
+    <tr>
+      <td>is_video_enabled</td>
+      <td>No</td>
+      <td>Boolean</td>
+      <td>Flag indicating whether the slot is allowed to share their video with the rest of the session. If false, the slot will have no video shared in any views containing the slot.</td>
+    </tr>
+    <tr>
+      <td>is_live</td>
+      <td>No</td>
+      <td>Boolean</td>
+      <td>Flag indicating whether the user assigned to this slot is visible/can be heard from any public subscriptions. Generally, this determines whether or not the slot is enabled in any broadcasting software integrations.</td>
+    </tr>
+    <tr>
+      <td>volume</td>
+      <td>No</td>
+      <td>Integer</td>
+      <td>Value from 0-100 that controls the audio volume for shared views containing the slot.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>204 No Content</td>
+      <td>Successfuly updated slot settings</td>
+    </tr>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>Missing <i>broadcaster_id</i></li> <li>Missing <i>moderator_id</i></li> <li>Missing or invalid <i>session_id</i> </li><li>Missing or invalid <i>slot_id</i></li></ul></td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td><ul><li><i>moderator_id</i> is not a Guest Star moderator</li> <li>The request is attempting to modify a restricted slot</li></ul></td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request 1</h3>
+
+<p>Update slot settings to enable slot in broadcasting software</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> PATCH <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/slot_settings?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049&amp;session_id<span class="o">=</span>2KFRQbFtpmfyD3IevNRnCzOPRJI&amp;slot_id<span class="o">=</span>1&amp;is_audio_enabled<span class="o">=</span><span class="nb">false</span><span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Request 2</h3>
+
+<p>Mute a slot’s audio for a guest</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> PATCH <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/slot_settings?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049&amp;session_id<span class="o">=</span>2KFRQbFtpmfyD3IevNRnCzOPRJI&amp;slot_id<span class="o">=</span>1&amp;is_live<span class="o">=</span><span class="nb">true</span><span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Request 3</h3>
+
+<p>Allow slot audio to be unmuted by a guest. <strong>NOTE</strong>: This operation does not immediately unmute the guest. The guest will be notified they can unmute themselves when ready.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> PATCH <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/slot_settings?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049&amp;session_id<span class="o">=</span>2KFRQbFtpmfyD3IevNRnCzOPRJI&amp;slot_id<span class="o">=</span>1&amp;is_audio_enabled<span class="o">=</span><span class="nb">true</span><span class="sb">`</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="get-hype-train-events">Get Hype Train Events</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[65]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about the broadcaster’s current or most recent Hype Train event.</p>
 
@@ -13144,7 +14830,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
     </tr>
     <tr>
       <td>401 Unauthorized</td>
-      <td><ul><li>The ID in <i>broadcaster_id</i> must match the user ID in the user access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>channel:read:hype_train</b> scope.</li><li>The access token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
+      <td><ul><li>The ID in <i>broadcaster_id</i> must match the <i>user_id</i> in the user access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>channel:read:hype_train</b> scope.</li><li>The access token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
     </tr>
   </tbody>
 </table>
@@ -13208,7 +14894,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="check-automod-status">Check AutoMod Status</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[56]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[66]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Checks whether AutoMod would flag the specified message for review.</p>
 
@@ -13417,7 +15103,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="manage-held-automod-messages">Manage Held AutoMod Messages</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[57]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[67]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Allow or deny the message that AutoMod flagged for review. For information about AutoMod, see <a href="https://help.twitch.tv/s/article/how-to-use-automod">How to Use AutoMod</a>.</p>
 
@@ -13522,7 +15208,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-automod-settings">Get AutoMod Settings</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[58]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[68]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s AutoMod settings. The settings are used to automatically block inappropriate or harassing messages from appearing in the broadcaster’s chat room.</p>
 
@@ -13708,7 +15394,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-automod-settings">Update AutoMod Settings</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[59]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[69]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the broadcaster’s AutoMod settings. The settings are used to automatically block inappropriate or harassing messages from appearing in the broadcaster’s chat room.</p>
 
@@ -13988,7 +15674,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-banned-users">Get Banned Users</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[60]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[70]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets all users that the broadcaster banned or put in a timeout.</p>
 
@@ -14197,7 +15883,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="ban-user">Ban User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[61]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[71]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Bans a user from participating in the specified broadcaster’s chat room or puts them in a timeout.</p>
 
@@ -14448,7 +16134,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="unban-user">Unban User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[62]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[72]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes the ban or timeout that was placed on the specified user.</p>
 
@@ -14571,7 +16257,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-blocked-terms">Get Blocked Terms</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[63]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[73]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s list of non-private, blocked words or phrases. These are the terms that the broadcaster or moderator added manually or that were denied by AutoMod.</p>
 
@@ -14759,7 +16445,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="add-blocked-term">Add Blocked Term</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[64]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[74]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a word or phrase to the broadcaster’s list of blocked terms. These are the terms that the broadcaster doesn’t want used in their chat room.</p>
 
@@ -14970,7 +16656,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="remove-blocked-term">Remove Blocked Term</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[65]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[75]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes the word or phrase from the broadcaster’s list of blocked terms.</p>
 
@@ -15065,7 +16751,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-chat-messages">Delete Chat Messages</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[66]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[76]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes a single chat message or all chat messages from the broadcaster’s chat room.</p>
 
@@ -15171,7 +16857,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-moderators">Get Moderators</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[67]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[77]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets all users allowed to moderate the broadcaster’s chat room.</p>
 
@@ -15327,7 +17013,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="add-channel-moderator">Add Channel Moderator</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[68]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[78]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a moderator to the broadcaster’s chat room.</p>
 
@@ -15420,7 +17106,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="remove-channel-moderator">Remove Channel Moderator</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[69]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[79]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes a moderator from the broadcaster’s chat room.</p>
 
@@ -15509,7 +17195,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-vips">Get VIPs</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[70]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[80]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of the broadcaster’s VIPs.</p>
 
@@ -15674,7 +17360,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="add-channel-vip">Add Channel VIP</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[71]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[81]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds the specified user as a VIP in the broadcaster’s channel.</p>
 
@@ -15789,7 +17475,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="remove-channel-vip">Remove Channel VIP</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[72]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[82]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes the specified user as a VIP in the broadcaster’s channel.</p>
 
@@ -15898,7 +17584,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-shield-mode-status">Update Shield Mode Status</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[73]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[83]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Activates or deactivates the broadcaster’s Shield Mode.</p>
 
@@ -16069,7 +17755,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-shield-mode-status">Get Shield Mode Status</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[74]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[84]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s Shield Mode activation status.</p>
 
@@ -16217,7 +17903,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-polls">Get Polls</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[75]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[85]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of polls that the broadcaster created.</p>
 
@@ -16483,7 +18169,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-poll">Create Poll</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[76]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[86]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Creates a poll that viewers in the broadcaster’s channel can vote on.</p>
 
@@ -16766,7 +18452,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="end-poll">End Poll</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[77]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[87]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Ends an active poll. You have the option to end it or end it and archive it.</p>
 
@@ -17016,7 +18702,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-predictions">Get Predictions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[78]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[88]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of Channel Points Predictions that the broadcaster created.</p>
 
@@ -17297,7 +18983,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-prediction">Create Prediction</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[79]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[89]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Creates a Channel Points Prediction.</p>
 
@@ -17593,7 +19279,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="end-prediction">End Prediction</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[80]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[90]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Locks, resolves, or cancels a Channel Points Prediction.</p>
 
@@ -17874,7 +19560,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="start-a-raid">Start a raid</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[81]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[91]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Raid another channel by sending the broadcaster’s viewers to the targeted channel.</p>
 
@@ -18018,7 +19704,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="cancel-a-raid">Cancel a raid</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[82]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[92]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Cancel a pending raid.</p>
 
@@ -18107,7 +19793,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-stream-schedule">Get Channel Stream Schedule</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[83]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[93]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s streaming schedule. You can get the entire schedule or specific segments of the schedule. <a href="https://help.twitch.tv/s/article/channel-page-setup#Schedule" target="_blank">Learn More</a></p>
 
@@ -18361,7 +20047,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-icalendar">Get Channel iCalendar</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[84]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[94]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s streaming schedule as an <a href="https://datatracker.ietf.org/doc/html/rfc5545" target="_blank">iCalendar</a>.</p>
 
@@ -18460,7 +20146,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-channel-stream-schedule">Update Channel Stream Schedule</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[85]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[95]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the broadcaster’s schedule settings, such as scheduling a vacation.</p>
 
@@ -18567,7 +20253,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-channel-stream-schedule-segment">Create Channel Stream Schedule Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[86]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[96]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a single or recurring broadcast to the broadcaster’s streaming schedule. For information about scheduling broadcasts, see <a href="https://help.twitch.tv/s/article/channel-page-setup#Schedule" target="_blank">Stream Schedule</a>.</p>
 
@@ -18835,7 +20521,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-channel-stream-schedule-segment">Update Channel Stream Schedule Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[87]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[97]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates a scheduled broadcast segment.</p>
 
@@ -19106,7 +20792,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-channel-stream-schedule-segment">Delete Channel Stream Schedule Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[88]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[98]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes a broadcast segment from the broadcaster’s streaming schedule.</p>
 
@@ -19193,7 +20879,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="search-categories">Search Categories</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[89]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[99]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the games or categories that match the specified query.</p>
 
@@ -19337,7 +21023,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="search-channels">Search Channels</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[90]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[100]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the channels that match the specified query and have streamed content within the past 6 months.</p>
 
@@ -19448,7 +21134,7 @@ END:VCALENDAR%
     <tr>
       <td>   tag_ids</td>
       <td>String[]</td>
-      <td><strong>IMPORTANT</strong> Twitch is deprecating this field and will stop providing IDs in 2023 (Twitch will communicate the specific date in early 2023). If you use this field, consider updating your code at your earliest convenience to use the <code class="highlighter-rouge">tags</code> field.<br><br>The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see <a href="https://www.twitch.tv/directory/all/tags">List of All Tags</a>. The list doesn’t include Category Tags.</td>
+      <td><strong>IMPORTANT</strong> As of February 28, 2023, this field is deprecated and returns only an empty array. If you use this field, please update your code to use the <code class="highlighter-rouge">tags</code> field.<br><br>The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see <a href="https://www.twitch.tv/directory/all/tags">List of All Tags</a>. The list doesn’t include Category Tags.</td>
     </tr>
     <tr>
       <td>   tags</td>
@@ -19557,7 +21243,7 @@ END:VCALENDAR%
       </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DOOM Eternal"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19070311"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"is_live"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"6ea6bca4-4712-4ab9-a906-e3336a9d8039"</span><span class="p">],</span><span class="w">
+      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
       </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"English"</span><span class="p">],</span><span class="w">
       </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/jtv_user_pictures/a_seagull-profile_image-4d2d235688c7dc66-300x300.png"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a_seagull"</span><span class="p">,</span><span class="w">
@@ -19575,7 +21261,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-soundtrack-current-track">Get Soundtrack Current Track</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[91]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[101]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the Soundtrack track that the broadcaster is playing.</p>
 
@@ -19811,7 +21497,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-soundtrack-playlist">Get Soundtrack Playlist</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[92]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[102]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the Soundtrack playlist’s tracks.</p>
 
@@ -20045,7 +21731,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-soundtrack-playlists">Get Soundtrack Playlists</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[93]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[103]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of Soundtrack playlists.</p>
 
@@ -20246,7 +21932,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-key">Get Stream Key</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[94]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[104]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the channel’s stream key.</p>
 
@@ -20358,7 +22044,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-streams">Get Streams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[95]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[105]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of all streams. The list is in descending order by the number of viewers watching the stream. Because viewers come and go during a stream, it’s possible to find duplicate or missing streams in the list as you page through the results.</p>
 
@@ -20517,12 +22203,7 @@ END:VCALENDAR%
     <tr>
       <td>   tag_ids</td>
       <td>String[]</td>
-      <td><strong>IMPORTANT</strong> Twitch is deprecating this field and will stop providing IDs in 2023 (Twitch will communicate the specific date in early 2023). If you use this field, consider updating your code at your earliest convenience to use the <code class="highlighter-rouge">tags</code> field.<br><br>The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see <a href="https://www.twitch.tv/directory/all/tags">List of All Tags</a>. The list doesn’t include Category Tags.</td>
-    </tr>
-    <tr>
-      <td>   is_mature</td>
-      <td>Boolean</td>
-      <td>A Boolean value that indicates whether the stream is meant for mature audiences.</td>
+      <td><strong>IMPORTANT</strong> As of February 28, 2023, this field is deprecated and returns only an empty array. If you use this field, please update your code to use the <code class="highlighter-rouge">tags</code> field.<br><br>The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see <a href="https://www.twitch.tv/directory/all/tags">List of All Tags</a>. The list doesn’t include Category Tags.</td>
     </tr>
     <tr>
       <td>   is_mature</td>
@@ -20599,7 +22280,7 @@ END:VCALENDAR%
       </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-10T15:04:21Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"es"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/previews-ttv/live_user_auronplay-{width}x{height}.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"d4bb9c58-2141-4881-bcdc-3fe0505457d1"</span><span class="p">],</span><span class="w">
+      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
       </span><span class="s2">"is_mature"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="w">
@@ -20638,7 +22319,7 @@ END:VCALENDAR%
       </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-10T03:18:11Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/previews-ttv/live_user_afro-{width}x{height}.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"6ea6bca4-4712-4ab9-a906-e3336a9d8039"</span><span class="p">],</span><span class="w">
+      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
       </span><span class="s2">"is_mature"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="w">
@@ -20654,7 +22335,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-followed-streams">Get Followed Streams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[96]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[106]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of broadcasters that the user follows and that are streaming live.</p>
 
@@ -20778,7 +22459,7 @@ END:VCALENDAR%
     <tr>
       <td>   tag_ids</td>
       <td>String[]</td>
-      <td><strong>IMPORTANT</strong> Twitch is deprecating this field and will stop providing IDs in 2023 (Twitch will communicate the specific date in early 2023). If you use this field, consider updating your code at your earliest convenience to use the <code class="highlighter-rouge">tags</code> field.<br><br>The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see <a href="https://www.twitch.tv/directory/all/tags">List of All Tags</a>. The list doesn’t include Category Tags.</td>
+      <td><strong>IMPORTANT</strong> As of February 28, 2023, this field is deprecated and returns only an empty array. If you use this field, please update your code to use the <code class="highlighter-rouge">tags</code> field.<br><br>The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see <a href="https://www.twitch.tv/directory/all/tags">List of All Tags</a>. The list doesn’t include Category Tags.</td>
     </tr>
     <tr>
       <td>   tags</td>
@@ -20859,7 +22540,7 @@ END:VCALENDAR%
       </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-31T20:57:26Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/previews-ttv/live_user_aws-{width}x{height}.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"6ea6bca4-4712-4ab9-a906-e3336a9d8039"</span><span class="p">],</span><span class="w">
+      </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
       </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"English"</span><span class="p">]</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="w">
@@ -20877,7 +22558,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-stream-marker">Create Stream Marker</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[97]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[107]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a marker to a live stream. A marker is an arbitrary point in a live stream that the broadcaster or editor wants to mark, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).</p>
 
@@ -21034,7 +22715,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-markers">Get Stream Markers</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[98]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[108]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of markers from the user’s most recent stream or from the specified VOD/video. A marker is an arbitrary point in a live stream that the broadcaster or editor marked, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).</p>
 
@@ -21261,7 +22942,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-broadcaster-subscriptions">Get Broadcaster Subscriptions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[99]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[109]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of users that subscribe to the specified broadcaster.</p>
 
@@ -21491,7 +23172,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="check-user-subscription">Check User Subscription</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[100]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[110]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Checks whether the user subscribes to the broadcaster’s channel.</p>
 
@@ -21656,9 +23337,9 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-all-stream-tags">Get All Stream Tags</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[101]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[111]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. As part of this move, Twitch is deprecating this endpoint and will remove it in 2023 (Twitch will communicate the specific removal date in early 2023).</p>
+				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. <strong>IMPORTANT</strong> As of February 28, 2023, this endpoint returns an empty array. On July 13, 2023, it will return a 410 response.</p>
 
 <p>Gets a list of all stream tags that Twitch defines. The broadcaster may apply any of these to their channel except automatic tags. For an online list of the possible tags, see <a href="https://www.twitch.tv/directory/all/tags" target="_blank">List of All Tags</a>.</p>
 
@@ -21838,9 +23519,9 @@ twitch api get /tags/streams <span class="nt">-q</span> <span class="nv">tag_id<
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-tags">Get Stream Tags</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[102]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[112]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. As part of this move, Twitch is deprecating this endpoint and will remove it in 2023 (Twitch will communicate the specific removal date in early 2023). If you use this endpoint, consider updating your code at your earliest convenience to use <a href="#get-channel-information">Get Channel Information</a>.</p>
+				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. <strong>IMPORTANT</strong> As of February 28, 2023, this endpoint returns an empty array. On July 13, 2023, it will return a 410 response. If you use this endpoint, please update your code to use <a href="#get-channel-information">Get Channel Information</a>.</p>
 
 <p>Gets the list of stream tags that the broadcaster or Twitch added to their channel.</p>
 
@@ -21991,124 +23672,8 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 	<section class="doc-content">
 		<section class="left-docs">
-			<h2 id="replace-stream-tags">Replace Stream Tags</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[103]" data-cms-editor-link-style="modal">&#x270E;</a>
-			
-				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. As part of this move, Twitch is deprecating this endpoint and will remove it in 2023 (Twitch will communicate the specific removal date in early 2023). If you use this endpoint, consider updating your code at your earliest convenience to use <a href="#modify-channel-information">Modify Channel Information</a>.</p>
-
-<p>Applies one or more tags to the specified channel, overwriting existing tags.</p>
-
-<p><strong>NOTE</strong>: You may not specify automatic tags; the call fails if you specify automatic tags. Automatic tags are tags that Twitch applies to the channel. For a list of automatic tags, see <a href="https://www.twitch.tv/directory/all/tags">List of All Tags</a>. To get the list of possible tags programmatically, see <a href="/docs/api/reference#get-all-stream-tags">Get All Stream Tags</a>.</p>
-
-<h3>Authorization</h3>
-
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:broadcast</strong> scope.</p>
-
-<h3>URL</h3>
-
-<p><code class="highlighter-rouge">PUT https://api.twitch.tv/helix/streams/tags</code></p>
-
-<h3>Request Query Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Type</th>
-      <th>Required?</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>broadcaster_id</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>The ID of the broadcaster that owns the channel to apply the tags to. This ID must match the user ID in the access token.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Request Body</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Type</th>
-      <th>Required?</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>tag_ids</td>
-      <td>String[]</td>
-      <td>No</td>
-      <td>A list of IDs that identify the tags to apply to the channel. You may specify a maximum of five tags.<br><br>To remove all tags from the channel, set <code class="highlighter-rouge">tag_ids</code> to an empty array.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Codes</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>204 No Content</td>
-      <td>Successfully replaced the stream’s tags.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The tag ID &lt;value&gt; is not valid.</li><li>The list of tag IDs is too long.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The ID in <i>broadcaster_id</i> must match the user ID in the access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>channel:manage:broadcast</b> scope.</li><li>The access token is not valid.</li><li>The client ID specified in the Client-Id header must match the client ID specified in the access token.</li></ul></td>
-    </tr>
-    <tr>
-      <td>403 Forbidden</td>
-      <td><ul><li>You may not add automatic tags.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
-
-			
-		</section>
-
-	
-			<section class="right-code">
-				<h3>Example Request</h3>
-
-<p>Applies two stream tags to channel 257788195.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> PUT <span class="s1">'https://api.twitch.tv/helix/streams/tags?broadcaster_id=257788195'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
-<span class="nt">-d</span> <span class="s1">'{"tag_ids":["621fb5bf-5498-4d8f-b4ac-db4d40d401bf","52d7e4cc-633d-46f5-818c-bb59102d9549"]}'</span>
-</code></pre></div></div>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Twitch CLI example that adds two stream tags to the channel.</span>
-twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadcaster_id</span><span class="o">=</span>1234567 <span class="nt">-b</span> <span class="s1">'{"tag_ids":["621fb5bf-5498-4d8f-b4ac-db4d40d401bf", "52d7e4cc-633d-46f5-818c-bb59102d9549"]}'</span>
-
-<span class="c"># Twitch CLI example that removes all stream tags from the channel.</span>
-twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadcaster_id</span><span class="o">=</span>1234567 <span class="nt">-b</span> <span class="s1">'{"tag_ids":[]}'</span>
-</code></pre></div></div>
-
-			</section>
-	
-	</section>
-
-	<section class="doc-content">
-		<section class="left-docs">
 			<h2 id="get-channel-teams">Get Channel Teams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[104]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[113]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of Twitch teams that the broadcaster is a member of.</p>
 
@@ -22292,7 +23857,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-teams">Get Teams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[105]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[114]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about the specified Twitch team. <a href="https://help.twitch.tv/s/article/twitch-teams">Read More</a></p>
 
@@ -22497,7 +24062,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-users">Get Users</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[106]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[115]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about one or more users.</p>
 
@@ -22683,7 +24248,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-user">Update User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[107]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[116]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the specified user’s information. The user ID in the OAuth token identifies the user whose information you want to update.</p>
 
@@ -22857,9 +24422,13 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-users-follows">Get Users Follows</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[108]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[117]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about users that are following other users. For example, you can use this endpoint to answer questions like “who is qotrok following,” “who is following qotrok,” or “is user X following user Y.”</p>
+
+<blockquote>
+  <p><strong><em>Deprecation Notice:</em></strong> This endpoint is deprecated and will be decommissioned on <a href="https://discuss.dev.twitch.tv/t/follows-endpoints-and-eventsub-subscription-type-are-now-available-in-open-beta/43322" target="_blank">August 3, 2023</a>. Access to this endpoint is limited to client IDs that have called the endpoint on or before February 17, 2023.</p>
+</blockquote>
 
 <h3>Authorization</h3>
 
@@ -23053,7 +24622,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-block-list">Get User Block List</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[109]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[118]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of users that the broadcaster has blocked. <a href="https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat?language=en_US#BlockWhispersandMessagesfromStrangers">Read More</a></p>
 
@@ -23196,7 +24765,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="block-user">Block User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[110]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[119]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Blocks the specified user from interacting with or having contact with the broadcaster. The user ID in the OAuth token identifies the broadcaster who is blocking the user.</p>
 
@@ -23289,7 +24858,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="unblock-user">Unblock User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[111]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[120]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes the user from the broadcaster’s list of blocked users. The user ID in the OAuth token identifies the broadcaster who’s removing the block.</p>
 
@@ -23368,7 +24937,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-extensions">Get User Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[112]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[121]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of all extensions (both active and inactive) that the broadcaster has installed. The user ID in the access token identifies the broadcaster.</p>
 
@@ -23524,7 +25093,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-active-extensions">Get User Active Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[113]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[122]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the active extensions that the broadcaster has installed for each configuration.</p>
 
@@ -23758,7 +25327,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-user-extensions">Update User Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[114]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[123]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates an installed extension’s information. You can update the extension’s activation state, ID, and version number. The user ID in the access token identifies the broadcaster whose extensions you’re updating.</p>
 
@@ -24037,7 +25606,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-videos">Get Videos</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[115]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[124]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about one or more published videos. You may get videos by ID, by user, or by game/category.</p>
 
@@ -24333,7 +25902,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-videos">Delete Videos</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[116]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[125]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Deletes one or more videos. You may delete past broadcasts, highlights, or uploads.</p>
 
@@ -24441,7 +26010,7 @@ twitch api put /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="send-whisper">Send Whisper</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[117]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[126]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Sends a whisper message to the specified user.</p>
 

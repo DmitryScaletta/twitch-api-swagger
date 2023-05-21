@@ -42,6 +42,7 @@ tags:
   - name: EventSub
   - name: Games
   - name: Goals
+  - name: Guest Star
   - name: Hype Train
   - name: Moderation
   - name: Polls
@@ -1144,13 +1145,13 @@ paths:
             - channel:read:editors
   /channels/followed:
     get:
-      summary: BETA Gets a list of broadcasters that the specified user follows. You
-        can also use this endpoint to see whether a user follows a specific
+      summary: Gets a list of broadcasters that the specified user follows. You can
+        also use this endpoint to see whether a user follows a specific
         broadcaster.
       description: >-
-        [BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets a list of
-        broadcasters that the specified user follows. You can also use this
-        endpoint to see whether a user follows a specific broadcaster.
+        Gets a list of broadcasters that the specified user follows. You
+        can also use this endpoint to see whether a user follows a specific
+        broadcaster.
 
 
         __Authorization:__
@@ -1282,19 +1283,19 @@ paths:
             - user:read:follows
   /channels/followers:
     get:
-      summary: BETA  a list of users that follow the specified broadcaster. You can
+      summary: Gets a list of users that follow the specified broadcaster. You can
         also use this endpoint to see whether a specific user follows the
         broadcaster.
       description: >-
-        [BETA](https://dev.twitch.tv/docs/product-lifecycle) Gets a list of
-        users that follow the specified broadcaster. You can also use this
-        endpoint to see whether a specific user follows the broadcaster.
+        Gets a list of users that follow the specified broadcaster. You can
+        also use this endpoint to see whether a specific user follows the
+        broadcaster.
 
 
         __Authorization:__
 
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:followers** scope. The ID in the broadcaster\_id query parameter must match the user ID in the access token or the user must be a moderator for the specified broadcaster. If a scope is not provided, only the total follower account will be included in the response.
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:followers** scope. The ID in the broadcaster\_id query parameter must match the user ID in the access token or the user must be a moderator for the specified broadcaster. If a scope is not provided, only the total follower count will be included in the response.
       tags:
         - Channels
       externalDocs:
@@ -3125,12 +3126,20 @@ paths:
                             image_url_1x: https://static-cdn.jtvnw.net/badges/v1/743a0f3b-84b3-450b-96a0-503d7f4a9764/1
                             image_url_2x: https://static-cdn.jtvnw.net/badges/v1/743a0f3b-84b3-450b-96a0-503d7f4a9764/2
                             image_url_4x: https://static-cdn.jtvnw.net/badges/v1/743a0f3b-84b3-450b-96a0-503d7f4a9764/3
+                            title: cheer 1
+                            description: cheer 1
+                            click_action: visit_url
+                            click_url: https://bits.twitch.tv
                       - set_id: subscriber
                         versions:
                           - id: "0"
                             image_url_1x: https://static-cdn.jtvnw.net/badges/v1/eb4a8a4c-eacd-4f5e-b9f2-394348310442/1
                             image_url_2x: https://static-cdn.jtvnw.net/badges/v1/eb4a8a4c-eacd-4f5e-b9f2-394348310442/2
                             image_url_4x: https://static-cdn.jtvnw.net/badges/v1/eb4a8a4c-eacd-4f5e-b9f2-394348310442/3
+                            title: Subscriber
+                            description: Subscriber
+                            click_action: subscribe_to_channel
+                            click_url: null
         "400":
           description: "* The _broadcaster\\_id_ query parameter is required."
         "401":
@@ -3202,6 +3211,10 @@ paths:
                             image_url_1x: https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/1
                             image_url_2x: https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/2
                             image_url_4x: https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/3
+                            title: VIP
+                            description: VIP
+                            click_action: visit_url
+                            click_url: https://help.twitch.tv/customer/en/portal/articles/659115-twitch-chat-badges-guide
         "401":
           description: >-
             * The Authorization header is required and must specify a valid app
@@ -4155,192 +4168,6 @@ paths:
             * The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.
         "404":
           description: "* The ID in _game\\_id_ was not found."
-      security:
-        - twitch_auth: []
-  /entitlements/codes:
-    get:
-      summary: Gets the status of one or more redemption codes for a Bits reward.
-      description: >-
-        Gets the status of one or more redemption codes for a Bits reward.
-        Only client IDs approved by Twitch may request a redemption code’s
-        status.
-
-
-        Rate limit: You may send at most one request per second per user.
-
-
-        __Authorization:__
-
-
-        Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). The client ID in the access token must match a client ID that Twitch has approved to provide entitlements.
-      tags:
-        - Entitlements
-      externalDocs:
-        description: Get Code Status
-        url: https://dev.twitch.tv/docs/api/reference#get-code-status
-      operationId: get-code-status
-      parameters:
-        - name: code
-          in: query
-          description: The redemption code to check. Include this parameter for each
-            redemption code whose status you want to check. For example,
-            `code=1234&code=5678`. You may specify a maximum of 20 codes.
-          schema:
-            type: array
-            items:
-              type: string
-          required: true
-          explode: true
-        - name: user_id
-          in: query
-          description: The ID of the user that owns the redemption code.
-          schema:
-            type: integer
-            format: int32
-          required: true
-      responses:
-        "200":
-          description: Successfully retrieved the statuses of the specified codes.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetCodeStatusResponse"
-              examples:
-                Example:
-                  description: >-
-                    _Request:_
-
-
-                    ```bash
-
-                    curl -X GET 'https://api.twitch.tv/helix/entitlements/codes?code=KUHXV-4GXYP-AKAKK&code=XZDDZ-5SIQR-RT5M3&user_id=156900877' \
-
-                    -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
-
-                    -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
-
-                    ```
-                  value:
-                    data:
-                      - code: KUHXV-4GXYP-AKAKK
-                        status: UNUSED
-                      - code: XZDDZ-5SIQR-RT5M3
-                        status: ALREADY_CLAIMED
-        "400":
-          description: >-
-            * The _user\_id_ query parameter is required.
-
-            * The _code_ query parameter is required.
-
-            * The _code_ query parameter may not contain a comma-delimited list of codes. Instead, repeat the parameter for each code. For example, `code=1234&code=5678`.
-
-            * The _code_ query parameter may not contain an empty string.
-        "401":
-          description: >-
-            * The Authorization header is required and must specify an app
-            access token.
-
-            * The access token is not valid.
-
-            * The ID in the Client-Id header must match the Client ID in the access token.
-        "403":
-          description: >-
-            * The API accepts only app access tokens.
-
-            * The client ID specified in the access token is not approved for getting the statuses of the redemption codes.
-      security:
-        - twitch_auth: []
-    post:
-      summary: Redeems one or more redemption codes.
-      description: >-
-        Redeems one or more redemption codes. Redeeming a code credits the
-        user’s account with the entitlement; for example, a Bits reward earned
-        by playing a game.
-
-
-        Rate limit: You may send at most one request per second per user.
-
-
-        __Authorization:__
-
-
-        Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens). Only client IDs approved by Twitch may redeem codes on behalf of any Twitch user account.
-      tags:
-        - Entitlements
-      externalDocs:
-        description: Redeem Code
-        url: https://dev.twitch.tv/docs/api/reference#redeem-code
-      operationId: redeem-code
-      parameters:
-        - name: code
-          in: query
-          description: The redemption code to redeem. To redeem multiple codes, include
-            this parameter for each redemption code. For example,
-            `code=1234&code=5678`. You may specify a maximum of 20 codes.
-          schema:
-            type: array
-            items:
-              type: string
-          required: true
-          explode: true
-        - name: user_id
-          in: query
-          description: An ID of the user that owns the redemption code to redeem.
-          schema:
-            type: string
-          required: true
-      responses:
-        "200":
-          description: Successfully redeemed the code.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RedeemCodeResponse"
-              examples:
-                Example:
-                  description: >-
-                    _Request:_
-
-
-                    ```bash
-
-                    curl -X POST 'https://api.twitch.tv/helix/entitlements/codes?user_id=12345&code=8CD5P-V3J92-2S6JY&code=PUN4G-HYFVP-MMFET' \
-
-                    -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
-
-                    -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
-
-                    ```
-                  value:
-                    data:
-                      - code: 8CD5P-V3J92-2S6JY
-                        status: SUCCESSFULLY_REDEEMED
-                      - code: PUN4G-HYFVP-MMFET
-                        status: ALREADY_CLAIMED
-        "400":
-          description: >-
-            * The _user\_id_ query parameter is required.
-
-            * The _code_ query parameter is required.
-
-            * The _code_ query parameter may not contain a comma-delimited list of codes. Instead, repeat the parameter for each code. For example, `code=1234&code=5678`.
-
-            * The _code_ query parameter may not contain an empty string.
-        "401":
-          description: >-
-            * The Authorization header is required and must specify an app
-            access token.
-
-            * The access token is not valid.
-
-            * The ID in the Client-Id header must match the Client ID in the access token.
-        "403":
-          description: >-
-            * The API accepts only app access tokens.
-
-            * The client specified in the access token is not approved to redeem codes.
-        "500":
-          description: ""
       security:
         - twitch_auth: []
   /entitlements/drops:
@@ -6043,6 +5870,11 @@ paths:
               - channel.unban
               - channel.moderator.add
               - channel.moderator.remove
+              - channel.guest_star_session.begin
+              - channel.guest_star_session.end
+              - channel.guest_star_guest.update
+              - channel.guest_star_slot.update
+              - channel.guest_star_settings.update
               - channel.channel_points_custom_reward.add
               - channel.channel_points_custom_reward.update
               - channel.channel_points_custom_reward.remove
@@ -6440,6 +6272,875 @@ paths:
       security:
         - twitch_auth:
             - channel:read:goals
+  /guest_star/channel_settings:
+    get:
+      summary: BETA Gets the channel settings for configuration of the Guest Star
+        feature for a particular host.
+      description: >-
+        BETA Gets the channel settings for configuration of the Guest Star
+        feature for a particular host.
+
+
+        __Authorization:__
+
+
+        * Query parameter `broadcaster_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+
+        * Requires OAuth Scope: `channel:read:guest_star` or `channel:manage:guest_star`
+      tags:
+        - Guest Star
+      externalDocs:
+        description: Get Channel Guest Star Settings
+        url: https://dev.twitch.tv/docs/api/reference#get-channel-guest-star-settings
+      operationId: get-channel-guest-star-settings
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The ID of the broadcaster you want to get guest star settings for.
+          schema:
+            type: string
+          required: true
+      responses:
+        "400":
+          description: Missing _broadcaster\_id_
+    put:
+      summary: BETA Mutates the channel settings for configuration of the Guest Star
+        feature for a particular host.
+      description: >-
+        BETA Mutates the channel settings for configuration of the Guest
+        Star feature for a particular host.
+
+
+        __Authorization:__
+
+
+        * Query parameter `broadcaster_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+
+        * Requires OAuth Scope: `channel:manage:guest_star`
+      tags:
+        - Guest Star
+      externalDocs:
+        description: Update Channel Guest Star Settings
+        url: https://dev.twitch.tv/docs/api/reference#update-channel-guest-star-settings
+      operationId: update-channel-guest-star-settings
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The ID of the broadcaster you want to update Guest Star settings for.
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateChannelGuestStarSettingsBody"
+      responses:
+        "204":
+          description: >-
+            Successfully updated channel settings
+
+
+            __Examples__
+
+
+            _Request:_
+
+
+            Update browser source layout settings
+
+
+            ```bash
+
+            curl -x PUT `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&group_layout=TILED_LAYOUT` \
+
+            -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+            ```
+
+
+            _Request:_
+
+
+            Disable moderator control of slot live setting
+
+
+            ```bash
+
+            curl -x PUT `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&is_moderator_send_live_enabled=false` \
+
+            -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+            ```
+
+
+            _Request:_
+
+
+            Update max slot count
+
+
+            ```bash
+
+            curl -x PUT `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&slot_count=6` \
+
+            -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+            ```
+
+
+            _Request:_
+
+
+            Regenerate browser sources
+
+
+            ```bash
+
+            curl -x PUT `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&regenerate_browser_sources=true` \
+
+            -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+            ```
+        "400":
+          description: |-
+            * Missing _broadcaster\_id_
+            * Invalid _slot\_count_
+            * Invalid _group\_layout_
+  /guest_star/session:
+    get:
+      summary: BETA Gets information about an ongoing Guest Star session for a
+        particular channel.
+      description: >-
+        BETA Gets information about an ongoing Guest Star session for a
+        particular channel.
+
+
+        You may retrieve the session by a broadcaster channel ID, or by a previously retrieved session ID.
+
+
+        __Authorization:__
+
+
+        * Requires OAuth Scope: `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star` or `moderator:manage:guest_star`
+
+        * Guests must be either invited or assigned a slot within the session
+      tags:
+        - Guest Star
+      externalDocs:
+        description: Get Guest Star Session
+        url: https://dev.twitch.tv/docs/api/reference#get-guest-star-session
+      operationId: get-guest-star-session
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: ID for the user hosting the Guest Star session.
+          schema:
+            type: string
+          required: true
+        - name: moderator_id
+          in: query
+          description: The ID of the broadcaster or a user that has permission to moderate
+            the broadcaster’s chat room. This ID must match the user ID in the
+            user access token.
+          schema:
+            type: string
+          required: true
+      responses:
+        "400":
+          description: |-
+            * Missing _broadcaster\_id_
+            * Missing _moderator\_id_
+        "401":
+          description: _moderator\_id_ and user token do not match
+    post:
+      summary: BETA Programmatically creates a Guest Star session on behalf of the
+        broadcaster.
+      description: >-
+        BETA Programmatically creates a Guest Star session on behalf of the
+        broadcaster. Requires the broadcaster to be present in the call
+        interface, or the call will be ended automatically.
+
+
+        __Authorization:__
+
+
+        * Query parameter `broadcaster_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+
+        * Requires OAuth Scope: `channel:manage:guest_star`
+      tags:
+        - Guest Star
+      externalDocs:
+        description: Create Guest Star Session
+        url: https://dev.twitch.tv/docs/api/reference#create-guest-star-session
+      operationId: create-guest-star-session
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The ID of the broadcaster you want to create a Guest Star session
+            for. Provided `broadcaster_id` must match the `user_id` in the auth
+            token.
+          schema:
+            type: string
+          required: true
+      responses:
+        "400":
+          description: |-
+            * Missing _broadcaster\_id_
+            * Session limit reached (1 active call)
+        "401":
+          description: Phone verification missing
+        "403":
+          description: Insufficient authorization for creating session
+    delete:
+      summary: BETA Programmatically ends a Guest Star session on behalf of the
+        broadcaster.
+      description: >-
+        BETA Programmatically ends a Guest Star session on behalf of the
+        broadcaster. Performs the same action as if the host clicked the “End
+        Call” button in the Guest Star UI.
+
+
+        __Authorization:__
+
+
+        * Query parameter `broadcaster_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+
+        * Requires OAuth Scope: `channel:manage:guest_star`
+      tags:
+        - Guest Star
+      externalDocs:
+        description: End Guest Star Session
+        url: https://dev.twitch.tv/docs/api/reference#end-guest-star-session
+      operationId: end-guest-star-session
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The ID of the broadcaster you want to end a Guest Star session for.
+            Provided `broadcaster_id` must match the `user_id` in the auth
+            token.
+          schema:
+            type: string
+          required: true
+        - name: session_id
+          in: query
+          description: ID for the session to end on behalf of the broadcaster.
+          schema:
+            type: string
+          required: true
+      responses:
+        "400":
+          description: |-
+            * Missing or invalid _broadcaster\_id_
+            * Missing or invalid _session\_id_
+            * Session has already been ended
+        "403":
+          description: Insufficient authorization for ending session
+  /guest_star/invites:
+    get:
+      summary: BETA Provides the caller with a list of pending invites to a Guest Star
+        session.
+      description: >-
+        BETA Provides the caller with a list of pending invites to a Guest
+        Star session, including the invitee’s ready status while joining the
+        waiting room.
+
+
+        __Authorization:__
+
+
+        * Query parameter `broadcaster_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+
+        * Requires OAuth Scope: `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star` or `moderator:manage:guest_star`
+      tags:
+        - Guest Star
+      externalDocs:
+        description: Get Guest Star Invites
+        url: https://dev.twitch.tv/docs/api/reference#get-guest-star-invites
+      operationId: get-guest-star-invites
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The ID of the broadcaster running the Guest Star session.
+          schema:
+            type: string
+          required: true
+        - name: moderator_id
+          in: query
+          description: The ID of the broadcaster or a user that has permission to moderate
+            the broadcaster’s chat room. This ID must match the `user_id` in the
+            user access token.
+          schema:
+            type: string
+          required: true
+        - name: session_id
+          in: query
+          description: The session ID to query for invite status.
+          schema:
+            type: string
+          required: true
+      responses:
+        "400":
+          description: |-
+            * Missing _broadcaster\_id_
+            * Missing _session\_id_
+    post:
+      summary: BETA Sends an invite to a specified guest on behalf of the broadcaster
+        for a Guest Star session in progress.
+      description: >-
+        BETA Sends an invite to a specified guest on behalf of the
+        broadcaster for a Guest Star session in progress.
+
+
+        __Authorization:__
+
+
+        * Query parameter `moderator_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+
+        * Requires OAuth Scope: `channel:manage:guest_star` or `moderator:manage:guest_star`
+      tags:
+        - Guest Star
+      externalDocs:
+        description: Send Guest Star Invite
+        url: https://dev.twitch.tv/docs/api/reference#send-guest-star-invite
+      operationId: send-guest-star-invite
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The ID of the broadcaster running the Guest Star session.
+          schema:
+            type: string
+          required: true
+        - name: moderator_id
+          in: query
+          description: The ID of the broadcaster or a user that has permission to moderate
+            the broadcaster’s chat room. This ID must match the `user_id` in the
+            user access token.
+          schema:
+            type: string
+          required: true
+        - name: session_id
+          in: query
+          description: The session ID for the invite to be sent on behalf of the
+            broadcaster.
+          schema:
+            type: string
+          required: true
+        - name: guest_id
+          in: query
+          description: Twitch User ID for the guest to invite to the Guest Star session.
+          schema:
+            type: string
+          required: true
+      responses:
+        "400":
+          description: |-
+            * Missing _broadcaster\_id_
+            * Missing _moderator\_id_
+            * Missing _session\_id_
+            * Missing _guest\_id_
+            * Invalid _session\_id_
+        "403":
+          description: |-
+            * Unauthorized guest invited
+            * Guest already invited
+    delete:
+      summary: BETA Revokes a previously sent invite for a Guest Star session.
+      description: >-
+        BETA Revokes a previously sent invite for a Guest Star session.
+
+
+        __Authorization:__
+
+
+        * Query parameter `moderator_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+
+        * Requires OAuth Scope: `channel:manage:guest_star` or `moderator:manage:guest_star`
+      tags:
+        - Guest Star
+      externalDocs:
+        description: Delete Guest Star Invite
+        url: https://dev.twitch.tv/docs/api/reference#delete-guest-star-invite
+      operationId: delete-guest-star-invite
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The ID of the broadcaster running the Guest Star session.
+          schema:
+            type: string
+          required: true
+        - name: moderator_id
+          in: query
+          description: The ID of the broadcaster or a user that has permission to moderate
+            the broadcaster’s chat room. This ID must match the `user_id` in the
+            user access token.
+          schema:
+            type: string
+          required: true
+        - name: session_id
+          in: query
+          description: The ID of the session for the invite to be revoked on behalf of the
+            broadcaster.
+          schema:
+            type: string
+          required: true
+        - name: guest_id
+          in: query
+          description: Twitch User ID for the guest to revoke the Guest Star session
+            invite from.
+          schema:
+            type: string
+          required: true
+      responses:
+        "400":
+          description: |-
+            * Missing _broadcaster\_id_
+            * Missing _session\_id_
+            * Missing _guest\_id_
+            * Invalid _session\_id_
+        "404":
+          description: No invite exists for specified _guest\_id_
+  /guest_star/slot:
+    post:
+      summary: BETA Allows a previously invited user to be assigned a slot within the
+        active Guest Star session.
+      description: >-
+        BETA Allows a previously invited user to be assigned a slot within
+        the active Guest Star session, once that guest has indicated they are
+        ready to join.
+
+
+        __Authorization:__
+
+
+        * Query parameter `moderator_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+
+        * Requires OAuth Scope: `channel:manage:guest_star` or `moderator:manage:guest_star`
+      tags:
+        - Guest Star
+      externalDocs:
+        description: Assign Guest Star Slot
+        url: https://dev.twitch.tv/docs/api/reference#assign-guest-star-slot
+      operationId: assign-guest-star-slot
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The ID of the broadcaster running the Guest Star session.
+          schema:
+            type: string
+          required: true
+        - name: moderator_id
+          in: query
+          description: The ID of the broadcaster or a user that has permission to moderate
+            the broadcaster’s chat room. This ID must match the `user_id` in the
+            user access token.
+          schema:
+            type: string
+          required: true
+        - name: session_id
+          in: query
+          description: The ID of the Guest Star session in which to assign the slot.
+          schema:
+            type: string
+          required: true
+        - name: guest_id
+          in: query
+          description: The Twitch User ID corresponding to the guest to assign a slot in
+            the session. This user must already have an invite to this session,
+            and have indicated that they are ready to join.
+          schema:
+            type: string
+          required: true
+        - name: slot_id
+          in: query
+          description: The slot assignment to give to the user. Must be a numeric
+            identifier between “1” and “N” where N is the max number of slots
+            for the session. Max number of slots allowed for the session is
+            reported by [Get Channel Guest Star
+            Settings](https://dev.twitch.tv/docs/api/reference#get-channel-guest-star-settings).
+          schema:
+            type: string
+          required: true
+      responses:
+        "204":
+          description: >-
+            Successfuly assigned guest to slot
+
+
+            __Examples__
+
+
+            _Request:_
+
+
+            Assign invited user to slot
+
+
+            ```bash
+
+            curl -x POST `https://api.twitch.tv/helix/guest_star/slot?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104&slot_id=1` \
+
+            -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+            ```
+        "400":
+          description: |-
+            * Missing _broadcaster\_id_
+            * Missing _moderator\_id_
+            * Missing _guest\_id_
+            * Missing or invalid _session\_id_
+            * Missing or invalid _slot\_id_
+        "401":
+          description: _moderator\_id_ is not a guest star moderator
+        "403":
+          description: |-
+            * Cannot assign host slot
+            * Guest not invited to session
+            * Guest already assigned to slot
+            * Guest is not ready to join
+    patch:
+      summary: BETA Allows a user to update the assigned slot for a particular user
+        within the active Guest Star session.
+      description: >-
+        BETA Allows a user to update the assigned slot for a particular
+        user within the active Guest Star session.
+
+
+        __Authorization:__
+
+
+        * Query parameter `moderator_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+
+        * Requires OAuth Scope: `channel:manage:guest_star` or `moderator:manage:guest_star`
+      tags:
+        - Guest Star
+      externalDocs:
+        description: Update Guest Star Slot
+        url: https://dev.twitch.tv/docs/api/reference#update-guest-star-slot
+      operationId: update-guest-star-slot
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The ID of the broadcaster running the Guest Star session.
+          schema:
+            type: string
+          required: true
+        - name: moderator_id
+          in: query
+          description: The ID of the broadcaster or a user that has permission to moderate
+            the broadcaster’s chat room. This ID must match the `user_id` in the
+            user access token.
+          schema:
+            type: string
+          required: true
+        - name: session_id
+          in: query
+          description: The ID of the Guest Star session in which to update slot settings.
+          schema:
+            type: string
+          required: true
+        - name: source_slot_id
+          in: query
+          description: The slot assignment previously assigned to a user.
+          schema:
+            type: string
+          required: true
+        - name: destination_slot_id
+          in: query
+          description: The slot to move this user assignment to. If the destination slot
+            is occupied, the user assigned will be swapped into
+            `source_slot_id`.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: >-
+            Successfuly updated slot(s)
+
+
+            __Examples__
+
+
+            _Request:_
+
+
+            Move slot assignment to a new slot ID
+
+
+            ```bash
+
+            curl -x PATCH `https://api.twitch.tv/helix/guest_star/slot?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&source_slot_id=1&destination_slot_id=2` \
+
+            -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+            ```
+        "400":
+          description: |-
+            * Missing _broadcaster\_id_
+            * Missing or invalid _session\_id_
+            * Missing or invalid _slot\_id_
+    delete:
+      summary: BETA Allows a caller to remove a slot assignment from a user
+        participating in an active Guest Star session.
+      description: >-
+        BETA Allows a caller to remove a slot assignment from a user
+        participating in an active Guest Star session. This revokes their access
+        to the session immediately and disables their access to publish or
+        subscribe to media within the session.
+
+
+        __Authorization:__
+
+
+        * Query parameter `moderator_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+
+        * Requires OAuth Scope: `channel:manage:guest_star` or `moderator:manage:guest_star`
+      tags:
+        - Guest Star
+      externalDocs:
+        description: Delete Guest Star Slot
+        url: https://dev.twitch.tv/docs/api/reference#delete-guest-star-slot
+      operationId: delete-guest-star-slot
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The ID of the broadcaster running the Guest Star session.
+          schema:
+            type: string
+          required: true
+        - name: moderator_id
+          in: query
+          description: The ID of the broadcaster or a user that has permission to moderate
+            the broadcaster’s chat room. This ID must match the user ID in the
+            user access token.
+          schema:
+            type: string
+          required: true
+        - name: session_id
+          in: query
+          description: The ID of the Guest Star session in which to remove the slot
+            assignment.
+          schema:
+            type: string
+          required: true
+        - name: guest_id
+          in: query
+          description: The Twitch User ID corresponding to the guest to remove from the
+            session.
+          schema:
+            type: string
+          required: true
+        - name: slot_id
+          in: query
+          description: The slot ID representing the slot assignment to remove from the
+            session.
+          schema:
+            type: string
+          required: true
+        - name: should_reinvite_guest
+          in: query
+          description: Flag signaling that the guest should be reinvited to the session,
+            sending them back to the invite queue.
+          schema:
+            type: string
+      responses:
+        "204":
+          description: >-
+            Successfuly removed user from slot
+
+
+            __Examples__
+
+
+            _Request:_
+
+
+            Remove user from slot
+
+
+            ```bash
+
+            curl -x DELETE `https://api.twitch.tv/helix/guest_star/slot?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104&slot_id=1` \
+
+            -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+            ```
+        "400":
+          description: |-
+            * Missing _broadcaster\_id_
+            * Missing _moderator\_id_
+            * Missing or invalid _session\_id_
+            * Missing or invalid _slot\_id_
+        "403":
+          description: |-
+            * _moderator\_id_ is not a Guest Star moderator
+            * The request is attempting to modify a restricted slot
+        "404":
+          description: _guest\_id_ or _slot\_id_ not found
+  /guest_star/slot_settings:
+    patch:
+      summary: BETA Allows a user to update slot settings for a particular guest
+        within a Guest Star session.
+      description: >-
+        BETA Allows a user to update slot settings for a particular guest
+        within a Guest Star session, such as allowing the user to share audio or
+        video within the call as a host. These settings will be broadcasted to
+        all subscribers which control their view of the guest in that slot. One
+        or more of the optional parameters to this API can be specified at any
+        time.
+
+
+        __Authorization:__
+
+
+        * Query parameter `moderator_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+
+        * Requires OAuth Scope: `channel:manage:guest_star` or `moderator:manage:guest_star`
+      tags:
+        - Guest Star
+      externalDocs:
+        description: Update Guest Star Slot Settings
+        url: https://dev.twitch.tv/docs/api/reference#update-guest-star-slot-settings
+      operationId: update-guest-star-slot-settings
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The ID of the broadcaster running the Guest Star session.
+          schema:
+            type: string
+          required: true
+        - name: moderator_id
+          in: query
+          description: The ID of the broadcaster or a user that has permission to moderate
+            the broadcaster’s chat room. This ID must match the user ID in the
+            user access token.
+          schema:
+            type: string
+          required: true
+        - name: session_id
+          in: query
+          description: The ID of the Guest Star session in which to update a slot’s
+            settings.
+          schema:
+            type: string
+          required: true
+        - name: slot_id
+          in: query
+          description: The slot assignment that has previously been assigned to a user.
+          schema:
+            type: string
+          required: true
+        - name: is_audio_enabled
+          in: query
+          description: Flag indicating whether the slot is allowed to share their audio
+            with the rest of the session. If false, the slot will be muted in
+            any views containing the slot.
+          schema:
+            type: boolean
+        - name: is_video_enabled
+          in: query
+          description: Flag indicating whether the slot is allowed to share their video
+            with the rest of the session. If false, the slot will have no video
+            shared in any views containing the slot.
+          schema:
+            type: boolean
+        - name: is_live
+          in: query
+          description: Flag indicating whether the user assigned to this slot is
+            visible/can be heard from any public subscriptions. Generally, this
+            determines whether or not the slot is enabled in any broadcasting
+            software integrations.
+          schema:
+            type: boolean
+        - name: volume
+          in: query
+          description: Value from 0-100 that controls the audio volume for shared views
+            containing the slot.
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "204":
+          description: >-
+            Successfuly updated slot settings
+
+
+            __Examples__
+
+
+            _Request:_
+
+
+            Update slot settings to enable slot in broadcasting software
+
+
+            ```bash
+
+            curl -x PATCH `https://api.twitch.tv/helix/guest_star/slot_settings?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&slot_id=1&is_audio_enabled=false` \
+
+            -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+            ```
+
+
+            _Request:_
+
+
+            Mute a slot’s audio for a guest
+
+
+            ```bash
+
+            curl -x PATCH `https://api.twitch.tv/helix/guest_star/slot_settings?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&slot_id=1&is_live=true` \
+
+            -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+            ```
+
+
+            _Request:_
+
+
+            Allow slot audio to be unmuted by a guest. **NOTE**: This operation does not immediately unmute the guest. The guest will be notified they can unmute themselves when ready.
+
+
+            ```bash
+
+            curl -x PATCH `https://api.twitch.tv/helix/guest_star/slot_settings?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&slot_id=1&is_audio_enabled=true` \
+
+            -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+            ```
+        "400":
+          description: |-
+            * Missing _broadcaster\_id_
+            * Missing _moderator\_id_
+            * Missing or invalid _session\_id_
+            * Missing or invalid _slot\_id_
+        "403":
+          description: |-
+            * _moderator\_id_ is not a Guest Star moderator
+            * The request is attempting to modify a restricted slot
   /hypetrain/events:
     get:
       summary: Gets information about the broadcaster’s current or most recent Hype
@@ -6536,7 +7237,7 @@ paths:
                       cursor: eyJiIjpudWxsLCJhIjp7IkN1cnNvciI6IjI3MDk1NDUxOToxNTg3NzU4ODQ0OjFiMEFzYkluQ0haVzJTUUZRa0N6cU4wN0liMiJ9fQ
         "401":
           description: >-
-            * The ID in _broadcaster\_id_ must match the user ID in the user
+            * The ID in _broadcaster\_id_ must match the _user\_id_ in the user
             access token.
 
             * The Authorization header is required and must contain a user access token.
@@ -9519,13 +10220,11 @@ paths:
             must match the user ID in the user access token.
           schema:
             type: string
-          required: true
         - name: to_broadcaster_id
           in: query
           description: The ID of the broadcaster to raid.
           schema:
             type: string
-          required: true
       responses:
         "200":
           description: Successfully requested to start a raid. To determine whether the
@@ -10537,8 +11236,7 @@ paths:
                         game_name: DOOM Eternal
                         id: "19070311"
                         is_live: true
-                        tag_ids:
-                          - 6ea6bca4-4712-4ab9-a906-e3336a9d8039
+                        tag_ids: []
                         tags:
                           - English
                         thumbnail_url: https://static-cdn.jtvnw.net/jtv_user_pictures/a_seagull-profile_image-4d2d235688c7dc66-300x300.png
@@ -11081,8 +11779,7 @@ paths:
                         started_at: 2021-03-10T15:04:21Z
                         language: es
                         thumbnail_url: https://static-cdn.jtvnw.net/previews-ttv/live_user_auronplay-{width}x{height}.jpg
-                        tag_ids:
-                          - d4bb9c58-2141-4881-bcdc-3fe0505457d1
+                        tag_ids: []
                         is_mature: false
                     pagination:
                       cursor: eyJiIjp7IkN1cnNvciI6ImV5SnpJam8zT0RNMk5TNDBORFF4TlRjMU1UY3hOU3dpWkNJNlptRnNjMlVzSW5RaU9uUnlkV1Y5In0sImEiOnsiQ3Vyc29yIjoiZXlKeklqb3hOVGs0TkM0MU56RXhNekExTVRZNU1ESXNJbVFpT21aaGJITmxMQ0owSWpwMGNuVmxmUT09In19
@@ -11121,8 +11818,7 @@ paths:
                         started_at: 2021-03-10T03:18:11Z
                         language: en
                         thumbnail_url: https://static-cdn.jtvnw.net/previews-ttv/live_user_afro-{width}x{height}.jpg
-                        tag_ids:
-                          - 6ea6bca4-4712-4ab9-a906-e3336a9d8039
+                        tag_ids: []
                         is_mature: false
                     pagination: {}
         "400":
@@ -11219,8 +11915,7 @@ paths:
                         started_at: 2021-03-31T20:57:26Z
                         language: en
                         thumbnail_url: https://static-cdn.jtvnw.net/previews-ttv/live_user_aws-{width}x{height}.jpg
-                        tag_ids:
-                          - 6ea6bca4-4712-4ab9-a906-e3336a9d8039
+                        tag_ids: []
                         tags:
                           - English
                     pagination:
@@ -11693,9 +12388,9 @@ paths:
         filter the list by one or more tag IDs.
       description: >-
         **IMPORTANT** Twitch is moving from Twitch-defined tags to
-        channel-defined tags. As part of this move, Twitch is deprecating this
-        endpoint and will remove it in 2023 (Twitch will communicate the
-        specific removal date in early 2023).
+        channel-defined tags. **IMPORTANT** As of February 28, 2023, this
+        endpoint returns an empty array. On July 13, 2023, it will return a 410
+        response.
 
 
         Gets a list of all stream tags that Twitch defines. The broadcaster may apply any of these to their channel except automatic tags. For an online list of the possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags).
@@ -11826,10 +12521,10 @@ paths:
         their channel.
       description: >-
         **IMPORTANT** Twitch is moving from Twitch-defined tags to
-        channel-defined tags. As part of this move, Twitch is deprecating this
-        endpoint and will remove it in 2023 (Twitch will communicate the
-        specific removal date in early 2023). If you use this endpoint, consider
-        updating your code at your earliest convenience to use [Get Channel
+        channel-defined tags. **IMPORTANT** As of February 28, 2023, this
+        endpoint returns an empty array. On July 13, 2023, it will return a 410
+        response. If you use this endpoint, please update your code to use [Get
+        Channel
         Information](https://dev.twitch.tv/docs/api/reference#get-channel-information).
 
 
@@ -11921,118 +12616,6 @@ paths:
             * The ID in the Client-Id header must match the Client ID in the access token.
       security:
         - twitch_auth: []
-      deprecated: true
-    put:
-      summary: Applies one or more tags to the specified channel, overwriting existing
-        tags.
-      description: >-
-        **IMPORTANT** Twitch is moving from Twitch-defined tags to
-        channel-defined tags. As part of this move, Twitch is deprecating this
-        endpoint and will remove it in 2023 (Twitch will communicate the
-        specific removal date in early 2023). If you use this endpoint, consider
-        updating your code at your earliest convenience to use [Modify Channel
-        Information](https://dev.twitch.tv/docs/api/reference#modify-channel-information).
-
-
-        Applies one or more tags to the specified channel, overwriting existing tags.
-
-
-        **NOTE**: You may not specify automatic tags; the call fails if you specify automatic tags. Automatic tags are tags that Twitch applies to the channel. For a list of automatic tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags). To get the list of possible tags programmatically, see [Get All Stream Tags](https://dev.twitch.tv/docs/api/reference#get-all-stream-tags).
-
-
-        __Authorization:__
-
-
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:broadcast** scope.
-      tags:
-        - Tags
-      externalDocs:
-        description: Replace Stream Tags
-        url: https://dev.twitch.tv/docs/api/reference#replace-stream-tags
-      operationId: replace-stream-tags
-      parameters:
-        - name: broadcaster_id
-          in: query
-          description: The ID of the broadcaster that owns the channel to apply the tags
-            to. This ID must match the user ID in the access token.
-          schema:
-            type: string
-          required: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ReplaceStreamTagsBody"
-            examples:
-              Example:
-                value:
-                  tag_ids:
-                    - 621fb5bf-5498-4d8f-b4ac-db4d40d401bf
-                    - 52d7e4cc-633d-46f5-818c-bb59102d9549
-                description: Applies two stream tags to channel 257788195.
-      responses:
-        "204":
-          description: >-
-            Successfully replaced the stream’s tags.
-
-
-            __Examples__
-
-
-            _Request:_
-
-
-            Applies two stream tags to channel 257788195.
-
-
-            ```bash
-
-            curl -X PUT 'https://api.twitch.tv/helix/streams/tags?broadcaster_id=257788195' \
-
-            -H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \
-
-            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2' \
-
-            -H 'Content-Type: application/json' \
-
-            -d '{"tag_ids":["621fb5bf-5498-4d8f-b4ac-db4d40d401bf","52d7e4cc-633d-46f5-818c-bb59102d9549"]}'
-
-            ```
-
-
-            ```bash
-
-            # Twitch CLI example that adds two stream tags to the channel.
-
-            twitch api put /streams/tags -q broadcaster_id=1234567 -b '{"tag_ids":["621fb5bf-5498-4d8f-b4ac-db4d40d401bf", "52d7e4cc-633d-46f5-818c-bb59102d9549"]}'
-
-
-            # Twitch CLI example that removes all stream tags from the channel.
-
-            twitch api put /streams/tags -q broadcaster_id=1234567 -b '{"tag_ids":[]}'
-
-            ```
-        "400":
-          description: |-
-            * The tag ID <value> is not valid.
-            * The list of tag IDs is too long.
-        "401":
-          description: >-
-            * The ID in _broadcaster\_id_ must match the user ID in the access
-            token.
-
-            * The Authorization header is required and must contain a user access token.
-
-            * The user access token must include the **channel:manage:broadcast** scope.
-
-            * The access token is not valid.
-
-            * The client ID specified in the Client-Id header must match the client ID specified in the access token.
-        "403":
-          description: "* You may not add automatic tags."
-      security:
-        - twitch_auth:
-            - channel:manage:broadcast
       deprecated: true
   /teams/channel:
     get:
@@ -12398,6 +12981,9 @@ paths:
         example, you can use this endpoint to answer questions like “who is
         qotrok following,” “who is following qotrok,” or “is user X following
         user Y.”
+
+
+        **_Deprecation Notice:_** This endpoint is deprecated and will be decommissioned on [August 3, 2023](https://discuss.dev.twitch.tv/t/follows-endpoints-and-eventsub-subscription-type-are-now-available-in-open-beta/43322). Access to this endpoint is limited to client IDs that have called the endpoint on or before February 17, 2023.
 
 
         __Authorization:__
@@ -15579,6 +16165,10 @@ components:
               - image_url_1x
               - image_url_2x
               - image_url_4x
+              - title
+              - description
+              - click_action
+              - click_url
             properties:
               id:
                 type: string
@@ -15594,6 +16184,20 @@ components:
               image_url_4x:
                 type: string
                 description: A URL to the large version (72px x 72px) of the badge.
+              title:
+                type: string
+                description: The title of the badge.
+              description:
+                type: string
+                description: The description of the badge.
+              click_action:
+                type: string
+                description: The action to take when clicking on the badge. Set to `null` if no
+                  action is specified.
+              click_url:
+                type: string
+                description: The URL to navigate to when clicking on the badge. Set to `null` if
+                  no URL is specified.
     GetChannelChatBadgesResponse:
       type: object
       required:
@@ -16112,54 +16716,6 @@ components:
               description: The cursor used to get the next page of results. Set the request’s
                 _after_ or _before_ query parameter to this value depending on
                 whether you’re paging forwards or backwards.
-    CodeStatus:
-      type: object
-      required:
-        - code
-        - status
-      properties:
-        code:
-          type: string
-          description: The redemption code.
-        status:
-          type: string
-          description: >-
-            The redemption code’s status. Possible values are:   
-              
-            * ALREADY\_CLAIMED — The code has already been claimed. All codes are single-use.
-
-            * EXPIRED — The code has expired and can no longer be claimed.
-
-            * INACTIVE — The code has not been activated.
-
-            * INCORRECT\_FORMAT — The code is not properly formatted.
-
-            * INTERNAL\_ERROR — An internal or unknown error occurred when checking the code. Retry later.
-
-            * NOT\_FOUND — The code was not found.
-
-            * UNUSED — The code has not been claimed.
-
-            * USER\_NOT\_ELIGIBLE — The user is not eligible to redeem this code.
-          enum:
-            - ALREADY_CLAIMED
-            - EXPIRED
-            - INACTIVE
-            - INCORRECT_FORMAT
-            - INTERNAL_ERROR
-            - NOT_FOUND
-            - UNUSED
-            - USER_NOT_ELIGIBLE
-    GetCodeStatusResponse:
-      type: object
-      required:
-        - data
-      properties:
-        data:
-          type: array
-          description: The list of redemption codes and their status values.
-          items:
-            $ref: "#/components/schemas/CodeStatus"
     DropsEntitlement:
       type: object
       required:
@@ -16290,55 +16846,6 @@ components:
             and those that weren’t.
           items:
             $ref: "#/components/schemas/DropsEntitlementUpdated"
-    RedeemCodeResponse:
-      type: object
-      required:
-        - data
-      properties:
-        data:
-          type: array
-          description: The list of redeemed codes.
-          items:
-            type: object
-            required:
-              - code
-              - status
-            properties:
-              code:
-                type: string
-                description: The redemption code.
-              status:
-                type: string
-                description: >-
-                  The redemption code’s status. Possible values are:  
-                    
-                  * ALREADY\_CLAIMED — The code has already been claimed. All codes are single-use.
-
-                  * EXPIRED — The code has expired and can no longer be claimed.
-
-                  * INACTIVE — The code has not been activated.
-
-                  * INCORRECT\_FORMAT — The code is not properly formatted.
-
-                  * INTERNAL\_ERROR — An internal or unknown error occurred when accessing the code. Retry later.
-
-                  * NOT\_FOUND — The code was not found.
-
-                  * SUCCESSFULLY\_REDEEMED — Successfully redeemed the code and credited the user's account with the entitlement.
-
-                  * UNUSED — The code has not been claimed.
-
-                  * USER\_NOT\_ELIGIBLE — The user is not eligible to redeem this code.
-                enum:
-                  - ALREADY_CLAIMED
-                  - EXPIRED
-                  - INACTIVE
-                  - INCORRECT_FORMAT
-                  - INTERNAL_ERROR
-                  - NOT_FOUND
-                  - SUCCESSFULLY_REDEEMED
-                  - UNUSED
-                  - USER_NOT_ELIGIBLE
     ExtensionConfigurationSegment:
       type: object
       required:
@@ -17444,6 +17951,260 @@ components:
             created goals.
           items:
             $ref: "#/components/schemas/CreatorGoal"
+    GetChannelGuestStarSettingsResponse:
+      type: object
+      required:
+        - is_moderator_send_live_enabled
+        - slot_count
+        - is_browser_source_audio_enabled
+        - group_layout
+        - browser_source_token
+      properties:
+        is_moderator_send_live_enabled:
+          type: boolean
+          description: Flag determining if Guest Star moderators have access to control
+            whether a guest is live once assigned to a slot.
+        slot_count:
+          type: integer
+          description: Number of slots the Guest Star call interface will allow the host
+            to add to a call. Required to be between 1 and 6.
+          format: int32
+        is_browser_source_audio_enabled:
+          type: boolean
+          description: Flag determining if Browser Sources subscribed to sessions on this
+            channel should output audio
+        group_layout:
+          type: string
+          description: >-
+            This setting determines how the guests within a session should be
+            laid out within the browser source. Can be one of the following
+            values:   
+              
+            * `TILED_LAYOUT`: All live guests are tiled within the browser source with the same size.
+
+            * `SCREENSHARE_LAYOUT`: All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.
+        browser_source_token:
+          type: string
+          description: View only token to generate browser source URLs
+    UpdateChannelGuestStarSettingsBody:
+      type: object
+      properties:
+        is_moderator_send_live_enabled:
+          type: boolean
+          description: Flag determining if Guest Star moderators have access to control
+            whether a guest is live once assigned to a slot.
+        slot_count:
+          type: integer
+          description: Number of slots the Guest Star call interface will allow the host
+            to add to a call. Required to be between 1 and 6.
+          format: int32
+        is_browser_source_audio_enabled:
+          type: boolean
+          description: Flag determining if Browser Sources subscribed to sessions on this
+            channel should output audio
+        group_layout:
+          type: string
+          description: >-
+            This setting determines how the guests within a session should be
+            laid out within the browser source. Can be one of the following
+            values:   
+              
+            * `TILED_LAYOUT`: All live guests are tiled within the browser source with the same size.
+
+            * `SCREENSHARE_LAYOUT`: All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.
+
+            * `HORIZONTAL_LAYOUT`: All live guests are arranged in a horizontal bar within the browser source
+
+            * `VERTICAL_LAYOUT`: All live guests are arranged in a vertical bar within the browser source
+        regenerate_browser_sources:
+          type: boolean
+          description: Flag determining if Guest Star should regenerate the auth token
+            associated with the channel’s browser sources. Providing a true
+            value for this will immediately invalidate all browser sources
+            previously configured in your streaming software.
+    Session:
+      type: object
+      required:
+        - id
+        - guests
+        - slot_id
+        - is_live
+        - user_id
+        - user_display_name
+        - user_login
+        - volume
+        - assigned_at
+        - audio_settings
+        - video_settings
+      properties:
+        id:
+          type: string
+          description: ID uniquely representing the Guest Star session.
+        guests:
+          type: Guest
+          description: List of guests currently interacting with the Guest Star session.
+        slot_id:
+          type: string
+          description: >-
+            ID representing this guest’s slot assignment.   
+              
+            * Host is always in slot "0"
+
+            * Guests are assigned the following consecutive IDs (e.g, "1", "2", "3", etc)
+
+            * Screen Share is represented as a special guest with the ID "SCREENSHARE"
+
+            * The identifier here matches the ID referenced in browser source links used in broadcasting software.
+        is_live:
+          type: boolean
+          description: Flag determining whether or not the guest is visible in the browser
+            source in the host’s streaming software.
+        user_id:
+          type: string
+          description: User ID of the guest assigned to this slot.
+        user_display_name:
+          type: string
+          description: Display name of the guest assigned to this slot.
+        user_login:
+          type: string
+          description: Login of the guest assigned to this slot.
+        volume:
+          type: integer
+          description: Value from 0 to 100 representing the host’s volume setting for this
+            guest.
+          format: int32
+        assigned_at:
+          type: string
+          description: Timestamp when this guest was assigned a slot in the session.
+          format: date-time
+        audio_settings:
+          description: Information about the guest’s audio settings
+          type: object
+          required:
+            - is_host_enabled
+            - is_guest_enabled
+            - is_available
+          properties:
+            is_host_enabled:
+              type: boolean
+              description: Flag determining whether the host is allowing the guest’s audio to
+                be seen or heard within the session.
+            is_guest_enabled:
+              type: boolean
+              description: Flag determining whether the guest is allowing their audio/video to
+                be transmitted to the session.
+            is_available:
+              type: boolean
+              description: Flag determining whether the guest has an appropriate audio/video
+                device available to be transmitted to the session.
+        video_settings:
+          description: Information about the guest’s video settings
+          type: object
+          required:
+            - is_host_enabled
+            - is_guest_enabled
+            - is_available
+          properties:
+            is_host_enabled:
+              type: boolean
+              description: Flag determining whether the host is allowing the guest’s audio to
+                be seen or heard within the session.
+            is_guest_enabled:
+              type: boolean
+              description: Flag determining whether the guest is allowing their audio/video to
+                be transmitted to the session.
+            is_available:
+              type: boolean
+              description: Flag determining whether the guest has an appropriate audio/video
+                device available to be transmitted to the session.
+    GetGuestStarSessionResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          description: Summary of the session details
+          items:
+            $ref: "#/components/schemas/Session"
+    CreateGuestStarSessionResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          description: Summary of the session details.
+          items:
+            $ref: "#/components/schemas/Session"
+    EndGuestStarSessionResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          description: Summary of the session details when the session was ended.
+          items:
+            $ref: "#/components/schemas/Session"
+    Invite:
+      type: object
+      required:
+        - user_id
+        - invited_at
+        - status
+        - is_video_enabled
+        - is_audio_enabled
+        - is_video_available
+        - is_audio_available
+      properties:
+        user_id:
+          type: string
+          description: Twitch User ID corresponding to the invited guest
+        invited_at:
+          type: string
+          description: Timestamp when this user was invited to the session.
+          format: date-time
+        status:
+          type: string
+          description: >-
+            Status representing the invited user’s join state. Can be one of
+            the following:   
+              
+            * `INVITED`: The user has been invited to the session but has not acknowledged it.
+
+            * `ACCEPTED`: The invited user has acknowledged the invite and joined the waiting room, but may still be setting up their media devices or otherwise preparing to join the call.
+
+            * `READY`: The invited user has signaled they are ready to join the call from the waiting room.
+        is_video_enabled:
+          type: boolean
+          description: Flag signaling that the invited user has chosen to disable their
+            local video device. The user has hidden themselves, but they may
+            choose to reveal their video feed upon joining the session.
+        is_audio_enabled:
+          type: boolean
+          description: Flag signaling that the invited user has chosen to disable their
+            local audio device. The user has muted themselves, but they may
+            choose to unmute their audio feed upon joining the session.
+        is_video_available:
+          type: boolean
+          description: Flag signaling that the invited user has a video device available
+            for sharing.
+        is_audio_available:
+          type: boolean
+          description: Flag signaling that the invited user has an audio device available
+            for sharing.
+    GetGuestStarInvitesResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          description: A list of invite objects describing the invited user as well as
+            their ready status.
+          items:
+            $ref: "#/components/schemas/Invite"
     HypeTrainEvent:
       type: object
       required:
@@ -19082,10 +19843,9 @@ components:
         tag_ids:
           type: array
           description: >-
-            **IMPORTANT** Twitch is deprecating this field and will stop
-            providing IDs in 2023 (Twitch will communicate the specific date in
-            early 2023). If you use this field, consider updating your code at
-            your earliest convenience to use the `tags` field.  
+            **IMPORTANT** As of February 28, 2023, this field is deprecated and
+            returns only an empty array. If you use this field, please update
+            your code to use the `tags` field.  
               
             The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags). The list doesn’t include Category Tags.
           items:
@@ -19395,10 +20155,9 @@ components:
         tag_ids:
           type: array
           description: >-
-            **IMPORTANT** Twitch is deprecating this field and will stop
-            providing IDs in 2023 (Twitch will communicate the specific date in
-            early 2023). If you use this field, consider updating your code at
-            your earliest convenience to use the `tags` field.  
+            **IMPORTANT** As of February 28, 2023, this field is deprecated and
+            returns only an empty array. If you use this field, please update
+            your code to use the `tags` field.  
               
             The list of tags that apply to the stream. The list contains IDs only when the channel is steaming live. For a list of possible tags, see [List of All Tags](https://www.twitch.tv/directory/all/tags). The list doesn’t include Category Tags.
           items:
@@ -19821,19 +20580,6 @@ components:
             Twitch hasn’t added tags to the broadcaster’s channel.
           items:
             $ref: "#/components/schemas/StreamTag"
-      deprecated: true
-    ReplaceStreamTagsBody:
-      type: object
-      properties:
-        tag_ids:
-          type: array
-          description: >-
-            A list of IDs that identify the tags to apply to the channel. You
-            may specify a maximum of five tags.  
-              
-            To remove all tags from the channel, set `tag_ids` to an empty array.
-          items:
-            type: string
       deprecated: true
     ChannelTeam:
       type: object
@@ -20678,26 +21424,28 @@ components:
               updating channel configuration and managing stream markers and
               stream tags.
             channel:read:charity: Read charity campaign details and user donations on your channel.
+            channel:read:editors: View a list of users with the editor role for a channel.
             channel:manage:extensions: Manage a channel’s Extension configuration, including
               activating Extensions.
+            channel:read:goals: View Creator Goals for a channel.
+            channel:read:guest_star: Read Guest Star details for your channel.
+            channel:manage:guest_star: Manage Guest Star for your channel.
+            channel:read:hype_train: View Hype Train information for a channel.
             channel:manage:moderators: Add or remove the moderator role from users in your channel.
+            channel:read:polls: View a channel’s polls.
             channel:manage:polls: Manage a channel’s polls.
+            channel:read:predictions: View a channel’s Channel Points Predictions.
             channel:manage:predictions: Manage of channel’s Channel Points Predictions
             channel:manage:raids: Manage a channel raiding another channel.
+            channel:read:redemptions: View Channel Points custom rewards and their
+              redemptions on a channel.
             channel:manage:redemptions: Manage Channel Points custom rewards and their
               redemptions on a channel.
             channel:manage:schedule: Manage a channel’s stream schedule.
-            channel:manage:videos: Manage a channel’s videos, including deleting videos.
-            channel:read:editors: View a list of users with the editor role for a channel.
-            channel:read:goals: View Creator Goals for a channel.
-            channel:read:hype_train: View Hype Train information for a channel.
-            channel:read:polls: View a channel’s polls.
-            channel:read:predictions: View a channel’s Channel Points Predictions.
-            channel:read:redemptions: View Channel Points custom rewards and their
-              redemptions on a channel.
             channel:read:stream_key: View an authorized user’s stream key.
             channel:read:subscriptions: View a list of all subscribers to a channel and
               check if a user is subscribed to a channel.
+            channel:manage:videos: Manage a channel’s videos, including deleting videos.
             channel:read:vips: Read the list of VIPs in your channel.
             channel:manage:vips: Add or remove the VIP role from users in your channel.
             clips:edit: Manage Clips for a channel.
@@ -20716,13 +21464,17 @@ components:
             moderator:manage:chat_settings: Manage a broadcaster’s chat room settings.
             moderator:read:chatters: View the chatters in a broadcaster’s chat room.
             moderator:read:followers: Read the followers of a broadcaster.
+            moderator:read:guest_star: Read Guest Star details for channels where you are a
+              Guest Star moderator.
+            moderator:manage:guest_star: Manage Guest Star for channels where you are a
+              Guest Star moderator.
             moderator:read:shield_mode: View a broadcaster’s Shield Mode status.
             moderator:manage:shield_mode: Manage a broadcaster’s Shield Mode status.
             moderator:read:shoutouts: View a broadcaster’s shoutouts.
             moderator:manage:shoutouts: Manage a broadcaster’s shoutouts.
             user:edit: Manage a user object.
-            user:manage:blocked_users: Manage the block list of a user.
             user:read:blocked_users: View the block list of a user.
+            user:manage:blocked_users: Manage the block list of a user.
             user:read:broadcast: View a user’s broadcasting configuration, including
               Extension configurations.
             user:manage:chat_color: Update the color used for the user’s name in chat.

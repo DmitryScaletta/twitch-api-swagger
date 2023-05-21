@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-02-13T11:15:13-08:00">
+<meta property="article:published_time" content="2023-05-17T17:20:12-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Access Token Scopes","headline":"Twitch Access Token Scopes","dateModified":"2023-02-13T11:15:13-08:00","datePublished":"2023-02-13T11:15:13-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/authentication/scopes/"},"url":"https://dev.twitch.tv/authentication/scopes/","@context":"http://schema.org"}</script>
+{"description":"Twitch Access Token Scopes","headline":"Twitch Access Token Scopes","dateModified":"2023-05-17T17:20:12-07:00","datePublished":"2023-05-17T17:20:12-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/authentication/scopes/"},"url":"https://dev.twitch.tv/authentication/scopes/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -515,16 +515,44 @@
       <td>Read charity campaign details and user donations on your channel.<br><br><a href="/docs/api/reference#get-charity-campaign">Get Charity Campaign</a></td>
     </tr>
     <tr>
+      <td><code class="highlighter-rouge">channel:read:editors</code></td>
+      <td>View a list of users with the editor role for a channel.<br><br><a href="/docs/api/reference#get-channel-editors">Get Channel Editors</a></td>
+    </tr>
+    <tr>
       <td><code class="highlighter-rouge">channel:manage:extensions</code></td>
       <td>Manage a channel’s Extension configuration, including activating Extensions.<br><br><a href="/docs/api/reference#get-user-active-extensions">Get User Active Extensions</a><br><a href="/docs/api/reference#update-user-extensions">Update User Extensions</a></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">channel:read:goals</code></td>
+      <td>View Creator Goals for a channel.<br><br><a href="/docs/api/reference#get-creator-goals">Get Creator Goals</a></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">channel:read:guest_star</code></td>
+      <td>Read Guest Star details for your channel.<br><br><a href="/docs/api/reference#get-channel-guest-star-settings">Get Channel Guest Star Settings</a><br><a href="/docs/api/reference#get-guest-star-session">Get Guest Star Session</a><br><a href="/docs/api/reference#get-guest-star-invites">Get Guest Star Invites</a></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">channel:manage:guest_star</code></td>
+      <td>Manage Guest Star for your channel.<br><br><a href="/docs/api/reference#update-channel-guest-star-settings">Update Channel Guest Star Settings</a><br><a href="/docs/api/reference#create-guest-star-session">Create Guest Star Session</a><br><a href="/docs/api/reference#end-guest-star-session">End Guest Star Session</a><br><a href="/docs/api/reference#send-guest-star-invite">Send Guest Star Invite</a><br><a href="/docs/api/reference#delete-guest-star-invite">Delete Guest Star Invite</a><br><a href="/docs/api/reference#assign-guest-star-slot">Assign Guest Star Slot</a><br><a href="/docs/api/reference#update-guest-star-slot">Update Guest Star Slot</a><br><a href="/docs/api/reference#delete-guest-star-slot">Delete Guest Star Slot</a><br><a href="/docs/api/reference#update-guest-star-slot-settings">Update Guest Star Slot Settings</a></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">channel:read:hype_train</code></td>
+      <td>View Hype Train information for a channel.<br><br><a href="/docs/api/reference#get-hype-train-events">Get Hype Train Events</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">channel:manage:moderators</code></td>
       <td>Add or remove the moderator role from users in your channel.<br><br><a href="/docs/api/reference#add-channel-moderator">Add Channel Moderator</a><br><a href="/docs/api/reference#remove-channel-moderator">Remove Channel Moderator</a></td>
     </tr>
     <tr>
+      <td><code class="highlighter-rouge">channel:read:polls</code></td>
+      <td>View a channel’s polls.<br><br><a href="/docs/api/reference#get-polls">Get Polls</a></td>
+    </tr>
+    <tr>
       <td><code class="highlighter-rouge">channel:manage:polls</code></td>
       <td>Manage a channel’s polls.<br><br><a href="/docs/api/reference#create-poll">Create Poll</a><br><a href="/docs/api/reference#end-poll">End Poll</a></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">channel:read:predictions</code></td>
+      <td>View a channel’s Channel Points Predictions.<br><br><a href="/docs/api/reference#get-predictions">Get Channel Points Predictions</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">channel:manage:predictions</code></td>
@@ -535,6 +563,10 @@
       <td>Manage a channel raiding another channel.<br><br><a href="/docs/api/reference#start-a-raid">Start a raid</a><br><a href="/docs/api/reference#cancel-a-raid">Cancel a raid</a></td>
     </tr>
     <tr>
+      <td><code class="highlighter-rouge">channel:read:redemptions</code></td>
+      <td>View Channel Points custom rewards and their redemptions on a channel.<br><br><a href="/docs/api/reference#get-custom-reward">Get Custom Reward</a><br><a href="/docs/api/reference#get-custom-reward-redemption">Get Custom Reward Redemption</a></td>
+    </tr>
+    <tr>
       <td><code class="highlighter-rouge">channel:manage:redemptions</code></td>
       <td>Manage Channel Points custom rewards and their redemptions on a channel.<br><br><a href="/docs/api/reference#create-custom-rewards">Create Custom Rewards</a><br><a href="/docs/api/reference#delete-custom-reward">Delete Custom Reward</a><br><a href="/docs/api/reference#update-custom-reward">Update Custom Reward</a><br><a href="/docs/api/reference#update-redemption-status">Update Redemption Status</a></td>
     </tr>
@@ -543,40 +575,16 @@
       <td>Manage a channel’s stream schedule.<br><br><a href="/docs/api/reference#update-channel-stream-schedule">Update Channel Stream Schedule</a><br><a href="/docs/api/reference#create-channel-stream-schedule-segment">Create Channel Stream Schedule Segment</a><br><a href="/docs/api/reference#update-channel-stream-schedule-segment">Update Channel Stream Schedule Segment</a><br><a href="/docs/api/reference#delete-channel-stream-schedule-segment">Delete Channel Stream Schedule Segment</a></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">channel:manage:videos</code></td>
-      <td>Manage a channel’s videos, including deleting videos.<br><br><a href="/docs/api/reference#delete-videos">Delete Videos</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">channel:read:editors</code></td>
-      <td>View a list of users with the editor role for a channel.<br><br><a href="/docs/api/reference#get-channel-editors">Get Channel Editors</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">channel:read:goals</code></td>
-      <td>View Creator Goals for a channel.<br><br><a href="/docs/api/reference#get-creator-goals">Get Creator Goals</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">channel:read:hype_train</code></td>
-      <td>View Hype Train information for a channel.<br><br><a href="/docs/api/reference#get-hype-train-events">Get Hype Train Events</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">channel:read:polls</code></td>
-      <td>View a channel’s polls.<br><br><a href="/docs/api/reference#get-polls">Get Polls</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">channel:read:predictions</code></td>
-      <td>View a channel’s Channel Points Predictions.<br><br><a href="/docs/api/reference#get-predictions">Get Channel Points Predictions</a></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">channel:read:redemptions</code></td>
-      <td>View Channel Points custom rewards and their redemptions on a channel.<br><br><a href="/docs/api/reference#get-custom-reward">Get Custom Reward</a><br><a href="/docs/api/reference#get-custom-reward-redemption">Get Custom Reward Redemption</a></td>
-    </tr>
-    <tr>
       <td><code class="highlighter-rouge">channel:read:stream_key</code></td>
       <td>View an authorized user’s stream key.<br><br><a href="/docs/api/reference#get-stream-key">Get Stream Key</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">channel:read:subscriptions</code></td>
       <td>View a list of all subscribers to a channel and check if a user is subscribed to a channel.<br><br><a href="/docs/api/reference#get-broadcaster-subscriptions">Get Broadcaster Subscriptions</a></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">channel:manage:videos</code></td>
+      <td>Manage a channel’s videos, including deleting videos.<br><br><a href="/docs/api/reference#delete-videos">Delete Videos</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">channel:read:vips</code></td>
@@ -643,6 +651,14 @@
       <td>Read the followers of a broadcaster.<br><br><a href="/docs/api/reference#get-channel-followers">Get Channel Followers</a></td>
     </tr>
     <tr>
+      <td><code class="highlighter-rouge">moderator:read:guest_star</code></td>
+      <td>Read Guest Star details for channels where you are a Guest Star moderator.<br><br><a href="/docs/api/reference#get-guest-star-session">Get Guest Star Session</a><br><a href="/docs/api/reference#get-guest-star-invites">Get Guest Star Invites</a></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator:manage:guest_star</code></td>
+      <td>Manage Guest Star for channels where you are a Guest Star moderator.<br><br><a href="/docs/api/reference#send-guest-star-invite">Send Guest Star Invite</a><br><a href="/docs/api/reference#delete-guest-star-invite">Delete Guest Star Invite</a><br><a href="/docs/api/reference#assign-guest-star-slot">Assign Guest Star Slot</a><br><a href="/docs/api/reference#update-guest-star-slot">Update Guest Star Slot</a><br><a href="/docs/api/reference#delete-guest-star-slot">Delete Guest Star Slot</a><br><a href="/docs/api/reference#update-guest-star-slot-settings">Update Guest Star Slot Settings</a></td>
+    </tr>
+    <tr>
       <td><code class="highlighter-rouge">moderator:read:shield_mode</code></td>
       <td>View a broadcaster’s Shield Mode status.<br><br><a href="/docs/api/reference#get-shield-mode-status">Get Shield Mode Status</a></td>
     </tr>
@@ -667,12 +683,12 @@
       <td>Deprecated. Was previously used for “Create User Follows” and “Delete User Follows.” See <a href="https://discuss.dev.twitch.tv/t/deprecation-of-create-and-delete-follows-api-endpoints/32351" target="_blank">Deprecation of Create and Delete Follows API Endpoints</a>.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">user:manage:blocked_users</code></td>
-      <td>Manage the block list of a user.<br><br><a href="/docs/api/reference#block-user">Block User</a><br><a href="/docs/api/reference#unblock-user">Unblock User</a></td>
-    </tr>
-    <tr>
       <td><code class="highlighter-rouge">user:read:blocked_users</code></td>
       <td>View the block list of a user.<br><br><a href="/docs/api/reference#get-user-block-list">Get User Block List</a></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user:manage:blocked_users</code></td>
+      <td>Manage the block list of a user.<br><br><a href="/docs/api/reference#block-user">Block User</a><br><a href="/docs/api/reference#unblock-user">Unblock User</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">user:read:broadcast</code></td>

@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-02-13T11:15:13-08:00">
+<meta property="article:published_time" content="2023-05-17T17:20:12-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"EventSub Reference","headline":"EventSub Reference","dateModified":"2023-02-13T11:15:13-08:00","datePublished":"2023-02-13T11:15:13-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@context":"http://schema.org"}</script>
+{"description":"EventSub Reference","headline":"EventSub Reference","dateModified":"2023-05-17T17:20:12-07:00","datePublished":"2023-05-17T17:20:12-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -929,6 +929,129 @@
       <td>string</td>
       <td>yes</td>
       <td>The broadcaster user ID for the channel you want to get moderator removal notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-session-begin-condition">Channel Guest Star Session Begin Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel hosting the Guest Star Session</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-session-end-condition">Channel Guest Star Session End Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel hosting the Guest Star Session</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-guest-update-condition">Channel Guest Star Guest Update Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel hosting the Guest Star Session</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The user ID of the moderator or broadcaster of the specified channel.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-slot-update-condition">Channel Guest Star Slot Update Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel hosting the Guest Star Session</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The user ID of the moderator or broadcaster of the specified channel.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-settings-update-condition">Channel Guest Star Settings Update Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel hosting the Guest Star Session</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The user ID of the moderator or broadcaster of the specified channel.</td>
     </tr>
   </tbody>
 </table>
@@ -1970,6 +2093,296 @@
       <td><code class="highlighter-rouge">user_name</code></td>
       <td>string</td>
       <td>The display name of the removed moderator.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-session-begin-event">Channel Guest Star Session Begin Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>The broadcaster user ID</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>String</td>
+      <td>The broadcaster display name</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>String</td>
+      <td>The broadcaster login</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">session_id</code></td>
+      <td>String</td>
+      <td>ID representing the unique session that was started.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">started_at</code></td>
+      <td>String</td>
+      <td>RFC3339 timestamp indicating the time the session began.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-session-end-event">Channel Guest Star Session End Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>The broadcaster user ID</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>String</td>
+      <td>The broadcaster display name</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>String</td>
+      <td>The broadcaster login</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">session_id</code></td>
+      <td>String</td>
+      <td>ID representing the unique session that was started.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">started_at</code></td>
+      <td>String</td>
+      <td>RFC3339 timestamp indicating the time the session began.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ended_at</code></td>
+      <td>String</td>
+      <td>RFC3339 timestamp indicating the time the session ended.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-guest-update-event">Channel Guest Star Guest Update Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>The broadcaster user ID</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>String</td>
+      <td>The broadcaster display name</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>String</td>
+      <td>The broadcaster login</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">session_id</code></td>
+      <td>String</td>
+      <td>ID representing the unique session that was started.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>The user ID of the moderator who updated the guest’s state (could be the host). <code class="highlighter-rouge">null</code> if the update was performed by the guest.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_name</code></td>
+      <td>String</td>
+      <td>The moderator display name. <code class="highlighter-rouge">null</code> if the update was performed by the guest.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_login</code></td>
+      <td>String</td>
+      <td>The moderator login. <code class="highlighter-rouge">null</code> if the update was performed by the guest.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">guest_user_id</code></td>
+      <td>String</td>
+      <td>The user ID of the guest who transitioned states in the session.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">guest_user_name</code></td>
+      <td>String</td>
+      <td>The guest display name</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">guest_user_login</code></td>
+      <td>String</td>
+      <td>The guest login</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">slot_id</code></td>
+      <td>String</td>
+      <td>The ID of the slot assignment the guest is assigned to. <code class="highlighter-rouge">null</code> if the guest is in the INVITED state.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">state</code></td>
+      <td>String</td>
+      <td>The current state of the user after the update has taken place. Can be one of the following: <ul><li><code>invited</code> &mdash; The guest has transitioned to the invite queue. This can take place when the guest was previously assigned a slot, but have been removed from the call and are sent back to the invite queue.</li> <li><code>ready</code> &mdash; The guest has signaled they are ready and can be assigned a slot.</li> <li><code>backstage</code> &mdash; The guest has been assigned a slot in the session, but is not currently seen live in the broadcasting software.</li> <li><code>live</code> &mdash; The guest is now live in the host's broadcasting software.</li> <li><code>removed</code> &mdash; The guest was removed from the call or queue.</li><ul></ul></ul></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-slot-update-event">Channel Guest Star Slot Update Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>User ID of the host channel</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>String</td>
+      <td>The broadcaster display name</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>String</td>
+      <td>The broadcaster login</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">session_id</code></td>
+      <td>String</td>
+      <td>ID representing the unique session the event took place in.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>The user ID of the moderator who modified the setting, if any.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_name</code></td>
+      <td>String</td>
+      <td>The moderator display name</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_login</code></td>
+      <td>String</td>
+      <td>The moderator login</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">guest_user_id</code></td>
+      <td>String</td>
+      <td>The user ID of the guest who is assigned to the slot. <code class="highlighter-rouge">null</code> if the slot has no guest.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">guest_user_name</code></td>
+      <td>String</td>
+      <td>The guest display name. <code class="highlighter-rouge">null</code> if the slot has no guest.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">guest_user_login</code></td>
+      <td>String</td>
+      <td>The guest login. <code class="highlighter-rouge">null</code> if the slot has no guest.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">slot_id</code></td>
+      <td>String</td>
+      <td>The ID of the slot where settings were updated.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">host_video_enabled</code></td>
+      <td>Boolean</td>
+      <td>Flag that signals whether the host is allowing the slot’s video to be seen by participants within the session.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">host_audio_enabled</code></td>
+      <td>Boolean</td>
+      <td>Flag that signals whether the host is allowing the slot’s audio to be heard by participants within the session.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">host_volume</code></td>
+      <td>int</td>
+      <td>Value between 0-100 that represents the slot’s audio level as heard by participants within the session.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-settings-update-event">Channel Guest Star Settings Update Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>User ID of the host channel</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>String</td>
+      <td>The broadcaster display name</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>String</td>
+      <td>The broadcaster login</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_moderator_send_live_enabled</code></td>
+      <td>Boolean</td>
+      <td>Flag determining if Guest Star moderators have access to control whether a guest is live once assigned to a slot.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">slot_count</code></td>
+      <td>Integer</td>
+      <td>Number of slots the Guest Star call interface will allow the host to add to a call.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_browser_source_audio_enabled</code></td>
+      <td>Boolean</td>
+      <td>Flag determining if browser sources subscribed to sessions on this channel should output audio</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">group_layout</code></td>
+      <td>String</td>
+      <td>This setting determines how the guests within a session should be laid out within a group browser source. Can be one of the following values: <ul><li><code>tiled</code> &mdash; All live guests are tiled within the browser source with the same size.</li><li><code>screenshare</code> &mdash; All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.</li></ul></td>
     </tr>
   </tbody>
 </table>
