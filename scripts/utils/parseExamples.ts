@@ -106,7 +106,13 @@ const parseExamples = (endpointId: string, examplesEl: Element) => {
         const m = BODY_REGEX.exec(code);
         if (m) {
           const exampleBody: ExampleObject = {};
-          exampleBody.value = JSON.parse(m[1]!);
+          const bodyCode = m[1]!;
+          try {
+            exampleBody.value = JSON.parse(bodyCode);
+          } catch (e) {
+            console.error(bodyCode);
+            throw e;
+          }
           if (bodyObjectDesc.length > 0) {
             exampleBody.description = bodyObjectDesc.join('\n\n');
           }
@@ -124,10 +130,13 @@ const parseExamples = (endpointId: string, examplesEl: Element) => {
     if (res) {
       res.forEach((s) => {
         if (s.startsWith('```json\n')) {
-          // missing comma in the examples
-          // https://dev.twitch.tv/docs/api/reference/#get-followed-channels
-          const code = s.slice(8, -4).replace('"total": 8', '"total": 8,');
-          value = parseJson(code);
+          const code = s.slice(8, -4);
+          try {
+            value = parseJson(code);
+          } catch (e) {
+            console.error(code);
+            throw e;
+          }
         } else if (s.startsWith('```text\n')) {
           // not json response
           // https://dev.twitch.tv/docs/api/reference#get-channel-icalendar
