@@ -128,7 +128,6 @@ const normalizeReferenceHtml = (document: Document) => {
       'get-guest-star-session',
       'create-guest-star-session',
       'get-guest-star-invites',
-      'send-guest-star-invite',
     ];
     for (const id of ids200) {
       const tableEl = getDocsEl(id).querySelector('table:last-child')!;
@@ -137,7 +136,11 @@ const normalizeReferenceHtml = (document: Document) => {
         '<tr><td>200 OK</td><td></td></tr>',
       );
     }
-    const ids204 = ['end-guest-star-session', 'delete-guest-star-invite'];
+    const ids204 = [
+      'end-guest-star-session',
+      'send-guest-star-invite',
+      'delete-guest-star-invite',
+    ];
     for (const id of ids204) {
       const tableEl = getDocsEl(id).querySelector('table:last-child')!;
       tableEl.innerHTML = tableEl.innerHTML.replace(
