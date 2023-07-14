@@ -1,15 +1,46 @@
 import type { FieldSchema } from '../types';
 import parseMarkdown from './parseMarkdown.js';
 
+// TODO: add default value and enum for the `locale` query parameter
+// https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
+
 const parseTableSchema = (table: Element): FieldSchema[] => {
   const fieldSchemas: FieldSchema[] = [];
 
+  let parameterIdx = -1;
+  let typeIdx = -1;
+  let requiredIdx = -1;
+  let descriptionIdx = -1;
+
+  table.querySelectorAll('thead th').forEach((th, i) => {
+    const thText = th.textContent!.trim().toLowerCase();
+    if (['fields', 'field', 'parameter', 'name'].includes(thText)) {
+      return (parameterIdx = i);
+    }
+    if (thText === 'type') {
+      return (typeIdx = i);
+    }
+    if (thText === 'required?' || thText === 'required') {
+      return (requiredIdx = i);
+    }
+    if (thText === 'description') {
+      return (descriptionIdx = i);
+    }
+    return;
+  });
+
+  if (parameterIdx === -1 || typeIdx === -1 || descriptionIdx === -1) {
+    throw new Error(
+      'Cannot find table schema headers: ' +
+        table.querySelector('thead')!.textContent,
+    );
+  }
+
   table.querySelectorAll('tbody tr').forEach((tr) => {
-    const parameterEl = tr.children[0]!;
-    const typeEl = tr.children[1];
-    const requiredEl = tr.children.length === 4 ? tr.children[2] : null;
-    const descriptionEl =
-      tr.children.length === 4 ? tr.children[3]! : tr.children[2]!;
+    const parameterEl = tr.children[parameterIdx]!;
+    const typeEl = tr.children[typeIdx];
+    const requiredEl = requiredIdx !== -1 ? tr.children[requiredIdx] : null;
+    const descriptionEl = tr.children[descriptionIdx]!;
 
     const name = parameterEl?.textContent?.trim()!;
 
