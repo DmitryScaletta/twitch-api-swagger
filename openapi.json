@@ -3563,6 +3563,15 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "500": {
+            "description": ""
           }
         },
         "security": [

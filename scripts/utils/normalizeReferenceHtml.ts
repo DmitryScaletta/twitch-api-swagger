@@ -65,6 +65,7 @@ const normalizeReferenceHtml = (document: Document) => {
   // missing Response Codes table and probably wrong Response Body
   // https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
   {
+    // IMPORTANT: I didn't test response codes, it's just my guess
     const table = `<table>
       <thead>
         <tr>
@@ -76,6 +77,18 @@ const normalizeReferenceHtml = (document: Document) => {
         <tr>
           <td>200 OK</td>
           <td>Successfully retrieved The list of CCLs available.</td>
+        </tr>
+        <tr>
+          <td>400 Bad Request</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>401 Unauthorized</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>500 Internal Server Error</td>
+          <td></td>
         </tr>
       </tbody>
     </table>`;

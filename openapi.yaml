@@ -4299,6 +4299,12 @@ paths:
                         description: Simulations and/or depictions of realistic violence, gore, extreme
                           injury, or death.
                         name: Violent and Graphic Depictions
+        "400":
+          description: ""
+        "401":
+          description: ""
+        "500":
+          description: ""
       security:
         - twitch_auth: []
   /entitlements/drops:
