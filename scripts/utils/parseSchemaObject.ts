@@ -14,6 +14,10 @@ const TYPES_MAP: Record<string, SchemaObject> = {
   'Object[]':           { type: 'array', items: { type: 'object' } },
   'map[string,string]': { type: 'object', additionalProperties: { type: 'string' } },
   'map[string]Object':  { type: 'object', additionalProperties: { type: 'object' } },
+
+  'Session[]':          { type: 'array', items: { type: 'object' } },
+  'Invite[]':           { type: 'array', items: { type: 'object' } },
+  'MediaSettings':      { type: 'object' },
 };
 
 const parseType = (rawType: string): SchemaObject | null =>
