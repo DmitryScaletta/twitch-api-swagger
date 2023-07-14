@@ -17,6 +17,7 @@ const TYPES_MAP: Record<string, SchemaObject> = {
 
   'Session[]':          { type: 'array', items: { type: 'object' } },
   'Invite[]':           { type: 'array', items: { type: 'object' } },
+  'Label[]':            { type: 'array', items: { type: 'object' } },
   'MediaSettings':      { type: 'object' },
 };
 
