@@ -18441,11 +18441,8 @@ components:
 
             * `SCREENSHARE_LAYOUT`: All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.
           enum:
-            - "TILED_LAYOUT: All live guests are tiled within the browser source
-              with the same size."
-            - "SCREENSHARE_LAYOUT: All live guests are tiled within the browser
-              source with the same size. If there is an active screen share, it
-              is sized larger than the other guests."
+            - TILED_LAYOUT
+            - SCREENSHARE_LAYOUT
         browser_source_token:
           type: string
           description: View only token to generate browser source URLs
@@ -18480,15 +18477,10 @@ components:
 
             * `VERTICAL_LAYOUT`: All live guests are arranged in a vertical bar within the browser source
           enum:
-            - "TILED_LAYOUT: All live guests are tiled within the browser source
-              with the same size."
-            - "SCREENSHARE_LAYOUT: All live guests are tiled within the browser
-              source with the same size. If there is an active screen share, it
-              is sized larger than the other guests."
-            - "HORIZONTAL_LAYOUT: All live guests are arranged in a horizontal
-              bar within the browser source"
-            - "VERTICAL_LAYOUT: All live guests are arranged in a vertical bar
-              within the browser source"
+            - TILED_LAYOUT
+            - SCREENSHARE_LAYOUT
+            - HORIZONTAL_LAYOUT
+            - VERTICAL_LAYOUT
         regenerate_browser_sources:
           type: boolean
           description: Flag determining if Guest Star should regenerate the auth token
