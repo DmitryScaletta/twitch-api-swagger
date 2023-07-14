@@ -12587,8 +12587,32 @@
             }
           },
           "content_classification_labels": {
-            "type": "Label[]",
-            "description": "List of labels that should be set as the Channel’s CCLs."
+            "type": "array",
+            "description": "List of labels that should be set as the Channel’s CCLs.",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "is_enabled"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "ID of the [Content Classification Labels](https://blog.twitch.tv/en/2023/06/20/introducing-content-classification-labels/) that must be added/removed from the channel. Can be one of the following values:  \n  \n* DrugsIntoxication\n* SexualThemes\n* ViolentGraphic\n* Gambling\n* ProfanityVulgarity",
+                  "enum": [
+                    "DrugsIntoxication",
+                    "SexualThemes",
+                    "ViolentGraphic",
+                    "Gambling",
+                    "ProfanityVulgarity"
+                  ]
+                },
+                "is_enabled": {
+                  "type": "boolean",
+                  "description": "Boolean flag indicating whether the label should be enabled (true) or disabled for the channel."
+                }
+              }
+            }
           },
           "is_branded_content": {
             "type": "boolean",
@@ -15773,7 +15797,11 @@
           },
           "group_layout": {
             "type": "string",
-            "description": "This setting determines how the guests within a session should be laid out within the browser source. Can be one of the following values:   \n  \n* `TILED_LAYOUT`: All live guests are tiled within the browser source with the same size.\n* `SCREENSHARE_LAYOUT`: All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests."
+            "description": "This setting determines how the guests within a session should be laid out within the browser source. Can be one of the following values:   \n  \n* `TILED_LAYOUT`: All live guests are tiled within the browser source with the same size.\n* `SCREENSHARE_LAYOUT`: All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.",
+            "enum": [
+              "TILED_LAYOUT: All live guests are tiled within the browser source with the same size.",
+              "SCREENSHARE_LAYOUT: All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests."
+            ]
           },
           "browser_source_token": {
             "type": "string",
@@ -15799,7 +15827,13 @@
           },
           "group_layout": {
             "type": "string",
-            "description": "This setting determines how the guests within a session should be laid out within the browser source. Can be one of the following values:   \n  \n* `TILED_LAYOUT`: All live guests are tiled within the browser source with the same size.\n* `SCREENSHARE_LAYOUT`: All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.\n* `HORIZONTAL_LAYOUT`: All live guests are arranged in a horizontal bar within the browser source\n* `VERTICAL_LAYOUT`: All live guests are arranged in a vertical bar within the browser source"
+            "description": "This setting determines how the guests within a session should be laid out within the browser source. Can be one of the following values:   \n  \n* `TILED_LAYOUT`: All live guests are tiled within the browser source with the same size.\n* `SCREENSHARE_LAYOUT`: All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.\n* `HORIZONTAL_LAYOUT`: All live guests are arranged in a horizontal bar within the browser source\n* `VERTICAL_LAYOUT`: All live guests are arranged in a vertical bar within the browser source",
+            "enum": [
+              "TILED_LAYOUT: All live guests are tiled within the browser source with the same size.",
+              "SCREENSHARE_LAYOUT: All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.",
+              "HORIZONTAL_LAYOUT: All live guests are arranged in a horizontal bar within the browser source",
+              "VERTICAL_LAYOUT: All live guests are arranged in a vertical bar within the browser source"
+            ]
           },
           "regenerate_browser_sources": {
             "type": "boolean",
