@@ -99,6 +99,40 @@ const normalizeReferenceHtml = (document: Document) => {
       );
     el.innerHTML += '<h3>Response Codes</h3>' + table;
   }
+
+  // No SUCCESS response code
+  // https://dev.twitch.tv/docs/api/reference/#get-channel-guest-star-settings
+  // https://dev.twitch.tv/docs/api/reference/#get-guest-star-session
+  // https://dev.twitch.tv/docs/api/reference/#create-guest-star-session
+  // https://dev.twitch.tv/docs/api/reference/#end-guest-star-session
+  // https://dev.twitch.tv/docs/api/reference/#get-guest-star-invites
+  // https://dev.twitch.tv/docs/api/reference/#send-guest-star-invite
+  // https://dev.twitch.tv/docs/api/reference/#delete-guest-star-invite
+  {
+    // IMPORTANT: I didn't test response codes, it's just my guess
+    const ids200 = [
+      'get-channel-guest-star-settings',
+      'get-guest-star-session',
+      'create-guest-star-session',
+      'get-guest-star-invites',
+      'send-guest-star-invite',
+    ];
+    for (const id of ids200) {
+      const tableEl = getDocsEl(id).querySelector('table:last-child')!;
+      tableEl.innerHTML = tableEl.innerHTML.replace(
+        '<tbody>',
+        '<tr><td>200 OK</td><td></td></tr>',
+      );
+    }
+    const ids204 = ['end-guest-star-session', 'delete-guest-star-invite'];
+    for (const id of ids204) {
+      const tableEl = getDocsEl(id).querySelector('table:last-child')!;
+      tableEl.innerHTML = tableEl.innerHTML.replace(
+        '<tbody>',
+        '<tr><td>204 No Content</td><td></td></tr>',
+      );
+    }
+  }
 };
 
 export default normalizeReferenceHtml;

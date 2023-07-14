@@ -5328,6 +5328,32 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetChannelGuestStarSettingsResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -x GET `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&moderator_id=9321049` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "is_moderator_send_live_enabled": true,
+                          "slot_count": 4,
+                          "is_browser_source_audio_enabled": true,
+                          "layout": "TILED_LAYOUT",
+                          "browser_source_token": "eihq8rew7q3hgierufhi3q"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Missing _moderator\\_id_"
           },
@@ -5410,6 +5436,68 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGuestStarSessionResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\nGet session for host channel\n\n```bash\ncurl -x GET `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049&moderator_id=9321049` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "2KFRQbFtpmfyD3IevNRnCzOPRJI",
+                          "guests": [
+                            {
+                              "slot_id": "0",
+                              "user_id": "9321049",
+                              "user_display_name": "Cool_User",
+                              "user_login": "cool_user",
+                              "is_live": true,
+                              "volume": 100,
+                              "assigned_at": "2023-01-02T04:16:53.325Z",
+                              "audio_settings": {
+                                "is_available": true,
+                                "is_host_enabled": true,
+                                "is_guest_enabled": true
+                              },
+                              "video_settings": {
+                                "is_available": true,
+                                "is_host_enabled": true,
+                                "is_guest_enabled": true
+                              }
+                            },
+                            {
+                              "slot_id": "1",
+                              "user_id": "144601104",
+                              "user_display_name": "Cool_Guest",
+                              "user_login": "cool_guest",
+                              "is_live": true,
+                              "volume": 100,
+                              "assigned_at": "2023-01-02T04:20:59.325Z",
+                              "audio_settings": {
+                                "is_available": true,
+                                "is_host_enabled": true,
+                                "is_guest_enabled": true
+                              },
+                              "video_settings": {
+                                "is_available": true,
+                                "is_host_enabled": true,
+                                "is_guest_enabled": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Missing _moderator\\_id_"
           },
@@ -5441,6 +5529,49 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateGuestStarSessionResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\nStart Guest Star session\n\n```bash\ncurl -x POST `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "2KFRQbFtpmfyD3IevNRnCzOPRJI",
+                          "guests": [
+                            {
+                              "id": "0",
+                              "user_id": "9321049",
+                              "user_display_name": "Cool_User",
+                              "user_login": "cool_user",
+                              "is_live": true,
+                              "volume": 100,
+                              "assigned_at": "2023-01-02T04:16:53.325Z",
+                              "audio_settings": {
+                                "is_available": true,
+                                "is_host_enabled": true,
+                                "is_guest_enabled": true
+                              },
+                              "video_settings": {
+                                "is_available": true,
+                                "is_host_enabled": true,
+                                "is_guest_enabled": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Session limit reached (1 active call)"
           },
@@ -5484,6 +5615,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "\n\n__Examples__\n\n_Request:_\n\nEnd Guest Star session\n\n```bash\ncurl -x DELETE `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+          },
           "400": {
             "description": "* Missing or invalid _broadcaster\\_id_\n* Missing or invalid _session\\_id_\n* Session has already been ended"
           },
@@ -5535,6 +5669,37 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGuestStarInvitesResponse"
+                },
+                "examples": {
+                  "Example 1": {
+                    "description": "_Request:_\n\nGet session invites\n\n```bash\ncurl -x GET `https://api.twitch.tv/helix/guest_star/invites?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+                  },
+                  "Example 2": {
+                    "description": "_Request:_\n\nGet session for host channel\n\n```bash\ncurl -x GET `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049` \\ -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\ -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "user_id": "144601104",
+                          "invited_at": "2023-01-02T04:16:53.325Z",
+                          "status": "INVITED",
+                          "is_audio_enabled": false,
+                          "is_video_enabled": true,
+                          "is_audio_available": true,
+                          "is_video_available": true
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Missing _session\\_id_"
           }
@@ -5590,6 +5755,18 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\nInvite user to Guest Star session\n\n```bash\ncurl -x POST `https://api.twitch.tv/helix/guest_star/invites?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+                  }
+                }
+              }
+            }
+          },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Missing _moderator\\_id_\n* Missing _session\\_id_\n* Missing _guest\\_id_\n* Invalid _session\\_id_"
           },
@@ -5648,6 +5825,9 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "\n\n__Examples__\n\n_Request:_\n\nRemove invite to session\n\n```bash\ncurl -x DELETE `https://api.twitch.tv/helix/guest_star/invites?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+          },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Missing _session\\_id_\n* Missing _guest\\_id_\n* Invalid _session\\_id_"
           },

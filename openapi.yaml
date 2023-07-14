@@ -6440,6 +6440,34 @@ paths:
             type: string
           required: true
       responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetChannelGuestStarSettingsResponse"
+              examples:
+                Example:
+                  description: >-
+                    _Request:_
+
+
+                    ```bash
+
+                    curl -x GET `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&moderator_id=9321049` \
+
+                    -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+                    -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+                    ```
+                  value:
+                    data:
+                      - is_moderator_send_live_enabled: true
+                        slot_count: 4
+                        is_browser_source_audio_enabled: true
+                        layout: TILED_LAYOUT
+                        browser_source_token: eihq8rew7q3hgierufhi3q
         "400":
           description: |-
             * Missing _broadcaster\_id_
@@ -6595,6 +6623,64 @@ paths:
             type: string
           required: true
       responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetGuestStarSessionResponse"
+              examples:
+                Example:
+                  description: >-
+                    _Request:_
+
+
+                    Get session for host channel
+
+
+                    ```bash
+
+                    curl -x GET `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049&moderator_id=9321049` \
+
+                    -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+                    -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+                    ```
+                  value:
+                    data:
+                      - id: 2KFRQbFtpmfyD3IevNRnCzOPRJI
+                        guests:
+                          - slot_id: "0"
+                            user_id: "9321049"
+                            user_display_name: Cool_User
+                            user_login: cool_user
+                            is_live: true
+                            volume: 100
+                            assigned_at: 2023-01-02T04:16:53.325Z
+                            audio_settings:
+                              is_available: true
+                              is_host_enabled: true
+                              is_guest_enabled: true
+                            video_settings:
+                              is_available: true
+                              is_host_enabled: true
+                              is_guest_enabled: true
+                          - slot_id: "1"
+                            user_id: "144601104"
+                            user_display_name: Cool_Guest
+                            user_login: cool_guest
+                            is_live: true
+                            volume: 100
+                            assigned_at: 2023-01-02T04:20:59.325Z
+                            audio_settings:
+                              is_available: true
+                              is_host_enabled: true
+                              is_guest_enabled: true
+                            video_settings:
+                              is_available: true
+                              is_host_enabled: true
+                              is_guest_enabled: true
         "400":
           description: |-
             * Missing _broadcaster\_id_
@@ -6632,6 +6718,49 @@ paths:
             type: string
           required: true
       responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateGuestStarSessionResponse"
+              examples:
+                Example:
+                  description: >-
+                    _Request:_
+
+
+                    Start Guest Star session
+
+
+                    ```bash
+
+                    curl -x POST `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049` \
+
+                    -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+                    -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+                    ```
+                  value:
+                    data:
+                      - id: 2KFRQbFtpmfyD3IevNRnCzOPRJI
+                        guests:
+                          - id: "0"
+                            user_id: "9321049"
+                            user_display_name: Cool_User
+                            user_login: cool_user
+                            is_live: true
+                            volume: 100
+                            assigned_at: 2023-01-02T04:16:53.325Z
+                            audio_settings:
+                              is_available: true
+                              is_host_enabled: true
+                              is_guest_enabled: true
+                            video_settings:
+                              is_available: true
+                              is_host_enabled: true
+                              is_guest_enabled: true
         "400":
           description: |-
             * Missing _broadcaster\_id_
@@ -6677,6 +6806,28 @@ paths:
             type: string
           required: true
       responses:
+        "204":
+          description: >-
+            
+
+            __Examples__
+
+
+            _Request:_
+
+
+            End Guest Star session
+
+
+            ```bash
+
+            curl -x DELETE `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI` \
+
+            -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+            ```
         "400":
           description: |-
             * Missing or invalid _broadcaster\_id_
@@ -6728,6 +6879,52 @@ paths:
             type: string
           required: true
       responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetGuestStarInvitesResponse"
+              examples:
+                Example 1:
+                  description: >-
+                    _Request:_
+
+
+                    Get session invites
+
+
+                    ```bash
+
+                    curl -x GET `https://api.twitch.tv/helix/guest_star/invites?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI` \
+
+                    -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+                    -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+                    ```
+                Example 2:
+                  description: >-
+                    _Request:_
+
+
+                    Get session for host channel
+
+
+                    ```bash
+
+                    curl -x GET `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049` \ -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \ -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+                    ```
+                  value:
+                    data:
+                      - user_id: "144601104"
+                        invited_at: 2023-01-02T04:16:53.325Z
+                        status: INVITED
+                        is_audio_enabled: false
+                        is_video_enabled: true
+                        is_audio_available: true
+                        is_video_available: true
         "400":
           description: |-
             * Missing _broadcaster\_id_
@@ -6781,6 +6978,28 @@ paths:
             type: string
           required: true
       responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: >-
+                    _Request:_
+
+
+                    Invite user to Guest Star session
+
+
+                    ```bash
+
+                    curl -x POST `https://api.twitch.tv/helix/guest_star/invites?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104` \
+
+                    -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+                    -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+                    ```
         "400":
           description: |-
             * Missing _broadcaster\_id_
@@ -6840,6 +7059,28 @@ paths:
             type: string
           required: true
       responses:
+        "204":
+          description: >-
+            
+
+            __Examples__
+
+
+            _Request:_
+
+
+            Remove invite to session
+
+
+            ```bash
+
+            curl -x DELETE `https://api.twitch.tv/helix/guest_star/invites?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104` \
+
+            -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+            ```
         "400":
           description: |-
             * Missing _broadcaster\_id_

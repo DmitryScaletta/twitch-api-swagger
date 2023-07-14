@@ -444,7 +444,7 @@ const parseEndpoint =
         ...examplesOk.map((example) => example.description),
       ].join('\n\n');
     } else {
-      console.warn('No OK response code: ' + id);
+      console.warn('No SUCCESS response code: ' + id);
     }
 
     if (examplesError.length > 0) {
