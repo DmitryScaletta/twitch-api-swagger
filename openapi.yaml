@@ -37,6 +37,7 @@ tags:
   - name: Charity
   - name: Chat
   - name: Clips
+  - name: CCLs
   - name: Entitlements
   - name: Extensions
   - name: EventSub
@@ -939,6 +940,11 @@ paths:
                         delay: 0
                         tags:
                           - DevsInTheKnow
+                        content_classification_labels:
+                          - Gambling
+                          - DrugsIntoxication
+                          - MatureGame
+                        is_branded_content: false
         "400":
           description: >-
             * The _broadcaster\_id_ query parameter is required.
@@ -998,13 +1004,23 @@ paths:
             schema:
               $ref: "#/components/schemas/ModifyChannelInformationBody"
             examples:
-              Example:
+              Example 1:
                 value:
                   game_id: "33214"
                   title: there are helicopters in the game? REASON TO PLAY FORTNITE found
                   broadcaster_language: en
                   tags:
                     - LevelingUp
+              Example 2:
+                value:
+                  game_id: SomeGameID
+                  content_classification_labels:
+                    - id: Gambling
+                      is_enabled: true
+                    - id: DrugsIntoxication
+                      is_enabled: false
+                  is_branded_content: true
+                description: Set CCLs for a Channel
       responses:
         "204":
           description: >-
@@ -1030,6 +1046,33 @@ paths:
             --data-raw '{"game_id":"33214", "title":"there are helicopters in the game? REASON TO PLAY FORTNITE found", "broadcaster_language":"en", "tags":["LevelingUp"]}'
 
             ```
+
+
+            Set CCLs for a Channel
+
+
+            ```bash
+
+            curl -X PATCH
+
+            'https://api.twitch.tv/helix/channels?broadcaster_id=41245072' \
+
+            -H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \
+
+            -H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \
+
+            -H 'Content-Type: application/json' \
+
+            --data-raw '{ 
+                "game_id": "SomeGameID",
+                "content_classification_labels": [
+                   {"id": "Gambling", "is_enabled": true}, 
+                   {"id": "DrugsIntoxication", "is_enabled": false}  
+                 ],
+                "is_branded_content": true
+            }'
+
+            ```
         "400":
           description: >-
             * The _broadcaster\_id_ query parameter is required.
@@ -1051,10 +1094,13 @@ paths:
             * A tag in the `tags` field contains special characters or spaces.
 
             * One or more tags in the `tags` field failed AutoMod review.
+
+            * Game restricted for user's age and region
         "401":
           description: >-
-            * The ID in _broadcaster\_id_ must match the user ID found in the
-            OAuth token.
+            * User requests CCL for a channel they don’t own
+
+            * The ID in _broadcaster\_id_ must match the user ID found in the OAuth token.
 
             * The Authorization header is required and must specify a user access token.
 
@@ -1063,6 +1109,13 @@ paths:
             * The OAuth token is not valid.
 
             * The ID in the Client-Id header must match the Client ID in the OAuth token.
+        "403":
+          description: >-
+            * User requested gaming CCLs to be added to their channel
+
+            * Unallowed CCLs declared for underaged authorized user in a restricted country
+        "409":
+          description: User set the Branded Content flag too frequently
         "500":
           description: ""
       security:
@@ -4170,6 +4223,84 @@ paths:
           description: "* The ID in _game\\_id_ was not found."
       security:
         - twitch_auth: []
+  /content_classification_labels:
+    get:
+      summary: Gets information about Twitch content classification labels.
+      description: >-
+        Gets information about Twitch content classification labels.
+
+
+        __Authorization:__
+
+
+        Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
+      tags:
+        - CCLs
+      externalDocs:
+        description: Get Content Classification Labels
+        url: https://dev.twitch.tv/docs/api/reference#get-content-classification-labels
+      operationId: get-content-classification-labels
+      parameters:
+        - name: locale
+          in: query
+          description: >-
+            Locale for the Content Classification Labels. You may specify a
+            maximum of 1 locale. Default: `“en-US”`  
+
+            Supported locales: `"bg-BG", "cs-CZ", "da-DK", "da-DK", "de-DE", "el-GR", "en-GB", "en-US", "es-ES", "es-MX", "fi-FI", "fr-FR", "hu-HU", "it-IT", "ja-JP", "ko-KR", "nl-NL", "no-NO", "pl-PL", "pt-BT", "pt-PT", "ro-RO", "ru-RU", "sk-SK", "sv-SE", "th-TH", "tr-TR", "vi-VN", "zh-CN", "zh-TW"`
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved The list of CCLs available.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetContentClassificationLabelsResponse"
+              examples:
+                Example:
+                  description: >-
+                    _Request:_
+
+
+                    ```bash
+
+                    curl -X GET 'https://api.twitch.tv/helix/content_classification_labels' \
+
+                    -H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \
+
+                    -H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'
+
+                    ```
+                  value:
+                    data:
+                      - id: DrugsIntoxication
+                        description: Excessive tobacco glorification or promotion, any marijuana
+                          consumption/use, legal drug and alcohol induced
+                          intoxication, discussions of illegal drugs.
+                        name: Drugs, Intoxication, or Excessive Tobacco Use
+                      - id: Gambling
+                        description: Participating in online or in-person gambling, poker or fantasy
+                          sports, that involve the exchange of real money.
+                        name: Gambling
+                      - id: MatureGame
+                        description: Games that are rated Mature or less suitable for a younger
+                          audience.
+                        name: Mature-rated game
+                      - id: ProfanityVulgarity
+                        description: Prolonged, and repeated use of obscenities, profanities, and
+                          vulgarities, especially as a regular part of speech.
+                        name: Significant Profanity or Vulgarity
+                      - id: SexualThemes
+                        description: Content that focuses on sexualized physical attributes and
+                          activities, sexual topics, or experiences.
+                        name: Sexual Themes
+                      - id: ViolentGraphic
+                        description: Simulations and/or depictions of realistic violence, gore, extreme
+                          injury, or death.
+                        name: Violent and Graphic Depictions
+      security:
+        - twitch_auth: []
   /entitlements/drops:
     get:
       summary: Gets an organization’s list of entitlements that have been granted to a
@@ -6284,9 +6415,9 @@ paths:
         __Authorization:__
 
 
-        * Query parameter `broadcaster_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+        * Query parameter `moderator_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
 
-        * Requires OAuth Scope: `channel:read:guest_star` or `channel:manage:guest_star`
+        * Requires OAuth Scope: `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star` or `moderator:manage:guest_star`
       tags:
         - Guest Star
       externalDocs:
@@ -6300,9 +6431,21 @@ paths:
           schema:
             type: string
           required: true
+        - name: moderator_id
+          in: query
+          description: The ID of the broadcaster or a user that has permission to moderate
+            the broadcaster’s chat room. This ID must match the user ID in the
+            user access token.
+          schema:
+            type: string
+          required: true
       responses:
         "400":
-          description: Missing _broadcaster\_id_
+          description: |-
+            * Missing _broadcaster\_id_
+            * Missing _moderator\_id_
+        "403":
+          description: Insufficient authorization for viewing channel’s Guest Star settings
     put:
       summary: BETA Mutates the channel settings for configuration of the Guest Star
         feature for a particular host.
@@ -6422,9 +6565,6 @@ paths:
       description: >-
         BETA Gets information about an ongoing Guest Star session for a
         particular channel.
-
-
-        You may retrieve the session by a broadcaster channel ID, or by a previously retrieved session ID.
 
 
         __Authorization:__
@@ -14848,6 +14988,8 @@ components:
         - title
         - delay
         - tags
+        - content_classification_labels
+        - is_branded_content
       properties:
         broadcaster_id:
           type: string
@@ -14893,6 +15035,14 @@ components:
           description: The tags applied to the channel.
           items:
             type: string
+        content_classification_labels:
+          type: array
+          description: The CCLs applied to the channel.
+          items:
+            type: string
+        is_branded_content:
+          type: boolean
+          description: Boolean flag indicating if the channel has branded content.
     GetChannelInformationResponse:
       type: object
       required:
@@ -14941,6 +15091,12 @@ components:
             A channel may specify a maximum of 10 tags. Each tag is limited to a maximum of 25 characters and may not be an empty string or contain spaces or special characters. Tags are case insensitive. For readability, consider using camelCasing or PascalCasing.
           items:
             type: string
+        content_classification_labels:
+          type: Label[]
+          description: List of labels that should be set as the Channel’s CCLs.
+        is_branded_content:
+          type: boolean
+          description: Boolean flag indicating if the channel has branded content.
     ChannelEditor:
       type: object
       required:
@@ -16716,6 +16872,33 @@ components:
               description: The cursor used to get the next page of results. Set the request’s
                 _after_ or _before_ query parameter to this value depending on
                 whether you’re paging forwards or backwards.
+    ContentClassificationLabel:
+      type: object
+      required:
+        - id
+        - description
+        - name
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the CCL.
+        description:
+          type: string
+          description: Localized description of the CCL.
+        name:
+          type: string
+          description: Localized name of the CCL.
+    GetContentClassificationLabelsResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          description: A list that contains information about the available content
+            classification labels.
+          items:
+            $ref: "#/components/schemas/ContentClassificationLabel"
     DropsEntitlement:
       type: object
       required:
@@ -18022,7 +18205,7 @@ components:
             associated with the channel’s browser sources. Providing a true
             value for this will immediately invalidate all browser sources
             previously configured in your streaming software.
-    Session:
+    GuestStarSession:
       type: object
       required:
         - id
@@ -18091,12 +18274,12 @@ components:
                 be seen or heard within the session.
             is_guest_enabled:
               type: boolean
-              description: Flag determining whether the guest is allowing their audio/video to
-                be transmitted to the session.
+              description: Flag determining whether the guest is allowing their audio to be
+                transmitted to the session.
             is_available:
               type: boolean
-              description: Flag determining whether the guest has an appropriate audio/video
-                device available to be transmitted to the session.
+              description: Flag determining whether the guest has an appropriate audio device
+                available to be transmitted to the session.
         video_settings:
           description: Information about the guest’s video settings
           type: object
@@ -18107,16 +18290,16 @@ components:
           properties:
             is_host_enabled:
               type: boolean
-              description: Flag determining whether the host is allowing the guest’s audio to
+              description: Flag determining whether the host is allowing the guest’s video to
                 be seen or heard within the session.
             is_guest_enabled:
               type: boolean
-              description: Flag determining whether the guest is allowing their audio/video to
-                be transmitted to the session.
+              description: Flag determining whether the guest is allowing their video to be
+                transmitted to the session.
             is_available:
               type: boolean
-              description: Flag determining whether the guest has an appropriate audio/video
-                device available to be transmitted to the session.
+              description: Flag determining whether the guest has an appropriate video device
+                available to be transmitted to the session.
     GetGuestStarSessionResponse:
       type: object
       required:
@@ -18126,7 +18309,7 @@ components:
           type: array
           description: Summary of the session details
           items:
-            $ref: "#/components/schemas/Session"
+            $ref: "#/components/schemas/GuestStarSession"
     CreateGuestStarSessionResponse:
       type: object
       required:
@@ -18136,7 +18319,7 @@ components:
           type: array
           description: Summary of the session details.
           items:
-            $ref: "#/components/schemas/Session"
+            $ref: "#/components/schemas/GuestStarSession"
     EndGuestStarSessionResponse:
       type: object
       required:
@@ -18146,8 +18329,8 @@ components:
           type: array
           description: Summary of the session details when the session was ended.
           items:
-            $ref: "#/components/schemas/Session"
-    Invite:
+            $ref: "#/components/schemas/GuestStarSession"
+    GuestStarInvite:
       type: object
       required:
         - user_id
@@ -18204,7 +18387,7 @@ components:
           description: A list of invite objects describing the invited user as well as
             their ready status.
           items:
-            $ref: "#/components/schemas/Invite"
+            $ref: "#/components/schemas/GuestStarInvite"
     HypeTrainEvent:
       type: object
       required:
@@ -21419,11 +21602,11 @@ components:
             analytics:read:games: View analytics data for the games owned by the
               authenticated account.
             bits:read: View Bits information for a channel.
-            channel:edit:commercial: Run commercials on a channel.
             channel:manage:broadcast: Manage a channel’s broadcast configuration, including
               updating channel configuration and managing stream markers and
               stream tags.
             channel:read:charity: Read charity campaign details and user donations on your channel.
+            channel:edit:commercial: Run commercials on a channel.
             channel:read:editors: View a list of users with the editor role for a channel.
             channel:manage:extensions: Manage a channel’s Extension configuration, including
               activating Extensions.

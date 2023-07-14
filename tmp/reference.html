@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-05-17T17:20:12-07:00">
+<meta property="article:published_time" content="2023-07-11T10:03:13-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2023-05-17T17:20:12-07:00","datePublished":"2023-05-17T17:20:12-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2023-07-11T10:03:13-07:00","datePublished":"2023-07-11T10:03:13-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -276,6 +276,8 @@
 		
 			<dd><a href="#get-clips">Get Clips</a></dd>
 		
+			<dd><a href="#get-content-classification-labels">Get Content Classification Labels</a></dd>
+		
 			<dd><a href="#get-drops-entitlements">Get Drops Entitlements</a></dd>
 		
 			<dd><a href="#update-drops-entitlements">Update Drops Entitlements</a></dd>
@@ -466,13 +468,6 @@
 		
 	
 
-
-
-
-
-	<dd><a class="sub-page" href="/docs/api/migration">v5 Migration Guide</a></dd>
-
-	
 
 
 
@@ -1141,6 +1136,17 @@
 							
 							<td><a href="#get-clips">Get Clips</a></td>
 							<td><p>Gets one or more video clips.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>CCLs</td>
+							
+							<td><a href="#get-content-classification-labels">Get Content Classification Labels</a></td>
+							<td><p>Gets information about Twitch content classification labels.</p>
 </td>
 						</tr>
 					
@@ -3530,6 +3536,16 @@
       <td>String[]</td>
       <td>The tags applied to the channel.</td>
     </tr>
+    <tr>
+      <td>   content_classification_labels</td>
+      <td>String[]</td>
+      <td>The CCLs applied to the channel.</td>
+    </tr>
+    <tr>
+      <td>   is_branded_content</td>
+      <td>Boolean</td>
+      <td>Boolean flag indicating if the channel has branded content.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3593,7 +3609,9 @@
       </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Science &amp; Technology"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TwitchDev Monthly Update // May 6, 2021"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"delay"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"DevsInTheKnow"</span><span class="p">]</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"DevsInTheKnow"</span><span class="p">],</span><span class="w">
+      </span><span class="s2">"content_classification_labels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Gambling"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DrugsIntoxication"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MatureGame"</span><span class="p">],</span><span class="w">
+      </span><span class="s2">"is_branded_content"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -3683,6 +3701,30 @@
       <td>No</td>
       <td>A list of channel-defined tags to apply to the channel. To remove all tags from the channel, set tags to an empty array. Tags help identify the content that the channel streams. <a href="https://help.twitch.tv/s/article/guide-to-tags">Learn More</a><br><br>A channel may specify a maximum of 10 tags. Each tag is limited to a maximum of 25 characters and may not be an empty string or contain spaces or special characters. Tags are case insensitive. For readability, consider using camelCasing or PascalCasing.</td>
     </tr>
+    <tr>
+      <td>content_classification_labels</td>
+      <td>Label[]</td>
+      <td>No</td>
+      <td>List of labels that should be set as the Channel’s CCLs.</td>
+    </tr>
+    <tr>
+      <td>   id</td>
+      <td>string</td>
+      <td>Yes</td>
+      <td>ID of the <a href="https://blog.twitch.tv/en/2023/06/20/introducing-content-classification-labels/">Content Classification Labels</a> that must be added/removed from the channel. Can be one of the following values:<ul><li>DrugsIntoxication</li><li>SexualThemes</li><li>ViolentGraphic</li><li>Gambling</li><li>ProfanityVulgarity</li></ul></td>
+    </tr>
+    <tr>
+      <td>   is_enabled</td>
+      <td>boolean</td>
+      <td>Yes</td>
+      <td>Boolean flag indicating whether the label should be enabled (true) or disabled for the channel.</td>
+    </tr>
+    <tr>
+      <td>is_branded_content</td>
+      <td>Boolean</td>
+      <td>No</td>
+      <td>Boolean flag indicating if the channel has branded content.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -3702,11 +3744,19 @@
     </tr>
     <tr>
       <td>400 Bad Request</td>
-      <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li><li>The request must update at least one property.</li><li>The <code>title</code> field may not contain an empty string.</li><li>The ID in <code>game_id</code> is not valid.</li><li>To update the <code>delay</code> field, the broadcaster must have partner status.</li><li>The list in the <code>tags</code> field exceeds the maximum number of tags allowed.</li><li>A tag in the <code>tags</code> field exceeds the maximum length allowed.</li><li>A tag in the <code>tags</code> field is empty.</li><li>A tag in the <code>tags</code> field contains special characters or spaces.</li><li>One or more tags in the <code>tags</code> field failed AutoMod review.</li></ul></td>
+      <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li><li>The request must update at least one property.</li><li>The <code>title</code> field may not contain an empty string.</li><li>The ID in <code>game_id</code> is not valid.</li><li>To update the <code>delay</code> field, the broadcaster must have partner status.</li><li>The list in the <code>tags</code> field exceeds the maximum number of tags allowed.</li><li>A tag in the <code>tags</code> field exceeds the maximum length allowed.</li><li>A tag in the <code>tags</code> field is empty.</li><li>A tag in the <code>tags</code> field contains special characters or spaces.</li><li>One or more tags in the <code>tags</code> field failed AutoMod review.</li><li>Game restricted for user's age and region</li></ul></td>
     </tr>
     <tr>
       <td>401 Unauthorized</td>
-      <td><ul><li>The ID in <i>broadcaster_id</i> must match the user ID found in the OAuth token.</li><li>The Authorization header is required and must specify a user access token.</li><li>The OAuth token must include the <b>channel:manage:broadcast</b> scope.</li><li>The OAuth token is not valid.</li><li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li></ul></td>
+      <td><ul><li>User requests CCL for a channel they don’t own</li><li>The ID in <i>broadcaster_id</i> must match the user ID found in the OAuth token.</li><li>The Authorization header is required and must specify a user access token.</li><li>The OAuth token must include the <b>channel:manage:broadcast</b> scope.</li><li>The OAuth token is not valid.</li><li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li></ul></td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td><ul><li>User requested gaming CCLs to be added to their channel</li><li>Unallowed CCLs declared for underaged authorized user in a restricted country</li></ul></td>
+    </tr>
+    <tr>
+      <td>409 Too Many Requests</td>
+      <td>User set the Branded Content flag too frequently</td>
     </tr>
     <tr>
       <td>500 Internal server error</td>
@@ -3727,6 +3777,21 @@
 <span class="nt">-H</span> <span class="s1">'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{"game_id":"33214", "title":"there are helicopters in the game? REASON TO PLAY FORTNITE found", "broadcaster_language":"en", "tags":["LevelingUp"]}'</span>
+</code></pre></div></div>
+<p>Set CCLs for a Channel</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> PATCH
+<span class="s1">'https://api.twitch.tv/helix/channels?broadcaster_id=41245072'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">--data-raw</span> <span class="s1">'{ 
+    “game_id”: “SomeGameID”,
+    “content_classification_labels”: [
+       {“id”: “Gambling”, “is_enabled”: true}, // adds this label
+       {“id”: “DrugsIntoxication”, “is_enabled”: false}  // removes this label
+     ],
+    “is_branded_content”: true
+}'</span>
 </code></pre></div></div>
 
 			</section>
@@ -9070,8 +9135,137 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 	<section class="doc-content">
 		<section class="left-docs">
-			<h2 id="get-drops-entitlements">Get Drops Entitlements</h2>
+			<h2 id="get-content-classification-labels">Get Content Classification Labels</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[33]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p>Gets information about Twitch content classification labels.</p>
+
+<h3>Authorization</h3>
+
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/content_classification_labels</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>locale</td>
+      <td>String</td>
+      <td>No</td>
+      <td>Locale for the Content Classification Labels. You may specify a maximum of 1 locale. Default: <code class="highlighter-rouge">“en-US”</code><br>Supported locales: <code class="highlighter-rouge">"bg-BG", "cs-CZ", "da-DK", "da-DK", "de-DE", "el-GR", "en-GB", "en-US", "es-ES", "es-MX", "fi-FI", "fr-FR", "hu-HU", "it-IT", "ja-JP", "ko-KR", "nl-NL", "no-NO", "pl-PL", "pt-BT", "pt-PT", "ro-RO", "ru-RU", "sk-SK", "sv-SE", "th-TH", "tr-TR", "vi-VN", "zh-CN", "zh-TW"</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>Object[]</td>
+      <td>A list that contains information about the available content classification labels.</td>
+    </tr>
+    <tr>
+      <td>   content_classification_labels</td>
+      <td>Label[]</td>
+      <td>The list of CCLs available.</td>
+    </tr>
+    <tr>
+      <td>      id</td>
+      <td>String</td>
+      <td>Unique identifier for the CCL.</td>
+    </tr>
+    <tr>
+      <td>      description</td>
+      <td>String</td>
+      <td>Localized description of the CCL.</td>
+    </tr>
+    <tr>
+      <td>      name</td>
+      <td>String</td>
+      <td>Localized name of the CCL.</td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/content_classification_labels'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'</span>
+</code></pre></div></div>
+
+<h3>Example Response</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DrugsIntoxication"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Excessive tobacco glorification or promotion, any marijuana consumption/use, legal drug and alcohol induced intoxication, discussions of illegal drugs."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drugs, Intoxication, or Excessive Tobacco Use"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gambling"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Participating in online or in-person gambling, poker or fantasy sports, that involve the exchange of real money."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gambling"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MatureGame"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Games that are rated Mature or less suitable for a younger audience."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mature-rated game"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ProfanityVulgarity"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Prolonged, and repeated use of obscenities, profanities, and vulgarities, especially as a regular part of speech."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Significant Profanity or Vulgarity"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SexualThemes"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Content that focuses on sexualized physical attributes and activities, sexual topics, or experiences."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sexual Themes"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ViolentGraphic"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Simulations and/or depictions of realistic violence, gore, extreme injury, or death."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Violent and Graphic Depictions"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="get-drops-entitlements">Get Drops Entitlements</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[34]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets an organization’s list of entitlements that have been granted to a game, a user, or both.</p>
 
@@ -9343,7 +9537,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-drops-entitlements">Update Drops Entitlements</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[34]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[35]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the Drop entitlement’s fulfillment status.</p>
 
@@ -9516,7 +9710,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-extension-configuration-segment">Get Extension Configuration Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[35]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[36]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the specified configuration segment from the specified extension.</p>
 
@@ -9686,7 +9880,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="set-extension-configuration-segment">Set Extension Configuration Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[36]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[37]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates a configuration segment. The segment is limited to 5 KB. Extensions that are active on a channel do not receive the updated configuration.</p>
 
@@ -9796,7 +9990,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="set-extension-required-configuration">Set Extension Required Configuration</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[37]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[38]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the extension’s required_configuration string. Use this endpoint if your extension requires the broadcaster to configure the extension before activating it (to require configuration, you must select <strong>Custom/My Own Service</strong> in Extension <a href="/docs/extensions/life-cycle/#capabilities">Capabilities</a>). For more information, see <a href="/docs/extensions/building#required-configurations">Required Configurations</a> and <a href="/docs/extensions/building#setting-required-configuration-with-the-configuration-service-optional">Setting Required Configuration</a>.</p>
 
@@ -9912,7 +10106,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="send-extension-pubsub-message">Send Extension PubSub Message</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[38]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[39]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Sends a message to one or more viewers. You can send messages to a specific channel or to all channels where your extension is active. This endpoint uses the same mechanism as the <a href="/docs/extensions/reference#send">send</a> JavaScript helper function used to send messages.</p>
 
@@ -10049,7 +10243,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-extension-live-channels">Get Extension Live Channels</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[39]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[40]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of broadcasters that are streaming live and have installed or activated the extension.</p>
 
@@ -10223,7 +10417,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-extension-secrets">Get Extension Secrets</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[40]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[41]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets an extension’s list of shared secrets.</p>
 
@@ -10362,7 +10556,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-extension-secret">Create Extension Secret</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[41]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[42]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Creates a shared secret used to sign and verify JWT tokens. Creating a new secret removes the current secrets from service. Use this function only when you are ready to use the new secret it returns.</p>
 
@@ -10512,7 +10706,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="send-extension-chat-message">Send Extension Chat Message</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[42]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[43]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Sends a message to the specified broadcaster’s chat room. The extension’s name is used as the username for the message in the chat room. To send a chat message, your extension must enable <strong>Chat Capabilities</strong> (under your extension’s <strong>Capabilities</strong> tab).</p>
 
@@ -10630,7 +10824,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-extensions">Get Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[43]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[44]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about an extension.</p>
 
@@ -11017,7 +11211,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-released-extensions">Get Released Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[44]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[45]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about a released extension. Returns the extension if its <code class="highlighter-rouge">state</code> is Released.</p>
 
@@ -11404,7 +11598,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-extension-bits-products">Get Extension Bits Products</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[45]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[46]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of Bits products that belongs to the extension. The client ID in the app access token identifies the extension.</p>
 
@@ -11561,7 +11755,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-extension-bits-product">Update Extension Bits Product</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[46]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[47]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds or updates a Bits product that the extension created. If the SKU doesn’t exist, the product is added. You may update all fields except the <code class="highlighter-rouge">sku</code> field.</p>
 
@@ -11770,7 +11964,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-eventsub-subscription">Create EventSub Subscription</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[47]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[48]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Creates an EventSub subscription.</p>
 
@@ -12032,7 +12226,7 @@ twitch api post /eventsub/subscriptions <span class="nt">-b</span> <span class="
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-eventsub-subscription">Delete EventSub Subscription</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[48]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[49]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Deletes an EventSub subscription.</p>
 
@@ -12121,7 +12315,7 @@ twitch api delete /eventsub/subscriptions <span class="nt">-q</span> <span class
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-eventsub-subscriptions">Get EventSub Subscriptions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[49]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[50]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of EventSub subscriptions that the client in the access token created.</p>
 
@@ -12376,7 +12570,7 @@ twitch api get /eventsub/subscriptions
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-top-games">Get Top Games</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[50]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[51]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about all broadcasts on Twitch.</p>
 
@@ -12530,7 +12724,7 @@ twitch api get /eventsub/subscriptions
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-games">Get Games</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[51]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[52]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about specified categories or games.</p>
 
@@ -12678,7 +12872,7 @@ twitch api get /eventsub/subscriptions
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-creator-goals">Get Creator Goals</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[52]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[53]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s list of active goals. Use this endpoint to get the current progress of each goal.</p>
 
@@ -12844,15 +13038,15 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-guest-star-settings">Get Channel Guest Star Settings</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[53]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[54]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-beta">BETA</span> Gets the channel settings for configuration of the Guest Star feature for a particular host.</p>
 
 <h3>Authorization</h3>
 
 <ul>
-  <li>Query parameter <code class="highlighter-rouge">broadcaster_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
-  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:read:guest_star</code> or <code class="highlighter-rouge">channel:manage:guest_star</code></li>
+  <li>Query parameter <code class="highlighter-rouge">moderator_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="/docs/authentication#user-access-tokens">User-Access token</a></li>
+  <li>Requires OAuth Scope: <code class="highlighter-rouge">channel:read:guest_star</code>, <code class="highlighter-rouge">channel:manage:guest_star</code>, <code class="highlighter-rouge">moderator:read:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code></li>
 </ul>
 
 <h3>URL</h3>
@@ -12876,6 +13070,12 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
       <td>Yes</td>
       <td>String</td>
       <td>The ID of the broadcaster you want to get guest star settings for.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>Yes</td>
+      <td>String</td>
+      <td>The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room. This ID must match the user ID in the user access token.</td>
     </tr>
   </tbody>
 </table>
@@ -12931,7 +13131,11 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
   <tbody>
     <tr>
       <td>400 Bad Request</td>
-      <td>Missing <i>broadcaster_id</i></td>
+      <td><ul><li>Missing <i>broadcaster_id</i></li> <li>Missing <i>moderator_id</i></li></ul></td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td>Insufficient authorization for viewing channel’s Guest Star settings</td>
     </tr>
   </tbody>
 </table>
@@ -12943,7 +13147,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 			<section class="right-code">
 				<h3>Example Request</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id<span class="o">=</span>9321049<span class="sb">`</span> <span class="se">\</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049<span class="sb">`</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
 </code></pre></div></div>
@@ -12969,7 +13173,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-channel-guest-star-settings">Update Channel Guest Star Settings</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[54]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[55]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-beta">BETA</span> Mutates the channel settings for configuration of the Guest Star feature for a particular host.</p>
 
@@ -13119,11 +13323,9 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-guest-star-session">Get Guest Star Session</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[55]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[56]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-beta">BETA</span> Gets information about an ongoing Guest Star session for a particular channel.</p>
-
-<p>You may retrieve the session by a broadcaster channel ID, or by a previously retrieved session ID.</p>
 
 <h3>Authorization</h3>
 
@@ -13237,12 +13439,12 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
     <tr>
       <td>      is_guest_enabled</td>
       <td>Boolean</td>
-      <td>Flag determining whether the guest is allowing their audio/video to be transmitted to the session.</td>
+      <td>Flag determining whether the guest is allowing their audio to be transmitted to the session.</td>
     </tr>
     <tr>
       <td>      is_available</td>
       <td>Boolean</td>
-      <td>Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session.</td>
+      <td>Flag determining whether the guest has an appropriate audio device available to be transmitted to the session.</td>
     </tr>
     <tr>
       <td>   video_settings</td>
@@ -13252,17 +13454,17 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
     <tr>
       <td>      is_host_enabled</td>
       <td>Boolean</td>
-      <td>Flag determining whether the host is allowing the guest’s audio to be seen or heard within the session.</td>
+      <td>Flag determining whether the host is allowing the guest’s video to be seen or heard within the session.</td>
     </tr>
     <tr>
       <td>      is_guest_enabled</td>
       <td>Boolean</td>
-      <td>Flag determining whether the guest is allowing their audio/video to be transmitted to the session.</td>
+      <td>Flag determining whether the guest is allowing their video to be transmitted to the session.</td>
     </tr>
     <tr>
       <td>      is_available</td>
       <td>Boolean</td>
-      <td>Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session.</td>
+      <td>Flag determining whether the guest has an appropriate video device available to be transmitted to the session.</td>
     </tr>
   </tbody>
 </table>
@@ -13360,7 +13562,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-guest-star-session">Create Guest Star Session</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[56]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[57]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-beta">BETA</span> Programmatically creates a Guest Star session on behalf of the broadcaster. Requires the broadcaster to be present in the call interface, or the call will be ended automatically.</p>
 
@@ -13470,12 +13672,12 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
     <tr>
       <td>      is_guest_enabled</td>
       <td>Boolean</td>
-      <td>Flag determining whether the guest is allowing their audio/video to be transmitted to the session.</td>
+      <td>Flag determining whether the guest is allowing their audio to be transmitted to the session.</td>
     </tr>
     <tr>
       <td>      is_available</td>
       <td>Boolean</td>
-      <td>Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session.</td>
+      <td>Flag determining whether the guest has an appropriate audio device available to be transmitted to the session.</td>
     </tr>
     <tr>
       <td>   video_settings</td>
@@ -13485,17 +13687,17 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
     <tr>
       <td>      is_host_enabled</td>
       <td>Boolean</td>
-      <td>Flag determining whether the host is allowing the guest’s audio to be seen or heard within the session.</td>
+      <td>Flag determining whether the host is allowing the guest’s video to be seen or heard within the session.</td>
     </tr>
     <tr>
       <td>      is_guest_enabled</td>
       <td>Boolean</td>
-      <td>Flag determining whether the guest is allowing their audio/video to be transmitted to the session.</td>
+      <td>Flag determining whether the guest is allowing their video to be transmitted to the session.</td>
     </tr>
     <tr>
       <td>      is_available</td>
       <td>Boolean</td>
-      <td>Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session.</td>
+      <td>Flag determining whether the guest has an appropriate video device available to be transmitted to the session.</td>
     </tr>
   </tbody>
 </table>
@@ -13578,7 +13780,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="end-guest-star-session">End Guest Star Session</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[57]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[58]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-beta">BETA</span> Programmatically ends a Guest Star session on behalf of the broadcaster. Performs the same action as if the host clicked the “End Call” button in the Guest Star UI.</p>
 
@@ -13694,12 +13896,12 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
     <tr>
       <td>      is_guest_enabled</td>
       <td>Boolean</td>
-      <td>Flag determining whether the guest is allowing their audio/video to be transmitted to the session.</td>
+      <td>Flag determining whether the guest is allowing their audio to be transmitted to the session.</td>
     </tr>
     <tr>
       <td>      is_available</td>
       <td>Boolean</td>
-      <td>Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session.</td>
+      <td>Flag determining whether the guest has an appropriate audio device available to be transmitted to the session.</td>
     </tr>
     <tr>
       <td>   video_settings</td>
@@ -13709,17 +13911,17 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
     <tr>
       <td>      is_host_enabled</td>
       <td>Boolean</td>
-      <td>Flag determining whether the host is allowing the guest’s audio to be seen or heard within the session.</td>
+      <td>Flag determining whether the host is allowing the guest’s video to be seen or heard within the session.</td>
     </tr>
     <tr>
       <td>      is_guest_enabled</td>
       <td>Boolean</td>
-      <td>Flag determining whether the guest is allowing their audio/video to be transmitted to the session.</td>
+      <td>Flag determining whether the guest is allowing their video to be transmitted to the session.</td>
     </tr>
     <tr>
       <td>      is_available</td>
       <td>Boolean</td>
-      <td>Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session.</td>
+      <td>Flag determining whether the guest has an appropriate video device available to be transmitted to the session.</td>
     </tr>
   </tbody>
 </table>
@@ -13798,7 +14000,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-guest-star-invites">Get Guest Star Invites</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[58]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[59]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-beta">BETA</span> Provides the caller with a list of pending invites to a Guest Star session, including the invitee’s ready status while joining the waiting room.</p>
 
@@ -13962,7 +14164,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="send-guest-star-invite">Send Guest Star Invite</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[59]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[60]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-beta">BETA</span> Sends an invite to a specified guest on behalf of the broadcaster for a Guest Star session in progress.</p>
 
@@ -14058,7 +14260,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-guest-star-invite">Delete Guest Star Invite</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[60]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[61]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-beta">BETA</span> Revokes a previously sent invite for a Guest Star session.</p>
 
@@ -14154,7 +14356,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="assign-guest-star-slot">Assign Guest Star Slot</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[61]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[62]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-beta">BETA</span> Allows a previously invited user to be assigned a slot within the active Guest Star session, once that guest has indicated they are ready to join.</p>
 
@@ -14273,7 +14475,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-guest-star-slot">Update Guest Star Slot</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[62]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[63]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-beta">BETA</span> Allows a user to update the assigned slot for a particular user within the active Guest Star session.</p>
 
@@ -14375,7 +14577,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-guest-star-slot">Delete Guest Star Slot</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[63]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[64]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-beta">BETA</span> Allows a caller to remove a slot assignment from a user participating in an active Guest Star session. This revokes their access to the session immediately and disables their access to publish or subscribe to media within the session.</p>
 
@@ -14491,7 +14693,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-guest-star-slot-settings">Update Guest Star Slot Settings</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[64]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[65]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-beta">BETA</span> Allows a user to update slot settings for a particular guest within a Guest Star session, such as allowing the user to share audio or video within the call as a host. These settings will be broadcasted to all subscribers which control their view of the guest in that slot. One or more of the optional parameters to this API can be specified at any time.</p>
 
@@ -14633,7 +14835,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-hype-train-events">Get Hype Train Events</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[65]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[66]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about the broadcaster’s current or most recent Hype Train event.</p>
 
@@ -14894,7 +15096,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="check-automod-status">Check AutoMod Status</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[66]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[67]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Checks whether AutoMod would flag the specified message for review.</p>
 
@@ -15103,7 +15305,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="manage-held-automod-messages">Manage Held AutoMod Messages</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[67]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[68]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Allow or deny the message that AutoMod flagged for review. For information about AutoMod, see <a href="https://help.twitch.tv/s/article/how-to-use-automod">How to Use AutoMod</a>.</p>
 
@@ -15208,7 +15410,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-automod-settings">Get AutoMod Settings</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[68]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[69]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s AutoMod settings. The settings are used to automatically block inappropriate or harassing messages from appearing in the broadcaster’s chat room.</p>
 
@@ -15394,7 +15596,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-automod-settings">Update AutoMod Settings</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[69]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[70]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the broadcaster’s AutoMod settings. The settings are used to automatically block inappropriate or harassing messages from appearing in the broadcaster’s chat room.</p>
 
@@ -15674,7 +15876,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-banned-users">Get Banned Users</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[70]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[71]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets all users that the broadcaster banned or put in a timeout.</p>
 
@@ -15883,7 +16085,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="ban-user">Ban User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[71]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[72]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Bans a user from participating in the specified broadcaster’s chat room or puts them in a timeout.</p>
 
@@ -16134,7 +16336,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="unban-user">Unban User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[72]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[73]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes the ban or timeout that was placed on the specified user.</p>
 
@@ -16257,7 +16459,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-blocked-terms">Get Blocked Terms</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[73]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[74]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s list of non-private, blocked words or phrases. These are the terms that the broadcaster or moderator added manually or that were denied by AutoMod.</p>
 
@@ -16445,7 +16647,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="add-blocked-term">Add Blocked Term</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[74]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[75]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a word or phrase to the broadcaster’s list of blocked terms. These are the terms that the broadcaster doesn’t want used in their chat room.</p>
 
@@ -16656,7 +16858,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="remove-blocked-term">Remove Blocked Term</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[75]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[76]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes the word or phrase from the broadcaster’s list of blocked terms.</p>
 
@@ -16751,7 +16953,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-chat-messages">Delete Chat Messages</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[76]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[77]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes a single chat message or all chat messages from the broadcaster’s chat room.</p>
 
@@ -16857,7 +17059,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-moderators">Get Moderators</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[77]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[78]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets all users allowed to moderate the broadcaster’s chat room.</p>
 
@@ -17013,7 +17215,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="add-channel-moderator">Add Channel Moderator</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[78]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[79]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a moderator to the broadcaster’s chat room.</p>
 
@@ -17106,7 +17308,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="remove-channel-moderator">Remove Channel Moderator</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[79]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[80]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes a moderator from the broadcaster’s chat room.</p>
 
@@ -17195,7 +17397,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-vips">Get VIPs</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[80]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[81]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of the broadcaster’s VIPs.</p>
 
@@ -17360,7 +17562,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="add-channel-vip">Add Channel VIP</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[81]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[82]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds the specified user as a VIP in the broadcaster’s channel.</p>
 
@@ -17475,7 +17677,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="remove-channel-vip">Remove Channel VIP</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[82]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[83]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes the specified user as a VIP in the broadcaster’s channel.</p>
 
@@ -17584,7 +17786,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-shield-mode-status">Update Shield Mode Status</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[83]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[84]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Activates or deactivates the broadcaster’s Shield Mode.</p>
 
@@ -17755,7 +17957,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-shield-mode-status">Get Shield Mode Status</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[84]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[85]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s Shield Mode activation status.</p>
 
@@ -17903,7 +18105,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-polls">Get Polls</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[85]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[86]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of polls that the broadcaster created.</p>
 
@@ -18169,7 +18371,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-poll">Create Poll</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[86]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[87]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Creates a poll that viewers in the broadcaster’s channel can vote on.</p>
 
@@ -18452,7 +18654,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="end-poll">End Poll</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[87]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[88]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Ends an active poll. You have the option to end it or end it and archive it.</p>
 
@@ -18702,7 +18904,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-predictions">Get Predictions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[88]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[89]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of Channel Points Predictions that the broadcaster created.</p>
 
@@ -18983,7 +19185,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-prediction">Create Prediction</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[89]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[90]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Creates a Channel Points Prediction.</p>
 
@@ -19279,7 +19481,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="end-prediction">End Prediction</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[90]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[91]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Locks, resolves, or cancels a Channel Points Prediction.</p>
 
@@ -19560,7 +19762,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="start-a-raid">Start a raid</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[91]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[92]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Raid another channel by sending the broadcaster’s viewers to the targeted channel.</p>
 
@@ -19704,7 +19906,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="cancel-a-raid">Cancel a raid</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[92]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[93]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Cancel a pending raid.</p>
 
@@ -19793,7 +19995,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-stream-schedule">Get Channel Stream Schedule</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[93]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[94]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s streaming schedule. You can get the entire schedule or specific segments of the schedule. <a href="https://help.twitch.tv/s/article/channel-page-setup#Schedule" target="_blank">Learn More</a></p>
 
@@ -20047,7 +20249,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-icalendar">Get Channel iCalendar</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[94]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[95]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s streaming schedule as an <a href="https://datatracker.ietf.org/doc/html/rfc5545" target="_blank">iCalendar</a>.</p>
 
@@ -20146,7 +20348,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-channel-stream-schedule">Update Channel Stream Schedule</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[95]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[96]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the broadcaster’s schedule settings, such as scheduling a vacation.</p>
 
@@ -20253,7 +20455,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-channel-stream-schedule-segment">Create Channel Stream Schedule Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[96]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[97]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a single or recurring broadcast to the broadcaster’s streaming schedule. For information about scheduling broadcasts, see <a href="https://help.twitch.tv/s/article/channel-page-setup#Schedule" target="_blank">Stream Schedule</a>.</p>
 
@@ -20521,7 +20723,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-channel-stream-schedule-segment">Update Channel Stream Schedule Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[97]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[98]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates a scheduled broadcast segment.</p>
 
@@ -20792,7 +20994,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-channel-stream-schedule-segment">Delete Channel Stream Schedule Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[98]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[99]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes a broadcast segment from the broadcaster’s streaming schedule.</p>
 
@@ -20879,7 +21081,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="search-categories">Search Categories</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[99]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[100]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the games or categories that match the specified query.</p>
 
@@ -21023,7 +21225,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="search-channels">Search Channels</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[100]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[101]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the channels that match the specified query and have streamed content within the past 6 months.</p>
 
@@ -21261,7 +21463,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-soundtrack-current-track">Get Soundtrack Current Track</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[101]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[102]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the Soundtrack track that the broadcaster is playing.</p>
 
@@ -21497,7 +21699,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-soundtrack-playlist">Get Soundtrack Playlist</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[102]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[103]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the Soundtrack playlist’s tracks.</p>
 
@@ -21731,7 +21933,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-soundtrack-playlists">Get Soundtrack Playlists</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[103]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[104]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of Soundtrack playlists.</p>
 
@@ -21932,7 +22134,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-key">Get Stream Key</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[104]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[105]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the channel’s stream key.</p>
 
@@ -22044,7 +22246,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-streams">Get Streams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[105]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[106]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of all streams. The list is in descending order by the number of viewers watching the stream. Because viewers come and go during a stream, it’s possible to find duplicate or missing streams in the list as you page through the results.</p>
 
@@ -22335,7 +22537,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-followed-streams">Get Followed Streams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[106]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[107]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of broadcasters that the user follows and that are streaming live.</p>
 
@@ -22558,7 +22760,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-stream-marker">Create Stream Marker</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[107]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[108]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a marker to a live stream. A marker is an arbitrary point in a live stream that the broadcaster or editor wants to mark, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).</p>
 
@@ -22715,7 +22917,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-markers">Get Stream Markers</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[108]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[109]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of markers from the user’s most recent stream or from the specified VOD/video. A marker is an arbitrary point in a live stream that the broadcaster or editor marked, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).</p>
 
@@ -22942,7 +23144,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-broadcaster-subscriptions">Get Broadcaster Subscriptions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[109]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[110]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of users that subscribe to the specified broadcaster.</p>
 
@@ -23172,7 +23374,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="check-user-subscription">Check User Subscription</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[110]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[111]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Checks whether the user subscribes to the broadcaster’s channel.</p>
 
@@ -23337,7 +23539,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-all-stream-tags">Get All Stream Tags</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[111]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[112]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. <strong>IMPORTANT</strong> As of February 28, 2023, this endpoint returns an empty array. On July 13, 2023, it will return a 410 response.</p>
 
@@ -23519,7 +23721,7 @@ twitch api get /tags/streams <span class="nt">-q</span> <span class="nv">tag_id<
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-tags">Get Stream Tags</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[112]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[113]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. <strong>IMPORTANT</strong> As of February 28, 2023, this endpoint returns an empty array. On July 13, 2023, it will return a 410 response. If you use this endpoint, please update your code to use <a href="#get-channel-information">Get Channel Information</a>.</p>
 
@@ -23673,7 +23875,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-teams">Get Channel Teams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[113]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[114]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of Twitch teams that the broadcaster is a member of.</p>
 
@@ -23857,7 +24059,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-teams">Get Teams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[114]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[115]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about the specified Twitch team. <a href="https://help.twitch.tv/s/article/twitch-teams">Read More</a></p>
 
@@ -24062,7 +24264,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-users">Get Users</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[115]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[116]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about one or more users.</p>
 
@@ -24248,7 +24450,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-user">Update User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[116]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[117]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the specified user’s information. The user ID in the OAuth token identifies the user whose information you want to update.</p>
 
@@ -24422,7 +24624,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-users-follows">Get Users Follows</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[117]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[118]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about users that are following other users. For example, you can use this endpoint to answer questions like “who is qotrok following,” “who is following qotrok,” or “is user X following user Y.”</p>
 
@@ -24622,7 +24824,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-block-list">Get User Block List</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[118]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[119]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of users that the broadcaster has blocked. <a href="https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat?language=en_US#BlockWhispersandMessagesfromStrangers">Read More</a></p>
 
@@ -24765,7 +24967,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="block-user">Block User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[119]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[120]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Blocks the specified user from interacting with or having contact with the broadcaster. The user ID in the OAuth token identifies the broadcaster who is blocking the user.</p>
 
@@ -24858,7 +25060,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="unblock-user">Unblock User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[120]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[121]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes the user from the broadcaster’s list of blocked users. The user ID in the OAuth token identifies the broadcaster who’s removing the block.</p>
 
@@ -24937,7 +25139,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-extensions">Get User Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[121]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[122]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of all extensions (both active and inactive) that the broadcaster has installed. The user ID in the access token identifies the broadcaster.</p>
 
@@ -25093,7 +25295,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-active-extensions">Get User Active Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[122]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[123]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the active extensions that the broadcaster has installed for each configuration.</p>
 
@@ -25327,7 +25529,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-user-extensions">Update User Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[123]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[124]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates an installed extension’s information. You can update the extension’s activation state, ID, and version number. The user ID in the access token identifies the broadcaster whose extensions you’re updating.</p>
 
@@ -25606,7 +25808,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-videos">Get Videos</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[124]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[125]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about one or more published videos. You may get videos by ID, by user, or by game/category.</p>
 
@@ -25902,7 +26104,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-videos">Delete Videos</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[125]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[126]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Deletes one or more videos. You may delete past broadcasts, highlights, or uploads.</p>
 
@@ -26010,7 +26212,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="send-whisper">Send Whisper</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[126]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[127]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Sends a whisper message to the specified user.</p>
 

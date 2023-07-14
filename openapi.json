@@ -38,6 +38,9 @@
       "name": "Clips"
     },
     {
+      "name": "CCLs"
+    },
+    {
       "name": "Entitlements"
     },
     {
@@ -838,7 +841,13 @@
                           "delay": 0,
                           "tags": [
                             "DevsInTheKnow"
-                          ]
+                          ],
+                          "content_classification_labels": [
+                            "Gambling",
+                            "DrugsIntoxication",
+                            "MatureGame"
+                          ],
+                          "is_branded_content": false
                         }
                       ]
                     }
@@ -895,7 +904,7 @@
                 "$ref": "#/components/schemas/ModifyChannelInformationBody"
               },
               "examples": {
-                "Example": {
+                "Example 1": {
                   "value": {
                     "game_id": "33214",
                     "title": "there are helicopters in the game? REASON TO PLAY FORTNITE found",
@@ -904,6 +913,23 @@
                       "LevelingUp"
                     ]
                   }
+                },
+                "Example 2": {
+                  "value": {
+                    "game_id": "SomeGameID",
+                    "content_classification_labels": [
+                      {
+                        "id": "Gambling",
+                        "is_enabled": true
+                      },
+                      {
+                        "id": "DrugsIntoxication",
+                        "is_enabled": false
+                      }
+                    ],
+                    "is_branded_content": true
+                  },
+                  "description": "Set CCLs for a Channel"
                 }
               }
             }
@@ -911,13 +937,19 @@
         },
         "responses": {
           "204": {
-            "description": "Successfully updated the channel’s properties.\n\n__Examples__\n\n_Request:_\n\n```bash\ncurl -X PATCH 'https://api.twitch.tv/helix/channels?broadcaster_id=41245072' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \\\n-H 'Content-Type: application/json' \\\n--data-raw '{\"game_id\":\"33214\", \"title\":\"there are helicopters in the game? REASON TO PLAY FORTNITE found\", \"broadcaster_language\":\"en\", \"tags\":[\"LevelingUp\"]}'\n```"
+            "description": "Successfully updated the channel’s properties.\n\n__Examples__\n\n_Request:_\n\n```bash\ncurl -X PATCH 'https://api.twitch.tv/helix/channels?broadcaster_id=41245072' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \\\n-H 'Content-Type: application/json' \\\n--data-raw '{\"game_id\":\"33214\", \"title\":\"there are helicopters in the game? REASON TO PLAY FORTNITE found\", \"broadcaster_language\":\"en\", \"tags\":[\"LevelingUp\"]}'\n```\n\nSet CCLs for a Channel\n\n```bash\ncurl -X PATCH\n'https://api.twitch.tv/helix/channels?broadcaster_id=41245072' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \\\n-H 'Content-Type: application/json' \\\n--data-raw '{ \n    \"game_id\": \"SomeGameID\",\n    \"content_classification_labels\": [\n       {\"id\": \"Gambling\", \"is_enabled\": true}, \n       {\"id\": \"DrugsIntoxication\", \"is_enabled\": false}  \n     ],\n    \"is_branded_content\": true\n}'\n```"
           },
           "400": {
-            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The request must update at least one property.\n* The `title` field may not contain an empty string.\n* The ID in `game_id` is not valid.\n* To update the `delay` field, the broadcaster must have partner status.\n* The list in the `tags` field exceeds the maximum number of tags allowed.\n* A tag in the `tags` field exceeds the maximum length allowed.\n* A tag in the `tags` field is empty.\n* A tag in the `tags` field contains special characters or spaces.\n* One or more tags in the `tags` field failed AutoMod review."
+            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The request must update at least one property.\n* The `title` field may not contain an empty string.\n* The ID in `game_id` is not valid.\n* To update the `delay` field, the broadcaster must have partner status.\n* The list in the `tags` field exceeds the maximum number of tags allowed.\n* A tag in the `tags` field exceeds the maximum length allowed.\n* A tag in the `tags` field is empty.\n* A tag in the `tags` field contains special characters or spaces.\n* One or more tags in the `tags` field failed AutoMod review.\n* Game restricted for user's age and region"
           },
           "401": {
-            "description": "* The ID in _broadcaster\\_id_ must match the user ID found in the OAuth token.\n* The Authorization header is required and must specify a user access token.\n* The OAuth token must include the **channel:manage:broadcast** scope.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
+            "description": "* User requests CCL for a channel they don’t own\n* The ID in _broadcaster\\_id_ must match the user ID found in the OAuth token.\n* The Authorization header is required and must specify a user access token.\n* The OAuth token must include the **channel:manage:broadcast** scope.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
+          },
+          "403": {
+            "description": "* User requested gaming CCLs to be added to their channel\n* Unallowed CCLs declared for underaged authorized user in a restricted country"
+          },
+          "409": {
+            "description": "User set the Branded Content flag too frequently"
           },
           "500": {
             "description": ""
@@ -3460,6 +3492,86 @@
         ]
       }
     },
+    "/content_classification_labels": {
+      "get": {
+        "summary": "Gets information about Twitch content classification labels.",
+        "description": "Gets information about Twitch content classification labels.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).",
+        "tags": [
+          "CCLs"
+        ],
+        "externalDocs": {
+          "description": "Get Content Classification Labels",
+          "url": "https://dev.twitch.tv/docs/api/reference#get-content-classification-labels"
+        },
+        "operationId": "get-content-classification-labels",
+        "parameters": [
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "Locale for the Content Classification Labels. You may specify a maximum of 1 locale. Default: `“en-US”`  \nSupported locales: `\"bg-BG\", \"cs-CZ\", \"da-DK\", \"da-DK\", \"de-DE\", \"el-GR\", \"en-GB\", \"en-US\", \"es-ES\", \"es-MX\", \"fi-FI\", \"fr-FR\", \"hu-HU\", \"it-IT\", \"ja-JP\", \"ko-KR\", \"nl-NL\", \"no-NO\", \"pl-PL\", \"pt-BT\", \"pt-PT\", \"ro-RO\", \"ru-RU\", \"sk-SK\", \"sv-SE\", \"th-TH\", \"tr-TR\", \"vi-VN\", \"zh-CN\", \"zh-TW\"`",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved The list of CCLs available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetContentClassificationLabelsResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/content_classification_labels' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "DrugsIntoxication",
+                          "description": "Excessive tobacco glorification or promotion, any marijuana consumption/use, legal drug and alcohol induced intoxication, discussions of illegal drugs.",
+                          "name": "Drugs, Intoxication, or Excessive Tobacco Use"
+                        },
+                        {
+                          "id": "Gambling",
+                          "description": "Participating in online or in-person gambling, poker or fantasy sports, that involve the exchange of real money.",
+                          "name": "Gambling"
+                        },
+                        {
+                          "id": "MatureGame",
+                          "description": "Games that are rated Mature or less suitable for a younger audience.",
+                          "name": "Mature-rated game"
+                        },
+                        {
+                          "id": "ProfanityVulgarity",
+                          "description": "Prolonged, and repeated use of obscenities, profanities, and vulgarities, especially as a regular part of speech.",
+                          "name": "Significant Profanity or Vulgarity"
+                        },
+                        {
+                          "id": "SexualThemes",
+                          "description": "Content that focuses on sexualized physical attributes and activities, sexual topics, or experiences.",
+                          "name": "Sexual Themes"
+                        },
+                        {
+                          "id": "ViolentGraphic",
+                          "description": "Simulations and/or depictions of realistic violence, gore, extreme injury, or death.",
+                          "name": "Violent and Graphic Depictions"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
+      }
+    },
     "/entitlements/drops": {
       "get": {
         "summary": "Gets an organization’s list of entitlements that have been granted to a game, a user, or both.",
@@ -5186,7 +5298,7 @@
     "/guest_star/channel_settings": {
       "get": {
         "summary": "BETA Gets the channel settings for configuration of the Guest Star feature for a particular host.",
-        "description": "BETA Gets the channel settings for configuration of the Guest Star feature for a particular host.\n\n__Authorization:__\n\n* Query parameter `broadcaster_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)\n* Requires OAuth Scope: `channel:read:guest_star` or `channel:manage:guest_star`",
+        "description": "BETA Gets the channel settings for configuration of the Guest Star feature for a particular host.\n\n__Authorization:__\n\n* Query parameter `moderator_id` must match the `user_id` in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)\n* Requires OAuth Scope: `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star` or `moderator:manage:guest_star`",
         "tags": [
           "Guest Star"
         ],
@@ -5204,11 +5316,23 @@
               "type": "string"
             },
             "required": true
+          },
+          {
+            "name": "moderator_id",
+            "in": "query",
+            "description": "The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room. This ID must match the user ID in the user access token.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
           }
         ],
         "responses": {
           "400": {
-            "description": "Missing _broadcaster\\_id_"
+            "description": "* Missing _broadcaster\\_id_\n* Missing _moderator\\_id_"
+          },
+          "403": {
+            "description": "Insufficient authorization for viewing channel’s Guest Star settings"
           }
         }
       },
@@ -5256,7 +5380,7 @@
     "/guest_star/session": {
       "get": {
         "summary": "BETA Gets information about an ongoing Guest Star session for a particular channel.",
-        "description": "BETA Gets information about an ongoing Guest Star session for a particular channel.\n\nYou may retrieve the session by a broadcaster channel ID, or by a previously retrieved session ID.\n\n__Authorization:__\n\n* Requires OAuth Scope: `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star` or `moderator:manage:guest_star`\n* Guests must be either invited or assigned a slot within the session",
+        "description": "BETA Gets information about an ongoing Guest Star session for a particular channel.\n\n__Authorization:__\n\n* Requires OAuth Scope: `channel:read:guest_star`, `channel:manage:guest_star`, `moderator:read:guest_star` or `moderator:manage:guest_star`\n* Guests must be either invited or assigned a slot within the session",
         "tags": [
           "Guest Star"
         ],
@@ -12362,7 +12486,9 @@
           "game_id",
           "title",
           "delay",
-          "tags"
+          "tags",
+          "content_classification_labels",
+          "is_branded_content"
         ],
         "properties": {
           "broadcaster_id": {
@@ -12404,6 +12530,17 @@
             "items": {
               "type": "string"
             }
+          },
+          "content_classification_labels": {
+            "type": "array",
+            "description": "The CCLs applied to the channel.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "is_branded_content": {
+            "type": "boolean",
+            "description": "Boolean flag indicating if the channel has branded content."
           }
         }
       },
@@ -12448,6 +12585,14 @@
             "items": {
               "type": "string"
             }
+          },
+          "content_classification_labels": {
+            "type": "Label[]",
+            "description": "List of labels that should be set as the Channel’s CCLs."
+          },
+          "is_branded_content": {
+            "type": "boolean",
+            "description": "Boolean flag indicating if the channel has branded content."
           }
         }
       },
@@ -14214,6 +14359,43 @@
           }
         }
       },
+      "ContentClassificationLabel": {
+        "type": "object",
+        "required": [
+          "id",
+          "description",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the CCL."
+          },
+          "description": {
+            "type": "string",
+            "description": "Localized description of the CCL."
+          },
+          "name": {
+            "type": "string",
+            "description": "Localized name of the CCL."
+          }
+        }
+      },
+      "GetContentClassificationLabelsResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "A list that contains information about the available content classification labels.",
+            "items": {
+              "$ref": "#/components/schemas/ContentClassificationLabel"
+            }
+          }
+        }
+      },
       "DropsEntitlement": {
         "type": "object",
         "required": [
@@ -15625,7 +15807,7 @@
           }
         }
       },
-      "Session": {
+      "GuestStarSession": {
         "type": "object",
         "required": [
           "id",
@@ -15694,11 +15876,11 @@
               },
               "is_guest_enabled": {
                 "type": "boolean",
-                "description": "Flag determining whether the guest is allowing their audio/video to be transmitted to the session."
+                "description": "Flag determining whether the guest is allowing their audio to be transmitted to the session."
               },
               "is_available": {
                 "type": "boolean",
-                "description": "Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session."
+                "description": "Flag determining whether the guest has an appropriate audio device available to be transmitted to the session."
               }
             }
           },
@@ -15713,15 +15895,15 @@
             "properties": {
               "is_host_enabled": {
                 "type": "boolean",
-                "description": "Flag determining whether the host is allowing the guest’s audio to be seen or heard within the session."
+                "description": "Flag determining whether the host is allowing the guest’s video to be seen or heard within the session."
               },
               "is_guest_enabled": {
                 "type": "boolean",
-                "description": "Flag determining whether the guest is allowing their audio/video to be transmitted to the session."
+                "description": "Flag determining whether the guest is allowing their video to be transmitted to the session."
               },
               "is_available": {
                 "type": "boolean",
-                "description": "Flag determining whether the guest has an appropriate audio/video device available to be transmitted to the session."
+                "description": "Flag determining whether the guest has an appropriate video device available to be transmitted to the session."
               }
             }
           }
@@ -15737,7 +15919,7 @@
             "type": "array",
             "description": "Summary of the session details",
             "items": {
-              "$ref": "#/components/schemas/Session"
+              "$ref": "#/components/schemas/GuestStarSession"
             }
           }
         }
@@ -15752,7 +15934,7 @@
             "type": "array",
             "description": "Summary of the session details.",
             "items": {
-              "$ref": "#/components/schemas/Session"
+              "$ref": "#/components/schemas/GuestStarSession"
             }
           }
         }
@@ -15767,12 +15949,12 @@
             "type": "array",
             "description": "Summary of the session details when the session was ended.",
             "items": {
-              "$ref": "#/components/schemas/Session"
+              "$ref": "#/components/schemas/GuestStarSession"
             }
           }
         }
       },
-      "Invite": {
+      "GuestStarInvite": {
         "type": "object",
         "required": [
           "user_id",
@@ -15825,7 +16007,7 @@
             "type": "array",
             "description": "A list of invite objects describing the invited user as well as their ready status.",
             "items": {
-              "$ref": "#/components/schemas/Invite"
+              "$ref": "#/components/schemas/GuestStarInvite"
             }
           }
         }
@@ -19487,9 +19669,9 @@
               "analytics:read:extensions": "View analytics data for the Twitch Extensions owned by the authenticated account.",
               "analytics:read:games": "View analytics data for the games owned by the authenticated account.",
               "bits:read": "View Bits information for a channel.",
-              "channel:edit:commercial": "Run commercials on a channel.",
               "channel:manage:broadcast": "Manage a channel’s broadcast configuration, including updating channel configuration and managing stream markers and stream tags.",
               "channel:read:charity": "Read charity campaign details and user donations on your channel.",
+              "channel:edit:commercial": "Run commercials on a channel.",
               "channel:read:editors": "View a list of users with the editor role for a channel.",
               "channel:manage:extensions": "Manage a channel’s Extension configuration, including activating Extensions.",
               "channel:read:goals": "View Creator Goals for a channel.",
