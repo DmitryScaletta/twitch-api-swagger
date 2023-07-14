@@ -1,6 +1,7 @@
 import { JSDOM } from 'jsdom';
 import type { OpenApi } from '../types';
 import { OPEN_API_DESCRIPTION, OPEN_API_TITLE } from './constants.js';
+import normalizeReferenceHtml from './normalizeReferenceHtml.js';
 import addUndocumentedApi from './addUndocumentedApi.js';
 import parseApiReference from './parseApiReference.js';
 import parseEndpoint from './parseEndpoint.js';
@@ -13,6 +14,7 @@ const generateOpenApi = (
   openApi: OpenApi,
 ): OpenApi => {
   const { document } = new JSDOM(html).window;
+  normalizeReferenceHtml(document);
   const apiReference = parseApiReference(document);
   const tags = new Set<string>();
   apiReference.forEach(({ tag }) => tags.add(tag));
@@ -35,10 +37,8 @@ const generateOpenApi = (
   const schemas = openApi.components.schemas;
   openApi.paths['/tags/streams']!['get'].deprecated = true;
   openApi.paths['/streams/tags']!['get'].deprecated = true;
-  openApi.paths['/streams/tags']!['put'].deprecated = true;
   schemas['GetAllStreamTagsResponse']!.deprecated = true;
   schemas['GetStreamTagsResponse']!.deprecated = true;
-  schemas['ReplaceStreamTagsBody']!.deprecated = true;
   schemas['Channel']!.properties!['tag_ids']!.deprecated = true;
   schemas['Stream']!.properties!['tag_ids']!.deprecated = true;
 

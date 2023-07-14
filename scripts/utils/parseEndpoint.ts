@@ -110,12 +110,6 @@ const parseEndpoint =
 
       // URL
       if (currentSection.toLowerCase().includes('url')) {
-        // no method
-        // https://dev.twitch.tv/docs/api/reference#get-stream-key
-        if (id === 'get-stream-key') {
-          el.textContent = 'GET ' + el.textContent;
-        }
-
         [method, url] = el.textContent!.trim().split(' ') as [string, string];
       }
 
@@ -215,22 +209,6 @@ const parseEndpoint =
       if (currentSection.toLowerCase().includes('response body')) {
         if (el.tagName === 'TABLE') {
           let fieldSchemas = parseTableSchema(el);
-
-          // No "data" field in the response body
-          // https://dev.twitch.tv/docs/api/reference#create-clip
-          if (id === 'create-clip') {
-            fieldSchemas = [
-              {
-                name: 'data',
-                type: 'Object[]',
-                required: true,
-                description: '',
-                depth: 0,
-                enumValues: null,
-                children: fieldSchemas,
-              },
-            ];
-          }
 
           const setRequired = (f: FieldSchema) => {
             if (f.required === null) {
@@ -460,16 +438,13 @@ const parseEndpoint =
         },
       };
     } else if (responseCodeOk === '204') {
-      if (examplesOk.length > 1) {
-        throw new Error('Too many examples for 204: ' + id);
-      }
       responseObjectOk.description = [
         responseObjectOk.description!,
         '__Examples__',
-        examplesOk[0]!.description,
+        ...examplesOk.map((example) => example.description),
       ].join('\n\n');
     } else {
-      throw new Error('Wrong response code: ' + responseCodeOk + ' ' + id);
+      console.warn('No OK response code: ' + id);
     }
 
     if (examplesError.length > 0) {
