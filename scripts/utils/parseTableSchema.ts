@@ -79,6 +79,7 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
         'tiers are:',
         'themes are:',
         'following named color values',
+        'following values',
       ].some((s) => descriptionEl.textContent!.includes(s))
     ) {
       let liValues: string[] = [];
