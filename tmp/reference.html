@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-07-11T10:03:13-07:00">
+<meta property="article:published_time" content="2023-07-17T15:41:33-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2023-07-11T10:03:13-07:00","datePublished":"2023-07-11T10:03:13-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2023-07-17T15:41:33-07:00","datePublished":"2023-07-17T15:41:33-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -413,12 +413,6 @@
 			<dd><a href="#search-categories">Search Categories</a></dd>
 		
 			<dd><a href="#search-channels">Search Channels</a></dd>
-		
-			<dd><a href="#get-soundtrack-current-track">Get Soundtrack Current Track</a></dd>
-		
-			<dd><a href="#get-soundtrack-playlist">Get Soundtrack Playlist</a></dd>
-		
-			<dd><a href="#get-soundtrack-playlists">Get Soundtrack Playlists</a></dd>
 		
 			<dd><a href="#get-stream-key">Get Stream Key</a></dd>
 		
@@ -1895,39 +1889,6 @@
 							
 							<td><a href="#search-channels">Search Channels</a></td>
 							<td><p>Gets the channels that match the specified query and have streamed content within the past 6 months.</p>
-</td>
-						</tr>
-					
-				
-					
-						<tr>
-							
-								<td>Music</td>
-							
-							<td><a href="#get-soundtrack-current-track">Get Soundtrack Current Track</a></td>
-							<td><p>Gets the Soundtrack track that the broadcaster is playing.</p>
-</td>
-						</tr>
-					
-				
-					
-						<tr>
-							
-								<td>Music</td>
-							
-							<td><a href="#get-soundtrack-playlist">Get Soundtrack Playlist</a></td>
-							<td><p>Gets the Soundtrack playlist’s tracks.</p>
-</td>
-						</tr>
-					
-				
-					
-						<tr>
-							
-								<td>Music</td>
-							
-							<td><a href="#get-soundtrack-playlists">Get Soundtrack Playlists</a></td>
-							<td><p>Gets a list of Soundtrack playlists.</p>
 </td>
 						</tr>
 					
@@ -21462,679 +21423,8 @@ END:VCALENDAR%
 
 	<section class="doc-content">
 		<section class="left-docs">
-			<h2 id="get-soundtrack-current-track">Get Soundtrack Current Track</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[102]" data-cms-editor-link-style="modal">&#x270E;</a>
-			
-				<p>Gets the Soundtrack track that the broadcaster is playing.</p>
-
-<h3>Authorization</h3>
-
-<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
-
-<h3>URL</h3>
-
-<p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/soundtrack/current_track</code></p>
-
-<h3>Request Query Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Type</th>
-      <th>Required?</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>broadcaster_id</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>The ID of the broadcaster that’s playing a Soundtrack track.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Body</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>data</td>
-      <td>Object[]</td>
-      <td>A list that contains the single Soundtrack track that the broadcaster is playing.</td>
-    </tr>
-    <tr>
-      <td>   track</td>
-      <td>Object</td>
-      <td>Describes a track.</td>
-    </tr>
-    <tr>
-      <td>      album</td>
-      <td>Object</td>
-      <td>Describes the album that the track is found on.</td>
-    </tr>
-    <tr>
-      <td>        id</td>
-      <td>String</td>
-      <td>The album’s ASIN (Amazon Standard Identification Number).</td>
-    </tr>
-    <tr>
-      <td>        image_url</td>
-      <td>String</td>
-      <td>A URL to the album’s cover art.</td>
-    </tr>
-    <tr>
-      <td>        name</td>
-      <td>String</td>
-      <td>The album’s name. If the album contains explicit content, the name will contain <strong>[Explicit]</strong> in the string. For example, Let It Die [Explicit].</td>
-    </tr>
-    <tr>
-      <td>     artists</td>
-      <td>Object[]</td>
-      <td>The artists included on the track.</td>
-    </tr>
-    <tr>
-      <td>        creator_channel_id</td>
-      <td>String</td>
-      <td>The ID of the Twitch user that created the track. The string is empty if a Twitch user didn’t create the track.</td>
-    </tr>
-    <tr>
-      <td>        id</td>
-      <td>String</td>
-      <td>The artist’s ASIN (Amazon Standard Identification Number).</td>
-    </tr>
-    <tr>
-      <td>        name</td>
-      <td>String</td>
-      <td>The artist’s name. This can be the band’s name or the solo artist’s name.</td>
-    </tr>
-    <tr>
-      <td>     duration</td>
-      <td>Integer</td>
-      <td>The duration of the track, in seconds.</td>
-    </tr>
-    <tr>
-      <td>     id</td>
-      <td>String</td>
-      <td>The track’s ASIN (Amazon Standard Identification Number).</td>
-    </tr>
-    <tr>
-      <td>     isrc</td>
-      <td>String</td>
-      <td>The track’s ISRC (International Standard Recording Code).</td>
-    </tr>
-    <tr>
-      <td>     title</td>
-      <td>String</td>
-      <td>The track’s title. If the track contains explicit content, the title will contain <strong>[Explicit]</strong> in the string. For example, Let It Die [Explicit].</td>
-    </tr>
-    <tr>
-      <td>   source</td>
-      <td>Object</td>
-      <td>The source of the track that’s currently playing. For example, a playlist or station.</td>
-    </tr>
-    <tr>
-      <td>     content_type</td>
-      <td>String</td>
-      <td>The type of content that <code class="highlighter-rouge">id</code> maps to. Possible values are: <ul><li>PLAYLIST</li><li>STATION</li></ul></td>
-    </tr>
-    <tr>
-      <td>      id</td>
-      <td>String</td>
-      <td>The playlist’s or station’s ASIN (Amazon Standard Identification Number).</td>
-    </tr>
-    <tr>
-      <td>      image_url</td>
-      <td>String</td>
-      <td>A URL to the playlist’s or station’s image art.</td>
-    </tr>
-    <tr>
-      <td>      soundtrack_url</td>
-      <td>String</td>
-      <td>A URL to the playlist on Soundtrack. The string is empty if <code class="highlighter-rouge">content-type</code> is STATION.</td>
-    </tr>
-    <tr>
-      <td>      spotify_url</td>
-      <td>String</td>
-      <td>A URL to the playlist on Spotify. The string is empty if <code class="highlighter-rouge">content-type</code> is STATION.</td>
-    </tr>
-    <tr>
-      <td>      title</td>
-      <td>String</td>
-      <td>The playlist’s or station’s title.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Codes</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the track that the broadcaster is playing.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must specify an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID in the Client-Id header must match the client ID in the access token.</li></ul></td>
-    </tr>
-    <tr>
-      <td>404 Not Found</td>
-      <td><ul><li>The broadcaster is not playing a track.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
-
-			
-		</section>
-
-	
-			<section class="right-code">
-				<h3>Example Request</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/soundtrack/current_track?broadcaster_id=1234'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Authorization: Bearer 4a4x78f5wqvkybms7mxfist3jmzul'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Client-Id: t214nt8z1rdtbj69hyarjvh5mi6fh'</span>
-</code></pre></div></div>
-
-<h3>Example Response</h3>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"track"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"artists"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B07S7JG3TK"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Enoth"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"creator_channel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39051113"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B08D6QFS38"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"isrc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CCXXXYYNNNNN"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">153</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Please stay"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"album"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B08D6PMKYL"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Summer 2020"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://m.media-amazon.com/images/I/51zs1JZY8tL.jpg"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B08HCW84SF"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"content_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PLAYLIST"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Beats To Stream To"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://m.media-amazon.com/images/I/419WuvMXzEL.jpg"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"soundtrack_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://soundtrack.twitch.tv/playlist?playlistID=B08HCW84SF"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"spotify_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://open.spotify.com/playlist/1LOP14236oTUscowY3NvYN"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-			</section>
-	
-	</section>
-
-	<section class="doc-content">
-		<section class="left-docs">
-			<h2 id="get-soundtrack-playlist">Get Soundtrack Playlist</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[103]" data-cms-editor-link-style="modal">&#x270E;</a>
-			
-				<p>Gets the Soundtrack playlist’s tracks.</p>
-
-<h3>Authorization</h3>
-
-<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
-
-<h3>URL</h3>
-
-<p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/soundtrack/playlist</code></p>
-
-<h3>Request Query Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Type</th>
-      <th>Required?</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>The ID of the playlist to get.</td>
-    </tr>
-    <tr>
-      <td>first</td>
-      <td>Integer</td>
-      <td>No</td>
-      <td>The maximum number of items to return per page in the response. The minimum page size is 1 item per page and the maximum is 50 items per page. The default is 20.</td>
-    </tr>
-    <tr>
-      <td>after</td>
-      <td>String</td>
-      <td>No</td>
-      <td>The cursor used to get the next page of results. The <strong>Pagination</strong> object in the response contains the cursor’s value. <a href="/docs/api/guide#pagination">Read More</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Body</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>data</td>
-      <td>Object[]</td>
-      <td>The playlist’s list of tracks.</td>
-    </tr>
-    <tr>
-      <td>   album</td>
-      <td>Object</td>
-      <td>The album that includes this track.</td>
-    </tr>
-    <tr>
-      <td>      id</td>
-      <td>String</td>
-      <td>The album’s ASIN (Amazon Standard Identification Number).</td>
-    </tr>
-    <tr>
-      <td>      image_url</td>
-      <td>String</td>
-      <td>A URL to the album’s cover art.</td>
-    </tr>
-    <tr>
-      <td>      name</td>
-      <td>String</td>
-      <td>The album’s name.  If the album contains explicit content, the name will contain <strong>[Explicit]</strong> in the string. For example, Let It Die [Explicit].</td>
-    </tr>
-    <tr>
-      <td>   artists</td>
-      <td>Object[]</td>
-      <td>The artists included on the track.</td>
-    </tr>
-    <tr>
-      <td>      creator_channel_id</td>
-      <td>String</td>
-      <td>The ID of the Twitch user that created the track. The string is empty if a Twitch user didn’t create the track.</td>
-    </tr>
-    <tr>
-      <td>      id</td>
-      <td>String</td>
-      <td>The artist’s ASIN (Amazon Standard Identification Number).</td>
-    </tr>
-    <tr>
-      <td>      name</td>
-      <td>String</td>
-      <td>The artist’s name. This can be the band’s name or the solo artist’s name.</td>
-    </tr>
-    <tr>
-      <td>   duration</td>
-      <td>Integer</td>
-      <td>The duration of the track, in seconds.</td>
-    </tr>
-    <tr>
-      <td>   id</td>
-      <td>String</td>
-      <td>The track’s ASIN (Amazon Standard Identification Number).</td>
-    </tr>
-    <tr>
-      <td>   isrc</td>
-      <td>String</td>
-      <td>The track’s ISRC (International Standard Recording Code).</td>
-    </tr>
-    <tr>
-      <td>   title</td>
-      <td>String</td>
-      <td>The track’s title. If the track contains explicit content, the title will contain <strong>[Explicit]</strong> in the string. For example, Let It Die [Explicit].</td>
-    </tr>
-    <tr>
-      <td>pagination</td>
-      <td>Object</td>
-      <td>Contains the information used to page through a list of results. The object is empty if there are no more pages to page through. <a href="/docs/api/guide#pagination">Read More</a></td>
-    </tr>
-    <tr>
-      <td>   cursor</td>
-      <td>String</td>
-      <td>The cursor used to get the next page of results. Use the cursor to set the request’s <em>after</em> query parameter.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Codes</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the playlist.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>id</i> query parameter is required.</li><li>The ID in the <i>id</i> query parameter is not a valid playlist ASIN.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must specify an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID in the Client-Id header must match the client ID in the access token.</li></ul></td>
-    </tr>
-    <tr>
-      <td>404 Not Found</td>
-      <td><ul><li>The specified playlist was not found.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
-
-			
-		</section>
-
-	
-			<section class="right-code">
-				<h3>Example Request</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/soundtrack/playlist?id=B0912YMKSL'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Authorization: Bearer 4a4x78f5wqvkybms7mxfist3jmzul'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Client-Id: t214nt8z1rdtbj69hyarjvh5mi6fh'</span>
-</code></pre></div></div>
-
-<h3>Example Response</h3>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"artists"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B002F8OLPK"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BJ The Chicago Kid"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"creator_channel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B09J7FZ92D"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"isrc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QM24S2106597"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">210</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Smooth [Explicit]"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"album"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B09J7B37VS"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Smooth [Explicit]"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://m.media-amazon.com/images/I/316SDaD-XQL.jpg"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"artists"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B071ZL7NDT"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23 Unofficial"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"creator_channel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"647990463"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B073PHDDSK"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KALLITECHNIS"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"creator_channel_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B09C8344GZ"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"isrc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QM24S2105530"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">154</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OUTTA MY WAY"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"album"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B09C794J2L"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OUTTA MY WAY"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://m.media-amazon.com/images/I/515HYAEtpeL.jpg"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6MjB9fQ"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-			</section>
-	
-	</section>
-
-	<section class="doc-content">
-		<section class="left-docs">
-			<h2 id="get-soundtrack-playlists">Get Soundtrack Playlists</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[104]" data-cms-editor-link-style="modal">&#x270E;</a>
-			
-				<p>Gets a list of Soundtrack playlists.</p>
-
-<p>The response contains information about the playlists, such as their titles and descriptions. To get a playlist’s tracks, use <a href="#get-soundtrack-playlist">Get Soundtrack Playlist</a> endpoint.</p>
-
-<h3>Authorization</h3>
-
-<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
-
-<h3>URL</h3>
-
-<p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/soundtrack/playlists</code></p>
-
-<h3>Request Query Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Type</th>
-      <th>Required?</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>String</td>
-      <td>No</td>
-      <td>The ID of the playlist to get. Specify an ID only if you want to get a single playlist instead of all playlists.</td>
-    </tr>
-    <tr>
-      <td>first</td>
-      <td>Integer</td>
-      <td>No</td>
-      <td>The maximum number of items to return per page in the response. The minimum page size is 1 item per page and the maximum is 50 items per page. The default is 20.</td>
-    </tr>
-    <tr>
-      <td>after</td>
-      <td>String</td>
-      <td>No</td>
-      <td>The cursor used to get the next page of results. The <strong>Pagination</strong> object in the response contains the cursor’s value. <a href="/docs/api/guide#pagination">Read More</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Body</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>data</td>
-      <td>Object[]</td>
-      <td>The list of Soundtrack playlists.</td>
-    </tr>
-    <tr>
-      <td>   description</td>
-      <td>String</td>
-      <td>A short description about the music that the playlist includes.</td>
-    </tr>
-    <tr>
-      <td>   id</td>
-      <td>String</td>
-      <td>The playlist’s ASIN (Amazon Standard Identification Number).</td>
-    </tr>
-    <tr>
-      <td>   image_url</td>
-      <td>String</td>
-      <td>A URL to the playlist’s image art. Is empty if the playlist doesn’t include art.</td>
-    </tr>
-    <tr>
-      <td>   title</td>
-      <td>String</td>
-      <td>The playlist’s title.</td>
-    </tr>
-    <tr>
-      <td>pagination</td>
-      <td>Object</td>
-      <td>Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. <a href="/docs/api/guide#pagination">Read More</a></td>
-    </tr>
-    <tr>
-      <td>   cursor</td>
-      <td>String</td>
-      <td>The cursor used to get the next page of results. Use the cursor to set the request’s <em>after</em> query parameter.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Codes</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the list of playlists.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The ID in the <i>id</i> query parameter is not a valid playlist ASIN.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must specify an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID in the Client-Id header must match the client ID in the access token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
-
-			
-		</section>
-
-	
-			<section class="right-code">
-				<h3>Example Request</h3>
-
-<p>Gets all playlists.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/soundtrack/playlists'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Authorization: Bearer 4a4x78f5wqvkybms7mxfist3jmzul'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Client-Id: t214nt8z1rdtbj69hyarjvh5mi6fh'</span>
-</code></pre></div></div>
-
-<h3>Example Response</h3>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Label Spotlight: Radio Juicy"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B08P3N4ZPD"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://m.media-amazon.com/images/I/517kGzeaRhL.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Journey through boom-bap, lo-fi, trap and ambient sounds, courtesy of esteemed label Radio Juicy."</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fall Days"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B09LVX24K7"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://m.media-amazon.com/images/I/41w3M-1KfXL.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turn a new leaf with these chill pop &amp; indie tunes."</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Release Spotlight: JVNA"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B09M7H78YL"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://m.media-amazon.com/images/I/419V2D2OlML.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Twitch streamer, singer-songwriter and producer JVNA presents her debut album </span><span class="se">\"</span><span class="s2">Hope in Chaos</span><span class="se">\"</span><span class="s2">."</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Among Us"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B08ZDWR371"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://m.media-amazon.com/images/I/414O3CYQguL.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Traverse space, do tasks, and eject the Impostors in this official Among Us playlist!"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6MjB9fQ"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<h3>Example Request</h3>
-
-<p>Gets a single playlist.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/soundtrack/playlists?id=B0912YMKSL'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Authorization: Bearer 4a4x78f5wqvkybms7mxfist3jmzul'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Client-Id: t214nt8z1rdtbj69hyarjvh5mi6fh'</span>
-</code></pre></div></div>
-
-<h3>Example Response</h3>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Night Shift"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"B0912YMKSL"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://m.media-amazon.com/images/I/41UoIaB4VaL.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"R&amp;B to ride out to."</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-			</section>
-	
-	</section>
-
-	<section class="doc-content">
-		<section class="left-docs">
 			<h2 id="get-stream-key">Get Stream Key</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[105]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[102]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the channel’s stream key.</p>
 
@@ -22246,7 +21536,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-streams">Get Streams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[106]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[103]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of all streams. The list is in descending order by the number of viewers watching the stream. Because viewers come and go during a stream, it’s possible to find duplicate or missing streams in the list as you page through the results.</p>
 
@@ -22537,7 +21827,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-followed-streams">Get Followed Streams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[107]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[104]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of broadcasters that the user follows and that are streaming live.</p>
 
@@ -22760,7 +22050,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-stream-marker">Create Stream Marker</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[108]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[105]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a marker to a live stream. A marker is an arbitrary point in a live stream that the broadcaster or editor wants to mark, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).</p>
 
@@ -22917,7 +22207,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-markers">Get Stream Markers</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[109]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[106]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of markers from the user’s most recent stream or from the specified VOD/video. A marker is an arbitrary point in a live stream that the broadcaster or editor marked, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).</p>
 
@@ -23144,7 +22434,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-broadcaster-subscriptions">Get Broadcaster Subscriptions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[110]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[107]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of users that subscribe to the specified broadcaster.</p>
 
@@ -23374,7 +22664,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="check-user-subscription">Check User Subscription</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[111]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[108]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Checks whether the user subscribes to the broadcaster’s channel.</p>
 
@@ -23539,7 +22829,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-all-stream-tags">Get All Stream Tags</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[112]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[109]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. <strong>IMPORTANT</strong> As of February 28, 2023, this endpoint returns an empty array. On July 13, 2023, it will return a 410 response.</p>
 
@@ -23721,7 +23011,7 @@ twitch api get /tags/streams <span class="nt">-q</span> <span class="nv">tag_id<
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-tags">Get Stream Tags</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[113]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[110]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. <strong>IMPORTANT</strong> As of February 28, 2023, this endpoint returns an empty array. On July 13, 2023, it will return a 410 response. If you use this endpoint, please update your code to use <a href="#get-channel-information">Get Channel Information</a>.</p>
 
@@ -23875,7 +23165,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-teams">Get Channel Teams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[114]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[111]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of Twitch teams that the broadcaster is a member of.</p>
 
@@ -24059,7 +23349,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-teams">Get Teams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[115]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[112]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about the specified Twitch team. <a href="https://help.twitch.tv/s/article/twitch-teams">Read More</a></p>
 
@@ -24264,7 +23554,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-users">Get Users</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[116]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[113]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about one or more users.</p>
 
@@ -24450,7 +23740,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-user">Update User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[117]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[114]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the specified user’s information. The user ID in the OAuth token identifies the user whose information you want to update.</p>
 
@@ -24624,7 +23914,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-users-follows">Get Users Follows</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[118]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[115]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about users that are following other users. For example, you can use this endpoint to answer questions like “who is qotrok following,” “who is following qotrok,” or “is user X following user Y.”</p>
 
@@ -24824,7 +24114,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-block-list">Get User Block List</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[119]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[116]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of users that the broadcaster has blocked. <a href="https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat?language=en_US#BlockWhispersandMessagesfromStrangers">Read More</a></p>
 
@@ -24967,7 +24257,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="block-user">Block User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[120]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[117]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Blocks the specified user from interacting with or having contact with the broadcaster. The user ID in the OAuth token identifies the broadcaster who is blocking the user.</p>
 
@@ -25060,7 +24350,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="unblock-user">Unblock User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[121]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[118]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes the user from the broadcaster’s list of blocked users. The user ID in the OAuth token identifies the broadcaster who’s removing the block.</p>
 
@@ -25139,7 +24429,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-extensions">Get User Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[122]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[119]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of all extensions (both active and inactive) that the broadcaster has installed. The user ID in the access token identifies the broadcaster.</p>
 
@@ -25295,7 +24585,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-active-extensions">Get User Active Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[123]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[120]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the active extensions that the broadcaster has installed for each configuration.</p>
 
@@ -25529,7 +24819,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-user-extensions">Update User Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[124]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[121]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates an installed extension’s information. You can update the extension’s activation state, ID, and version number. The user ID in the access token identifies the broadcaster whose extensions you’re updating.</p>
 
@@ -25808,7 +25098,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-videos">Get Videos</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[125]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[122]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about one or more published videos. You may get videos by ID, by user, or by game/category.</p>
 
@@ -26104,7 +25394,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-videos">Delete Videos</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[126]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[123]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Deletes one or more videos. You may delete past broadcasts, highlights, or uploads.</p>
 
@@ -26212,7 +25502,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="send-whisper">Send Whisper</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[127]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[124]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Sends a whisper message to the specified user.</p>
 
