@@ -57,7 +57,10 @@ const normalizeReferenceHtml = (document: Document) => {
   {
     const el = getDocsEl('create-clip').querySelectorAll('table')[1]!;
     el.innerHTML = el.innerHTML
-      .replace('<tbody>', '<tr><td>data</td><td>Object[]</td><td></td></tr>')
+      .replace(
+        '<tbody>',
+        '<tbody><tr><td>data</td><td>Object[]</td><td></td></tr>',
+      )
       .replace('<td>edit_url</td>', '<td>&nbsp;&nbsp;&nbsp;edit_url</td>')
       .replace('<td>id</td>', '<td>&nbsp;&nbsp;&nbsp;id</td>');
   }
