@@ -1,9 +1,6 @@
 import type { FieldSchema } from '../types';
 import parseMarkdown from './parseMarkdown.js';
 
-// TODO: add default value and enum for the `locale` query parameter
-// https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
-
 const parseTableSchema = (table: Element): FieldSchema[] => {
   const fieldSchemas: FieldSchema[] = [];
 
@@ -43,12 +40,26 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
     const descriptionEl = tr.children[descriptionIdx]!;
 
     const name = parameterEl?.textContent?.trim()!;
+    const descriptionTextLower = descriptionEl.textContent!.toLowerCase();
 
     // type
     const type = typeEl?.textContent?.trim()!;
 
     // required
+    // Not required description examples:
+    //   NOTE: This field is required only if you don’t specify the id query parameter.
+    //   The response includes this field only if
+    //   The object includes this field only if
+    //   Specify this field only if
+    //   Included only if
     let required: FieldSchema['required'] = null;
+    if (
+      ['required only if', 'included only if', 'this field only if'].some((s) =>
+        descriptionTextLower.includes(s),
+      )
+    ) {
+      required = false;
+    }
     const requiredText = requiredEl?.textContent?.trim();
     if (requiredText) required = requiredText === 'Yes';
 
@@ -67,8 +78,13 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
 
     const description = parseMarkdown(descriptionEl!.innerHTML!);
 
+    // TODO: min, max, default
+
     // enum
-    // TODO: "Valid values are", "Possible values are" without ul li
+    // TODO: "Valid values are", "Possible values are" without ul li (follower_mode_duration, slow_mode_wait_time)
+    // https://dev.twitch.tv/docs/api/reference/#update-chat-settings
+    // TODO: add default value and enum for the `locale` query parameter
+    // https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
     // TODO: whisper-<user-id>
     let enumValues: FieldSchema['enumValues'] = null;
     if (
@@ -80,7 +96,7 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
         'themes are:',
         'following named color values',
         'following values',
-      ].some((s) => descriptionEl.textContent!.includes(s))
+      ].some((s) => descriptionTextLower.includes(s))
     ) {
       let liValues: string[] = [];
       descriptionEl.querySelectorAll('ul li').forEach((li) => {
