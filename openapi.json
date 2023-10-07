@@ -13726,9 +13726,6 @@
           "emote_mode",
           "follower_mode",
           "follower_mode_duration",
-          "moderator_id",
-          "non_moderator_chat_delay",
-          "non_moderator_chat_delay_duration",
           "slow_mode",
           "slow_mode_wait_time",
           "subscriber_mode",
@@ -13858,7 +13855,6 @@
           "emote_mode",
           "follower_mode",
           "follower_mode_duration",
-          "moderator_id",
           "non_moderator_chat_delay",
           "non_moderator_chat_delay_duration",
           "slow_mode",
@@ -18127,9 +18123,6 @@
           "broadcaster_id",
           "broadcaster_login",
           "broadcaster_name",
-          "gifter_id",
-          "gifter_login",
-          "gifter_name",
           "is_gift",
           "tier"
         ],
@@ -18455,7 +18448,6 @@
           "profile_image_url",
           "offline_image_url",
           "view_count",
-          "email",
           "created_at"
         ],
         "properties": {
