@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-07-17T15:41:33-07:00">
+<meta property="article:published_time" content="2023-10-05T11:15:02-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2023-07-17T15:41:33-07:00","datePublished":"2023-07-17T15:41:33-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2023-10-05T11:15:02-07:00","datePublished":"2023-10-05T11:15:02-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -439,8 +439,6 @@
 			<dd><a href="#get-users">Get Users</a></dd>
 		
 			<dd><a href="#update-user">Update User</a></dd>
-		
-			<dd><a href="#get-users-follows">Get Users Follows</a></dd>
 		
 			<dd><a href="#get-user-block-list">Get User Block List</a></dd>
 		
@@ -2032,17 +2030,6 @@
 							
 							<td><a href="#update-user">Update User</a></td>
 							<td><p>Updates the user’s information.</p>
-</td>
-						</tr>
-					
-				
-					
-						<tr>
-							
-								<td>Users</td>
-							
-							<td><a href="#get-users-follows">Get Users Follows</a></td>
-							<td><p>Gets information about users that are following other users.</p>
 </td>
 						</tr>
 					
@@ -4095,7 +4082,12 @@
 
 <h3>Authorization</h3>
 
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:read:followers</strong> scope. The ID in the broadcaster_id query parameter must match the user ID in the access token or the user must be a moderator for the specified broadcaster. If a scope is not provided, only the total follower count will be included in the response.</p>
+<ul>
+  <li>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:read:followers</strong> scope.</li>
+  <li>The ID in the broadcaster_id query parameter must match the user ID in the access token or the user ID in the access token must be a moderator for the specified broadcaster.</li>
+</ul>
+
+<p>This endpoint will return specific follower information only if both of the above are true. If a scope is not provided or the user isn’t the broadcaster or a moderator for the specified channel, only the total follower count will be included in the response.</p>
 
 <h3>URL</h3>
 
@@ -4117,7 +4109,7 @@
       <td>user_id</td>
       <td>String</td>
       <td>No</td>
-      <td>A user’s ID. Use this parameter to see whether the user follows this broadcaster. If specified, the response contains this user if they follow the broadcaster. If not specified, the response contains all users that follow the broadcaster.</td>
+      <td>A user’s ID. Use this parameter to see whether the user follows this broadcaster. If specified, the response contains this user if they follow the broadcaster. If not specified, the response contains all users that follow the broadcaster.<br><br>Using this parameter requires both a user access token with the <strong>moderator:read:followers</strong> scope and the user ID in the access token match the broadcaster_id or be the user ID for a moderator of the specified broadcaster.</td>
     </tr>
     <tr>
       <td>broadcaster_id</td>
@@ -4154,7 +4146,7 @@
     <tr>
       <td>data</td>
       <td>Object[]</td>
-      <td>The list of users that follow the specified broadcaster. The list is in descending order by <code class="highlighter-rouge">followed_at</code> (with the most recent follower first). The list is empty if nobody follows the broadcaster.</td>
+      <td>The list of users that follow the specified broadcaster. The list is in descending order by <code class="highlighter-rouge">followed_at</code> (with the most recent follower first). The list is empty if nobody follows the broadcaster, the specified <code class="highlighter-rouge">user_id</code> isn’t in the follower list, the user access token is missing the <strong>moderator:read:followers</strong> scope, or the user isn’t the broadcaster or moderator for the channel.</td>
     </tr>
     <tr>
       <td>   followed_at</td>
@@ -4210,11 +4202,11 @@
     </tr>
     <tr>
       <td>400 Bad Request</td>
-      <td>Possible reasons:<ul><li>The <i>broadcaster_id</i> query parameter is required.</li><li>The <i>broadcaster_id</i> query parameter is not valid.</li><li>The <i>user_id</i> query parameter is required.</li></ul></td>
+      <td>Possible reasons:<ul><li>The <i>broadcaster_id</i> query parameter is required.</li><li>The <i>broadcaster_id</i> query parameter is not valid.</li></ul></td>
     </tr>
     <tr>
       <td>401 Unauthorized</td>
-      <td>Possible reasons:<ul><li>The ID in the <i>broadcaster_id</i> query parameter must match the user ID in the access token or the user must be a moderator for the specified broadcaster.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token is missing the <b>moderator:read:followers</b> scope.</li><li>The OAuth token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.</li></ul></td>
+      <td>Possible reasons:<ul><li>The ID in the <i>broadcaster_id</i> query parameter must match the user ID in the access token or the user must be a moderator for the specified broadcaster.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token is missing the <b>moderator:read:followers</b> scope.</li><li>The OAuth token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.</li><li>The <i>user_id</i> parameter was specified but either the user access token is missing the <b>moderator:read:followers</b> scope or the user is not the broadcaster or moderator for the specified channel</li></ul></td>
     </tr>
   </tbody>
 </table>
@@ -8870,6 +8862,12 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
       <td>No</td>
       <td>The cursor used to get the next page of results. The <strong>Pagination</strong> object in the response contains the cursor’s value. <a href="/docs/api/guide#pagination">Read More</a></td>
     </tr>
+    <tr>
+      <td>is_featured</td>
+      <td>Boolean</td>
+      <td>No</td>
+      <td>A Boolean value that determines whether the response includes featured clips. If <strong>true</strong>, returns only clips that are featured. If <strong>false</strong>, returns only clips that aren’t featured. All clips are returned if this parameter is not present.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -8970,6 +8968,11 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
       <td>The zero-based offset, in seconds, to where the clip starts in the video (VOD). Is <strong>null</strong> if the video is not available or hasn’t been created yet from the live stream (see <code class="highlighter-rouge">video_id</code>).<br><br>Note that there’s a delay between when a clip is created during a broadcast and when the offset is set. During the delay period, <code class="highlighter-rouge">vod_offset</code> is <strong>null</strong>. The delay is indeterminant but is typically minutes long.</td>
     </tr>
     <tr>
+      <td>   is_featured</td>
+      <td>Boolean</td>
+      <td>A Boolean value that indicates if the clip is featured or not.</td>
+    </tr>
+    <tr>
       <td>pagination</td>
       <td>Object</td>
       <td>The information used to page through the list of results. The object is empty if there are no more pages left to page through. <a href="/docs/api/guide#pagination">Read More</a></td>
@@ -9045,7 +9048,8 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
       </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T22:34:18Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://clips-media-assets.twitch.tv/157589949-preview-480x272.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"vod_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="w">
+      </span><span class="s2">"vod_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"is_featured"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -9080,7 +9084,8 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
       </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-30T22:34:18Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://clips-media-assets.twitch.tv/157589949-preview-480x272.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.9</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"vod_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">1957</span><span class="w">
+      </span><span class="s2">"vod_offset"</span><span class="p">:</span><span class="w"> </span><span class="mi">1957</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"is_featured"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="w">
   </span><span class="p">],</span><span class="w">
@@ -23913,208 +23918,8 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 	<section class="doc-content">
 		<section class="left-docs">
-			<h2 id="get-users-follows">Get Users Follows</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[115]" data-cms-editor-link-style="modal">&#x270E;</a>
-			
-				<p>Gets information about users that are following other users. For example, you can use this endpoint to answer questions like “who is qotrok following,” “who is following qotrok,” or “is user X following user Y.”</p>
-
-<blockquote>
-  <p><strong><em>Deprecation Notice:</em></strong> This endpoint is deprecated and will be decommissioned on <a href="https://discuss.dev.twitch.tv/t/follows-endpoints-and-eventsub-subscription-type-are-now-available-in-open-beta/43322" target="_blank">August 3, 2023</a>. Access to this endpoint is limited to client IDs that have called the endpoint on or before February 17, 2023.</p>
-</blockquote>
-
-<h3>Authorization</h3>
-
-<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a>.</p>
-
-<h3>URL</h3>
-
-<p><code class="highlighter-rouge">GET https://api.twitch.tv/helix/users/follows</code></p>
-
-<h3>Request Query Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Type</th>
-      <th>Required?</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>from_id</td>
-      <td>String</td>
-      <td>No</td>
-      <td>A user ID. Specify this parameter to discover the users that this user is following.<br><br>You must specify this parameter, the <em>to_id</em> parameter, or both.</td>
-    </tr>
-    <tr>
-      <td>to_id</td>
-      <td>String</td>
-      <td>No</td>
-      <td>A user ID. Specify this parameter to discover the users who are following this user.<br><br>You must specify this parameter, the <em>from_id</em> parameter, or both.</td>
-    </tr>
-    <tr>
-      <td>first</td>
-      <td>Integer</td>
-      <td>No</td>
-      <td>The maximum number of items to return per page in the response. The minimum page size is 1 item per page and the maximum is 100. The default is 20.</td>
-    </tr>
-    <tr>
-      <td>after</td>
-      <td>String</td>
-      <td>No</td>
-      <td>The cursor used to get the next page of results. The <strong>Pagination</strong> object in the response contains the cursor’s value. <a href="/docs/api/guide#pagination">Read More</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Body</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>total</td>
-      <td>Integer</td>
-      <td>The number of items in the <code class="highlighter-rouge">data</code> field.<ul><li>If the request includes only <i>from_id</i>, this is the total number of followed users.</li><li>If the request includes only <i>to_id</i>, this is the total number of followers.</li><li>If the request specifies both <i>from_id</i> and <i>to_id</i>, the total is 1 if the "from" user follows the "to" user; otherwise, the total is 0.</li></ul></td>
-    </tr>
-    <tr>
-      <td>data</td>
-      <td>Object[]</td>
-      <td>The list of follower-followee relationship information. The list is in descending order by when the follow occurred (most recent follow first).</td>
-    </tr>
-    <tr>
-      <td>   from_id</td>
-      <td>String</td>
-      <td>The ID of the user that’s following the user in <code class="highlighter-rouge">to_id</code>.</td>
-    </tr>
-    <tr>
-      <td>   from_login</td>
-      <td>String</td>
-      <td>The follower’s login name.</td>
-    </tr>
-    <tr>
-      <td>   from_name</td>
-      <td>String</td>
-      <td>The follower’s display name.</td>
-    </tr>
-    <tr>
-      <td>   to_id</td>
-      <td>String</td>
-      <td>The ID of the user that’s being followed by the user in <code class="highlighter-rouge">from_id</code>.</td>
-    </tr>
-    <tr>
-      <td>   to_login</td>
-      <td>String</td>
-      <td>The login name of the user that’s being followed.</td>
-    </tr>
-    <tr>
-      <td>   to_name</td>
-      <td>String</td>
-      <td>The display name of the user that’s being followed.</td>
-    </tr>
-    <tr>
-      <td>   followed_at</td>
-      <td>String</td>
-      <td>The UTC date and time (in RFC3339 format) of when the user in <code class="highlighter-rouge">from_id</code> began following the user in <code class="highlighter-rouge">to_id</code>.</td>
-    </tr>
-    <tr>
-      <td>pagination</td>
-      <td>Object</td>
-      <td>Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. <a href="/docs/api/guide#pagination">Read More</a></td>
-    </tr>
-    <tr>
-      <td>   cursor</td>
-      <td>String</td>
-      <td>The cursor used to get the next page of results. Use the cursor to set the request’s <em>after</em> query parameter.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Codes</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the follows information.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>from_id</i> query parameter, <i>to_id</i> query parameter, or both parameters are required.</li><li>The ID in the <i>from_id</i> query parameter is not valid</li><li>The ID in the <i>to_id</i> query parameter is not valid.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must contain an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
-
-			
-		</section>
-
-	
-			<section class="right-code">
-				<h3>Example Request</h3>
-
-<p>Gets the first 20 IDs of users who are following the specified user.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/users/follows?to_id=23161357'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
-</code></pre></div></div>
-
-<h3>Example Response</h3>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-   </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span><span class="w">
-   </span><span class="s2">"data"</span><span class="p">:</span><span class="w">
-   </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-         </span><span class="s2">"from_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"171003792"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"from_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"iiisutha067iii"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"from_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IIIsutha067III"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"to_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23161357"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"to_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIRIK"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"followed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-22T22:55:24Z"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-         </span><span class="s2">"from_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"113627897"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"from_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"birdman616"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"from_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birdman616"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"to_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"23161357"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"to_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIRIK"</span><span class="p">,</span><span class="w">
-         </span><span class="s2">"followed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-08-22T22:55:04Z"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-   </span><span class="p">],</span><span class="w">
-   </span><span class="s2">"pagination"</span><span class="p">:{</span><span class="w">
-     </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJiIjpudWxsLCJhIjoiMTUwMzQ0MTc3NjQyNDQyMjAwMCJ9"</span><span class="w">
-   </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-			</section>
-	
-	</section>
-
-	<section class="doc-content">
-		<section class="left-docs">
 			<h2 id="get-user-block-list">Get User Block List</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[116]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[115]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of users that the broadcaster has blocked. <a href="https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat?language=en_US#BlockWhispersandMessagesfromStrangers">Read More</a></p>
 
@@ -24257,7 +24062,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="block-user">Block User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[117]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[116]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Blocks the specified user from interacting with or having contact with the broadcaster. The user ID in the OAuth token identifies the broadcaster who is blocking the user.</p>
 
@@ -24350,7 +24155,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="unblock-user">Unblock User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[118]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[117]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes the user from the broadcaster’s list of blocked users. The user ID in the OAuth token identifies the broadcaster who’s removing the block.</p>
 
@@ -24429,7 +24234,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-extensions">Get User Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[119]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[118]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of all extensions (both active and inactive) that the broadcaster has installed. The user ID in the access token identifies the broadcaster.</p>
 
@@ -24585,7 +24390,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-active-extensions">Get User Active Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[120]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[119]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the active extensions that the broadcaster has installed for each configuration.</p>
 
@@ -24819,7 +24624,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-user-extensions">Update User Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[121]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[120]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates an installed extension’s information. You can update the extension’s activation state, ID, and version number. The user ID in the access token identifies the broadcaster whose extensions you’re updating.</p>
 
@@ -25098,7 +24903,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-videos">Get Videos</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[122]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[121]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about one or more published videos. You may get videos by ID, by user, or by game/category.</p>
 
@@ -25394,7 +25199,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-videos">Delete Videos</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[123]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[122]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Deletes one or more videos. You may delete past broadcasts, highlights, or uploads.</p>
 
@@ -25502,7 +25307,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="send-whisper">Send Whisper</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[124]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[123]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Sends a whisper message to the specified user.</p>
 

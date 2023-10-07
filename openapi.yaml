@@ -1347,7 +1347,12 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:followers** scope. The ID in the broadcaster\_id query parameter must match the user ID in the access token or the user must be a moderator for the specified broadcaster. If a scope is not provided, only the total follower count will be included in the response.
+        * Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:followers** scope.
+
+        * The ID in the broadcaster\_id query parameter must match the user ID in the access token or the user ID in the access token must be a moderator for the specified broadcaster.
+
+
+        This endpoint will return specific follower information only if both of the above are true. If a scope is not provided or the user isn’t the broadcaster or a moderator for the specified channel, only the total follower count will be included in the response.
       tags:
         - Channels
       externalDocs:
@@ -1357,10 +1362,13 @@ paths:
       parameters:
         - name: user_id
           in: query
-          description: A user’s ID. Use this parameter to see whether the user follows
+          description: >-
+            A user’s ID. Use this parameter to see whether the user follows
             this broadcaster. If specified, the response contains this user if
             they follow the broadcaster. If not specified, the response contains
-            all users that follow the broadcaster.
+            all users that follow the broadcaster.  
+              
+            Using this parameter requires both a user access token with the **moderator:read:followers** scope and the user ID in the access token match the broadcaster\_id or be the user ID for a moderator of the specified broadcaster.
           schema:
             type: string
         - name: broadcaster_id
@@ -1450,7 +1458,6 @@ paths:
               
             * The _broadcaster\_id_ query parameter is required.
             * The _broadcaster\_id_ query parameter is not valid.
-            * The _user\_id_ query parameter is required.
         "401":
           description: >-
             Possible reasons:  
@@ -1464,6 +1471,8 @@ paths:
             * The OAuth token is not valid.
 
             * The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.
+
+            * The _user\_id_ parameter was specified but either the user access token is missing the **moderator:read:followers** scope or the user is not the broadcaster or moderator for the specified channel
       security:
         - twitch_auth:
             - moderator:read:followers
@@ -4124,6 +4133,14 @@ paths:
             More](https://dev.twitch.tv/docs/api/guide#pagination)
           schema:
             type: string
+        - name: is_featured
+          in: query
+          description: A Boolean value that determines whether the response includes
+            featured clips. If **true**, returns only clips that are featured.
+            If **false**, returns only clips that aren’t featured. All clips are
+            returned if this parameter is not present.
+          schema:
+            type: boolean
       responses:
         "200":
           description: Successfully retrieved the list of video clips.
@@ -4167,6 +4184,7 @@ paths:
                         thumbnail_url: https://clips-media-assets.twitch.tv/157589949-preview-480x272.jpg
                         duration: 60
                         vod_offset: 480
+                        is_featured: false
                 Example 2:
                   description: >-
                     _Request:_
@@ -4202,6 +4220,7 @@ paths:
                         thumbnail_url: https://clips-media-assets.twitch.tv/157589949-preview-480x272.jpg
                         duration: 12.9
                         vod_offset: 1957
+                        is_featured: true
                     pagination:
                       cursor: eyJiIjpudWxsLCJhIjoiIn0
         "400":
@@ -6009,7 +6028,6 @@ paths:
               - channel.guest_star_session.begin
               - channel.guest_star_session.end
               - channel.guest_star_guest.update
-              - channel.guest_star_slot.update
               - channel.guest_star_settings.update
               - channel.channel_points_custom_reward.add
               - channel.channel_points_custom_reward.update
@@ -13043,123 +13061,6 @@ paths:
       security:
         - twitch_auth:
             - user:edit
-  /users/follows:
-    get:
-      summary: Gets information about users that are following other users.
-      description: >-
-        Gets information about users that are following other users. For
-        example, you can use this endpoint to answer questions like “who is
-        qotrok following,” “who is following qotrok,” or “is user X following
-        user Y.”
-
-
-        **_Deprecation Notice:_** This endpoint is deprecated and will be decommissioned on [August 3, 2023](https://discuss.dev.twitch.tv/t/follows-endpoints-and-eventsub-subscription-type-are-now-available-in-open-beta/43322). Access to this endpoint is limited to client IDs that have called the endpoint on or before February 17, 2023.
-
-
-        __Authorization:__
-
-
-        Requires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).
-      tags:
-        - Users
-      externalDocs:
-        description: Get Users Follows
-        url: https://dev.twitch.tv/docs/api/reference#get-users-follows
-      operationId: get-users-follows
-      parameters:
-        - name: from_id
-          in: query
-          description: >-
-            A user ID. Specify this parameter to discover the users that this
-            user is following.  
-              
-            You must specify this parameter, the _to\_id_ parameter, or both.
-          schema:
-            type: string
-        - name: to_id
-          in: query
-          description: >-
-            A user ID. Specify this parameter to discover the users who are
-            following this user.  
-              
-            You must specify this parameter, the _from\_id_ parameter, or both.
-          schema:
-            type: string
-        - name: first
-          in: query
-          description: The maximum number of items to return per page in the response. The
-            minimum page size is 1 item per page and the maximum is 100\. The
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-        - name: after
-          in: query
-          description: The cursor used to get the next page of results. The **Pagination**
-            object in the response contains the cursor’s value. [Read
-            More](https://dev.twitch.tv/docs/api/guide#pagination)
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successfully retrieved the follows information.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetUsersFollowsResponse"
-              examples:
-                Example:
-                  description: >-
-                    _Request:_
-
-
-                    Gets the first 20 IDs of users who are following the specified user.
-
-
-                    ```bash
-
-                    curl -X GET 'https://api.twitch.tv/helix/users/follows?to_id=23161357' \
-
-                    -H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \
-
-                    -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
-
-                    ```
-                  value:
-                    total: 12345
-                    data:
-                      - from_id: "171003792"
-                        from_login: iiisutha067iii
-                        from_name: IIIsutha067III
-                        to_id: "23161357"
-                        to_name: LIRIK
-                        followed_at: 2017-08-22T22:55:24Z
-                      - from_id: "113627897"
-                        from_login: birdman616
-                        from_name: Birdman616
-                        to_id: "23161357"
-                        to_name: LIRIK
-                        followed_at: 2017-08-22T22:55:04Z
-                    pagination:
-                      cursor: eyJiIjpudWxsLCJhIjoiMTUwMzQ0MTc3NjQyNDQyMjAwMCJ9
-        "400":
-          description: >-
-            * The _from\_id_ query parameter, _to\_id_ query parameter, or both
-            parameters are required.
-
-            * The ID in the _from\_id_ query parameter is not valid
-
-            * The ID in the _to\_id_ query parameter is not valid.
-        "401":
-          description: >-
-            * The Authorization header is required and must contain an app
-            access token or user access token.
-
-            * The access token is not valid.
-
-            * The ID specified in the Client-Id header does not match the client ID specified in the access token.
-      security:
-        - twitch_auth: []
   /users/blocks:
     get:
       summary: Gets the list of users that the broadcaster has blocked.
@@ -15150,7 +15051,9 @@ components:
           description: The list of users that follow the specified broadcaster. The list
             is in descending order by `followed_at` (with the most recent
             follower first). The list is empty if nobody follows the
-            broadcaster.
+            broadcaster, the specified `user_id` isn’t in the follower list, the
+            user access token is missing the **moderator:read:followers** scope,
+            or the user isn’t the broadcaster or moderator for the channel.
           items:
             type: object
             required:
@@ -16745,6 +16648,7 @@ components:
         - thumbnail_url
         - duration
         - vod_offset
+        - is_featured
       properties:
         id:
           type: string
@@ -16811,6 +16715,9 @@ components:
             Note that there’s a delay between when a clip is created during a broadcast and when the offset is set. During the delay period, `vod_offset` is **null**. The delay is indeterminant but is typically minutes long.
           format: int32
           nullable: true
+        is_featured:
+          type: boolean
+          description: A Boolean value that indicates if the clip is featured or not.
     GetClipsResponse:
       type: object
       required:
@@ -20793,74 +20700,6 @@ components:
           description: A list contains the single user that you updated.
           items:
             $ref: "#/components/schemas/User"
-    UsersFollow:
-      type: object
-      required:
-        - from_id
-        - from_login
-        - from_name
-        - to_id
-        - to_login
-        - to_name
-        - followed_at
-      properties:
-        from_id:
-          type: string
-          description: The ID of the user that’s following the user in `to_id`.
-        from_login:
-          type: string
-          description: The follower’s login name.
-        from_name:
-          type: string
-          description: The follower’s display name.
-        to_id:
-          type: string
-          description: The ID of the user that’s being followed by the user in `from_id`.
-        to_login:
-          type: string
-          description: The login name of the user that’s being followed.
-        to_name:
-          type: string
-          description: The display name of the user that’s being followed.
-        followed_at:
-          type: string
-          description: The UTC date and time (in RFC3339 format) of when the user in
-            `from_id` began following the user in `to_id`.
-          format: date-time
-    GetUsersFollowsResponse:
-      type: object
-      required:
-        - total
-        - data
-      properties:
-        total:
-          type: integer
-          description: >-
-            The number of items in the `data` field.  
-              
-            * If the request includes only _from\_id_, this is the total number of followed users.
-
-            * If the request includes only _to\_id_, this is the total number of followers.
-
-            * If the request specifies both _from\_id_ and _to\_id_, the total is 1 if the "from" user follows the "to" user; otherwise, the total is 0.
-          format: int32
-        data:
-          type: array
-          description: The list of follower-followee relationship information. The list is
-            in descending order by when the follow occurred (most recent follow
-            first).
-          items:
-            $ref: "#/components/schemas/UsersFollow"
-        pagination:
-          description: Contains the information used to page through the list of results.
-            The object is empty if there are no more pages left to page through.
-            [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
-          type: object
-          properties:
-            cursor:
-              type: string
-              description: The cursor used to get the next page of results. Use the cursor to
-                set the request’s _after_ query parameter.
     UserBlockList:
       type: object
       required:
