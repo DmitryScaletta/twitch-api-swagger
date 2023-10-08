@@ -53,6 +53,8 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
     //   Specify this field only if
     //   Included only if
     let required: FieldSchema['required'] = null;
+    const requiredText = requiredEl?.textContent?.trim();
+    if (requiredText) required = requiredText === 'Yes';
     if (
       ['required only if', 'included only if', 'this field only if'].some((s) =>
         descriptionTextLower.includes(s),
@@ -60,8 +62,6 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
     ) {
       required = false;
     }
-    const requiredText = requiredEl?.textContent?.trim();
-    if (requiredText) required = requiredText === 'Yes';
 
     // depth
     const parameterText = parameterEl.textContent!;
