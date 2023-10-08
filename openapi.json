@@ -1839,8 +1839,7 @@
                 "FULFILLED",
                 "UNFULFILLED"
               ]
-            },
-            "required": true
+            }
           },
           {
             "name": "id",

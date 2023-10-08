@@ -2189,7 +2189,6 @@ paths:
               - CANCELED
               - FULFILLED
               - UNFULFILLED
-          required: true
         - name: id
           in: query
           description: >-
