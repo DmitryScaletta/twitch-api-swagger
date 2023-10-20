@@ -179,6 +179,140 @@
         ]
       }
     },
+    "/channels/ads/schedule/snooze": {
+      "post": {
+        "summary": "Returns ad schedule related information.",
+        "description": "This endpoint returns ad schedule related information, including snooze, when the last ad was run, when the next ad is scheduled, and if the channel is currently in pre-roll free time.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:ads** scope. The `user_id` in the user access token must match the `broadcaster_id`.",
+        "tags": [
+          "Ads"
+        ],
+        "externalDocs": {
+          "description": "Get Ad Schedule",
+          "url": "https://dev.twitch.tv/docs/api/reference#get-ad-schedule"
+        },
+        "operationId": "get-ad-schedule",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "Provided `broadcaster_id` must match the `user_id` in the auth token.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User’s next ad is successfully snoozed. Their _snooze\\_count_ is decremented and _snooze\\_refresh\\_time_ and _next\\_ad\\_at_ are both updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAdScheduleResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\nSnooze the next ad.\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/channels/ads/schedule/snooze?broadcaster_id=123' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "snooze_count": "1",
+                          "snooze_refresh_at": "2023-08-01T23:08:18+00:00",
+                          "next_ad_at": "2023-08-01T23:08:18+00:00"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "* The channel is not currently live.\n* The broadcaster ID is not valid.\n* Channel does not have an upcoming scheduled ad break."
+          },
+          "429": {
+            "description": "Channel has no snoozes left."
+          },
+          "500": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:ads"
+            ]
+          }
+        ]
+      }
+    },
+    "/channels/ads": {
+      "get": {
+        "summary": "Pushes back the timestamp of the upcoming automatic mid-roll ad by 5 minutes.",
+        "description": "If available, pushes back the timestamp of the upcoming automatic mid-roll ad by 5 minutes. This endpoint duplicates the snooze functionality in the creator dashboard’s Ads Manager.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:ads** scope. The `user_id` in the user access token must match the `broadcaster_id`.",
+        "tags": [
+          "Ads"
+        ],
+        "externalDocs": {
+          "description": "Snooze Next Ad",
+          "url": "https://dev.twitch.tv/docs/api/reference#snooze-next-ad"
+        },
+        "operationId": "snooze-next-ad",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "Provided `broadcaster_id` must match the `user_id` in the auth token.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the ad schedule information for the channel.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SnoozeNextAdResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\nSnooze the next ad.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/channels/ads?broadcaster_id=123' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "next_ad_at": "2023-08-01T23:08:18+00:00",
+                          "last_ad_at": "2023-08-01T23:08:18+00:00",
+                          "length_seconds": "60",
+                          "preroll_free_time_seconds": "90",
+                          "snooze_count": "1",
+                          "snooze_refresh_at": "2023-08-01T23:08:18+00:00"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The broadcaster ID is not valid."
+          },
+          "500": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:manage:ads"
+            ]
+          }
+        ]
+      }
+    },
     "/analytics/extensions": {
       "get": {
         "summary": "Gets an analytics report for one or more extensions.",
@@ -11535,6 +11669,98 @@
                 "retry_after": {
                   "type": "integer",
                   "description": "The number of seconds you must wait before running another commercial.",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAdScheduleResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "A list that contains information about the channel’s snoozes and next upcoming ad after successfully snoozing.",
+            "items": {
+              "type": "object",
+              "required": [
+                "snooze_count",
+                "snooze_refresh_at",
+                "next_ad_at"
+              ],
+              "properties": {
+                "snooze_count": {
+                  "type": "integer",
+                  "description": "The number of snoozes available for the broadcaster.",
+                  "format": "int32"
+                },
+                "snooze_refresh_at": {
+                  "type": "string",
+                  "description": "The UTC timestamp when the broadcaster will gain an additional snooze, in RFC3339 format.",
+                  "format": "date-time"
+                },
+                "next_ad_at": {
+                  "type": "string",
+                  "description": "The UTC timestamp of the broadcaster’s next scheduled ad, in RFC3339 format.",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        }
+      },
+      "SnoozeNextAdResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "A list that contains information related to the channel’s ad schedule.",
+            "items": {
+              "type": "object",
+              "required": [
+                "snooze_count",
+                "snooze_refresh_at",
+                "next_ad_at",
+                "length_seconds",
+                "last_ad_at",
+                "preroll_free_time_seconds"
+              ],
+              "properties": {
+                "snooze_count": {
+                  "type": "integer",
+                  "description": "The number of snoozes available for the broadcaster.",
+                  "format": "int32"
+                },
+                "snooze_refresh_at": {
+                  "type": "string",
+                  "description": "The UTC timestamp when the broadcaster will gain an additional snooze, in RFC3339 format.",
+                  "format": "date-time"
+                },
+                "next_ad_at": {
+                  "type": "string",
+                  "description": "The UTC timestamp of the broadcaster’s next scheduled ad, in RFC3339 format. Empty if the channel has no ad scheduled or is not live.",
+                  "format": "date-time"
+                },
+                "length_seconds": {
+                  "type": "integer",
+                  "description": "The length in seconds of the scheduled upcoming ad break.",
+                  "format": "int32"
+                },
+                "last_ad_at": {
+                  "type": "string",
+                  "description": "The UTC timestamp of the broadcaster’s last ad-break, in RFC3339 format. Empty if the channel has not run an ad or is not live.",
+                  "format": "date-time"
+                },
+                "preroll_free_time_seconds": {
+                  "type": "integer",
+                  "description": "The amount of pre-roll free time remaining for the channel in seconds. Returns 0 if they are currently not pre-roll free.",
                   "format": "int32"
                 }
               }
