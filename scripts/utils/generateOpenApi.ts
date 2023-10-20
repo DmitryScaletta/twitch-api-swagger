@@ -2,7 +2,6 @@ import { JSDOM } from 'jsdom';
 import type { OpenApi } from '../types';
 import { OPEN_API_DESCRIPTION, OPEN_API_TITLE } from './constants.js';
 import normalizeReferenceHtml from './normalizeReferenceHtml.js';
-import addUndocumentedApi from './addUndocumentedApi.js';
 import parseApiReference from './parseApiReference.js';
 import parseEndpoint from './parseEndpoint.js';
 import addEventSubSubscriptionTypes from './addEventSubSubscriptionTypes.js';
@@ -30,8 +29,6 @@ const generateOpenApi = (
 
   openApi.components.securitySchemes['twitch_auth'].flows.implicit.scopes =
     allScopes;
-
-  addUndocumentedApi(openApi);
 
   // deprecations
   const schemas = openApi.components.schemas;
