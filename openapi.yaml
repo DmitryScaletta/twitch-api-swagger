@@ -167,9 +167,9 @@ paths:
     post:
       summary: Returns ad schedule related information.
       description: >-
-        This endpoint returns ad schedule related information, including
-        snooze, when the last ad was run, when the next ad is scheduled, and if
-        the channel is currently in pre-roll free time.
+        This endpoint returns ad schedule related information, including snooze,
+        when the last ad was run, when the next ad is scheduled, and if the
+        channel is currently in pre-roll free time.
 
 
         __Authorization:__
@@ -451,8 +451,8 @@ paths:
     get:
       summary: Gets an analytics report for one or more games.
       description: >-
-        Gets an analytics report for one or more games. The response
-        contains the URLs used to download the reports (CSV files). [Learn
+        Gets an analytics report for one or more games. The response contains
+        the URLs used to download the reports (CSV files). [Learn
         more](https://dev.twitch.tv/docs/insights)
 
 
@@ -1338,8 +1338,8 @@ paths:
         also use this endpoint to see whether a user follows a specific
         broadcaster.
       description: >-
-        Gets a list of broadcasters that the specified user follows. You
-        can also use this endpoint to see whether a user follows a specific
+        Gets a list of broadcasters that the specified user follows. You can
+        also use this endpoint to see whether a user follows a specific
         broadcaster.
 
 
@@ -1420,8 +1420,8 @@ paths:
                       cursor: eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6NX19
                 Example 2:
                   description: >-
-                    The `data` field is not an empty array, which means that the user
-                    does follow the specified broadcaster.
+                    The `data` field is not an empty array, which means that the
+                    user does follow the specified broadcaster.
 
 
                     _Request:_
@@ -1476,8 +1476,8 @@ paths:
         also use this endpoint to see whether a specific user follows the
         broadcaster.
       description: >-
-        Gets a list of users that follow the specified broadcaster. You can
-        also use this endpoint to see whether a specific user follows the
+        Gets a list of users that follow the specified broadcaster. You can also
+        use this endpoint to see whether a specific user follows the
         broadcaster.
 
 
@@ -1500,10 +1500,10 @@ paths:
         - name: user_id
           in: query
           description: >-
-            A user’s ID. Use this parameter to see whether the user follows
-            this broadcaster. If specified, the response contains this user if
-            they follow the broadcaster. If not specified, the response contains
-            all users that follow the broadcaster.  
+            A user’s ID. Use this parameter to see whether the user follows this
+            broadcaster. If specified, the response contains this user if they
+            follow the broadcaster. If not specified, the response contains all
+            users that follow the broadcaster.  
               
             Using this parameter requires both a user access token with the **moderator:read:followers** scope and the user ID in the access token match the broadcaster\_id or be the user ID for a moderator of the specified broadcaster.
           schema:
@@ -1566,8 +1566,8 @@ paths:
                       cursor: eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6NX19
                 Example 2:
                   description: >-
-                    The `data` field is an empty array, which means the user doesn’t
-                    follow the specified broadcaster.
+                    The `data` field is an empty array, which means the user
+                    doesn’t follow the specified broadcaster.
 
 
                     _Request:_
@@ -1617,9 +1617,9 @@ paths:
     post:
       summary: Creates a Custom Reward in the broadcaster’s channel.
       description: >-
-        Creates a Custom Reward in the broadcaster’s channel. The maximum
-        number of custom rewards per channel is 50, which includes both enabled
-        and disabled rewards.
+        Creates a Custom Reward in the broadcaster’s channel. The maximum number
+        of custom rewards per channel is 50, which includes both enabled and
+        disabled rewards.
 
 
         __Authorization:__
@@ -1843,8 +1843,7 @@ paths:
     get:
       summary: Gets a list of custom rewards that the specified broadcaster created.
       description: >-
-        Gets a list of custom rewards that the specified broadcaster
-        created.
+        Gets a list of custom rewards that the specified broadcaster created.
 
 
         **NOTE**: A channel may offer a maximum of 50 rewards, which includes both enabled and disabled rewards.
@@ -1871,9 +1870,9 @@ paths:
         - name: id
           in: query
           description: >-
-            A list of IDs to filter the rewards by. To specify more than one
-            ID, include this parameter for each reward you want to get. For
-            example, `id=1234&id=5678`. You may specify a maximum of 50 IDs.  
+            A list of IDs to filter the rewards by. To specify more than one ID,
+            include this parameter for each reward you want to get. For example,
+            `id=1234&id=5678`. You may specify a maximum of 50 IDs.  
               
             Duplicate IDs are ignored. The response contains only the IDs that were found. If none of the IDs were found, the response is 404 Not Found.
           schema:
@@ -2067,8 +2066,8 @@ paths:
     patch:
       summary: Updates a custom reward.
       description: >-
-        Updates a custom reward. The app used to create the reward is the
-        only app that may update the reward.
+        Updates a custom reward. The app used to create the reward is the only
+        app that may update the reward.
 
 
         __Authorization:__
@@ -2276,8 +2275,8 @@ paths:
     get:
       summary: Gets a list of redemptions for a custom reward.
       description: >-
-        Gets a list of redemptions for the specified custom reward. The app
-        used to create the reward is the only app that may get the redemptions.
+        Gets a list of redemptions for the specified custom reward. The app used
+        to create the reward is the only app that may get the redemptions.
 
 
         __Authorization:__
@@ -2308,8 +2307,8 @@ paths:
         - name: status
           in: query
           description: >-
-            The status of the redemptions to return. The possible
-            case-sensitive values are:  
+            The status of the redemptions to return. The possible case-sensitive
+            values are:  
               
             * CANCELED
 
@@ -2329,10 +2328,9 @@ paths:
         - name: id
           in: query
           description: >-
-            A list of IDs to filter the redemptions by. To specify more than
-            one ID, include this parameter for each redemption you want to get.
-            For example, `id=1234&id=5678`. You may specify a maximum of 50
-            IDs.  
+            A list of IDs to filter the redemptions by. To specify more than one
+            ID, include this parameter for each redemption you want to get. For
+            example, `id=1234&id=5678`. You may specify a maximum of 50 IDs.  
               
             Duplicate IDs are ignored. The response contains only the IDs that were found. If none of the IDs were found, the response is 404 Not Found.
           schema:
@@ -2343,8 +2341,8 @@ paths:
         - name: sort
           in: query
           description: >-
-            The order to sort redemptions by. The possible case-sensitive
-            values are:  
+            The order to sort redemptions by. The possible case-sensitive values
+            are:  
               
             * OLDEST
 
@@ -2487,9 +2485,9 @@ paths:
     patch:
       summary: Updates a redemption’s status.
       description: >-
-        Updates a redemption’s status. You may update a redemption only if
-        its status is UNFULFILLED. The app used to create the reward is the only
-        app that may update the redemption.
+        Updates a redemption’s status. You may update a redemption only if its
+        status is UNFULFILLED. The app used to create the reward is the only app
+        that may update the redemption.
 
 
         __Authorization:__
@@ -2719,8 +2717,8 @@ paths:
       summary: Gets the list of donations that users have made to the broadcaster’s
         active charity campaign.
       description: >-
-        Gets the list of donations that users have made to the
-        broadcaster’s active charity campaign.
+        Gets the list of donations that users have made to the broadcaster’s
+        active charity campaign.
 
 
         To receive events as donations occur, subscribe to the [channel.charity\_campaign.donate](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelcharity%5Fcampaigndonate) subscription type.
@@ -2943,9 +2941,9 @@ paths:
     get:
       summary: Gets the broadcaster’s list of custom emotes.
       description: >-
-        Gets the broadcaster’s list of custom emotes. Broadcasters create
-        these custom emotes for users who subscribe to or follow the channel or
-        cheer Bits in the channel’s chat window. [Learn
+        Gets the broadcaster’s list of custom emotes. Broadcasters create these
+        custom emotes for users who subscribe to or follow the channel or cheer
+        Bits in the channel’s chat window. [Learn
         More](https://dev.twitch.tv/docs/irc/emotes)
 
 
@@ -3266,9 +3264,9 @@ paths:
     get:
       summary: Gets the broadcaster’s list of custom chat badges.
       description: >-
-        Gets the broadcaster’s list of custom chat badges. The list is
-        empty if the broadcaster hasn’t created custom chat badges. For
-        information about custom badges, see [subscriber
+        Gets the broadcaster’s list of custom chat badges. The list is empty if
+        the broadcaster hasn’t created custom chat badges. For information about
+        custom badges, see [subscriber
         badges](https://help.twitch.tv/s/article/subscriber-badge-guide) and
         [Bits badges](https://help.twitch.tv/s/article/custom-bit-badges-guide).
 
@@ -3353,9 +3351,8 @@ paths:
     get:
       summary: Gets Twitch’s list of chat badges.
       description: >-
-        Gets Twitch’s list of chat badges, which users may use in any
-        channel’s chat room. For information about chat badges, see [Twitch Chat
-        Badges
+        Gets Twitch’s list of chat badges, which users may use in any channel’s
+        chat room. For information about chat badges, see [Twitch Chat Badges
         Guide](https://help.twitch.tv/s/article/twitch-chat-badges-guide).
 
 
@@ -4466,8 +4463,8 @@ paths:
       summary: Gets an organization’s list of entitlements that have been granted to a
         game, a user, or both.
       description: >-
-        Gets an organization’s list of entitlements that have been granted
-        to a game, a user, or both.
+        Gets an organization’s list of entitlements that have been granted to a
+        game, a user, or both.
 
 
         The following table identifies the request parameters that you may specify based on the type of access token used.
@@ -4736,8 +4733,7 @@ paths:
     get:
       summary: Gets the specified configuration segment from the specified extension.
       description: >-
-        Gets the specified configuration segment from the specified
-        extension.
+        Gets the specified configuration segment from the specified extension.
 
 
         **Rate Limits**: You may retrieve each segment a maximum of 20 times per minute.
@@ -4986,8 +4982,7 @@ paths:
       responses:
         "204":
           description: >-
-            Successfully updated the extension’s required\_configuration
-            string.
+            Successfully updated the extension’s required\_configuration string.
 
 
             __Examples__
@@ -5141,8 +5136,8 @@ paths:
       summary: Gets a list of broadcasters that are streaming live and have installed
         or activated the extension.
       description: >-
-        Gets a list of broadcasters that are streaming live and have
-        installed or activated the extension.
+        Gets a list of broadcasters that are streaming live and have installed
+        or activated the extension.
 
 
         It may take a few minutes for the list to include or remove broadcasters that have recently gone live or stopped broadcasting.
@@ -5297,9 +5292,9 @@ paths:
     post:
       summary: Creates a shared secret used to sign and verify JWT tokens.
       description: >-
-        Creates a shared secret used to sign and verify JWT tokens.
-        Creating a new secret removes the current secrets from service. Use this
-        function only when you are ready to use the new secret it returns.
+        Creates a shared secret used to sign and verify JWT tokens. Creating a
+        new secret removes the current secrets from service. Use this function
+        only when you are ready to use the new secret it returns.
 
 
         __Authorization:__
@@ -5444,8 +5439,7 @@ paths:
             * The message is too long.
         "401":
           description: >-
-            * The Authorization header is required and must specify a JWT
-            token.
+            * The Authorization header is required and must specify a JWT token.
 
             * The ID in the _broadcaster\_id_ query parameter must match the `channel_id` claim in the JWT.
 
@@ -5575,8 +5569,8 @@ paths:
     get:
       summary: Gets information about a released extension.
       description: >-
-        Gets information about a released extension. Returns the extension
-        if its `state` is Released.
+        Gets information about a released extension. Returns the extension if
+        its `state` is Released.
 
 
         __Authorization:__
@@ -5694,8 +5688,8 @@ paths:
     get:
       summary: Gets the list of Bits products that belongs to the extension.
       description: >-
-        Gets the list of Bits products that belongs to the extension. The
-        client ID in the app access token identifies the extension.
+        Gets the list of Bits products that belongs to the extension. The client
+        ID in the app access token identifies the extension.
 
 
         __Authorization:__
@@ -5765,9 +5759,9 @@ paths:
     put:
       summary: Adds or updates a Bits product that the extension created.
       description: >-
-        Adds or updates a Bits product that the extension created. If the
-        SKU doesn’t exist, the product is added. You may update all fields
-        except the `sku` field.
+        Adds or updates a Bits product that the extension created. If the SKU
+        doesn’t exist, the product is added. You may update all fields except
+        the `sku` field.
 
 
         __Authorization:__
@@ -6482,8 +6476,8 @@ paths:
     get:
       summary: Gets the broadcaster’s list of active goals.
       description: >-
-        Gets the broadcaster’s list of active goals. Use this endpoint to
-        get the current progress of each goal.
+        Gets the broadcaster’s list of active goals. Use this endpoint to get
+        the current progress of each goal.
 
 
         Instead of polling for the progress of a goal, consider [subscribing](https://dev.twitch.tv/docs/eventsub/manage-subscriptions) to receive notifications when a goal makes progress using the [channel.goal.progress](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelgoalprogress) subscription type. [Read More](https://dev.twitch.tv/docs/api/goals#requesting-event-notifications)
@@ -6642,8 +6636,8 @@ paths:
       summary: BETA Mutates the channel settings for configuration of the Guest Star
         feature for a particular host.
       description: >-
-        BETA Mutates the channel settings for configuration of the Guest
-        Star feature for a particular host.
+        BETA Mutates the channel settings for configuration of the Guest Star
+        feature for a particular host.
 
 
         __Authorization:__
@@ -7004,9 +6998,9 @@ paths:
       summary: BETA Provides the caller with a list of pending invites to a Guest Star
         session.
       description: >-
-        BETA Provides the caller with a list of pending invites to a Guest
-        Star session, including the invitee’s ready status while joining the
-        waiting room.
+        BETA Provides the caller with a list of pending invites to a Guest Star
+        session, including the invitee’s ready status while joining the waiting
+        room.
 
 
         __Authorization:__
@@ -7097,8 +7091,8 @@ paths:
       summary: BETA Sends an invite to a specified guest on behalf of the broadcaster
         for a Guest Star session in progress.
       description: >-
-        BETA Sends an invite to a specified guest on behalf of the
-        broadcaster for a Guest Star session in progress.
+        BETA Sends an invite to a specified guest on behalf of the broadcaster
+        for a Guest Star session in progress.
 
 
         __Authorization:__
@@ -7258,9 +7252,9 @@ paths:
       summary: BETA Allows a previously invited user to be assigned a slot within the
         active Guest Star session.
       description: >-
-        BETA Allows a previously invited user to be assigned a slot within
-        the active Guest Star session, once that guest has indicated they are
-        ready to join.
+        BETA Allows a previously invited user to be assigned a slot within the
+        active Guest Star session, once that guest has indicated they are ready
+        to join.
 
 
         __Authorization:__
@@ -7357,8 +7351,8 @@ paths:
       summary: BETA Allows a user to update the assigned slot for a particular user
         within the active Guest Star session.
       description: >-
-        BETA Allows a user to update the assigned slot for a particular
-        user within the active Guest Star session.
+        BETA Allows a user to update the assigned slot for a particular user
+        within the active Guest Star session.
 
 
         __Authorization:__
@@ -7541,11 +7535,11 @@ paths:
       summary: BETA Allows a user to update slot settings for a particular guest
         within a Guest Star session.
       description: >-
-        BETA Allows a user to update slot settings for a particular guest
-        within a Guest Star session, such as allowing the user to share audio or
-        video within the call as a host. These settings will be broadcasted to
-        all subscribers which control their view of the guest in that slot. One
-        or more of the optional parameters to this API can be specified at any
+        BETA Allows a user to update slot settings for a particular guest within
+        a Guest Star session, such as allowing the user to share audio or video
+        within the call as a host. These settings will be broadcasted to all
+        subscribers which control their view of the guest in that slot. One or
+        more of the optional parameters to this API can be specified at any
         time.
 
 
@@ -7691,8 +7685,8 @@ paths:
       summary: Gets information about the broadcaster’s current or most recent Hype
         Train event.
       description: >-
-        Gets information about the broadcaster’s current or most recent
-        Hype Train event.
+        Gets information about the broadcaster’s current or most recent Hype
+        Train event.
 
 
         Instead of polling for events, consider [subscribing](https://dev.twitch.tv/docs/eventsub/manage-subscriptions) to Hype Train events ([Begin](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainbegin), [Progress](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainprogress), [End](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainend)).
@@ -8115,9 +8109,9 @@ paths:
     put:
       summary: Updates the broadcaster’s AutoMod settings.
       description: >-
-        Updates the broadcaster’s AutoMod settings. The settings are used
-        to automatically block inappropriate or harassing messages from
-        appearing in the broadcaster’s chat room.
+        Updates the broadcaster’s AutoMod settings. The settings are used to
+        automatically block inappropriate or harassing messages from appearing
+        in the broadcaster’s chat room.
 
 
         __Authorization:__
@@ -8190,7 +8184,8 @@ paths:
               examples:
                 Example 1:
                   description: >-
-                    Notice in the response that not all settings are set to level 3.
+                    Notice in the response that not all settings are set to
+                    level 3.
 
 
                     _Request:_
@@ -8227,11 +8222,11 @@ paths:
                         sex_based_terms: 3
                 Example 2:
                   description: >-
-                    If `overall_level` is set to 3 and you try to change `swearing` to
-                    2, all other settings are set to 0\. If the goal was to
-                    change the `swearing` setting and leave all the others
-                    unchanged, the request must have included all the other
-                    settings as well.
+                    If `overall_level` is set to 3 and you try to change
+                    `swearing` to 2, all other settings are set to 0\. If the
+                    goal was to change the `swearing` setting and leave all the
+                    others unchanged, the request must have included all the
+                    other settings as well.
 
 
                     _Request:_
@@ -8421,8 +8416,8 @@ paths:
       summary: Bans a user from participating in a broadcaster’s chat room or puts
         them in a timeout.
       description: >-
-        Bans a user from participating in the specified broadcaster’s chat
-        room or puts them in a timeout.
+        Bans a user from participating in the specified broadcaster’s chat room
+        or puts them in a timeout.
 
 
         For information about banning or putting users in a timeout, see [Ban a User](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat#TheBanFeature) and [Timeout a User](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat#TheTimeoutFeature).
@@ -8486,10 +8481,10 @@ paths:
                     duration: 300
                     reason: no reason
                 description: >-
-                  Shows what happens if you try to place a banned user in a timeout.
-                  You can ban a user that’s already in a timeout but you can’t
-                  move a banned user into a timeout. To do this, you’d have to
-                  remove the ban and then place them in a timeout.
+                  Shows what happens if you try to place a banned user in a
+                  timeout. You can ban a user that’s already in a timeout but
+                  you can’t move a banned user into a timeout. To do this, you’d
+                  have to remove the ban and then place them in a timeout.
 
 
                   You’ll get the same response if you try to ban a user who is already banned.
@@ -8760,9 +8755,9 @@ paths:
     get:
       summary: Gets the broadcaster’s list of non-private, blocked words or phrases.
       description: >-
-        Gets the broadcaster’s list of non-private, blocked words or
-        phrases. These are the terms that the broadcaster or moderator added
-        manually or that were denied by AutoMod.
+        Gets the broadcaster’s list of non-private, blocked words or phrases.
+        These are the terms that the broadcaster or moderator added manually or
+        that were denied by AutoMod.
 
 
         __Authorization:__
@@ -8866,9 +8861,8 @@ paths:
     post:
       summary: Adds a word or phrase to the broadcaster’s list of blocked terms.
       description: >-
-        Adds a word or phrase to the broadcaster’s list of blocked terms.
-        These are the terms that the broadcaster doesn’t want used in their chat
-        room.
+        Adds a word or phrase to the broadcaster’s list of blocked terms. These
+        are the terms that the broadcaster doesn’t want used in their chat room.
 
 
         __Authorization:__
@@ -9009,8 +9003,7 @@ paths:
     delete:
       summary: Removes the word or phrase from the broadcaster’s list of blocked terms.
       description: >-
-        Removes the word or phrase from the broadcaster’s list of blocked
-        terms.
+        Removes the word or phrase from the broadcaster’s list of blocked terms.
 
 
         __Authorization:__
@@ -10108,8 +10101,7 @@ paths:
     post:
       summary: Creates a poll that viewers in the broadcaster’s channel can vote on.
       description: >-
-        Creates a poll that viewers in the broadcaster’s channel can vote
-        on.
+        Creates a poll that viewers in the broadcaster’s channel can vote on.
 
 
         The poll begins as soon as it’s created. You may run only one poll at a time.
@@ -10243,8 +10235,8 @@ paths:
     patch:
       summary: End an active poll.
       description: >-
-        Ends an active poll. You have the option to end it or end it and
-        archive it.
+        Ends an active poll. You have the option to end it or end it and archive
+        it.
 
 
         __Authorization:__
@@ -10355,8 +10347,7 @@ paths:
     get:
       summary: Gets a list of Channel Points Predictions that the broadcaster created.
       description: >-
-        Gets a list of Channel Points Predictions that the broadcaster
-        created.
+        Gets a list of Channel Points Predictions that the broadcaster created.
 
 
         __Authorization:__
@@ -11489,8 +11480,7 @@ paths:
     delete:
       summary: Deletes a broadcast from the broadcaster’s streaming schedule.
       description: >-
-        Removes a broadcast segment from the broadcaster’s streaming
-        schedule.
+        Removes a broadcast segment from the broadcaster’s streaming schedule.
 
 
         **NOTE**: For recurring segments, removing a segment removes all segments in the recurring schedule.
@@ -11923,8 +11913,8 @@ paths:
         - name: type
           in: query
           description: >-
-            The type of stream to filter the list of streams by. Possible
-            values are:  
+            The type of stream to filter the list of streams by. Possible values
+            are:  
               
             * all
 
@@ -12170,10 +12160,10 @@ paths:
     post:
       summary: Adds a marker to a live stream.
       description: >-
-        Adds a marker to a live stream. A marker is an arbitrary point in a
-        live stream that the broadcaster or editor wants to mark, so they can
-        return to that spot later to create video highlights (see Video
-        Producer, Highlights in the Twitch UX).
+        Adds a marker to a live stream. A marker is an arbitrary point in a live
+        stream that the broadcaster or editor wants to mark, so they can return
+        to that spot later to create video highlights (see Video Producer,
+        Highlights in the Twitch UX).
 
 
         You may not add markers:
@@ -12275,8 +12265,8 @@ paths:
       summary: Gets a list of markers from the user’s most recent stream or from the
         specified VOD/video.
       description: >-
-        Gets a list of markers from the user’s most recent stream or from
-        the specified VOD/video. A marker is an arbitrary point in a live stream
+        Gets a list of markers from the user’s most recent stream or from the
+        specified VOD/video. A marker is an arbitrary point in a live stream
         that the broadcaster or editor marked, so they can return to that spot
         later to create video highlights (see Video Producer, Highlights in the
         Twitch UX).
@@ -12594,8 +12584,8 @@ paths:
             * The _user\_id_ query parameter is required.
         "401":
           description: >-
-            * The ID in _user\_id_ must match the user ID found in the
-            request’s OAuth token.
+            * The ID in _user\_id_ must match the user ID found in the request’s
+            OAuth token.
 
             * The Authorization header is required and must contain a user access token.
 
@@ -13105,8 +13095,8 @@ paths:
                         created_at: 2016-12-14T20:32:28Z
         "400":
           description: >-
-            * The _id_ or _login_ query parameter is required unless the
-            request uses a user access token.
+            * The _id_ or _login_ query parameter is required unless the request
+            uses a user access token.
 
             * The request exceeded the maximum allowed number of _id_ and/or _login_ query parameters.
         "401":
@@ -13122,8 +13112,8 @@ paths:
     put:
       summary: Updates the user’s information.
       description: >-
-        Updates the specified user’s information. The user ID in the OAuth
-        token identifies the user whose information you want to update.
+        Updates the specified user’s information. The user ID in the OAuth token
+        identifies the user whose information you want to update.
 
 
         To include the user’s verified email address in the response, the user access token must also include the **user:read:email** scope.
@@ -13297,8 +13287,8 @@ paths:
       summary: Blocks the specified user from interacting with or having contact with
         the broadcaster.
       description: >-
-        Blocks the specified user from interacting with or having contact
-        with the broadcaster. The user ID in the OAuth token identifies the
+        Blocks the specified user from interacting with or having contact with
+        the broadcaster. The user ID in the OAuth token identifies the
         broadcaster who is blocking the user.
 
 
@@ -13405,8 +13395,8 @@ paths:
     delete:
       summary: Removes the user from the broadcaster’s list of blocked users.
       description: >-
-        Removes the user from the broadcaster’s list of blocked users. The
-        user ID in the OAuth token identifies the broadcaster who’s removing the
+        Removes the user from the broadcaster’s list of blocked users. The user
+        ID in the OAuth token identifies the broadcaster who’s removing the
         block.
 
 
@@ -13570,8 +13560,8 @@ paths:
       summary: Gets the active extensions that the broadcaster has installed for each
         configuration.
       description: >-
-        Gets the active extensions that the broadcaster has installed for
-        each configuration.
+        Gets the active extensions that the broadcaster has installed for each
+        configuration.
 
 
         NOTE: To include extensions that you have under development, you must specify a user access token that includes the **user:read:broadcast** or **user:edit:broadcast** scope.
@@ -13591,8 +13581,7 @@ paths:
         - name: user_id
           in: query
           description: >-
-            The ID of the broadcaster whose active extensions you want to
-            get.  
+            The ID of the broadcaster whose active extensions you want to get.  
               
             This parameter is required if you specify an app access token and is optional if you specify a user access token. If you specify a user access token and don’t specify this parameter, the API uses the user ID from the access token.
           schema:
@@ -13844,8 +13833,8 @@ paths:
     get:
       summary: Gets information about one or more published videos.
       description: >-
-        Gets information about one or more published videos. You may get
-        videos by ID, by user, or by game/category.
+        Gets information about one or more published videos. You may get videos
+        by ID, by user, or by game/category.
 
 
         You may apply several filters to get a subset of the videos. The filters are applied as an AND operation to each video. For example, if _language_ is set to ‘de’ and _game\_id_ is set to 21779, the response includes only videos that show playing League of Legends by users that stream in German. The filters apply only if you get videos by user ID or game ID.
@@ -13888,9 +13877,8 @@ paths:
         - name: game_id
           in: query
           description: >-
-            A category or game ID. The response contains a maximum of 500
-            videos that show this content. To get category/game IDs, use the
-            [Search
+            A category or game ID. The response contains a maximum of 500 videos
+            that show this content. To get category/game IDs, use the [Search
             Categories](https://dev.twitch.tv/docs/api/reference#search-categories)
             endpoint.  
               
@@ -14092,8 +14080,8 @@ paths:
     delete:
       summary: Deletes one or more videos.
       description: >-
-        Deletes one or more videos. You may delete past broadcasts,
-        highlights, or uploads.
+        Deletes one or more videos. You may delete past broadcasts, highlights,
+        or uploads.
 
 
         __Authorization:__
@@ -14251,8 +14239,8 @@ paths:
             ```
         "400":
           description: >-
-            * The ID in the _from\_user\_id_ and _to\_user\_id_ query
-            parameters must be different.
+            * The ID in the _from\_user\_id_ and _to\_user\_id_ query parameters
+            must be different.
 
             * The `message` field must not contain an empty string.
 
@@ -15688,9 +15676,9 @@ components:
             decimal_places:
               type: integer
               description: >-
-                The number of decimal places used by the currency. For example, USD
-                uses two decimal places. Use this number to translate `value`
-                from minor units to major units by using the formula:  
+                The number of decimal places used by the currency. For example,
+                USD uses two decimal places. Use this number to translate
+                `value` from minor units to major units by using the formula:  
                   
                 `value / 10^decimal_places`
               format: int32
@@ -15716,9 +15704,9 @@ components:
             decimal_places:
               type: integer
               description: >-
-                The number of decimal places used by the currency. For example, USD
-                uses two decimal places. Use this number to translate `value`
-                from minor units to major units by using the formula:  
+                The number of decimal places used by the currency. For example,
+                USD uses two decimal places. Use this number to translate
+                `value` from minor units to major units by using the formula:  
                   
                 `value / 10^decimal_places`
               format: int32
@@ -15783,9 +15771,9 @@ components:
             decimal_places:
               type: integer
               description: >-
-                The number of decimal places used by the currency. For example, USD
-                uses two decimal places. Use this number to translate `value`
-                from minor units to major units by using the formula:  
+                The number of decimal places used by the currency. For example,
+                USD uses two decimal places. Use this number to translate
+                `value` from minor units to major units by using the formula:  
                   
                 `value / 10^decimal_places`
               format: int32
@@ -16357,12 +16345,12 @@ components:
         non_moderator_chat_delay:
           type: boolean
           description: >-
-            A Boolean value that determines whether the broadcaster adds a
-            short delay before chat messages appear in the chat room. This gives
-            chat moderators and bots a chance to remove them before viewers can
-            see the message. See the `non_moderator_chat_delay_duration` field
-            for the length of the delay. Is **true** if the broadcaster applies
-            a delay; otherwise, **false**.  
+            A Boolean value that determines whether the broadcaster adds a short
+            delay before chat messages appear in the chat room. This gives chat
+            moderators and bots a chance to remove them before viewers can see
+            the message. See the `non_moderator_chat_delay_duration` field for
+            the length of the delay. Is **true** if the broadcaster applies a
+            delay; otherwise, **false**.  
               
             The response includes this field only if the request specifies a user access token that includes the **moderator:read:chat\_settings** scope and the user in the _moderator\_id_ query parameter is one of the broadcaster’s moderators.
         non_moderator_chat_delay_duration:
@@ -16387,8 +16375,8 @@ components:
         slow_mode_wait_time:
           type: integer
           description: >-
-            The amount of time, in seconds, that users must wait between
-            sending messages.  
+            The amount of time, in seconds, that users must wait between sending
+            messages.  
               
             Is **null** if slow\_mode is **false**.
           format: int32
@@ -16396,8 +16384,8 @@ components:
         subscriber_mode:
           type: boolean
           description: >-
-            A Boolean value that determines whether only users that subscribe
-            to the broadcaster’s channel may talk in the chat room.  
+            A Boolean value that determines whether only users that subscribe to
+            the broadcaster’s channel may talk in the chat room.  
               
             Is **true** if the broadcaster restricts the chat room to subscribers only; otherwise, **false**.
         unique_chat_mode:
@@ -16447,10 +16435,10 @@ components:
         non_moderator_chat_delay:
           type: boolean
           description: >-
-            A Boolean value that determines whether the broadcaster adds a
-            short delay before chat messages appear in the chat room. This gives
-            chat moderators and bots a chance to remove them before viewers can
-            see the message.  
+            A Boolean value that determines whether the broadcaster adds a short
+            delay before chat messages appear in the chat room. This gives chat
+            moderators and bots a chance to remove them before viewers can see
+            the message.  
               
             Set to **true** if the broadcaster applies a delay; otherwise, **false**. The default is **false**.  
               
@@ -16484,16 +16472,16 @@ components:
         slow_mode_wait_time:
           type: integer
           description: >-
-            The amount of time, in seconds, that users must wait between
-            sending messages. Set only if `slow_mode` is **true**.  
+            The amount of time, in seconds, that users must wait between sending
+            messages. Set only if `slow_mode` is **true**.  
               
             Possible values are: 3 (3 second delay) through 120 (2 minute delay). The default is 30 seconds.
           format: int32
         subscriber_mode:
           type: boolean
           description: >-
-            A Boolean value that determines whether only users that subscribe
-            to the broadcaster’s channel may talk in the chat room.  
+            A Boolean value that determines whether only users that subscribe to
+            the broadcaster’s channel may talk in the chat room.  
               
             Set to **true** if the broadcaster restricts the chat room to subscribers only; otherwise, **false**. The default is **false**.
         unique_chat_mode:
@@ -16573,8 +16561,8 @@ components:
         slow_mode_wait_time:
           type: integer
           description: >-
-            The amount of time, in seconds, that users must wait between
-            sending messages.  
+            The amount of time, in seconds, that users must wait between sending
+            messages.  
               
             Is **null** if slow\_mode is **false**.
           format: int32
@@ -16582,8 +16570,8 @@ components:
         subscriber_mode:
           type: boolean
           description: >-
-            A Boolean value that determines whether only users that subscribe
-            to the broadcaster’s channel may talk in the chat room.  
+            A Boolean value that determines whether only users that subscribe to
+            the broadcaster’s channel may talk in the chat room.  
               
             Is **true** if the broadcaster restricts the chat room to subscribers only; otherwise, **false**.
         unique_chat_mode:
@@ -16686,8 +16674,8 @@ components:
               edit_url:
                 type: string
                 description: >-
-                  A URL that you can use to edit the clip’s title, identify the part
-                  of the clip to publish, and publish the clip. [Learn
+                  A URL that you can use to edit the clip’s title, identify the
+                  part of the clip to publish, and publish the clip. [Learn
                   More](https://help.twitch.tv/s/article/how-to-use-clips)  
                     
                   The URL is valid for up to 24 hours or until the clip is published, whichever comes first.
@@ -17711,8 +17699,8 @@ components:
             callback:
               type: string
               description: >-
-                The callback URL where the notifications are sent. The URL must use
-                the HTTPS protocol and port 443\. See [Processing an
+                The callback URL where the notifications are sent. The URL must
+                use the HTTPS protocol and port 443\. See [Processing an
                 event](https://dev.twitch.tv/docs/eventsub/handling-webhook-events#processing-an-event).  
                   
                 Specify this field only if `method` is set to **webhook**.  
@@ -17731,9 +17719,9 @@ components:
             session_id:
               type: string
               description: >-
-                An ID that identifies the WebSocket to send notifications to. When
-                you connect to EventSub using WebSockets, the server returns the
-                ID in the [Welcome
+                An ID that identifies the WebSocket to send notifications to.
+                When you connect to EventSub using WebSockets, the server
+                returns the ID in the [Welcome
                 message](https://dev.twitch.tv/docs/eventsub/handling-websocket-events#welcome-message).  
                   
                 Specify this field only if `method` is set to **websocket**.
@@ -18294,8 +18282,8 @@ components:
         status:
           type: string
           description: >-
-            Status representing the invited user’s join state. Can be one of
-            the following:   
+            Status representing the invited user’s join state. Can be one of the
+            following:   
               
             * `INVITED`: The user has been invited to the session but has not acknowledged it.
 
@@ -19302,8 +19290,7 @@ components:
         status:
           type: string
           description: >-
-            The status to set the poll to. Possible case-sensitive values
-            are:  
+            The status to set the poll to. Possible case-sensitive values are:  
               
             * TERMINATED — Ends the poll before the poll is scheduled to end. The poll remains publicly visible.
 
