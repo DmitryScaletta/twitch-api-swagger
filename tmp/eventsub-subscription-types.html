@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-10-19T00:43:47-07:00">
+<meta property="article:published_time" content="2023-10-19T17:01:39-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Subscription Types","headline":"EventSub Subscription Types","dateModified":"2023-10-19T00:43:47-07:00","datePublished":"2023-10-19T00:43:47-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/"},"url":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/","@context":"http://schema.org"}</script>
+{"description":"Subscription Types","headline":"EventSub Subscription Types","dateModified":"2023-10-19T17:01:39-07:00","datePublished":"2023-10-19T17:01:39-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/"},"url":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -492,6 +492,36 @@
       <td><code class="highlighter-rouge">channel.follow</code></td>
       <td><code class="highlighter-rouge">2</code></td>
       <td>A specified channel receives a follow.</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-beta">BETA</span> <a href="#channelad_breakbegin">Channel Ad Break Begin</a></td>
+      <td><code class="highlighter-rouge">channel.ad_break.begin</code></td>
+      <td><code class="highlighter-rouge">beta</code></td>
+      <td>A midroll commercial break has started running.</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-beta">BETA</span> <a href="#channelchatclear">Channel Chat Clear</a></td>
+      <td><code class="highlighter-rouge">channel.chat.clear</code></td>
+      <td><code class="highlighter-rouge">beta</code></td>
+      <td>A moderator or bot has cleared all messages from the chat room.</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-beta">BETA</span> <a href="#channelchatclear_user_messages">Channel Chat Clear User Messages</a></td>
+      <td><code class="highlighter-rouge">channel.chat.clear_user_messages</code></td>
+      <td><code class="highlighter-rouge">beta</code></td>
+      <td>A moderator or bot has cleared all messages from a specific user.</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-beta">BETA</span> <a href="#channelchatmessage_delete">Channel Chat Message Delete</a></td>
+      <td><code class="highlighter-rouge">channel.chat.message_delete</code></td>
+      <td><code class="highlighter-rouge">beta</code></td>
+      <td>A moderator has removed a specific message.</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-beta">BETA</span> <a href="#channelchatnotification">Channel Chat Notification</a></td>
+      <td><code class="highlighter-rouge">channel.chat.notification</code></td>
+      <td><code class="highlighter-rouge">beta</code></td>
+      <td>A notification for when an event that appears in chat has occurred.</td>
     </tr>
     <tr>
       <td><a href="#channelsubscribe">Channel Subscribe</a></td>
@@ -1023,11 +1053,635 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
+<h3 id="channelad_breakbegin">channel.ad_break.begin</h3>
+
+<p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.ad_break.begin</code> subscription type sends a notification when a user runs a midroll commercial break, either manually or automatically via ads manager.</p>
+
+<h3 id="authorization-2">Authorization</h3>
+
+<p>Must have <code class="highlighter-rouge">channel:read:ads</code> scope.</p>
+
+<h3 id="channel-ad-break-begin-request-body">Channel Ad Break Begin Request Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">type</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The subscription type name: <code class="highlighter-rouge">channel.ad_break.begin</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">version</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The subscription type version: <code class="highlighter-rouge">beta</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">condition</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#channel-ad-break-begin-condition">condition</a> </td>
+      <td>Yes</td>
+      <td>Subscription-specific parameters.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">transport</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#transport">transport</a> </td>
+      <td>Yes</td>
+      <td>Transport-specific parameters.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-ad-break-begin-webhook-example">Channel Ad Break Begin Webhook Example</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.ad_break.begin"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"transport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"callback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/webhooks/callback"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s3cRe7"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="channel-ad-break-begin-notification-payload">Channel Ad Break Begin Notification Payload</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">subscription</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#subscription">subscription</a> </td>
+      <td>Metadata about the subscription.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">event</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#channel-ad-break-begin-event">event</a> </td>
+      <td>The event information.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-ad-break-begin-notification-example">Channel Ad Break Begin Notification Example</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.ad_break.begin"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+         </span><span class="s2">"transport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"callback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/webhooks/callback"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-16T10:11:12.634234626Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"length_seconds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-16T10:11:12.634234626Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"is_automatic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"requester_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"broadcaster_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"broadcaster_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_User"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="channelchatclear">channel.chat.clear</h3>
+
+<p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.chat.clear</code> subscription type sends a notification when a moderator or bot clears all messages from the chat room.</p>
+
+<h3 id="authorization-3">Authorization</h3>
+
+<p>Requires <code class="highlighter-rouge">user:read:chat</code> scope from chatting user. If app access token used, then additionally requires <code class="highlighter-rouge">user:bot</code> scope from chatting user, and either <code class="highlighter-rouge">channel:bot</code> scope from broadcaster or moderator status.</p>
+
+<h3 id="channel-chat-clear-request-body">Channel Chat Clear Request Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">type</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The subscription type name: <code class="highlighter-rouge">channel.chat.clear</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">version</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The subscription type version: <code class="highlighter-rouge">beta</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">condition</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#channel-chat-clear-condition">condition</a> </td>
+      <td>Yes</td>
+      <td>Subscription-specific parameters.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">transport</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#transport">transport</a> </td>
+      <td>Yes</td>
+      <td>Transport-specific parameters.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-clear-webhook-example">Channel Chat Clear Webhook Example</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.clear"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"transport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"callback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/webhooks/callback"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s3cRe7"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="channel-chat-clear-notification-payload">Channel Chat Clear Notification Payload</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">subscription</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#subscription">subscription</a> </td>
+      <td>Metadata about the subscription.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">event</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#channel-chat-clear-event">event</a> </td>
+      <td>The event information.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-clear-notification-example">Channel Chat Clear Notification Example</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.clear"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"transport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"callback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/webhooks/callback"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-11T10:11:12.123Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"broadcaster_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_User"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"broadcaster_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="channelchatclear_user_messages">channel.chat.clear_user_messages</h3>
+
+<p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.chat.clear_user_messages</code> subscription type sends a notification when a moderator or bot clears all messages for a specific user.</p>
+
+<h3 id="authorization-4">Authorization</h3>
+
+<p>Requires <code class="highlighter-rouge">user:read:chat</code> scope from chatting user. If app access token used, then additionally requires <code class="highlighter-rouge">user:bot</code> scope from chatting user, and either <code class="highlighter-rouge">channel:bot</code> scope from broadcaster or moderator status.</p>
+
+<h3 id="channel-chat-clear-user-messages-request-body">Channel Chat Clear User Messages Request Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">type</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The subscription type name: <code class="highlighter-rouge">channel.chat.clear_user_messages</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">version</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The subscription type version: <code class="highlighter-rouge">beta</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">condition</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#channel-chat-clear-user-messages-condition">condition</a> </td>
+      <td>Yes</td>
+      <td>Subscription-specific parameters.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">transport</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#transport">transport</a> </td>
+      <td>Yes</td>
+      <td>Transport-specific parameters.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-clear-user-messages-webhook-example">Channel Chat Clear User Messages Webhook Example</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.clear_user_messages"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"transport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"callback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/webhooks/callback"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s3cRe7"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="channel-chat-clear-user-messages-notification-payload">Channel Chat Clear User Messages Notification Payload</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">subscription</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#subscription">subscription</a> </td>
+      <td>Metadata about the subscription.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">event</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#channel-chat-clear-user-messages-event">event</a> </td>
+      <td>The event information.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-clear-user-messages-notification-example">Channel Chat Clear User Messages Notification Example</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.clear_user_messages"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+         </span><span class="s2">"transport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"callback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/webhooks/callback"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-11T10:11:12.123Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"broadcaster_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_User"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"broadcaster_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"target_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7734"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"target_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uncool_viewer"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"target_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uncool_viewer"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="channelchatmessage_delete">channel.chat.message_delete</h3>
+
+<p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.chat.message_delete</code> subscription type sends a notification when a moderator removes a specific message.</p>
+
+<h3 id="authorization-5">Authorization</h3>
+
+<p>Requires <code class="highlighter-rouge">user:read:chat</code> scope from chatting user. If app access token used, then additionally requires <code class="highlighter-rouge">user:bot</code> scope from chatting user, and either <code class="highlighter-rouge">channel:bot</code> scope from broadcaster or moderator status.</p>
+
+<h3 id="channel-chat-message-delete-request-body">Channel Chat Message Delete Request Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">type</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The subscription type name: <code class="highlighter-rouge">channel.chat.message_delete</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">version</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The subscription type version: <code class="highlighter-rouge">beta</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">condition</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#channel-chat-message-delete-condition">condition</a> </td>
+      <td>Yes</td>
+      <td>Subscription-specific parameters.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">transport</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#transport">transport</a> </td>
+      <td>Yes</td>
+      <td>Transport-specific parameters.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-message-delete-webhook-example">Channel Chat Message Delete Webhook Example</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.message_delete"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"transport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"callback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/webhooks/callback"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s3cRe7"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="channel-chat-message-delete-notification-payload">Channel Chat Message Delete Notification Payload</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">subscription</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#subscription">subscription</a> </td>
+      <td>Metadata about the subscription.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">event</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#channel-chat-message-delete-event">event</a> </td>
+      <td>The event information.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-message-delete-notification-example">Channel Chat Message Delete Notification Example</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.message_delete"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+         </span><span class="s2">"transport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"callback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/webhooks/callback"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-11T10:11:12.123Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"broadcaster_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_User"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"broadcaster_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"target_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7734"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"target_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uncool_viewer"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"target_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uncool_viewer"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="channelchatnotification">channel.chat.notification</h3>
+
+<p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.chat.notification</code> subscription type sends a notification when an event that appears in chat occurs, such as someone subscribing to the channel or a subscription is gifted.</p>
+
+<h3 id="authorization-6">Authorization</h3>
+
+<p>Requires <code class="highlighter-rouge">user:read:chat</code> scope from chatting user. If app access token used, then additionally requires <code class="highlighter-rouge">user:bot</code> scope from chatting user, and either <code class="highlighter-rouge">channel:bot</code> scope from broadcaster or moderator status.</p>
+
+<h3 id="channel-chat-notification-request-body">Channel Chat Notification Request Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">type</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The subscription type name: <code class="highlighter-rouge">channel.chat.notification</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">version</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The subscription type version: <code class="highlighter-rouge">beta</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">condition</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#channel-chat-notification-condition">condition</a> </td>
+      <td>Yes</td>
+      <td>Subscription-specific parameters.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">transport</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#transport">transport</a> </td>
+      <td>Yes</td>
+      <td>Transport-specific parameters.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-notification-webhook-example">Channel Chat Notification Webhook Example</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.notification"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"transport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"callback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/webhooks/callback"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s3cRe7"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="channel-chat-notification-notification-payload">Channel Chat Notification Notification Payload</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">subscription</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#subscription">subscription</a> </td>
+      <td>Metadata about the subscription.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">event</code></td>
+      <td> <a href="/docs/eventsub/eventsub-reference/#channel-chat-notification-event">event</a> </td>
+      <td>The event information.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-notification-notification-example">Channel Chat Notification Notification Example</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.notification"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+         </span><span class="s2">"transport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"callback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/webhooks/callback"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-11T10:11:12.123Z"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"broadcaster_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_User"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"broadcaster_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"chatter_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"444"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"chatter_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_chatter"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"chatter_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_Chatter"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"chatter_is_anonymous"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"system_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chat message"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"message_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message-id"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chat-msg"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"fragments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"emote"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chat-msg"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"cheermote"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"emote"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"emote-id"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"emote_set_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"emote-set"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"owner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"emote-owner"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"format"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"static"</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"mention"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"notice_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"announcement"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"sub"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"resub"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"sub_gift"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"community_sub_gift"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"gift_paid_upgrade"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"prime_paid_upgrade"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pay_it_forward"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"raid"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"unraid"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"announcement"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"blue"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"bits_badge_tier"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"charity_donation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
 <h3 id="channelsubscribe">channel.subscribe</h3>
 
 <p>The <code class="highlighter-rouge">channel.subscribe</code> subscription type sends a notification when a specified channel receives a subscriber. This does not include resubscribes.</p>
 
-<h3 id="authorization-2">Authorization</h3>
+<h3 id="authorization-7">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:subscriptions</code> scope.</p>
 
@@ -1145,7 +1799,7 @@
 
 <p>The <code class="highlighter-rouge">channel.subscription.end</code> subscription type sends a notification when a subscription to the specified channel expires.</p>
 
-<h3 id="authorization-3">Authorization</h3>
+<h3 id="authorization-8">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:subscriptions</code> scope.</p>
 
@@ -1263,7 +1917,7 @@
 
 <p>The <code class="highlighter-rouge">channel.subscription.gift</code> subscription type sends a notification when a user gives one or more gifted subscriptions in a channel.</p>
 
-<h3 id="authorization-4">Authorization</h3>
+<h3 id="authorization-9">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:subscriptions</code> scope.</p>
 
@@ -1383,7 +2037,7 @@
 
 <p>The <code class="highlighter-rouge">channel.subscription.message</code> subscription type sends a notification when a user sends a resubscription chat message in a specific channel.</p>
 
-<h3 id="authorization-5">Authorization</h3>
+<h3 id="authorization-10">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:subscriptions</code> scope.</p>
 
@@ -1513,7 +2167,7 @@
 
 <p>The <code class="highlighter-rouge">channel.cheer</code> subscription type sends a notification when a user cheers on the specified channel.</p>
 
-<h3 id="authorization-6">Authorization</h3>
+<h3 id="authorization-11">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">bits:read</code> scope.</p>
 
@@ -1632,7 +2286,7 @@
 
 <p>The <code class="highlighter-rouge">channel.raid</code> subscription type sends a notification when a broadcaster raids another broadcaster’s channel.</p>
 
-<h3 id="authorization-7">Authorization</h3>
+<h3 id="authorization-12">Authorization</h3>
 
 <p>No authorization required.</p>
 
@@ -1749,7 +2403,7 @@
 
 <p>The <code class="highlighter-rouge">channel.ban</code> subscription type sends a notification when a viewer is timed out or banned from the specified channel.</p>
 
-<h3 id="authorization-8">Authorization</h3>
+<h3 id="authorization-13">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:moderate</code> scope.</p>
 
@@ -1872,7 +2526,7 @@
 
 <p>The <code class="highlighter-rouge">channel.unban</code> subscription type sends a notification when a viewer is unbanned from the specified channel.</p>
 
-<h3 id="authorization-9">Authorization</h3>
+<h3 id="authorization-14">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:moderate</code> scope.</p>
 
@@ -1991,7 +2645,7 @@
 
 <p>The <code class="highlighter-rouge">channel.moderator.add</code> subscription type sends a notification when a user is given moderator privileges on a specified channel.</p>
 
-<h3 id="authorization-10">Authorization</h3>
+<h3 id="authorization-15">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">moderation:read</code> scope.</p>
 
@@ -2107,7 +2761,7 @@
 
 <p>The <code class="highlighter-rouge">channel.moderator.remove</code> subscription type sends a notification when a user has moderator privileges removed on a specified channel.</p>
 
-<h3 id="authorization-11">Authorization</h3>
+<h3 id="authorization-16">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">moderation:read</code> scope.</p>
 
@@ -2223,7 +2877,7 @@
 
 <p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.guest_star_session.begin</code> subscription type sends a notification when the host begins a new Guest Star session.</p>
 
-<h3 id="authorization-12">Authorization</h3>
+<h3 id="authorization-17">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:guest_star</code>, <code class="highlighter-rouge">channel:manage:guest_star</code>, <code class="highlighter-rouge">moderator:read:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code> scope.</p>
 
@@ -2355,7 +3009,7 @@
 
 <p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.guest_star_session.end</code> subscription type sends a notification when a running Guest Star session is ended by the host, or automatically by the system.</p>
 
-<h3 id="authorization-13">Authorization</h3>
+<h3 id="authorization-18">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:guest_star</code>, <code class="highlighter-rouge">channel:manage:guest_star</code>, <code class="highlighter-rouge">moderator:read:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code> scope.</p>
 
@@ -2488,7 +3142,7 @@
 
 <p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.guest_star_guest.update</code> subscription type sends a notification when a guest or a slot is updated in an active Guest Star session.</p>
 
-<h3 id="authorization-14">Authorization</h3>
+<h3 id="authorization-19">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:guest_star</code>, <code class="highlighter-rouge">channel:manage:guest_star</code>, <code class="highlighter-rouge">moderator:read:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code> scope.</p>
 
@@ -2627,7 +3281,7 @@
 
 <p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.guest_star_settings.update</code> subscription type sends a notification when the host preferences for Guest Star have been updated.</p>
 
-<h3 id="authorization-15">Authorization</h3>
+<h3 id="authorization-20">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:guest_star</code>, <code class="highlighter-rouge">channel:manage:guest_star</code>, <code class="highlighter-rouge">moderator:read:guest_star</code> or <code class="highlighter-rouge">moderator:manage:guest_star</code> scope.</p>
 
@@ -2758,7 +3412,7 @@
 
 <p>The <code class="highlighter-rouge">channel.channel_points_custom_reward.add</code> subscription type sends a notification when a custom channel points reward has been created for the specified channel.</p>
 
-<h3 id="authorization-16">Authorization</h3>
+<h3 id="authorization-21">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:redemptions</code> or <code class="highlighter-rouge">channel:manage:redemptions</code> scope.</p>
 
@@ -2905,7 +3559,7 @@
 
 <p>The <code class="highlighter-rouge">channel.channel_points_custom_reward.update</code> subscription type sends a notification when a custom channel points reward has been updated for the specified channel.</p>
 
-<h3 id="authorization-17">Authorization</h3>
+<h3 id="authorization-22">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:redemptions</code> or <code class="highlighter-rouge">channel:manage:redemptions</code> scope.</p>
 
@@ -3054,7 +3708,7 @@
 
 <p>The <code class="highlighter-rouge">channel.channel_points_custom_reward.remove</code> subscription type sends a notification when a custom channel points reward has been removed from the specified channel.</p>
 
-<h3 id="authorization-18">Authorization</h3>
+<h3 id="authorization-23">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:redemptions</code> or <code class="highlighter-rouge">channel:manage:redemptions</code> scope.</p>
 
@@ -3203,7 +3857,7 @@
 
 <p>The <code class="highlighter-rouge">channel.channel_points_custom_reward_redemption.add</code> subscription type sends a notification when a viewer has redeemed a custom channel points reward on the specified channel.</p>
 
-<h3 id="authorization-19">Authorization</h3>
+<h3 id="authorization-24">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:redemptions</code> or <code class="highlighter-rouge">channel:manage:redemptions</code> scope.</p>
 
@@ -3331,7 +3985,7 @@
 
 <p>The <code class="highlighter-rouge">channel.channel_points_custom_reward_redemption.update</code> subscription type sends a notification when a redemption of a channel points custom reward has been updated for the specified channel.</p>
 
-<h3 id="authorization-20">Authorization</h3>
+<h3 id="authorization-25">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:redemptions</code> or <code class="highlighter-rouge">channel:manage:redemptions</code> scope.</p>
 
@@ -3459,7 +4113,7 @@
 
 <p>The <code class="highlighter-rouge">channel.poll.begin</code> subscription type sends a notification when a poll begins on the specified channel.</p>
 
-<h3 id="authorization-21">Authorization</h3>
+<h3 id="authorization-26">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:polls</code> or <code class="highlighter-rouge">channel:manage:polls</code> scope.</p>
 
@@ -3589,7 +4243,7 @@
 
 <p>The <code class="highlighter-rouge">channel.poll.progress</code> subscription type sends a notification when users respond to a poll on the specified channel.</p>
 
-<h3 id="authorization-22">Authorization</h3>
+<h3 id="authorization-27">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:polls</code> or <code class="highlighter-rouge">channel:manage:polls</code> scope.</p>
 
@@ -3719,7 +4373,7 @@
 
 <p>The <code class="highlighter-rouge">channel.poll.end</code> subscription type sends a notification when a poll ends on the specified channel.</p>
 
-<h3 id="authorization-23">Authorization</h3>
+<h3 id="authorization-28">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:polls</code> or <code class="highlighter-rouge">channel:manage:polls</code> scope.</p>
 
@@ -3850,7 +4504,7 @@
 
 <p>The <code class="highlighter-rouge">channel.prediction.begin</code> subscription type sends a notification when a Prediction begins on the specified channel.</p>
 
-<h3 id="authorization-24">Authorization</h3>
+<h3 id="authorization-29">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:predictions</code> or <code class="highlighter-rouge">channel:manage:predictions</code> scope.</p>
 
@@ -3971,7 +4625,7 @@
 
 <p>The <code class="highlighter-rouge">channel.prediction.progress</code> subscription type sends a notification when users participate in a Prediction on the specified channel.</p>
 
-<h3 id="authorization-25">Authorization</h3>
+<h3 id="authorization-30">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:predictions</code> or <code class="highlighter-rouge">channel:manage:predictions</code> scope.</p>
 
@@ -4127,7 +4781,7 @@
 
 <p>The <code class="highlighter-rouge">channel.prediction.lock</code> subscription type sends a notification when a Prediction is locked on the specified channel.</p>
 
-<h3 id="authorization-26">Authorization</h3>
+<h3 id="authorization-31">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:predictions</code> or <code class="highlighter-rouge">channel:manage:predictions</code> scope.</p>
 
@@ -4283,7 +4937,7 @@
 
 <p>The <code class="highlighter-rouge">channel.prediction.end</code> subscription type sends a notification when a Prediction ends on the specified channel.</p>
 
-<h3 id="authorization-27">Authorization</h3>
+<h3 id="authorization-32">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:predictions</code> or <code class="highlighter-rouge">channel:manage:predictions</code> scope.</p>
 
@@ -4452,7 +5106,7 @@
 
 <p>After the Hype Train begins, any additional cheers or subscriptions on the channel will cause <code class="highlighter-rouge">channel.hype_train.progress</code> notifications to be sent. When the Hype Train is over, <code class="highlighter-rouge">channel.hype_train.end</code> is emitted.</p>
 
-<h3 id="authorization-28">Authorization</h3>
+<h3 id="authorization-33">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:hype_train</code> scope.</p>
 
@@ -4579,7 +5233,7 @@
 
 <p>After a Hype Train begins, any additional cheers or subscriptions on the channel will cause <code class="highlighter-rouge">channel.hype_train.progress</code> notifications to be sent. When the Hype Train is over, <code class="highlighter-rouge">channel.hype_train.end</code> is emitted.</p>
 
-<h3 id="authorization-29">Authorization</h3>
+<h3 id="authorization-34">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:hype_train</code> scope.</p>
 
@@ -4704,7 +5358,7 @@
 
 <p>The <code class="highlighter-rouge">channel.hype_train.end</code> subscription type sends a notification when a Hype Train ends on the specified channel.</p>
 
-<h3 id="authorization-30">Authorization</h3>
+<h3 id="authorization-35">Authorization</h3>
 
 <p>Must have <code class="highlighter-rouge">channel:read:hype_train</code> scope.</p>
 
@@ -4827,7 +5481,7 @@
 
 <p>Sends a notification when a user donates to the broadcaster’s charity campaign.</p>
 
-<h3 id="authorization-31">Authorization</h3>
+<h3 id="authorization-36">Authorization</h3>
 
 <p>Requires the <strong>channel:read:charity</strong> scope.</p>
 
@@ -4964,7 +5618,7 @@
 
 <p>It’s possible to receive this event after the <a href="#channelcharity_campaignprogress">Progress</a> event.</p>
 
-<h3 id="authorization-32">Authorization</h3>
+<h3 id="authorization-37">Authorization</h3>
 
 <p>Requires the <strong>channel:read:charity</strong> scope.</p>
 
@@ -5105,7 +5759,7 @@
 
 <p>To get donation information, subscribe to the <a href="#channelcharity_campaigndonate">channel.charity_campaign.donate</a> event.</p>
 
-<h3 id="authorization-33">Authorization</h3>
+<h3 id="authorization-38">Authorization</h3>
 
 <p>Requires the <strong>channel:read:charity</strong> scope.</p>
 
@@ -5241,7 +5895,7 @@
 
 <p>Sends a notification when the broadcaster stops a charity campaign.</p>
 
-<h3 id="authorization-34">Authorization</h3>
+<h3 id="authorization-39">Authorization</h3>
 
 <p>Requires the <strong>channel:read:charity</strong> scope.</p>
 
@@ -5380,7 +6034,7 @@
 
 <p>This event informs the subscriber that the broadcaster’s moderation settings were changed based on the broadcaster’s Shield Mode configuration settings.</p>
 
-<h3 id="authorization-35">Authorization</h3>
+<h3 id="authorization-40">Authorization</h3>
 
 <p>Requires the <strong>moderator:read:shield_mode</strong> or <strong>moderator:manage:shield_mode</strong> scope.</p>
 
@@ -5519,7 +6173,7 @@
 
 <p>This event informs the subscriber that the broadcaster’s moderation settings were changed back to the broadcaster’s previous moderation settings.</p>
 
-<h3 id="authorization-36">Authorization</h3>
+<h3 id="authorization-41">Authorization</h3>
 
 <p>Requires the <strong>moderator:read:shield_mode</strong> or <strong>moderator:manage:shield_mode</strong> scope.</p>
 
@@ -5656,7 +6310,7 @@
 
 <p>Sends a notification when the specified broadcaster sends a Shoutout.</p>
 
-<h3 id="authorization-37">Authorization</h3>
+<h3 id="authorization-42">Authorization</h3>
 
 <p>Requires the <strong>moderator:read:shoutouts</strong> or <strong>moderator:manage:shoutouts</strong> scope.</p>
 
@@ -5801,7 +6455,7 @@
 
 <p><strong>NOTE</strong> Sent only if Twitch posts the Shoutout to the broadcaster’s activity feed.</p>
 
-<h3 id="authorization-38">Authorization</h3>
+<h3 id="authorization-43">Authorization</h3>
 
 <p>Requires the <strong>moderator:read:shoutouts</strong> or <strong>moderator:manage:shoutouts</strong> scope.</p>
 
@@ -5941,7 +6595,7 @@
 
 <p><strong>NOTE</strong> This subscription type is only supported by webhooks, and cannot be used with WebSockets.</p>
 
-<h3 id="authorization-39">Authorization</h3>
+<h3 id="authorization-44">Authorization</h3>
 
 <p>App access token required. The client ID associated with the access token must be owned by a user who is part of the specified organization.</p>
 
@@ -6097,7 +6751,7 @@
 
 <p><strong>NOTE</strong> This subscription type is only supported by webhooks, and cannot be used with WebSockets.</p>
 
-<h3 id="authorization-40">Authorization</h3>
+<h3 id="authorization-45">Authorization</h3>
 
 <p>The OAuth token client ID must match the Extension client ID.</p>
 
@@ -6225,7 +6879,7 @@
 
 <p><strong>NOTE:</strong> It’s possible to receive the Begin event after receiving Progress events.</p>
 
-<h3 id="authorization-41">Authorization</h3>
+<h3 id="authorization-46">Authorization</h3>
 
 <p>Requires a user OAuth access token with scope set to <strong>channel:read:goals</strong>.</p>
 
@@ -6346,7 +7000,7 @@
 
 <p><strong>NOTE:</strong> It’s possible to receive Progress events before receiving the Begin event.</p>
 
-<h3 id="authorization-42">Authorization</h3>
+<h3 id="authorization-47">Authorization</h3>
 
 <p>Requires a user OAuth access token with scope set to <strong>channel:read:goals</strong>.</p>
 
@@ -6465,7 +7119,7 @@
 
 <p><a href="/docs/product-lifecycle"><span class="pill pill-new">NEW</span></a> Notifies the subscriber when the specified broadcaster ends a goal.</p>
 
-<h3 id="authorization-43">Authorization</h3>
+<h3 id="authorization-48">Authorization</h3>
 
 <p>Requires a user OAuth access token with scope set to <strong>channel:read:goals</strong>.</p>
 
@@ -6590,7 +7244,7 @@
 
 <p>The <code class="highlighter-rouge">stream.online</code> subscription type sends a notification when the specified broadcaster starts a stream.</p>
 
-<h3 id="authorization-44">Authorization</h3>
+<h3 id="authorization-49">Authorization</h3>
 
 <p>No authorization required.</p>
 
@@ -6706,7 +7360,7 @@
 
 <p>The <code class="highlighter-rouge">stream.offline</code> subscription type sends a notification when the specified broadcaster stops a stream.</p>
 
-<h3 id="authorization-45">Authorization</h3>
+<h3 id="authorization-50">Authorization</h3>
 
 <p>No authorization required.</p>
 
@@ -6823,7 +7477,7 @@
 
 <p><strong>NOTE</strong> This subscription type is only supported by webhooks, and cannot be used with WebSockets.</p>
 
-<h3 id="authorization-46">Authorization</h3>
+<h3 id="authorization-51">Authorization</h3>
 
 <p>Provided <code class="highlighter-rouge">client_id</code> must match the client id in the application access token.</p>
 
@@ -6939,7 +7593,7 @@
 
 <p><strong>NOTE</strong> This subscription type is only supported by webhooks, and cannot be used with WebSockets.</p>
 
-<h3 id="authorization-47">Authorization</h3>
+<h3 id="authorization-52">Authorization</h3>
 
 <p>Provided <code class="highlighter-rouge">client_id</code> must match the client id in the application access token.</p>
 
@@ -7053,7 +7707,7 @@
 
 <p>The <code class="highlighter-rouge">user.update</code> subscription type sends a notification when user updates their account.</p>
 
-<h3 id="authorization-48">Authorization</h3>
+<h3 id="authorization-53">Authorization</h3>
 
 <p>No authorization required. If you have the <code class="highlighter-rouge">user:read:email</code> scope, the notification will include <code class="highlighter-rouge">email</code> field.</p>
 

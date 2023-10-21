@@ -6151,6 +6151,11 @@ paths:
             enum: &a1
               - channel.update
               - channel.follow
+              - channel.ad_break.begin
+              - channel.chat.clear
+              - channel.chat.clear_user_messages
+              - channel.chat.message_delete
+              - channel.chat.notification
               - channel.subscribe
               - channel.subscription.end
               - channel.subscription.gift
@@ -21222,6 +21227,7 @@ components:
             analytics:read:games: View analytics data for the games owned by the
               authenticated account.
             bits:read: View Bits information for a channel.
+            channel:manage:ads: Manage ads schedule on a channel.
             channel:manage:broadcast: Manage a channel’s broadcast configuration, including
               updating channel configuration and managing stream markers and
               stream tags.
@@ -21288,6 +21294,7 @@ components:
               on your behalf.
             channel:moderate: Perform moderation actions in a channel. The user requesting
               the scope must be a moderator in the channel.
+            channel:read:ads: Read the ads schedule and details on your channel.
             chat:edit: Send live stream chat messages.
             chat:read: View live stream chat messages.
             whispers:read: View your whisper messages.

@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-10-19T00:43:47-07:00">
+<meta property="article:published_time" content="2023-10-19T17:01:39-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"EventSub Reference","headline":"EventSub Reference","dateModified":"2023-10-19T00:43:47-07:00","datePublished":"2023-10-19T00:43:47-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@context":"http://schema.org"}</script>
+{"description":"EventSub Reference","headline":"EventSub Reference","dateModified":"2023-10-19T17:01:39-07:00","datePublished":"2023-10-19T17:01:39-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -669,6 +669,27 @@
 
 <h2 id="conditions">Conditions</h2>
 
+<h3 id="channel-ad-break-begin-condition">Channel Ad Break Begin Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The ID of the broadcaster that you want to get Channel Ad Break begin notifications for. Maximum: 1</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="channel-ban-condition">Channel Ban Condition</h3>
 
 <table>
@@ -686,6 +707,114 @@
       <td>string</td>
       <td>yes</td>
       <td>The broadcaster user ID for the channel you want to get ban notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-clear-condition">Channel Chat Clear Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>User ID of the channel to receive chat clear events for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID to read chat as.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-clear-user-messages-condition">Channel Chat Clear User Messages Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>User ID of the channel to receive chat clear user messages events for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID to read chat as.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-message-delete-condition">Channel Chat Message Delete Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>User ID of the channel to receive chat message delete events for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID to read chat as.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-notification-condition">Channel Chat Notification Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>User ID of the channel to receive chat notification events for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID to read chat as.</td>
     </tr>
   </tbody>
 </table>
@@ -1591,6 +1720,55 @@
 
 <h2 id="events">Events</h2>
 
+<h3 id="channel-ad-break-begin-event">Channel Ad Break Begin Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">duration</code></td>
+      <td>integer</td>
+      <td>Length in seconds of the mid-roll ad break requested</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">timestamp</code></td>
+      <td>string</td>
+      <td>The UTC timestamp of when the ad break began, in RFC3339 format. Note that there is potential delay between this event, when the streamer requested the ad break, and when the viewers will see ads.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_automatic</code></td>
+      <td>boolean</td>
+      <td>Indicates if the ad was automatically scheduled via Ads Manager</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The broadcaster’s user ID for the channel the ad was run on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">requester_user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user that requested the ad. For automatic ads, this will be the ID of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The broadcaster’s user login for the channel the ad was run on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The broadcaster’s user display name for the channel the ad was run on.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="channel-ban-event">Channel Ban Event</h3>
 
 <table>
@@ -1666,6 +1844,567 @@
       <td><code class="highlighter-rouge">is_permanent</code></td>
       <td>boolean</td>
       <td>Indicates whether the ban is permanent (true) or a timeout (false). If true, <code class="highlighter-rouge">ends_at</code> will be null.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-clear-event">Channel Chat Clear Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The broadcaster user ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The broadcaster display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The broadcaster login.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-clear-user-messages-event">Channel Chat Clear User Messages Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The broadcaster user ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The broadcaster display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The broadcaster login.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target_user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user that was banned or put in a timeout. All of their messages are deleted.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user that was banned or put in a timeout.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target_user_login</code></td>
+      <td>string</td>
+      <td>The user login of the user that was banned or put in a timeout.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-message-delete-event">Channel Chat Message Delete Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The broadcaster user ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The broadcaster display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The broadcaster login.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target_user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user whose message was deleted.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user whose message was deleted.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target_user_login</code></td>
+      <td>string</td>
+      <td>The user login of the user whose message was deleted.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message_id</code></td>
+      <td>string</td>
+      <td>A UUID that identifies the message that was removed.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-notification-event">Channel Chat Notification Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The broadcaster user ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The broadcaster display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The broadcaster login.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">chatter_user_id</code></td>
+      <td>string</td>
+      <td>The user ID of the user that sent the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">chatter_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user that sent the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">chatter_user_login</code></td>
+      <td>string</td>
+      <td>The user login of the user that sent the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">chatter_is_anonymous</code></td>
+      <td>bool</td>
+      <td>Whether or not the chatter is anonymous.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">color</code></td>
+      <td>string</td>
+      <td>The color of the user’s name in the chat room.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">system_message</code></td>
+      <td>string</td>
+      <td>The message Twitch shows in the chat room for this notice.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message_id</code></td>
+      <td>string</td>
+      <td>A UUID that identifies the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message</code></td>
+      <td>object</td>
+      <td>The structured chat message</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">text</code></td>
+      <td>string</td>
+      <td>The chat message in plain text.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">fragments</code></td>
+      <td>object[]</td>
+      <td>Ordered list of chat message fragments.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>The type of message fragment. Possible values: <ul><li>text</li><li>cheermote</li><li>emote</li><li>mention</li></ul></td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">text</code></td>
+      <td>string</td>
+      <td>Message text in fragment</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">cheermote</code></td>
+      <td>object</td>
+      <td>Optional. Metadata pertaining to the cheermote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">prefix</code></td>
+      <td>string</td>
+      <td>The name portion of the Cheermote string that you use in chat to cheer Bits. The full Cheermote string is the concatenation of {prefix} + {number of Bits}. For example, if the prefix is “Cheer” and you want to cheer 100 Bits, the full Cheermote string is Cheer100. When the Cheermote string is entered in chat, Twitch converts it to the image associated with the Bits tier that was cheered.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">bits</code></td>
+      <td>int</td>
+      <td>The amount of bits cheered.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">tier</code></td>
+      <td>int</td>
+      <td>The tier level of the cheermote.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">emote</code></td>
+      <td>object</td>
+      <td>Optional. Metadata pertaining to the emote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>An ID that uniquely identifies this emote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">emote_set_id</code></td>
+      <td>string</td>
+      <td>An ID that identifies the emote set that the emote belongs to.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">owner_id</code></td>
+      <td>string</td>
+      <td>The ID of the broadcaster who owns the emote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">format</code></td>
+      <td>string[]</td>
+      <td>The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only static. But if the emote is available as a static PNG and an animated GIF, the array contains static and animated. The possible formats are: <ul><li>animated — An animated GIF is available for this emote.</li><li>static — A static PNG file is available for this emote.</li></ul></td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">mention</code></td>
+      <td>object</td>
+      <td>Optional. Metadata pertaining to the mention.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The user ID of the mentioned user.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the mentioned user.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The user login of the mentioned user.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">notice_type</code></td>
+      <td>string</td>
+      <td>The type of notice. Possible values are: <ul><li>sub</li><li>resub</li><li>sub_gift</li><li>community_sub_gift</li><li>gift_paid_upgrade</li><li>prime_paid_upgrade</li><li>raid</li><li>unraid</li><li>pay_it_forward</li><li>announcement</li><li>bits_badge_tier</li><li>charity_donation</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">sub</code></td>
+      <td>object</td>
+      <td>Information about the sub event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">sub</code>.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">cumulative_months</code></td>
+      <td>int</td>
+      <td>The total number of months the user has subscribed.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">sub_plan</code></td>
+      <td>string</td>
+      <td>The type of subscription plan being used. Possible values are: <ul><li>Prime — Amazon Prime subscription</li><li>1000 — First level of paid subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">duration_months</code></td>
+      <td>int</td>
+      <td>The number of months the subscription is for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">resub</code></td>
+      <td>object</td>
+      <td>Information about the resub event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">resub</code>.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">cumulative_months</code></td>
+      <td>int</td>
+      <td>The total number of months the user has subscribed.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">duration_months</code></td>
+      <td>int</td>
+      <td>The number of months the subscription is for.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">streak_months</code></td>
+      <td>int</td>
+      <td>Optional. The number of consecutive months the user has subscribed.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">sub_plan</code></td>
+      <td>string</td>
+      <td>The type of subscription plan being used. Possible values are: <ul><li>Prime — Amazon Prime subscription</li><li>1000 — First level of paid subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">is_gift</code></td>
+      <td>bool</td>
+      <td>Whether or not the resub was a result of a gift.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">gifter_is_anonymous</code></td>
+      <td>bool</td>
+      <td>Optional. Whether or not the gift was anonymous.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">gifter_user_id</code></td>
+      <td>string</td>
+      <td>Optional. The user ID of the subscription gifter. Null if anonymous.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">gifter_user_name</code></td>
+      <td>string</td>
+      <td>Optional. The user name of the subscription gifter. Null if anonymous.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">gifter_user_login</code></td>
+      <td>string</td>
+      <td>Optional. The user login of the subscription gifter. Null if anonymous.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">sub_gift</code></td>
+      <td>object</td>
+      <td>Information about the gift sub event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">sub_gift</code>.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">duration_months</code></td>
+      <td>int</td>
+      <td>The number of months the subscription is for.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">cumulative_total</code></td>
+      <td>int</td>
+      <td>Optional. The amount of gifts the gifter has given in this channel. Null if anonymous.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">recipient_user_id</code></td>
+      <td>string</td>
+      <td>The user ID of the subscription gift recipient.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">recipient_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the subscription gift recipient.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">recipient_user_login</code></td>
+      <td>string</td>
+      <td>The user login of the subscription gift recipient.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">sub_plan</code></td>
+      <td>string</td>
+      <td>The type of subscription plan being used. Possible values are: <ul><li>1000 — First level of paid subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">community_gift_id</code></td>
+      <td>string</td>
+      <td>Optional. The ID of the associated community gift. Null if not associated with a community gift.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">community_sub_gift</code></td>
+      <td>object</td>
+      <td>Information about the community gift sub event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">community_sub_gift</code>.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>The ID of the associated community gift.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">total</code></td>
+      <td>int</td>
+      <td>Number of subscriptions being gifted.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">sub_plan</code></td>
+      <td>string</td>
+      <td>The type of subscription plan being used. Possible values are: <ul><li>1000 — First level of paid subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">cumulative_total</code></td>
+      <td>int</td>
+      <td>Optional. The amount of gifts the gifter has given in this channel. Null if anonymous.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">gift_paid_upgrade</code></td>
+      <td>object</td>
+      <td>Information about the community gift paid upgrade event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">gift_paid_upgrade</code>.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">gifter_is_anonymous</code></td>
+      <td>bool</td>
+      <td>Whether the gift was given anonymously.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">gifter_user_id</code></td>
+      <td>string</td>
+      <td>Optional. The user ID of the user who gifted the subscription. Null if anonymous.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">gifter_user_name</code></td>
+      <td>string</td>
+      <td>Optional. The user name of the user who gifted the subscription. Null if anonymous.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">gifter_user_login</code></td>
+      <td>string</td>
+      <td>Optional. The user login of the user who gifted the subscription. Null if anonymous.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">prime_paid_upgrade</code></td>
+      <td>object</td>
+      <td>Information about the Prime gift paid upgrade event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">prime_paid_upgrade</code>.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">sub_plan</code></td>
+      <td>string</td>
+      <td>The type of subscription plan being used. Possible values are: <ul><li>1000 — First level of paid subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">raid</code></td>
+      <td>object</td>
+      <td>Information about the raid event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">raid</code>.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The user ID of the broadcaster raiding this channel.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the broadcaster raiding this channel.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login name of the broadcaster raiding this channel.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">viewer_count</code></td>
+      <td>int</td>
+      <td>The number of viewers raiding this channel from the broadcaster’s channel.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">profile_image_url</code></td>
+      <td>string</td>
+      <td>Profile image URL of the broadcaster raiding this channel.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unraid</code></td>
+      <td>object</td>
+      <td>Information about the unraid event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">unraid</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">pay_it_forward</code></td>
+      <td>object</td>
+      <td>Information about the pay it forward event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">pay_it_forward</code>.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">gifter_is_anonymous</code></td>
+      <td>bool</td>
+      <td>Whether the gift was given anonymously.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">gifter_user_id</code></td>
+      <td>string</td>
+      <td>Optional. The user ID of the user who gifted the subscription. Null if anonymous.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">gifter_user_name</code></td>
+      <td>string</td>
+      <td>Optional. The user name of the user who gifted the subscription. Null if anonymous.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">gifter_user_login</code></td>
+      <td>string</td>
+      <td>Optional. The user login of the user who gifted the subscription. Null if anonymous.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">announcement</code></td>
+      <td>object</td>
+      <td>Information about the announcement event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">announcement</code></td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">color</code></td>
+      <td>string</td>
+      <td>Color of the announcement.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">charity_donation</code></td>
+      <td>object</td>
+      <td>Information about the charity donation event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">charity_donation</code>.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">charity_name</code></td>
+      <td>string</td>
+      <td>Name of the charity.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">amount</code></td>
+      <td>object</td>
+      <td>An object that contains the amount of money that the user paid.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">value</code></td>
+      <td>int</td>
+      <td>The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, value is set to 550.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">decimal_places</code></td>
+      <td>int</td>
+      <td>The number of decimal places used by the currency. For example, USD uses two decimal places.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">currency</code></td>
+      <td>string</td>
+      <td>The ISO-4217 three-letter currency code that identifies the type of currency in value.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">bits_badge_tier</code></td>
+      <td>object</td>
+      <td>Information about the bits badge tier event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">bits_badge_tier</code>.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">tier</code></td>
+      <td>int</td>
+      <td>The tier of the Bits badge the user just earned. For example, 100, 1000, or 10000.</td>
     </tr>
   </tbody>
 </table>
