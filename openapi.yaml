@@ -21215,6 +21215,7 @@ components:
               authenticated account.
             bits:read: View Bits information for a channel.
             channel:manage:ads: Manage ads schedule on a channel.
+            channel:read:ads: Read the ads schedule and details on your channel.
             channel:manage:broadcast: Manage a channel’s broadcast configuration, including
               updating channel configuration and managing stream markers and
               stream tags.
@@ -21279,10 +21280,12 @@ components:
             user:read:subscriptions: View if an authorized user is subscribed to specific channels.
             user:manage:whispers: Read whispers that you send and receive, and send whispers
               on your behalf.
+            channel:bot: Allows the client’s bot users access to a channel.
             channel:moderate: Perform moderation actions in a channel. The user requesting
               the scope must be a moderator in the channel.
-            channel:read:ads: Read the ads schedule and details on your channel.
             chat:edit: Send live stream chat messages.
             chat:read: View live stream chat messages.
+            user:bot: Allows client’s bot to act as this user.
+            user:read:chat: View live stream chat and room messages.
             whispers:read: View your whisper messages.
             whispers:edit: Send whisper messages.

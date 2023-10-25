@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-10-19T17:01:39-07:00">
+<meta property="article:published_time" content="2023-10-24T12:02:17-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Access Token Scopes","headline":"Twitch Access Token Scopes","dateModified":"2023-10-19T17:01:39-07:00","datePublished":"2023-10-19T17:01:39-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/authentication/scopes/"},"url":"https://dev.twitch.tv/authentication/scopes/","@context":"http://schema.org"}</script>
+{"description":"Twitch Access Token Scopes","headline":"Twitch Access Token Scopes","dateModified":"2023-10-24T12:02:17-07:00","datePublished":"2023-10-24T12:02:17-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/authentication/scopes/"},"url":"https://dev.twitch.tv/authentication/scopes/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -504,7 +504,11 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">channel:manage:ads</code></td>
-      <td>Manage ads schedule on a channel.<br><br><a href="/docs/api/reference#snooze-next-ad">Snooze Next Adl</a></td>
+      <td>Manage ads schedule on a channel.<br><br><a href="/docs/api/reference#snooze-next-ad">Snooze Next Ad</a></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">channel:read:ads</code></td>
+      <td>Read the ads schedule and details on your channel.<br><br><a href="/docs/api/reference#get-ad-schedule">Get Ad Schedule</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">channel:manage:broadcast</code></td>
@@ -732,12 +736,12 @@
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">channel:moderate</code></td>
-      <td>Perform moderation actions in a channel. The user requesting the scope must be a moderator in the channel.</td>
+      <td><code class="highlighter-rouge">channel:bot</code></td>
+      <td>Allows the client’s bot users access to a channel.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">channel:read:ads</code></td>
-      <td>Read the ads schedule and details on your channel.</td>
+      <td><code class="highlighter-rouge">channel:moderate</code></td>
+      <td>Perform moderation actions in a channel. The user requesting the scope must be a moderator in the channel.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">chat:edit</code></td>
@@ -746,6 +750,14 @@
     <tr>
       <td><code class="highlighter-rouge">chat:read</code></td>
       <td>View live stream chat messages.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user:bot</code></td>
+      <td>Allows client’s bot to act as this user.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user:read:chat</code></td>
+      <td>View live stream chat and room messages.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">whispers:read</code></td>
