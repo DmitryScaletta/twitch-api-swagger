@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-10-19T17:01:39-07:00">
+<meta property="article:published_time" content="2023-10-24T12:02:17-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2023-10-19T17:01:39-07:00","datePublished":"2023-10-19T17:01:39-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2023-10-24T12:02:17-07:00","datePublished":"2023-10-24T12:02:17-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -790,7 +790,7 @@
 								<td>Ads</td>
 							
 							<td><a href="#get-ad-schedule">Get Ad Schedule</a></td>
-							<td><p>Returns ad schedule related information.</p>
+							<td><p><span class="pill pill-beta">BETA</span> Returns ad schedule related information.</p>
 </td>
 						</tr>
 					
@@ -801,7 +801,7 @@
 								<td>Ads</td>
 							
 							<td><a href="#snooze-next-ad">Snooze Next Ad</a></td>
-							<td><p>Pushes back the timestamp of the upcoming automatic mid-roll ad by 5 minutes.</p>
+							<td><p><span class="pill pill-beta">BETA</span> Pushes back the timestamp of the upcoming automatic mid-roll ad by 5 minutes.</p>
 </td>
 						</tr>
 					
@@ -2315,141 +2315,11 @@
 			<h2 id="get-ad-schedule">Get Ad Schedule</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[1]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>This endpoint returns ad schedule related information, including snooze, when the last ad was run, when the next ad is scheduled, and if the channel is currently in pre-roll free time.</p>
+				<p><span class="pill pill-beta">BETA</span> This endpoint returns ad schedule related information, including snooze, when the last ad was run, when the next ad is scheduled, and if the channel is currently in pre-roll free time.</p>
 
 <h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:ads</strong> scope. The <code class="highlighter-rouge">user_id</code> in the user access token must match the <code class="highlighter-rouge">broadcaster_id</code>.</p>
-
-<h3>URL</h3>
-
-<p><code class="highlighter-rouge">POST https://api.twitch.tv/helix/channels/ads/schedule/snooze</code></p>
-
-<h3>Request Query Parameters</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Type</th>
-      <th>Required?</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>broadcaster_id</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>Provided <code class="highlighter-rouge">broadcaster_id</code> must match the <code class="highlighter-rouge">user_id</code> in the auth token.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Body</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>data</td>
-      <td>Object[]</td>
-      <td>A list that contains information about the channel’s snoozes and next upcoming ad after successfully snoozing.</td>
-    </tr>
-    <tr>
-      <td>   snooze_count</td>
-      <td>Integer</td>
-      <td>The number of snoozes available for the broadcaster.</td>
-    </tr>
-    <tr>
-      <td>   snooze_refresh_at</td>
-      <td>String</td>
-      <td>The UTC timestamp when the broadcaster will gain an additional snooze, in RFC3339 format.</td>
-    </tr>
-    <tr>
-      <td>   next_ad_at</td>
-      <td>String</td>
-      <td>The UTC timestamp of the broadcaster’s next scheduled ad, in RFC3339 format.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3>Response Codes</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>User’s next ad is successfully snoozed. Their <em>snooze_count</em> is decremented and <em>snooze_refresh_time</em> and <em>next_ad_at</em> are both updated.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The channel is not currently live.</li><li>The broadcaster ID is not valid.</li><li>Channel does not have an upcoming scheduled ad break.</li></ul></td>
-    </tr>
-    <tr>
-      <td>429 Too Many Requests</td>
-      <td>Channel has no snoozes left.</td>
-    </tr>
-    <tr>
-      <td>500 Internal Server Error</td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-			
-		</section>
-
-	
-			<section class="right-code">
-				<h3>Example Request</h3>
-
-<p>Snooze the next ad.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.twitch.tv/helix/channels/ads/schedule/snooze?broadcaster_id=123'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'</span>
-</code></pre></div></div>
-
-<h3>Example Response</h3>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"snooze_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"snooze_refresh_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-08-01T23:08:18+00:00"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"next_ad_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-08-01T23:08:18+00:00"</span><span class="p">,</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-			</section>
-	
-	</section>
-
-	<section class="doc-content">
-		<section class="left-docs">
-			<h2 id="snooze-next-ad">Snooze Next Ad</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[2]" data-cms-editor-link-style="modal">&#x270E;</a>
-			
-				<p>If available, pushes back the timestamp of the upcoming automatic mid-roll ad by 5 minutes. This endpoint duplicates the snooze functionality in the creator dashboard’s Ads Manager.</p>
-
-<h3>Authorization</h3>
-
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:ads</strong> scope. The <code class="highlighter-rouge">user_id</code> in the user access token must match the <code class="highlighter-rouge">broadcaster_id</code>.</p>
 
 <h3>URL</h3>
 
@@ -2575,6 +2445,136 @@
       </span><span class="s2">"preroll_free_time_seconds"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"90"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"snooze_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"snooze_refresh_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-08-01T23:08:18+00:00"</span><span class="p">,</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="snooze-next-ad">Snooze Next Ad</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[2]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> If available, pushes back the timestamp of the upcoming automatic mid-roll ad by 5 minutes. This endpoint duplicates the snooze functionality in the creator dashboard’s Ads Manager.</p>
+
+<h3>Authorization</h3>
+
+<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:ads</strong> scope. The <code class="highlighter-rouge">user_id</code> in the user access token must match the <code class="highlighter-rouge">broadcaster_id</code>.</p>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">POST https://api.twitch.tv/helix/channels/ads/schedule/snooze</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>Provided <code class="highlighter-rouge">broadcaster_id</code> must match the <code class="highlighter-rouge">user_id</code> in the auth token.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>Object[]</td>
+      <td>A list that contains information about the channel’s snoozes and next upcoming ad after successfully snoozing.</td>
+    </tr>
+    <tr>
+      <td>   snooze_count</td>
+      <td>Integer</td>
+      <td>The number of snoozes available for the broadcaster.</td>
+    </tr>
+    <tr>
+      <td>   snooze_refresh_at</td>
+      <td>String</td>
+      <td>The UTC timestamp when the broadcaster will gain an additional snooze, in RFC3339 format.</td>
+    </tr>
+    <tr>
+      <td>   next_ad_at</td>
+      <td>String</td>
+      <td>The UTC timestamp of the broadcaster’s next scheduled ad, in RFC3339 format.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>200 OK</td>
+      <td>User’s next ad is successfully snoozed. Their <em>snooze_count</em> is decremented and <em>snooze_refresh_time</em> and <em>next_ad_at</em> are both updated.</td>
+    </tr>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>The channel is not currently live.</li><li>The broadcaster ID is not valid.</li><li>Channel does not have an upcoming scheduled ad break.</li></ul></td>
+    </tr>
+    <tr>
+      <td>429 Too Many Requests</td>
+      <td>Channel has no snoozes left.</td>
+    </tr>
+    <tr>
+      <td>500 Internal Server Error</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<p>Snooze the next ad.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.twitch.tv/helix/channels/ads/schedule/snooze?broadcaster_id=123'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'</span>
+</code></pre></div></div>
+
+<h3>Example Response</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"snooze_count"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"snooze_refresh_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-08-01T23:08:18+00:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"next_ad_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-08-01T23:08:18+00:00"</span><span class="p">,</span><span class="w">
     </span><span class="p">},</span><span class="w">
   </span><span class="p">],</span><span class="w">
 </span><span class="p">}</span><span class="w">

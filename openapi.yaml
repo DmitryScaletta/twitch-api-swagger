@@ -163,13 +163,13 @@ paths:
       security:
         - twitch_auth:
             - channel:edit:commercial
-  /channels/ads/schedule/snooze:
-    post:
-      summary: Returns ad schedule related information.
+  /channels/ads:
+    get:
+      summary: BETA Returns ad schedule related information.
       description: >-
-        This endpoint returns ad schedule related information, including snooze,
-        when the last ad was run, when the next ad is scheduled, and if the
-        channel is currently in pre-roll free time.
+        BETA This endpoint returns ad schedule related information, including
+        snooze, when the last ad was run, when the next ad is scheduled, and if
+        the channel is currently in pre-roll free time.
 
 
         __Authorization:__
@@ -191,13 +191,80 @@ paths:
           required: true
       responses:
         "200":
+          description: Returns the ad schedule information for the channel.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAdScheduleResponse"
+              examples:
+                Example:
+                  description: >-
+                    _Request:_
+
+
+                    Snooze the next ad.
+
+
+                    ```bash
+
+                    curl -X GET 'https://api.twitch.tv/helix/channels/ads?broadcaster_id=123' \
+
+                    -H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \
+
+                    -H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'
+
+                    ```
+                  value:
+                    data:
+                      - next_ad_at: 2023-08-01T23:08:18+00:00
+                        last_ad_at: 2023-08-01T23:08:18+00:00
+                        length_seconds: "60"
+                        preroll_free_time_seconds: "90"
+                        snooze_count: "1"
+                        snooze_refresh_at: 2023-08-01T23:08:18+00:00
+        "400":
+          description: The broadcaster ID is not valid.
+        "500":
+          description: ""
+      security:
+        - twitch_auth:
+            - channel:read:ads
+  /channels/ads/schedule/snooze:
+    post:
+      summary: BETA Pushes back the timestamp of the upcoming automatic mid-roll ad by
+        5 minutes.
+      description: >-
+        BETA If available, pushes back the timestamp of the upcoming automatic
+        mid-roll ad by 5 minutes. This endpoint duplicates the snooze
+        functionality in the creator dashboard’s Ads Manager.
+
+
+        __Authorization:__
+
+
+        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:ads** scope. The `user_id` in the user access token must match the `broadcaster_id`.
+      tags:
+        - Ads
+      externalDocs:
+        description: Snooze Next Ad
+        url: https://dev.twitch.tv/docs/api/reference#snooze-next-ad
+      operationId: snooze-next-ad
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: Provided `broadcaster_id` must match the `user_id` in the auth token.
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
           description: User’s next ad is successfully snoozed. Their _snooze\_count_ is
             decremented and _snooze\_refresh\_time_ and _next\_ad\_at_ are both
             updated.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetAdScheduleResponse"
+                $ref: "#/components/schemas/SnoozeNextAdResponse"
               examples:
                 Example:
                   description: >-
@@ -228,73 +295,6 @@ paths:
             * Channel does not have an upcoming scheduled ad break.
         "429":
           description: Channel has no snoozes left.
-        "500":
-          description: ""
-      security:
-        - twitch_auth:
-            - channel:read:ads
-  /channels/ads:
-    get:
-      summary: Pushes back the timestamp of the upcoming automatic mid-roll ad by 5
-        minutes.
-      description: >-
-        If available, pushes back the timestamp of the upcoming automatic
-        mid-roll ad by 5 minutes. This endpoint duplicates the snooze
-        functionality in the creator dashboard’s Ads Manager.
-
-
-        __Authorization:__
-
-
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:ads** scope. The `user_id` in the user access token must match the `broadcaster_id`.
-      tags:
-        - Ads
-      externalDocs:
-        description: Snooze Next Ad
-        url: https://dev.twitch.tv/docs/api/reference#snooze-next-ad
-      operationId: snooze-next-ad
-      parameters:
-        - name: broadcaster_id
-          in: query
-          description: Provided `broadcaster_id` must match the `user_id` in the auth token.
-          schema:
-            type: string
-          required: true
-      responses:
-        "200":
-          description: Returns the ad schedule information for the channel.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SnoozeNextAdResponse"
-              examples:
-                Example:
-                  description: >-
-                    _Request:_
-
-
-                    Snooze the next ad.
-
-
-                    ```bash
-
-                    curl -X GET 'https://api.twitch.tv/helix/channels/ads?broadcaster_id=123' \
-
-                    -H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \
-
-                    -H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'
-
-                    ```
-                  value:
-                    data:
-                      - next_ad_at: 2023-08-01T23:08:18+00:00
-                        last_ad_at: 2023-08-01T23:08:18+00:00
-                        length_seconds: "60"
-                        preroll_free_time_seconds: "90"
-                        snooze_count: "1"
-                        snooze_refresh_at: 2023-08-01T23:08:18+00:00
-        "400":
-          description: The broadcaster ID is not valid.
         "500":
           description: ""
       security:
@@ -14335,36 +14335,6 @@ components:
       properties:
         data:
           type: array
-          description: A list that contains information about the channel’s snoozes and
-            next upcoming ad after successfully snoozing.
-          items:
-            type: object
-            required:
-              - snooze_count
-              - snooze_refresh_at
-              - next_ad_at
-            properties:
-              snooze_count:
-                type: integer
-                description: The number of snoozes available for the broadcaster.
-                format: int32
-              snooze_refresh_at:
-                type: string
-                description: The UTC timestamp when the broadcaster will gain an additional
-                  snooze, in RFC3339 format.
-                format: date-time
-              next_ad_at:
-                type: string
-                description: The UTC timestamp of the broadcaster’s next scheduled ad, in
-                  RFC3339 format.
-                format: date-time
-    SnoozeNextAdResponse:
-      type: object
-      required:
-        - data
-      properties:
-        data:
-          type: array
           description: A list that contains information related to the channel’s ad
             schedule.
           items:
@@ -14406,6 +14376,36 @@ components:
                 description: The amount of pre-roll free time remaining for the channel in
                   seconds. Returns 0 if they are currently not pre-roll free.
                 format: int32
+    SnoozeNextAdResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          description: A list that contains information about the channel’s snoozes and
+            next upcoming ad after successfully snoozing.
+          items:
+            type: object
+            required:
+              - snooze_count
+              - snooze_refresh_at
+              - next_ad_at
+            properties:
+              snooze_count:
+                type: integer
+                description: The number of snoozes available for the broadcaster.
+                format: int32
+              snooze_refresh_at:
+                type: string
+                description: The UTC timestamp when the broadcaster will gain an additional
+                  snooze, in RFC3339 format.
+                format: date-time
+              next_ad_at:
+                type: string
+                description: The UTC timestamp of the broadcaster’s next scheduled ad, in
+                  RFC3339 format.
+                format: date-time
     ExtensionAnalytics:
       type: object
       required:
