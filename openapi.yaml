@@ -165,11 +165,12 @@ paths:
             - channel:edit:commercial
   /channels/ads:
     get:
-      summary: BETA Returns ad schedule related information.
+      summary: Returns ad schedule related information.
       description: >-
-        BETA This endpoint returns ad schedule related information, including
-        snooze, when the last ad was run, when the next ad is scheduled, and if
-        the channel is currently in pre-roll free time.
+        This endpoint returns ad schedule related information, including snooze,
+        when the last ad was run, when the next ad is scheduled, and if the
+        channel is currently in pre-roll free time. Note that a new ad cannot be
+        run until 8 minutes after running a previous ad.
 
 
         __Authorization:__
@@ -218,8 +219,8 @@ paths:
                     data:
                       - next_ad_at: 2023-08-01T23:08:18+00:00
                         last_ad_at: 2023-08-01T23:08:18+00:00
-                        length_seconds: "60"
-                        preroll_free_time_seconds: "90"
+                        duration: "60"
+                        preroll_free_time: "90"
                         snooze_count: "1"
                         snooze_refresh_at: 2023-08-01T23:08:18+00:00
         "400":
@@ -231,10 +232,10 @@ paths:
             - channel:read:ads
   /channels/ads/schedule/snooze:
     post:
-      summary: BETA Pushes back the timestamp of the upcoming automatic mid-roll ad by
-        5 minutes.
+      summary: Pushes back the timestamp of the upcoming automatic mid-roll ad by 5
+        minutes.
       description: >-
-        BETA If available, pushes back the timestamp of the upcoming automatic
+        If available, pushes back the timestamp of the upcoming automatic
         mid-roll ad by 5 minutes. This endpoint duplicates the snooze
         functionality in the creator dashboard’s Ads Manager.
 
@@ -12902,7 +12903,7 @@ paths:
                         team_display_name: Live Coders
                         id: "6358"
         "400":
-          description: "* The _broadcaster\\_id_ query parameter is required."
+          description: "* The _broadcaster\\_id_ query parameter is missing or invalid."
         "401":
           description: >-
             * The Authorization header must contain an app access token or user
@@ -12912,9 +12913,7 @@ paths:
 
             * The ID specified in the Client-Id header does not match the client ID specified in the access token.
         "404":
-          description: |-
-            * The broadcaster was not found.
-            * The broadcaster is not a member of a team.
+          description: "* The broadcaster was not found."
       security:
         - twitch_auth: []
   /teams:
@@ -14343,9 +14342,9 @@ components:
               - snooze_count
               - snooze_refresh_at
               - next_ad_at
-              - length_seconds
+              - duration
               - last_ad_at
-              - preroll_free_time_seconds
+              - preroll_free_time
             properties:
               snooze_count:
                 type: integer
@@ -14362,7 +14361,7 @@ components:
                   RFC3339 format. Empty if the channel has no ad scheduled or is
                   not live.
                 format: date-time
-              length_seconds:
+              duration:
                 type: integer
                 description: The length in seconds of the scheduled upcoming ad break.
                 format: int32
@@ -14371,7 +14370,7 @@ components:
                 description: The UTC timestamp of the broadcaster’s last ad-break, in RFC3339
                   format. Empty if the channel has not run an ad or is not live.
                 format: date-time
-              preroll_free_time_seconds:
+              preroll_free_time:
                 type: integer
                 description: The amount of pre-roll free time remaining for the channel in
                   seconds. Returns 0 if they are currently not pre-roll free.
@@ -20570,7 +20569,8 @@ components:
       properties:
         data:
           type: array
-          description: The list of teams that the broadcaster is a member of.
+          description: The list of teams that the broadcaster is a member of. Returns an
+            empty array if the broadcaster is not a member of a team.
           items:
             $ref: "#/components/schemas/ChannelTeam"
     Team:

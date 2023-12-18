@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-10-24T12:02:17-07:00">
+<meta property="article:published_time" content="2023-12-13T16:41:54-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Subscription Types","headline":"EventSub Subscription Types","dateModified":"2023-10-24T12:02:17-07:00","datePublished":"2023-10-24T12:02:17-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/"},"url":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/","@context":"http://schema.org"}</script>
+{"description":"Subscription Types","headline":"EventSub Subscription Types","dateModified":"2023-12-13T16:41:54-08:00","datePublished":"2023-12-13T16:41:54-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/"},"url":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -494,33 +494,33 @@
       <td>A specified channel receives a follow.</td>
     </tr>
     <tr>
-      <td><span class="pill pill-beta">BETA</span> <a href="#channelad_breakbegin">Channel Ad Break Begin</a></td>
+      <td><a href="#channelad_breakbegin">Channel Ad Break Begin</a></td>
       <td><code class="highlighter-rouge">channel.ad_break.begin</code></td>
-      <td><code class="highlighter-rouge">beta</code></td>
+      <td><code class="highlighter-rouge">1</code></td>
       <td>A midroll commercial break has started running.</td>
     </tr>
     <tr>
-      <td><span class="pill pill-beta">BETA</span> <a href="#channelchatclear">Channel Chat Clear</a></td>
+      <td><a href="#channelchatclear">Channel Chat Clear</a></td>
       <td><code class="highlighter-rouge">channel.chat.clear</code></td>
-      <td><code class="highlighter-rouge">beta</code></td>
+      <td><code class="highlighter-rouge">1</code></td>
       <td>A moderator or bot has cleared all messages from the chat room.</td>
     </tr>
     <tr>
-      <td><span class="pill pill-beta">BETA</span> <a href="#channelchatclear_user_messages">Channel Chat Clear User Messages</a></td>
+      <td><a href="#channelchatclear_user_messages">Channel Chat Clear User Messages</a></td>
       <td><code class="highlighter-rouge">channel.chat.clear_user_messages</code></td>
-      <td><code class="highlighter-rouge">beta</code></td>
+      <td><code class="highlighter-rouge">1</code></td>
       <td>A moderator or bot has cleared all messages from a specific user.</td>
     </tr>
     <tr>
-      <td><span class="pill pill-beta">BETA</span> <a href="#channelchatmessage_delete">Channel Chat Message Delete</a></td>
+      <td><a href="#channelchatmessage_delete">Channel Chat Message Delete</a></td>
       <td><code class="highlighter-rouge">channel.chat.message_delete</code></td>
-      <td><code class="highlighter-rouge">beta</code></td>
+      <td><code class="highlighter-rouge">1</code></td>
       <td>A moderator has removed a specific message.</td>
     </tr>
     <tr>
-      <td><span class="pill pill-beta">BETA</span> <a href="#channelchatnotification">Channel Chat Notification</a></td>
+      <td><a href="#channelchatnotification">Channel Chat Notification</a></td>
       <td><code class="highlighter-rouge">channel.chat.notification</code></td>
-      <td><code class="highlighter-rouge">beta</code></td>
+      <td><code class="highlighter-rouge">1</code></td>
       <td>A notification for when an event that appears in chat has occurred.</td>
     </tr>
     <tr>
@@ -810,7 +810,7 @@
 
 <h2 id="public-beta-program">Public Beta Program</h2>
 
-<p>When new subscription types are added to EventSub, or existing subscription types receive an update, they are occasionally released as a public beta and denoted with the <a href="/docs/product-lifecycle#api-endpoint-and-subscription-classifications"><span class="pill pill-beta">BETA</span></a> tag. This provides the community an opportunity to provide feedback via <a href="https://twitch.uservoice.com/forums/310213-developers" target="_blank">UserVoice</a> to make sure it meets expectations before a more established version is committed.</p>
+<p>When new subscription types are added to EventSub, or existing subscription types receive an update, they are occasionally released as a public beta and denoted with the <a href="/docs/product-lifecycle#api-endpoint-and-subscription-classifications"><span class="pill pill-beta">BETA</span></a> tag. This provides the community an opportunity to provide feedback via <a href="https://twitch.uservoice.com/forums/310213-developers" target="_blank">UserVoice</a> to make sure it meets expectations before a more established version is committed. Subscription types that are in beta are unstable and may change at any time, and as a result, should not be used in a production environment. If you decide to use beta subscription types, ensure that you have robust error handling and are prepared for unexpected behaviours.</p>
 
 <p>Unless otherwise noted, EventSub subscriptions that were released as a public beta will be available for 30 days after their generally available version is released. Subscriptions should be updated to the new version (v1, v2, etc.) during this timeframe. Any active beta subscriptions beyond 30 days will be automatically deleted.</p>
 
@@ -1055,7 +1055,7 @@
 
 <h3 id="channelad_breakbegin">channel.ad_break.begin</h3>
 
-<p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.ad_break.begin</code> subscription type sends a notification when a user runs a midroll commercial break, either manually or automatically via ads manager.</p>
+<p>The <code class="highlighter-rouge">channel.ad_break.begin</code> subscription type sends a notification when a user runs a midroll commercial break, either manually or automatically via ads manager.</p>
 
 <h3 id="authorization-2">Authorization</h3>
 
@@ -1083,7 +1083,7 @@
       <td><code class="highlighter-rouge">version</code></td>
       <td>String</td>
       <td>Yes</td>
-      <td>The subscription type version: <code class="highlighter-rouge">beta</code>.</td>
+      <td>The subscription type version: <code class="highlighter-rouge">1</code>.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">condition</code></td>
@@ -1104,7 +1104,7 @@
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.ad_break.begin"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -1146,7 +1146,7 @@
     </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.ad_break.begin"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1159,20 +1159,22 @@
         </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-16T10:11:12.634234626Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"length_seconds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"duration_seconds"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-11-16T10:11:12.634234626Z"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"is_automatic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"requester_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"broadcaster_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"broadcaster_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_User"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"requester_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"requester_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"requester_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_User"</span><span class="p">,</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <h3 id="channelchatclear">channel.chat.clear</h3>
 
-<p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.chat.clear</code> subscription type sends a notification when a moderator or bot clears all messages from the chat room.</p>
+<p>The <code class="highlighter-rouge">channel.chat.clear</code> subscription type sends a notification when a moderator or bot clears all messages from the chat room.</p>
 
 <h3 id="authorization-3">Authorization</h3>
 
@@ -1200,7 +1202,7 @@
       <td><code class="highlighter-rouge">version</code></td>
       <td>String</td>
       <td>Yes</td>
-      <td>The subscription type version: <code class="highlighter-rouge">beta</code>.</td>
+      <td>The subscription type version: <code class="highlighter-rouge">1</code>.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">condition</code></td>
@@ -1221,7 +1223,7 @@
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.clear"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
@@ -1264,7 +1266,7 @@
     </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.clear"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1287,7 +1289,7 @@
 
 <h3 id="channelchatclear_user_messages">channel.chat.clear_user_messages</h3>
 
-<p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.chat.clear_user_messages</code> subscription type sends a notification when a moderator or bot clears all messages for a specific user.</p>
+<p>The <code class="highlighter-rouge">channel.chat.clear_user_messages</code> subscription type sends a notification when a moderator or bot clears all messages for a specific user.</p>
 
 <h3 id="authorization-4">Authorization</h3>
 
@@ -1315,7 +1317,7 @@
       <td><code class="highlighter-rouge">version</code></td>
       <td>String</td>
       <td>Yes</td>
-      <td>The subscription type version: <code class="highlighter-rouge">beta</code>.</td>
+      <td>The subscription type version: <code class="highlighter-rouge">1</code>.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">condition</code></td>
@@ -1336,7 +1338,7 @@
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.clear_user_messages"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
@@ -1379,7 +1381,7 @@
     </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.clear_user_messages"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1405,7 +1407,7 @@
 
 <h3 id="channelchatmessage_delete">channel.chat.message_delete</h3>
 
-<p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.chat.message_delete</code> subscription type sends a notification when a moderator removes a specific message.</p>
+<p>The <code class="highlighter-rouge">channel.chat.message_delete</code> subscription type sends a notification when a moderator removes a specific message.</p>
 
 <h3 id="authorization-5">Authorization</h3>
 
@@ -1433,7 +1435,7 @@
       <td><code class="highlighter-rouge">version</code></td>
       <td>String</td>
       <td>Yes</td>
-      <td>The subscription type version: <code class="highlighter-rouge">beta</code>.</td>
+      <td>The subscription type version: <code class="highlighter-rouge">1</code>.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">condition</code></td>
@@ -1454,7 +1456,7 @@
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.message_delete"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
@@ -1497,7 +1499,7 @@
     </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.message_delete"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1523,7 +1525,7 @@
 
 <h3 id="channelchatnotification">channel.chat.notification</h3>
 
-<p><span class="pill pill-beta">BETA</span> The <code class="highlighter-rouge">channel.chat.notification</code> subscription type sends a notification when an event that appears in chat occurs, such as someone subscribing to the channel or a subscription is gifted.</p>
+<p>The <code class="highlighter-rouge">channel.chat.notification</code> subscription type sends a notification when an event that appears in chat occurs, such as someone subscribing to the channel or a subscription is gifted.</p>
 
 <h3 id="authorization-6">Authorization</h3>
 
@@ -1551,7 +1553,7 @@
       <td><code class="highlighter-rouge">version</code></td>
       <td>String</td>
       <td>Yes</td>
-      <td>The subscription type version: <code class="highlighter-rouge">beta</code>.</td>
+      <td>The subscription type version: <code class="highlighter-rouge">1</code>.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">condition</code></td>
@@ -1572,7 +1574,7 @@
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.notification"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
@@ -1615,7 +1617,7 @@
     </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.notification"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1637,6 +1639,23 @@
         </span><span class="s2">"chatter_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_Chatter"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"chatter_is_anonymous"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="s2">"color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"badges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"set_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"moderator"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"info"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"set_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscriber"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"info"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"set_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sub-gifter"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"info"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
         </span><span class="s2">"system_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chat message"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"message_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message-id"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
