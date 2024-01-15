@@ -6151,6 +6151,7 @@ paths:
               - channel.chat.clear_user_messages
               - channel.chat.message_delete
               - channel.chat.notification
+              - channel.chat_settings.update
               - channel.subscribe
               - channel.subscription.end
               - channel.subscription.gift
@@ -9200,6 +9201,52 @@ paths:
       security:
         - twitch_auth:
             - moderator:manage:chat_messages
+  /moderation/channels:
+    get:
+      summary: BETA Gets a list of channels that the specified user has moderator
+        privileges in.
+      description: >-
+        BETA Gets a list of channels that the specified user has moderator
+        privileges in.
+
+
+        __Authorization:__
+
+
+        * Query parameter `user_id` must match the user ID in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+
+        * Requires OAuth Scope: `user:read:moderated_channels`
+      tags:
+        - Moderation
+      externalDocs:
+        description: Get Moderated Channels
+        url: https://dev.twitch.tv/docs/api/reference#get-moderated-channels
+      operationId: get-moderated-channels
+      parameters:
+        - name: user_id
+          in: query
+          description: A user’s ID. Returns the list of channels that this user has
+            moderator privileges in. This ID must match the user ID in the user
+            OAuth token
+          schema:
+            type: string
+          required: true
+        - name: after
+          in: query
+          description: The cursor used to get the next page of results. The Pagination
+            object in the response contains the cursor’s value.
+          schema:
+            type: string
+        - name: first
+          in: query
+          description: >-
+            The maximum number of items to return per page in the response.   
+              
+            Minimum page size is 1 item per page and the maximum is 100\. The default is 20.
+          schema:
+            type: integer
+            format: int32
+      responses: {}
   /moderation/moderators:
     get:
       summary: Gets all users allowed to moderate the broadcaster’s chat room.
@@ -18903,6 +18950,39 @@ components:
             added.
           items:
             $ref: "#/components/schemas/BlockedTerm"
+    GetModeratedChannelsResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          description: The list of channels that the user has moderator privileges in.
+          items:
+            type: object
+            required:
+              - broadcaster_id
+              - broadcaster_login
+              - broadcaster_name
+            properties:
+              broadcaster_id:
+                type: string
+                description: An ID that uniquely identifies the channel this user can moderate.
+              broadcaster_login:
+                type: string
+                description: The channel’s login name.
+              broadcaster_name:
+                type: string
+                description: The channels’ display name.
+        pagination:
+          description: Contains the information used to page through the list of results.
+            The object is empty if there are no more pages left to page through.
+          type: object
+          properties:
+            cursor:
+              type: string
+              description: The cursor used to get the next page of results. Use the cursor to
+                set the request’s after query parameter.
     UserModerator:
       type: object
       required:
@@ -21277,6 +21357,7 @@ components:
             user:manage:chat_color: Update the color used for the user’s name in chat.
             user:read:email: View a user’s email address.
             user:read:follows: View the list of channels a user follows.
+            user:read:moderated_channels: Read the list of channels you have moderator privileges in.
             user:read:subscriptions: View if an authorized user is subscribed to specific channels.
             user:manage:whispers: Read whispers that you send and receive, and send whispers
               on your behalf.

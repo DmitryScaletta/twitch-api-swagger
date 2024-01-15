@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2023-12-13T16:41:54-08:00">
+<meta property="article:published_time" content="2024-01-08T16:16:23-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"EventSub Reference","headline":"EventSub Reference","dateModified":"2023-12-13T16:41:54-08:00","datePublished":"2023-12-13T16:41:54-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@context":"http://schema.org"}</script>
+{"description":"EventSub Reference","headline":"EventSub Reference","dateModified":"2024-01-08T16:16:23-08:00","datePublished":"2024-01-08T16:16:23-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -809,6 +809,33 @@
       <td>string</td>
       <td>yes</td>
       <td>User ID of the channel to receive chat notification events for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID to read chat as.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-settings-update-condition">Channel Chat Settings Update Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>User ID of the channel to receive chat settings update events for.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">user_id</code></td>
@@ -2440,6 +2467,70 @@
       <td>   <code class="highlighter-rouge">tier</code></td>
       <td>int</td>
       <td>The tier of the Bits badge the user just earned. For example, 100, 1000, or 10000.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-settings-update-event">Channel Chat Settings Update Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The ID of the broadcaster specified in the request.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The login of the broadcaster specified in the request.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the broadcaster specified in the request.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">emote_mode</code></td>
+      <td>bool</td>
+      <td>A Boolean value that determines whether chat messages must contain only emotes. True if only messages that are 100% emotes are allowed; otherwise false.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">follower_mode</code></td>
+      <td>bool</td>
+      <td>A Boolean value that determines whether the broadcaster restricts the chat room to followers only, based on how long they’ve followed.<br><br>True if the broadcaster restricts the chat room to followers only; otherwise false.<br><br>See <code class="highlighter-rouge">follower_mode_duration_minutes</code> for how long the followers must have followed the broadcaster to participate in the chat room.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">follower_mode_duration_minutes</code></td>
+      <td>int</td>
+      <td>The length of time, in minutes, that the followers must have followed the broadcaster to participate in the chat room. See <code class="highlighter-rouge">follower_mode</code>.<br><br>Null if <code class="highlighter-rouge">follower_mode</code> is false.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">slow_mode</code></td>
+      <td>bool</td>
+      <td>A Boolean value that determines whether the broadcaster limits how often users in the chat room are allowed to send messages.<br><br>Is true, if the broadcaster applies a delay; otherwise, false.<br><br>See <code class="highlighter-rouge">slow_mode_wait_time_seconds</code> for the delay.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">slow_mode_wait_time_seconds</code></td>
+      <td>int</td>
+      <td>The amount of time, in seconds, that users need to wait between sending messages. See <code class="highlighter-rouge">slow_mode</code>.<br><br>Null if <code class="highlighter-rouge">slow_mode</code> is false.<br></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">subscriber_mode</code></td>
+      <td>bool</td>
+      <td>A Boolean value that determines whether only users that subscribe to the broadcaster’s channel can talk in the chat room.<br><br>True if the broadcaster restricts the chat room to subscribers only; otherwise false.<br></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unique_chat_mode</code></td>
+      <td>bool</td>
+      <td>A Boolean value that determines whether the broadcaster requires users to post only unique messages in the chat room.<br><br>True if the broadcaster requires unique messages only; otherwise false.</td>
     </tr>
   </tbody>
 </table>
@@ -5992,7 +6083,7 @@
         <!-- <a href="#">Languages</a> -->
       </div>
       <div class="copyright">
-        &copy; 2023 Twitch Interactive, Inc.
+        &copy; 2024 Twitch Interactive, Inc.
       </div>
     </div>
   </div>
