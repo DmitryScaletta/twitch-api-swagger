@@ -65,36 +65,9 @@ const normalizeReferenceHtml = (document: Document) => {
       .replace('<td>id</td>', '<td>&nbsp;&nbsp;&nbsp;id</td>');
   }
 
-  // missing Response Codes table and probably wrong Response Body
+  // probably wrong Response Body
   // https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
   {
-    // IMPORTANT: I didn't test response codes, it's just my guess
-    const table = `<table>
-      <thead>
-        <tr>
-          <th>Code</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>200 OK</td>
-          <td>Successfully retrieved The list of CCLs available.</td>
-        </tr>
-        <tr>
-          <td>400 Bad Request</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>401 Unauthorized</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>500 Internal Server Error</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>`;
     const el = getDocsEl('get-content-classification-labels');
     el.innerHTML = el.innerHTML
       .replace(
@@ -113,7 +86,55 @@ const normalizeReferenceHtml = (document: Document) => {
         '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</td>',
         '<td>&nbsp;&nbsp;&nbsp;name</td>',
       );
-    el.innerHTML += '<h3>Response Codes</h3>' + table;
+  }
+
+  // missing Response Codes table
+  // https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
+  // https://dev.twitch.tv/docs/api/reference/#get-moderated-channels
+  {
+    // IMPORTANT: I didn't test response codes, it's just my guess
+    const getTableHtml = (okDesc = '') => `<table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>200 OK</td>
+          <td>${okDesc}</td>
+        </tr>
+        <tr>
+          <td>400 Bad Request</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>401 Unauthorized</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>500 Internal Server Error</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>`;
+
+    const endpoints = [
+      {
+        id: 'get-content-classification-labels',
+        okDesc: 'Successfully retrieved the list of CCLs available.',
+      },
+      {
+        id: 'get-moderated-channels',
+        okDesc: 'Successfully retrieved the list of moderated channels.',
+      },
+    ];
+
+    for (const { id, okDesc } of endpoints) {
+      const el = getDocsEl(id);
+      el.innerHTML += '<h3>Response Codes</h3>' + getTableHtml(okDesc);
+    }
   }
 
   // No SUCCESS response code

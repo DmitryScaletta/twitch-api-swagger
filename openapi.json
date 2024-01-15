@@ -3656,7 +3656,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved The list of CCLs available.",
+            "description": "Successfully retrieved the list of CCLs available.",
             "content": {
               "application/json": {
                 "schema": {
@@ -7509,7 +7509,49 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of moderated channels.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetModeratedChannelsResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/moderation/channels?user_id=931931' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "broadcaster_id": "12345",
+                          "broadcaster_login": "grateful_broadcaster",
+                          "broadcaster_name": "Grateful_Broadcaster"
+                        },
+                        {
+                          "broadcaster_id": "98765",
+                          "broadcaster_login": "bashfulgamer",
+                          "broadcaster_name": "BashfulGamer"
+                        }
+                      ],
+                      "pagination": {
+                        "cursor": "eyJiIjpudWxsLCJhIjp7IkN1cnNvciI6IjEwMDQ3MzA2NDo4NjQwNjU3MToxSVZCVDFKMnY5M1BTOXh3d1E0dUdXMkJOMFcifX0"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": ""
+          },
+          "500": {
+            "description": ""
+          }
+        }
       }
     },
     "/moderation/moderators": {
