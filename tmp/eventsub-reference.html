@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-01-08T16:16:23-08:00">
+<meta property="article:published_time" content="2024-01-23T10:05:23-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"EventSub Reference","headline":"EventSub Reference","dateModified":"2024-01-08T16:16:23-08:00","datePublished":"2024-01-08T16:16:23-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@context":"http://schema.org"}</script>
+{"description":"EventSub Reference","headline":"EventSub Reference","dateModified":"2024-01-23T10:05:23-08:00","datePublished":"2024-01-23T10:05:23-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -497,6 +497,8 @@
 	
 	<h1 id="eventsub-reference">EventSub Reference</h1>
 	
+
+
 
 
 
@@ -1764,7 +1766,7 @@
       <td>Length in seconds of the mid-roll ad break requested</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">timestamp</code></td>
+      <td><code class="highlighter-rouge">started_at</code></td>
       <td>string</td>
       <td>The UTC timestamp of when the ad break began, in RFC3339 format. Note that there is potential delay between this event, when the streamer requested the ad break, and when the viewers will see ads.</td>
     </tr>
@@ -2009,467 +2011,7 @@
 
 <h3 id="channel-chat-notification-event">Channel Chat Notification Event</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
-      <td>string</td>
-      <td>The broadcaster user ID.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
-      <td>string</td>
-      <td>The broadcaster display name.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
-      <td>string</td>
-      <td>The broadcaster login.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">chatter_user_id</code></td>
-      <td>string</td>
-      <td>The user ID of the user that sent the message.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">chatter_user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user that sent the message.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">chatter_user_login</code></td>
-      <td>string</td>
-      <td>The user login of the user that sent the message.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">chatter_is_anonymous</code></td>
-      <td>bool</td>
-      <td>Whether or not the chatter is anonymous.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">color</code></td>
-      <td>string</td>
-      <td>The color of the user’s name in the chat room.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">badges</code></td>
-      <td>object[]</td>
-      <td>List of chat badges.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">set_id</code></td>
-      <td>string</td>
-      <td>An ID that identifies this set of chat badges. For example, Bits or Subscriber.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">id</code></td>
-      <td>string</td>
-      <td>An ID that identifies this version of the badge. The ID can be any value. For example, for Bits, the ID is the Bits tier level, but for World of Warcraft, it could be Alliance or Horde.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">info</code></td>
-      <td>string</td>
-      <td>Contains metadata related to the chat badges in the badges tag. Currently, this tag contains metadata only for subscriber badges, to indicate the number of months the user has been a subscriber.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">system_message</code></td>
-      <td>string</td>
-      <td>The message Twitch shows in the chat room for this notice.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">message_id</code></td>
-      <td>string</td>
-      <td>A UUID that identifies the message.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">message</code></td>
-      <td>object</td>
-      <td>The structured chat message</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">text</code></td>
-      <td>string</td>
-      <td>The chat message in plain text.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">fragments</code></td>
-      <td>object[]</td>
-      <td>Ordered list of chat message fragments.</td>
-    </tr>
-    <tr>
-      <td>      <code class="highlighter-rouge">type</code></td>
-      <td>string</td>
-      <td>The type of message fragment. Possible values: <ul><li>text</li><li>cheermote</li><li>emote</li><li>mention</li></ul></td>
-    </tr>
-    <tr>
-      <td>      <code class="highlighter-rouge">text</code></td>
-      <td>string</td>
-      <td>Message text in fragment</td>
-    </tr>
-    <tr>
-      <td>      <code class="highlighter-rouge">cheermote</code></td>
-      <td>object</td>
-      <td>Optional. Metadata pertaining to the cheermote.</td>
-    </tr>
-    <tr>
-      <td>         <code class="highlighter-rouge">prefix</code></td>
-      <td>string</td>
-      <td>The name portion of the Cheermote string that you use in chat to cheer Bits. The full Cheermote string is the concatenation of {prefix} + {number of Bits}. For example, if the prefix is “Cheer” and you want to cheer 100 Bits, the full Cheermote string is Cheer100. When the Cheermote string is entered in chat, Twitch converts it to the image associated with the Bits tier that was cheered.</td>
-    </tr>
-    <tr>
-      <td>         <code class="highlighter-rouge">bits</code></td>
-      <td>int</td>
-      <td>The amount of bits cheered.</td>
-    </tr>
-    <tr>
-      <td>         <code class="highlighter-rouge">tier</code></td>
-      <td>int</td>
-      <td>The tier level of the cheermote.</td>
-    </tr>
-    <tr>
-      <td>      <code class="highlighter-rouge">emote</code></td>
-      <td>object</td>
-      <td>Optional. Metadata pertaining to the emote.</td>
-    </tr>
-    <tr>
-      <td>         <code class="highlighter-rouge">id</code></td>
-      <td>string</td>
-      <td>An ID that uniquely identifies this emote.</td>
-    </tr>
-    <tr>
-      <td>         <code class="highlighter-rouge">emote_set_id</code></td>
-      <td>string</td>
-      <td>An ID that identifies the emote set that the emote belongs to.</td>
-    </tr>
-    <tr>
-      <td>         <code class="highlighter-rouge">owner_id</code></td>
-      <td>string</td>
-      <td>The ID of the broadcaster who owns the emote.</td>
-    </tr>
-    <tr>
-      <td>         <code class="highlighter-rouge">format</code></td>
-      <td>string[]</td>
-      <td>The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only static. But if the emote is available as a static PNG and an animated GIF, the array contains static and animated. The possible formats are: <ul><li>animated — An animated GIF is available for this emote.</li><li>static — A static PNG file is available for this emote.</li></ul></td>
-    </tr>
-    <tr>
-      <td>      <code class="highlighter-rouge">mention</code></td>
-      <td>object</td>
-      <td>Optional. Metadata pertaining to the mention.</td>
-    </tr>
-    <tr>
-      <td>         <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The user ID of the mentioned user.</td>
-    </tr>
-    <tr>
-      <td>         <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the mentioned user.</td>
-    </tr>
-    <tr>
-      <td>         <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The user login of the mentioned user.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">notice_type</code></td>
-      <td>string</td>
-      <td>The type of notice. Possible values are: <ul><li>sub</li><li>resub</li><li>sub_gift</li><li>community_sub_gift</li><li>gift_paid_upgrade</li><li>prime_paid_upgrade</li><li>raid</li><li>unraid</li><li>pay_it_forward</li><li>announcement</li><li>bits_badge_tier</li><li>charity_donation</li></ul></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">sub</code></td>
-      <td>object</td>
-      <td>Information about the sub event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">sub</code>.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">sub_tier</code></td>
-      <td>string</td>
-      <td>The type of subscription plan being used. Possible values are: <ul><li>1000 — First level of paid or Prime subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">is_prime</code></td>
-      <td>bool</td>
-      <td>Indicates if the subscription was obtained through Amazon Prime.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">duration_months</code></td>
-      <td>int</td>
-      <td>The number of months the subscription is for.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">resub</code></td>
-      <td>object</td>
-      <td>Information about the resub event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">resub</code>.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">cumulative_months</code></td>
-      <td>int</td>
-      <td>The total number of months the user has subscribed.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">duration_months</code></td>
-      <td>int</td>
-      <td>The number of months the subscription is for.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">streak_months</code></td>
-      <td>int</td>
-      <td>Optional. The number of consecutive months the user has subscribed.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">sub_tier</code></td>
-      <td>string</td>
-      <td>The type of subscription plan being used. Possible values are: <ul><li>1000 — First level of paid or Prime subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">is_prime</code></td>
-      <td>bool</td>
-      <td>Indicates if the resub was obtained through Amazon Prime.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">is_gift</code></td>
-      <td>bool</td>
-      <td>Whether or not the resub was a result of a gift.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">gifter_is_anonymous</code></td>
-      <td>bool</td>
-      <td>Optional. Whether or not the gift was anonymous.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">gifter_user_id</code></td>
-      <td>string</td>
-      <td>Optional. The user ID of the subscription gifter. Null if anonymous.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">gifter_user_name</code></td>
-      <td>string</td>
-      <td>Optional. The user name of the subscription gifter. Null if anonymous.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">gifter_user_login</code></td>
-      <td>string</td>
-      <td>Optional. The user login of the subscription gifter. Null if anonymous.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">sub_gift</code></td>
-      <td>object</td>
-      <td>Information about the gift sub event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">sub_gift</code>.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">duration_months</code></td>
-      <td>int</td>
-      <td>The number of months the subscription is for.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">cumulative_total</code></td>
-      <td>int</td>
-      <td>Optional. The amount of gifts the gifter has given in this channel. Null if anonymous.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">recipient_user_id</code></td>
-      <td>string</td>
-      <td>The user ID of the subscription gift recipient.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">recipient_user_name</code></td>
-      <td>string</td>
-      <td>The user name of the subscription gift recipient.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">recipient_user_login</code></td>
-      <td>string</td>
-      <td>The user login of the subscription gift recipient.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">sub_tier</code></td>
-      <td>string</td>
-      <td>The type of subscription plan being used. Possible values are: <ul><li>1000 — First level of paid subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">community_gift_id</code></td>
-      <td>string</td>
-      <td>Optional. The ID of the associated community gift. Null if not associated with a community gift.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">community_sub_gift</code></td>
-      <td>object</td>
-      <td>Information about the community gift sub event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">community_sub_gift</code>.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">id</code></td>
-      <td>string</td>
-      <td>The ID of the associated community gift.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">total</code></td>
-      <td>int</td>
-      <td>Number of subscriptions being gifted.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">sub_tier</code></td>
-      <td>string</td>
-      <td>The type of subscription plan being used. Possible values are: <ul><li>1000 — First level of paid subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">cumulative_total</code></td>
-      <td>int</td>
-      <td>Optional. The amount of gifts the gifter has given in this channel. Null if anonymous.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">gift_paid_upgrade</code></td>
-      <td>object</td>
-      <td>Information about the community gift paid upgrade event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">gift_paid_upgrade</code>.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">gifter_is_anonymous</code></td>
-      <td>bool</td>
-      <td>Whether the gift was given anonymously.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">gifter_user_id</code></td>
-      <td>string</td>
-      <td>Optional. The user ID of the user who gifted the subscription. Null if anonymous.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">gifter_user_name</code></td>
-      <td>string</td>
-      <td>Optional. The user name of the user who gifted the subscription. Null if anonymous.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">gifter_user_login</code></td>
-      <td>string</td>
-      <td>Optional. The user login of the user who gifted the subscription. Null if anonymous.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">prime_paid_upgrade</code></td>
-      <td>object</td>
-      <td>Information about the Prime gift paid upgrade event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">prime_paid_upgrade</code>.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">sub_tier</code></td>
-      <td>string</td>
-      <td>The type of subscription plan being used. Possible values are: <ul><li>1000 — First level of paid subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">raid</code></td>
-      <td>object</td>
-      <td>Information about the raid event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">raid</code>.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The user ID of the broadcaster raiding this channel.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the broadcaster raiding this channel.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login name of the broadcaster raiding this channel.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">viewer_count</code></td>
-      <td>int</td>
-      <td>The number of viewers raiding this channel from the broadcaster’s channel.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">profile_image_url</code></td>
-      <td>string</td>
-      <td>Profile image URL of the broadcaster raiding this channel.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">unraid</code></td>
-      <td>object</td>
-      <td>Returns an empty payload if <code class="highlighter-rouge">notice_type</code> is <code class="highlighter-rouge">unraid</code>, otherwise returns null.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">pay_it_forward</code></td>
-      <td>object</td>
-      <td>Information about the pay it forward event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">pay_it_forward</code>.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">gifter_is_anonymous</code></td>
-      <td>bool</td>
-      <td>Whether the gift was given anonymously.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">gifter_user_id</code></td>
-      <td>string</td>
-      <td>Optional. The user ID of the user who gifted the subscription. Null if anonymous.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">gifter_user_name</code></td>
-      <td>string</td>
-      <td>Optional. The user name of the user who gifted the subscription. Null if anonymous.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">gifter_user_login</code></td>
-      <td>string</td>
-      <td>Optional. The user login of the user who gifted the subscription. Null if anonymous.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">announcement</code></td>
-      <td>object</td>
-      <td>Information about the announcement event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">announcement</code></td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">color</code></td>
-      <td>string</td>
-      <td>Color of the announcement.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">charity_donation</code></td>
-      <td>object</td>
-      <td>Information about the charity donation event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">charity_donation</code>.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">charity_name</code></td>
-      <td>string</td>
-      <td>Name of the charity.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">amount</code></td>
-      <td>object</td>
-      <td>An object that contains the amount of money that the user paid.</td>
-    </tr>
-    <tr>
-      <td>      <code class="highlighter-rouge">value</code></td>
-      <td>int</td>
-      <td>The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, value is set to 550.</td>
-    </tr>
-    <tr>
-      <td>      <code class="highlighter-rouge">decimal_places</code></td>
-      <td>int</td>
-      <td>The number of decimal places used by the currency. For example, USD uses two decimal places.</td>
-    </tr>
-    <tr>
-      <td>      <code class="highlighter-rouge">currency</code></td>
-      <td>string</td>
-      <td>The ISO-4217 three-letter currency code that identifies the type of currency in value.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">bits_badge_tier</code></td>
-      <td>object</td>
-      <td>Information about the bits badge tier event. Null if <code class="highlighter-rouge">notice_type</code> is not <code class="highlighter-rouge">bits_badge_tier</code>.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">tier</code></td>
-      <td>int</td>
-      <td>The tier of the Bits badge the user just earned. For example, 100, 1000, or 10000.</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>broadcaster_user_id</code></td><td>string</td><td>The broadcaster user ID.</td></tr><tr><td><code>broadcaster_user_name</code></td><td>string</td><td>The broadcaster display name.</td></tr><tr><td><code>broadcaster_user_login</code></td><td>string</td><td>The broadcaster login.</td></tr><tr><td><code>chatter_user_id</code></td><td>string</td><td>The user ID of the user that sent the message.</td></tr><tr><td><code>chatter_user_name</code></td><td>string</td><td>The user name of the user that sent the message.</td></tr><tr><td><code>chatter_user_login</code></td><td>string</td><td>The user login of the user that sent the message.</td></tr><tr><td><code>chatter_is_anonymous</code></td><td>bool</td><td>Whether or not the chatter is anonymous.</td></tr><tr><td><code>color</code></td><td>string</td><td>The color of the user’s name in the chat room.</td></tr><tr><td><code>badges</code></td><td>object[]</td><td>List of chat badges.</td></tr><tr><td>&nbsp; &nbsp;<code>set_id</code></td><td>string</td><td>An ID that identifies this set of chat badges. For example, Bits or Subscriber.</td></tr><tr><td>&nbsp; &nbsp;<code>id</code></td><td>string</td><td>An ID that identifies this version of the badge. The ID can be any value. For example, for Bits, the ID is the Bits tier level, but for World of Warcraft, it could be Alliance or Horde.</td></tr><tr><td>&nbsp; &nbsp;<code>info</code></td><td>string</td><td>Contains metadata related to the chat badges in the badges tag. Currently, this tag contains metadata only for subscriber badges, to indicate the number of months the user has been a subscriber.</td></tr><tr><td><code>system_message</code></td><td>string</td><td>The message Twitch shows in the chat room for this notice.</td></tr><tr><td><code>message_id</code></td><td>string</td><td>A UUID that identifies the message.</td></tr><tr><td><code>message</code></td><td>object</td><td>The structured chat message</td></tr><tr><td>&nbsp; &nbsp;<code>text</code></td><td>string</td><td>The chat message in plain text.</td></tr><tr><td>&nbsp; &nbsp;<code>fragments</code></td><td>object[]</td><td>Ordered list of chat message fragments.</td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>type</code></td><td>string</td><td>The type of message fragment. Possible values:<ul><li>text</li><li>cheermote</li><li>emote</li><li>mention</li></ul></td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>text</code></td><td>string</td><td>Message text in fragment</td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>cheermote</code></td><td>object</td><td>Optional. Metadata pertaining to the cheermote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>prefix</code></td><td>string</td><td>The name portion of the Cheermote string that you use in chat to cheer Bits. The full Cheermote string is the concatenation of {prefix} + {number of Bits}. For example, if the prefix is “Cheer” and you want to cheer 100 Bits, the full Cheermote string is Cheer100. When the Cheermote string is entered in chat, Twitch converts it to the image associated with the Bits tier that was cheered.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>bits</code></td><td>int</td><td>The amount of bits cheered.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>tier</code></td><td>int</td><td>The tier level of the cheermote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>emote</code></td><td>object</td><td>Optional. Metadata pertaining to the emote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>id</code></td><td>string</td><td>An ID that uniquely identifies this emote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>emote_set_id</code></td><td>string</td><td>An ID that identifies the emote set that the emote belongs to.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>owner_id</code></td><td>string</td><td>The ID of the broadcaster who owns the emote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>format</code></td><td>string[]</td><td>The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only static. But if the emote is available as a static PNG and an animated GIF, the array contains static and animated. The possible formats are:<ul><li>animated — An animated GIF is available for this emote.</li><li>static — A static PNG file is available for this emote.</li></ul></td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>mention</code></td><td>object</td><td>Optional. Metadata pertaining to the mention.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>user_id</code></td><td>string</td><td>The user ID of the mentioned user.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>user_name</code></td><td>string</td><td>The user name of the mentioned user.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>user_login</code></td><td>string</td><td>The user login of the mentioned user.</td></tr><tr><td><code>notice_type</code></td><td>string</td><td>The type of notice. Possible values are:<ul><li>sub</li><li>resub</li><li>sub_gift</li><li>community_sub_gift</li><li>gift_paid_upgrade</li><li>prime_paid_upgrade</li><li>raid</li><li>unraid</li><li>pay_it_forward</li><li>announcement</li><li>bits_badge_tier</li><li>charity_donation</li></ul></td></tr><tr><td><code>sub</code></td><td>object</td><td>Information about the sub event. Null if <code>notice_type</code> is not <code>sub</code>.</td></tr><tr><td>&nbsp; &nbsp;<code>sub_tier</code></td><td>string</td><td>The type of subscription plan being used. Possible values are:<ul><li>1000 — First level of paid or Prime subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td></tr><tr><td>&nbsp; &nbsp;<code>is_prime</code></td><td>bool</td><td>Indicates if the subscription was obtained through Amazon Prime.</td></tr><tr><td>&nbsp; &nbsp;<code>duration_months</code></td><td>int</td><td>The number of months the subscription is for.</td></tr><tr><td><code>resub</code></td><td>object</td><td>Information about the resub event. Null if <code>notice_type</code> is not <code>resub</code>.</td></tr><tr><td>&nbsp; &nbsp;<code>cumulative_months</code></td><td>int</td><td>The total number of months the user has subscribed.</td></tr><tr><td>&nbsp; &nbsp;<code>duration_months</code></td><td>int</td><td>The number of months the subscription is for.</td></tr><tr><td>&nbsp; &nbsp;<code>streak_months</code></td><td>int</td><td>Optional. The number of consecutive months the user has subscribed.</td></tr><tr><td>&nbsp; &nbsp;<code>sub_tier</code></td><td>string</td><td>The type of subscription plan being used. Possible values are:<ul><li>1000 — First level of paid or Prime subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td></tr><tr><td>&nbsp; &nbsp;<code>is_prime</code></td><td>bool</td><td>Indicates if the resub was obtained through Amazon Prime.</td></tr><tr><td>&nbsp; &nbsp;<code>is_gift</code></td><td>bool</td><td>Whether or not the resub was a result of a gift.</td></tr><tr><td>&nbsp; &nbsp;<code>gifter_is_anonymous</code></td><td>bool</td><td>Optional. Whether or not the gift was anonymous.</td></tr><tr><td>&nbsp; &nbsp;<code>gifter_user_id</code></td><td>string</td><td>Optional. The user ID of the subscription gifter. Null if anonymous.</td></tr><tr><td>&nbsp; &nbsp;<code>gifter_user_name</code></td><td>string</td><td>Optional. The user name of the subscription gifter. Null if anonymous.</td></tr><tr><td>&nbsp; &nbsp;<code>gifter_user_login</code></td><td>string</td><td>Optional. The user login of the subscription gifter. Null if anonymous.</td></tr><tr><td><code>sub_gift</code></td><td>object</td><td>Information about the gift sub event. Null if <code>notice_type</code> is not <code>sub_gift</code>.</td></tr><tr><td>&nbsp; &nbsp;<code>duration_months</code></td><td>int</td><td>The number of months the subscription is for.</td></tr><tr><td>&nbsp; &nbsp;<code>cumulative_total</code></td><td>int</td><td>Optional. The amount of gifts the gifter has given in this channel. Null if anonymous.</td></tr><tr><td>&nbsp; &nbsp;<code>recipient_user_id</code></td><td>string</td><td>The user ID of the subscription gift recipient.</td></tr><tr><td>&nbsp; &nbsp;<code>recipient_user_name</code></td><td>string</td><td>The user name of the subscription gift recipient.</td></tr><tr><td>&nbsp; &nbsp;<code>recipient_user_login</code></td><td>string</td><td>The user login of the subscription gift recipient.</td></tr><tr><td>&nbsp; &nbsp;<code>sub_tier</code></td><td>string</td><td>The type of subscription plan being used. Possible values are:<ul><li>1000 — First level of paid subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td></tr><tr><td>&nbsp; &nbsp;<code>community_gift_id</code></td><td>string</td><td>Optional. The ID of the associated community gift. Null if not associated with a community gift.</td></tr><tr><td><code>community_sub_gift</code></td><td>object</td><td>Information about the community gift sub event. Null if <code>notice_type</code> is not <code>community_sub_gift</code>.</td></tr><tr><td>&nbsp; &nbsp;<code>id</code></td><td>string</td><td>The ID of the associated community gift.</td></tr><tr><td>&nbsp; &nbsp;<code>total</code></td><td>int</td><td>Number of subscriptions being gifted.</td></tr><tr><td>&nbsp; &nbsp;<code>sub_tier</code></td><td>string</td><td>The type of subscription plan being used. Possible values are:<ul><li>1000 — First level of paid subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td></tr><tr><td>&nbsp; &nbsp;<code>cumulative_total</code></td><td>int</td><td>Optional. The amount of gifts the gifter has given in this channel. Null if anonymous.</td></tr><tr><td><code>gift_paid_upgrade</code></td><td>object</td><td>Information about the community gift paid upgrade event. Null if <code>notice_type</code> is not <code>gift_paid_upgrade</code>.</td></tr><tr><td>&nbsp; &nbsp;<code>gifter_is_anonymous</code></td><td>bool</td><td>Whether the gift was given anonymously.</td></tr><tr><td>&nbsp; &nbsp;<code>gifter_user_id</code></td><td>string</td><td>Optional. The user ID of the user who gifted the subscription. Null if anonymous.</td></tr><tr><td>&nbsp; &nbsp;<code>gifter_user_name</code></td><td>string</td><td>Optional. The user name of the user who gifted the subscription. Null if anonymous.</td></tr><tr><td>&nbsp; &nbsp;<code>gifter_user_login</code></td><td>string</td><td>Optional. The user login of the user who gifted the subscription. Null if anonymous.</td></tr><tr><td><code>prime_paid_upgrade</code></td><td>object</td><td>Information about the Prime gift paid upgrade event. Null if <code>notice_type</code> is not <code>prime_paid_upgrade</code>.</td></tr><tr><td>&nbsp; &nbsp;<code>sub_tier</code></td><td>string</td><td>The type of subscription plan being used. Possible values are:<ul><li>1000 — First level of paid subscription</li><li>2000 — Second level of paid subscription</li><li>3000 — Third level of paid subscription</li></ul></td></tr><tr><td><code>raid</code></td><td>object</td><td>Information about the raid event. Null if <code>notice_type</code> is not <code>raid</code>.</td></tr><tr><td>&nbsp; &nbsp;<code>user_id</code></td><td>string</td><td>The user ID of the broadcaster raiding this channel.</td></tr><tr><td>&nbsp; &nbsp;<code>user_name</code></td><td>string</td><td>The user name of the broadcaster raiding this channel.</td></tr><tr><td>&nbsp; &nbsp;<code>user_login</code></td><td>string</td><td>The login name of the broadcaster raiding this channel.</td></tr><tr><td>&nbsp; &nbsp;<code>viewer_count</code></td><td>int</td><td>The number of viewers raiding this channel from the broadcaster’s channel.</td></tr><tr><td>&nbsp; &nbsp;<code>profile_image_url</code></td><td>string</td><td>Profile image URL of the broadcaster raiding this channel.</td></tr><tr><td><code>unraid</code></td><td>object</td><td>Returns an empty payload if <code>notice_type</code> is <code>unraid</code>, otherwise returns null.</td></tr><tr><td><code>pay_it_forward</code></td><td>object</td><td>Information about the pay it forward event. Null if <code>notice_type</code> is not <code>pay_it_forward</code>.</td></tr><tr><td>&nbsp; &nbsp;<code>gifter_is_anonymous</code></td><td>bool</td><td>Whether the gift was given anonymously.</td></tr><tr><td>&nbsp; &nbsp;<code>gifter_user_id</code></td><td>string</td><td>Optional. The user ID of the user who gifted the subscription. Null if anonymous.</td></tr><tr><td>&nbsp; &nbsp;<code>gifter_user_name</code></td><td>string</td><td>Optional. The user name of the user who gifted the subscription. Null if anonymous.</td></tr><tr><td>&nbsp; &nbsp;<code>gifter_user_login</code></td><td>string</td><td>Optional. The user login of the user who gifted the subscription. Null if anonymous.</td></tr><tr><td><code>announcement</code></td><td>object</td><td>Information about the announcement event. Null if <code>notice_type</code> is not <code>announcement</code></td></tr><tr><td>&nbsp; &nbsp;<code>color</code></td><td>string</td><td>Color of the announcement.</td></tr><tr><td><code>charity_donation</code></td><td>object</td><td>Information about the charity donation event. Null if <code>notice_type</code> is not <code>charity_donation</code>.</td></tr><tr><td>&nbsp; &nbsp;<code>charity_name</code></td><td>string</td><td>Name of the charity.</td></tr><tr><td>&nbsp; &nbsp;<code>amount</code></td><td>object</td><td>An object that contains the amount of money that the user paid.</td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>value</code></td><td>int</td><td>The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, value is set to 550.</td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>decimal_places</code></td><td>int</td><td>The number of decimal places used by the currency. For example, USD uses two decimal places.</td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>currency</code></td><td>string</td><td>The ISO-4217 three-letter currency code that identifies the type of currency in value.</td></tr><tr><td><code>bits_badge_tier</code></td><td>object</td><td>Information about the bits badge tier event. Null if <code>notice_type</code> is not <code>bits_badge_tier</code>.</td></tr><tr><td>&nbsp; &nbsp;<code>tier</code></td><td>int</td><td>The tier of the Bits badge the user just earned. For example, 100, 1000, or 10000.</td></tr></tbody></table>
 
 <h3 id="channel-chat-settings-update-event">Channel Chat Settings Update Event</h3>
 
@@ -2520,12 +2062,12 @@
     <tr>
       <td><code class="highlighter-rouge">slow_mode_wait_time_seconds</code></td>
       <td>int</td>
-      <td>The amount of time, in seconds, that users need to wait between sending messages. See <code class="highlighter-rouge">slow_mode</code>.<br><br>Null if <code class="highlighter-rouge">slow_mode</code> is false.<br></td>
+      <td>The amount of time, in seconds, that users need to wait between sending messages. See <code class="highlighter-rouge">slow_mode</code>.<br><br>Null if <code class="highlighter-rouge">slow_mode</code> is false.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">subscriber_mode</code></td>
       <td>bool</td>
-      <td>A Boolean value that determines whether only users that subscribe to the broadcaster’s channel can talk in the chat room.<br><br>True if the broadcaster restricts the chat room to subscribers only; otherwise false.<br></td>
+      <td>A Boolean value that determines whether only users that subscribe to the broadcaster’s channel can talk in the chat room.<br><br>True if the broadcaster restricts the chat room to subscribers only; otherwise false.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">unique_chat_mode</code></td>
@@ -3032,141 +2574,11 @@
 
 <h3 id="channel-guest-star-guest-update-event">Channel Guest Star Guest Update Event</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
-      <td>String</td>
-      <td>The broadcaster user ID</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
-      <td>String</td>
-      <td>The broadcaster display name</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
-      <td>String</td>
-      <td>The broadcaster login</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">session_id</code></td>
-      <td>String</td>
-      <td>ID representing the unique session that was started.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">moderator_user_id</code></td>
-      <td>String</td>
-      <td>The user ID of the moderator who updated the guest’s state (could be the host). <code class="highlighter-rouge">null</code> if the update was performed by the guest.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">moderator_user_name</code></td>
-      <td>String</td>
-      <td>The moderator display name. <code class="highlighter-rouge">null</code> if the update was performed by the guest.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">moderator_user_login</code></td>
-      <td>String</td>
-      <td>The moderator login. <code class="highlighter-rouge">null</code> if the update was performed by the guest.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">guest_user_id</code></td>
-      <td>String</td>
-      <td>The user ID of the guest who transitioned states in the session. <code class="highlighter-rouge">null</code> if the slot is now empty.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">guest_user_name</code></td>
-      <td>String</td>
-      <td>The guest display name. <code class="highlighter-rouge">null</code> if the slot is now empty.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">guest_user_login</code></td>
-      <td>String</td>
-      <td>The guest login. <code class="highlighter-rouge">null</code> if the slot is now empty.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">slot_id</code></td>
-      <td>String</td>
-      <td>The ID of the slot assignment the guest is assigned to. <code class="highlighter-rouge">null</code> if the guest is in the INVITED, REMOVED, READY, or ACCEPTED state.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">state</code></td>
-      <td>String</td>
-      <td>The current state of the user after the update has taken place. <code class="highlighter-rouge">null</code> if the slot is now empty. Can otherwise be one of the following: <ul><li><code>invited</code> &mdash; The guest has transitioned to the invite queue. This can take place when the guest was previously assigned a slot, but have been removed from the call and are sent back to the invite queue.</li> <li><code>accepted</code> &mdash; The guest has accepted the invite and is currently in the process of setting up to join the session.</li> <li><code>ready</code> &mdash; The guest has signaled they are ready and can be assigned a slot.</li> <li><code>backstage</code> &mdash; The guest has been assigned a slot in the session, but is not currently seen live in the broadcasting software.</li> <li><code>live</code> &mdash; The guest is now live in the host's broadcasting software.</li> <li><code>removed</code> &mdash; The guest was removed from the call or queue.</li><ul> <li><code>accepted</code> &mdash; The guest has accepted the invite to the call.</li></ul></ul></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">host_video_enabled</code></td>
-      <td>Boolean</td>
-      <td>Flag that signals whether the host is allowing the slot’s video to be seen by participants within the session. <code class="highlighter-rouge">null</code> if the guest is not slotted.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">host_audio_enabled</code></td>
-      <td>Boolean</td>
-      <td>Flag that signals whether the host is allowing the slot’s audio to be heard by participants within the session. <code class="highlighter-rouge">null</code> if the guest is not slotted.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">host_volume</code></td>
-      <td>int</td>
-      <td>Value between 0-100 that represents the slot’s audio level as heard by participants within the session. <code class="highlighter-rouge">null</code> if the guest is not slotted.</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>broadcaster_user_id</code></td><td>String</td><td>The broadcaster user ID</td></tr><tr><td><code>broadcaster_user_name</code></td><td>String</td><td>The broadcaster display name</td></tr><tr><td><code>broadcaster_user_login</code></td><td>String</td><td>The broadcaster login</td></tr><tr><td><code>session_id</code></td><td>String</td><td>ID representing the unique session that was started.</td></tr><tr><td><code>moderator_user_id</code></td><td>String</td><td>The user ID of the moderator who updated the guest's state (could be the host). <code>null</code> if the update was performed by the guest.</td></tr><tr><td><code>moderator_user_name</code></td><td>String</td><td>The moderator display name. <code>null</code> if the update was performed by the guest.</td></tr><tr><td><code>moderator_user_login</code></td><td>String</td><td>The moderator login. <code>null</code> if the update was performed by the guest.</td></tr><tr><td><code>guest_user_id</code></td><td>String</td><td>The user ID of the guest who transitioned states in the session. <code>null</code> if the slot is now empty.</td></tr><tr><td><code>guest_user_name</code></td><td>String</td><td>The guest display name. <code>null</code> if the slot is now empty.</td></tr><tr><td><code>guest_user_login</code></td><td>String</td><td>The guest login. <code>null</code> if the slot is now empty.</td></tr><tr><td><code>slot_id</code></td><td>String</td><td>The ID of the slot assignment the guest is assigned to. <code>null</code> if the guest is in the INVITED, REMOVED, READY, or ACCEPTED state.</td></tr><tr><td><code>state</code></td><td>String</td><td>The current state of the user after the update has taken place. <code>null</code> if the slot is now empty. Can otherwise be one of the following:<ul><li><code>invited</code> — The guest has transitioned to the invite queue. This can take place when the guest was previously assigned a slot, but have been removed from the call and are sent back to the invite queue.</li><li><code>accepted</code> — The guest has accepted the invite and is currently in the process of setting up to join the session.</li><li><code>ready</code> — The guest has signaled they are ready and can be assigned a slot.</li><li><code>backstage</code> — The guest has been assigned a slot in the session, but is not currently seen live in the broadcasting software.</li><li><code>live</code> — The guest is now live in the host's broadcasting software.</li><li><code>removed</code> — The guest was removed from the call or queue.<ul><li><code>accepted</code> — The guest has accepted the invite to the call.</li></ul></li></ul></td></tr><tr><td><code>host_video_enabled</code></td><td>Boolean</td><td>Flag that signals whether the host is allowing the slot's video to be seen by participants within the session. <code>null</code> if the guest is not slotted.</td></tr><tr><td><code>host_audio_enabled</code></td><td>Boolean</td><td>Flag that signals whether the host is allowing the slot's audio to be heard by participants within the session. <code>null</code> if the guest is not slotted.</td></tr><tr><td><code>host_volume</code></td><td>int</td><td>Value between 0-100 that represents the slot's audio level as heard by participants within the session. <code>null</code> if the guest is not slotted.</td></tr></tbody></table>
 
 <h3 id="channel-guest-star-settings-update-event">Channel Guest Star Settings Update Event</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
-      <td>String</td>
-      <td>User ID of the host channel</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
-      <td>String</td>
-      <td>The broadcaster display name</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
-      <td>String</td>
-      <td>The broadcaster login</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">is_moderator_send_live_enabled</code></td>
-      <td>Boolean</td>
-      <td>Flag determining if Guest Star moderators have access to control whether a guest is live once assigned to a slot.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">slot_count</code></td>
-      <td>Integer</td>
-      <td>Number of slots the Guest Star call interface will allow the host to add to a call.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">is_browser_source_audio_enabled</code></td>
-      <td>Boolean</td>
-      <td>Flag determining if browser sources subscribed to sessions on this channel should output audio</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">group_layout</code></td>
-      <td>String</td>
-      <td>This setting determines how the guests within a session should be laid out within a group browser source. Can be one of the following values: <ul><li><code>tiled</code> &mdash; All live guests are tiled within the browser source with the same size.</li><li><code>screenshare</code> &mdash; All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.</li><li><code>horizontal_top</code> &mdash; Indicates the group layout will contain all participants in a top-aligned horizontal stack.</li><li><code>horizontal_bottom</code> &mdash; Indicates the group layout will contain all participants in a bottom-aligned horizontal stack.</li><li><code>vertical_left</code> &mdash; Indicates the group layout will contain all participants in a left-aligned vertical stack.</li><li><code>vertical_right</code> &mdash; Indicates the group layout will contain all participants in a right-aligned vertical stack.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>broadcaster_user_id</code></td><td>String</td><td>User ID of the host channel</td></tr><tr><td><code>broadcaster_user_name</code></td><td>String</td><td>The broadcaster display name</td></tr><tr><td><code>broadcaster_user_login</code></td><td>String</td><td>The broadcaster login</td></tr><tr><td><code>is_moderator_send_live_enabled</code></td><td>Boolean</td><td>Flag determining if Guest Star moderators have access to control whether a guest is live once assigned to a slot.</td></tr><tr><td><code>slot_count</code></td><td>Integer</td><td>Number of slots the Guest Star call interface will allow the host to add to a call.</td></tr><tr><td><code>is_browser_source_audio_enabled</code></td><td>Boolean</td><td>Flag determining if browser sources subscribed to sessions on this channel should output audio</td></tr><tr><td><code>group_layout</code></td><td>String</td><td>This setting determines how the guests within a session should be laid out within a group browser source. Can be one of the following values:<ul><li><code>tiled</code> — All live guests are tiled within the browser source with the same size.</li><li><code>screenshare</code> — All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.</li><li><code>horizontal_top</code> — Indicates the group layout will contain all participants in a top-aligned horizontal stack.</li><li><code>horizontal_bottom</code> — Indicates the group layout will contain all participants in a bottom-aligned horizontal stack.</li><li><code>vertical_left</code> — Indicates the group layout will contain all participants in a left-aligned vertical stack.</li><li><code>vertical_right</code> — Indicates the group layout will contain all participants in a right-aligned vertical stack.</li></ul></td></tr></tbody></table>
 
 <h3 id="channel-poll-begin-event">Channel Poll Begin Event</h3>
 
@@ -4282,17 +3694,17 @@
       <td>An ID that identifies the charity campaign.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">broadcaster_id</code></td>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
       <td>String</td>
       <td>An ID that identifies the broadcaster that’s running the campaign.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">broadcaster_login</code></td>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
       <td>String</td>
       <td>The broadcaster’s login name.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">broadcaster_name</code></td>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
       <td>String</td>
       <td>The broadcaster’s display name.</td>
     </tr>
@@ -4337,17 +3749,17 @@
       <td>An object that contains the amount of money that the user donated.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">value</code></td>
+      <td>   <code class="highlighter-rouge">value</code></td>
       <td>Integer</td>
       <td>The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, <code class="highlighter-rouge">value</code> is set to 550.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">decimal_places</code></td>
+      <td>   <code class="highlighter-rouge">decimal_places</code></td>
       <td>Integer</td>
       <td>The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate <code class="highlighter-rouge">value</code> from minor units to major units by using the formula:<br><br><code class="highlighter-rouge">value / 10^decimal_places</code></td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">currency</code></td>
+      <td>   <code class="highlighter-rouge">currency</code></td>
       <td>String</td>
       <td>The ISO-4217 three-letter currency code that identifies the type of currency in <code class="highlighter-rouge">value</code>.</td>
     </tr>
@@ -4413,17 +3825,17 @@
       <td>An object that contains the current amount of donations that the campaign has received.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">value</code></td>
+      <td>   <code class="highlighter-rouge">value</code></td>
       <td>Integer</td>
       <td>The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, <code class="highlighter-rouge">value</code> is set to 550.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">decimal_places</code></td>
+      <td>   <code class="highlighter-rouge">decimal_places</code></td>
       <td>Integer</td>
       <td>The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate <code class="highlighter-rouge">value</code> from minor units to major units by using the formula:<br><br><code class="highlighter-rouge">value / 10^decimal_places</code></td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">currency</code></td>
+      <td>   <code class="highlighter-rouge">currency</code></td>
       <td>String</td>
       <td>The ISO-4217 three-letter currency code that identifies the type of currency in <code class="highlighter-rouge">value</code>.</td>
     </tr>
@@ -4433,17 +3845,17 @@
       <td>An object that contains the campaign’s target fundraising goal.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">value</code></td>
+      <td>   <code class="highlighter-rouge">value</code></td>
       <td>Integer</td>
       <td>The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, <code class="highlighter-rouge">value</code> is set to 550.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">decimal_places</code></td>
+      <td>   <code class="highlighter-rouge">decimal_places</code></td>
       <td>Integer</td>
       <td>The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate <code class="highlighter-rouge">value</code> from minor units to major units by using the formula:<br><br><code class="highlighter-rouge">value / 10^decimal_places</code></td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">currency</code></td>
+      <td>   <code class="highlighter-rouge">currency</code></td>
       <td>String</td>
       <td>The ISO-4217 three-letter currency code that identifies the type of currency in <code class="highlighter-rouge">value</code>.</td>
     </tr>
@@ -4514,17 +3926,17 @@
       <td>An object that contains the current amount of donations that the campaign has received.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">value</code></td>
+      <td>   <code class="highlighter-rouge">value</code></td>
       <td>Integer</td>
       <td>The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, <code class="highlighter-rouge">value</code> is set to 550.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">decimal_places</code></td>
+      <td>   <code class="highlighter-rouge">decimal_places</code></td>
       <td>Integer</td>
       <td>The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate <code class="highlighter-rouge">value</code> from minor units to major units by using the formula:<br><br><code class="highlighter-rouge">value / 10^decimal_places</code></td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">currency</code></td>
+      <td>   <code class="highlighter-rouge">currency</code></td>
       <td>String</td>
       <td>The ISO-4217 three-letter currency code that identifies the type of currency in <code class="highlighter-rouge">value</code>.</td>
     </tr>
@@ -4534,17 +3946,17 @@
       <td>An object that contains the campaign’s target fundraising goal.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">value</code></td>
+      <td>   <code class="highlighter-rouge">value</code></td>
       <td>Integer</td>
       <td>The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, <code class="highlighter-rouge">value</code> is set to 550.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">decimal_places</code></td>
+      <td>   <code class="highlighter-rouge">decimal_places</code></td>
       <td>Integer</td>
       <td>The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate <code class="highlighter-rouge">value</code> from minor units to major units by using the formula:<br><br><code class="highlighter-rouge">value / 10^decimal_places</code></td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">currency</code></td>
+      <td>   <code class="highlighter-rouge">currency</code></td>
       <td>String</td>
       <td>The ISO-4217 three-letter currency code that identifies the type of currency in <code class="highlighter-rouge">value</code>.</td>
     </tr>
@@ -4610,17 +4022,17 @@
       <td>An object that contains the final amount of donations that the campaign received.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">value</code></td>
+      <td>   <code class="highlighter-rouge">value</code></td>
       <td>Integer</td>
       <td>The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, <code class="highlighter-rouge">value</code> is set to 550.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">decimal_places</code></td>
+      <td>   <code class="highlighter-rouge">decimal_places</code></td>
       <td>Integer</td>
       <td>The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate <code class="highlighter-rouge">value</code> from minor units to major units by using the formula:<br><br><code class="highlighter-rouge">value / 10^decimal_places</code></td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">currency</code></td>
+      <td>   <code class="highlighter-rouge">currency</code></td>
       <td>String</td>
       <td>The ISO-4217 three-letter currency code that identifies the type of currency in <code class="highlighter-rouge">value</code>.</td>
     </tr>
@@ -4630,17 +4042,17 @@
       <td>An object that contains the campaign’s target fundraising goal.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">value</code></td>
+      <td>   <code class="highlighter-rouge">value</code></td>
       <td>Integer</td>
       <td>The monetary amount. The amount is specified in the currency’s minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, <code class="highlighter-rouge">value</code> is set to 550.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">decimal_places</code></td>
+      <td>   <code class="highlighter-rouge">decimal_places</code></td>
       <td>Integer</td>
       <td>The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate <code class="highlighter-rouge">value</code> from minor units to major units by using the formula:<br><br><code class="highlighter-rouge">value / 10^decimal_places</code></td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">currency</code></td>
+      <td>   <code class="highlighter-rouge">currency</code></td>
       <td>String</td>
       <td>The ISO-4217 three-letter currency code that identifies the type of currency in <code class="highlighter-rouge">value</code>.</td>
     </tr>
@@ -4803,72 +4215,7 @@
 
 <p>Defines the event payload for a Goals event.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">id</code></td>
-      <td>string</td>
-      <td>An ID that identifies this event.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
-      <td>string</td>
-      <td>An ID that uniquely identifies the broadcaster.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
-      <td>string</td>
-      <td>The broadcaster’s display name.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
-      <td>string</td>
-      <td>The broadcaster’s user handle.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">type</code></td>
-      <td>string</td>
-      <td>The type of goal. Possible values are: <ul><li>follow &mdash; The goal is to increase followers.</li><li>subscription &mdash; The goal is to increase subscriptions. This type shows the net increase or decrease in tier points associated with the subscriptions.</li><li>subscription_count &mdash; The goal is to increase subscriptions. This type shows the net increase or decrease in the number of subscriptions.</li><li>new_subscription &mdash; The goal is to increase subscriptions. This type shows only the net increase in tier points associated with the subscriptions (it does not account for users that unsubscribed since the goal started).</li><li>new_subscription_count &mdash; The goal is to increase subscriptions. This type shows only the net increase in the number of subscriptions (it does not account for users that unsubscribed since the goal started).</li></ul></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">description</code></td>
-      <td>string</td>
-      <td>A description of the goal, if specified. The description may contain a maximum of 40 characters.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">is_achieved</code></td>
-      <td>Boolean</td>
-      <td>A Boolean value that indicates whether the broadcaster achieved their goal. Is <strong>true</strong> if the goal was achieved; otherwise, <strong>false</strong>.<br><br>Only the <strong>channel.goal.end</strong> event includes this field.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">current_amount</code></td>
-      <td>integer</td>
-      <td>The goal’s current value.<br><br>The goal’s <code class="highlighter-rouge">type</code> determines how this value is increased or decreased. <ul><li>If <code>type</code> is follow, this field is set to the broadcaster's current number of followers. This number increases with new followers and decreases when users unfollow the broadcaster.</li><li>If <code>type</code> is subscription, this field is increased and decreased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased or decreased by 2, not 1.</li><li>If <code>type</code> is subscription_count, this field is increased by 1 for each new subscription and decreased by 1 for each user that unsubscribes.</li><li>If <code>type</code> is new_subscription, this field is increased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased by 2, not 1.</li><li>If <code>type</code> is new_subscription_count, this field is increased by 1 for each new subscription.</li></ul></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">target_amount</code></td>
-      <td>integer</td>
-      <td>The goal’s target value. For example, if the broadcaster has 200 followers before creating the goal, and their goal is to double that number, this field is set to 400.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">started_at</code></td>
-      <td>string</td>
-      <td>The UTC timestamp in <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC 3339</a> format, which indicates when the broadcaster created the goal.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">ended_at</code></td>
-      <td>string</td>
-      <td>The UTC timestamp in <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC 3339</a> format, which indicates when the broadcaster ended the goal.<br><br>Only the <strong>channel.goal.end</strong> event includes this field.</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>id</code></td><td>string</td><td>An ID that identifies this event.</td></tr><tr><td><code>broadcaster_user_id</code></td><td>string</td><td>An ID that uniquely identifies the broadcaster.</td></tr><tr><td><code>broadcaster_user_name</code></td><td>string</td><td>The broadcaster's display name.</td></tr><tr><td><code>broadcaster_user_login</code></td><td>string</td><td>The broadcaster's user handle.</td></tr><tr><td><code>type</code></td><td>string</td><td>The type of goal. Possible values are:<ul><li>follow — The goal is to increase followers.</li><li>subscription — The goal is to increase subscriptions. This type shows the net increase or decrease in tier points associated with the subscriptions.</li><li>subscription_count — The goal is to increase subscriptions. This type shows the net increase or decrease in the number of subscriptions.</li><li>new_subscription — The goal is to increase subscriptions. This type shows only the net increase in tier points associated with the subscriptions (it does not account for users that unsubscribed since the goal started).</li><li>new_subscription_count — The goal is to increase subscriptions. This type shows only the net increase in the number of subscriptions (it does not account for users that unsubscribed since the goal started).</li></ul></td></tr><tr><td><code>description</code></td><td>string</td><td>A description of the goal, if specified. The description may contain a maximum of 40 characters.</td></tr><tr><td><code>is_achieved</code></td><td>Boolean</td><td>A Boolean value that indicates whether the broadcaster achieved their goal. Is <strong>true</strong> if the goal was achieved; otherwise, <strong>false</strong>.<br><br>Only the <strong>channel.goal.end</strong> event includes this field.</td></tr><tr><td><code>current_amount</code></td><td>integer</td><td>The goal's current value.<br><br>The goal's <code>type</code> determines how this value is increased or decreased.<ul><li>If <code>type</code> is follow, this field is set to the broadcaster's current number of followers. This number increases with new followers and decreases when users unfollow the broadcaster.</li><li>If <code>type</code> is subscription, this field is increased and decreased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased or decreased by 2, not 1.</li><li>If <code>type</code> is subscription_count, this field is increased by 1 for each new subscription and decreased by 1 for each user that unsubscribes.</li><li>If <code>type</code> is new_subscription, this field is increased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased by 2, not 1.</li><li>If <code>type</code> is new_subscription_count, this field is increased by 1 for each new subscription.</li></ul></td></tr><tr><td><code>target_amount</code></td><td>integer</td><td>The goal's target value. For example, if the broadcaster has 200 followers before creating the goal, and their goal is to double that number, this field is set to 400.</td></tr><tr><td><code>started_at</code></td><td>string</td><td>The UTC timestamp in <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC 3339</a> format, which indicates when the broadcaster created the goal.</td></tr><tr><td><code>ended_at</code></td><td>string</td><td>The UTC timestamp in <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC 3339</a> format, which indicates when the broadcaster ended the goal.<br><br>Only the <strong>channel.goal.end</strong> event includes this field.</td></tr></tbody></table>
 
 <h3 id="hype-train-begin-event">Hype Train Begin Event</h3>
 
@@ -5324,42 +4671,7 @@
 
 <p>The most recent contribution towards the Hype Train’s goal.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user that made the contribution.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The user’s login name.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user’s display name.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">type</code></td>
-      <td>string</td>
-      <td>The contribution method used. Possible values are:<ul><li><code>bits</code> &mdash; Cheering with Bits.</li><li><code>subscription</code> &mdash; Subscription activity like subscribing or gifting subscriptions.</li><li><code>other</code> &mdash; Covers other contribution methods not listed.</li></ul></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">total</code></td>
-      <td>integer</td>
-      <td>The total amount contributed. If <code class="highlighter-rouge">type</code> is <code class="highlighter-rouge">bits</code>, <code class="highlighter-rouge">total</code> represents the amount of Bits used. If <code class="highlighter-rouge">type</code> is <code class="highlighter-rouge">subscription</code>, <code class="highlighter-rouge">total</code> is 500, 1000, or 2500 to represent tier 1, 2, or 3 subscriptions, respectively.</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>user_id</code></td><td>string</td><td>The ID of the user that made the contribution.</td></tr><tr><td><code>user_login</code></td><td>string</td><td>The user's login name.</td></tr><tr><td><code>user_name</code></td><td>string</td><td>The user's display name.</td></tr><tr><td><code>type</code></td><td>string</td><td>The contribution method used. Possible values are:<ul><li><code>bits</code> — Cheering with Bits.</li><li><code>subscription</code> — Subscription activity like subscribing or gifting subscriptions.</li><li><code>other</code> — Covers other contribution methods not listed.</li></ul></td></tr><tr><td><code>total</code></td><td>integer</td><td>The total amount contributed. If <code>type</code> is <code>bits</code>, <code>total</code> represents the amount of Bits used. If <code>type</code> is <code>subscription</code>, <code>total</code> is 500, 1000, or 2500 to represent tier 1, 2, or 3 subscriptions, respectively.</td></tr></tbody></table>
 
 <h2 id="max-per-stream">Max Per Stream</h2>
 
@@ -5795,42 +5107,7 @@
 
 <p>The top contributor for a contribution type. For example, the top contributor using BITS (by aggregate) or the top contributor using subscriptions (by count).</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user that made the contribution.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The user’s login name.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user’s display name.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">type</code></td>
-      <td>string</td>
-      <td>The contribution method used. Possible values are:<ul><li><code>bits</code> &mdash; Cheering with Bits.</li><li><code>subscription</code> &mdash; Subscription activity like subscribing or gifting subscriptions.</li><li><code>other</code> &mdash; Covers other contribution methods not listed.</li></ul></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">total</code></td>
-      <td>integer</td>
-      <td>The total amount contributed. If <code class="highlighter-rouge">type</code> is <code class="highlighter-rouge">bits</code>, <code class="highlighter-rouge">total</code> represents the amount of Bits used. If <code class="highlighter-rouge">type</code> is <code class="highlighter-rouge">subscription</code>, <code class="highlighter-rouge">total</code> is 500, 1000, or 2500 to represent tier 1, 2, or 3 subscriptions, respectively.</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>user_id</code></td><td>string</td><td>The ID of the user that made the contribution.</td></tr><tr><td><code>user_login</code></td><td>string</td><td>The user's login name.</td></tr><tr><td><code>user_name</code></td><td>string</td><td>The user's display name.</td></tr><tr><td><code>type</code></td><td>string</td><td>The contribution method used. Possible values are:<ul><li><code>bits</code> — Cheering with Bits.</li><li><code>subscription</code> — Subscription activity like subscribing or gifting subscriptions.</li><li><code>other</code> — Covers other contribution methods not listed.</li></ul></td></tr><tr><td><code>total</code></td><td>integer</td><td>The total amount contributed. If <code>type</code> is <code>bits</code>, <code>total</code> represents the amount of Bits used. If <code>type</code> is <code>subscription</code>, <code>total</code> is 500, 1000, or 2500 to represent tier 1, 2, or 3 subscriptions, respectively.</td></tr></tbody></table>
 
 <h2 id="top-predictors">Top Predictors</h2>
 
@@ -5877,54 +5154,7 @@
 
 <p>Defines the transport details that you want Twitch to use when sending you event notifications.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Required?</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">method</code></td>
-      <td>string</td>
-      <td>yes</td>
-      <td>The transport method. Possible values are:<ul><li>webhook</li><li>websocket</li></ul></td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">callback</code></td>
-      <td>string</td>
-      <td>no</td>
-      <td>The callback URL where the notifications are sent. The URL must use the HTTPS protocol and port 443. See <a href="/docs/eventsub/handling-webhook-events#processing-an-event">Processing an event</a>.<br><br>Specify this field only if <code class="highlighter-rouge">method</code> is set to <strong>webhook</strong>.<br><br><strong>NOTE</strong>: Redirects are not followed.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">secret</code></td>
-      <td>string</td>
-      <td>no</td>
-      <td>The secret used to verify the signature. The secret must be an ASCII string that’s a minimum of 10 characters long and a maximum of 100 characters long. For information about how the secret is used, see <a href="/docs/eventsub/handling-webhook-events#verifying-the-event-message">Verifying the event message</a>.<br><br>Specify this field only if <code class="highlighter-rouge">method</code> is set to <strong>webhook</strong>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">session_id</code></td>
-      <td>string</td>
-      <td>no</td>
-      <td>An ID that identifies the WebSocket to send notifications to. When you connect to EventSub using WebSockets, the server returns the ID in the <a href="/docs/eventsub/handling-websocket-events#welcome-message">Welcome message</a>.<br><br>Specify this field only if <code class="highlighter-rouge">method</code> is set to <strong>websocket</strong>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">connected_at</code></td>
-      <td>string</td>
-      <td>no</td>
-      <td>The UTC date and time that the WebSocket connection was established.<br><br>This is a response-only field that <a href="/docs/api/reference#create-eventsub-subscription">Create EventSub Subscription</a> and <a href="/docs/api/reference#get-eventsub-subscriptions">Get EventSub Subscription</a> returns if the <code class="highlighter-rouge">method</code> field is set to <strong>websocket</strong>.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">disconnected_at</code></td>
-      <td>string</td>
-      <td>no</td>
-      <td>The UTC date and time that the WebSocket connection was lost.<br><br>This is a response-only field that <a href="/docs/api/reference#get-eventsub-subscriptions">Get EventSub Subscription</a> returns if the <code class="highlighter-rouge">method</code> field is set to <strong>websocket</strong>.</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Name</th><th>Type</th><th>Required?</th><th>Description</th></tr></thead><tbody><tr><td><code>method</code></td><td>string</td><td>yes</td><td>The transport method. Possible values are:<ul><li>webhook</li><li>websocket</li></ul></td></tr><tr><td><code>callback</code></td><td>string</td><td>no</td><td>The callback URL where the notifications are sent. The URL must use the HTTPS protocol and port 443. See <a href="/docs/eventsub/handling-webhook-events#processing-an-event">Processing an event</a>.<br><br>Specify this field only if <code>method</code> is set to <strong>webhook</strong>.<br><br><strong>NOTE</strong>: Redirects are not followed.</td></tr><tr><td><code>secret</code></td><td>string</td><td>no</td><td>The secret used to verify the signature. The secret must be an ASCII string that’s a minimum of 10 characters long and a maximum of 100 characters long. For information about how the secret is used, see <a href="/docs/eventsub/handling-webhook-events#verifying-the-event-message">Verifying the event message</a>.<br><br>Specify this field only if <code>method</code> is set to <strong>webhook</strong>.</td></tr><tr><td><code>session_id</code></td><td>string</td><td>no</td><td>An ID that identifies the WebSocket to send notifications to. When you connect to EventSub using WebSockets, the server returns the ID in the <a href="/docs/eventsub/handling-websocket-events#welcome-message">Welcome message</a>.<br><br>Specify this field only if <code>method</code> is set to <strong>websocket</strong>.</td></tr><tr><td><code>connected_at</code></td><td>string</td><td>no</td><td>The UTC date and time that the WebSocket connection was established.<br><br>This is a response-only field that <a href="/docs/api/reference#create-eventsub-subscription">Create EventSub Subscription</a> and <a href="/docs/api/reference#get-eventsub-subscriptions">Get EventSub Subscription</a> returns if the <code>method</code> field is set to <strong>websocket</strong>.</td></tr><tr><td><code>disconnected_at</code></td><td>string</td><td>no</td><td>The UTC date and time that the WebSocket connection was lost.<br><br>This is a response-only field that <a href="/docs/api/reference#get-eventsub-subscriptions">Get EventSub Subscription</a> returns if the <code>method</code> field is set to <strong>websocket</strong>.</td></tr></tbody></table>
 
 	
 

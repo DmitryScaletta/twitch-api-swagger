@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-01-08T16:16:23-08:00">
+<meta property="article:published_time" content="2024-01-23T10:05:23-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Subscription Types","headline":"EventSub Subscription Types","dateModified":"2024-01-08T16:16:23-08:00","datePublished":"2024-01-08T16:16:23-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/"},"url":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/","@context":"http://schema.org"}</script>
+{"description":"Subscription Types","headline":"EventSub Subscription Types","dateModified":"2024-01-23T10:05:23-08:00","datePublished":"2024-01-23T10:05:23-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/"},"url":"https://dev.twitch.tv/eventsub/eventsub-subscription-types/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -176,8 +176,6 @@
 			<dd><a href="#public-beta-program">Public Beta Program</a></dd>
 		
 			<dd><a href="#channel-subscriptions">Channel Subscriptions</a></dd>
-		
-			<dd><a href="#channelchat_settingsupdate">channel.chat_settings.update</a></dd>
 		
 			<dd><a href="#goal-subscriptions">Goal Subscriptions</a></dd>
 		
@@ -470,6 +468,8 @@
 
 
 
+
+
 	
 		
 
@@ -523,13 +523,13 @@
       <td><a href="#channelchatnotification">Channel Chat Notification</a></td>
       <td><code class="highlighter-rouge">channel.chat.notification</code></td>
       <td><code class="highlighter-rouge">1</code></td>
-      <td>A notification for when a broadcaster’s chat settings are updated</td>
+      <td>A notification for when an event that appears in chat has occurred.</td>
     </tr>
     <tr>
       <td><span class="pill pill-beta">BETA</span> <a href="#channelchat_settingsupdate">Channel Chat Settings Update</a></td>
       <td><code class="highlighter-rouge">channel.chat_settings.update</code></td>
       <td><code class="highlighter-rouge">beta</code></td>
-      <td>A notification for when an event that appears in chat has occurred.</td>
+      <td>A notification for when a broadcaster’s chat settings are updated.</td>
     </tr>
     <tr>
       <td><a href="#channelsubscribe">Channel Subscribe</a></td>
@@ -1503,33 +1503,34 @@
 
 <h3 id="channel-chat-message-delete-notification-example">Channel Chat Message Delete Notification Example</h3>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat.message_delete"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9001"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-         </span><span class="s2">"transport"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webhook"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"callback"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/webhooks/callback"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2023-04-11T10:11:12.123Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"event"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"broadcaster_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_User"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"broadcaster_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"target_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7734"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"target_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uncool_viewer"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"target_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uncool_viewer"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+    "subscription": {
+        "id": "f1c2a387-161a-49f9-a165-0f21d7a4e1c4",
+        "type": "channel.chat.message_delete",
+        "version": "1",
+        "status": "enabled",
+        "cost": 0,
+        "condition": {
+            "broadcaster_user_id": "1337",
+            "user_id": "9001"
+        },
+         "transport": {
+            "method": "webhook",
+            "callback": "https://example.com/webhooks/callback"
+        },
+        "created_at": "2023-04-11T10:11:12.123Z"
+    },
+    "event": {
+        "broadcaster_user_id": "1337",
+        "broadcaster_user_name": "Cool_User",
+        "broadcaster_user_login": "cool_user",
+        "target_user_id": "7734",
+        "target_user_name": "Uncool_viewer",
+        "target_user_login": "uncool_viewer",
+        "message_id": "ab24e0b0-2260-4bac-94e4-05eedd4ecd0e"
+    }
+}
+</code></pre></div></div>
 
 <h3 id="channelchatnotification">channel.chat.notification</h3>
 
@@ -1665,7 +1666,7 @@
           </span><span class="p">}</span><span class="w">
         </span><span class="p">],</span><span class="w">
         </span><span class="s2">"system_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chat message"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"message_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message-id"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"message_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ab24e0b0-2260-4bac-94e4-05eedd4ecd0e"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"chat-msg"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"fragments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1704,7 +1705,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<h2 id="channelchat_settingsupdate">channel.chat_settings.update</h2>
+<h3 id="channelchat_settingsupdate">channel.chat_settings.update</h3>
 
 <p><span class="pill pill-beta">BETA</span> This event sends a notification when a broadcaster’s chat settings are updated.</p>
 
@@ -1752,6 +1753,7 @@
 </table>
 
 <h3 id="channel-chat-settings-update-webhook-example">Channel Chat Settings Update Webhook Example</h3>
+
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"channel.chat_settings.update"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"beta"</span><span class="p">,</span><span class="w">
@@ -1792,6 +1794,7 @@
 </table>
 
 <h3 id="channel-chat-settings-update-notification-example">Channel Chat Settings Update Notification Example</h3>
+
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f1c2a387-161a-49f9-a165-0f21d7a4e1c4"</span><span class="p">,</span><span class="w">
@@ -1813,7 +1816,7 @@
         </span><span class="s2">"broadcaster_user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1337"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"broadcaster_user_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cool_user"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"broadcaster_user_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cool_User"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"emote_mode"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> 
+        </span><span class="s2">"emote_mode"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="s2">"follower_mode"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="s2">"follower_mode_duration_minutes"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="s2">"slow_mode"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -3059,13 +3062,13 @@
       <td>An object that contains subscription-specific parameters.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>   <code class="highlighter-rouge">broadcaster_user_id</code></td>
       <td>String</td>
       <td>Yes</td>
       <td>The broadcaster user ID for the channel you want to receive Guest Star session begin notifications for.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>   <code class="highlighter-rouge">moderator_user_id</code></td>
       <td>String</td>
       <td>Yes</td>
       <td>The user ID of the moderator or broadcaster of the specified channel.</td>
@@ -3191,13 +3194,13 @@
       <td>An object that contains subscription-specific parameters.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>   <code class="highlighter-rouge">broadcaster_user_id</code></td>
       <td>String</td>
       <td>Yes</td>
       <td>The broadcaster user ID for the channel you want to receive Guest Star session end notifications for.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>   <code class="highlighter-rouge">moderator_user_id</code></td>
       <td>String</td>
       <td>Yes</td>
       <td>The user ID of the moderator or broadcaster of the specified channel.</td>
@@ -3324,13 +3327,13 @@
       <td>An object that contains subscription-specific parameters.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>   <code class="highlighter-rouge">broadcaster_user_id</code></td>
       <td>String</td>
       <td>Yes</td>
       <td>The broadcaster user ID for the channel you want to receive Guest Star guest update notifications for.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>   <code class="highlighter-rouge">moderator_user_id</code></td>
       <td>String</td>
       <td>Yes</td>
       <td>The user ID of the moderator or broadcaster of the specified channel.</td>
@@ -3463,13 +3466,13 @@
       <td>An object that contains subscription-specific parameters.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>   <code class="highlighter-rouge">broadcaster_user_id</code></td>
       <td>String</td>
       <td>Yes</td>
       <td>The broadcaster user ID for the channel you want to receive Guest Star settings update notifications for.</td>
     </tr>
     <tr>
-      <td>   <code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>   <code class="highlighter-rouge">moderator_user_id</code></td>
       <td>String</td>
       <td>Yes</td>
       <td>The user ID of the moderator or broadcaster of the specified channel.</td>
@@ -5665,7 +5668,7 @@
       <td>An object that contains subscription-specific parameters.</td>
     </tr>
     <tr>
-      <td>   broadcaster_user_id</td>
+      <td>   broadcaster_user_id</td>
       <td>String</td>
       <td>Yes</td>
       <td>The ID of the broadcaster that you want to receive notifications about when users donate to their campaign.</td>
@@ -5802,7 +5805,7 @@
       <td>An object that contains subscription-specific parameters.</td>
     </tr>
     <tr>
-      <td>   broadcaster_user_id</td>
+      <td>   broadcaster_user_id</td>
       <td>String</td>
       <td>Yes</td>
       <td>The ID of the broadcaster that you want to receive notifications about when they start a charity campaign.</td>
@@ -5943,7 +5946,7 @@
       <td>An object that contains subscription-specific parameters.</td>
     </tr>
     <tr>
-      <td>   broadcaster_user_id</td>
+      <td>   broadcaster_user_id</td>
       <td>String</td>
       <td>Yes</td>
       <td>The ID of the broadcaster that you want to receive notifications about when their campaign makes progress or is updated.</td>
@@ -6079,7 +6082,7 @@
       <td>An object that contains subscription-specific parameters.</td>
     </tr>
     <tr>
-      <td>   broadcaster_user_id</td>
+      <td>   broadcaster_user_id</td>
       <td>String</td>
       <td>Yes</td>
       <td>The ID of the broadcaster that you want to receive notifications about when they stop a charity campaign.</td>
@@ -6222,13 +6225,13 @@
       <td>An object that contains subscription-specific parameters.</td>
     </tr>
     <tr>
-      <td>   broadcaster_user_id</td>
+      <td>   broadcaster_user_id</td>
       <td>String</td>
       <td>Yes</td>
       <td>The ID of the broadcaster that you want to receive notifications about when they activate Shield Mode.</td>
     </tr>
     <tr>
-      <td>   moderator_user_id</td>
+      <td>   moderator_user_id</td>
       <td>String</td>
       <td>Yes</td>
       <td>The ID of the broadcaster or one of the broadcaster’s moderators.</td>
@@ -6361,13 +6364,13 @@
       <td>An object that contains subscription-specific parameters.</td>
     </tr>
     <tr>
-      <td>   broadcaster_user_id</td>
+      <td>   broadcaster_user_id</td>
       <td>String</td>
       <td>Yes</td>
       <td>The ID of the broadcaster that you want to receive notifications about when they deactivate Shield Mode.</td>
     </tr>
     <tr>
-      <td>   moderator_user_id</td>
+      <td>   moderator_user_id</td>
       <td>String</td>
       <td>Yes</td>
       <td>The ID of the broadcaster or one of the broadcaster’s moderators.</td>
@@ -6498,13 +6501,13 @@
       <td>An object that contains subscription-specific parameters.</td>
     </tr>
     <tr>
-      <td>   broadcaster_user_id</td>
+      <td>   broadcaster_user_id</td>
       <td>String</td>
       <td>Yes</td>
       <td>The ID of the broadcaster that you want to receive notifications about when they send a Shoutout.</td>
     </tr>
     <tr>
-      <td>   moderator_user_id</td>
+      <td>   moderator_user_id</td>
       <td>String</td>
       <td>Yes</td>
       <td>The ID of the broadcaster that gave the Shoutout or one of the broadcaster’s moderators.</td>
@@ -6643,13 +6646,13 @@
       <td>An object that contains subscription-specific parameters.</td>
     </tr>
     <tr>
-      <td>   broadcaster_user_id</td>
+      <td>   broadcaster_user_id</td>
       <td>String</td>
       <td>Yes</td>
       <td>The ID of the broadcaster that you want to receive notifications about when they receive a Shoutout.</td>
     </tr>
     <tr>
-      <td>   moderator_user_id</td>
+      <td>   moderator_user_id</td>
       <td>String</td>
       <td>Yes</td>
       <td>The ID of the broadcaster that received the Shoutout or one of the broadcaster’s moderators.</td>
@@ -7932,7 +7935,7 @@
     <tr>
       <td><code class="highlighter-rouge">event</code></td>
       <td> <a href="/docs/eventsub/eventsub-reference/#user-update-event">event</a> </td>
-      <td>Event information. Contains the user ID, user name, and description. The event includes the user’s email address if the app used to request this event type includes the <code class="highlighter-rouge">user:read:email</code> scope for the user.  See <a href="/docs/api/reference#create-eventsub-subscription">Create EventSub Subscription</a>.</td>
+      <td>Event information. Contains the user ID, user name, and description. The event includes the user’s email address if the app used to request this event type includes the <code class="highlighter-rouge">user:read:email</code> scope for the user. See <a href="/docs/api/reference#create-eventsub-subscription">Create EventSub Subscription</a>.</td>
     </tr>
   </tbody>
 </table>

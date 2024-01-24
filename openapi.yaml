@@ -19,7 +19,7 @@ info:
 
     * Response codes and examples
 
-    * Generated types for TypeScript: [twitch-api-ts](https://github.com/DmitryScaletta/twitch-api-ts)
+    * Generated types for TypeScript: [ts-twitch-api](https://github.com/DmitryScaletta/ts-twitch-api)
 
 
     __Repository:__ [github.com/DmitryScaletta/twitch-api-swagger](https://github.com/DmitryScaletta/twitch-api-swagger)
@@ -1433,7 +1433,7 @@ paths:
 
                     ```bash
 
-                    curl -X GET 'https://api.twitch.tv/helix/channels/followers?user_id=123456&broadcaster_id=654321' \
+                    curl -X GET 'https://api.twitch.tv/helix/channels/followed?user_id=123456&broadcaster_id=654321' \
 
                     -H 'Authorization: Bearer kpvy3cjboyptmiacwr0c19hotn5s' \
 
@@ -3733,7 +3733,6 @@ paths:
         "400":
           description: |-
             * The `message` field in the request's body is required.
-            * The `message` field may not contain an empty string.
             * The `message` field may not contain an empty string.
             * The string in the `message` field failed review.
             * The specified color is not valid.
@@ -6103,7 +6102,9 @@ paths:
 
             * user\_removed — One of the users specified in the **Condition** object was removed.
 
-            * version\_removed — The subscribed to subscription type and version is no longer supported.
+            * version\_removed — The subscription to subscription type and version is no longer supported.
+
+            * beta\_maintenance — The subscription to the beta subscription type was removed due to maintenance.
 
             * websocket\_disconnected — The client closed the connection.
 
@@ -6129,6 +6130,7 @@ paths:
               - moderator_removed
               - user_removed
               - version_removed
+              - beta_maintenance
               - websocket_disconnected
               - websocket_failed_ping_pong
               - websocket_received_inbound_traffic
@@ -17843,7 +17845,9 @@ components:
 
             * user\_removed — One of the users specified in the **Condition** object was removed.
 
-            * version\_removed — The subscribed to subscription type and version is no longer supported.
+            * version\_removed — The subscription to subscription type and version is no longer supported.
+
+            * beta\_maintenance — The subscription to the beta subscription type was removed due to maintenance.
 
             * websocket\_disconnected — The client closed the connection.
 
@@ -17867,6 +17871,7 @@ components:
             - moderator_removed
             - user_removed
             - version_removed
+            - beta_maintenance
             - websocket_disconnected
             - websocket_failed_ping_pong
             - websocket_received_inbound_traffic
@@ -21212,10 +21217,8 @@ components:
           type: string
           description: A URL to a thumbnail image of the video. Before using the URL, you
             must replace the `%{width}` and `%{height}` placeholders with the
-            width and height of the thumbnail you want returned. Specify the
-            width and height in pixels. Because the CDN preserves the
-            thumbnail’s ratio, the thumbnail may not be the exact size you
-            requested.
+            width and height of the thumbnail you want returned. Due to current
+            limitations, `${width}` must be 320 and `${height}` must be 180.
         viewable:
           type: string
           description: The video’s viewable state. Always set to **public**.

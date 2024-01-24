@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Twitch API Swagger UI (Unofficial)",
-    "description": "Unofficial Swagger UI for Twitch API.\n\nAll endpoints are generated automatically from the [twitch docs](https://dev.twitch.tv/docs/api/reference) page.\n\n__Features:__\n\n* Swagger UI for all Twitch API endpoints\n* Schemas for _Request Query Parameters_, _Request Body_, _Response Body_\n* Some additional schemas like _Clip_, _ChatBadge_, _Prediction_, _Game_, _Channel_, _Video_ etc.\n* Response codes and examples\n* Generated types for TypeScript: [twitch-api-ts](https://github.com/DmitryScaletta/twitch-api-ts)\n\n__Repository:__ [github.com/DmitryScaletta/twitch-api-swagger](https://github.com/DmitryScaletta/twitch-api-swagger)",
+    "description": "Unofficial Swagger UI for Twitch API.\n\nAll endpoints are generated automatically from the [twitch docs](https://dev.twitch.tv/docs/api/reference) page.\n\n__Features:__\n\n* Swagger UI for all Twitch API endpoints\n* Schemas for _Request Query Parameters_, _Request Body_, _Response Body_\n* Some additional schemas like _Clip_, _ChatBadge_, _Prediction_, _Game_, _Channel_, _Video_ etc.\n* Response codes and examples\n* Generated types for TypeScript: [ts-twitch-api](https://github.com/DmitryScaletta/ts-twitch-api)\n\n__Repository:__ [github.com/DmitryScaletta/twitch-api-swagger](https://github.com/DmitryScaletta/twitch-api-swagger)",
     "version": "helix"
   },
   "servers": [
@@ -1239,7 +1239,7 @@
                     }
                   },
                   "Example 2": {
-                    "description": "The `data` field is not an empty array, which means that the user does follow the specified broadcaster.\n\n_Request:_\n\nChecks whether the specified user follows the specified broadcaster.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/channels/followers?user_id=123456&broadcaster_id=654321' \\\n-H 'Authorization: Bearer kpvy3cjboyptmiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfn0nyan9c87zr6t'\n```",
+                    "description": "The `data` field is not an empty array, which means that the user does follow the specified broadcaster.\n\n_Request:_\n\nChecks whether the specified user follows the specified broadcaster.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/channels/followed?user_id=123456&broadcaster_id=654321' \\\n-H 'Authorization: Bearer kpvy3cjboyptmiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfn0nyan9c87zr6t'\n```",
                     "value": {
                       "total": 8,
                       "data": [
@@ -3157,7 +3157,7 @@
             "description": "Successfully sent the announcement.\n\n__Examples__\n\n_Request:_\n\nSends an announcement to the broadcaster’s chat room.\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/chat/announcements?broadcaster_id=11111&moderator_id=44444' \\\n-H 'Authorization: Bearer kpvy3cjboyptmdkiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t' \\\n-H 'Content-Type: application/json' \\\n-d '{\"message\":\"Hello chat!\",\"color\":\"purple\"}'\n```"
           },
           "400": {
-            "description": "* The `message` field in the request's body is required.\n* The `message` field may not contain an empty string.\n* The `message` field may not contain an empty string.\n* The string in the `message` field failed review.\n* The specified color is not valid."
+            "description": "* The `message` field in the request's body is required.\n* The `message` field may not contain an empty string.\n* The string in the `message` field failed review.\n* The specified color is not valid."
           },
           "401": {
             "description": "* The Authorization header is required and must contain a user access token.\n* The user access token is missing the **moderator:manage:announcements** scope.\n* The OAuth token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token."
@@ -5032,7 +5032,7 @@
           {
             "name": "status",
             "in": "query",
-            "description": "Filter subscriptions by its status. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* moderator\\_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscribed to subscription type and version is no longer supported.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_connection\\_unused — The client failed to subscribe to events within the required time.\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.",
+            "description": "Filter subscriptions by its status. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* moderator\\_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscription to subscription type and version is no longer supported.\n* beta\\_maintenance — The subscription to the beta subscription type was removed due to maintenance.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_connection\\_unused — The client failed to subscribe to events within the required time.\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.",
             "schema": {
               "type": "string",
               "enum": [
@@ -5044,6 +5044,7 @@
                 "moderator_removed",
                 "user_removed",
                 "version_removed",
+                "beta_maintenance",
                 "websocket_disconnected",
                 "websocket_failed_ping_pong",
                 "websocket_received_inbound_traffic",
@@ -15316,7 +15317,7 @@
           },
           "status": {
             "type": "string",
-            "description": "The subscription’s status. The subscriber receives events only for **enabled** subscriptions. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* moderator\\_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscribed to subscription type and version is no longer supported.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_connection\\_unused — The client failed to subscribe to events within the required time.\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.",
+            "description": "The subscription’s status. The subscriber receives events only for **enabled** subscriptions. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* moderator\\_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscription to subscription type and version is no longer supported.\n* beta\\_maintenance — The subscription to the beta subscription type was removed due to maintenance.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_connection\\_unused — The client failed to subscribe to events within the required time.\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.",
             "enum": [
               "enabled",
               "webhook_callback_verification_pending",
@@ -15326,6 +15327,7 @@
               "moderator_removed",
               "user_removed",
               "version_removed",
+              "beta_maintenance",
               "websocket_disconnected",
               "websocket_failed_ping_pong",
               "websocket_received_inbound_traffic",
@@ -19137,7 +19139,7 @@
           },
           "thumbnail_url": {
             "type": "string",
-            "description": "A URL to a thumbnail image of the video. Before using the URL, you must replace the `%{width}` and `%{height}` placeholders with the width and height of the thumbnail you want returned. Specify the width and height in pixels. Because the CDN preserves the thumbnail’s ratio, the thumbnail may not be the exact size you requested."
+            "description": "A URL to a thumbnail image of the video. Before using the URL, you must replace the `%{width}` and `%{height}` placeholders with the width and height of the thumbnail you want returned. Due to current limitations, `${width}` must be 320 and `${height}` must be 180."
           },
           "viewable": {
             "type": "string",
