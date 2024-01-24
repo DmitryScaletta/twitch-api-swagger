@@ -10,7 +10,7 @@ __Features:__
 * Schemas for _Request Query Parameters_, _Request Body_, _Response Body_
 * Some additional schemas like _Clip_, _ChatBadge_, _Prediction_, _Game_, _Channel_, _Video_ etc.
 * Response codes and examples
-* Generated types for TypeScript: [twitch-api-ts](https://github.com/DmitryScaletta/twitch-api-ts)
+* Generated types for TypeScript: [ts-twitch-api](https://github.com/DmitryScaletta/ts-twitch-api)
 
 __Repository:__ [github.com/DmitryScaletta/twitch-api-swagger](https://github.com/DmitryScaletta/twitch-api-swagger)
 `.trim();
