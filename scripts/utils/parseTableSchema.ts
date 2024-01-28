@@ -52,13 +52,17 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
     //   The object includes this field only if
     //   Specify this field only if
     //   Included only if
+    //   if any.
     let required: FieldSchema['required'] = null;
     const requiredText = requiredEl?.textContent?.trim();
     if (requiredText) required = requiredText === 'Yes';
     if (
-      ['required only if', 'included only if', 'this field only if'].some((s) =>
-        descriptionTextLower.includes(s),
-      )
+      [
+        'required only if',
+        'included only if',
+        'this field only if',
+        'if any.',
+      ].some((s) => descriptionTextLower.includes(s))
     ) {
       required = false;
     }
@@ -67,8 +71,9 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
     const parameterText = parameterEl.textContent!;
     let nbspCount = 0;
     for (let i = 0; i < parameterText.length; i += 1) {
-      if (parameterText[i] === '\xa0') nbspCount += 1;
-      else break;
+      if (parameterText[i] === '\xa0' || parameterText[i] === ' ') {
+        nbspCount += 1;
+      } else break;
     }
     // sometimes indentation can be 2 so use Math.ceil
     let depth = Math.ceil(nbspCount / 3);

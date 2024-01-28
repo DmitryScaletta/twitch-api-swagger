@@ -71,19 +71,19 @@ const normalizeReferenceHtml = (document: Document) => {
     const el = getDocsEl('get-content-classification-labels');
     el.innerHTML = el.innerHTML
       .replace(
-        '<tr>\n      <td>&nbsp;&nbsp;&nbsp;content_classification_labels</td>\n      <td>Label[]</td>\n      <td>The list of CCLs available.</td>\n    </tr>',
+        '<tr>\n      <td>&nbsp; &nbsp;content_classification_labels</td>\n      <td>Label[]</td>\n      <td>The list of CCLs available.</td>\n    </tr>',
         '',
       )
       .replace(
-        '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td>',
+        '<td>&nbsp; &nbsp; &nbsp; id</td>',
         '<td>&nbsp;&nbsp;&nbsp;id</td>',
       )
       .replace(
-        '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description</td>',
+        '<td>&nbsp; &nbsp; &nbsp; description</td>',
         '<td>&nbsp;&nbsp;&nbsp;description</td>',
       )
       .replace(
-        '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</td>',
+        '<td>&nbsp; &nbsp; &nbsp; name</td>',
         '<td>&nbsp;&nbsp;&nbsp;name</td>',
       );
   }
@@ -172,6 +172,68 @@ const normalizeReferenceHtml = (document: Document) => {
         '<tr><td>204 No Content</td><td></td></tr>',
       );
     }
+  }
+
+  // Redundant '{' in the example
+  // https://dev.twitch.tv/docs/api/reference/#get-conduits
+  {
+    const el = getCodeEl('get-conduits');
+    el.innerHTML = el.innerHTML.replace(
+      '<code><span class="p">{</span><span class="w">\n  </span><span class="p">{</span>',
+      '<code><span class="p">{</span><span class="w">',
+    );
+  }
+
+  // Redundant semicolon after "pagination" in the example
+  // https://dev.twitch.tv/docs/api/reference/#get-conduit-shards
+  {
+    const el = getCodeEl('get-conduit-shards');
+    el.innerHTML = el.innerHTML.replace(
+      '<span class="p">{},</span>',
+      '<span class="p">{}</span>',
+    );
+  }
+
+  // Redundant and missing semicolons in the examples
+  // https://dev.twitch.tv/docs/api/reference/#update-conduit-shards
+  {
+    const el = getCodeEl('update-conduit-shards');
+    el.innerHTML = el.innerHTML
+      .replaceAll('\n    },\n', '\n    }\n')
+      .replace(
+        '"https://this-is-a-callback-3.com"',
+        '"https://this-is-a-callback-3.com",',
+      );
+  }
+
+  // Wrong place for double quotes in the request body
+  // https://dev.twitch.tv/docs/api/reference/#create-eventsub-subscription
+  {
+    const el = getCodeEl('create-eventsub-subscription');
+    el.innerHTML = el.innerHTML.replace(
+      '"\n    type": "user.update"',
+      '\n    "type": "user.update"',
+    );
+  }
+
+  // `cost` html tag instead of `code`
+  // https://dev.twitch.tv/docs/api/reference/#update-extension-bits-product
+  {
+    const el = getDocsEl('update-extension-bits-product');
+    el.innerHTML = el.innerHTML.replace(
+      '&lt;cost&gt;cost&lt;/cost&gt;',
+      '<code>cost</code>',
+    );
+  }
+
+  // Wrong padding for the `broadcast` field
+  // https://dev.twitch.tv/docs/api/reference/#get-extension-transactions
+  {
+    const el = getDocsEl('get-extension-transactions');
+    el.innerHTML = el.innerHTML.replace(
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; broadcast</td>',
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;broadcast</td>',
+    );
   }
 };
 

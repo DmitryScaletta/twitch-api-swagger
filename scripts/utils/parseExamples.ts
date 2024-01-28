@@ -22,7 +22,9 @@ const parseExamples = (endpointId: string, examplesEl: Element) => {
 
   const exampleItems: ExampleItem[] = [];
   for (const exampleText of examplesText) {
-    const textLower = exampleText.toLowerCase();
+    // $ZeroWidthSpace; - \u200B
+    // https://dev.twitch.tv/docs/api/reference/#create-eventsub-subscription
+    const textLower = exampleText.replaceAll('\u200B', '').trim().toLowerCase();
     const isRequest = textLower.startsWith('example request');
     const isResponse = textLower.startsWith('example response');
     if (isRequest || isResponse) {
