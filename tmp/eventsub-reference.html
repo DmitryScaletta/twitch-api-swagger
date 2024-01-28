@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-01-23T10:05:23-08:00">
+<meta property="article:published_time" content="2024-01-25T12:17:17-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"EventSub Reference","headline":"EventSub Reference","dateModified":"2024-01-23T10:05:23-08:00","datePublished":"2024-01-23T10:05:23-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@context":"http://schema.org"}</script>
+{"description":"EventSub Reference","headline":"EventSub Reference","dateModified":"2024-01-25T12:17:17-08:00","datePublished":"2024-01-25T12:17:17-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -160,6 +160,13 @@
 
 
 
+	<dd><a class="sub-page" href="/docs/eventsub/handling-conduit-events">Handling Conduit Events</a></dd>
+
+	
+
+
+
+
 	<dd><a class="sub-page" href="/docs/eventsub/manage-subscriptions">Managing Subscriptions</a></dd>
 
 	
@@ -195,6 +202,20 @@
 			<dd><a href="#emotes">Emotes</a></dd>
 		
 			<dd><a href="#events">Events</a></dd>
+		
+			<dd><a href="#response-fields-1">Response fields</a></dd>
+		
+			<dd><a href="#bits-voting-1">Bits Voting</a></dd>
+		
+			<dd><a href="#channel-points-voting-1">Channel Points Voting</a></dd>
+		
+			<dd><a href="#choices-1">Choices</a></dd>
+		
+			<dd><a href="#conditions-1">Conditions</a></dd>
+		
+			<dd><a href="#emotes-1">Emotes</a></dd>
+		
+			<dd><a href="#events-1">Events</a></dd>
 		
 			<dd><a href="#global-cooldown">Global Cooldown</a></dd>
 		
@@ -757,6 +778,33 @@
       <td>string</td>
       <td>yes</td>
       <td>User ID of the channel to receive chat clear user messages events for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID to read chat as.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-message-condition">Channel Chat Message Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>User ID of the channel to receive chat message events for.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">user_id</code></td>
@@ -1475,6 +1523,33 @@
   </tbody>
 </table>
 
+<h3 id="conduit-shard-disabled-condition">Conduit Shard Disabled Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">client_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>Your application’s client id. The provided client_id must match the client ID in the application access token.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">conduit_id</code></td>
+      <td>string</td>
+      <td>no</td>
+      <td>The conduit ID to receive events for. If omitted, events for all of this client’s conduits are sent.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="drop-entitlement-grant-condition">Drop Entitlement Grant Condition</h3>
 
 <table>
@@ -1959,6 +2034,1474 @@
     </tr>
   </tbody>
 </table>
+
+<h2 id="response-fields-1">Response fields</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">subscription</code></td>
+      <td> <a href="#subscription">subscription</a> </td>
+      <td>Contains subscription metadata.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">event</code></td>
+      <td> <a href="#events">event</a> </td>
+      <td>The event information. The fields inside this object differ by subscription type.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="objects-1">Objects
+	
+		
+
+<h2 id="bits-voting-1">Bits Voting</h2>
+
+<p><strong>NOTE</strong>: Bits voting is not supported.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">is_enabled</code></td>
+      <td>boolean</td>
+      <td>Not used; will be set to <strong>false</strong>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">amount_per_vote</code></td>
+      <td>integer</td>
+      <td>Not used; will be set to 0.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="channel-points-voting-1">Channel Points Voting</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">is_enabled</code></td>
+      <td>boolean</td>
+      <td>Indicates if Channel Points can be used for voting.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">amount_per_vote</code></td>
+      <td>integer</td>
+      <td>Number of Channel Points required to vote once with Channel Points.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="choices-1">Choices</h2>
+
+<p>An array of the choices for a particular poll. Each poll’s event payload includes a choices array. The choices array contains an object that describes each choice and, if applicable, the votes for that choice.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>ID for the choice.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">title</code></td>
+      <td>string</td>
+      <td>Text displayed for the choice.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">bits_votes</code></td>
+      <td>integer</td>
+      <td>Not used; will be set to 0.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">channel_points_votes</code></td>
+      <td>integer</td>
+      <td>Number of votes received via Channel Points.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">votes</code></td>
+      <td>integer</td>
+      <td>Total number of votes received for the choice across all methods of voting.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="conditions-1">Conditions</h2>
+
+<h3 id="channel-ad-break-begin-condition-1">Channel Ad Break Begin Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The ID of the broadcaster that you want to get Channel Ad Break begin notifications for. Maximum: 1</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-ban-condition-1">Channel Ban Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to get ban notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-clear-condition-1">Channel Chat Clear Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>User ID of the channel to receive chat clear events for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID to read chat as.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-clear-user-messages-condition-1">Channel Chat Clear User Messages Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>User ID of the channel to receive chat clear user messages events for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID to read chat as.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-message-condition-1">Channel Chat Message Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>User ID of the channel to receive chat message events for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID to read chat as.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-message-delete-condition-1">Channel Chat Message Delete Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>User ID of the channel to receive chat message delete events for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID to read chat as.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-notification-condition-1">Channel Chat Notification Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>User ID of the channel to receive chat notification events for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID to read chat as.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-settings-update-condition-1">Channel Chat Settings Update Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>User ID of the channel to receive chat settings update events for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID to read chat as.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-subscribe-condition-1">Channel Subscribe Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to get subscribe notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-subscription-end-condition-1">Channel Subscription End Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to get subscription end notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-subscription-gift-condition-1">Channel Subscription Gift Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to get subscription gift notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-subscription-message-condition-1">Channel Subscription Message Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to get resubscription chat message notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-cheer-condition-1">Channel Cheer Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to get cheer notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-update-condition-1">Channel Update Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to get updates for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-follow-condition-1">Channel Follow Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to get follow notifications for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The ID of the moderator of the channel you want to get follow notifications for. If you have authorization from the broadcaster rather than a moderator, specify the broadcaster’s user ID here.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-unban-condition-1">Channel Unban Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to get unban notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-raid-condition-1">Channel Raid Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">from_broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>no</td>
+      <td>The broadcaster user ID that created the channel raid you want to get notifications for. Use this parameter if you want to know when a specific broadcaster raids another broadcaster. The channel raid condition must include either <code class="highlighter-rouge">from_broadcaster_user_id</code> or <code class="highlighter-rouge">to_broadcaster_user_id</code>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">to_broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>no</td>
+      <td>The broadcaster user ID that received the channel raid you want to get notifications for. Use this parameter if you want to know when a specific broadcaster is raided by another broadcaster. The channel raid condition must include either <code class="highlighter-rouge">from_broadcaster_user_id</code> or <code class="highlighter-rouge">to_broadcaster_user_id</code>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-moderator-add-condition-1">Channel Moderator Add Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to get moderator addition notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-moderator-remove-condition-1">Channel Moderator Remove Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to get moderator removal notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-session-begin-condition-1">Channel Guest Star Session Begin Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel hosting the Guest Star Session</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The user ID of the moderator or broadcaster of the specified channel.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-session-end-condition-1">Channel Guest Star Session End Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel hosting the Guest Star Session</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The user ID of the moderator or broadcaster of the specified channel.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-guest-update-condition-1">Channel Guest Star Guest Update Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel hosting the Guest Star Session</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The user ID of the moderator or broadcaster of the specified channel.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-guest-star-settings-update-condition-1">Channel Guest Star Settings Update Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel hosting the Guest Star Session</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>yes</td>
+      <td>The user ID of the moderator or broadcaster of the specified channel.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-points-custom-reward-add-condition-1">Channel Points Custom Reward Add Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to receive channel points custom reward add notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-points-custom-reward-update-condition-1">Channel Points Custom Reward Update Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to receive channel points custom reward update notifications for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">reward_id</code></td>
+      <td>string</td>
+      <td>no</td>
+      <td><em>Optional</em>. Specify a reward id to only receive notifications for a specific reward.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-points-custom-reward-remove-condition-1">Channel Points Custom Reward Remove Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to receive channel points custom reward remove notifications for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">reward_id</code></td>
+      <td>string</td>
+      <td>no</td>
+      <td><em>Optional</em>. Specify a reward id to only receive notifications for a specific reward.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-points-custom-reward-redemption-add-condition-1">Channel Points Custom Reward Redemption Add Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to receive channel points custom reward redemption add notifications for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">reward_id</code></td>
+      <td>string</td>
+      <td>no</td>
+      <td><em>Optional</em>. Specify a reward id to only receive notifications for a specific reward.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-points-custom-reward-redemption-update-condition-1">Channel Points Custom Reward Redemption Update Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to receive channel points custom reward redemption update notifications for.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">reward_id</code></td>
+      <td>string</td>
+      <td>no</td>
+      <td><em>Optional</em>. Specify a reward id to only receive notifications for a specific reward.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-poll-begin-condition-1">Channel Poll Begin Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel for which “poll begin” notifications will be received.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-poll-progress-condition-1">Channel Poll Progress Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel for which “poll progress” notifications will be received.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-poll-end-condition-1">Channel Poll End Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel for which “poll end” notifications will be received.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-prediction-begin-condition-1">Channel Prediction Begin Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel for which “prediction begin” notifications will be received.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-prediction-progress-condition-1">Channel Prediction Progress Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel for which “prediction progress” notifications will be received.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-prediction-lock-condition-1">Channel Prediction Lock Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel for which “prediction lock” notifications will be received.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-prediction-end-condition-1">Channel Prediction End Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID of the channel for which “prediction end” notifications will be received.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="conduit-shard-disabled-condition-1">Conduit Shard Disabled Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">client_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>Your application’s client id. The provided client_id must match the client ID in the application access token.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">conduit_id</code></td>
+      <td>string</td>
+      <td>no</td>
+      <td>The conduit ID to receive events for. If omitted, events for all of this client’s conduits are sent.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="drop-entitlement-grant-condition-1">Drop Entitlement Grant Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">organization_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The organization ID of the organization that owns the game on the developer portal.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">category_id</code></td>
+      <td>string</td>
+      <td>no</td>
+      <td>The category (or game) ID of the game for which entitlement notifications will be received.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">campaign_id</code></td>
+      <td>string</td>
+      <td>no</td>
+      <td>The campaign ID for a specific campaign for which entitlement notifications will be received.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="extension-bits-transaction-create-condition-1">Extension Bits Transaction Create Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">extension_client_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The client ID of the extension.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="goals-condition-1">Goals Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The ID of the broadcaster to get notified about. The ID must match the <code class="highlighter-rouge">user_id</code> in the OAuth access token.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="hype-train-begin-condition-1">Hype Train Begin Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The ID of the broadcaster that you want to get Hype Train begin notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="hype-train-progress-condition-1">Hype Train Progress Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The ID of the broadcaster that you want to get Hype Train progress notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="hype-train-end-condition-1">Hype Train End Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The ID of the broadcaster that you want to get Hype Train end notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="stream-online-condition-1">Stream Online Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID you want to get stream online notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="stream-offline-condition-1">Stream Offline Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID you want to get stream offline notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="user-authorization-grant-condition-1">User Authorization Grant Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">client_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>Your application’s client id. The provided <code class="highlighter-rouge">client_id</code> must match the client id in the application access token.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="user-authorization-revoke-condition-1">User Authorization Revoke Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">client_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>Your application’s client id. The provided <code class="highlighter-rouge">client_id</code> must match the client id in the application access token.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="user-update-condition-1">User Update Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID for the user you want update notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="emotes-1">Emotes</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">begin</code></td>
+      <td>int</td>
+      <td>The index of where the Emote starts in the text.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">end</code></td>
+      <td>int</td>
+      <td>The index of where the Emote ends in the text.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>The emote ID.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="events-1">Events</h2>
+
+<h3 id="channel-ad-break-begin-event-1">Channel Ad Break Begin Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">duration_seconds</code></td>
+      <td>integer</td>
+      <td>Length in seconds of the mid-roll ad break requested</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">started_at</code></td>
+      <td>string</td>
+      <td>The UTC timestamp of when the ad break began, in RFC3339 format. Note that there is potential delay between this event, when the streamer requested the ad break, and when the viewers will see ads.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_automatic</code></td>
+      <td>boolean</td>
+      <td>Indicates if the ad was automatically scheduled via Ads Manager</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The broadcaster’s user ID for the channel the ad was run on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The broadcaster’s user login for the channel the ad was run on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The broadcaster’s user display name for the channel the ad was run on.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">requester_user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user that requested the ad. For automatic ads, this will be the ID of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">requester_user_login</code></td>
+      <td>string</td>
+      <td>The login of the user that requested the ad.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">requester_user_name</code></td>
+      <td>string</td>
+      <td>The display name of the user that requested the ad.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-ban-event-1">Channel Ban Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The user ID for the user who was banned on the specified channel.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The user login for the user who was banned on the specified channel.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user display name for the user who was banned on the specified channel.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The requested broadcaster ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The requested broadcaster login.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The requested broadcaster display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>string</td>
+      <td>The user ID of the issuer of the ban.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_login</code></td>
+      <td>string</td>
+      <td>The user login of the issuer of the ban.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the issuer of the ban.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">reason</code></td>
+      <td>string</td>
+      <td>The reason behind the ban.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">banned_at</code></td>
+      <td>string</td>
+      <td>The UTC date and time (in RFC3339 format) of when the user was banned or put in a timeout.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ends_at</code></td>
+      <td>string</td>
+      <td>The UTC date and time (in RFC3339 format) of when the timeout ends. Is <strong>null</strong> if the user was banned instead of put in a timeout.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_permanent</code></td>
+      <td>boolean</td>
+      <td>Indicates whether the ban is permanent (true) or a timeout (false). If true, <code class="highlighter-rouge">ends_at</code> will be null.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-clear-event-1">Channel Chat Clear Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The broadcaster user ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The broadcaster display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The broadcaster login.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-clear-user-messages-event-1">Channel Chat Clear User Messages Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The broadcaster user ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The broadcaster display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The broadcaster login.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target_user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user that was banned or put in a timeout. All of their messages are deleted.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user that was banned or put in a timeout.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target_user_login</code></td>
+      <td>string</td>
+      <td>The user login of the user that was banned or put in a timeout.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-chat-message-event">Channel Chat Message Event</h3>
+
+<table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>broadcaster_user_id</code></td><td>string</td><td>The broadcaster user ID.</td></tr><tr><td><code>broadcaster_user_name</code></td><td>string</td><td>The broadcaster display name.</td></tr><tr><td><code>broadcaster_user_login</code></td><td>string</td><td>The broadcaster login.</td></tr><tr><td><code>chatter_user_id</code></td><td>string</td><td>The user ID of the user that sent the message.</td></tr><tr><td><code>chatter_user_name</code></td><td>string</td><td>The user name of the user that sent the message.</td></tr><tr><td><code>chatter_user_login</code></td><td>string</td><td>The user login of the user that sent the message.</td></tr><tr><td><code>message_id</code></td><td>string</td><td>A UUID that identifies the message.</td></tr><tr><td><code>message</code></td><td>object</td><td>The structured chat message.</td></tr><tr><td><code>text</code></td><td>string</td><td>The chat message in plain text.</td></tr><tr><td><code>fragments</code></td><td>object[]</td><td>Ordered list of chat message fragments.</td></tr><tr><td><code>type</code></td><td>string</td><td><p>The type of message fragment. Possible values:</p><ul><li>text</li><li>cheermote</li><li>emote</li><li>mention</li></ul></td></tr><tr><td><code>text</code></td><td>string</td><td>Message text in fragment.</td></tr><tr><td><code>cheermote</code></td><td>object</td><td>Optional. Metadata pertaining to the cheermote.</td></tr><tr><td><code>prefix</code></td><td>string</td><td>The name portion of the Cheermote string that you use in chat to cheer Bits. The full Cheermote string is the concatenation of {prefix} + {number of Bits}. For example, if the prefix is “Cheer” and you want to cheer 100 Bits, the full Cheermote string is Cheer100. When the Cheermote string is entered in chat, Twitch converts it to the image associated with the Bits tier that was cheered.</td></tr><tr><td><code>bits</code></td><td>int</td><td>The amount of bits cheered.</td></tr><tr><td><code>tier</code></td><td>int</td><td>The tier level of the cheermote.</td></tr><tr><td><code>emote</code></td><td>object</td><td>Optional. Metadata pertaining to the emote.</td></tr><tr><td><code>id</code></td><td>string</td><td>An ID that uniquely identifies this emote.</td></tr><tr><td><code>emote_set_id</code></td><td>string</td><td>An ID that identifies the emote set that the emote belongs to.</td></tr><tr><td><code>owner_id</code></td><td>string</td><td>The ID of the broadcaster who owns the emote.</td></tr><tr><td><code>format</code></td><td>string</td><td><p>The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only static. But if the emote is available as a static PNG and an animated GIF, the array contains static and animated. The possible formats are:</p><ul><li>animated — An animated GIF is available for this emote.</li><li>static — A static PNG file is available for this emote.</li></ul></td></tr><tr><td><code>mention</code></td><td>object</td><td>Optional. Metadata pertaining to the mention.</td></tr><tr><td><code>user_id</code></td><td>string</td><td>The user ID of the mentioned user.</td></tr><tr><td>&nbsp;<code>user_name</code></td><td>string</td><td>The user name of the mentioned user.</td></tr><tr><td><code>user_login</code></td><td>string</td><td>The user login of the mentioned user.</td></tr><tr><td><code>message_type</code></td><td>string</td><td><p>The type of message. Possible values:</p><ul><li>text</li><li>channel_points_highlighted</li><li>channel_points_sub_only</li><li>user_intro</li></ul></td></tr><tr><td><code>badges</code></td><td>object[]</td><td>List of chat badges.</td></tr><tr><td><code>set_id</code></td><td>string</td><td>An ID that identifies this set of chat badges. For example, Bits or Subscriber.</td></tr><tr><td><code>id</code></td><td>string</td><td>An ID that identifies this version of the badge. The ID can be any value. For example, for Bits, the ID is the Bits tier level, but for World of Warcraft, it could be Alliance or Horde.</td></tr><tr><td><code>info</code></td><td>string</td><td>Contains metadata related to the chat badges in the badges tag. Currently, this tag contains metadata only for subscriber badges, to indicate the number of months the user has been a subscriber.</td></tr><tr><td><code>cheer</code></td><td>object</td><td>Optional. Metadata if this message is a cheer.</td></tr><tr><td><code>bits</code></td><td>int</td><td>The amount of Bits the user cheered.</td></tr><tr><td><code>color</code></td><td>string</td><td>The color of the user’s name in the chat room. This is a hexadecimal RGB color code in the form, #&lt;RGB&gt;. This tag may be empty if it is never set.</td></tr><tr><td><code>reply</code></td><td>object</td><td>Optional. Metadata if this message is a reply.</td></tr><tr><td><code>parent_message_id</code></td><td>string</td><td>An ID that uniquely identifies the parent message that this message is replying to.</td></tr><tr><td><code>parent_message_body</code></td><td>string</td><td>The message body of the parent message.</td></tr><tr><td><code>parent_user_id</code></td><td>string</td><td>User ID of the sender of the parent message.</td></tr><tr><td><code>parent_user_name</code></td><td>string</td><td>User name of the sender of the parent message.</td></tr><tr><td><code>parent_user_login</code></td><td>string</td><td>User login of the sender of the parent message.</td></tr><tr><td><code>thread_message_id</code></td><td>string</td><td>An ID that identifies the parent message of the reply thread.</td></tr><tr><td><code>thread_user_id</code></td><td>string</td><td>User ID of the sender of the thread’s parent message.</td></tr><tr><td><code>thread_user_name</code></td><td>string</td><td>User name of the sender of the thread’s parent message.</td></tr><tr><td><code>thread_user_login</code></td><td>string</td><td>User login of the sender of the thread’s parent message.</td></tr><tr><td><code>channel_points_custom_reward_id</code></td><td>string</td><td>Optional. The ID of a channel points custom reward that was redeemed.</td></tr></tbody></table>
 
 <h3 id="channel-chat-message-delete-event">Channel Chat Message Delete Event</h3>
 
@@ -4064,6 +5607,65 @@
   </tbody>
 </table>
 
+<h3 id="conduit-shard-disabled-event">Conduit Shard Disabled Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">conduit_id</code></td>
+      <td>String</td>
+      <td>The ID of the conduit.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">shard_id</code></td>
+      <td>String</td>
+      <td>The ID of the disabled shard.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td>The new status of the transport.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">transport</code></td>
+      <td>Object</td>
+      <td>The disabled transport.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">method</code></td>
+      <td>String</td>
+      <td><strong>websocket</strong> or <strong>webhook</strong></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">callback</code></td>
+      <td>String</td>
+      <td>Optional. Webhook callback URL. Null if <code class="highlighter-rouge">method</code> is set to <strong>websocket</strong>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">session_id</code></td>
+      <td>String</td>
+      <td>Optional. WebSocket session ID. Null if  <code class="highlighter-rouge">method</code> is set to <strong>webhook</strong>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">connected_at</code></td>
+      <td>String</td>
+      <td>Optional. Time that the WebSocket session connected. Null if <code class="highlighter-rouge">method</code> is set to <strong>webhook</strong>.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">disconnected_at</code></td>
+      <td>String</td>
+      <td>Optional. Time that the WebSocket session disconnected. Null if <code class="highlighter-rouge">method</code> is set to <strong>webhook</strong>.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="drop-entitlement-grant-event">Drop Entitlement Grant Event</h3>
 
 <table>
@@ -5164,7 +6766,7 @@
 	
 	<div><button id="doc-feedback" class="btn big">Provide feedback for this page</button></div>
 	
-</h1></section>
+</h1></h1></section>
 
 <script>
 	$(document).ready(function() {

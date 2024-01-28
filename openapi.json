@@ -38,6 +38,9 @@
       "name": "Clips"
     },
     {
+      "name": "Conduits"
+    },
+    {
       "name": "CCLs"
     },
     {
@@ -329,7 +332,7 @@
           {
             "name": "extension_id",
             "in": "query",
-            "description": "The extension’s client ID. If specified, the response contains a report for the specified extension. If not specified, the response includes a report for each extension that the authenticated user owns.",
+            "description": "The extension's client ID. If specified, the response contains a report for the specified extension. If not specified, the response includes a report for each extension that the authenticated user owns.",
             "schema": {
               "type": "string"
             }
@@ -348,7 +351,7 @@
           {
             "name": "started_at",
             "in": "query",
-            "description": "The reporting window’s start date, in RFC3339 format. Set the time portion to zeroes (for example, 2021-10-22T00:00:00Z).  \n  \nThe start date must be on or after January 31, 2018\\. If you specify an earlier date, the API ignores it and uses January 31, 2018\\. If you specify a start date, you must specify an end date. If you don’t specify a start and end date, the report includes all available data since January 31, 2018.  \n  \nThe report contains one row of data for each day in the reporting window.",
+            "description": "The reporting window's start date, in RFC3339 format. Set the time portion to zeroes (for example, 2021-10-22T00:00:00Z).  \n  \nThe start date must be on or after January 31, 2018\\. If you specify an earlier date, the API ignores it and uses January 31, 2018\\. If you specify a start date, you must specify an end date. If you don't specify a start and end date, the report includes all available data since January 31, 2018.  \n  \nThe report contains one row of data for each day in the reporting window.",
             "schema": {
               "type": "string",
               "format": "date-time"
@@ -357,7 +360,7 @@
           {
             "name": "ended_at",
             "in": "query",
-            "description": "The reporting window’s end date, in RFC3339 format. Set the time portion to zeroes (for example, 2021-10-27T00:00:00Z). The report is inclusive of the end date.  \n  \nSpecify an end date only if you provide a start date. Because it can take up to two days for the data to be available, you must specify an end date that’s earlier than today minus one to two days. If not, the API ignores your end date and uses an end date that is today minus one to two days.",
+            "description": "The reporting window's end date, in RFC3339 format. Set the time portion to zeroes (for example, 2021-10-27T00:00:00Z). The report is inclusive of the end date.  \n  \nSpecify an end date only if you provide a start date. Because it can take up to two days for the data to be available, you must specify an end date that's earlier than today minus one to two days. If not, the API ignores your end date and uses an end date that is today minus one to two days.",
             "schema": {
               "type": "string",
               "format": "date-time"
@@ -383,7 +386,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the broadcaster’s analytics reports.",
+            "description": "Successfully retrieved the broadcaster's analytics reports.",
             "content": {
               "application/json": {
                 "schema": {
@@ -3239,6 +3242,84 @@
         ]
       }
     },
+    "/chat/messages": {
+      "post": {
+        "summary": "NEW Sends a message to the broadcaster’s chat room.",
+        "description": "NEW Sends a message to the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the `user:write:chat` scope. If app access token used, then additionally requires `user:bot` scope from chatting user, and either `channel:bot` scope from broadcaster or moderator status.",
+        "tags": [
+          "Chat"
+        ],
+        "externalDocs": {
+          "description": "Send Chat Message",
+          "url": "https://dev.twitch.tv/docs/api/reference#send-chat-message"
+        },
+        "operationId": "send-chat-message",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendChatMessageBody"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "broadcaster_id": "12826",
+                    "sender_id": "141981764",
+                    "message": "Hello, world! twitchdevHype"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully sent the specified broadcaster a message.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SendChatMessageResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/chat/messages' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \\\n-H 'Content-Type: application/json' \\\n-d '{\n  \"broadcaster_id\": \"12826\",\n  \"sender_id\": \"141981764\",\n  \"message\": \"Hello, world! twitchdevHype\"\n}'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "message_id": "abc-123-def",
+                          "is_sent": true
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The ID in the _broadcaster\\_id_ query parameter is not valid.\n* The _sender\\_id_ query parameter is required.\n* The ID in the _sender\\_id_ query parameter is not valid.\n* The _text_ query parameter is required.\n* The ID in the _reply\\_parent\\_message\\_id_ query parameter is not valid."
+          },
+          "401": {
+            "description": "* The ID in the user\\_id query parameter must match the user ID in the access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the user:write:chat scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
+          },
+          "403": {
+            "description": "The sender is not permitted to send chat messages to the broadcaster’s chat room."
+          },
+          "422": {
+            "description": "The message is too large."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "user:write:chat",
+              "user:bot",
+              "channel:bot"
+            ]
+          }
+        ]
+      }
+    },
     "/chat/color": {
       "get": {
         "summary": "Gets the color used for the user’s name in chat.",
@@ -3335,7 +3416,7 @@
           {
             "name": "color",
             "in": "query",
-            "description": "The color to use for the user’s name in chat. All users may specify one of the following named color values.  \n  \n* blue\n* blue\\_violet\n* cadet\\_blue\n* chocolate\n* coral\n* dodger\\_blue\n* firebrick\n* golden\\_rod\n* green\n* hot\\_pink\n* orange\\_red\n* red\n* sea\\_green\n* spring\\_green\n* yellow\\_green\n  \nTurbo and Prime users may specify a named color or a Hex color code like #9146FF. If you use a Hex color code, remember to URL encode it.",
+            "description": "The color to use for the user's name in chat. All users may specify one of the following named color values.  \n  \n* blue\n* blue\\_violet\n* cadet\\_blue\n* chocolate\n* coral\n* dodger\\_blue\n* firebrick\n* golden\\_rod\n* green\n* hot\\_pink\n* orange\\_red\n* red\n* sea\\_green\n* spring\\_green\n* yellow\\_green\n  \nTurbo and Prime users may specify a named color or a Hex color code like #9146FF. If you use a Hex color code, remember to URL encode it.",
             "schema": {
               "type": "string",
               "enum": [
@@ -3361,7 +3442,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfully updated the user’s chat color.\n\n__Examples__\n\n_Request:_\n\nUses a named color to change the color that the user uses for their name in chat.\n\n```bash\ncurl -X PUT 'https://api.twitch.tv/helix/chat/color?user_id=123&color=blue' \\\n-H 'Authorization: Bearer kpvy3cjboyptmdkiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t'\n```\n\nUses a color Hex code to change the color that the user uses for their name in chat.\n\n```bash\ncurl -X PUT 'https://api.twitch.tv/helix/chat/color?user_id=123&color=%239146FF' \\\n-H 'Authorization: Bearer kpvy3cjboyptmdkiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t'\n```"
+            "description": "Successfully updated the user's chat color.\n\n__Examples__\n\n_Request:_\n\nUses a named color to change the color that the user uses for their name in chat.\n\n```bash\ncurl -X PUT 'https://api.twitch.tv/helix/chat/color?user_id=123&color=blue' \\\n-H 'Authorization: Bearer kpvy3cjboyptmdkiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t'\n```\n\nUses a color Hex code to change the color that the user uses for their name in chat.\n\n```bash\ncurl -X PUT 'https://api.twitch.tv/helix/chat/color?user_id=123&color=%239146FF' \\\n-H 'Authorization: Bearer kpvy3cjboyptmdkiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t'\n```"
           },
           "400": {
             "description": "* The ID in the _user\\_id_ query parameter is not valid.\n* The _color_ query parameter is required.\n* The named color in the _color_ query parameter is not valid.\n* To specify a Hex color code, the user must be a Turbo or Prime user."
@@ -3623,6 +3704,467 @@
           },
           "404": {
             "description": "* The ID in _game\\_id_ was not found."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
+      }
+    },
+    "/eventsub/conduits": {
+      "get": {
+        "summary": "NEW  Gets the conduits for a client ID.",
+        "description": "NEW Gets the [conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events) for a client ID.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).",
+        "tags": [
+          "Conduits"
+        ],
+        "externalDocs": {
+          "description": "Get Conduits",
+          "url": "https://dev.twitch.tv/docs/api/reference#get-conduits"
+        },
+        "operationId": "get-conduits",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved conduits.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConduitsResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/eventsub/conduits' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "26b1c993-bfcf-44d9-b876-379dacafe75a",
+                          "shard_count": 15
+                        },
+                        {
+                          "id": "bfcfc993-26b1-b876-44d9-afe75a379dac",
+                          "shard_count": 5
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization header required with an app access token."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "NEW Creates a new conduit.",
+        "description": "NEW Creates a new [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events).\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).",
+        "tags": [
+          "Conduits"
+        ],
+        "externalDocs": {
+          "description": "Create Conduits",
+          "url": "https://dev.twitch.tv/docs/api/reference#create-conduits"
+        },
+        "operationId": "create-conduits",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateConduitsBody"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "shard_count": 5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Conduit created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateConduitsResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/eventsub/conduits' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2' \\\n-d '{\"shard_count\": 5}'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "bfcfc993-26b1-b876-44d9-afe75a379dac",
+                          "shard_count": 5
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid shard count."
+          },
+          "401": {
+            "description": "Authorization header required with an app access token."
+          },
+          "429": {
+            "description": "Conduit limit reached."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
+      },
+      "patch": {
+        "summary": "NEW Updates a conduit’s shard count.",
+        "description": "NEW Updates a [conduit’s](https://dev.twitch.tv/docs/eventsub/handling-conduit-events) shard count. To delete shards, update the count to a lower number, and the shards above the count will be deleted. For example, if the existing shard count is 100, by resetting shard count to 50, shards 50-99 are disabled.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).",
+        "tags": [
+          "Conduits"
+        ],
+        "externalDocs": {
+          "description": "Update Conduits",
+          "url": "https://dev.twitch.tv/docs/api/reference#update-conduits"
+        },
+        "operationId": "update-conduits",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConduitsBody"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "id": "bfcfc993-26b1-b876-44d9-afe75a379dac",
+                    "shard_count": 5
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Conduit updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateConduitsResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -X PATCH 'https://api.twitch.tv/helix/eventsub/conduits' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2' \\\n-d '{\n  \"id\":\"bfcfc993-26b1-b876-44d9-afe75a379dac\",\n  \"shard_count\":5\n}'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "bfcfc993-26b1-b876-44d9-afe75a379dac",
+                          "shard_count": 5
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "* Invalid shard count\n* The id query parameter is required."
+          },
+          "401": {
+            "description": "Authorization header required with an app access token."
+          },
+          "404": {
+            "description": "* Conduit not found.\n* Conduit’s owner must match the client ID in the access token."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "NEW Deletes a specified conduit.",
+        "description": "NEW Deletes a specified [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/). Note that it may take some time for Eventsub subscriptions on a deleted [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events) to show as disabled when calling [Get Eventsub Subscriptions](https://dev.twitch.tv/docs/api/reference/#get-eventsub-subscriptions).\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).",
+        "tags": [
+          "Conduits"
+        ],
+        "externalDocs": {
+          "description": "Delete Conduit",
+          "url": "https://dev.twitch.tv/docs/api/reference#delete-conduit"
+        },
+        "operationId": "delete-conduit",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Conduit ID.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the conduit.\n\n__Examples__\n\n_Request:_\n\n```bash\ncurl -X DELETE 'https://api.twitch.tv/helix/eventsub/conduits' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2' \\\n-d '{\"id\":\"bfcfc993-26b1-b876-44d9-afe75a379dac\"}'\n```"
+          },
+          "400": {
+            "description": "The id query parameter is required."
+          },
+          "401": {
+            "description": "Authorization header required with an app access token."
+          },
+          "404": {
+            "description": "* Conduit not found.\n* Conduit’s owner must match the client ID in the access token."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
+      }
+    },
+    "/eventsub/conduits/shards": {
+      "get": {
+        "summary": "NEW Gets a lists of all shards for a conduit.",
+        "description": "NEW Gets a lists of all shards for a [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events).\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).",
+        "tags": [
+          "Conduits"
+        ],
+        "externalDocs": {
+          "description": "Get Conduit Shards",
+          "url": "https://dev.twitch.tv/docs/api/reference#get-conduit-shards"
+        },
+        "operationId": "get-conduit-shards",
+        "parameters": [
+          {
+            "name": "conduit_id",
+            "in": "query",
+            "description": "Conduit ID.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Status to filter by.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "The cursor used to get the next page of results. The pagination object in the response contains the cursor’s value.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved shards.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConduitShardsResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/eventsub/conduits/shards?id=bfcfc993-26b1-b876-44d9-afe75a379dac' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "0",
+                          "status": "enabled",
+                          "transport": {
+                            "method": "webhook",
+                            "callback": "https://this-is-a-callback.com"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "status": "webhook_callback_verification_pending",
+                          "transport": {
+                            "method": "webhook",
+                            "callback": "https://this-is-a-callback-2.com"
+                          }
+                        },
+                        {
+                          "id": "2",
+                          "status": "enabled",
+                          "transport": {
+                            "method": "websocket",
+                            "session_id": "9fd5164a-a958-4c60-b7f4-6a7202506ca0",
+                            "connected_at": "2020-11-10T14:32:18.730260295Z"
+                          }
+                        },
+                        {
+                          "id": "3",
+                          "status": "enabled",
+                          "transport": {
+                            "method": "websocket",
+                            "session_id": "238b4b08-13f1-4b8f-8d31-56665a7a9d9f",
+                            "connected_at": "2020-11-10T14:32:18.730260295Z"
+                          }
+                        },
+                        {
+                          "id": "4",
+                          "status": "websocket_disconnected",
+                          "transport": {
+                            "method": "websocket",
+                            "session_id": "ad1c9fc3-0d99-4eb7-8a04-8608e8ff9ec9",
+                            "connected_at": "2020-11-10T14:32:18.730260295Z",
+                            "disconnected_at": "2020-11-11T14:32:18.730260295Z"
+                          }
+                        }
+                      ],
+                      "pagination": {}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The id query parameter is required."
+          },
+          "401": {
+            "description": "Authorization header required with an app access token."
+          },
+          "404": {
+            "description": "* Conduit not found.\n* Conduit’s owner must match the client ID in the access token."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
+      },
+      "patch": {
+        "summary": "NEW Updates shard(s) for a conduit.",
+        "description": "NEW Updates shard(s) for a [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events).\n\n**NOTE:** Shard IDs are indexed starting at 0, so a conduit with a `shard_count` of 5 will have shards with IDs 0 through 4.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).",
+        "tags": [
+          "Conduits"
+        ],
+        "externalDocs": {
+          "description": "Update Conduit Shards",
+          "url": "https://dev.twitch.tv/docs/api/reference#update-conduit-shards"
+        },
+        "operationId": "update-conduit-shards",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConduitShardsBody"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "conduit_id": "bfcfc993-26b1-b876-44d9-afe75a379dac",
+                    "shards": [
+                      {
+                        "id": "0",
+                        "transport": {
+                          "method": "webhook",
+                          "callback": "https://this-is-a-callback.com",
+                          "secret": "s3cre7"
+                        }
+                      },
+                      {
+                        "id": "1",
+                        "transport": {
+                          "method": "webhook",
+                          "callback": "https://this-is-a-callback-2.com",
+                          "secret": "s3cre7"
+                        }
+                      },
+                      {
+                        "id": "3",
+                        "transport": {
+                          "method": "webhook",
+                          "callback": "https://this-is-a-callback-3.com",
+                          "secret": "s3cre7"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Successfully retrieved shards.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateConduitShardsResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -X PATCH 'https://api.twitch.tv/helix/eventsub/conduits/shards' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2' \\\n-d '{\n  \"conduit_id\":\"bfcfc993-26b1-b876-44d9-afe75a379dac\",\n  \"shards\": [{\n    \"id\":\"0\",\n    \"transport\":{\n        \"method\":\"webhook\",\n        \"callback\":\"https://this-is-a-callback.com\",\n        \"secret\":\"s3cre7\"\n    }\n  },\n  {\n    \"id\":\"1\",\n    \"transport\":{\n        \"method\":\"webhook\",\n        \"callback\":\"https://this-is-a-callback-2.com\",\n        \"secret\":\"s3cre7\"\n    }\n  },\n  {\n    \"id\":\"3\",\n    \"transport\":{\n        \"method\":\"webhook\",\n        \"callback\":\"https://this-is-a-callback-3.com\",\n        \"secret\":\"s3cre7\"\n    }\n  }]\n}'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "0",
+                          "status": "enabled",
+                          "transport": {
+                            "method": "webhook",
+                            "callback": "https://this-is-a-callback.com"
+                          }
+                        },
+                        {
+                          "id": "1",
+                          "status": "webhook_callback_verification_pending",
+                          "transport": {
+                            "method": "webhook",
+                            "callback": "https://this-is-a-callback-2.com"
+                          }
+                        }
+                      ],
+                      "errors": [
+                        {
+                          "id": "3",
+                          "message": "The shard id is outside the conduit's range",
+                          "code": "invalid_parameter"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The id query parameter is required."
+          },
+          "401": {
+            "description": "Authorization header required with an app access token."
+          },
+          "404": {
+            "description": "* Conduit not found.\n* Conduit’s owner must match the client ID in the access token."
           }
         },
         "security": [
@@ -4862,7 +5404,7 @@
             }
           },
           "400": {
-            "description": "* The `sku` field is required.\n* The value in the `sku` field is not valid. The SKU may contain only alphanumeric characters, dashes (-), underscores (\\_), and periods (.).\n* The `cost` object's `amount` field is required.\n* The value in the `cost` object's `amount` field is not valid.\n* The cost object's `type` field is required.\n* The value in the `cost` object's `type` field is not valid.\n* The `display_name` field is required.\n* The ID in the Client-Id header must belong to the extension."
+            "description": "* The `sku` field is required.\n* The value in the `sku` field is not valid. The SKU may contain only alphanumeric characters, dashes (-), underscores (\\_), and periods (.).\n* The `cost` object's `amount` field is required.\n* The value in the `cost` object's `amount` field is not valid.\n* The `cost` object's `type` field is required.\n* The value in the `cost` object's `type` field is not valid.\n* The `display_name` field is required.\n* The ID in the Client-Id header must belong to the extension."
           },
           "401": {
             "description": "* The Authorization header is required and must specify an app access token; you may not specify a user access token.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
@@ -4878,7 +5420,7 @@
     "/eventsub/subscriptions": {
       "post": {
         "summary": "Creates an EventSub subscription.",
-        "description": "Creates an EventSub subscription.\n\n__Authorization:__\n\nIf you use [webhooks to receive events](https://dev.twitch.tv/docs/eventsub/handling-webhook-events), the request must specify an app access token. The request will fail if you use a user access token. If the subscription type requires user authorization, the user must have granted your app (client ID) permissions to receive those events before you subscribe to them. For example, to subscribe to [channel.subscribe](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscribe) events, your app must get a user access token that includes the `channel:read:subscriptions` scope, which adds the required permission to your app access token’s client ID.\n\nIf you use [WebSockets to receive events](https://dev.twitch.tv/docs/eventsub/handling-websocket-events), the request must specify a user access token. The request will fail if you use an app access token. If the subscription type requires user authorization, the token must include the required scope. However, if the subscription type doesn’t include user authorization, the token may include any scopes or no scopes.",
+        "description": "Creates an EventSub subscription.\n\n__Authorization:__\n\nIf you use [webhooks to receive events](https://dev.twitch.tv/docs/eventsub/handling-webhook-events), the request must specify an app access token. The request will fail if you use a user access token. If the subscription type requires user authorization, the user must have granted your app (client ID) permissions to receive those events before you subscribe to them. For example, to subscribe to [channel.subscribe](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscribe) events, your app must get a user access token that includes the `channel:read:subscriptions` scope, which adds the required permission to your app access token’s client ID.\n\nIf you use [WebSockets to receive events](https://dev.twitch.tv/docs/eventsub/handling-websocket-events), the request must specify a user access token. The request will fail if you use an app access token. If the subscription type requires user authorization, the token must include the required scope. However, if the subscription type doesn’t include user authorization, the token may include any scopes or no scopes.\n\nIf you use [Conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events) to receive events, the request must specify an app access token. The request will fail if you use a user access token.",
         "tags": [
           "EventSub"
         ],
@@ -4894,7 +5436,7 @@
                 "$ref": "#/components/schemas/CreateEventSubSubscriptionBody"
               },
               "examples": {
-                "Example": {
+                "Example 1": {
                   "value": {
                     "type": "user.update",
                     "version": "1",
@@ -4907,7 +5449,21 @@
                       "secret": "s3cre7"
                     }
                   },
-                  "description": "Adds a user.update subscription."
+                  "description": "For a **webhook** `method` type. Adds a user.update subscription."
+                },
+                "Example 2": {
+                  "value": {
+                    "type": "user.update",
+                    "version": "1",
+                    "condition": {
+                      "user_id": "1234"
+                    },
+                    "transport": {
+                      "method": "websocket",
+                      "session_id": "AQoQexAWVYKSTIu4ec_2VAxyuhAB"
+                    }
+                  },
+                  "description": "For a **websocket** `method` type."
                 }
               }
             }
@@ -4922,8 +5478,8 @@
                   "$ref": "#/components/schemas/CreateEventSubSubscriptionResponse"
                 },
                 "examples": {
-                  "Example": {
-                    "description": "_Request:_\n\nAdds a user.update subscription.\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/eventsub/subscriptions' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \\\n-H 'Content-Type: application/json' \\\n-d '{\"type\":\"user.update\",\"version\":\"1\",\"condition\":{\"user_id\":\"1234\"},\"transport\":{\"method\":\"webhook\",\"callback\":\"https://this-is-a-callback.com\",\"secret\":\"s3cre7\"}}'\n```\n\n```bash\n# Twitch CLI example that adds a user.update subscription.\n\ntwitch api post /eventsub/subscriptions -b '{\"type\":\"user.update\",\"version\":\"1\",\"condition\":{\"user_id\":\"1234\"},\"transport\":{\"method\":\"webhook\",\"callback\":\"https://this-is-a-callback.com\",\"secret\":\"s3cre7\"}}'\n```",
+                  "Example 1": {
+                    "description": "_Request:_\n\nFor a **webhook** `method` type. Adds a user.update subscription.\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/eventsub/subscriptions' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \\\n-H 'Content-Type: application/json' \\\n-d '{\"type\":\"user.update\",\"version\":\"1\",\"condition\":{\"user_id\":\"1234\"},\"transport\":{\"method\":\"webhook\",\"callback\":\"https://this-is-a-callback.com\",\"secret\":\"s3cre7\"}}'\n```\n\n```bash\n# Twitch CLI example that adds a user.update subscription.\n\ntwitch api post /eventsub/subscriptions -b '{\"type\":\"user.update\",\"version\":\"1\",\"condition\":{\"user_id\":\"1234\"},\"transport\":{\"method\":\"webhook\",\"callback\":\"https://this-is-a-callback.com\",\"secret\":\"s3cre7\"}}'Example Response - Webhook\n```\n\n```text\n\n```",
                     "value": {
                       "data": [
                         {
@@ -4946,25 +5502,75 @@
                       "total_cost": 1,
                       "max_total_cost": 10000
                     }
+                  },
+                  "Example 2": {
+                    "description": "_Request:_\n\nFor a **websocket** `method` type.\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/eventsub/subscriptions' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \\\n-H 'Content-Type: application/json' \\\n-d '{\n    \"type\": \"user.update\",\n    \"version\": \"1\",\n    \"condition\": {\n        \"user_id\": \"1234\"\n    },\n    \"transport\": {\n        \"method\": \"websocket\",\n        \"session_id\": \"AQoQexAWVYKSTIu4ec_2VAxyuhAB\"\n    }\n}'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "26b1c993-bfcf-44d9-b876-379dacafe75a",
+                          "status": "webhook_callback_verification_pending",
+                          "type": "user.update",
+                          "version": "1",
+                          "condition": {
+                            "user_id": "1234"
+                          },
+                          "created_at": "2020-11-10T14:32:18.730260295Z",
+                          "transport": {
+                            "method": "webhook",
+                            "callback": "https://this-is-a-callback.com"
+                          },
+                          "cost": 1
+                        }
+                      ],
+                      "total": 1,
+                      "total_cost": 1,
+                      "max_total_cost": 10000
+                    }
+                  },
+                  "Example 3": {
+                    "description": "_Request:_\n\nFor a **conduit** `method` type.\n\n```text\nExample RequestExample Requestcurl -X POST 'https://api.twitch.tv/helix/eventsub/subscriptions' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \\\n-H 'Content-Type: application/json' \\\n-d '{\n    \"type\":\"user.update\",\n    \"version\":\"1\",\n    \"condition\":{\n        \"user_id\":\"1234\"\n    },\n    \"transport\":{\n        \"method\":\"conduit\",\n        \"conduit_id\":\"bfcfc993-26b1-b876-44d9-afe75a379dac\"\n    }\n}'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "26b1c993-bfcf-44d9-b876-379dacafe75a",
+                          "status": "enabled",
+                          "type": "user.update",
+                          "version": "1",
+                          "condition": {
+                            "user_id": "1234"
+                          },
+                          "created_at": "2020-11-10T14:32:18.730260295Z",
+                          "transport": {
+                            "method": "conduit",
+                            "conduit_id": "bfcfc993-26b1-b876-44d9-afe75a379dac"
+                          },
+                          "cost": 1
+                        }
+                      ],
+                      "total": 1,
+                      "total_cost": 1,
+                      "max_total_cost": 10000
+                    }
                   }
                 }
               }
             }
           },
           "400": {
-            "description": "* The `condition` field is required.\n* The user specified in the `condition` object does not exist.\n* The `condition` object is missing one or more required fields.\n* The combination of values in the `version` and `type` fields is not valid.\n* The length of the string in the `secret` field is not valid.\n* The URL in the transport's `callback` field is not valid. The URL must use the HTTPS protocol and the 443 port number.\n* The value specified in the `method` field is not valid.\n* The `callback` field is required if you specify the webhook transport method.\n* The `session_id` field is required if you specify the WebSocket transport method.\n* The combination of subscription type and version is not valid."
+            "description": "* The `condition` field is required.\n* The user specified in the `condition` object does not exist.\n* The `condition` object is missing one or more required fields.\n* The combination of values in the `version` and `type` fields is not valid.\n* The length of the string in the `secret` field is not valid.\n* The URL in the transport's `callback` field is not valid. The URL must use the HTTPS protocol and the 443 port number.\n* The value specified in the `method` field is not valid.\n* The `callback` field is required if you specify the webhook transport method.\n* The `session_id` field is required if you specify the WebSocket transport method.\n* The combination of subscription type and version is not valid.\n* The `conduit_id` field is required if you specify the Conduit transport method."
           },
           "401": {
             "description": "* The Authorization header is required and must specify an app access token if the transport method is webhook.\n* The Authorization header is required and must specify a user access token if the transport method is WebSocket.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
           },
           "403": {
-            "description": "* The access token is missing the required scopes."
+            "description": "The access token is missing the required scopes."
           },
           "409": {
-            "description": "* A subscription already exists for the specified event type and condition combination."
+            "description": "A subscription already exists for the specified event type and `condition` combination."
           },
           "429": {
-            "description": "* The request exceeds the number of subscriptions that you may create with the same combination of `type` and `condition` values."
+            "description": "The request exceeds the number of subscriptions that you may create with the same combination of `type` and `condition` values."
           }
         },
         "security": [
@@ -5032,7 +5638,7 @@
           {
             "name": "status",
             "in": "query",
-            "description": "Filter subscriptions by its status. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* moderator\\_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscription to subscription type and version is no longer supported.\n* beta\\_maintenance — The subscription to the beta subscription type was removed due to maintenance.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_connection\\_unused — The client failed to subscribe to events within the required time.\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.",
+            "description": "Filter subscriptions by its status. Possible values are:  \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* moderator\\_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscription to subscription type and version is no longer supported.\n* beta\\_maintenance — The subscription to the beta subscription type was removed due to maintenance.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_connection\\_unused — The client failed to subscribe to events within the required time.\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.",
             "schema": {
               "type": "string",
               "enum": [
@@ -5067,6 +5673,7 @@
                 "channel.ad_break.begin",
                 "channel.chat.clear",
                 "channel.chat.clear_user_messages",
+                "channel.chat.message",
                 "channel.chat.message_delete",
                 "channel.chat.notification",
                 "channel.chat_settings.update",
@@ -5100,6 +5707,7 @@
                 "channel.charity_campaign.start",
                 "channel.charity_campaign.progress",
                 "channel.charity_campaign.stop",
+                "conduit.shard.disabled",
                 "drop.entitlement.grant",
                 "extension.bits_transaction.create",
                 "channel.goal.begin",
@@ -5131,7 +5739,7 @@
           {
             "name": "after",
             "in": "query",
-            "description": "The cursor used to get the next page of results. The `pagination` object in the response contains the cursor’s value.",
+            "description": "The cursor used to get the next page of results. The `pagination` object in the response contains the cursor's value.",
             "schema": {
               "type": "string"
             }
@@ -14080,6 +14688,82 @@
           }
         }
       },
+      "SendChatMessageBody": {
+        "type": "object",
+        "required": [
+          "broadcaster_id",
+          "sender_id",
+          "message"
+        ],
+        "properties": {
+          "broadcaster_id": {
+            "type": "string",
+            "description": "The ID of the broadcaster whose chat room the message will be sent to."
+          },
+          "sender_id": {
+            "type": "string",
+            "description": "The ID of the user sending the message. This ID must match the user ID in the user access token."
+          },
+          "message": {
+            "type": "string",
+            "description": "The message to send. The message is limited to a maximum of 500 characters. Chat messages can also include emoticons. To include emoticons, use the name of the emote. The names are case sensitive. Don’t include colons around the name (e.g., :bleedPurple:). If Twitch recognizes the name, Twitch converts the name to the emote before writing the chat message to the chat room"
+          },
+          "reply_parent_message_id": {
+            "type": "string",
+            "description": "The ID of the chat message being replied to."
+          }
+        }
+      },
+      "SendChatMessageResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "type": "object",
+              "required": [
+                "message_id",
+                "is_sent"
+              ],
+              "properties": {
+                "message_id": {
+                  "type": "string",
+                  "description": "The message id for the message that was sent."
+                },
+                "is_sent": {
+                  "type": "boolean",
+                  "description": "If the message passed all checks and was sent."
+                },
+                "drop_reason": {
+                  "type": "array",
+                  "description": "The reason the message was dropped, if any.",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "code",
+                      "message"
+                    ],
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "description": "Code for why the message was dropped."
+                      },
+                      "message": {
+                        "type": "string",
+                        "description": "Message for why the message was dropped."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "UserChatColor": {
         "type": "object",
         "required": [
@@ -14268,6 +14952,374 @@
               "cursor": {
                 "type": "string",
                 "description": "The cursor used to get the next page of results. Set the request’s _after_ or _before_ query parameter to this value depending on whether you’re paging forwards or backwards."
+              }
+            }
+          }
+        }
+      },
+      "GetConduitsResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "List of information about the client’s conduits.",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "shard_count"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Conduit ID."
+                },
+                "shard_count": {
+                  "type": "integer",
+                  "description": "Number of shards associated with this conduit.",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "CreateConduitsBody": {
+        "type": "object",
+        "required": [
+          "shard_count"
+        ],
+        "properties": {
+          "shard_count": {
+            "type": "integer",
+            "description": "The number of shards to create for this conduit.",
+            "format": "int32"
+          }
+        }
+      },
+      "CreateConduitsResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "List of information about the client’s conduits.",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "shard_count"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Conduit ID."
+                },
+                "shard_count": {
+                  "type": "integer",
+                  "description": "Number of shards created for this conduit.",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "UpdateConduitsBody": {
+        "type": "object",
+        "required": [
+          "id",
+          "shard_count"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Conduit ID."
+          },
+          "shard_count": {
+            "type": "integer",
+            "description": "The new number of shards for this conduit.",
+            "format": "int32"
+          }
+        }
+      },
+      "UpdateConduitsResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "List of information about the client’s conduits.",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "shard_count"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Conduit ID."
+                },
+                "shard_count": {
+                  "type": "integer",
+                  "description": "Number of shards associated with this conduit after the update.",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetConduitShardsResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "List of information about a conduit's shards.",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "status",
+                "transport"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Shard ID."
+                },
+                "status": {
+                  "type": "string",
+                  "description": "The shard status. The subscriber receives events only for enabled shards. Possible values are:  \n  \n* enabled — The shard is enabled.\n* webhook\\_callback\\_verification\\_pending — The shard is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.",
+                  "enum": [
+                    "enabled",
+                    "webhook_callback_verification_pending",
+                    "webhook_callback_verification_failed",
+                    "notification_failures_exceeded",
+                    "websocket_disconnected",
+                    "websocket_failed_ping_pong",
+                    "websocket_received_inbound_traffic",
+                    "websocket_internal_error",
+                    "websocket_network_timeout",
+                    "websocket_network_error"
+                  ]
+                },
+                "transport": {
+                  "description": "The transport details used to send the notifications.",
+                  "type": "object",
+                  "required": [
+                    "method"
+                  ],
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "description": "The transport method. Possible values are:  \n  \n* webhook\n* websocket",
+                      "enum": [
+                        "webhook",
+                        "websocket"
+                      ]
+                    },
+                    "callback": {
+                      "type": "string",
+                      "description": "The callback URL where the notifications are sent. Included only if method is set to webhook."
+                    },
+                    "session_id": {
+                      "type": "string",
+                      "description": "An ID that identifies the WebSocket that notifications are sent to. Included only if method is set to websocket."
+                    },
+                    "connected_at": {
+                      "type": "string",
+                      "description": "The UTC date and time that the WebSocket connection was established. Included only if method is set to websocket.",
+                      "format": "date-time"
+                    },
+                    "disconnected_at": {
+                      "type": "string",
+                      "description": "The UTC date and time that the WebSocket connection was lost. Included only if method is set to websocket.",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "pagination": {
+            "description": "Contains information used to page through a list of results. The object is empty if there are no more pages left to page through.",
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "description": "The cursor used to get the next page of results. Use the cursor to set the request’s after query parameter."
+              }
+            }
+          }
+        }
+      },
+      "UpdateConduitShardsBody": {
+        "type": "object",
+        "required": [
+          "conduit_id",
+          "shards"
+        ],
+        "properties": {
+          "conduit_id": {
+            "type": "string",
+            "description": "Conduit ID."
+          },
+          "shards": {
+            "type": "array",
+            "description": "List of shards to update.",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "transport"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Shard ID."
+                },
+                "transport": {
+                  "description": "The transport details that you want Twitch to use when sending you notifications.",
+                  "type": "object",
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "description": "The transport method. Possible values are:  \n  \n* webhook\n* websocket",
+                      "enum": [
+                        "webhook",
+                        "websocket"
+                      ]
+                    },
+                    "callback": {
+                      "type": "string",
+                      "description": "The callback URL where the notifications are sent. The URL must use the HTTPS protocol and port 443\\. See Processing an event.Specify this field only if method is set to webhook.NOTE: Redirects are not followed."
+                    },
+                    "secret": {
+                      "type": "string",
+                      "description": "The secret used to verify the signature. The secret must be an ASCII string that’s a minimum of 10 characters long and a maximum of 100 characters long. For information about how the secret is used, see Verifying the event message.Specify this field only if method is set to webhook."
+                    },
+                    "session_id": {
+                      "type": "string",
+                      "description": "An ID that identifies the WebSocket to send notifications to. When you connect to EventSub using WebSockets, the server returns the ID in the Welcome message.Specify this field only if method is set to websocket."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "UpdateConduitShardsResponse": {
+        "type": "object",
+        "required": [
+          "data",
+          "errors"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "List of successful shard updates.",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "status",
+                "transport"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Shard ID."
+                },
+                "status": {
+                  "type": "string",
+                  "description": "The shard status. The subscriber receives events only for enabled shards. Possible values are:  \n  \n* enabled — The shard is enabled.\n* webhook\\_callback\\_verification\\_pending — The shard is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.",
+                  "enum": [
+                    "enabled",
+                    "webhook_callback_verification_pending",
+                    "webhook_callback_verification_failed",
+                    "notification_failures_exceeded",
+                    "websocket_disconnected",
+                    "websocket_failed_ping_pong",
+                    "websocket_received_inbound_traffic",
+                    "websocket_internal_error",
+                    "websocket_network_timeout",
+                    "websocket_network_error"
+                  ]
+                },
+                "transport": {
+                  "description": "The transport details used to send the notifications.",
+                  "type": "object",
+                  "required": [
+                    "method"
+                  ],
+                  "properties": {
+                    "method": {
+                      "type": "string",
+                      "description": "The transport method. Possible values are:  \n  \n* webhook\n* websocket",
+                      "enum": [
+                        "webhook",
+                        "websocket"
+                      ]
+                    },
+                    "callback": {
+                      "type": "string",
+                      "description": "The callback URL where the notifications are sent. Included only if method is set to webhook."
+                    },
+                    "session_id": {
+                      "type": "string",
+                      "description": "An ID that identifies the WebSocket that notifications are sent to. Included only if method is set to websocket."
+                    },
+                    "connected_at": {
+                      "type": "string",
+                      "description": "The UTC date and time that the WebSocket connection was established. Included only if method is set to websocket.",
+                      "format": "date-time"
+                    },
+                    "disconnected_at": {
+                      "type": "string",
+                      "description": "The UTC date and time that the WebSocket connection was lost. Included only if method is set to websocket.",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "errors": {
+            "type": "array",
+            "description": "List of unsuccessful updates.",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "message",
+                "code"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Shard ID."
+                },
+                "message": {
+                  "type": "string",
+                  "description": "The error that occurred while updating the shard. Possible errors:  \n  \n* The length of the string in the secret field is not valid.\n* The URL in the transport's callback field is not valid. The URL must use the HTTPS protocol and the 443 port number.\n* The value specified in the method field is not valid.\n* The callback field is required if you specify the webhook transport method.\n* The session\\_id field is required if you specify the WebSocket transport method.\n* The websocket session is not connected.\n* The shard id is outside of the conduit’s range."
+                },
+                "code": {
+                  "type": "string",
+                  "description": "Error codes used to represent a specific error condition while attempting to update shards."
+                }
               }
             }
           }
@@ -15063,10 +16115,10 @@
         "properties": {
           "sku": {
             "type": "string",
-            "description": "The product’s SKU. The SKU is unique across an extension’s products."
+            "description": "The product's SKU. The SKU is unique across an extension's products."
           },
           "cost": {
-            "description": "An object that contains the product’s cost information.",
+            "description": "An object that contains the product's cost information.",
             "type": "object",
             "required": [
               "amount",
@@ -15075,7 +16127,7 @@
             "properties": {
               "amount": {
                 "type": "integer",
-                "description": "The product’s price.",
+                "description": "The product's price.",
                 "format": "int32"
               },
               "type": {
@@ -15093,7 +16145,7 @@
           },
           "display_name": {
             "type": "string",
-            "description": "The product’s name as displayed in the extension."
+            "description": "The product's name as displayed in the extension."
           },
           "expiration": {
             "type": "string",
@@ -15131,10 +16183,10 @@
         "properties": {
           "sku": {
             "type": "string",
-            "description": "The product’s SKU. The SKU must be unique within an extension. The product’s SKU cannot be changed. The SKU may contain only alphanumeric characters, dashes (-), underscores (\\_), and periods (.) and is limited to a maximum of 255 characters. No spaces."
+            "description": "The product's SKU. The SKU must be unique within an extension. The product's SKU cannot be changed. The SKU may contain only alphanumeric characters, dashes (-), underscores (\\_), and periods (.) and is limited to a maximum of 255 characters. No spaces."
           },
           "cost": {
-            "description": "An object that contains the product’s cost information.",
+            "description": "An object that contains the product's cost information.",
             "type": "object",
             "required": [
               "amount",
@@ -15143,7 +16195,7 @@
             "properties": {
               "amount": {
                 "type": "integer",
-                "description": "The product’s price.",
+                "description": "The product's price.",
                 "format": "int32"
               },
               "type": {
@@ -15157,7 +16209,7 @@
           },
           "display_name": {
             "type": "string",
-            "description": "The product’s name as displayed in the extension. The maximum length is 255 characters."
+            "description": "The product's name as displayed in the extension. The maximum length is 255 characters."
           },
           "in_development": {
             "type": "boolean",
@@ -15182,7 +16234,7 @@
         "properties": {
           "data": {
             "type": "array",
-            "description": "A list of Bits products that the extension created. The list is in ascending SKU order. The list is empty if the extension hasn’t created any products or they’re all expired or disabled.",
+            "description": "A list of Bits products that the extension created. The list is in ascending SKU order. The list is empty if the extension hasn't created any products or they're all expired or disabled.",
             "items": {
               "$ref": "#/components/schemas/ExtensionBitsProduct"
             }
@@ -15207,6 +16259,7 @@
               "channel.ad_break.begin",
               "channel.chat.clear",
               "channel.chat.clear_user_messages",
+              "channel.chat.message",
               "channel.chat.message_delete",
               "channel.chat.notification",
               "channel.chat_settings.update",
@@ -15240,6 +16293,7 @@
               "channel.charity_campaign.start",
               "channel.charity_campaign.progress",
               "channel.charity_campaign.stop",
+              "conduit.shard.disabled",
               "drop.entitlement.grant",
               "extension.bits_transaction.create",
               "channel.goal.begin",
@@ -15276,23 +16330,28 @@
             "properties": {
               "method": {
                 "type": "string",
-                "description": "The transport method. Possible values are:  \n  \n* webhook\n* websocket",
+                "description": "The transport method. Possible values are:  \n  \n* webhook\n* websocket\n* conduit",
                 "enum": [
                   "webhook",
-                  "websocket"
+                  "websocket",
+                  "conduit"
                 ]
               },
               "callback": {
                 "type": "string",
-                "description": "The callback URL where the notifications are sent. The URL must use the HTTPS protocol and port 443\\. See [Processing an event](https://dev.twitch.tv/docs/eventsub/handling-webhook-events#processing-an-event).  \n  \nSpecify this field only if `method` is set to **webhook**.  \n  \n**NOTE**: Redirects are not followed."
+                "description": "The callback URL where the notifications are sent. The URL must use the HTTPS protocol and port 443\\. See [Processing an event](https://dev.twitch.tv/docs/eventsub/handling-webhook-events#processing-an-event). Specify this field only if `method` is set to **webhook**.\n\n**NOTE**: Redirects are not followed."
               },
               "secret": {
                 "type": "string",
-                "description": "The secret used to verify the signature. The secret must be an ASCII string that’s a minimum of 10 characters long and a maximum of 100 characters long. For information about how the secret is used, see [Verifying the event message](https://dev.twitch.tv/docs/eventsub/handling-webhook-events#verifying-the-event-message).  \n  \nSpecify this field only if `method` is set to **webhook**."
+                "description": "The secret used to verify the signature. The secret must be an ASCII string that’s a minimum of 10 characters long and a maximum of 100 characters long. For information about how the secret is used, see [Verifying the event message](https://dev.twitch.tv/docs/eventsub/handling-webhook-events#verifying-the-event-message). Specify this field only if `method` is set to **webhook**."
               },
               "session_id": {
                 "type": "string",
-                "description": "An ID that identifies the WebSocket to send notifications to. When you connect to EventSub using WebSockets, the server returns the ID in the [Welcome message](https://dev.twitch.tv/docs/eventsub/handling-websocket-events#welcome-message).  \n  \nSpecify this field only if `method` is set to **websocket**."
+                "description": "An ID that identifies the WebSocket to send notifications to. When you connect to EventSub using WebSockets, the server returns the ID in the Welcome message. Specify this field only if `method` is set to **websocket**."
+              },
+              "conduit_id": {
+                "type": "string",
+                "description": "An ID that identifies the conduit to send notifications to. When you create a conduit, the server returns the conduit ID. Specify this field only if `method` is set to **conduit**."
               }
             }
           }
@@ -15317,7 +16376,7 @@
           },
           "status": {
             "type": "string",
-            "description": "The subscription’s status. The subscriber receives events only for **enabled** subscriptions. Possible values are:   \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* moderator\\_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscription to subscription type and version is no longer supported.\n* beta\\_maintenance — The subscription to the beta subscription type was removed due to maintenance.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_connection\\_unused — The client failed to subscribe to events within the required time.\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.",
+            "description": "The subscription's status. The subscriber receives events only for **enabled** subscriptions. Possible values are:  \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* moderator\\_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* version\\_removed — The subscription to subscription type and version is no longer supported.\n* beta\\_maintenance — The subscription to the beta subscription type was removed due to maintenance.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_connection\\_unused — The client failed to subscribe to events within the required time.\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.",
             "enum": [
               "enabled",
               "webhook_callback_verification_pending",
@@ -15339,13 +16398,14 @@
           },
           "type": {
             "type": "string",
-            "description": "The subscription’s type. See [Subscription Types](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#subscription-types).",
+            "description": "The subscription's type. See [Subscription Types](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#subscription-types).",
             "enum": [
               "channel.update",
               "channel.follow",
               "channel.ad_break.begin",
               "channel.chat.clear",
               "channel.chat.clear_user_messages",
+              "channel.chat.message",
               "channel.chat.message_delete",
               "channel.chat.notification",
               "channel.chat_settings.update",
@@ -15379,6 +16439,7 @@
               "channel.charity_campaign.start",
               "channel.charity_campaign.progress",
               "channel.charity_campaign.stop",
+              "conduit.shard.disabled",
               "drop.entitlement.grant",
               "extension.bits_transaction.create",
               "channel.goal.begin",
@@ -15400,11 +16461,11 @@
           },
           "version": {
             "type": "string",
-            "description": "The version number that identifies this definition of the subscription’s data."
+            "description": "The version number that identifies this definition of the subscription's data."
           },
           "condition": {
             "type": "object",
-            "description": "The subscription’s parameter values. This is a string-encoded JSON object whose contents are determined by the subscription type."
+            "description": "The subscription's parameter values. This is a string-encoded JSON object whose contents are determined by the subscription type."
           },
           "created_at": {
             "type": "string",
@@ -15420,7 +16481,7 @@
             "properties": {
               "method": {
                 "type": "string",
-                "description": "The transport method. Possible values are:   \n  \n* webhook\n* websocket",
+                "description": "The transport method. Possible values are:  \n  \n* webhook\n* websocket",
                 "enum": [
                   "webhook",
                   "websocket"
@@ -15497,14 +16558,14 @@
         "properties": {
           "data": {
             "type": "array",
-            "description": "The list of subscriptions. The list is ordered by the oldest subscription first. The list is empty if the client hasn’t created subscriptions or there are no subscriptions that match the specified filter criteria.",
+            "description": "The list of subscriptions. The list is ordered by the oldest subscription first. The list is empty if the client hasn't created subscriptions or there are no subscriptions that match the specified filter criteria.",
             "items": {
               "$ref": "#/components/schemas/EventSubSubscription"
             }
           },
           "total": {
             "type": "integer",
-            "description": "The total number of subscriptions that you’ve created.",
+            "description": "The total number of subscriptions that you've created.",
             "format": "int32"
           },
           "total_cost": {
@@ -15514,7 +16575,7 @@
           },
           "max_total_cost": {
             "type": "integer",
-            "description": "The maximum total cost that you’re allowed to incur for all subscriptions that you create.",
+            "description": "The maximum total cost that you're allowed to incur for all subscriptions that you create.",
             "format": "int32"
           },
           "pagination": {
