@@ -178,15 +178,6 @@ const normalizeReferenceHtml = (document: Document) => {
     }
   }
 
-  // Redundant '{' in the example
-  // https://dev.twitch.tv/docs/api/reference/#get-conduits
-  replaceHtml(getCodeEl('get-conduits'), [
-    [
-      '<code><span class="p">{</span><span class="w">\n  </span><span class="p">{</span>',
-      '<code><span class="p">{</span><span class="w">',
-    ],
-  ]);
-
   // Redundant semicolon after "pagination" in the example
   // https://dev.twitch.tv/docs/api/reference/#get-conduit-shards
   replaceHtml(getCodeEl('get-conduit-shards'), [
