@@ -1,3 +1,26 @@
+const replaceHtml = (
+  el: Element,
+  entries: [
+    searchValue: string | RegExp,
+    replaceValue: string,
+    replaceAll?: boolean,
+  ][],
+) => {
+  for (const [searchValue, replaceValue, replaceAll = false] of entries) {
+    const oldHtml = el.innerHTML;
+    if (replaceAll) {
+      el.innerHTML = el.innerHTML.replaceAll(searchValue, replaceValue);
+    } else {
+      el.innerHTML = el.innerHTML.replace(searchValue, replaceValue);
+    }
+    if (oldHtml === el.innerHTML) {
+      console.warn(
+        `The replace wasn't applied:\n${searchValue}\n${replaceValue}`,
+      );
+    }
+  }
+};
+
 const normalizeReferenceHtml = (document: Document) => {
   const getDocsEl = (endpointId: string) =>
     document.getElementById(endpointId)!.closest('.left-docs')!;
@@ -9,14 +32,12 @@ const normalizeReferenceHtml = (document: Document) => {
 
   // wrong quotes and comments inside json
   // https://dev.twitch.tv/docs/api/reference/#modify-channel-information
-  {
-    const el = getCodeEl('modify-channel-information');
-    el.innerHTML = el.innerHTML
-      .replaceAll('“', '"')
-      .replaceAll('”', '"')
-      .replace('// adds this label', '')
-      .replace('// removes this label', '');
-  }
+  replaceHtml(getCodeEl('modify-channel-information'), [
+    ['“', '"', true],
+    ['”', '"', true],
+    ['// adds this label', ''],
+    ['// removes this label', ''],
+  ]);
 
   // missing comma in the examples
   // https://dev.twitch.tv/docs/api/reference/#get-followed-channels
@@ -24,69 +45,56 @@ const normalizeReferenceHtml = (document: Document) => {
   {
     const ids = ['get-followed-channels', 'get-channel-followers'];
     for (const id of ids) {
-      const el = getCodeEl(id);
-      el.innerHTML = el.innerHTML.replaceAll(
-        '<span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span>',
-        '<span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>',
-      );
+      replaceHtml(getCodeEl(id), [
+        [
+          '<span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span>',
+          '<span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>',
+          true,
+        ],
+      ]);
     }
   }
 
   // missing comma in the examples
   // https://dev.twitch.tv/docs/api/reference/#get-channel-chat-badges
-  {
-    const el = getCodeEl('get-channel-chat-badges');
-    el.innerHTML = el.innerHTML.replace(
+  replaceHtml(getCodeEl('get-channel-chat-badges'), [
+    [
       '<span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cheer 1"</span>',
       '<span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cheer 1"</span><span class="p">,</span>',
-    );
-  }
+    ],
+  ]);
 
   // no method
   // https://dev.twitch.tv/docs/api/reference#get-stream-key
-  {
-    const el = getDocsEl('get-stream-key');
-    el.innerHTML = el.innerHTML.replace(
+  replaceHtml(getDocsEl('get-stream-key'), [
+    [
       'https://api.twitch.tv/helix/streams/key',
       'GET https://api.twitch.tv/helix/streams/key',
-    );
-  }
+    ],
+  ]);
 
   // No "data" field in the response body
   // https://dev.twitch.tv/docs/api/reference#create-clip
-  {
-    const el = getDocsEl('create-clip').querySelectorAll('table')[1]!;
-    el.innerHTML = el.innerHTML
-      .replace(
-        '<tbody>',
-        '<tbody><tr><td>data</td><td>Object[]</td><td></td></tr>',
-      )
-      .replace('<td>edit_url</td>', '<td>&nbsp;&nbsp;&nbsp;edit_url</td>')
-      .replace('<td>id</td>', '<td>&nbsp;&nbsp;&nbsp;id</td>');
-  }
+  replaceHtml(getDocsEl('create-clip').querySelectorAll('table')[1]!, [
+    ['<tbody>', '<tbody><tr><td>data</td><td>Object[]</td><td></td></tr>'],
+    ['<td>edit_url</td>', '<td>&nbsp;&nbsp;&nbsp;edit_url</td>'],
+    ['<td>id</td>', '<td>&nbsp;&nbsp;&nbsp;id</td>'],
+  ]);
 
-  // probably wrong Response Body
+  // Wrong Response Body
   // https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
-  {
-    const el = getDocsEl('get-content-classification-labels');
-    el.innerHTML = el.innerHTML
-      .replace(
-        '<tr>\n      <td>&nbsp; &nbsp;content_classification_labels</td>\n      <td>Label[]</td>\n      <td>The list of CCLs available.</td>\n    </tr>',
-        '',
-      )
-      .replace(
-        '<td>&nbsp; &nbsp; &nbsp; id</td>',
-        '<td>&nbsp;&nbsp;&nbsp;id</td>',
-      )
-      .replace(
-        '<td>&nbsp; &nbsp; &nbsp; description</td>',
-        '<td>&nbsp;&nbsp;&nbsp;description</td>',
-      )
-      .replace(
-        '<td>&nbsp; &nbsp; &nbsp; name</td>',
-        '<td>&nbsp;&nbsp;&nbsp;name</td>',
-      );
-  }
+  replaceHtml(getDocsEl('get-content-classification-labels'), [
+    [
+      '<tr>\n      <td>&nbsp; &nbsp;content_classification_labels</td>\n      <td>Label[]</td>\n      <td>The list of CCLs available.</td>\n    </tr>',
+      '',
+    ],
+    ['<td>&nbsp; &nbsp; &nbsp; id</td>', '<td>&nbsp;&nbsp;&nbsp;id</td>'],
+    [
+      '<td>&nbsp; &nbsp; &nbsp; description</td>',
+      '<td>&nbsp;&nbsp;&nbsp;description</td>',
+    ],
+    ['<td>&nbsp; &nbsp; &nbsp; name</td>', '<td>&nbsp;&nbsp;&nbsp;name</td>'],
+  ]);
 
   // missing Response Codes table
   // https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
@@ -154,11 +162,9 @@ const normalizeReferenceHtml = (document: Document) => {
       'get-guest-star-invites',
     ];
     for (const id of ids200) {
-      const tableEl = getDocsEl(id).querySelector('table:last-child')!;
-      tableEl.innerHTML = tableEl.innerHTML.replace(
-        '<tbody>',
-        '<tr><td>200 OK</td><td></td></tr>',
-      );
+      replaceHtml(getDocsEl(id).querySelector('table:last-child')!, [
+        ['<tbody>', '<tr><td>200 OK</td><td></td></tr>'],
+      ]);
     }
     const ids204 = [
       'end-guest-star-session',
@@ -166,75 +172,57 @@ const normalizeReferenceHtml = (document: Document) => {
       'delete-guest-star-invite',
     ];
     for (const id of ids204) {
-      const tableEl = getDocsEl(id).querySelector('table:last-child')!;
-      tableEl.innerHTML = tableEl.innerHTML.replace(
-        '<tbody>',
-        '<tr><td>204 No Content</td><td></td></tr>',
-      );
+      replaceHtml(getDocsEl(id).querySelector('table:last-child')!, [
+        ['<tbody>', '<tr><td>204 No Content</td><td></td></tr>'],
+      ]);
     }
   }
 
   // Redundant '{' in the example
   // https://dev.twitch.tv/docs/api/reference/#get-conduits
-  {
-    const el = getCodeEl('get-conduits');
-    el.innerHTML = el.innerHTML.replace(
+  replaceHtml(getCodeEl('get-conduits'), [
+    [
       '<code><span class="p">{</span><span class="w">\n  </span><span class="p">{</span>',
       '<code><span class="p">{</span><span class="w">',
-    );
-  }
+    ],
+  ]);
 
   // Redundant semicolon after "pagination" in the example
   // https://dev.twitch.tv/docs/api/reference/#get-conduit-shards
-  {
-    const el = getCodeEl('get-conduit-shards');
-    el.innerHTML = el.innerHTML.replace(
-      '<span class="p">{},</span>',
-      '<span class="p">{}</span>',
-    );
-  }
+  replaceHtml(getCodeEl('get-conduit-shards'), [
+    ['<span class="p">{},</span>', '<span class="p">{}</span>'],
+  ]);
 
   // Redundant and missing semicolons in the examples
   // https://dev.twitch.tv/docs/api/reference/#update-conduit-shards
-  {
-    const el = getCodeEl('update-conduit-shards');
-    el.innerHTML = el.innerHTML
-      .replaceAll('\n    },\n', '\n    }\n')
-      .replace(
-        '"https://this-is-a-callback-3.com"',
-        '"https://this-is-a-callback-3.com",',
-      );
-  }
+  replaceHtml(getCodeEl('update-conduit-shards'), [
+    ['\n    },\n', '\n    }\n', true],
+    [
+      '"https://this-is-a-callback-3.com"',
+      '"https://this-is-a-callback-3.com",',
+    ],
+  ]);
 
   // Wrong place for double quotes in the request body
   // https://dev.twitch.tv/docs/api/reference/#create-eventsub-subscription
-  {
-    const el = getCodeEl('create-eventsub-subscription');
-    el.innerHTML = el.innerHTML.replace(
-      '"\n    type": "user.update"',
-      '\n    "type": "user.update"',
-    );
-  }
+  replaceHtml(getCodeEl('create-eventsub-subscription'), [
+    ['"\n    type": "user.update"', '\n    "type": "user.update"'],
+  ]);
 
   // `cost` html tag instead of `code`
   // https://dev.twitch.tv/docs/api/reference/#update-extension-bits-product
-  {
-    const el = getDocsEl('update-extension-bits-product');
-    el.innerHTML = el.innerHTML.replace(
-      '&lt;cost&gt;cost&lt;/cost&gt;',
-      '<code>cost</code>',
-    );
-  }
+  replaceHtml(getDocsEl('update-extension-bits-product'), [
+    ['&lt;cost&gt;cost&lt;/cost&gt;', '<code>cost</code>'],
+  ]);
 
   // Wrong padding for the `broadcast` field
   // https://dev.twitch.tv/docs/api/reference/#get-extension-transactions
-  {
-    const el = getDocsEl('get-extension-transactions');
-    el.innerHTML = el.innerHTML.replace(
+  replaceHtml(getDocsEl('get-extension-transactions'), [
+    [
       '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; broadcast</td>',
       '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;broadcast</td>',
-    );
-  }
+    ],
+  ]);
 };
 
 export default normalizeReferenceHtml;
