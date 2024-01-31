@@ -4563,6 +4563,8 @@ paths:
 
                     -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2' \
 
+                    -H 'Content-Type: application/json' \
+
                     -d '{"shard_count": 5}'
 
                     ```
@@ -4630,6 +4632,8 @@ paths:
 
                     -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2' \
 
+                    -H 'Content-Type: application/json' \
+
                     -d '{
                       "id":"bfcfc993-26b1-b876-44d9-afe75a379dac",
                       "shard_count":5
@@ -4682,18 +4686,24 @@ paths:
           required: true
       responses:
         "204":
-          description: |-
+          description: >-
             Successfully deleted the conduit.
+
 
             __Examples__
 
+
             _Request:_
 
+
             ```bash
-            curl -X DELETE 'https://api.twitch.tv/helix/eventsub/conduits' \
+
+            curl -X DELETE 'https://api.twitch.tv/helix/eventsub/conduits?id=bfcfc993-26b1-b876-44d9-afe75a379dac' \
+
             -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
-            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2' \
-            -d '{"id":"bfcfc993-26b1-b876-44d9-afe75a379dac"}'
+
+            -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
             ```
         "400":
           description: The id query parameter is required.
@@ -4870,6 +4880,8 @@ paths:
                     -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
 
                     -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2' \
+
+                    -H 'Content-Type: application/json' \
 
                     -d '{
                       "conduit_id":"bfcfc993-26b1-b876-44d9-afe75a379dac",
@@ -6473,7 +6485,18 @@ paths:
 
                     -H 'Content-Type: application/json' \
 
-                    -d '{"type":"user.update","version":"1","condition":{"user_id":"1234"},"transport":{"method":"webhook","callback":"https://this-is-a-callback.com","secret":"s3cre7"}}'
+                    -d '{
+                      "type": "user.update",
+                      "version": "1",
+                      "condition": {
+                        "user_id": "1234"
+                      },
+                      "transport": {
+                        "method": "webhook",
+                        "callback": "https://this-is-a-callback.com",
+                        "secret":"s3cre7"
+                      }
+                    }'
 
                     ```
 
@@ -6484,12 +6507,6 @@ paths:
 
 
                     twitch api post /eventsub/subscriptions -b '{"type":"user.update","version":"1","condition":{"user_id":"1234"},"transport":{"method":"webhook","callback":"https://this-is-a-callback.com","secret":"s3cre7"}}'Example Response - Webhook
-
-                    ```
-
-
-                    ```text
-
 
                     ```
                   value:
@@ -22499,9 +22516,10 @@ components:
             channel:bot: Allows the client’s bot users access to a channel.
             channel:moderate: Perform moderation actions in a channel. The user requesting
               the scope must be a moderator in the channel.
-            chat:edit: Send live stream chat messages.
-            chat:read: View live stream chat messages.
+            chat:edit: Send live stream chat messages using an IRC connection.
+            chat:read: View live stream chat messages using an IRC connection.
             user:bot: Allows client’s bot to act as this user.
-            user:read:chat: View live stream chat and room messages.
+            user:read:chat: View live stream chat and room messages using EventSub.
+            user:write:chat: Send live stream chat messages using
             whispers:read: View your whisper messages.
             whispers:edit: Send whisper messages.
