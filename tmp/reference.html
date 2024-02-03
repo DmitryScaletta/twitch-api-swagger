@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-01-29T13:22:45-08:00">
+<meta property="article:published_time" content="2024-02-02T11:13:27-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2024-01-29T13:22:45-08:00","datePublished":"2024-01-29T13:22:45-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2024-02-02T11:13:27-08:00","datePublished":"2024-02-02T11:13:27-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -573,6 +573,25 @@
 	<dl>
 		<dt>
 			<a href="/docs/drops">Drops</a>
+		</dt>
+		
+			
+			
+			
+			
+			
+		
+	</dl>
+
+	
+	
+	
+
+	
+	
+	<dl>
+		<dt>
+			<a href="/docs/game-engine-plugins">Game Engine Plugins</a>
 		</dt>
 		
 			
@@ -1754,7 +1773,7 @@
 								<td>Moderation</td>
 							
 							<td><a href="#get-moderated-channels">Get Moderated Channels</a></td>
-							<td><p><span class="pill pill-beta">BETA</span> Gets a list of channels that the specified user has moderator privileges in.</p>
+							<td><p>Gets a list of channels that the specified user has moderator privileges in.</p>
 </td>
 						</tr>
 					
@@ -4057,6 +4076,7 @@
 			<a class="editor-link" href="cloudcannon:#content_blocks[10]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s list editors.</p>
+
 <h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:read:editors</strong> scope.</p>
@@ -4103,17 +4123,17 @@
       <td>A list of users that are editors for the specified broadcaster. The list is empty if the broadcaster doesn’t have editors.</td>
     </tr>
     <tr>
-      <td>   user_id</td>
+      <td>   user_id</td>
       <td>String</td>
       <td>An ID that uniquely identifies a user with editor permissions.</td>
     </tr>
     <tr>
-      <td>   user_name</td>
+      <td>   user_name</td>
       <td>String</td>
       <td>The user’s display name.</td>
     </tr>
     <tr>
-      <td>   created_at</td>
+      <td>   created_at</td>
       <td>String</td>
       <td>The date and time, in RFC3339 format, when the user became one of the broadcaster’s editors.</td>
     </tr>
@@ -4122,28 +4142,7 @@
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the broadcaster’s list of editors.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The ID in the <i>broadcaster_id</i> query parameter must match the user ID found in the OAuth token.</li><li>The Authorization header is required and must specify a user access token.</li><li>The OAuth token must include the <b>channel:read:editors</b> scope.</li><li>The OAuth token is not valid.</li><li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully retrieved the broadcaster's list of editors.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The ID in the <i>broadcaster_id</i> query parameter must match the user ID found in the OAuth token.</li><li>The Authorization header is required and must specify a user access token.</li><li>The OAuth token must include the <b>channel:read:editors</b> scope.</li><li>The OAuth token is not valid.</li><li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -4252,22 +4251,22 @@
       <td>The list of broadcasters that the user follows. The list is in descending order by <code class="highlighter-rouge">followed_at</code> (with the most recently followed broadcaster first). The list is empty if the user doesn’t follow anyone.</td>
     </tr>
     <tr>
-      <td>   broadcaster_id</td>
+      <td>   broadcaster_id</td>
       <td>String</td>
       <td>An ID that uniquely identifies the broadcaster that this user is following.</td>
     </tr>
     <tr>
-      <td>   broadcaster_login</td>
+      <td>   broadcaster_login</td>
       <td>String</td>
       <td>The broadcaster’s login name.</td>
     </tr>
     <tr>
-      <td>   broadcaster_name</td>
+      <td>   broadcaster_name</td>
       <td>String</td>
       <td>The broadcaster’s display name.</td>
     </tr>
     <tr>
-      <td>   followed_at</td>
+      <td>   followed_at</td>
       <td>String</td>
       <td>The UTC timestamp when the user started following the broadcaster.</td>
     </tr>
@@ -4277,7 +4276,7 @@
       <td>Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. <a href="https://dev.twitch.tv/docs/api/guide#pagination">Read more</a>.</td>
     </tr>
     <tr>
-      <td>   cursor</td>
+      <td>   cursor</td>
       <td>String</td>
       <td>The cursor used to get the next page of results. Use the cursor to set the request’s <em>after</em> query parameter.</td>
     </tr>
@@ -4291,28 +4290,7 @@
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the broadcaster’s list of followers.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td>Possible reasons:<ul><li>The <i>user_id</i> query parameter is required.</li><li>The <i>broadcaster_id</i> query parameter is not valid.</li><li>The <i>user_id</i> query parameter is required.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td>Possible reasons:<ul><li>The ID in the <i>user_id</i> query parameter must match the user ID in the access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token is missing the <b>user:read:follows</b> scope.</li><li>The OAuth token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully retrieved the broadcaster's list of followers.</td></tr><tr><td>400 Bad Request</td><td>Possible reasons:<ul><li>The <i>user_id</i> query parameter is required.</li><li>The <i>broadcaster_id</i> query parameter is not valid.</li><li>The <i>user_id</i> query parameter is required.</li></ul></td></tr><tr><td>401 Unauthorized</td><td>Possible reasons:<ul><li>The ID in the <i>user_id</i> query parameter must match the user ID in the access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token is missing the <b>user:read:follows</b> scope.</li><li>The OAuth token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -6448,8 +6426,8 @@
 
 <p>Updates a redemption’s status.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">--X</span> PATCH <span class="s1">'https://api.twitch.tv/helix/channel_points/custom_rewards/redemptions?broadcaster_id=274637212&amp;reward_id=92af127c-7326-4483-a52b-b0da0be61c01&amp;id=17fa2df1-ad76-4804-bfa5-a40ef63efe63'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'client-id: gx2pv4208cff0ig9ou7nk3riccffxt'</span> <span class="se">\</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> PATCH <span class="s1">'https://api.twitch.tv/helix/channel_points/custom_rewards/redemptions?broadcaster_id=274637212&amp;reward_id=92af127c-7326-4483-a52b-b0da0be61c01&amp;id=17fa2df1-ad76-4804-bfa5-a40ef63efe63'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: gx2pv4208cff0ig9ou7nk3riccffxt'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer vjxv3i0l4zxru966wsnwji51tmpkj2'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">-d</span> <span class="s1">'{
@@ -7123,112 +7101,11 @@
 
 <h3>Response Body</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>data</td>
-      <td>Object[]</td>
-      <td>The list of emotes that the specified broadcaster created. If the broadcaster hasn’t created custom emotes, the list is empty.</td>
-    </tr>
-    <tr>
-      <td>   id</td>
-      <td>String</td>
-      <td>An ID that identifies this emote.</td>
-    </tr>
-    <tr>
-      <td>   name</td>
-      <td>String</td>
-      <td>The name of the emote. This is the name that viewers type in the chat window to get the emote to appear.</td>
-    </tr>
-    <tr>
-      <td>   images</td>
-      <td>Object</td>
-      <td>The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.<br><br><strong>NOTE:</strong> You should use the templated URL in the <code class="highlighter-rouge">template</code> field to fetch the image instead of using these URLs.</td>
-    </tr>
-    <tr>
-      <td>      url_1x</td>
-      <td>String</td>
-      <td>A URL to the small version (28px x 28px) of the emote.</td>
-    </tr>
-    <tr>
-      <td>      url_2x</td>
-      <td>String</td>
-      <td>A URL to the medium version (56px x 56px) of the emote.</td>
-    </tr>
-    <tr>
-      <td>      url_4x</td>
-      <td>String</td>
-      <td>A URL to the large version (112px x 112px) of the emote.</td>
-    </tr>
-    <tr>
-      <td>   tier</td>
-      <td>String</td>
-      <td>The subscriber tier at which the emote is unlocked. This field contains the tier information only if <code class="highlighter-rouge">emote_type</code> is set to <code class="highlighter-rouge">subscriptions</code>, otherwise, it’s an empty string.</td>
-    </tr>
-    <tr>
-      <td>   emote_type</td>
-      <td>String</td>
-      <td>The type of emote. The possible values are: <ul><li>bitstier &mdash; A custom Bits tier emote.</li><li>follower &mdash; A custom follower emote.</li><li>subscriptions &mdash; A custom subscriber emote.</li></ul></td>
-    </tr>
-    <tr>
-      <td>   emote_set_id</td>
-      <td>String</td>
-      <td>An ID that identifies the emote set that the emote belongs to.</td>
-    </tr>
-    <tr>
-      <td>   format</td>
-      <td>String[]</td>
-      <td>The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only <code class="highlighter-rouge">static</code>. But if the emote is available as a static PNG and an animated GIF, the array contains <code class="highlighter-rouge">static</code> and <code class="highlighter-rouge">animated</code>. The possible formats are: <ul><li>animated &mdash; An animated GIF is available for this emote.</li><li>static &mdash; A static PNG file is available for this emote.</li></ul></td>
-    </tr>
-    <tr>
-      <td>   scale</td>
-      <td>String[]</td>
-      <td>The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0. Possible sizes are: <ul><li>1.0 &mdash; A small version (28px x 28px) is available.</li><li>2.0 &mdash; A medium version (56px x 56px) is available.</li><li>3.0 &mdash; A large version (112px x 112px) is available.</li></ul></td>
-    </tr>
-    <tr>
-      <td>   theme_mode</td>
-      <td>String[]</td>
-      <td>The background themes that the emote is available in. Possible themes are: <ul><li>dark</li><li>light</li></ul></td>
-    </tr>
-    <tr>
-      <td>template</td>
-      <td>String</td>
-      <td>A templated URL. Use the values from the <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">format</code>, <code class="highlighter-rouge">scale</code>, and <code class="highlighter-rouge">theme_mode</code> fields to replace the like-named placeholder strings in the templated URL to create a CDN (content delivery network) URL that you use to fetch the emote. For information about what the template looks like and how to use it to fetch emotes, see <a href="/docs/irc/emotes#cdn-template">Emote CDN URL format</a>. You should use this template instead of using the URLs in the <code class="highlighter-rouge">images</code> object.</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>data</td><td>Object[]</td><td>The list of emotes that the specified broadcaster created. If the broadcaster hasn't created custom emotes, the list is empty.</td></tr><tr><td>&nbsp; &nbsp;id</td><td>String</td><td>An ID that identifies this emote.</td></tr><tr><td>&nbsp; &nbsp;name</td><td>String</td><td>The name of the emote. This is the name that viewers type in the chat window to get the emote to appear.</td></tr><tr><td>&nbsp; &nbsp;images</td><td>Object</td><td>The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.<br><br><strong>NOTE:</strong> You should use the templated URL in the <code>template</code> field to fetch the image instead of using these URLs.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; url_1x</td><td>String</td><td>A URL to the small version (28px x 28px) of the emote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; url_2x</td><td>String</td><td>A URL to the medium version (56px x 56px) of the emote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; url_4x</td><td>String</td><td>A URL to the large version (112px x 112px) of the emote.</td></tr><tr><td>&nbsp; &nbsp;tier</td><td>String</td><td>The subscriber tier at which the emote is unlocked. This field contains the tier information only if <code>emote_type</code> is set to <code>subscriptions</code>, otherwise, it's an empty string.</td></tr><tr><td>&nbsp; &nbsp;emote_type</td><td>String</td><td>The type of emote. The possible values are:<ul><li>bitstier — A custom Bits tier emote.</li><li>follower — A custom follower emote.</li><li>subscriptions — A custom subscriber emote.</li></ul></td></tr><tr><td>&nbsp; &nbsp;emote_set_id</td><td>String</td><td>An ID that identifies the emote set that the emote belongs to.</td></tr><tr><td>&nbsp; &nbsp;format</td><td>String[]</td><td>The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only <code>static</code>. But if the emote is available as a static PNG and an animated GIF, the array contains <code>static</code> and <code>animated</code>. The possible formats are:<ul><li>animated — An animated GIF is available for this emote.</li><li>static — A static PNG file is available for this emote.</li></ul></td></tr><tr><td>&nbsp; &nbsp;scale</td><td>String[]</td><td>The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0. Possible sizes are:<ul><li>1.0 — A small version (28px x 28px) is available.</li><li>2.0 — A medium version (56px x 56px) is available.</li><li>3.0 — A large version (112px x 112px) is available.</li></ul></td></tr><tr><td>&nbsp; &nbsp;theme_mode</td><td>String[]</td><td>The background themes that the emote is available in. Possible themes are:<ul><li>dark</li><li>light</li></ul></td></tr><tr><td>template</td><td>String</td><td>A templated URL. Use the values from the <code>id</code>, <code>format</code>, <code>scale</code>, and <code>theme_mode</code> fields to replace the like-named placeholder strings in the templated URL to create a CDN (content delivery network) URL that you use to fetch the emote. For information about what the template looks like and how to use it to fetch emotes, see <a href="/docs/irc/emotes#cdn-template">Emote CDN URL format</a>. You should use this template instead of using the URLs in the <code>images</code> object.</td></tr></tbody></table>
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved broadcaster’s list of custom emotes.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must specify a valid app access token or user access token.</li><li>The OAuth token is not valid.</li><li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully retrieved broadcaster's list of custom emotes.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The Authorization header is required and must specify a valid app access token or user access token.</li><li>The OAuth token is not valid.</li><li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -7243,15 +7120,14 @@
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
 </code></pre></div></div>
+
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Twitch CLI example that gets the custom emotes for the specified channel.</span>
 
 twitch api get /chat/emotes <span class="nt">-q</span> <span class="nv">broadcaster_id</span><span class="o">=</span>141981764
 </code></pre></div></div>
 
 <h3>Example Response</h3>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"304456832"</span><span class="p">,</span><span class="w">
@@ -7306,7 +7182,6 @@ twitch api get /chat/emotes <span class="nt">-q</span> <span class="nv">broadcas
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/emoticons/v2/{{id}}/{{format}}/{{theme_mode}}/{{scale}}"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div></div>
 
 			</section>
@@ -7336,93 +7211,11 @@ twitch api get /chat/emotes <span class="nt">-q</span> <span class="nv">broadcas
 
 <h3>Response Body</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>data</td>
-      <td>Object[]</td>
-      <td>The list of global emotes.</td>
-    </tr>
-    <tr>
-      <td>   id</td>
-      <td>String</td>
-      <td>An ID that identifies this emote.</td>
-    </tr>
-    <tr>
-      <td>   name</td>
-      <td>String</td>
-      <td>The name of the emote. This is the name that viewers type in the chat window to get the emote to appear.</td>
-    </tr>
-    <tr>
-      <td>   images</td>
-      <td>Object</td>
-      <td>The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.<br><br><strong>NOTE:</strong> You should use the templated URL in the <code class="highlighter-rouge">template</code> field to fetch the image instead of using these URLs.</td>
-    </tr>
-    <tr>
-      <td>      url_1x</td>
-      <td>String</td>
-      <td>A URL to the small version (28px x 28px) of the emote.</td>
-    </tr>
-    <tr>
-      <td>      url_2x</td>
-      <td>String</td>
-      <td>A URL to the medium version (56px x 56px) of the emote.</td>
-    </tr>
-    <tr>
-      <td>      url_4x</td>
-      <td>String</td>
-      <td>A URL to the large version (112px x 112px) of the emote.</td>
-    </tr>
-    <tr>
-      <td>   format</td>
-      <td>String[]</td>
-      <td>The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only <code class="highlighter-rouge">static</code>. But if the emote is available as a static PNG and an animated GIF, the array contains <code class="highlighter-rouge">static</code> and <code class="highlighter-rouge">animated</code>. The possible formats are: <ul><li>animated &mdash; An animated GIF is available for this emote.</li><li>static &mdash; A static PNG file is available for this emote.</li></ul></td>
-    </tr>
-    <tr>
-      <td>   scale</td>
-      <td>String[]</td>
-      <td>The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0. Possible sizes are: <ul><li>1.0 &mdash; A small version (28px x 28px) is available.</li><li>2.0 &mdash; A medium version (56px x 56px) is available.</li><li>3.0 &mdash; A large version (112px x 112px) is available.</li></ul></td>
-    </tr>
-    <tr>
-      <td>   theme_mode</td>
-      <td>String[]</td>
-      <td>The background themes that the emote is available in. Possible themes are: <ul><li>dark</li><li>light</li></ul></td>
-    </tr>
-    <tr>
-      <td>template</td>
-      <td>String</td>
-      <td>A templated URL. Use the values from the <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">format</code>, <code class="highlighter-rouge">scale</code>, and <code class="highlighter-rouge">theme_mode</code> fields to replace the like-named placeholder strings in the templated URL to create a CDN (content delivery network) URL that you use to fetch the emote. For information about what the template looks like and how to use it to fetch emotes, see <a href="/docs/irc/emotes#cdn-template">Emote CDN URL format</a>. You should use this template instead of using the URLs in the <code class="highlighter-rouge">images</code> object.</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>data</td><td>Object[]</td><td>The list of global emotes.</td></tr><tr><td>&nbsp; &nbsp;id</td><td>String</td><td>An ID that identifies this emote.</td></tr><tr><td>&nbsp; &nbsp;name</td><td>String</td><td>The name of the emote. This is the name that viewers type in the chat window to get the emote to appear.</td></tr><tr><td>&nbsp; &nbsp;images</td><td>Object</td><td>The image URLs for the emote. These image URLs always provide a static, non-animated emote image with a light background.<br><br><strong>NOTE:</strong> You should use the templated URL in the <code>template</code> field to fetch the image instead of using these URLs.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; url_1x</td><td>String</td><td>A URL to the small version (28px x 28px) of the emote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; url_2x</td><td>String</td><td>A URL to the medium version (56px x 56px) of the emote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; url_4x</td><td>String</td><td>A URL to the large version (112px x 112px) of the emote.</td></tr><tr><td>&nbsp; &nbsp;format</td><td>String[]</td><td>The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only <code>static</code>. But if the emote is available as a static PNG and an animated GIF, the array contains <code>static</code> and <code>animated</code>. The possible formats are:<ul><li>animated — An animated GIF is available for this emote.</li><li>static — A static PNG file is available for this emote.</li></ul></td></tr><tr><td>&nbsp; &nbsp;scale</td><td>String[]</td><td>The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0. Possible sizes are:<ul><li>1.0 — A small version (28px x 28px) is available.</li><li>2.0 — A medium version (56px x 56px) is available.</li><li>3.0 — A large version (112px x 112px) is available.</li></ul></td></tr><tr><td>&nbsp; &nbsp;theme_mode</td><td>String[]</td><td>The background themes that the emote is available in. Possible themes are:<ul><li>dark</li><li>light</li></ul></td></tr><tr><td>template</td><td>String</td><td>A templated URL. Use the values from the <code>id</code>, <code>format</code>, <code>scale</code>, and <code>theme_mode</code> fields to replace the like-named placeholder strings in the templated URL to create a CDN (content delivery network) URL that you use to fetch the emote. For information about what the template looks like and how to use it to fetch emotes, see <a href="/docs/irc/emotes#cdn-template">Emote CDN URL format</a>. You should use this template instead of using the URLs in the <code>images</code> object.</td></tr></tbody></table>
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved Twitch’s list of global emotes.</td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must specify a valid app access token or user access token.</li><li>The OAuth token is not valid.</li><li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully retrieved Twitch's list of global emotes.</td></tr><tr><td>401 Unauthorized</td><td><ul><li>The Authorization header is required and must specify a valid app access token or user access token.</li><li>The OAuth token is not valid.</li><li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -7437,6 +7230,7 @@ twitch api get /chat/emotes <span class="nt">-q</span> <span class="nv">broadcas
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
 </code></pre></div></div>
+
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Twitch CLI example that gets all global emotes.</span>
 
 twitch api get /chat/emotes/global
@@ -7444,8 +7238,7 @@ twitch api get /chat/emotes/global
 
 <h3>Example Response</h3>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
-</span><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"196892"</span><span class="p">,</span><span class="w">
@@ -7472,7 +7265,6 @@ twitch api get /chat/emotes/global
   </span><span class="p">],</span><span class="w">
   </span><span class="s2">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/emoticons/v2/{{id}}/{{format}}/{{theme_mode}}/{{scale}}"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div></div>
 
 			</section>
@@ -16470,47 +16262,47 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
       <td>The list of users that were banned or put in a timeout.</td>
     </tr>
     <tr>
-      <td>   user_id</td>
+      <td>   user_id</td>
       <td>String</td>
       <td>The ID of the banned user.</td>
     </tr>
     <tr>
-      <td>   user_login</td>
+      <td>   user_login</td>
       <td>String</td>
       <td>The banned user’s login name.</td>
     </tr>
     <tr>
-      <td>   user_name</td>
+      <td>   user_name</td>
       <td>String</td>
       <td>The banned user’s display name.</td>
     </tr>
     <tr>
-      <td>   expires_at</td>
+      <td>   expires_at</td>
       <td>String</td>
       <td>The UTC date and time (in RFC3339 format) of when the timeout expires, or an empty string if the user is permanently banned.</td>
     </tr>
     <tr>
-      <td>   created_at</td>
+      <td>   created_at</td>
       <td>String</td>
       <td>The UTC date and time (in RFC3339 format) of when the user was banned.</td>
     </tr>
     <tr>
-      <td>   reason</td>
+      <td>   reason</td>
       <td>String</td>
       <td>The reason the user was banned or put in a timeout if the moderator provided one.</td>
     </tr>
     <tr>
-      <td>   moderator_id</td>
+      <td>   moderator_id</td>
       <td>String</td>
       <td>The ID of the moderator that banned the user or put them in a timeout.</td>
     </tr>
     <tr>
-      <td>   moderator_login</td>
+      <td>   moderator_login</td>
       <td>String</td>
       <td>The moderator’s login name.</td>
     </tr>
     <tr>
-      <td>   moderator_name</td>
+      <td>   moderator_name</td>
       <td>String</td>
       <td>The moderator’s display name.</td>
     </tr>
@@ -16520,7 +16312,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
       <td>Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. <a href="/docs/api/guide#pagination">Read More</a></td>
     </tr>
     <tr>
-      <td>   cursor</td>
+      <td>   cursor</td>
       <td>String</td>
       <td>The cursor used to get the next page of results. Use the cursor to set the request’s <em>after</em> query parameter.</td>
     </tr>
@@ -16529,28 +16321,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the list of banned users.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The ID in <i>broadcaster_id</i> must match the user ID in the user access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>moderation:read</b> scope.</li><li>The access token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully retrieved the list of banned users.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The ID in <i>broadcaster_id</i> must match the user ID in the user access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>moderation:read</b> scope.</li><li>The access token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -17581,7 +17352,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 			<h2 id="get-moderated-channels">Get Moderated Channels</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[87]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p><span class="pill pill-beta">BETA</span> Gets a list of channels that the specified user has moderator privileges in.</p>
+				<p>Gets a list of channels that the specified user has moderator privileges in.</p>
 
 <h3>Authorization</h3>
 
@@ -17622,7 +17393,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
       <td>first</td>
       <td>Integer</td>
       <td>No</td>
-      <td>The maximum number of items to return per page in the response. <br><br>Minimum page size is 1 item per page and the maximum is 100. The default is 20.</td>
+      <td>The maximum number of items to return per page in the response.<br><br>Minimum page size is 1 item per page and the maximum is 100. The default is 20.</td>
     </tr>
   </tbody>
 </table>
@@ -17644,17 +17415,17 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
       <td>The list of channels that the user has moderator privileges in.</td>
     </tr>
     <tr>
-      <td>   broadcaster_id</td>
+      <td>   broadcaster_id</td>
       <td>String</td>
       <td>An ID that uniquely identifies the channel this user can moderate.</td>
     </tr>
     <tr>
-      <td>   broadcaster_login</td>
+      <td>   broadcaster_login</td>
       <td>String</td>
       <td>The channel’s login name.</td>
     </tr>
     <tr>
-      <td>   broadcaster_name</td>
+      <td>   broadcaster_name</td>
       <td>String</td>
       <td>The channels’ display name.</td>
     </tr>
@@ -17664,7 +17435,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
       <td>Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through.</td>
     </tr>
     <tr>
-      <td>   cursor</td>
+      <td>   cursor</td>
       <td>String</td>
       <td>The cursor used to get the next page of results. Use the cursor to set the request’s after query parameter.</td>
     </tr>
@@ -17677,6 +17448,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 	
 			<section class="right-code">
 				<h3>Example Request</h3>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/moderation/channels?user_id=931931'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
@@ -17779,17 +17551,17 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
       <td>The list of moderators.</td>
     </tr>
     <tr>
-      <td>   user_id</td>
+      <td>   user_id</td>
       <td>String</td>
       <td>The ID of the user that has permission to moderate the broadcaster’s channel.</td>
     </tr>
     <tr>
-      <td>   user_login</td>
+      <td>   user_login</td>
       <td>String</td>
       <td>The user’s login name.</td>
     </tr>
     <tr>
-      <td>   user_name</td>
+      <td>   user_name</td>
       <td>String</td>
       <td>The user’s display name.</td>
     </tr>
@@ -17799,7 +17571,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
       <td>Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. <a href="/docs/api/guide#pagination">Read More</a></td>
     </tr>
     <tr>
-      <td>   cursor</td>
+      <td>   cursor</td>
       <td>String</td>
       <td>The cursor used to get the next page of results. Use the cursor to set the request’s <em>after</em> query parameter.</td>
     </tr>
@@ -17808,28 +17580,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the list of moderators.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The ID in <i>broadcaster_id</i> must match the user ID found in the access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>moderation:read</b> scope.</li><li>The access token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully retrieved the list of moderators.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The ID in <i>broadcaster_id</i> must match the user ID found in the access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>moderation:read</b> scope.</li><li>The access token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -17910,36 +17661,7 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>204 No Content</td>
-      <td>Successfully added the moderator.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The ID in <i>broadcaster_id</i> was not found.</li><li>The ID in <i>user_id</i> was not found.</li><li>The user in <i>user_id</i> is already a moderator in the broadcaster's chat room.</li><li>The user in <i>user_id</i> cannot become a moderator because they're banned from the channel.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>channel:manage:moderators</b> scope.</li><li>The access token is not valid.</li><li>The ID in the <i>broadcaster_id</i> query parameter must match the user ID in the access token.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-    <tr>
-      <td>422 Unprocessable Entity</td>
-      <td><ul><li>The user in <i>user_id</i> is a VIP. To make them a moderator, you must first remove them as a VIP (see <a href="/docs/api/reference#remove-channel-vip">Remove Channel VIP</a>).</li></ul></td>
-    </tr>
-    <tr>
-      <td>429 Too Many Requests</td>
-      <td><ul><li>The broadcaster has exceeded the number of requests allowed within a 10-second window. See this endpoint's rate limits.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>204 No Content</td><td>Successfully added the moderator.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The ID in <i>broadcaster_id</i> was not found.</li><li>The ID in <i>user_id</i> was not found.</li><li>The user in <i>user_id</i> is already a moderator in the broadcaster's chat room.</li><li>The user in <i>user_id</i> cannot become a moderator because they're banned from the channel.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>channel:manage:moderators</b> scope.</li><li>The access token is not valid.</li><li>The ID in the <i>broadcaster_id</i> query parameter must match the user ID in the access token.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr><tr><td>422 Unprocessable Entity</td><td><ul><li>The user in <i>user_id</i> is a VIP. To make them a moderator, you must first remove them as a VIP (see <a href="/docs/api/reference#remove-channel-vip">Remove Channel VIP</a>).</li></ul></td></tr><tr><td>429 Too Many Requests</td><td><ul><li>The broadcaster has exceeded the number of requests allowed within a 10-second window. See this endpoint's rate limits.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -23906,62 +23628,62 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
       <td>The list of teams that the broadcaster is a member of. Returns an empty array if the broadcaster is not a member of a team.</td>
     </tr>
     <tr>
-      <td>   broadcaster_id</td>
+      <td>   broadcaster_id</td>
       <td>String</td>
       <td>An ID that identifies the broadcaster.</td>
     </tr>
     <tr>
-      <td>   broadcaster_login</td>
+      <td>   broadcaster_login</td>
       <td>String</td>
       <td>The broadcaster’s login name.</td>
     </tr>
     <tr>
-      <td>   broadcaster_name</td>
+      <td>   broadcaster_name</td>
       <td>String</td>
       <td>The broadcaster’s display name.</td>
     </tr>
     <tr>
-      <td>   background_image_url</td>
+      <td>   background_image_url</td>
       <td>String</td>
       <td>A URL to the team’s background image.</td>
     </tr>
     <tr>
-      <td>   banner</td>
+      <td>   banner</td>
       <td>String</td>
       <td>A URL to the team’s banner.</td>
     </tr>
     <tr>
-      <td>   created_at</td>
+      <td>   created_at</td>
       <td>String</td>
       <td>The UTC date and time (in RFC3339 format) of when the team was created.</td>
     </tr>
     <tr>
-      <td>   updated_at</td>
+      <td>   updated_at</td>
       <td>String</td>
       <td>The UTC date and time (in RFC3339 format) of the last time the team was updated.</td>
     </tr>
     <tr>
-      <td>   info</td>
+      <td>   info</td>
       <td>String</td>
       <td>The team’s description. The description may contain formatting such as Markdown, HTML, newline (\n) characters, etc.</td>
     </tr>
     <tr>
-      <td>   thumbnail_url</td>
+      <td>   thumbnail_url</td>
       <td>String</td>
       <td>A URL to a thumbnail image of the team’s logo.</td>
     </tr>
     <tr>
-      <td>   team_name</td>
+      <td>   team_name</td>
       <td>String</td>
       <td>The team’s name.</td>
     </tr>
     <tr>
-      <td>   team_display_name</td>
+      <td>   team_display_name</td>
       <td>String</td>
       <td>The team’s display name.</td>
     </tr>
     <tr>
-      <td>   id</td>
+      <td>   id</td>
       <td>String</td>
       <td>An ID that identifies the team.</td>
     </tr>
@@ -23970,32 +23692,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the list of teams.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>broadcaster_id</i> query parameter is missing or invalid.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header must contain an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-    <tr>
-      <td>404 Not Found</td>
-      <td><ul><li>The broadcaster was not found.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully retrieved the list of teams.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The <i>broadcaster_id</i> query parameter is missing or invalid.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The Authorization header must contain an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr><tr><td>404 Not Found</td><td><ul><li>The broadcaster was not found.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -24096,67 +23793,67 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
       <td>A list that contains the single team that you requested.</td>
     </tr>
     <tr>
-      <td>   users</td>
+      <td>   users</td>
       <td>Object[]</td>
       <td>The list of team members.</td>
     </tr>
     <tr>
-      <td>      user_id</td>
+      <td>      user_id</td>
       <td>String</td>
       <td>An ID that identifies the team member.</td>
     </tr>
     <tr>
-      <td>      user_login</td>
+      <td>      user_login</td>
       <td>String</td>
       <td>The team member’s login name.</td>
     </tr>
     <tr>
-      <td>      user_name</td>
+      <td>      user_name</td>
       <td>String</td>
       <td>The team member’s display name.</td>
     </tr>
     <tr>
-      <td>   background_image_url</td>
+      <td>   background_image_url</td>
       <td>String</td>
       <td>A URL to the team’s background image.</td>
     </tr>
     <tr>
-      <td>   banner</td>
+      <td>   banner</td>
       <td>String</td>
       <td>A URL to the team’s banner.</td>
     </tr>
     <tr>
-      <td>   created_at</td>
+      <td>   created_at</td>
       <td>String</td>
       <td>The UTC date and time (in RFC3339 format) of when the team was created.</td>
     </tr>
     <tr>
-      <td>   updated_at</td>
+      <td>   updated_at</td>
       <td>String</td>
       <td>The UTC date and time (in RFC3339 format) of the last time the team was updated.</td>
     </tr>
     <tr>
-      <td>   info</td>
+      <td>   info</td>
       <td>String</td>
       <td>The team’s description. The description may contain formatting such as Markdown, HTML, newline (\n) characters, etc.</td>
     </tr>
     <tr>
-      <td>   thumbnail_url</td>
+      <td>   thumbnail_url</td>
       <td>String</td>
       <td>A URL to a thumbnail image of the team’s logo.</td>
     </tr>
     <tr>
-      <td>   team_name</td>
+      <td>   team_name</td>
       <td>String</td>
       <td>The team’s name.</td>
     </tr>
     <tr>
-      <td>   team_display_name</td>
+      <td>   team_display_name</td>
       <td>String</td>
       <td>The team’s display name.</td>
     </tr>
     <tr>
-      <td>   id</td>
+      <td>   id</td>
       <td>String</td>
       <td>An ID that identifies the team.</td>
     </tr>
@@ -24165,32 +23862,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the team’s information.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>name</i> or <i>id</i> query parameter is required.</li><li>Specify either the <i>name</i> or <i>id</i> query parameter but not both.</li><li>The ID in the <i>id</i> query parameter is not valid.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header must contain an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-    <tr>
-      <td>404 Not Found</td>
-      <td><ul><li>The specified team was not found.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully retrieved the team's information.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The <i>name</i> or <i>id</i> query parameter is required.</li><li>Specify either the <i>name</i> or <i>id</i> query parameter but not both.</li><li>The ID in the <i>id</i> query parameter is not valid.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The Authorization header must contain an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr><tr><td>404 Not Found</td><td><ul><li>The specified team was not found.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -24314,12 +23986,12 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
     <tr>
       <td>   login</td>
       <td>String</td>
-      <td>The user’s login name.</td>
+      <td>The user's login name.</td>
     </tr>
     <tr>
       <td>   display_name</td>
       <td>String</td>
-      <td>The user’s display name.</td>
+      <td>The user's display name.</td>
     </tr>
     <tr>
       <td>   type</td>
@@ -24329,37 +24001,37 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
     <tr>
       <td>   broadcaster_type</td>
       <td>String</td>
-      <td>The type of broadcaster. Possible values are:<ul><li>affiliate &mdash; An <a href="https://help.twitch.tv/s/article/joining-the-affiliate-program target=" _blank">affiliate broadcaster</a></li><li>partner &mdash; A <a href="https://help.twitch.tv/s/article/partner-program-overview" target="_blank">partner broadcaster</a></li><li>"" &mdash; A normal broadcaster</li></ul></td>
+      <td>The type of broadcaster. Possible values are:<ul><li>affiliate &mdash; An <a href="https://help.twitch.tv/s/article/joining-the-affiliate-program target=">affiliate broadcaster</a></li><li>partner &mdash; A <a href="https://help.twitch.tv/s/article/partner-program-overview" target="_blank">partner broadcaster</a></li><li>"" &mdash; A normal broadcaster</li></ul></td>
     </tr>
     <tr>
       <td>   description</td>
       <td>String</td>
-      <td>The user’s description of their channel.</td>
+      <td>The user's description of their channel.</td>
     </tr>
     <tr>
       <td>   profile_image_url</td>
       <td>String</td>
-      <td>A URL to the user’s profile image.</td>
+      <td>A URL to the user's profile image.</td>
     </tr>
     <tr>
       <td>   offline_image_url</td>
       <td>String</td>
-      <td>A URL to the user’s offline image.</td>
+      <td>A URL to the user's offline image.</td>
     </tr>
     <tr>
       <td>   view_count</td>
       <td>Integer</td>
-      <td>The number of times the user’s channel has been viewed.<br><br><strong>NOTE</strong>: This field has been deprecated (see <a href="https://discuss.dev.twitch.tv/t/get-users-api-endpoint-view-count-deprecation/37777" target="_blank">Get Users API endpoint – “view_count” deprecation</a>). Any data in this field is not valid and should not be used.</td>
+      <td>The number of times the user's channel has been viewed.<br><br><strong>NOTE</strong>: This field has been deprecated (see <a href="https://discuss.dev.twitch.tv/t/get-users-api-endpoint-view-count-deprecation/37777" target="_blank">Get Users API endpoint – "view_count" deprecation</a>). Any data in this field is not valid and should not be used.</td>
     </tr>
     <tr>
       <td>   email</td>
       <td>String</td>
-      <td>The user’s verified email address. The object includes this field only if the user access token includes the <strong>user:read:email</strong> scope.<br><br>If the request contains more than one user, only the user associated with the access token that provided consent will include an email address — the email address for all other users will be empty.</td>
+      <td>The user's verified email address. The object includes this field only if the user access token includes the <strong>user:read:email</strong> scope.<br><br>If the request contains more than one user, only the user associated with the access token that provided consent will include an email address — the email address for all other users will be empty.</td>
     </tr>
     <tr>
       <td>   created_at</td>
       <td>String</td>
-      <td>The UTC date and time that the user’s account was created. The timestamp is in RFC3339 format.</td>
+      <td>The UTC date and time that the user's account was created. The timestamp is in RFC3339 format.</td>
     </tr>
   </tbody>
 </table>
@@ -24376,7 +24048,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
   <tbody>
     <tr>
       <td>200 OK</td>
-      <td>Successfully retrieved the specified users’ information.</td>
+      <td>Successfully retrieved the specified users' information.</td>
     </tr>
     <tr>
       <td>400 Bad Request</td>
@@ -24468,102 +24140,11 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Response Body</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>data</td>
-      <td>Object[]</td>
-      <td>A list contains the single user that you updated.</td>
-    </tr>
-    <tr>
-      <td>   id</td>
-      <td>String</td>
-      <td>An ID that identifies the user.</td>
-    </tr>
-    <tr>
-      <td>   login</td>
-      <td>String</td>
-      <td>The user’s login name.</td>
-    </tr>
-    <tr>
-      <td>   display_name</td>
-      <td>String</td>
-      <td>The user’s display name.</td>
-    </tr>
-    <tr>
-      <td>   type</td>
-      <td>String</td>
-      <td>The type of user. Possible values are:<ul><li>admin &mdash; Twitch administrator</li><li>global_mod</li><li>staff &mdash; Twitch staff</li><li>"" &mdash; Normal user</li></ul></td>
-    </tr>
-    <tr>
-      <td>   broadcaster_type</td>
-      <td>String</td>
-      <td>The type of broadcaster. Possible values are:<ul><li>affiliate &mdash; An <a href="https://help.twitch.tv/s/article/joining-the-affiliate-program target=" _blank">affiliate broadcaster</a></li><li>partner &mdash; A <a href="https://help.twitch.tv/s/article/partner-program-overview" target="_blank">partner broadcaster</a></li><li>"" &mdash; A normal broadcaster</li></ul></td>
-    </tr>
-    <tr>
-      <td>   description</td>
-      <td>String</td>
-      <td>The user’s description of their channel.</td>
-    </tr>
-    <tr>
-      <td>   profile_image_url</td>
-      <td>String</td>
-      <td>A URL to the user’s profile image.</td>
-    </tr>
-    <tr>
-      <td>   offline_image_url</td>
-      <td>String</td>
-      <td>A URL to the user’s offline image.</td>
-    </tr>
-    <tr>
-      <td>   view_count</td>
-      <td>Integer</td>
-      <td>The number of times the user’s channel has been viewed.<br><br><strong>NOTE</strong>: This field has been deprecated (see <a href="https://discuss.dev.twitch.tv/t/get-users-api-endpoint-view-count-deprecation/37777" target="_blank">Get Users API endpoint – “view_count” deprecation</a>). Any data in this field is not valid and should not be used.</td>
-    </tr>
-    <tr>
-      <td>   email</td>
-      <td>String</td>
-      <td>The user’s verified email address. The object includes this field only if the user access token includes the <strong>user:read:email</strong> scope.<br><br>If the request contains more than one user, only the user associated with the access token that provided consent will include an email address — the email address for all other users will be empty.</td>
-    </tr>
-    <tr>
-      <td>   created_at</td>
-      <td>String</td>
-      <td>The UTC date and time that the user’s account was created. The timestamp is in RFC3339 format.</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>data</td><td>Object[]</td><td>A list contains the single user that you updated.</td></tr><tr><td>&nbsp; &nbsp;id</td><td>String</td><td>An ID that identifies the user.</td></tr><tr><td>&nbsp; &nbsp;login</td><td>String</td><td>The user's login name.</td></tr><tr><td>&nbsp; &nbsp;display_name</td><td>String</td><td>The user's display name.</td></tr><tr><td>&nbsp; &nbsp;type</td><td>String</td><td>The type of user. Possible values are:<ul><li>admin — Twitch administrator</li><li>global_mod</li><li>staff — Twitch staff</li><li>"" — Normal user</li></ul></td></tr><tr><td>&nbsp; &nbsp;broadcaster_type</td><td>String</td><td>The type of broadcaster. Possible values are:<ul><li>affiliate — An <a href="https://help.twitch.tv/s/article/joining-the-affiliate-program target=">affiliate broadcaster</a></li><li>partner — A <a target="_blank" href="https://help.twitch.tv/s/article/partner-program-overview">partner broadcaster</a></li><li>"" — A normal broadcaster</li></ul></td></tr><tr><td>&nbsp; &nbsp;description</td><td>String</td><td>The user's description of their channel.</td></tr><tr><td>&nbsp; &nbsp;profile_image_url</td><td>String</td><td>A URL to the user's profile image.</td></tr><tr><td>&nbsp; &nbsp;offline_image_url</td><td>String</td><td>A URL to the user's offline image.</td></tr><tr><td>&nbsp; &nbsp;view_count</td><td>Integer</td><td>The number of times the user's channel has been viewed.<br><br><strong>NOTE</strong>: This field has been deprecated (see <a target="_blank" href="https://discuss.dev.twitch.tv/t/get-users-api-endpoint-view-count-deprecation/37777">Get Users API endpoint – "view_count" deprecation</a>). Any data in this field is not valid and should not be used.</td></tr><tr><td>&nbsp; &nbsp;email</td><td>String</td><td>The user's verified email address. The object includes this field only if the user access token includes the <strong>user:read:email</strong> scope.<br><br>If the request contains more than one user, only the user associated with the access token that provided consent will include an email address — the email address for all other users will be empty.</td></tr><tr><td>&nbsp; &nbsp;created_at</td><td>String</td><td>The UTC date and time that the user's account was created. The timestamp is in RFC3339 format.</td></tr></tbody></table>
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully updated the specified user’s information.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The string in the <i>description</i> query parameter is too long.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>user:edit</b> scope.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully updated the specified user's information.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The string in the <i>description</i> query parameter is too long.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>user:edit</b> scope.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -24667,17 +24248,17 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
       <td>The list of blocked users. The list is in descending order by when the user was blocked.</td>
     </tr>
     <tr>
-      <td>   user_id</td>
+      <td>   user_id</td>
       <td>String</td>
       <td>An ID that identifies the blocked user.</td>
     </tr>
     <tr>
-      <td>   user_login</td>
+      <td>   user_login</td>
       <td>String</td>
       <td>The blocked user’s login name.</td>
     </tr>
     <tr>
-      <td>   display_name</td>
+      <td>   display_name</td>
       <td>String</td>
       <td>The blocked user’s display name.</td>
     </tr>
@@ -24686,28 +24267,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the broadcaster’s list of blocked users.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The ID in <i>broadcaster_id</i> must match the user ID found in the request’s access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>user:read:blocked_users</b> scope.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully retrieved the broadcaster's list of blocked users.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The ID in <i>broadcaster_id</i> must match the user ID found in the request’s access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>user:read:blocked_users</b> scope.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -24764,61 +24324,11 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Request Query Parameters</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Type</th>
-      <th>Required?</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>target_user_id</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>The ID of the user to block. The API ignores the request if the broadcaster has already blocked the user.</td>
-    </tr>
-    <tr>
-      <td>source_context</td>
-      <td>String</td>
-      <td>No</td>
-      <td>The location where the harassment took place that is causing the brodcaster to block the user. Possible values are:<ul><li>chat</li><li>whisper</li></ul>.</td>
-    </tr>
-    <tr>
-      <td>reason</td>
-      <td>String</td>
-      <td>No</td>
-      <td>The reason that the broadcaster is blocking the user. Possible values are:<ul><li>harassment</li><li>spam</li><li>other</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Parameter</th><th>Type</th><th>Required?</th><th>Description</th></tr></thead><tbody><tr><td>target_user_id</td><td>String</td><td>Yes</td><td>The ID of the user to block. The API ignores the request if the broadcaster has already blocked the user.</td></tr><tr><td>source_context</td><td>String</td><td>No</td><td>The location where the harassment took place that is causing the brodcaster to block the user. Possible values are:<ul><li>chat</li><li>whisper</li></ul>.</td></tr><tr><td>reason</td><td>String</td><td>No</td><td>The reason that the broadcaster is blocking the user. Possible values are:<ul><li>harassment</li><li>spam</li><li>other</li></ul></td></tr></tbody></table>
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>204 No Content</td>
-      <td>Successfully blocked the user.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>target_user_id</i> query parameter is required.</li><li>The ID in <i>target_user_id</i> cannot be the same as the user ID in the access token.</li><li>The value in <i>source_context</i> is not valid.</li><li>The value in <i>reason</i> is not valid.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>user:manage:blocked_users</b> scope.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>204 No Content</td><td>Successfully blocked the user.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The <i>target_user_id</i> query parameter is required.</li><li>The ID in <i>target_user_id</i> cannot be the same as the user ID in the access token.</li><li>The value in <i>source_context</i> is not valid.</li><li>The value in <i>reason</i> is not valid.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>user:manage:blocked_users</b> scope.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -24934,68 +24444,11 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Response Body</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Field</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>data</td>
-      <td>Object[]</td>
-      <td>The list of extensions that the user has installed.</td>
-    </tr>
-    <tr>
-      <td>   id</td>
-      <td>String</td>
-      <td>An ID that identifies the extension.</td>
-    </tr>
-    <tr>
-      <td>   version</td>
-      <td>String</td>
-      <td>The extension’s version.</td>
-    </tr>
-    <tr>
-      <td>   name</td>
-      <td>String</td>
-      <td>The extension’s name.</td>
-    </tr>
-    <tr>
-      <td>   can_activate</td>
-      <td>Boolean</td>
-      <td>A Boolean value that determines whether the extension is configured and can be activated. Is <strong>true</strong> if the extension is configured and can be activated.</td>
-    </tr>
-    <tr>
-      <td>   type</td>
-      <td>String[]</td>
-      <td>The extension types that you can activate for this extension. Possible values are:<ul><li>component</li><li>mobile</li><li>overlay</li><li>panel</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>data</td><td>Object[]</td><td>The list of extensions that the user has installed.</td></tr><tr><td>&nbsp; &nbsp;id</td><td>String</td><td>An ID that identifies the extension.</td></tr><tr><td>&nbsp; &nbsp;version</td><td>String</td><td>The extension's version.</td></tr><tr><td>&nbsp; &nbsp;name</td><td>String</td><td>The extension's name.</td></tr><tr><td>&nbsp; &nbsp;can_activate</td><td>Boolean</td><td>A Boolean value that determines whether the extension is configured and can be activated. Is <strong>true</strong> if the extension is configured and can be activated.</td></tr><tr><td>&nbsp; &nbsp;type</td><td>String[]</td><td>The extension types that you can activate for this extension. Possible values are:<ul><li>component</li><li>mobile</li><li>overlay</li><li>panel</li></ul></td></tr></tbody></table>
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the user’s installed extensions.</td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>user:read:broadcast</b> scope.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully retrieved the user's installed extensions.</td></tr><tr><td>401 Unauthorized</td><td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>user:read:broadcast</b> scope.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -25128,87 +24581,87 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
       <td>The active extensions that the broadcaster has installed.</td>
     </tr>
     <tr>
-      <td>   panel</td>
+      <td>   panel</td>
       <td>map[string]Object</td>
       <td>A dictionary that contains the data for a panel extension. The dictionary’s key is a sequential number beginning with 1. The following fields contain the panel’s data for each key.</td>
     </tr>
     <tr>
-      <td>      active</td>
+      <td>      active</td>
       <td>Boolean</td>
       <td>A Boolean value that determines the extension’s activation state. If <strong>false</strong>, the user has not configured this panel extension.</td>
     </tr>
     <tr>
-      <td>      id</td>
+      <td>      id</td>
       <td>String</td>
       <td>An ID that identifies the extension.</td>
     </tr>
     <tr>
-      <td>      version</td>
+      <td>      version</td>
       <td>String</td>
       <td>The extension’s version.</td>
     </tr>
     <tr>
-      <td>      name</td>
+      <td>      name</td>
       <td>String</td>
       <td>The extension’s name.</td>
     </tr>
     <tr>
-      <td>   overlay</td>
+      <td>   overlay</td>
       <td>map[string]Object</td>
       <td>A dictionary that contains the data for a video-overlay extension. The dictionary’s key is a sequential number beginning with 1. The following fields contain the overlay’s data for each key.</td>
     </tr>
     <tr>
-      <td>      active</td>
+      <td>      active</td>
       <td>Boolean</td>
       <td>A Boolean value that determines the extension’s activation state. If <strong>false</strong>, the user has not configured this overlay extension.</td>
     </tr>
     <tr>
-      <td>      id</td>
+      <td>      id</td>
       <td>String</td>
       <td>An ID that identifies the extension.</td>
     </tr>
     <tr>
-      <td>      version</td>
+      <td>      version</td>
       <td>String</td>
       <td>The extension’s version.</td>
     </tr>
     <tr>
-      <td>      name</td>
+      <td>      name</td>
       <td>String</td>
       <td>The extension’s name.</td>
     </tr>
     <tr>
-      <td>   component</td>
+      <td>   component</td>
       <td>map[string]Object</td>
       <td>A dictionary that contains the data for a video-component extension. The dictionary’s key is a sequential number beginning with 1. The following fields contain the component’s data for each key.</td>
     </tr>
     <tr>
-      <td>      active</td>
+      <td>      active</td>
       <td>Boolean</td>
       <td>A Boolean value that determines the extension’s activation state. If <strong>false</strong>, the user has not configured this component extension.</td>
     </tr>
     <tr>
-      <td>      id</td>
+      <td>      id</td>
       <td>String</td>
       <td>An ID that identifies the extension.</td>
     </tr>
     <tr>
-      <td>      version</td>
+      <td>      version</td>
       <td>String</td>
       <td>The extension’s version.</td>
     </tr>
     <tr>
-      <td>      name</td>
+      <td>      name</td>
       <td>String</td>
       <td>The extension’s name.</td>
     </tr>
     <tr>
-      <td>      x</td>
+      <td>      x</td>
       <td>Integer</td>
       <td>The x-coordinate where the extension is placed.</td>
     </tr>
     <tr>
-      <td>      y</td>
+      <td>      y</td>
       <td>Integer</td>
       <td>The y-coordinate where the extension is placed.</td>
     </tr>
@@ -25217,28 +24670,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the user’s active extensions.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>user_id</i> query parameter is required if you specify an app access token.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must contain an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully retrieved the user's active extensions.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The <i>user_id</i> query parameter is required if you specify an app access token.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The Authorization header is required and must contain an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -25362,87 +24794,87 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
       <td>The extensions that the broadcaster updated.</td>
     </tr>
     <tr>
-      <td>   panel</td>
+      <td>   panel</td>
       <td>map[string]Object</td>
       <td>A dictionary that contains the data for a panel extension. The dictionary’s key is a sequential number beginning with 1. The following fields contain the panel’s data for each key.</td>
     </tr>
     <tr>
-      <td>      active</td>
+      <td>      active</td>
       <td>Boolean</td>
       <td>A Boolean value that determines the extension’s activation state. If <strong>false</strong>, the user has not configured a panel extension.</td>
     </tr>
     <tr>
-      <td>      id</td>
+      <td>      id</td>
       <td>String</td>
       <td>An ID that identifies the extension.</td>
     </tr>
     <tr>
-      <td>      version</td>
+      <td>      version</td>
       <td>String</td>
       <td>The extension’s version.</td>
     </tr>
     <tr>
-      <td>      name</td>
+      <td>      name</td>
       <td>String</td>
       <td>The extension’s name.</td>
     </tr>
     <tr>
-      <td>   overlay</td>
+      <td>   overlay</td>
       <td>map[string]Object</td>
       <td>A dictionary that contains the data for a video-overlay extension. The dictionary’s key is a sequential number beginning with 1. The following fields contain the overlay’s data for each key.</td>
     </tr>
     <tr>
-      <td>      active</td>
+      <td>      active</td>
       <td>Boolean</td>
       <td>A Boolean value that determines the extension’s activation state. If <strong>false</strong>, the user has not configured an overlay extension.</td>
     </tr>
     <tr>
-      <td>      id</td>
+      <td>      id</td>
       <td>String</td>
       <td>An ID that identifies the extension.</td>
     </tr>
     <tr>
-      <td>      version</td>
+      <td>      version</td>
       <td>String</td>
       <td>The extension’s version.</td>
     </tr>
     <tr>
-      <td>      name</td>
+      <td>      name</td>
       <td>String</td>
       <td>The extension’s name.</td>
     </tr>
     <tr>
-      <td>   component</td>
+      <td>   component</td>
       <td>map[string]Object</td>
       <td>A dictionary that contains the data for a video-component extension. The dictionary’s key is a sequential number beginning with 1. The following fields contain the component’s data for each key.</td>
     </tr>
     <tr>
-      <td>      active</td>
+      <td>      active</td>
       <td>Boolean</td>
       <td>A Boolean value that determines the extension’s activation state. If <strong>false</strong>, the user has not configured a component extension.</td>
     </tr>
     <tr>
-      <td>      id</td>
+      <td>      id</td>
       <td>String</td>
       <td>An ID that identifies the extension.</td>
     </tr>
     <tr>
-      <td>      version</td>
+      <td>      version</td>
       <td>String</td>
       <td>The extension’s version.</td>
     </tr>
     <tr>
-      <td>      name</td>
+      <td>      name</td>
       <td>String</td>
       <td>The extension’s name.</td>
     </tr>
     <tr>
-      <td>      x</td>
+      <td>      x</td>
       <td>Integer</td>
       <td>The x-coordinate where the extension is placed.</td>
     </tr>
     <tr>
-      <td>      y</td>
+      <td>      y</td>
       <td>Integer</td>
       <td>The y-coordinate where the extension is placed.</td>
     </tr>
@@ -25451,32 +24883,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully updated the active extensions.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The JSON payload is malformed.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>user:edit:broadcast</b> scope.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-    <tr>
-      <td>404 Not Found</td>
-      <td><ul><li>An extension with the specified <code>id</code> and <code>version</code> values was not found.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully updated the active extensions.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The JSON payload is malformed.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>user:edit:broadcast</b> scope.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr><tr><td>404 Not Found</td><td><ul><li>An extension with the specified <code>id</code> and <code>version</code> values was not found.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -25605,231 +25012,15 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Request Query Parameters</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Type</th>
-      <th>Required?</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>id</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>A list of IDs that identify the videos you want to get. To get more than one video, include this parameter for each video you want to get. For example, <code class="highlighter-rouge">id=1234&amp;id=5678</code>. You may specify a maximum of 100 IDs. The endpoint ignores duplicate IDs and IDs that weren’t found (if there’s at least one valid ID).<br><br>The <em>id</em>, <em>user_id</em>, and <em>game_id</em> parameters are mutually exclusive.</td>
-    </tr>
-    <tr>
-      <td>user_id</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>The ID of the user whose list of videos you want to get.<br><br>The <em>id</em>, <em>user_id</em>, and <em>game_id</em> parameters are mutually exclusive.</td>
-    </tr>
-    <tr>
-      <td>game_id</td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>A category or game ID. The response contains a maximum of 500 videos that show this content. To get category/game IDs, use the <a href="#search-categories">Search Categories</a> endpoint.<br><br>The <em>id</em>, <em>user_id</em>, and <em>game_id</em> parameters are mutually exclusive.</td>
-    </tr>
-    <tr>
-      <td>language</td>
-      <td>String</td>
-      <td>No</td>
-      <td>A filter used to filter the list of videos by the language that the video owner broadcasts in. For example, to get videos that were broadcast in German, set this parameter to the ISO 639-1 two-letter code for German (i.e., DE). For a list of supported languages, see <a href="https://help.twitch.tv/s/article/languages-on-twitch#streamlang">Supported Stream Language</a>. If the language is not supported, use “other.”<br><br>Specify this parameter only if you specify the <em>game_id</em> query parameter.</td>
-    </tr>
-    <tr>
-      <td>period</td>
-      <td>String</td>
-      <td>No</td>
-      <td>A filter used to filter the list of videos by when they were published. For example, videos published in the last week. Possible values are:<ul><li>all</li><li>day</li><li>month</li><li>week</li></ul>The default is “all,” which returns videos published in all periods.<br><br>Specify this parameter only if you specify the <em>game_id</em> or <em>user_id</em> query parameter.</td>
-    </tr>
-    <tr>
-      <td>sort</td>
-      <td>String</td>
-      <td>No</td>
-      <td>The order to sort the returned videos in. Possible values are:<ul><li>time &mdash; Sort the results in descending order by when they were created (i.e., latest video first).</li><li>trending &mdash; Sort the results in descending order by biggest gains in viewership (i.e., highest trending video first).</li><li>views &mdash; Sort the results in descending order by most views (i.e., highest number of views first).</li></ul>The default is “time.”<br><br>Specify this parameter only if you specify the <em>game_id</em> or <em>user_id</em> query parameter.</td>
-    </tr>
-    <tr>
-      <td>type</td>
-      <td>String</td>
-      <td>No</td>
-      <td>A filter used to filter the list of videos by the video’s type. Possible case-sensitive values are:<ul><li>all</li><li>archive &mdash; On-demand videos (VODs) of past streams.</li><li>highlight &mdash; Highlight reels of past streams.</li><li>upload &mdash; External videos that the broadcaster uploaded using the Video Producer.</li></ul>The default is “all,” which returns all video types.<br><br>Specify this parameter only if you specify the <em>game_id</em> or <em>user_id</em> query parameter.</td>
-    </tr>
-    <tr>
-      <td>first</td>
-      <td>String</td>
-      <td>No</td>
-      <td>The maximum number of items to return per page in the response. The minimum page size is 1 item per page and the maximum is 100. The default is 20.<br><br>Specify this parameter only if you specify the <em>game_id</em> or <em>user_id</em> query parameter.</td>
-    </tr>
-    <tr>
-      <td>after</td>
-      <td>String</td>
-      <td>No</td>
-      <td>The cursor used to get the next page of results. The <strong>Pagination</strong> object in the response contains the cursor’s value. <a href="/docs/api/guide#pagination">Read More</a><br><br>Specify this parameter only if you specify the <em>user_id</em> query parameter.</td>
-    </tr>
-    <tr>
-      <td>before</td>
-      <td>String</td>
-      <td>No</td>
-      <td>The cursor used to get the previous page of results. The <strong>Pagination</strong> object in the response contains the cursor’s value. <a href="/docs/api/guide#pagination">Read More</a><br><br>Specify this parameter only if you specify the <em>user_id</em> query parameter.</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Parameter</th><th>Type</th><th>Required?</th><th>Description</th></tr></thead><tbody><tr><td>id</td><td>String</td><td>Yes</td><td>A list of IDs that identify the videos you want to get. To get more than one video, include this parameter for each video you want to get. For example, <code>id=1234&amp;id=5678</code>. You may specify a maximum of 100 IDs. The endpoint ignores duplicate IDs and IDs that weren't found (if there's at least one valid ID).<br><br>The <em>id</em>, <em>user_id</em>, and <em>game_id</em> parameters are mutually exclusive.</td></tr><tr><td>user_id</td><td>String</td><td>Yes</td><td>The ID of the user whose list of videos you want to get.<br><br>The <em>id</em>, <em>user_id</em>, and <em>game_id</em> parameters are mutually exclusive.</td></tr><tr><td>game_id</td><td>String</td><td>Yes</td><td>A category or game ID. The response contains a maximum of 500 videos that show this content. To get category/game IDs, use the <a href="#search-categories">Search Categories</a> endpoint.<br><br>The <em>id</em>, <em>user_id</em>, and <em>game_id</em> parameters are mutually exclusive.</td></tr><tr><td>language</td><td>String</td><td>No</td><td>A filter used to filter the list of videos by the language that the video owner broadcasts in. For example, to get videos that were broadcast in German, set this parameter to the ISO 639-1 two-letter code for German (i.e., DE). For a list of supported languages, see <a href="https://help.twitch.tv/s/article/languages-on-twitch#streamlang">Supported Stream Language</a>. If the language is not supported, use “other.”<br><br>Specify this parameter only if you specify the <em>game_id</em> query parameter.</td></tr><tr><td>period</td><td>String</td><td>No</td><td>A filter used to filter the list of videos by when they were published. For example, videos published in the last week. Possible values are:<ul><li>all</li><li>day</li><li>month</li><li>week</li></ul>The default is "all," which returns videos published in all periods.<br><br>Specify this parameter only if you specify the <em>game_id</em> or <em>user_id</em> query parameter.</td></tr><tr><td>sort</td><td>String</td><td>No</td><td>The order to sort the returned videos in. Possible values are:<ul><li>time — Sort the results in descending order by when they were created (i.e., latest video first).</li><li>trending — Sort the results in descending order by biggest gains in viewership (i.e., highest trending video first).</li><li>views — Sort the results in descending order by most views (i.e., highest number of views first).</li></ul>The default is "time."<br><br>Specify this parameter only if you specify the <em>game_id</em> or <em>user_id</em> query parameter.</td></tr><tr><td>type</td><td>String</td><td>No</td><td>A filter used to filter the list of videos by the video's type. Possible case-sensitive values are:<ul><li>all</li><li>archive — On-demand videos (VODs) of past streams.</li><li>highlight — Highlight reels of past streams.</li><li>upload — External videos that the broadcaster uploaded using the Video Producer.</li></ul>The default is "all," which returns all video types.<br><br>Specify this parameter only if you specify the <em>game_id</em> or <em>user_id</em> query parameter.</td></tr><tr><td>first</td><td>String</td><td>No</td><td>The maximum number of items to return per page in the response. The minimum page size is 1 item per page and the maximum is 100. The default is 20.<br><br>Specify this parameter only if you specify the <em>game_id</em> or <em>user_id</em> query parameter.</td></tr><tr><td>after</td><td>String</td><td>No</td><td>The cursor used to get the next page of results. The <strong>Pagination</strong> object in the response contains the cursor’s value. <a href="/docs/api/guide#pagination">Read More</a><br><br>Specify this parameter only if you specify the <em>user_id</em> query parameter.</td></tr><tr><td>before</td><td>String</td><td>No</td><td>The cursor used to get the previous page of results. The <strong>Pagination</strong> object in the response contains the cursor’s value. <a href="/docs/api/guide#pagination">Read More</a><br><br>Specify this parameter only if you specify the <em>user_id</em> query parameter.</td></tr></tbody></table>
 
 <h3>Response Body</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Fields</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>data</td>
-      <td>Object[]</td>
-      <td>The list of published videos that match the filter criteria.</td>
-    </tr>
-    <tr>
-      <td>   id</td>
-      <td>String</td>
-      <td>An ID that identifies the video.</td>
-    </tr>
-    <tr>
-      <td>   stream_id</td>
-      <td>String</td>
-      <td>The ID of the stream that the video originated from if the video’s type is “archive;” otherwise, <strong>null</strong>.</td>
-    </tr>
-    <tr>
-      <td>   user_id</td>
-      <td>String</td>
-      <td>The ID of the broadcaster that owns the video.</td>
-    </tr>
-    <tr>
-      <td>   user_login</td>
-      <td>String</td>
-      <td>The broadcaster’s login name.</td>
-    </tr>
-    <tr>
-      <td>   user_name</td>
-      <td>String</td>
-      <td>The broadcaster’s display name.</td>
-    </tr>
-    <tr>
-      <td>   title</td>
-      <td>String</td>
-      <td>The video’s title.</td>
-    </tr>
-    <tr>
-      <td>   description</td>
-      <td>String</td>
-      <td>The video’s description.</td>
-    </tr>
-    <tr>
-      <td>   created_at</td>
-      <td>String</td>
-      <td>The date and time, in UTC, of when the video was created. The timestamp is in RFC3339 format.</td>
-    </tr>
-    <tr>
-      <td>   published_at</td>
-      <td>String</td>
-      <td>The date and time, in UTC, of when the video was published. The timestamp is in RFC3339 format.</td>
-    </tr>
-    <tr>
-      <td>   url</td>
-      <td>String</td>
-      <td>The video’s URL.</td>
-    </tr>
-    <tr>
-      <td>   thumbnail_url</td>
-      <td>String</td>
-      <td>A URL to a thumbnail image of the video. Before using the URL, you must replace the <code class="highlighter-rouge">%{width}</code> and <code class="highlighter-rouge">%{height}</code> placeholders with the width and height of the thumbnail you want returned. Due to current limitations, <code class="highlighter-rouge">${width}</code> must be 320 and <code class="highlighter-rouge">${height}</code> must be 180.</td>
-    </tr>
-    <tr>
-      <td>   viewable</td>
-      <td>String</td>
-      <td>The video’s viewable state. Always set to <strong>public</strong>.</td>
-    </tr>
-    <tr>
-      <td>   view_count</td>
-      <td>Integer</td>
-      <td>The number of times that users have watched the video.</td>
-    </tr>
-    <tr>
-      <td>   language</td>
-      <td>String</td>
-      <td>The ISO 639-1 two-letter language code that the video was broadcast in. For example, the language code is DE if the video was broadcast in German. For a list of supported languages, see <a href="https://help.twitch.tv/s/article/languages-on-twitch#streamlang">Supported Stream Language</a>. The language value is “other” if the video was broadcast in a language not in the list of supported languages.</td>
-    </tr>
-    <tr>
-      <td>   type</td>
-      <td>String</td>
-      <td>The video’s type. Possible values are:<ul><li>archive &mdash; An on-demand video (VOD) of one of the broadcaster's past streams.</li><li>highlight &mdash; A highlight reel of one of the broadcaster's past streams. See <a href="https://help.twitch.tv/s/article/creating-highlights-and-stream-markers" target="_blank">Creating Highlights</a>.</li><li>upload &mdash; A video that the broadcaster uploaded to their video library. See Upload under <a href="https://help.twitch.tv/s/article/video-on-demand?language=en_US#videoproducer" target="_blank">Video Producer</a>.</li></ul></td>
-    </tr>
-    <tr>
-      <td>   duration</td>
-      <td>String</td>
-      <td>The video’s length in ISO 8601 duration format. For example, 3m21s represents 3 minutes, 21 seconds.</td>
-    </tr>
-    <tr>
-      <td>   muted_segments</td>
-      <td>Object[]</td>
-      <td>The segments that Twitch Audio Recognition muted; otherwise, <strong>null</strong>.</td>
-    </tr>
-    <tr>
-      <td>      duration</td>
-      <td>Integer</td>
-      <td>The duration of the muted segment, in seconds.</td>
-    </tr>
-    <tr>
-      <td>      offset</td>
-      <td>Integer</td>
-      <td>The offset, in seconds, from the beginning of the video to where the muted segment begins.</td>
-    </tr>
-    <tr>
-      <td>pagination</td>
-      <td>Object</td>
-      <td>Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. <a href="/docs/api/guide#pagination">Read More</a></td>
-    </tr>
-    <tr>
-      <td>   cursor</td>
-      <td>String</td>
-      <td>The cursor used to get the next page of results. Use the cursor to set the request’s <em>after</em> or <em>before</em> query parameter depending on whether you’re paging forwards or backwards through the results.</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Fields</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>data</td><td>Object[]</td><td>The list of published videos that match the filter criteria.</td></tr><tr><td>&nbsp; &nbsp;id</td><td>String</td><td>An ID that identifies the video.</td></tr><tr><td>&nbsp; &nbsp;stream_id</td><td>String</td><td>The ID of the stream that the video originated from if the video's type is "archive;" otherwise, <strong>null</strong>.</td></tr><tr><td>&nbsp; &nbsp;user_id</td><td>String</td><td>The ID of the broadcaster that owns the video.</td></tr><tr><td>&nbsp; &nbsp;user_login</td><td>String</td><td>The broadcaster's login name.</td></tr><tr><td>&nbsp; &nbsp;user_name</td><td>String</td><td>The broadcaster's display name.</td></tr><tr><td>&nbsp; &nbsp;title</td><td>String</td><td>The video's title.</td></tr><tr><td>&nbsp; &nbsp;description</td><td>String</td><td>The video's description.</td></tr><tr><td>&nbsp; &nbsp;created_at</td><td>String</td><td>The date and time, in UTC, of when the video was created. The timestamp is in RFC3339 format.</td></tr><tr><td>&nbsp; &nbsp;published_at</td><td>String</td><td>The date and time, in UTC, of when the video was published. The timestamp is in RFC3339 format.</td></tr><tr><td>&nbsp; &nbsp;url</td><td>String</td><td>The video's URL.</td></tr><tr><td>&nbsp; &nbsp;thumbnail_url</td><td>String</td><td>A URL to a thumbnail image of the video. Before using the URL, you must replace the <code>%{width}</code> and <code>%{height}</code> placeholders with the width and height of the thumbnail you want returned. Due to current limitations, <code>${width}</code> must be 320 and <code>${height}</code> must be 180.</td></tr><tr><td>&nbsp; &nbsp;viewable</td><td>String</td><td>The video's viewable state. Always set to <strong>public</strong>.</td></tr><tr><td>&nbsp; &nbsp;view_count</td><td>Integer</td><td>The number of times that users have watched the video.</td></tr><tr><td>&nbsp; &nbsp;language</td><td>String</td><td>The ISO 639-1 two-letter language code that the video was broadcast in. For example, the language code is DE if the video was broadcast in German. For a list of supported languages, see <a href="https://help.twitch.tv/s/article/languages-on-twitch#streamlang">Supported Stream Language</a>. The language value is "other" if the video was broadcast in a language not in the list of supported languages.</td></tr><tr><td>&nbsp; &nbsp;type</td><td>String</td><td>The video's type. Possible values are:<ul><li>archive — An on-demand video (VOD) of one of the broadcaster's past streams.</li><li>highlight — A highlight reel of one of the broadcaster's past streams. See <a target="_blank" href="https://help.twitch.tv/s/article/creating-highlights-and-stream-markers">Creating Highlights</a>.</li><li>upload — A video that the broadcaster uploaded to their video library. See Upload under <a target="_blank" href="https://help.twitch.tv/s/article/video-on-demand?language=en_US#videoproducer">Video Producer</a>.</li></ul></td></tr><tr><td>&nbsp; &nbsp;duration</td><td>String</td><td>The video's length in ISO 8601 duration format. For example, 3m21s represents 3 minutes, 21 seconds.</td></tr><tr><td>&nbsp; &nbsp;muted_segments</td><td>Object[]</td><td>The segments that Twitch Audio Recognition muted; otherwise, <strong>null</strong>.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; duration</td><td>Integer</td><td>The duration of the muted segment, in seconds.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; offset</td><td>Integer</td><td>The offset, in seconds, from the beginning of the video to where the muted segment begins.</td></tr><tr><td>pagination</td><td>Object</td><td>Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through. <a href="/docs/api/guide#pagination">Read More</a></td></tr><tr><td>&nbsp; &nbsp;cursor</td><td>String</td><td>The cursor used to get the next page of results. Use the cursor to set the request's <em>after</em> or <em>before</em> query parameter depending on whether you're paging forwards or backwards through the results.</td></tr></tbody></table>
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully retrieved the list of videos.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The request must specify either the <i>id</i> or <i>user_id</i> or <i>game_id</i> query parameter.</li><li>The <i>id</i>, <i>user_id</i>, and <i>game_id</i> query parameters are mutually exclusive; you must specify only one of them.</li><li>The value in the <i>id</i> query parameter is not valid.</li><li>The ID in the <i>game_id</i> query parameter is not valid.</li><li>The value in the <i>type</i> query parameter is not valid.</li><li>The value in the <i>period</i> query parameter is not valid.</li><li>The value in the <i>sort</i> query parameter is not valid.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The Authorization header is required and must contain an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-    <tr>
-      <td>404 Not Found</td>
-      <td><ul><li>The ID in the <i>game_id</i> query parameter was not found.</li><li>The ID in the <i>id</i> query parameter was not found. Returned only if all the IDs were not found; otherwise, the ID is ignored.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully retrieved the list of videos.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The request must specify either the <i>id</i> or <i>user_id</i> or <i>game_id</i> query parameter.</li><li>The <i>id</i>, <i>user_id</i>, and <i>game_id</i> query parameters are mutually exclusive; you must specify only one of them.</li><li>The value in the <i>id</i> query parameter is not valid.</li><li>The ID in the <i>game_id</i> query parameter is not valid.</li><li>The value in the <i>type</i> query parameter is not valid.</li><li>The value in the <i>period</i> query parameter is not valid.</li><li>The value in the <i>sort</i> query parameter is not valid.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The Authorization header is required and must contain an app access token or user access token.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr><tr><td>404 Not Found</td><td><ul><li>The ID in the <i>game_id</i> query parameter was not found.</li><li>The ID in the <i>id</i> query parameter was not found. Returned only if all the IDs were not found; otherwise, the ID is ignored.</li></ul></td></tr></tbody></table>
 
 			
 		</section>
@@ -25939,28 +25130,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <h3>Response Codes</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>200 OK</td>
-      <td>Successfully deleted the list of videos.</td>
-    </tr>
-    <tr>
-      <td>400 Bad Request</td>
-      <td><ul><li>The <i>id</i> query parameter is required.</li><li>The request exceeded the number of allowed <i>id</i> query parameters.</li></ul></td>
-    </tr>
-    <tr>
-      <td>401 Unauthorized</td>
-      <td><ul><li>The caller is not authorized to delete the specified video.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>channel:manage:videos</b> scope.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully deleted the list of videos.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The <i>id</i> query parameter is required.</li><li>The request exceeded the number of allowed <i>id</i> query parameters.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The caller is not authorized to delete the specified video.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>channel:manage:videos</b> scope.</li><li>The access token is not valid.</li><li>The ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr></tbody></table>
 
 			
 		</section>

@@ -1286,7 +1286,7 @@ paths:
           required: true
       responses:
         "200":
-          description: Successfully retrieved the broadcaster’s list of editors.
+          description: Successfully retrieved the broadcaster's list of editors.
           content:
             application/json:
               schema:
@@ -1388,7 +1388,7 @@ paths:
             type: string
       responses:
         "200":
-          description: Successfully retrieved the broadcaster’s list of followers.
+          description: Successfully retrieved the broadcaster's list of followers.
           content:
             application/json:
               schema:
@@ -2556,9 +2556,9 @@ paths:
 
                     ```bash
 
-                    curl --X PATCH 'https://api.twitch.tv/helix/channel_points/custom_rewards/redemptions?broadcaster_id=274637212&reward_id=92af127c-7326-4483-a52b-b0da0be61c01&id=17fa2df1-ad76-4804-bfa5-a40ef63efe63' \
+                    curl -X PATCH 'https://api.twitch.tv/helix/channel_points/custom_rewards/redemptions?broadcaster_id=274637212&reward_id=92af127c-7326-4483-a52b-b0da0be61c01&id=17fa2df1-ad76-4804-bfa5-a40ef63efe63' \
 
-                    -H 'client-id: gx2pv4208cff0ig9ou7nk3riccffxt' \
+                    -H 'Client-Id: gx2pv4208cff0ig9ou7nk3riccffxt' \
 
                     -H 'Authorization: Bearer vjxv3i0l4zxru966wsnwji51tmpkj2' \
 
@@ -2974,7 +2974,7 @@ paths:
           required: true
       responses:
         "200":
-          description: Successfully retrieved broadcaster’s list of custom emotes.
+          description: Successfully retrieved broadcaster's list of custom emotes.
           content:
             application/json:
               schema:
@@ -3090,7 +3090,7 @@ paths:
       operationId: get-global-emotes
       responses:
         "200":
-          description: Successfully retrieved Twitch’s list of global emotes.
+          description: Successfully retrieved Twitch's list of global emotes.
           content:
             application/json:
               schema:
@@ -9891,11 +9891,11 @@ paths:
             - moderator:manage:chat_messages
   /moderation/channels:
     get:
-      summary: BETA Gets a list of channels that the specified user has moderator
+      summary: Gets a list of channels that the specified user has moderator
         privileges in.
       description: >-
-        BETA Gets a list of channels that the specified user has moderator
-        privileges in.
+        Gets a list of channels that the specified user has moderator privileges
+        in.
 
 
         __Authorization:__
@@ -9928,7 +9928,7 @@ paths:
         - name: first
           in: query
           description: >-
-            The maximum number of items to return per page in the response.   
+            The maximum number of items to return per page in the response.  
               
             Minimum page size is 1 item per page and the maximum is 100\. The default is 20.
           schema:
@@ -13723,7 +13723,7 @@ paths:
             type: string
       responses:
         "200":
-          description: Successfully retrieved the team’s information.
+          description: Successfully retrieved the team's information.
           content:
             application/json:
               schema:
@@ -13827,7 +13827,7 @@ paths:
           explode: true
       responses:
         "200":
-          description: Successfully retrieved the specified users’ information.
+          description: Successfully retrieved the specified users' information.
           content:
             application/json:
               schema:
@@ -13912,7 +13912,7 @@ paths:
             type: string
       responses:
         "200":
-          description: Successfully updated the specified user’s information.
+          description: Successfully updated the specified user's information.
           content:
             application/json:
               schema:
@@ -14006,7 +14006,7 @@ paths:
             type: string
       responses:
         "200":
-          description: Successfully retrieved the broadcaster’s list of blocked users.
+          description: Successfully retrieved the broadcaster's list of blocked users.
           content:
             application/json:
               schema:
@@ -14251,7 +14251,7 @@ paths:
       operationId: get-user-extensions
       responses:
         "200":
-          description: Successfully retrieved the user’s installed extensions.
+          description: Successfully retrieved the user's installed extensions.
           content:
             application/json:
               schema:
@@ -14359,7 +14359,7 @@ paths:
             type: string
       responses:
         "200":
-          description: Successfully retrieved the user’s active extensions.
+          description: Successfully retrieved the user's active extensions.
           content:
             application/json:
               schema:
@@ -14628,8 +14628,8 @@ paths:
             A list of IDs that identify the videos you want to get. To get more
             than one video, include this parameter for each video you want to
             get. For example, `id=1234&id=5678`. You may specify a maximum of
-            100 IDs. The endpoint ignores duplicate IDs and IDs that weren’t
-            found (if there’s at least one valid ID).  
+            100 IDs. The endpoint ignores duplicate IDs and IDs that weren't
+            found (if there's at least one valid ID).  
               
             The _id_, _user\_id_, and _game\_id_ parameters are mutually exclusive.
           schema:
@@ -14685,7 +14685,7 @@ paths:
 
             * week
               
-            The default is “all,” which returns videos published in all periods.  
+            The default is "all," which returns videos published in all periods.  
               
             Specify this parameter only if you specify the _game\_id_ or _user\_id_ query parameter.
           schema:
@@ -14706,7 +14706,7 @@ paths:
 
             * views — Sort the results in descending order by most views (i.e., highest number of views first).
               
-            The default is “time.”  
+            The default is "time."  
               
             Specify this parameter only if you specify the _game\_id_ or _user\_id_ query parameter.
           schema:
@@ -14718,7 +14718,7 @@ paths:
         - name: type
           in: query
           description: >-
-            A filter used to filter the list of videos by the video’s type.
+            A filter used to filter the list of videos by the video's type.
             Possible case-sensitive values are:  
               
             * all
@@ -14729,7 +14729,7 @@ paths:
 
             * upload — External videos that the broadcaster uploaded using the Video Producer.
               
-            The default is “all,” which returns all video types.  
+            The default is "all," which returns all video types.  
               
             Specify this parameter only if you specify the _game\_id_ or _user\_id_ query parameter.
           schema:
@@ -16665,11 +16665,11 @@ components:
           type: string
           description: The subscriber tier at which the emote is unlocked. This field
             contains the tier information only if `emote_type` is set to
-            `subscriptions`, otherwise, it’s an empty string.
+            `subscriptions`, otherwise, it's an empty string.
         emote_type:
           type: string
           description: |-
-            The type of emote. The possible values are:   
+            The type of emote. The possible values are:  
               
             * bitstier — A custom Bits tier emote.
             * follower — A custom follower emote.
@@ -16688,7 +16688,7 @@ components:
             emote is available only as a static PNG, the array contains only
             `static`. But if the emote is available as a static PNG and an
             animated GIF, the array contains `static` and `animated`. The
-            possible formats are:   
+            possible formats are:  
               
             * animated — An animated GIF is available for this emote.
 
@@ -16703,7 +16703,7 @@ components:
           description: >-
             The sizes that the emote is available in. For example, if the emote
             is available in small and medium sizes, the array contains 1.0 and
-            2.0\. Possible sizes are:   
+            2.0\. Possible sizes are:  
               
             * 1.0 — A small version (28px x 28px) is available.
 
@@ -16720,7 +16720,7 @@ components:
           type: array
           description: >-
             The background themes that the emote is available in. Possible
-            themes are:   
+            themes are:  
               
             * dark
 
@@ -16739,7 +16739,7 @@ components:
         data:
           type: array
           description: The list of emotes that the specified broadcaster created. If the
-            broadcaster hasn’t created custom emotes, the list is empty.
+            broadcaster hasn't created custom emotes, the list is empty.
           items:
             $ref: "#/components/schemas/ChannelEmote"
         template:
@@ -16798,7 +16798,7 @@ components:
             emote is available only as a static PNG, the array contains only
             `static`. But if the emote is available as a static PNG and an
             animated GIF, the array contains `static` and `animated`. The
-            possible formats are:   
+            possible formats are:  
               
             * animated — An animated GIF is available for this emote.
 
@@ -16813,7 +16813,7 @@ components:
           description: >-
             The sizes that the emote is available in. For example, if the emote
             is available in small and medium sizes, the array contains 1.0 and
-            2.0\. Possible sizes are:   
+            2.0\. Possible sizes are:  
               
             * 1.0 — A small version (28px x 28px) is available.
 
@@ -16830,7 +16830,7 @@ components:
           type: array
           description: >-
             The background themes that the emote is available in. Possible
-            themes are:   
+            themes are:  
               
             * dark
 
@@ -21901,10 +21901,10 @@ components:
           description: An ID that identifies the user.
         login:
           type: string
-          description: The user’s login name.
+          description: The user's login name.
         display_name:
           type: string
-          description: The user’s display name.
+          description: The user's display name.
         type:
           type: string
           description: |-
@@ -21935,31 +21935,31 @@ components:
             - ""
         description:
           type: string
-          description: The user’s description of their channel.
+          description: The user's description of their channel.
         profile_image_url:
           type: string
-          description: A URL to the user’s profile image.
+          description: A URL to the user's profile image.
         offline_image_url:
           type: string
-          description: A URL to the user’s offline image.
+          description: A URL to the user's offline image.
         view_count:
           type: integer
           description: >-
-            The number of times the user’s channel has been viewed.  
+            The number of times the user's channel has been viewed.  
               
-            **NOTE**: This field has been deprecated (see [Get Users API endpoint – “view\_count” deprecation](https://discuss.dev.twitch.tv/t/get-users-api-endpoint-view-count-deprecation/37777)). Any data in this field is not valid and should not be used.
+            **NOTE**: This field has been deprecated (see [Get Users API endpoint – "view\_count" deprecation](https://discuss.dev.twitch.tv/t/get-users-api-endpoint-view-count-deprecation/37777)). Any data in this field is not valid and should not be used.
           format: int32
         email:
           type: string
           description: >-
-            The user’s verified email address. The object includes this field
+            The user's verified email address. The object includes this field
             only if the user access token includes the **user:read:email**
             scope.  
               
             If the request contains more than one user, only the user associated with the access token that provided consent will include an email address — the email address for all other users will be empty.
         created_at:
           type: string
-          description: The UTC date and time that the user’s account was created. The
+          description: The UTC date and time that the user's account was created. The
             timestamp is in RFC3339 format.
           format: date-time
     GetUsersResponse:
@@ -22023,10 +22023,10 @@ components:
           description: An ID that identifies the extension.
         version:
           type: string
-          description: The extension’s version.
+          description: The extension's version.
         name:
           type: string
-          description: The extension’s name.
+          description: The extension's name.
         can_activate:
           type: boolean
           description: A Boolean value that determines whether the extension is configured
@@ -22294,24 +22294,24 @@ components:
           description: An ID that identifies the video.
         stream_id:
           type: string
-          description: The ID of the stream that the video originated from if the video’s
-            type is “archive;” otherwise, **null**.
+          description: The ID of the stream that the video originated from if the video's
+            type is "archive;" otherwise, **null**.
           nullable: true
         user_id:
           type: string
           description: The ID of the broadcaster that owns the video.
         user_login:
           type: string
-          description: The broadcaster’s login name.
+          description: The broadcaster's login name.
         user_name:
           type: string
-          description: The broadcaster’s display name.
+          description: The broadcaster's display name.
         title:
           type: string
-          description: The video’s title.
+          description: The video's title.
         description:
           type: string
-          description: The video’s description.
+          description: The video's description.
         created_at:
           type: string
           description: The date and time, in UTC, of when the video was created. The
@@ -22324,7 +22324,7 @@ components:
           format: date-time
         url:
           type: string
-          description: The video’s URL.
+          description: The video's URL.
         thumbnail_url:
           type: string
           description: A URL to a thumbnail image of the video. Before using the URL, you
@@ -22333,7 +22333,7 @@ components:
             limitations, `${width}` must be 320 and `${height}` must be 180.
         viewable:
           type: string
-          description: The video’s viewable state. Always set to **public**.
+          description: The video's viewable state. Always set to **public**.
         view_count:
           type: integer
           description: The number of times that users have watched the video.
@@ -22344,12 +22344,12 @@ components:
             in. For example, the language code is DE if the video was broadcast
             in German. For a list of supported languages, see [Supported Stream
             Language](https://help.twitch.tv/s/article/languages-on-twitch#streamlang).
-            The language value is “other” if the video was broadcast in a
+            The language value is "other" if the video was broadcast in a
             language not in the list of supported languages.
         type:
           type: string
           description: >-
-            The video’s type. Possible values are:  
+            The video's type. Possible values are:  
               
             * archive — An on-demand video (VOD) of one of the broadcaster's past streams.
 
@@ -22362,7 +22362,7 @@ components:
             - upload
         duration:
           type: string
-          description: The video’s length in ISO 8601 duration format. For example, 3m21s
+          description: The video's length in ISO 8601 duration format. For example, 3m21s
             represents 3 minutes, 21 seconds.
         muted_segments:
           type: array
@@ -22403,8 +22403,8 @@ components:
             cursor:
               type: string
               description: The cursor used to get the next page of results. Use the cursor to
-                set the request’s _after_ or _before_ query parameter depending
-                on whether you’re paging forwards or backwards through the
+                set the request's _after_ or _before_ query parameter depending
+                on whether you're paging forwards or backwards through the
                 results.
     DeleteVideosResponse:
       type: object

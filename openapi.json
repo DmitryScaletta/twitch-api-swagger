@@ -1123,7 +1123,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the broadcaster’s list of editors.",
+            "description": "Successfully retrieved the broadcaster's list of editors.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1217,7 +1217,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the broadcaster’s list of followers.",
+            "description": "Successfully retrieved the broadcaster's list of followers.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2181,7 +2181,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\nUpdates a redemption’s status.\n\n```bash\ncurl --X PATCH 'https://api.twitch.tv/helix/channel_points/custom_rewards/redemptions?broadcaster_id=274637212&reward_id=92af127c-7326-4483-a52b-b0da0be61c01&id=17fa2df1-ad76-4804-bfa5-a40ef63efe63' \\\n-H 'client-id: gx2pv4208cff0ig9ou7nk3riccffxt' \\\n-H 'Authorization: Bearer vjxv3i0l4zxru966wsnwji51tmpkj2' \\\n-H 'Content-Type: application/json' \\\n-d '{\n  \"status\": \"CANCELED\"\n}'\n```",
+                    "description": "_Request:_\n\nUpdates a redemption’s status.\n\n```bash\ncurl -X PATCH 'https://api.twitch.tv/helix/channel_points/custom_rewards/redemptions?broadcaster_id=274637212&reward_id=92af127c-7326-4483-a52b-b0da0be61c01&id=17fa2df1-ad76-4804-bfa5-a40ef63efe63' \\\n-H 'Client-Id: gx2pv4208cff0ig9ou7nk3riccffxt' \\\n-H 'Authorization: Bearer vjxv3i0l4zxru966wsnwji51tmpkj2' \\\n-H 'Content-Type: application/json' \\\n-d '{\n  \"status\": \"CANCELED\"\n}'\n```",
                     "value": {
                       "data": [
                         {
@@ -2544,7 +2544,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved broadcaster’s list of custom emotes.",
+            "description": "Successfully retrieved broadcaster's list of custom emotes.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2640,7 +2640,7 @@
         "operationId": "get-global-emotes",
         "responses": {
           "200": {
-            "description": "Successfully retrieved Twitch’s list of global emotes.",
+            "description": "Successfully retrieved Twitch's list of global emotes.",
             "content": {
               "application/json": {
                 "schema": {
@@ -8080,8 +8080,8 @@
     },
     "/moderation/channels": {
       "get": {
-        "summary": "BETA Gets a list of channels that the specified user has moderator privileges in.",
-        "description": "BETA Gets a list of channels that the specified user has moderator privileges in.\n\n__Authorization:__\n\n* Query parameter `user_id` must match the user ID in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)\n* Requires OAuth Scope: `user:read:moderated_channels`",
+        "summary": "Gets a list of channels that the specified user has moderator privileges in.",
+        "description": "Gets a list of channels that the specified user has moderator privileges in.\n\n__Authorization:__\n\n* Query parameter `user_id` must match the user ID in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)\n* Requires OAuth Scope: `user:read:moderated_channels`",
         "tags": [
           "Moderation"
         ],
@@ -8111,7 +8111,7 @@
           {
             "name": "first",
             "in": "query",
-            "description": "The maximum number of items to return per page in the response.   \n  \nMinimum page size is 1 item per page and the maximum is 100\\. The default is 20.",
+            "description": "The maximum number of items to return per page in the response.  \n  \nMinimum page size is 1 item per page and the maximum is 100\\. The default is 20.",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -11258,7 +11258,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the team’s information.",
+            "description": "Successfully retrieved the team's information.",
             "content": {
               "application/json": {
                 "schema": {
@@ -11356,7 +11356,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the specified users’ information.",
+            "description": "Successfully retrieved the specified users' information.",
             "content": {
               "application/json": {
                 "schema": {
@@ -11423,7 +11423,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated the specified user’s information.",
+            "description": "Successfully updated the specified user's information.",
             "content": {
               "application/json": {
                 "schema": {
@@ -11512,7 +11512,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the broadcaster’s list of blocked users.",
+            "description": "Successfully retrieved the broadcaster's list of blocked users.",
             "content": {
               "application/json": {
                 "schema": {
@@ -11677,7 +11677,7 @@
         "operationId": "get-user-extensions",
         "responses": {
           "200": {
-            "description": "Successfully retrieved the user’s installed extensions.",
+            "description": "Successfully retrieved the user's installed extensions.",
             "content": {
               "application/json": {
                 "schema": {
@@ -11784,7 +11784,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the user’s active extensions.",
+            "description": "Successfully retrieved the user's active extensions.",
             "content": {
               "application/json": {
                 "schema": {
@@ -12017,7 +12017,7 @@
           {
             "name": "id",
             "in": "query",
-            "description": "A list of IDs that identify the videos you want to get. To get more than one video, include this parameter for each video you want to get. For example, `id=1234&id=5678`. You may specify a maximum of 100 IDs. The endpoint ignores duplicate IDs and IDs that weren’t found (if there’s at least one valid ID).  \n  \nThe _id_, _user\\_id_, and _game\\_id_ parameters are mutually exclusive.",
+            "description": "A list of IDs that identify the videos you want to get. To get more than one video, include this parameter for each video you want to get. For example, `id=1234&id=5678`. You may specify a maximum of 100 IDs. The endpoint ignores duplicate IDs and IDs that weren't found (if there's at least one valid ID).  \n  \nThe _id_, _user\\_id_, and _game\\_id_ parameters are mutually exclusive.",
             "schema": {
               "type": "array",
               "items": {
@@ -12053,7 +12053,7 @@
           {
             "name": "period",
             "in": "query",
-            "description": "A filter used to filter the list of videos by when they were published. For example, videos published in the last week. Possible values are:  \n  \n* all\n* day\n* month\n* week\n  \nThe default is “all,” which returns videos published in all periods.  \n  \nSpecify this parameter only if you specify the _game\\_id_ or _user\\_id_ query parameter.",
+            "description": "A filter used to filter the list of videos by when they were published. For example, videos published in the last week. Possible values are:  \n  \n* all\n* day\n* month\n* week\n  \nThe default is \"all,\" which returns videos published in all periods.  \n  \nSpecify this parameter only if you specify the _game\\_id_ or _user\\_id_ query parameter.",
             "schema": {
               "type": "string",
               "enum": [
@@ -12067,7 +12067,7 @@
           {
             "name": "sort",
             "in": "query",
-            "description": "The order to sort the returned videos in. Possible values are:  \n  \n* time — Sort the results in descending order by when they were created (i.e., latest video first).\n* trending — Sort the results in descending order by biggest gains in viewership (i.e., highest trending video first).\n* views — Sort the results in descending order by most views (i.e., highest number of views first).\n  \nThe default is “time.”  \n  \nSpecify this parameter only if you specify the _game\\_id_ or _user\\_id_ query parameter.",
+            "description": "The order to sort the returned videos in. Possible values are:  \n  \n* time — Sort the results in descending order by when they were created (i.e., latest video first).\n* trending — Sort the results in descending order by biggest gains in viewership (i.e., highest trending video first).\n* views — Sort the results in descending order by most views (i.e., highest number of views first).\n  \nThe default is \"time.\"  \n  \nSpecify this parameter only if you specify the _game\\_id_ or _user\\_id_ query parameter.",
             "schema": {
               "type": "string",
               "enum": [
@@ -12080,7 +12080,7 @@
           {
             "name": "type",
             "in": "query",
-            "description": "A filter used to filter the list of videos by the video’s type. Possible case-sensitive values are:  \n  \n* all\n* archive — On-demand videos (VODs) of past streams.\n* highlight — Highlight reels of past streams.\n* upload — External videos that the broadcaster uploaded using the Video Producer.\n  \nThe default is “all,” which returns all video types.  \n  \nSpecify this parameter only if you specify the _game\\_id_ or _user\\_id_ query parameter.",
+            "description": "A filter used to filter the list of videos by the video's type. Possible case-sensitive values are:  \n  \n* all\n* archive — On-demand videos (VODs) of past streams.\n* highlight — Highlight reels of past streams.\n* upload — External videos that the broadcaster uploaded using the Video Producer.\n  \nThe default is \"all,\" which returns all video types.  \n  \nSpecify this parameter only if you specify the _game\\_id_ or _user\\_id_ query parameter.",
             "schema": {
               "type": "string",
               "enum": [
@@ -14073,11 +14073,11 @@
           },
           "tier": {
             "type": "string",
-            "description": "The subscriber tier at which the emote is unlocked. This field contains the tier information only if `emote_type` is set to `subscriptions`, otherwise, it’s an empty string."
+            "description": "The subscriber tier at which the emote is unlocked. This field contains the tier information only if `emote_type` is set to `subscriptions`, otherwise, it's an empty string."
           },
           "emote_type": {
             "type": "string",
-            "description": "The type of emote. The possible values are:   \n  \n* bitstier — A custom Bits tier emote.\n* follower — A custom follower emote.\n* subscriptions — A custom subscriber emote.",
+            "description": "The type of emote. The possible values are:  \n  \n* bitstier — A custom Bits tier emote.\n* follower — A custom follower emote.\n* subscriptions — A custom subscriber emote.",
             "enum": [
               "bitstier",
               "follower",
@@ -14090,7 +14090,7 @@
           },
           "format": {
             "type": "array",
-            "description": "The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only `static`. But if the emote is available as a static PNG and an animated GIF, the array contains `static` and `animated`. The possible formats are:   \n  \n* animated — An animated GIF is available for this emote.\n* static — A static PNG file is available for this emote.",
+            "description": "The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only `static`. But if the emote is available as a static PNG and an animated GIF, the array contains `static` and `animated`. The possible formats are:  \n  \n* animated — An animated GIF is available for this emote.\n* static — A static PNG file is available for this emote.",
             "items": {
               "type": "string",
               "enum": [
@@ -14101,7 +14101,7 @@
           },
           "scale": {
             "type": "array",
-            "description": "The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0\\. Possible sizes are:   \n  \n* 1.0 — A small version (28px x 28px) is available.\n* 2.0 — A medium version (56px x 56px) is available.\n* 3.0 — A large version (112px x 112px) is available.",
+            "description": "The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0\\. Possible sizes are:  \n  \n* 1.0 — A small version (28px x 28px) is available.\n* 2.0 — A medium version (56px x 56px) is available.\n* 3.0 — A large version (112px x 112px) is available.",
             "items": {
               "type": "string",
               "enum": [
@@ -14113,7 +14113,7 @@
           },
           "theme_mode": {
             "type": "array",
-            "description": "The background themes that the emote is available in. Possible themes are:   \n  \n* dark\n* light",
+            "description": "The background themes that the emote is available in. Possible themes are:  \n  \n* dark\n* light",
             "items": {
               "type": "string",
               "enum": [
@@ -14133,7 +14133,7 @@
         "properties": {
           "data": {
             "type": "array",
-            "description": "The list of emotes that the specified broadcaster created. If the broadcaster hasn’t created custom emotes, the list is empty.",
+            "description": "The list of emotes that the specified broadcaster created. If the broadcaster hasn't created custom emotes, the list is empty.",
             "items": {
               "$ref": "#/components/schemas/ChannelEmote"
             }
@@ -14188,7 +14188,7 @@
           },
           "format": {
             "type": "array",
-            "description": "The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only `static`. But if the emote is available as a static PNG and an animated GIF, the array contains `static` and `animated`. The possible formats are:   \n  \n* animated — An animated GIF is available for this emote.\n* static — A static PNG file is available for this emote.",
+            "description": "The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only `static`. But if the emote is available as a static PNG and an animated GIF, the array contains `static` and `animated`. The possible formats are:  \n  \n* animated — An animated GIF is available for this emote.\n* static — A static PNG file is available for this emote.",
             "items": {
               "type": "string",
               "enum": [
@@ -14199,7 +14199,7 @@
           },
           "scale": {
             "type": "array",
-            "description": "The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0\\. Possible sizes are:   \n  \n* 1.0 — A small version (28px x 28px) is available.\n* 2.0 — A medium version (56px x 56px) is available.\n* 3.0 — A large version (112px x 112px) is available.",
+            "description": "The sizes that the emote is available in. For example, if the emote is available in small and medium sizes, the array contains 1.0 and 2.0\\. Possible sizes are:  \n  \n* 1.0 — A small version (28px x 28px) is available.\n* 2.0 — A medium version (56px x 56px) is available.\n* 3.0 — A large version (112px x 112px) is available.",
             "items": {
               "type": "string",
               "enum": [
@@ -14211,7 +14211,7 @@
           },
           "theme_mode": {
             "type": "array",
-            "description": "The background themes that the emote is available in. Possible themes are:   \n  \n* dark\n* light",
+            "description": "The background themes that the emote is available in. Possible themes are:  \n  \n* dark\n* light",
             "items": {
               "type": "string",
               "enum": [
@@ -19702,11 +19702,11 @@
           },
           "login": {
             "type": "string",
-            "description": "The user’s login name."
+            "description": "The user's login name."
           },
           "display_name": {
             "type": "string",
-            "description": "The user’s display name."
+            "description": "The user's display name."
           },
           "type": {
             "type": "string",
@@ -19729,28 +19729,28 @@
           },
           "description": {
             "type": "string",
-            "description": "The user’s description of their channel."
+            "description": "The user's description of their channel."
           },
           "profile_image_url": {
             "type": "string",
-            "description": "A URL to the user’s profile image."
+            "description": "A URL to the user's profile image."
           },
           "offline_image_url": {
             "type": "string",
-            "description": "A URL to the user’s offline image."
+            "description": "A URL to the user's offline image."
           },
           "view_count": {
             "type": "integer",
-            "description": "The number of times the user’s channel has been viewed.  \n  \n**NOTE**: This field has been deprecated (see [Get Users API endpoint – “view\\_count” deprecation](https://discuss.dev.twitch.tv/t/get-users-api-endpoint-view-count-deprecation/37777)). Any data in this field is not valid and should not be used.",
+            "description": "The number of times the user's channel has been viewed.  \n  \n**NOTE**: This field has been deprecated (see [Get Users API endpoint – \"view\\_count\" deprecation](https://discuss.dev.twitch.tv/t/get-users-api-endpoint-view-count-deprecation/37777)). Any data in this field is not valid and should not be used.",
             "format": "int32"
           },
           "email": {
             "type": "string",
-            "description": "The user’s verified email address. The object includes this field only if the user access token includes the **user:read:email** scope.  \n  \nIf the request contains more than one user, only the user associated with the access token that provided consent will include an email address — the email address for all other users will be empty."
+            "description": "The user's verified email address. The object includes this field only if the user access token includes the **user:read:email** scope.  \n  \nIf the request contains more than one user, only the user associated with the access token that provided consent will include an email address — the email address for all other users will be empty."
           },
           "created_at": {
             "type": "string",
-            "description": "The UTC date and time that the user’s account was created. The timestamp is in RFC3339 format.",
+            "description": "The UTC date and time that the user's account was created. The timestamp is in RFC3339 format.",
             "format": "date-time"
           }
         }
@@ -19838,11 +19838,11 @@
           },
           "version": {
             "type": "string",
-            "description": "The extension’s version."
+            "description": "The extension's version."
           },
           "name": {
             "type": "string",
-            "description": "The extension’s name."
+            "description": "The extension's name."
           },
           "can_activate": {
             "type": "boolean",
@@ -20161,7 +20161,7 @@
           },
           "stream_id": {
             "type": "string",
-            "description": "The ID of the stream that the video originated from if the video’s type is “archive;” otherwise, **null**.",
+            "description": "The ID of the stream that the video originated from if the video's type is \"archive;\" otherwise, **null**.",
             "nullable": true
           },
           "user_id": {
@@ -20170,19 +20170,19 @@
           },
           "user_login": {
             "type": "string",
-            "description": "The broadcaster’s login name."
+            "description": "The broadcaster's login name."
           },
           "user_name": {
             "type": "string",
-            "description": "The broadcaster’s display name."
+            "description": "The broadcaster's display name."
           },
           "title": {
             "type": "string",
-            "description": "The video’s title."
+            "description": "The video's title."
           },
           "description": {
             "type": "string",
-            "description": "The video’s description."
+            "description": "The video's description."
           },
           "created_at": {
             "type": "string",
@@ -20196,7 +20196,7 @@
           },
           "url": {
             "type": "string",
-            "description": "The video’s URL."
+            "description": "The video's URL."
           },
           "thumbnail_url": {
             "type": "string",
@@ -20204,7 +20204,7 @@
           },
           "viewable": {
             "type": "string",
-            "description": "The video’s viewable state. Always set to **public**."
+            "description": "The video's viewable state. Always set to **public**."
           },
           "view_count": {
             "type": "integer",
@@ -20213,11 +20213,11 @@
           },
           "language": {
             "type": "string",
-            "description": "The ISO 639-1 two-letter language code that the video was broadcast in. For example, the language code is DE if the video was broadcast in German. For a list of supported languages, see [Supported Stream Language](https://help.twitch.tv/s/article/languages-on-twitch#streamlang). The language value is “other” if the video was broadcast in a language not in the list of supported languages."
+            "description": "The ISO 639-1 two-letter language code that the video was broadcast in. For example, the language code is DE if the video was broadcast in German. For a list of supported languages, see [Supported Stream Language](https://help.twitch.tv/s/article/languages-on-twitch#streamlang). The language value is \"other\" if the video was broadcast in a language not in the list of supported languages."
           },
           "type": {
             "type": "string",
-            "description": "The video’s type. Possible values are:  \n  \n* archive — An on-demand video (VOD) of one of the broadcaster's past streams.\n* highlight — A highlight reel of one of the broadcaster's past streams. See [Creating Highlights](https://help.twitch.tv/s/article/creating-highlights-and-stream-markers).\n* upload — A video that the broadcaster uploaded to their video library. See Upload under [Video Producer](https://help.twitch.tv/s/article/video-on-demand?language=en%5FUS#videoproducer).",
+            "description": "The video's type. Possible values are:  \n  \n* archive — An on-demand video (VOD) of one of the broadcaster's past streams.\n* highlight — A highlight reel of one of the broadcaster's past streams. See [Creating Highlights](https://help.twitch.tv/s/article/creating-highlights-and-stream-markers).\n* upload — A video that the broadcaster uploaded to their video library. See Upload under [Video Producer](https://help.twitch.tv/s/article/video-on-demand?language=en%5FUS#videoproducer).",
             "enum": [
               "archive",
               "highlight",
@@ -20226,7 +20226,7 @@
           },
           "duration": {
             "type": "string",
-            "description": "The video’s length in ISO 8601 duration format. For example, 3m21s represents 3 minutes, 21 seconds."
+            "description": "The video's length in ISO 8601 duration format. For example, 3m21s represents 3 minutes, 21 seconds."
           },
           "muted_segments": {
             "type": "array",
@@ -20273,7 +20273,7 @@
             "properties": {
               "cursor": {
                 "type": "string",
-                "description": "The cursor used to get the next page of results. Use the cursor to set the request’s _after_ or _before_ query parameter depending on whether you’re paging forwards or backwards through the results."
+                "description": "The cursor used to get the next page of results. Use the cursor to set the request's _after_ or _before_ query parameter depending on whether you're paging forwards or backwards through the results."
               }
             }
           }
