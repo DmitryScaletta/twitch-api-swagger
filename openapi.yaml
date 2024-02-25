@@ -5031,6 +5031,9 @@ paths:
         game, a user, or both.
 
 
+        **NOTE:** Entitlements returned in the response body data are not guaranteed to be sorted by any field returned by the API. To retrieve **CLAIMED** or **FULFILLED** entitlements, use the `fulfillment_status` query parameter to filter results. To retrieve entitlements for a specific game, use the `game_id` query parameter to filter results.
+
+
         The following table identifies the request parameters that you may specify based on the type of access token used.
 
 

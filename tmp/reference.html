@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-02-02T11:13:27-08:00">
+<meta property="article:published_time" content="2024-02-14T16:05:03-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2024-02-02T11:13:27-08:00","datePublished":"2024-02-02T11:13:27-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2024-02-14T16:05:03-08:00","datePublished":"2024-02-14T16:05:03-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -9949,6 +9949,8 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 			<a class="editor-link" href="cloudcannon:#content_blocks[43]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets an organization’s list of entitlements that have been granted to a game, a user, or both.</p>
+
+<p><strong>NOTE:</strong> Entitlements returned in the response body data are not guaranteed to be sorted by any field returned by the API. To retrieve <strong>CLAIMED</strong> or <strong>FULFILLED</strong> entitlements, use the <code class="highlighter-rouge">fulfillment_status</code> query parameter to filter results. To retrieve entitlements for a specific game, use the <code class="highlighter-rouge">game_id</code> query parameter to filter results.</p>
 
 <p>The following table identifies the request parameters that you may specify based on the type of access token used.</p>
 
