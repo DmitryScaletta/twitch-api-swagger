@@ -16803,11 +16803,9 @@
           }
         }
       },
-      "GuestStarSession": {
+      "Guest": {
         "type": "object",
         "required": [
-          "id",
-          "guests",
           "slot_id",
           "is_live",
           "user_id",
@@ -16819,14 +16817,6 @@
           "video_settings"
         ],
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "ID uniquely representing the Guest Star session."
-          },
-          "guests": {
-            "type": "Guest",
-            "description": "List of guests currently interacting with the Guest Star session."
-          },
           "slot_id": {
             "type": "string",
             "description": "ID representing this guest’s slot assignment.   \n  \n* Host is always in slot \"0\"\n* Guests are assigned the following consecutive IDs (e.g, \"1\", \"2\", \"3\", etc)\n* Screen Share is represented as a special guest with the ID \"SCREENSHARE\"\n* The identifier here matches the ID referenced in browser source links used in broadcasting software."
@@ -16901,6 +16891,26 @@
                 "type": "boolean",
                 "description": "Flag determining whether the guest has an appropriate video device available to be transmitted to the session."
               }
+            }
+          }
+        }
+      },
+      "GuestStarSession": {
+        "type": "object",
+        "required": [
+          "id",
+          "guests"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ID uniquely representing the Guest Star session."
+          },
+          "guests": {
+            "type": "array",
+            "description": "List of guests currently interacting with the Guest Star session.",
+            "items": {
+              "$ref": "#/components/schemas/Guest"
             }
           }
         }

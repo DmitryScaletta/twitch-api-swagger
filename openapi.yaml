@@ -19339,11 +19339,9 @@ components:
             associated with the channel’s browser sources. Providing a true
             value for this will immediately invalidate all browser sources
             previously configured in your streaming software.
-    GuestStarSession:
+    Guest:
       type: object
       required:
-        - id
-        - guests
         - slot_id
         - is_live
         - user_id
@@ -19354,12 +19352,6 @@ components:
         - audio_settings
         - video_settings
       properties:
-        id:
-          type: string
-          description: ID uniquely representing the Guest Star session.
-        guests:
-          type: Guest
-          description: List of guests currently interacting with the Guest Star session.
         slot_id:
           type: string
           description: >-
@@ -19434,6 +19426,20 @@ components:
               type: boolean
               description: Flag determining whether the guest has an appropriate video device
                 available to be transmitted to the session.
+    GuestStarSession:
+      type: object
+      required:
+        - id
+        - guests
+      properties:
+        id:
+          type: string
+          description: ID uniquely representing the Guest Star session.
+        guests:
+          type: array
+          description: List of guests currently interacting with the Guest Star session.
+          items:
+            $ref: "#/components/schemas/Guest"
     GetGuestStarSessionResponse:
       type: object
       required:

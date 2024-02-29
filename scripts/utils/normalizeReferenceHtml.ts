@@ -214,6 +214,30 @@ const normalizeReferenceHtml = (document: Document) => {
       '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;broadcast</td>',
     ],
   ]);
+
+  // Wrong padding after the `guests` field
+  // https://dev.twitch.tv/docs/api/reference/#get-guest-star-session
+  // https://dev.twitch.tv/docs/api/reference/#create-guest-star-session
+  // https://dev.twitch.tv/docs/api/reference/#end-guest-star-session
+  {
+    const ids = [
+      'get-guest-star-session',
+      'create-guest-star-session',
+      'end-guest-star-session',
+    ];
+    for (const id of ids) {
+      const table = getDocsEl(id).querySelectorAll('table')[1]!;
+      replaceHtml(table, [['<td>Guest</td>', '<td>Object[]</td>']]);
+      let addPadding = false;
+      for (const tr of table.querySelectorAll('tr')!) {
+        if (addPadding) {
+          replaceHtml(tr, [['<td>', '<td>&nbsp;&nbsp;&nbsp']]);
+        } else if (tr.innerHTML.includes('<td>&nbsp;&nbsp;&nbsp;guests</td>')) {
+          addPadding = true;
+        }
+      }
+    }
+  }
 };
 
 export default normalizeReferenceHtml;
