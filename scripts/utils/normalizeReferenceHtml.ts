@@ -226,13 +226,16 @@ const normalizeReferenceHtml = (document: Document) => {
       'end-guest-star-session',
     ];
     for (const id of ids) {
-      const table = getDocsEl(id).querySelectorAll('table')[1]!;
-      replaceHtml(table, [['<td>Guest</td>', '<td>Object[]</td>']]);
+      const GUESTS_FIELD = '<td>Guest</td>';
       let addPadding = false;
-      for (const tr of table.querySelectorAll('tr')!) {
+      const trs = getDocsEl(id)
+        .querySelectorAll('table')[1]!
+        .querySelectorAll('tr')!;
+      for (const tr of trs) {
         if (addPadding) {
           replaceHtml(tr, [['<td>', '<td>&nbsp;&nbsp;&nbsp']]);
-        } else if (tr.innerHTML.includes('<td>&nbsp;&nbsp;&nbsp;guests</td>')) {
+        } else if (tr.innerHTML.includes(GUESTS_FIELD)) {
+          replaceHtml(tr, [[GUESTS_FIELD, '<td>Object[]</td>']]);
           addPadding = true;
         }
       }
