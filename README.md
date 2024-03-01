@@ -1,8 +1,9 @@
 # twitch-api-swagger
 
-https://twitch-api-swagger.surge.sh
-
 Unofficial Swagger UI for Twitch API.
+
+https://twitch-api-swagger.surge.sh - classic swagger ui  
+https://twitch-api-swagger.surge.sh/scalar/ - scalar ui
 
 All endpoints are generated automatically from the [twitch docs](https://dev.twitch.tv/docs/api/reference) page.
 
