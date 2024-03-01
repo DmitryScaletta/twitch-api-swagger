@@ -21933,7 +21933,7 @@ components:
           description: >-
             The type of broadcaster. Possible values are:  
               
-            * affiliate — An [affiliate broadcaster](https://help.twitch.tv/s/article/joining-the-affiliate-program target=)
+            * affiliate — An [affiliate broadcaster](https://help.twitch.tv/s/article/joining-the-affiliate-program)
 
             * partner — A [partner broadcaster](https://help.twitch.tv/s/article/partner-program-overview)
 

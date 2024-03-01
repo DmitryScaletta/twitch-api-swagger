@@ -19730,7 +19730,7 @@
           },
           "broadcaster_type": {
             "type": "string",
-            "description": "The type of broadcaster. Possible values are:  \n  \n* affiliate — An [affiliate broadcaster](https://help.twitch.tv/s/article/joining-the-affiliate-program target=)\n* partner — A [partner broadcaster](https://help.twitch.tv/s/article/partner-program-overview)\n* \"\" — A normal broadcaster",
+            "description": "The type of broadcaster. Possible values are:  \n  \n* affiliate — An [affiliate broadcaster](https://help.twitch.tv/s/article/joining-the-affiliate-program)\n* partner — A [partner broadcaster](https://help.twitch.tv/s/article/partner-program-overview)\n* \"\" — A normal broadcaster",
             "enum": [
               "affiliate",
               "partner",

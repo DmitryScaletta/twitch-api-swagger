@@ -8,7 +8,7 @@ const parseMarkdown = (html: string) => {
     .replaceAll('</ul>', '</ul><br>')
     .replaceAll('href="#', 'href="https://dev.twitch.tv/docs/api/reference#')
     .replaceAll('href="/docs/', 'href="https://dev.twitch.tv/docs/');
-  return nhm.translate(normalizedHtml).trim();
+  return nhm.translate(normalizedHtml).trim().replaceAll(' target=)', ')');
 };
 
 export default parseMarkdown;
