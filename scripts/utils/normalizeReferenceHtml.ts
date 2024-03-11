@@ -14,9 +14,8 @@ const replaceHtml = (
       el.innerHTML = el.innerHTML.replace(searchValue, replaceValue);
     }
     if (oldHtml === el.innerHTML) {
-      console.warn(
-        `The replace wasn't applied:\n${searchValue}\n${replaceValue}`,
-      );
+      console.warn("The replace wasn't applied:");
+      console.warn({ searchValue, replaceValue });
     }
   }
 };
@@ -187,7 +186,6 @@ const normalizeReferenceHtml = (document: Document) => {
   // Redundant and missing semicolons in the examples
   // https://dev.twitch.tv/docs/api/reference/#update-conduit-shards
   replaceHtml(getCodeEl('update-conduit-shards'), [
-    ['\n    },\n', '\n    }\n', true],
     [
       '"https://this-is-a-callback-3.com"',
       '"https://this-is-a-callback-3.com",',
@@ -241,6 +239,22 @@ const normalizeReferenceHtml = (document: Document) => {
       }
     }
   }
+
+  // Wrong padding for the `broadcaster_name` field
+  // https://dev.twitch.tv/docs/api/reference/#get-unban-requests
+  replaceHtml(getDocsEl('get-unban-requests'), [
+    [
+      '<td>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;broadcaster_name</td>',
+      '<td>&nbsp;&nbsp;&nbsp;broadcaster_name</td>',
+    ],
+  ]);
+  // https://dev.twitch.tv/docs/api/reference/#resolve-unban-requests
+  replaceHtml(getDocsEl('resolve-unban-requests'), [
+    [
+      '<td>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;broadcaster_name</td>',
+      '<td>&nbsp;&nbsp;&nbsp;broadcaster_name</td>',
+    ],
+  ]);
 };
 
 export default normalizeReferenceHtml;
