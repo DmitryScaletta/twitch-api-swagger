@@ -248,13 +248,6 @@ const normalizeReferenceHtml = (document: Document) => {
       '<td>&nbsp;&nbsp;&nbsp;broadcaster_name</td>',
     ],
   ]);
-  // https://dev.twitch.tv/docs/api/reference/#resolve-unban-requests
-  replaceHtml(getDocsEl('resolve-unban-requests'), [
-    [
-      '<td>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;broadcaster_name</td>',
-      '<td>&nbsp;&nbsp;&nbsp;broadcaster_name</td>',
-    ],
-  ]);
 };
 
 export default normalizeReferenceHtml;

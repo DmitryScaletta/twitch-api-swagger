@@ -2075,7 +2075,7 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.
+        Requires a [user access token](https://dev.twitch.tv/docs/api/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.
 
 
         __Request Body:__
@@ -2232,6 +2232,8 @@ paths:
                         cooldown_expires_at: null
         "400":
           description: >-
+            ul>
+
             * The _broadcaster\_id_ query parameter is required.
 
             * The _id_ query parameter is required.
@@ -3660,9 +3662,9 @@ paths:
             - moderator:manage:chat_settings
   /chat/emotes/user:
     get:
-      summary: BETA Retrieves emotes available to the user across all channels.
+      summary: NEW Retrieves emotes available to the user across all channels.
       description: >-
-        BETA Retrieves emotes available to the user across all channels.
+        NEW Retrieves emotes available to the user across all channels.
 
 
         __Authorization:__
@@ -6959,12 +6961,14 @@ paths:
               - channel.unban
               - channel.unban_request.create
               - channel.unban_request.resolve
+              - channel.moderate
               - channel.moderator.add
               - channel.moderator.remove
               - channel.guest_star_session.begin
               - channel.guest_star_session.end
               - channel.guest_star_guest.update
               - channel.guest_star_settings.update
+              - channel.channel_points_automatic_reward.add
               - channel.channel_points_custom_reward.add
               - channel.channel_points_custom_reward.update
               - channel.channel_points_custom_reward.remove
@@ -6977,6 +6981,8 @@ paths:
               - channel.prediction.progress
               - channel.prediction.lock
               - channel.prediction.end
+              - channel.vip.add
+              - channel.vip.remove
               - channel.charity_campaign.donate
               - channel.charity_campaign.start
               - channel.charity_campaign.progress
@@ -6999,6 +7005,7 @@ paths:
               - user.authorization.grant
               - user.authorization.revoke
               - user.update
+              - user.whisper.message
         - name: user_id
           in: query
           description: Filter subscriptions by user ID. The response contains
@@ -7416,7 +7423,9 @@ paths:
 
                     curl -x GET `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&moderator_id=9321049` \
 
+
                     -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
 
                     -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
 
@@ -9555,9 +9564,9 @@ paths:
             - moderator:manage:banned_users
   /moderation/unban_requests:
     get:
-      summary: BETA Gets a list of unban requests for a broadcaster’s channel.
+      summary: NEW Gets a list of unban requests for a broadcaster’s channel.
       description: >-
-        BETA Gets a list of unban requests for a broadcaster’s channel.
+        NEW Gets a list of unban requests for a broadcaster’s channel.
 
 
         __Authorization:__
@@ -9685,17 +9694,17 @@ paths:
             - moderator:read:unban_requests
             - moderator:manage:unban_requests
     patch:
-      summary: BETA Resolves an unban request by approving or denying it.
+      summary: NEW Resolves an unban request by approving or denying it.
       description: >-
-        BETA Resolves an unban request by approving or denying it.
+        NEW Resolves an unban request by approving or denying it.
 
 
         __Authorization:__
 
 
-        * Requires a user access token that includes the **moderator:manage:unban\_requests** scope.
+        * Requires a user access token that includes the **moderator:manage:unban\\\_requests** scope.
 
-        * Query parameter `moderator_id` must match the `user_id` in the [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).
+        * Query parameter `moderator_id` must match the `user_id` in the[user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).
       tags:
         - Moderation
       externalDocs:
@@ -9720,14 +9729,16 @@ paths:
           required: true
         - name: unban_request_id
           in: query
-          description: The UUID of the unban request.
+          description: The ID of the broadcaster or a user that has permission to moderate
+            the broadcaster’s unban requests. This ID must match the user ID in
+            the user access token.
           schema:
             type: string
           required: true
         - name: status
           in: query
           description: |-
-            Resolution status.  
+            Resolution status.   
               
             * approved
             * denied
@@ -14147,15 +14158,12 @@ paths:
     get:
       summary: Gets information about one or more users.
       description: >-
-        Gets information about one or more users.
-
-
-        You may look up users using their user ID, login name, or both but the sum total of the number of users you may look up is 100\. For example, you may specify 50 IDs and 50 names or 100 IDs or names, but you cannot specify 100 IDs and 100 names.
-
-
-        If you don’t specify IDs or login names, the request returns information about the user in the access token if you specify a user access token.
-
-
+        Gets information about one or more users.  
+          
+        You may look up users using their user ID, login name, or both but the sum total of the number of users you may look up is 100\. For example, you may specify 50 IDs and 50 names or 100 IDs or names, but you cannot specify 100 IDs and 100 names.  
+          
+        If you don’t specify IDs or login names, the request returns information about the user in the access token if you specify a user access token.  
+          
         To include the user’s verified email address in the response, you must use a user access token that includes the **user:read:email** scope.
 
 
@@ -14193,7 +14201,7 @@ paths:
           explode: true
       responses:
         "200":
-          description: Successfully retrieved the specified users' information.
+          description: Successfully retrieved the specified users’ information.
           content:
             application/json:
               schema:
@@ -14232,10 +14240,10 @@ paths:
                         created_at: 2016-12-14T20:32:28Z
         "400":
           description: >-
-            * The _id_ or _login_ query parameter is required unless the request
-            uses a user access token.
+            * The \*id\* or \*login\* query parameter is required unless the
+            request uses a user access token.
 
-            * The request exceeded the maximum allowed number of _id_ and/or _login_ query parameters.
+            * The request exceeded the maximum allowed number of \*id\* and/or \*login\* query parameters.
         "401":
           description: >-
             * The Authorization header is required and must contain an app
@@ -16665,8 +16673,8 @@ components:
           format: int64
         background_color:
           type: string
-          description: "The background color to use for the reward. Specify the color
-            using Hex format (for example, #00E5CB)."
+          description: The background color to use for the reward. Specify the color using
+            Hex format (for example, \\#00E5CB).
         is_enabled:
           type: boolean
           description: A Boolean value that indicates whether the reward is enabled. Set
@@ -20593,8 +20601,8 @@ components:
             required:
               - id
               - broadcaster_id
-              - broadcaster_name
               - broadcaster_login
+              - broadcaster_name
               - moderator_id
               - moderator_login
               - moderator_name
@@ -20614,37 +20622,37 @@ components:
                 type: string
                 description: User ID of broadcaster whose channel is receiving the unban
                   request.
-              broadcaster_name:
-                type: string
-                description: The broadcaster's display name.
               broadcaster_login:
                 type: string
-                description: The broadcaster's login name.
+                description: The broadcaster’s login name.
+              broadcaster_name:
+                type: string
+                description: The broadcaster’s display name.
               moderator_id:
                 type: string
                 description: User ID of moderator who approved/denied the request.
               moderator_login:
                 type: string
-                description: The moderator's login name.
+                description: The moderator’s login name.
               moderator_name:
                 type: string
-                description: The moderator's display name.
+                description: The moderator’s display name.
               user_id:
                 type: string
                 description: User ID of the requestor who is asking for an unban.
               user_login:
                 type: string
-                description: The user's login name.
+                description: The user’s login name.
               user_name:
                 type: string
-                description: The user's display name
+                description: The user’s display name.
               text:
                 type: string
                 description: Text of the request from the requesting user.
               status:
                 type: string
                 description: |-
-                  Status of the request. One of:  
+                  Status of the request. One of:   
                     
                   * approved
                   * denied

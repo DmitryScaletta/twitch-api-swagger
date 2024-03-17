@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-03-07T16:52:57-08:00">
+<meta property="article:published_time" content="2024-03-15T19:11:46-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2024-03-07T16:52:57-08:00","datePublished":"2024-03-07T16:52:57-08:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2024-03-15T19:11:46-07:00","datePublished":"2024-03-15T19:11:46-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -1130,7 +1130,7 @@
 								<td>Chat</td>
 							
 							<td><a href="#get-user-emotes">Get User Emotes</a></td>
-							<td><p><span class="pill pill-beta">BETA</span> Retrieves emotes available to the user across all channels.</p>
+							<td><p><span class="pill pill-new">NEW</span> Retrieves emotes available to the user across all channels.</p>
 </td>
 						</tr>
 					
@@ -1746,7 +1746,7 @@
 								<td>Moderation</td>
 							
 							<td><a href="#get-unban-requests">Get Unban Requests</a></td>
-							<td><p><span class="pill pill-beta">BETA</span> Gets a list of unban requests for a broadcaster’s channel.</p>
+							<td><p><span class="pill pill-new">NEW</span> Gets a list of unban requests for a broadcaster’s channel.</p>
 </td>
 						</tr>
 					
@@ -1757,7 +1757,7 @@
 								<td>Moderation</td>
 							
 							<td><a href="#resolve-unban-requests">Resolve Unban Requests</a></td>
-							<td><p><span class="pill pill-beta">BETA</span> Resolves an unban request by approving or denying it.</p>
+							<td><p><span class="pill pill-new">NEW</span> Resolves an unban request by approving or denying it.</p>
 </td>
 						</tr>
 					
@@ -5818,7 +5818,7 @@
 
 <h3>Authorization</h3>
 
-<p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:redemptions</strong> scope.</p>
+<p>Requires a <a href="/docs/api/authentication#user-access-tokens">user access token</a> that includes the <strong>channel:manage:redemptions</strong> scope.</p>
 
 <h3>URL</h3>
 
@@ -5887,7 +5887,7 @@
       <td>background_color</td>
       <td>String</td>
       <td>No</td>
-      <td>The background color to use for the reward. Specify the color using Hex format (for example, #00E5CB).</td>
+      <td>The background color to use for the reward. Specify the color using Hex format (for example, \#00E5CB).</td>
     </tr>
     <tr>
       <td>is_enabled</td>
@@ -6133,7 +6133,40 @@
 
 <h3>Response Codes</h3>
 
-<table><thead><tr><th>HTTP Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully updated the custom reward.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li><li>The <i>id</i> query parameter is required.</li><li>The <code>title</code> must contain a minimum of 1 character and a maximum of 45 characters.</li><li>The <code>title</code> must be unique amongst all of the broadcaster's custom rewards.</li><li>The <code>cost</code> field must contain a minimum of 1 point.</li><li>The <code>prompt</code> field is limited to a maximum of 200 characters.</li><li>If <code>is_max_per_stream_enabled</code> is <b>true</b>, the minimum value for <code>max_per_stream</code> is 1.</li><li>If <code>is_max_per_user_per_stream_enabled</code> is <b>true</b>, the minimum value for <code>max_per_user_per_stream</code> is 1.</li><li>If <code>is_global_cooldown_enabled</code> is <b>true</b>, the minimum value for <code>global_cooldown_seconds</code> is 1 and the maximum is 604800.</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The Authorization header is required and must specify a user access token.</li><li>The user access token must include the <b>channel:manage:redemptions</b> scope.</li><li>The OAuth token is not valide.</li><li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li></ul></td></tr><tr><td>403 Forbidden</td><td><ul><li>The ID in the Client-Id header must match the client ID used to create the custom reward.</li><li>The broadcaster is not a partner or affiliate.</li></ul></td></tr><tr><td>404 Not Found</td><td><ul><li>The custom reward specified in the <i>id</i> query parameter was not found.</li></ul></td></tr><tr><td>500 Internal Server Error</td><td> </td></tr></tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>HTTP Code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>200 OK</td>
+      <td>Successfully updated the custom reward.</td>
+    </tr>
+    <tr>
+      <td>400 Bad Request</td>
+      <td>ul><li>The <i>broadcaster_id</i> query parameter is required.</li><li>The <i>id</i> query parameter is required.</li><li>The <code>title</code> must contain a minimum of 1 character and a maximum of 45 characters.</li><li>The <code>title</code> must be unique amongst all of the broadcaster's custom rewards.</li><li>The <code>cost</code> field must contain a minimum of 1 point.</li><li>The <code>prompt</code> field is limited to a maximum of 200 characters.</li><li>If <code>is_max_per_stream_enabled</code> is <b>true</b>, the minimum value for <code>max_per_stream</code> is 1.</li><li>If <code>is_max_per_user_per_stream_enabled</code> is <b>true</b>, the minimum value for <code>max_per_user_per_stream</code> is 1.</li><li>If <code>is_global_cooldown_enabled</code> is <b>true</b>, the minimum value for <code>global_cooldown_seconds</code> is 1 and the maximum is 604800.</li></td>
+    </tr>
+    <tr>
+      <td>401 Unauthorized</td>
+      <td><ul><li>The Authorization header is required and must specify a user access token.</li><li>The user access token must include the <b>channel:manage:redemptions</b> scope.</li><li>The OAuth token is not valide.</li><li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li></ul></td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td><ul><li>The ID in the Client-Id header must match the client ID used to create the custom reward.</li><li>The broadcaster is not a partner or affiliate.</li></ul></td>
+    </tr>
+    <tr>
+      <td>404 Not Found</td>
+      <td><ul><li>The custom reward specified in the <i>id</i> query parameter was not found.</li></ul></td>
+    </tr>
+    <tr>
+      <td>500 Internal Server Error</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
 
 			
 		</section>
@@ -8039,7 +8072,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 			<h2 id="get-user-emotes">Get User Emotes</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[28]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p><span class="pill pill-beta">BETA</span> Retrieves emotes available to the user across all channels.</p>
+				<p><span class="pill pill-new">NEW</span> Retrieves emotes available to the user across all channels.</p>
 
 <h3>Authorization</h3>
 
@@ -13701,23 +13734,28 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 			<section class="right-code">
 				<h3>Example Request</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049<span class="sb">`</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
-<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
-</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 
+curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id<span class="o">=</span>9321049&amp;moderator_id<span class="o">=</span>9321049<span class="sb">`</span> <span class="se">\</span>
+
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+
+</code></pre></div></div>
 <h3>Example Response</h3>
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-	</span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"is_moderator_send_live_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"slot_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"is_browser_source_audio_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"layout"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TILED_LAYOUT"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"browser_source_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eihq8rew7q3hgierufhi3q"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">        
+    </span><span class="p">{</span><span class="w"> 
+      </span><span class="s2">"is_moderator_send_live_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">            </span><span class="s2">"slot_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">            </span><span class="s2">"is_browser_source_audio_enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">            </span><span class="s2">"layout"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TILED_LAYOUT"</span><span class="p">,</span><span class="w">            </span><span class="s2">"browser_source_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eihq8rew7q3hgierufhi3q"</span><span class="w">        
+    </span><span class="p">}</span><span class="w">    
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
+
 </span></code></pre></div></div>
 
 			</section>
@@ -16961,13 +16999,13 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 			<h2 id="get-unban-requests">Get Unban Requests</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[84]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p><span class="pill pill-beta">BETA</span> Gets a list of unban requests for a broadcaster’s channel.</p>
+				<p><span class="pill pill-new">NEW</span> Gets a list of unban requests for a broadcaster’s channel.</p>
 
 <h3>Authorization</h3>
 
 <ul>
   <li>Requires a user access token that includes the <strong>moderator:read:unban_requests</strong> or <strong>moderator:manage:unban_requests</strong> scope.</li>
-  <li>Query parameter <code class="highlighter-rouge">moderator_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="https://dev.twitch.tv/docs/authentication/#user-access-tokens" rel="nofollow">user access token</a>.</li>
+  <li>Query parameter <code class="highlighter-rouge">moderator_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="https://dev.twitch.tv/docs/authentication/#user-access-tokens">user access token</a>.</li>
 </ul>
 
 <h3>URL</h3>
@@ -17037,13 +17075,17 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 			<h2 id="resolve-unban-requests">Resolve Unban Requests</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[85]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p><span class="pill pill-beta">BETA</span> Resolves an unban request by approving or denying it.</p>
+				<p><span class="pill pill-new">NEW</span> Resolves an unban request by approving or denying it.</p>
 
 <h3>Authorization</h3>
 
 <ul>
-  <li>Requires a user access token that includes the <strong>moderator:manage:unban_requests</strong> scope.</li>
-  <li>Query parameter <code class="highlighter-rouge">moderator_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="https://dev.twitch.tv/docs/authentication/#user-access-tokens" rel="nofollow">user access token</a>.</li>
+  <li>
+    <p>Requires a user access token that includes the <strong>moderator:manage:unban\_requests</strong> scope.</p>
+  </li>
+  <li>
+    <p>Query parameter <code class="highlighter-rouge">moderator_id</code> must match the <code class="highlighter-rouge">user_id</code> in the<a href="https://dev.twitch.tv/docs/authentication/#user-access-tokens">user access token</a>.</p>
+  </li>
 </ul>
 
 <h3>URL</h3>
@@ -17052,15 +17094,171 @@ twitch api get /goals <span class="nt">-q</span> <span class="nv">broadcaster_id
 
 <h3>Request Query Parameters</h3>
 
-<table><thead><tr><th>Parameter</th><th>Type</th><th>Required?</th><th>Description</th></tr></thead><tbody><tr><td>broadcaster_id</td><td>String</td><td>Yes</td><td>The ID of the broadcaster whose channel is approving or denying the unban request.</td></tr><tr><td>moderator_id</td><td>String</td><td>Yes</td><td>The ID of the broadcaster or a user that has permission to moderate the broadcaster’s unban requests. This ID must match the user ID in the user access token.</td></tr><tr><td>unban_request_id</td><td>String</td><td>Yes</td><td>The UUID of the unban request.</td></tr><tr><td>status</td><td>String</td><td>Yes</td><td>Resolution status.<ul><li>approved</li><li>denied</li></ul></td></tr><tr><td>resolution_text</td><td>String</td><td>No</td><td>Message supplied by the unban request resolver</td></tr></tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The ID of the broadcaster whose channel is approving or denying the unban request.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The ID of the broadcaster or a user that has permission to moderate the broadcaster’s unban requests. This ID must match the user ID in the user access token.</td>
+    </tr>
+    <tr>
+      <td>unban_request_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The ID of the broadcaster or a user that has permission to moderate the broadcaster’s unban requests. This ID must match the user ID in the user access token.</td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>Resolution status. <ul><li>approved</li><li>denied</li></ul></td>
+    </tr>
+    <tr>
+      <td>resolution_text</td>
+      <td>String</td>
+      <td>No</td>
+      <td>Message supplied by the unban request resolver</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3>Response Body</h3>
 
-<table><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>data</td><td>Object[]</td><td> </td></tr><tr><td>&nbsp; &nbsp;id</td><td>String</td><td>Unban request ID.</td></tr><tr><td>&nbsp; &nbsp;broadcaster_id</td><td>String</td><td>User ID of broadcaster whose channel is receiving the unban request.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;broadcaster_name</td><td>String</td><td>The broadcaster's display name.</td></tr><tr><td>&nbsp; &nbsp;broadcaster_login</td><td>String</td><td>The broadcaster's login name.</td></tr><tr><td>&nbsp; &nbsp;moderator_id</td><td>String</td><td>User ID of moderator who approved/denied the request.</td></tr><tr><td>&nbsp; &nbsp;moderator_login</td><td>String</td><td>The moderator's login name.</td></tr><tr><td>&nbsp; &nbsp;moderator_name</td><td>String</td><td>The moderator's display name.</td></tr><tr><td>&nbsp; &nbsp;user_id</td><td>String</td><td>User ID of the requestor who is asking for an unban.</td></tr><tr><td>&nbsp; &nbsp;user_login</td><td>String</td><td>The user's login name.</td></tr><tr><td>&nbsp; &nbsp;user_name</td><td>String</td><td>The user's display name</td></tr><tr><td>&nbsp; &nbsp;text</td><td>String</td><td>Text of the request from the requesting user.</td></tr><tr><td>&nbsp; &nbsp;status</td><td>String</td><td>Status of the request. One of:<ul><li>approved</li><li>denied</li></ul></td></tr><tr><td>&nbsp; &nbsp;created_at</td><td>String</td><td>Timestamp of when the unban request was created.</td></tr><tr><td>&nbsp; &nbsp;resolved_at&nbsp;</td><td>String</td><td>Timestamp of when moderator/broadcaster approved or denied the request.</td></tr><tr><td>&nbsp; &nbsp;resolution_text</td><td>String</td><td>Text input by the resolver (moderator) of the unban request.</td></tr></tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>Object[]</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>   id</td>
+      <td>String</td>
+      <td>Unban request ID.</td>
+    </tr>
+    <tr>
+      <td>   broadcaster_id</td>
+      <td>String</td>
+      <td>User ID of broadcaster whose channel is receiving the unban request.</td>
+    </tr>
+    <tr>
+      <td>   broadcaster_login</td>
+      <td>String</td>
+      <td>The broadcaster’s login name.</td>
+    </tr>
+    <tr>
+      <td>   broadcaster_name</td>
+      <td>String</td>
+      <td>The broadcaster’s display name.</td>
+    </tr>
+    <tr>
+      <td>   moderator_id</td>
+      <td>String</td>
+      <td>User ID of moderator who approved/denied the request.</td>
+    </tr>
+    <tr>
+      <td>   moderator_login</td>
+      <td>String</td>
+      <td>The moderator’s login name.</td>
+    </tr>
+    <tr>
+      <td>   moderator_name</td>
+      <td>String</td>
+      <td>The moderator’s display name.</td>
+    </tr>
+    <tr>
+      <td>   user_id</td>
+      <td>String</td>
+      <td>User ID of the requestor who is asking for an unban.</td>
+    </tr>
+    <tr>
+      <td>   user_login</td>
+      <td>String</td>
+      <td>The user’s login name.</td>
+    </tr>
+    <tr>
+      <td>   user_name</td>
+      <td>String</td>
+      <td>The user’s display name.</td>
+    </tr>
+    <tr>
+      <td>   text</td>
+      <td>String</td>
+      <td>Text of the request from the requesting user.</td>
+    </tr>
+    <tr>
+      <td>   status</td>
+      <td>String</td>
+      <td>Status of the request. One of: <ul><li>approved</li><li>denied</li></ul></td>
+    </tr>
+    <tr>
+      <td>   created_at</td>
+      <td>String</td>
+      <td>Timestamp of when the unban request was created.</td>
+    </tr>
+    <tr>
+      <td>   resolved_at</td>
+      <td>String</td>
+      <td>Timestamp of when moderator/broadcaster approved or denied the request.</td>
+    </tr>
+    <tr>
+      <td>   resolution_text</td>
+      <td>String</td>
+      <td>Text input by the resolver (moderator) of the unban request.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3>Response Codes</h3>
 
-<table><thead><tr><th>HTTP Code</th><th>Description</th></tr></thead><tbody><tr><td>200 OK</td><td>Successfully resolved the unban request.</td></tr><tr><td>400 Bad Request</td><td><ul><li>The&nbsp;<em>broadcaster_id</em>&nbsp;query parameter is required.</li><li>The ID in the&nbsp;<em>broadcaster_id</em>&nbsp;query parameter is not valid.</li><li>The&nbsp;<em>moderator_id</em>&nbsp;query parameter is required.</li><li>The ID in the&nbsp;<em>moderator_id</em>&nbsp;query parameter is not valid.</li><li>The pagination cursor is not valid.</li><li>The broadcaster is not receiving unban requests</li><li>Invalid requested update</li></ul></td></tr><tr><td>401 Unauthorized</td><td><ul><li>The ID in&nbsp;<em>moderator_id</em>&nbsp;must match the user ID in the user access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the&nbsp;<strong>moderator:manage:unban_requests</strong>&nbsp;scope.</li><li>The access token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td></tr><tr><td>404 Not Found</td><td><p>The unban request ID was not found.</p></td></tr></tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>HTTP Code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>200 OK</td>
+      <td>Successfully resolved the unban request.</td>
+    </tr>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li><li>The ID in the <i>broadcaster_id</i> query parameter is not valid.</li><li>The <i>moderator_id</i> query parameter is required.</li><li>The ID in the <i>moderator_id</i> query parameter is not valid.</li><li>The pagination cursor is not valid.</li><li>The broadcaster is not receiving unban requests</li><li>Invalid requested update</li></ul></td>
+    </tr>
+    <tr>
+      <td>401 Unauthorized</td>
+      <td><ul><li>The ID in <i>moderator_id</i> must match the user ID in the user access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>moderator:manage:unban_requests</b> scope.</li><li>The access token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
+    </tr>
+    <tr>
+      <td>404 Not Found</td>
+      <td>The unban request ID was not found.</td>
+    </tr>
+  </tbody>
+</table>
 
 			
 		</section>
@@ -24132,13 +24330,10 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 			<h2 id="get-users">Get Users</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[126]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p>Gets information about one or more users.</p>
-
-<p>You may look up users using their user ID, login name, or both but the sum total of the number of users you may look up is 100. For example, you may specify 50 IDs and 50 names or 100 IDs or names, but you cannot specify 100 IDs and 100 names.</p>
-
-<p>If you don’t specify IDs or login names, the request returns information about the user in the access token if you specify a user access token.</p>
-
-<p>To include the user’s verified email address in the response, you must use a user access token that includes the <strong>user:read:email</strong> scope.</p>
+				<p>Gets information about one or more users.<br><br> 
+You may look up users using their user ID, login name, or both but the sum total of the number of users you may look up is 100. For example, you may specify 50 IDs and 50 names or 100 IDs or names, but you cannot specify 100 IDs and 100 names.<br><br> 
+If you don’t specify IDs or login names, the request returns information about the user in the access token if you specify a user access token.<br><br> 
+To include the user’s verified email address in the response, you must use a user access token that includes the <strong>user:read:email</strong> scope.</p>
 
 <h3>Authorization</h3>
 
@@ -24199,52 +24394,52 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
     <tr>
       <td>   login</td>
       <td>String</td>
-      <td>The user's login name.</td>
+      <td>The user’s login name.</td>
     </tr>
     <tr>
       <td>   display_name</td>
       <td>String</td>
-      <td>The user's display name.</td>
+      <td>The user’s display name.</td>
     </tr>
     <tr>
       <td>   type</td>
       <td>String</td>
-      <td>The type of user. Possible values are:<ul><li>admin &mdash; Twitch administrator</li><li>global_mod</li><li>staff &mdash; Twitch staff</li><li>"" &mdash; Normal user</li></ul></td>
+      <td>The type of user. Possible values are: <ul><li>admin — Twitch administrator</li> <li>global_mod</li><li>staff — Twitch staff</li><li>"" — Normal user</li></ul></td>
     </tr>
     <tr>
       <td>   broadcaster_type</td>
       <td>String</td>
-      <td>The type of broadcaster. Possible values are:<ul><li>affiliate &mdash; An <a href="https://help.twitch.tv/s/article/joining-the-affiliate-program target=">affiliate broadcaster</a></li><li>partner &mdash; A <a href="https://help.twitch.tv/s/article/partner-program-overview" target="_blank">partner broadcaster</a></li><li>"" &mdash; A normal broadcaster</li></ul></td>
+      <td>The type of broadcaster. Possible values are: <ul><li>affiliate — An affiliate broadcaster <a href="https://help.twitch.tv/s/article/joining-the-affiliate-program target=">affiliate broadcaster</a></li><li>partner — A partner broadcaster <a href="https://help.twitch.tv/s/article/partner-program-overview" target="_blank">partner broadcaster</a></li><li>"" — A normal broadcaster</li></ul></td>
     </tr>
     <tr>
       <td>   description</td>
       <td>String</td>
-      <td>The user's description of their channel.</td>
+      <td>The user’s description of their channel.</td>
     </tr>
     <tr>
       <td>   profile_image_url</td>
       <td>String</td>
-      <td>A URL to the user's profile image.</td>
+      <td>A URL to the user’s profile image.</td>
     </tr>
     <tr>
       <td>   offline_image_url</td>
       <td>String</td>
-      <td>A URL to the user's offline image.</td>
+      <td>A URL to the user’s offline image.</td>
     </tr>
     <tr>
       <td>   view_count</td>
       <td>Integer</td>
-      <td>The number of times the user's channel has been viewed.<br><br><strong>NOTE</strong>: This field has been deprecated (see <a href="https://discuss.dev.twitch.tv/t/get-users-api-endpoint-view-count-deprecation/37777" target="_blank">Get Users API endpoint – "view_count" deprecation</a>). Any data in this field is not valid and should not be used.</td>
+      <td>The number of times the user’s channel has been viewed.<br><br> <strong>NOTE</strong>: This field has been deprecated (see <a href="https://discuss.dev.twitch.tv/t/get-users-api-endpoint-view-count-deprecation/37777">Get Users API endpoint – “view_count” deprecation</a>). Any data in this field is not valid and should not be used.</td>
     </tr>
     <tr>
       <td>   email</td>
       <td>String</td>
-      <td>The user's verified email address. The object includes this field only if the user access token includes the <strong>user:read:email</strong> scope.<br><br>If the request contains more than one user, only the user associated with the access token that provided consent will include an email address — the email address for all other users will be empty.</td>
+      <td>The user’s verified email address. The object includes this field only if the user access token includes the <strong>user:read:email</strong> scope.<br><br> If the request contains more than one user, only the user associated with the access token that provided consent will include an email address — the email address for all other users will be empty.</td>
     </tr>
     <tr>
       <td>   created_at</td>
       <td>String</td>
-      <td>The UTC date and time that the user's account was created. The timestamp is in RFC3339 format.</td>
+      <td>The UTC date and time that the user’s account was created. The timestamp is in RFC3339 format.</td>
     </tr>
   </tbody>
 </table>
@@ -24261,11 +24456,11 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
   <tbody>
     <tr>
       <td>200 OK</td>
-      <td>Successfully retrieved the specified users' information.</td>
+      <td>Successfully retrieved the specified users’ information.</td>
     </tr>
     <tr>
       <td>400 Bad Request</td>
-      <td><ul><li>The <i>id</i> or <i>login</i> query parameter is required unless the request uses a user access token.</li><li>The request exceeded the maximum allowed number of <i>id</i> and/or <i>login</i> query parameters.</li></ul></td>
+      <td><ul><li>The *id* or *login* query parameter is required unless the request uses a user access token.</li><li>The request exceeded the maximum allowed number of *id* and/or *login* query parameters.</li></ul></td>
     </tr>
     <tr>
       <td>401 Unauthorized</td>
@@ -24283,14 +24478,17 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 
 <p>Gets information about the specified user.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/users?id=141981764'</span> <span class="se">\</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/users?id=141981764'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+
 </code></pre></div></div>
 
 <h3>Example Response</h3>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"141981764"</span><span class="p">,</span><span class="w">
@@ -24307,6 +24505,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre></div></div>
 
 			</section>

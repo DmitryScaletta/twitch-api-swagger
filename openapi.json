@@ -1760,7 +1760,7 @@
       },
       "patch": {
         "summary": "Updates a custom reward.",
-        "description": "Updates a custom reward. The app used to create the reward is the only app that may update the reward.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.\n\n__Request Body:__\n\nThe body of the request should contain only the fields you’re updating.",
+        "description": "Updates a custom reward. The app used to create the reward is the only app that may update the reward.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/api/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.\n\n__Request Body:__\n\nThe body of the request should contain only the fields you’re updating.",
         "tags": [
           "Channel Points"
         ],
@@ -1910,7 +1910,7 @@
             }
           },
           "400": {
-            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The _id_ query parameter is required.\n* The `title` must contain a minimum of 1 character and a maximum of 45 characters.\n* The `title` must be unique amongst all of the broadcaster's custom rewards.\n* The `cost` field must contain a minimum of 1 point.\n* The `prompt` field is limited to a maximum of 200 characters.\n* If `is_max_per_stream_enabled` is **true**, the minimum value for `max_per_stream` is 1.\n* If `is_max_per_user_per_stream_enabled` is **true**, the minimum value for `max_per_user_per_stream` is 1.\n* If `is_global_cooldown_enabled` is **true**, the minimum value for `global_cooldown_seconds` is 1 and the maximum is 604800."
+            "description": "ul>\n* The _broadcaster\\_id_ query parameter is required.\n* The _id_ query parameter is required.\n* The `title` must contain a minimum of 1 character and a maximum of 45 characters.\n* The `title` must be unique amongst all of the broadcaster's custom rewards.\n* The `cost` field must contain a minimum of 1 point.\n* The `prompt` field is limited to a maximum of 200 characters.\n* If `is_max_per_stream_enabled` is **true**, the minimum value for `max_per_stream` is 1.\n* If `is_max_per_user_per_stream_enabled` is **true**, the minimum value for `max_per_user_per_stream` is 1.\n* If `is_global_cooldown_enabled` is **true**, the minimum value for `global_cooldown_seconds` is 1 and the maximum is 604800."
           },
           "401": {
             "description": "* The Authorization header is required and must specify a user access token.\n* The user access token must include the **channel:manage:redemptions** scope.\n* The OAuth token is not valide.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
@@ -3107,8 +3107,8 @@
     },
     "/chat/emotes/user": {
       "get": {
-        "summary": "BETA Retrieves emotes available to the user across all channels.",
-        "description": "BETA Retrieves emotes available to the user across all channels.\n\n__Authorization:__\n\n* Requires a user access token that includes the **user:read:emotes** scope.\n* Query parameter `user_id` must match the `user_id` in the user access token.",
+        "summary": "NEW Retrieves emotes available to the user across all channels.",
+        "description": "NEW Retrieves emotes available to the user across all channels.\n\n__Authorization:__\n\n* Requires a user access token that includes the **user:read:emotes** scope.\n* Query parameter `user_id` must match the `user_id` in the user access token.",
         "tags": [
           "Chat"
         ],
@@ -5791,12 +5791,14 @@
                 "channel.unban",
                 "channel.unban_request.create",
                 "channel.unban_request.resolve",
+                "channel.moderate",
                 "channel.moderator.add",
                 "channel.moderator.remove",
                 "channel.guest_star_session.begin",
                 "channel.guest_star_session.end",
                 "channel.guest_star_guest.update",
                 "channel.guest_star_settings.update",
+                "channel.channel_points_automatic_reward.add",
                 "channel.channel_points_custom_reward.add",
                 "channel.channel_points_custom_reward.update",
                 "channel.channel_points_custom_reward.remove",
@@ -5809,6 +5811,8 @@
                 "channel.prediction.progress",
                 "channel.prediction.lock",
                 "channel.prediction.end",
+                "channel.vip.add",
+                "channel.vip.remove",
                 "channel.charity_campaign.donate",
                 "channel.charity_campaign.start",
                 "channel.charity_campaign.progress",
@@ -5830,7 +5834,8 @@
                 "stream.offline",
                 "user.authorization.grant",
                 "user.authorization.revoke",
-                "user.update"
+                "user.update",
+                "user.whisper.message"
               ]
             }
           },
@@ -6206,7 +6211,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\n```bash\ncurl -x GET `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&moderator_id=9321049` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "description": "_Request:_\n\n```bash\ncurl -x GET `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&moderator_id=9321049` \\\n\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
                     "value": {
                       "data": [
                         {
@@ -7840,8 +7845,8 @@
     },
     "/moderation/unban_requests": {
       "get": {
-        "summary": "BETA Gets a list of unban requests for a broadcaster’s channel.",
-        "description": "BETA Gets a list of unban requests for a broadcaster’s channel.\n\n__Authorization:__\n\n* Requires a user access token that includes the **moderator:read:unban\\_requests** or **moderator:manage:unban\\_requests** scope.\n* Query parameter `moderator_id` must match the `user_id` in the [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).",
+        "summary": "NEW Gets a list of unban requests for a broadcaster’s channel.",
+        "description": "NEW Gets a list of unban requests for a broadcaster’s channel.\n\n__Authorization:__\n\n* Requires a user access token that includes the **moderator:read:unban\\_requests** or **moderator:manage:unban\\_requests** scope.\n* Query parameter `moderator_id` must match the `user_id` in the [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).",
         "tags": [
           "Moderation"
         ],
@@ -7961,8 +7966,8 @@
         ]
       },
       "patch": {
-        "summary": "BETA Resolves an unban request by approving or denying it.",
-        "description": "BETA Resolves an unban request by approving or denying it.\n\n__Authorization:__\n\n* Requires a user access token that includes the **moderator:manage:unban\\_requests** scope.\n* Query parameter `moderator_id` must match the `user_id` in the [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).",
+        "summary": "NEW Resolves an unban request by approving or denying it.",
+        "description": "NEW Resolves an unban request by approving or denying it.\n\n__Authorization:__\n\n* Requires a user access token that includes the **moderator:manage:unban\\\\\\_requests** scope.\n* Query parameter `moderator_id` must match the `user_id` in the[user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).",
         "tags": [
           "Moderation"
         ],
@@ -7993,7 +7998,7 @@
           {
             "name": "unban_request_id",
             "in": "query",
-            "description": "The UUID of the unban request.",
+            "description": "The ID of the broadcaster or a user that has permission to moderate the broadcaster’s unban requests. This ID must match the user ID in the user access token.",
             "schema": {
               "type": "string"
             },
@@ -8002,7 +8007,7 @@
           {
             "name": "status",
             "in": "query",
-            "description": "Resolution status.  \n  \n* approved\n* denied",
+            "description": "Resolution status.   \n  \n* approved\n* denied",
             "schema": {
               "type": "string"
             },
@@ -11660,7 +11665,7 @@
     "/users": {
       "get": {
         "summary": "Gets information about one or more users.",
-        "description": "Gets information about one or more users.\n\nYou may look up users using their user ID, login name, or both but the sum total of the number of users you may look up is 100\\. For example, you may specify 50 IDs and 50 names or 100 IDs or names, but you cannot specify 100 IDs and 100 names.\n\nIf you don’t specify IDs or login names, the request returns information about the user in the access token if you specify a user access token.\n\nTo include the user’s verified email address in the response, you must use a user access token that includes the **user:read:email** scope.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).",
+        "description": "Gets information about one or more users.  \n  \nYou may look up users using their user ID, login name, or both but the sum total of the number of users you may look up is 100\\. For example, you may specify 50 IDs and 50 names or 100 IDs or names, but you cannot specify 100 IDs and 100 names.  \n  \nIf you don’t specify IDs or login names, the request returns information about the user in the access token if you specify a user access token.  \n  \nTo include the user’s verified email address in the response, you must use a user access token that includes the **user:read:email** scope.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens).",
         "tags": [
           "Users"
         ],
@@ -11697,7 +11702,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved the specified users' information.",
+            "description": "Successfully retrieved the specified users’ information.",
             "content": {
               "application/json": {
                 "schema": {
@@ -11729,7 +11734,7 @@
             }
           },
           "400": {
-            "description": "* The _id_ or _login_ query parameter is required unless the request uses a user access token.\n* The request exceeded the maximum allowed number of _id_ and/or _login_ query parameters."
+            "description": "* The \\*id\\* or \\*login\\* query parameter is required unless the request uses a user access token.\n* The request exceeded the maximum allowed number of \\*id\\* and/or \\*login\\* query parameters."
           },
           "401": {
             "description": "* The Authorization header is required and must contain an app access token or user access token.\n* The access token is not valid.\n* The ID specified in the Client-Id header does not match the client ID specified in the access token."
@@ -14024,7 +14029,7 @@
           },
           "background_color": {
             "type": "string",
-            "description": "The background color to use for the reward. Specify the color using Hex format (for example, #00E5CB)."
+            "description": "The background color to use for the reward. Specify the color using Hex format (for example, \\\\#00E5CB)."
           },
           "is_enabled": {
             "type": "boolean",
@@ -16708,12 +16713,14 @@
               "channel.unban",
               "channel.unban_request.create",
               "channel.unban_request.resolve",
+              "channel.moderate",
               "channel.moderator.add",
               "channel.moderator.remove",
               "channel.guest_star_session.begin",
               "channel.guest_star_session.end",
               "channel.guest_star_guest.update",
               "channel.guest_star_settings.update",
+              "channel.channel_points_automatic_reward.add",
               "channel.channel_points_custom_reward.add",
               "channel.channel_points_custom_reward.update",
               "channel.channel_points_custom_reward.remove",
@@ -16726,6 +16733,8 @@
               "channel.prediction.progress",
               "channel.prediction.lock",
               "channel.prediction.end",
+              "channel.vip.add",
+              "channel.vip.remove",
               "channel.charity_campaign.donate",
               "channel.charity_campaign.start",
               "channel.charity_campaign.progress",
@@ -16747,7 +16756,8 @@
               "stream.offline",
               "user.authorization.grant",
               "user.authorization.revoke",
-              "user.update"
+              "user.update",
+              "user.whisper.message"
             ]
           },
           "version": {
@@ -16862,12 +16872,14 @@
               "channel.unban",
               "channel.unban_request.create",
               "channel.unban_request.resolve",
+              "channel.moderate",
               "channel.moderator.add",
               "channel.moderator.remove",
               "channel.guest_star_session.begin",
               "channel.guest_star_session.end",
               "channel.guest_star_guest.update",
               "channel.guest_star_settings.update",
+              "channel.channel_points_automatic_reward.add",
               "channel.channel_points_custom_reward.add",
               "channel.channel_points_custom_reward.update",
               "channel.channel_points_custom_reward.remove",
@@ -16880,6 +16892,8 @@
               "channel.prediction.progress",
               "channel.prediction.lock",
               "channel.prediction.end",
+              "channel.vip.add",
+              "channel.vip.remove",
               "channel.charity_campaign.donate",
               "channel.charity_campaign.start",
               "channel.charity_campaign.progress",
@@ -16901,7 +16915,8 @@
               "stream.offline",
               "user.authorization.grant",
               "user.authorization.revoke",
-              "user.update"
+              "user.update",
+              "user.whisper.message"
             ]
           },
           "version": {
@@ -18149,8 +18164,8 @@
               "required": [
                 "id",
                 "broadcaster_id",
-                "broadcaster_name",
                 "broadcaster_login",
+                "broadcaster_name",
                 "moderator_id",
                 "moderator_login",
                 "moderator_name",
@@ -18172,13 +18187,13 @@
                   "type": "string",
                   "description": "User ID of broadcaster whose channel is receiving the unban request."
                 },
-                "broadcaster_name": {
-                  "type": "string",
-                  "description": "The broadcaster's display name."
-                },
                 "broadcaster_login": {
                   "type": "string",
-                  "description": "The broadcaster's login name."
+                  "description": "The broadcaster’s login name."
+                },
+                "broadcaster_name": {
+                  "type": "string",
+                  "description": "The broadcaster’s display name."
                 },
                 "moderator_id": {
                   "type": "string",
@@ -18186,11 +18201,11 @@
                 },
                 "moderator_login": {
                   "type": "string",
-                  "description": "The moderator's login name."
+                  "description": "The moderator’s login name."
                 },
                 "moderator_name": {
                   "type": "string",
-                  "description": "The moderator's display name."
+                  "description": "The moderator’s display name."
                 },
                 "user_id": {
                   "type": "string",
@@ -18198,11 +18213,11 @@
                 },
                 "user_login": {
                   "type": "string",
-                  "description": "The user's login name."
+                  "description": "The user’s login name."
                 },
                 "user_name": {
                   "type": "string",
-                  "description": "The user's display name"
+                  "description": "The user’s display name."
                 },
                 "text": {
                   "type": "string",
@@ -18210,7 +18225,7 @@
                 },
                 "status": {
                   "type": "string",
-                  "description": "Status of the request. One of:  \n  \n* approved\n* denied"
+                  "description": "Status of the request. One of:   \n  \n* approved\n* denied"
                 },
                 "created_at": {
                   "type": "string",
