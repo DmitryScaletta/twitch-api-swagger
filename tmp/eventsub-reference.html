@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-03-15T19:11:46-07:00">
+<meta property="article:published_time" content="2024-07-23T13:14:29-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"EventSub Reference","headline":"EventSub Reference","dateModified":"2024-03-15T19:11:46-07:00","datePublished":"2024-03-15T19:11:46-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@context":"http://schema.org"}</script>
+{"description":"EventSub Reference","headline":"EventSub Reference","dateModified":"2024-07-23T13:14:29-07:00","datePublished":"2024-07-23T13:14:29-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -59,7 +59,7 @@
 			<li><a href="https://dev.twitch.tv/products/">Products</a></li>
 			<li><a href="https://dev.twitch.tv/showcase/">Showcase</a></li>
 			<li><a href="https://dev.twitch.tv/support/">Support</a></li>
-			<li><a href="https://blog.twitch.tv/en/tags/Developers">Blog</a></li>
+			<li><a href="https://blog.twitch.tv/en/tags/developers">Blog</a></li>
 			<li><a href="/docs/" class="active">Docs</a></li>
 			<li><a href="/docs/tutorials/extension-101-tutorial-series/introduction">Tutorials</a></li>
 			<li class="no-pad border right-side" data-tw-dashboard-btn><a class="btn light small-pad signup-btn" href="https://dev.twitch.tv/dashboard">Log in with Twitch</a></li>
@@ -523,6 +523,10 @@
 	
 	<h1 id="eventsub-reference">EventSub Reference</h1>
 	
+
+
+
+
 
 
 
@@ -1318,381 +1322,56 @@
   </tbody>
 </table>
 
-<h3 id="channel-moderate-event">Channel Moderate Event</h3>
+<h3 id="channel-moderate-condition">Channel Moderate Condition</h3>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Type</th>
+      <th>Required?</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
-      <td>string</td>
-      <td>The ID of the broadcaster.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
-      <td>string</td>
-      <td>The login of the broadcaster.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
-      <td>string</td>
-      <td>The user name of the broadcaster.</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The user ID of the broadcaster.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">moderator_user_id</code></td>
-      <td>string</td>
-      <td>The ID of the moderator who performed the action.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">moderator_user_login</code></td>
-      <td>string</td>
-      <td>The login of the moderator.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">moderator_user_name</code></td>
-      <td>string</td>
-      <td>The user name of the moderator.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">action</code></td>
-      <td>string</td>
-      <td>The action performed. Possible values are: &lt;ul&gt;&lt;li&gt;ban&lt;/li&gt;&lt;li&gt;timeout&lt;/li&gt;&lt;li&gt;unban&lt;/li&gt;&lt;li&gt;untimeout&lt;/li&gt;&lt;li&gt;clear&lt;/li&gt;&lt;li&gt;emoteonly&lt;/li&gt;&lt;li&gt;emoteonlyoff&lt;/li&gt;&lt;li&gt;followers&lt;/li&gt;&lt;li&gt;followersoff&lt;/li&gt;&lt;li&gt;uniquechat&lt;/li&gt;&lt;li&gt;uniquechatoff&lt;/li&gt;&lt;li&gt;slow&lt;/li&gt;&lt;li&gt;slowoff&lt;/li&gt;&lt;li&gt;subscribers&lt;/li&gt;&lt;li&gt;subscribersoff&lt;/li&gt;&lt;li&gt;unraid&lt;/li&gt;&lt;li&gt;delete&lt;/li&gt;&lt;li&gt;unvip&lt;/li&gt;&lt;li&gt;vip&lt;/li&gt;&lt;li&gt;raid&lt;/li&gt;&lt;li&gt;add_blocked_term&lt;/li&gt;&lt;li&gt;add_permitted_term&lt;/li&gt;&lt;li&gt;delete_blocked_term&lt;/li&gt;&lt;li&gt;delete_permitted_term&lt;/li&gt;&lt;li&gt;mod&lt;/li&gt;&lt;li&gt;unmod&lt;/li&gt;&lt;li&gt;approve_unban_request&lt;/li&gt;&lt;li&gt;deny_unban_request&lt;/li&gt;&lt;/ul&gt;</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">followers</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the followers command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">follow_duration_minutes</code></td>
-      <td>Int</td>
-      <td>The length of time, in minutes, that the followers must have followed the broadcaster to participate in the chat room.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">slow</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the slow command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">wait_time_seconds</code></td>
-      <td>int</td>
-      <td>The amount of time, in seconds, that users need to wait between sending messages.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">vip</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the vip command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user gaining VIP status.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login of the user gaining VIP status.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user gaining VIP status.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">unvip</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the vip command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user losing VIP status.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login of the user losing VIP status.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user losing VIP status.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">mod</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the mod command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user gaining mod status.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login of the user gaining mod status.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user gaining mod status.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">unmod</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the unmod command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user losing mod status.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login of the user losing mod status.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user losing mod status.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">ban</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the ban command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user being banned.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login of the user being banned.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user being banned.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">reason</code></td>
-      <td>string</td>
-      <td>Optional. Reason given for the ban.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">unban</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the unban command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user being timed out.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login of the user being unbanned.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user being unbanned.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">timeout</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the timeout command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user being timed out.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login of the user being timed out.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user being timed out.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">reason</code></td>
-      <td>string</td>
-      <td>Optional. The reason given for the timeout.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">expires_at</code></td>
-      <td>string</td>
-      <td>The time at which the timeout ends.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">untimeout</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the untimeout command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user being untimed out.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login of the user being untimed out.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user untimed out.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">raid</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the raid command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user being raided.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login of the user being raided.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user raided.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user raided.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">viewer_count</code></td>
-      <td>Int</td>
-      <td>The viewer count.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">unraid</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the unraid command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user no longer being raided.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login of the user no longer being raided.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the no longer user raided.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">delete</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the delete command.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the user whose message is being deleted.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login of the user.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">message_id</code></td>
-      <td>string</td>
-      <td>The ID of the message being deleted.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">message_body</code></td>
-      <td>string</td>
-      <td>The message body of the message being deleted.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">automod_terms</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with the automod terms changes.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">action</code></td>
-      <td>string</td>
-      <td>Either “add” or “remove”.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">list</code></td>
-      <td>string</td>
-      <td>Either “blocked” or “permitted”.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">terms</code></td>
-      <td>string[]</td>
-      <td>Terms being added or removed.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">from_automod</code></td>
-      <td>bool</td>
-      <td>Whether the terms were added due to an Automod message approve/deny action.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">unban_request</code></td>
-      <td>object</td>
-      <td>Optional. Metadata associated with an unban request.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">is_approved</code></td>
-      <td>bool</td>
-      <td>Whether or not the unban request was approved or denied.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_id</code></td>
-      <td>string</td>
-      <td>The ID of the banned user.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_login</code></td>
-      <td>string</td>
-      <td>The login of the user.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">user_name</code></td>
-      <td>string</td>
-      <td>The user name of the user.</td>
-    </tr>
-    <tr>
-      <td>   <code class="highlighter-rouge">moderator_message</code></td>
-      <td>string</td>
-      <td>The message included by the moderator explaining their approval or denial.</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The user ID of the moderator.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-moderate-v2-condition">Channel Moderate V2 Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The user ID of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The user ID of the moderator.</td>
     </tr>
   </tbody>
 </table>
@@ -1847,7 +1526,7 @@
   </tbody>
 </table>
 
-<h3 id="channel-points-automatic-reward-add-condition">Channel Points Automatic Reward Add Condition</h3>
+<h3 id="channel-points-automatic-reward-redemption-add-condition">Channel Points Automatic Reward Redemption Add Condition</h3>
 
 <table>
   <thead>
@@ -2144,6 +1823,60 @@
   </tbody>
 </table>
 
+<h3 id="channel-suspicious-user-message-condition">Channel Suspicious User Message Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The ID of a user that has permission to moderate the broadcaster’s channel and has granted your app permission to subscribe to this subscription type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>User ID of the channel to receive chat message events for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-suspicious-user-update-condition">Channel Suspicious User Update Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The ID of a user that has permission to moderate the broadcaster’s channel and has granted your app permission to subscribe to this subscription type.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The broadcaster you want to get chat unban request notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="channel-vip-add-condition">Channel VIP Add Condition</h3>
 
 <table>
@@ -2182,6 +1915,60 @@
       <td>String</td>
       <td>Yes</td>
       <td>The User ID of the broadcaster (channel) Maximum: 1</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-warning-acknowledge-condition">Channel Warning Acknowledge Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The User ID of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The User ID of the moderator.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-warning-send-condition">Channel Warning Send Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The User ID of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The User ID of the moderator.</td>
     </tr>
   </tbody>
 </table>
@@ -2756,7 +2543,7 @@
     <tr>
       <td><code class="highlighter-rouge">status</code></td>
       <td>String</td>
-      <td>The message’s status. Possible values are:&lt;ul&gt;&lt;li&gt;Approved&lt;/li&gt;&lt;li&gt;Denied&lt;/li&gt;&lt;li&gt;Expired&lt;/li&gt;&lt;/ul&gt;</td>
+      <td>The message’s status. Possible values are:<ul><li>Approved</li><li>Denied</li><li>Expired</li></ul></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">held_at</code></td>
@@ -2868,47 +2655,47 @@
   <tbody>
     <tr>
       <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
-      <td>String</td>
+      <td>string</td>
       <td>The ID of the broadcaster specified in the request.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
-      <td>String</td>
+      <td>string</td>
       <td>The login of the broadcaster specified in the request.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
-      <td>String</td>
+      <td>string</td>
       <td>The user name of the broadcaster specified in the request.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">moderator_user_id</code></td>
-      <td>String</td>
+      <td>string</td>
       <td>The ID of the moderator who changed the channel settings.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">moderator_user_login</code></td>
-      <td>String</td>
+      <td>string</td>
       <td>The moderator’s login.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">moderator_user_name</code></td>
-      <td>String</td>
+      <td>string</td>
       <td>The moderator’s user name.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">action</code></td>
-      <td>Int</td>
-      <td>The status change applied to the terms. Possible options are: &lt;ul&gt;&lt;li&gt;add_permitted&lt;/li&gt;&lt;li&gt;remove_permitted&lt;/li&gt;&lt;li&gt;add_blocked&lt;/li&gt;&lt;li&gt;remove_blocked&lt;/li&gt;&lt;/ul&gt;</td>
+      <td>string</td>
+      <td>The status change applied to the terms. Possible options are: <ul><li>add_permitted</li><li>remove_permitted</li><li>add_blocked</li><li>remove_blocked</li></ul></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">from_automod</code></td>
-      <td>Bool</td>
+      <td>bool</td>
       <td>Indicates whether this term was added due to an Automod message approve/deny action.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">terms</code></td>
-      <td>String[]</td>
+      <td>string[]</td>
       <td>The list of terms that had a status change.</td>
     </tr>
   </tbody>
@@ -3127,7 +2914,242 @@
 
 <h3 id="channel-chat-message-event">Channel Chat Message Event</h3>
 
-<table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>broadcaster_user_id</code></td><td>string</td><td>The broadcaster user ID.</td></tr><tr><td><code>broadcaster_user_name</code></td><td>string</td><td>The broadcaster display name.</td></tr><tr><td><code>broadcaster_user_login</code></td><td>string</td><td>The broadcaster login.</td></tr><tr><td><code>chatter_user_id</code></td><td>string</td><td>The user ID of the user that sent the message.</td></tr><tr><td><code>chatter_user_name</code></td><td>string</td><td>The user name of the user that sent the message.</td></tr><tr><td><code>chatter_user_login</code></td><td>string</td><td>The user login of the user that sent the message.</td></tr><tr><td><code>message_id</code></td><td>string</td><td>A UUID that identifies the message.</td></tr><tr><td><code>message</code></td><td>object</td><td>The structured chat message.</td></tr><tr><td>&nbsp; &nbsp;<code>text</code></td><td>string</td><td>The chat message in plain text.</td></tr><tr><td>&nbsp; &nbsp;<code>fragments</code></td><td>object[]</td><td>Ordered list of chat message fragments.</td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>type</code></td><td>string</td><td>The type of message fragment. Possible values:<ul><li>text</li><li>cheermote</li><li>emote</li><li>mention</li></ul></td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>text</code></td><td>string</td><td>Message text in fragment.</td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>cheermote</code></td><td>object</td><td><strong>Optional</strong>. Metadata pertaining to the cheermote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>prefix</code></td><td>string</td><td>The name portion of the Cheermote string that you use in chat to cheer Bits. The full Cheermote string is the concatenation of {prefix} + {number of Bits}. For example, if the prefix is “Cheer” and you want to cheer 100 Bits, the full Cheermote string is Cheer100. When the Cheermote string is entered in chat, Twitch converts it to the image associated with the Bits tier that was cheered.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>bits</code></td><td>int</td><td>The amount of bits cheered.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>tier</code></td><td>int</td><td>The tier level of the cheermote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>emote</code></td><td>object</td><td><strong>Optional</strong>. Metadata pertaining to the emote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>id</code></td><td>string</td><td>An ID that uniquely identifies this emote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>emote_set_id</code></td><td>string</td><td>An ID that identifies the emote set that the emote belongs to.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>owner_id</code></td><td>string</td><td>The ID of the broadcaster who owns the emote.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>format</code></td><td>string</td><td>The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only static. But if the emote is available as a static PNG and an animated GIF, the array contains static and animated. The possible formats are:<ul><li>animated - An animated GIF is available for this emote.</li><li>static - A static PNG file is available for this emote.</li></ul></td></tr><tr><td>&nbsp; &nbsp; &nbsp;&nbsp;<code>mention</code></td><td>object</td><td><strong>Optional</strong>. Metadata pertaining to the mention.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>user_id</code></td><td>string</td><td>The user ID of the mentioned user.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>user_name</code></td><td>string</td><td>The user name of the mentioned user.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<code>user_login</code></td><td>string</td><td>The user login of the mentioned user.</td></tr><tr><td><code>message_type</code></td><td>string</td><td>The type of message. Possible values:<ul><li>text</li><li>channel_points_highlighted</li><li>channel_points_sub_only</li><li>user_intro</li></ul></td></tr><tr><td><code>badges</code></td><td>object[]</td><td>List of chat badges.</td></tr><tr><td>&nbsp; &nbsp;<code>set_id</code></td><td>string</td><td>An ID that identifies this set of chat badges. For example, Bits or Subscriber.</td></tr><tr><td>&nbsp; &nbsp;<code>id</code></td><td>string</td><td>An ID that identifies this version of the badge. The ID can be any value. For example, for Bits, the ID is the Bits tier level, but for World of Warcraft, it could be Alliance or Horde.</td></tr><tr><td>&nbsp; &nbsp;<code>info</code></td><td>string</td><td>Contains metadata related to the chat badges in the badges tag. Currently, this tag contains metadata only for subscriber badges, to indicate the number of months the user has been a subscriber.</td></tr><tr><td><code>cheer</code></td><td>object</td><td><strong>Optional</strong>. Metadata if this message is a cheer.</td></tr><tr><td>&nbsp; &nbsp;<code>bits</code></td><td>int</td><td>The amount of Bits the user cheered.</td></tr><tr><td><code>color</code></td><td>string</td><td>The color of the user’s name in the chat room. This is a hexadecimal RGB color code in the form, <code>#&lt;RGB&gt;</code>. This tag may be empty if it is never set.</td></tr><tr><td><code>reply</code></td><td>object</td><td><strong>Optional</strong>. Metadata if this message is a reply.</td></tr><tr><td>&nbsp; &nbsp;<code>parent_message_id</code></td><td>string</td><td>An ID that uniquely identifies the parent message that this message is replying to.</td></tr><tr><td>&nbsp; &nbsp;<code>parent_message_body</code></td><td>string</td><td>The message body of the parent message.</td></tr><tr><td>&nbsp; &nbsp;<code>parent_user_id</code></td><td>string</td><td>User ID of the sender of the parent message.</td></tr><tr><td>&nbsp; &nbsp;<code>parent_user_name</code></td><td>string</td><td>User name of the sender of the parent message.</td></tr><tr><td>&nbsp; &nbsp;<code>parent_user_login</code></td><td>string</td><td>User login of the sender of the parent message.</td></tr><tr><td>&nbsp; &nbsp;<code>thread_message_id</code></td><td>string</td><td>An ID that identifies the parent message of the reply thread.</td></tr><tr><td>&nbsp; &nbsp;<code>thread_user_id</code></td><td>string</td><td>User ID of the sender of the thread’s parent message.</td></tr><tr><td>&nbsp; &nbsp;<code>thread_user_name</code></td><td>string</td><td>User name of the sender of the thread’s parent message.</td></tr><tr><td>&nbsp; &nbsp;<code>thread_user_login</code></td><td>string</td><td>User login of the sender of the thread’s parent message.</td></tr><tr><td><code>channel_points_custom_reward_id</code></td><td>string</td><td><strong>Optional</strong>. The ID of a channel points custom reward that was redeemed.</td></tr></tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The broadcaster user ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The broadcaster display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The broadcaster login.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">chatter_user_id</code></td>
+      <td>string</td>
+      <td>The user ID of the user that sent the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">chatter_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user that sent the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">chatter_user_login</code></td>
+      <td>string</td>
+      <td>The user login of the user that sent the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message_id</code></td>
+      <td>string</td>
+      <td>A UUID that identifies the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message</code></td>
+      <td>object</td>
+      <td>The structured chat message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">text</code></td>
+      <td>string</td>
+      <td>The chat message in plain text.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">fragments</code></td>
+      <td>object[]</td>
+      <td>Ordered list of chat message fragments.</td>
+    </tr>
+    <tr>
+      <td>     <code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>The type of message fragment. Possible values: <ul><li>text</li><li>cheermote</li><li>emote</li><li>mention</li></ul></td>
+    </tr>
+    <tr>
+      <td>     <code class="highlighter-rouge">text</code></td>
+      <td>string</td>
+      <td>Message text in fragment.</td>
+    </tr>
+    <tr>
+      <td>     <code class="highlighter-rouge">cheermote</code></td>
+      <td>object</td>
+      <td><strong>Optional</strong>. Metadata pertaining to the cheermote.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">prefix</code></td>
+      <td>string</td>
+      <td>The name portion of the Cheermote string that you use in chat to cheer Bits. The full Cheermote string is the concatenation of {prefix} + {number of Bits}. For example, if the prefix is “Cheer” and you want to cheer 100 Bits, the full Cheermote string is Cheer100. When the Cheermote string is entered in chat, Twitch converts it to the image associated with the Bits tier that was cheered.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">bits</code></td>
+      <td>int</td>
+      <td>The amount of bits cheered.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">tier</code></td>
+      <td>int</td>
+      <td>The tier level of the cheermote.</td>
+    </tr>
+    <tr>
+      <td>     <code class="highlighter-rouge">emote</code></td>
+      <td>object</td>
+      <td><strong>Optional</strong>. Metadata pertaining to the emote.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>An ID that uniquely identifies this emote.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">emote_set_id</code></td>
+      <td>string</td>
+      <td>An ID that identifies the emote set that the emote belongs to.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">owner_id</code></td>
+      <td>string</td>
+      <td>The ID of the broadcaster who owns the emote.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">format</code></td>
+      <td>string[]</td>
+      <td>The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only static. But if the emote is available as a static PNG and an animated GIF, the array contains static and animated. The possible formats are: <ul><li>animated - An animated GIF is available for this emote.</li><li>static - A static PNG file is available for this emote.</li></ul></td>
+    </tr>
+    <tr>
+      <td>     <code class="highlighter-rouge">mention</code></td>
+      <td>object</td>
+      <td><strong>Optional</strong>. Metadata pertaining to the mention.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The user ID of the mentioned user.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the mentioned user.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The user login of the mentioned user.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message_type</code></td>
+      <td>string</td>
+      <td>The type of message. Possible values: <ul><li>text</li><li>channel_points_highlighted</li><li>channel_points_sub_only</li><li>user_intro</li><li>power_ups_message_effect</li><li>power_ups_gigantified_emote</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">badges</code></td>
+      <td>object[]</td>
+      <td>List of chat badges.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">set_id</code></td>
+      <td>string</td>
+      <td>An ID that identifies this set of chat badges. For example, Bits or Subscriber.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>An ID that identifies this version of the badge. The ID can be any value. For example, for Bits, the ID is the Bits tier level, but for World of Warcraft, it could be Alliance or Horde.</td>
+    </tr>
+    <tr>
+      <td>   info</td>
+      <td>string</td>
+      <td>Contains metadata related to the chat badges in the badges tag. Currently, this tag contains metadata only for subscriber badges, to indicate the number of months the user has been a subscriber.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">cheer</code></td>
+      <td>object</td>
+      <td><strong>Optional</strong>. Metadata if this message is a cheer.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">bits</code></td>
+      <td>int</td>
+      <td>The amount of Bits the user cheered.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">color</code></td>
+      <td>string</td>
+      <td>The color of the user’s name in the chat room. This is a hexadecimal RGB color code in the form, <code class="highlighter-rouge">#&amp;lt;RGB&amp;gt;</code>. This tag may be empty if it is never set.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">reply</code></td>
+      <td>object</td>
+      <td><strong>Optional</strong>. Metadata if this message is a reply.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">parent_message_id</code></td>
+      <td>string</td>
+      <td>An ID that uniquely identifies the parent message that this message is replying to.</td>
+    </tr>
+    <tr>
+      <td>    <code class="highlighter-rouge">parent_message_body</code></td>
+      <td>string</td>
+      <td>The message body of the parent message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">parent_user_id</code></td>
+      <td>string</td>
+      <td>User ID of the sender of the parent message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">parent_user_name</code></td>
+      <td>string</td>
+      <td>User name of the sender of the parent message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">parent_user_login</code></td>
+      <td>string</td>
+      <td>User login of the sender of the parent message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">thread_message_id</code></td>
+      <td>string</td>
+      <td>An ID that identifies the parent message of the reply thread.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">thread_user_id</code></td>
+      <td>string</td>
+      <td>User ID of the sender of the thread’s parent message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">thread_user_name</code></td>
+      <td>string</td>
+      <td>User name of the sender of the thread’s parent message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">thread_user_login</code></td>
+      <td>string</td>
+      <td>User login of the sender of the thread’s parent message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">channel_points_custom_reward_id</code></td>
+      <td>string</td>
+      <td><strong>Optional</strong>. The ID of a channel points custom reward that was redeemed.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">channel_points_animation_id</code></td>
+      <td>string</td>
+      <td><strong>Optional</strong>. An ID for the type of animation selected as part of an “animate my message” redemption.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="channel-chat-message-delete-event">Channel Chat Message Delete Event</h3>
 
@@ -3394,7 +3416,7 @@
     <tr>
       <td><code class="highlighter-rouge">status</code></td>
       <td>String</td>
-      <td>The message’s status. Possible values are:&lt;ul&gt;&lt;li&gt;approved&lt;/li&gt;&lt;li&gt;denied&lt;/li&gt;&lt;li&gt;invalid&lt;/li&gt;&lt;/ul&gt;</td>
+      <td>The message’s status. Possible values are:<ul><li>approved</li><li>denied</li><li>invalid</li></ul></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">message_id</code></td>
@@ -3813,7 +3835,7 @@
     <tr>
       <td><code class="highlighter-rouge">status</code></td>
       <td>string</td>
-      <td>Dictates whether the unban request was approved or denied. Can be the following: &lt;ul&gt;&lt;li&gt;approved&lt;/li&gt;&lt;li&gt;canceled&lt;/li&gt;&lt;li&gt;denied&lt;/li&gt;&lt;ul&gt;</td>
+      <td>Dictates whether the unban request was approved or denied. Can be the following: <ul><li>approved</li><li>canceled</li><li>denied</li><ul></ul></ul></td>
     </tr>
   </tbody>
 </table>
@@ -3916,29 +3938,790 @@
   </tbody>
 </table>
 
-<h3 id="channel-moderate-condition">Channel Moderate Condition</h3>
+<h3 id="channel-moderate-event">Channel Moderate Event</h3>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Type</th>
-      <th>Required?</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>The user ID of the broadcaster.</td>
+      <td>string</td>
+      <td>The ID of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The login of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the broadcaster.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">moderator_user_id</code></td>
-      <td>String</td>
-      <td>Yes</td>
-      <td>The user ID of the moderator.</td>
+      <td>string</td>
+      <td>The ID of the moderator who performed the action.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_login</code></td>
+      <td>string</td>
+      <td>The login of the moderator.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the moderator.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">action</code></td>
+      <td>string</td>
+      <td>The action performed. Possible values are: <ul><li>ban</li><li>timeout</li><li>unban</li><li>untimeout</li><li>clear</li><li>emoteonly</li><li>emoteonlyoff</li><li>followers</li><li>followersoff</li><li>uniquechat</li><li>uniquechatoff</li><li>slow</li><li>slowoff</li><li>subscribers</li><li>subscribersoff</li><li>unraid</li><li>delete</li><li>unvip</li><li>vip</li><li>raid</li><li>add_blocked_term</li><li>add_permitted_term</li><li>remove_blocked_term</li><li>remove_permitted_term</li><li>mod</li><li>unmod</li><li>approve_unban_request</li><li>deny_unban_request</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">followers</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the followers command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">follow_duration_minutes</code></td>
+      <td>Int</td>
+      <td>The length of time, in minutes, that the followers must have followed the broadcaster to participate in the chat room.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">slow</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the slow command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">wait_time_seconds</code></td>
+      <td>int</td>
+      <td>The amount of time, in seconds, that users need to wait between sending messages.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">vip</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the vip command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user gaining VIP status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user gaining VIP status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user gaining VIP status.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unvip</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the vip command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user losing VIP status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user losing VIP status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user losing VIP status.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">mod</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the mod command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user gaining mod status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user gaining mod status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user gaining mod status.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unmod</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the unmod command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user losing mod status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user losing mod status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user losing mod status.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ban</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the ban command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user being banned.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user being banned.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user being banned.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">reason</code></td>
+      <td>string</td>
+      <td>Optional. Reason given for the ban.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unban</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the unban command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user being timed out.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user being unbanned.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user being unbanned.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">timeout</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the timeout command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user being timed out.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user being timed out.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user being timed out.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">reason</code></td>
+      <td>string</td>
+      <td>Optional. The reason given for the timeout.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">expires_at</code></td>
+      <td>string</td>
+      <td>The time at which the timeout ends.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">untimeout</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the untimeout command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user being untimed out.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user being untimed out.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user untimed out.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">raid</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the raid command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user being raided.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user being raided.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user raided.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user raided.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">viewer_count</code></td>
+      <td>Int</td>
+      <td>The viewer count.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unraid</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the unraid command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user no longer being raided.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user no longer being raided.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the no longer user raided.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">delete</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the delete command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user whose message is being deleted.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">message_id</code></td>
+      <td>string</td>
+      <td>The ID of the message being deleted.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">message_body</code></td>
+      <td>string</td>
+      <td>The message body of the message being deleted.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">automod_terms</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the automod terms changes.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">action</code></td>
+      <td>string</td>
+      <td>Either “add” or “remove”.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">list</code></td>
+      <td>string</td>
+      <td>Either “blocked” or “permitted”.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">terms</code></td>
+      <td>string[]</td>
+      <td>Terms being added or removed.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">from_automod</code></td>
+      <td>bool</td>
+      <td>Whether the terms were added due to an Automod message approve/deny action.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unban_request</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with an unban request.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">is_approved</code></td>
+      <td>bool</td>
+      <td>Whether or not the unban request was approved or denied.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the banned user.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">moderator_message</code></td>
+      <td>string</td>
+      <td>The message included by the moderator explaining their approval or denial.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-moderate-event-v2">Channel Moderate Event V2</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The ID of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The login of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>string</td>
+      <td>The ID of the moderator who performed the action.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_login</code></td>
+      <td>string</td>
+      <td>The login of the moderator.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the moderator.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">action</code></td>
+      <td>string</td>
+      <td>The action performed. Possible values are: <ul><li>ban</li><li>timeout</li><li>unban</li><li>untimeout</li><li>clear</li><li>emoteonly</li><li>emoteonlyoff</li><li>followers</li><li>followersoff</li><li>uniquechat</li><li>uniquechatoff</li><li>slow</li><li>slowoff</li><li>subscribers</li><li>subscribersoff</li><li>unraid</li><li>delete</li><li>unvip</li><li>vip</li><li>raid</li><li>add_blocked_term</li><li>add_permitted_term</li><li>remove_blocked_term</li><li>remove_permitted_term</li><li>mod</li><li>unmod</li><li>approve_unban_request</li><li>deny_unban_request</li><li>warn</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">followers</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the followers command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">follow_duration_minutes</code></td>
+      <td>Int</td>
+      <td>The length of time, in minutes, that the followers must have followed the broadcaster to participate in the chat room.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">slow</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the slow command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">wait_time_seconds</code></td>
+      <td>int</td>
+      <td>The amount of time, in seconds, that users need to wait between sending messages.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">vip</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the vip command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user gaining VIP status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user gaining VIP status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user gaining VIP status.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unvip</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the vip command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user losing VIP status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user losing VIP status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user losing VIP status.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">mod</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the mod command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user gaining mod status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user gaining mod status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user gaining mod status.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unmod</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the unmod command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user losing mod status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user losing mod status.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user losing mod status.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ban</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the ban command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user being banned.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user being banned.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user being banned.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">reason</code></td>
+      <td>string</td>
+      <td>Optional. Reason given for the ban.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unban</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the unban command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user being timed out.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user being unbanned.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user being unbanned.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">timeout</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the timeout command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user being timed out.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user being timed out.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user being timed out.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">reason</code></td>
+      <td>string</td>
+      <td>Optional. The reason given for the timeout.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">expires_at</code></td>
+      <td>string</td>
+      <td>The time at which the timeout ends.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">untimeout</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the untimeout command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user being untimed out.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user being untimed out.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user untimed out.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">raid</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the raid command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user being raided.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user being raided.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user raided.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user raided.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">viewer_count</code></td>
+      <td>Int</td>
+      <td>The viewer count.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unraid</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the unraid command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user no longer being raided.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user no longer being raided.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the no longer user raided.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">delete</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the delete command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user whose message is being deleted.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">message_id</code></td>
+      <td>string</td>
+      <td>The ID of the message being deleted.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">message_body</code></td>
+      <td>string</td>
+      <td>The message body of the message being deleted.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">automod_terms</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with the automod terms changes.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">action</code></td>
+      <td>string</td>
+      <td>Either “add” or “remove”.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">list</code></td>
+      <td>string</td>
+      <td>Either “blocked” or “permitted”.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">terms</code></td>
+      <td>string[]</td>
+      <td>Terms being added or removed.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">from_automod</code></td>
+      <td>bool</td>
+      <td>Whether the terms were added due to an Automod message approve/deny action.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">unban_request</code></td>
+      <td>object</td>
+      <td>Optional. Metadata associated with an unban request.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">is_approved</code></td>
+      <td>bool</td>
+      <td>Whether or not the unban request was approved or denied.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the banned user.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">moderator_message</code></td>
+      <td>string</td>
+      <td>The message included by the moderator explaining their approval or denial.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">warn</code></td>
+      <td>object</td>
+      <td><em>Optional.</em> Metadata associated with the warn command.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user being warned.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user being warned.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user being warned.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">reason</code></td>
+      <td>string</td>
+      <td><em>Optional.</em> Reason given for the warning.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">chat_rules_cited</code></td>
+      <td>[]string</td>
+      <td><em>Optional.</em> Chat rules cited for the warning.</td>
     </tr>
   </tbody>
 </table>
@@ -4334,7 +5117,7 @@
   </tbody>
 </table>
 
-<h3 id="channel-points-automatic-reward-add-event">Channel Points Automatic Reward Add Event</h3>
+<h3 id="channel-points-automatic-reward-redemption-add-event">Channel Points Automatic Reward Redemption Add Event</h3>
 
 <table>
   <thead>
@@ -4388,7 +5171,7 @@
     <tr>
       <td>   <code class="highlighter-rouge">type</code></td>
       <td>string</td>
-      <td>The type of reward. One of: &lt;ul&gt;&lt;li&gt;single_message_bypass_sub_mode&lt;/li&gt;&lt;li&gt;send_highlighted_message&lt;/li&gt;&lt;li&gt;random_sub_emote_unlock&lt;/li&gt;&lt;li&gt;chosen_sub_emote_unlock&lt;/li&gt;&lt;li&gt;chosen_modified_sub_emote_unlock/li&gt;&lt;/ul&gt;</td>
+      <td>The type of reward. One of: <li>single_message_bypass_sub_mode</li><li>send_highlighted_message</li><li>random_sub_emote_unlock</li><li>chosen_sub_emote_unlock</li><li>chosen_modified_sub_emote_unlock</li><li>message_effect</li><li>gigantify_an_emote</li><li>celebration</li></td>
     </tr>
     <tr>
       <td>   <code class="highlighter-rouge">cost</code></td>
@@ -5346,6 +6129,199 @@
   </tbody>
 </table>
 
+<h3 id="channel-suspicious-user-update-event">Channel Suspicious User Update Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>The ID of the channel where the treatment for a suspicious user was updated.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>String</td>
+      <td>The display name of the channel where the treatment for a suspicious user was updated.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>String</td>
+      <td>The Login of the channel where the treatment for a suspicious user was updated.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>The ID of the moderator that updated the treatment for a suspicious user.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_name</code></td>
+      <td>String</td>
+      <td>The display name of the moderator that updated the treatment for a suspicious user.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_login</code></td>
+      <td>String</td>
+      <td>The login of the moderator that updated the treatment for a suspicious user.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>String</td>
+      <td>The ID of the suspicious user whose treatment was updated.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_name</code></td>
+      <td>String</td>
+      <td>The display name of the suspicious user whose treatment was updated.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_login</code></td>
+      <td>String</td>
+      <td>The login of the suspicious user whose treatment was updated.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">low_trust_status</code></td>
+      <td>String</td>
+      <td>The status set for the suspicious user. Can be the following: “none”, “active_monitoring”, or “restricted”.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-suspicious-user-message-event">Channel Suspicious User Message Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>The ID of the channel where the treatment for a suspicious user was updated.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>String</td>
+      <td>The display name of the channel where the treatment for a suspicious user was updated.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>String</td>
+      <td>The login of the channel where the treatment for a suspicious user was updated.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>String</td>
+      <td>The user ID of the user that sent the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_name</code></td>
+      <td>String</td>
+      <td>The user name of the user that sent the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_login</code></td>
+      <td>String</td>
+      <td>The user login of the user that sent the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">low_trust_status</code></td>
+      <td>String</td>
+      <td>The status set for the suspicious user. Can be the following: “none”, “active_monitoring”, or “restricted”</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">shared_ban_channel_ids</code></td>
+      <td>[]String</td>
+      <td>A list of channel IDs where the suspicious user is also banned.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">types</code></td>
+      <td>[]String</td>
+      <td>User types (if any) that apply to the suspicious user, can be “manual”, “ban_evader_detector”, or “shared_channel_ban”.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ban_evasion_evaluation</code></td>
+      <td>String</td>
+      <td>A ban evasion likelihood value (if any) that as been applied to the user automatically by Twitch, can be “unknown”, “possible”, or “likely”.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message</code></td>
+      <td>String</td>
+      <td>The structured chat message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">message_id</code></td>
+      <td>String</td>
+      <td>The UUID that identifies the message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">text</code></td>
+      <td>String</td>
+      <td>The chat message in plain text.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">fragments</code></td>
+      <td>Object[]</td>
+      <td>Ordered list of chat message fragments.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">type</code></td>
+      <td>String</td>
+      <td>The type of message fragment. Possible values: -text -cheermote -emote</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">text</code></td>
+      <td>String</td>
+      <td>Message text in fragment.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">cheermote</code></td>
+      <td>Object</td>
+      <td>Optional. Metadata pertaining to the cheermote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">prefix</code></td>
+      <td>String</td>
+      <td>The name portion of the Cheermote string that you use in chat to cheer Bits. The full Cheermote string is the concatenation of {prefix} + {number of Bits}. <br> <br> <strong>For example</strong>, if the prefix is “Cheer” and you want to cheer 100 Bits, the full Cheermote string is Cheer100. When the Cheermote string is entered in chat, Twitch converts it to the image associated with the Bits tier that was cheered.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">bits</code></td>
+      <td>String</td>
+      <td>The amount of bits cheered.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">tier</code></td>
+      <td>String</td>
+      <td>The tier level of the cheermote.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">emote</code></td>
+      <td>Object</td>
+      <td>Optional. Metadata pertaining to the emote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">id</code></td>
+      <td>String</td>
+      <td>An ID that uniquely identifies this emote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">emote_set_id</code></td>
+      <td>String</td>
+      <td>An ID that identifies the emote set that the emote belongs to.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="channel-vip-add-event">Channel VIP Add Event</h3>
 
 <table>
@@ -5430,6 +6406,119 @@
       <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
       <td>string</td>
       <td>The display name of the broadcaster.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-warning-acknowledge-event">Channel Warning Acknowledge Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The user ID of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The login of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user that has acknowledged their warning.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user that has acknowledged their warning.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user that has acknowledged their warning.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-warning-send-event">Channel Warning Send Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The user ID of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The login of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>string</td>
+      <td>The user ID of the moderator who sent the warning.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_login</code></td>
+      <td>string</td>
+      <td>The login of the moderator.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_name</code></td>
+      <td>string</td>
+      <td>The user name of the moderator.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user being warned.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the user being warned.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user name of the user being.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">reason</code></td>
+      <td>string</td>
+      <td><em>Optional.</em> The reason given for the warning.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">chat_rules_cited</code></td>
+      <td>[]string</td>
+      <td><em>Optional.</em> The chat rules cited for the warning.</td>
     </tr>
   </tbody>
 </table>
@@ -6038,7 +7127,72 @@
 
 <p>Defines the event payload for a Goals event.</p>
 
-<table><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>id</code></td><td>string</td><td>An ID that identifies this event.</td></tr><tr><td><code>broadcaster_user_id</code></td><td>string</td><td>An ID that uniquely identifies the broadcaster.</td></tr><tr><td><code>broadcaster_user_name</code></td><td>string</td><td>The broadcaster's display name.</td></tr><tr><td><code>broadcaster_user_login</code></td><td>string</td><td>The broadcaster's user handle.</td></tr><tr><td><code>type</code></td><td>string</td><td>The type of goal. Possible values are:<ul><li>follow — The goal is to increase followers.</li><li>subscription — The goal is to increase subscriptions. This type shows the net increase or decrease in tier points associated with the subscriptions.</li><li>subscription_count — The goal is to increase subscriptions. This type shows the net increase or decrease in the number of subscriptions.</li><li>new_subscription — The goal is to increase subscriptions. This type shows only the net increase in tier points associated with the subscriptions (it does not account for users that unsubscribed since the goal started).</li><li>new_subscription_count — The goal is to increase subscriptions. This type shows only the net increase in the number of subscriptions (it does not account for users that unsubscribed since the goal started).</li></ul></td></tr><tr><td><code>description</code></td><td>string</td><td>A description of the goal, if specified. The description may contain a maximum of 40 characters.</td></tr><tr><td><code>is_achieved</code></td><td>Boolean</td><td>A Boolean value that indicates whether the broadcaster achieved their goal. Is <strong>true</strong> if the goal was achieved; otherwise, <strong>false</strong>.<br><br>Only the <strong>channel.goal.end</strong> event includes this field.</td></tr><tr><td><code>current_amount</code></td><td>integer</td><td>The goal's current value.<br><br>The goal's <code>type</code> determines how this value is increased or decreased.<ul><li>If <code>type</code> is follow, this field is set to the broadcaster's current number of followers. This number increases with new followers and decreases when users unfollow the broadcaster.</li><li>If <code>type</code> is subscription, this field is increased and decreased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased or decreased by 2, not 1.</li><li>If <code>type</code> is subscription_count, this field is increased by 1 for each new subscription and decreased by 1 for each user that unsubscribes.</li><li>If <code>type</code> is new_subscription, this field is increased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased by 2, not 1.</li><li>If <code>type</code> is new_subscription_count, this field is increased by 1 for each new subscription.</li></ul></td></tr><tr><td><code>target_amount</code></td><td>integer</td><td>The goal's target value. For example, if the broadcaster has 200 followers before creating the goal, and their goal is to double that number, this field is set to 400.</td></tr><tr><td><code>started_at</code></td><td>string</td><td>The UTC timestamp in <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC 3339</a> format, which indicates when the broadcaster created the goal.</td></tr><tr><td><code>ended_at</code></td><td>string</td><td>The UTC timestamp in <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC 3339</a> format, which indicates when the broadcaster ended the goal.<br><br>Only the <strong>channel.goal.end</strong> event includes this field.</td></tr></tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>An ID that identifies this event.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>An ID that uniquely identifies the broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The broadcaster’s display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The broadcaster’s user handle.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>The type of goal. Possible values are: <ul><li>follow — The goal is to increase followers.</li><li>subscription — The goal is to increase subscriptions. This type shows the net increase or decrease in tier points associated with the subscriptions.</li><li>subscription_count — The goal is to increase subscriptions. This type shows the net increase or decrease in the number of subscriptions.</li><li>new_subscription — The goal is to increase subscriptions. This type shows only the net increase in tier points associated with the subscriptions (it does not account for users that unsubscribed since the goal started).</li><li>new_subscription_count — The goal is to increase subscriptions. This type shows only the net increase in the number of subscriptions (it does not account for users that unsubscribed since the goal started).</li><li>new_bit — The goal is to increase the amount of Bits used on the channel.</li><li>new_cheerer — The goal is to increase the number of unique Cheerers to Cheer on the channel.</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">description</code></td>
+      <td>string</td>
+      <td>A description of the goal, if specified. The description may contain a maximum of 40 characters.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_achieved</code></td>
+      <td>Boolean</td>
+      <td>A Boolean value that indicates whether the broadcaster achieved their goal. Is <strong>true</strong> if the goal was achieved; otherwise, <strong>false</strong>.<br><br>Only the <strong>channel.goal.end</strong> event includes this field.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">current_amount</code></td>
+      <td>integer</td>
+      <td>The goal’s current value.<br><br>The goal’s <code class="highlighter-rouge">type</code> determines how this value is increased or decreased.<ul><li>If <code>type</code> is follow, this field is set to the broadcaster's current number of followers. This number increases with new followers and decreases when users unfollow the broadcaster.</li><li>If <code>type</code> is subscription, this field is increased and decreased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased or decreased by 2, not 1.</li><li>If <code>type</code> is subscription_count, this field is increased by 1 for each new subscription and decreased by 1 for each user that unsubscribes.</li><li>If <code>type</code> is new_subscription, this field is increased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased by 2, not 1.</li><li>If <code>type</code> is new_subscription_count, this field is increased by 1 for each new subscription.</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">target_amount</code></td>
+      <td>integer</td>
+      <td>The goal’s target value. For example, if the broadcaster has 200 followers before creating the goal, and their goal is to double that number, this field is set to 400.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">started_at</code></td>
+      <td>string</td>
+      <td>The UTC timestamp in <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC 3339</a> format, which indicates when the broadcaster created the goal.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ended_at</code></td>
+      <td>string</td>
+      <td>The UTC timestamp in <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC 3339</a> format, which indicates when the broadcaster ended the goal.<br><br>Only the <strong>channel.goal.end</strong> event includes this field.</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="hype-train-begin-event">Hype Train Begin Event</h3>
 
@@ -7069,7 +8223,7 @@
 			<a href="https://devstatus.twitch.tv">Status</a>
 			<a href="https://dev.twitch.tv/support">Support</a>
 			<a href="https://dev.twitch.tv/showcase">Showcase</a>
-			<a href="https://blog.twitch.tv/tagged/developers">Blog</a>
+			<a href="https://blog.twitch.tv/en/tags/developers/">Blog</a>
 		</div>
 		<div class="social-icons">
 			<a class="twitter-icon" href="https://twitter.com/twitchdev"><svg width="256px" height="209px" viewBox="0 0 256 209" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
@@ -7084,7 +8238,7 @@
     </g>
 </svg>
 </a>
-			<a class="medium-icon" href="https://blog.twitch.tv/tagged/developers"><svg width="195px" height="195px" viewBox="0 0 195 195" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<a class="medium-icon" href="https://blog.twitch.tv/en/tags/developers/"><svg width="195px" height="195px" viewBox="0 0 195 195" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs/>
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g fill-rule="nonzero">
@@ -7157,7 +8311,6 @@
           <li><a href="https://www.twitch.tv/turbo">Turbo</a></li>
           <li><a href="https://www.twitch.tv/prime">Prime</a></li>
           <li><a href="https://www.twitch.tv/p/extensions/">Extensions</a></li>
-          <li><a href="https://sings.twitch.tv/">Sings</a></li>
         </ul>
       </div>
 
