@@ -105,7 +105,7 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
     ) {
       let liValues: string[] = [];
       descriptionEl.querySelectorAll('ul li').forEach((li) => {
-        const value = li.textContent?.split(/[—:]/)[0]!.trim();
+        const value = li.textContent?.split(/([—:]| - )/)[0]!.trim();
         if (value) liValues!.push(value);
       });
 

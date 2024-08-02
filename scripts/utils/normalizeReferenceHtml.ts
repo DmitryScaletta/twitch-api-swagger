@@ -53,8 +53,6 @@ const normalizeReferenceHtml = (document: Document) => {
       ]);
     }
   }
-
-  // missing comma in the examples
   // https://dev.twitch.tv/docs/api/reference/#get-channel-chat-badges
   replaceHtml(getCodeEl('get-channel-chat-badges'), [
     [
