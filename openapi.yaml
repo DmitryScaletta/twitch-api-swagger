@@ -3687,18 +3687,20 @@ paths:
           schema:
             type: string
           required: true
-        - name: broadcaster_id
-          in: query
-          description: Returns all emotes available to the user within the chat owned by
-            the specified broadcaster. This includes the Global and Subscriber
-            Emotes the user has access to, as well as channel-only specific
-            emotes such as Follower Emotes.
-          schema:
-            type: string
         - name: after
           in: query
           description: The cursor used to get the next page of results. The Pagination
             object in the response contains the cursor’s value.
+          schema:
+            type: string
+        - name: broadcaster_id
+          in: query
+          description: >-
+            The User ID of a broadcaster you wish to get follower emotes of.
+            Using this query parameter will guarantee inclusion of the
+            broadcaster’s follower emotes in the response body.   
+              
+            **Note:** If the user specified in `user_id` is subscribed to the broadcaster specified, their follower emotes will appear in the response body regardless if this query parameter is used.
           schema:
             type: string
       responses:
@@ -6892,6 +6894,8 @@ paths:
 
             * user\_removed — One of the users specified in the **Condition** object was removed.
 
+            * chat\_user\_banned - The user specified in the **Condition** object was banned from the broadcaster's chat.
+
             * version\_removed — The subscription to subscription type and version is no longer supported.
 
             * beta\_maintenance — The subscription to the beta subscription type was removed due to maintenance.
@@ -6909,6 +6913,8 @@ paths:
             * websocket\_network\_timeout — The Twitch WebSocket server timed out writing the message to the client.
 
             * websocket\_network\_error — The Twitch WebSocket server experienced a network error writing the message to the client.
+
+            * websocket\_failed\_to\_reconnect - The client failed to reconnect to the Twitch WebSocket server within the required time after a Reconnect Message.
           schema:
             type: string
             enum:
@@ -6919,6 +6925,7 @@ paths:
               - authorization_revoked
               - moderator_removed
               - user_removed
+              - chat_user_banned
               - version_removed
               - beta_maintenance
               - websocket_disconnected
@@ -6928,6 +6935,7 @@ paths:
               - websocket_internal_error
               - websocket_network_timeout
               - websocket_network_error
+              - websocket_failed_to_reconnect
         - name: type
           in: query
           description: Filter subscriptions by subscription type. For a list of
@@ -6962,13 +6970,14 @@ paths:
               - channel.unban_request.create
               - channel.unban_request.resolve
               - channel.moderate
+              - channel.moderate
               - channel.moderator.add
               - channel.moderator.remove
               - channel.guest_star_session.begin
               - channel.guest_star_session.end
               - channel.guest_star_guest.update
               - channel.guest_star_settings.update
-              - channel.channel_points_automatic_reward.add
+              - channel.channel_points_automatic_reward_redemption.add
               - channel.channel_points_custom_reward.add
               - channel.channel_points_custom_reward.update
               - channel.channel_points_custom_reward.remove
@@ -6981,8 +6990,12 @@ paths:
               - channel.prediction.progress
               - channel.prediction.lock
               - channel.prediction.end
+              - channel.suspicious_user.message
+              - channel.suspicious_user.update
               - channel.vip.add
               - channel.vip.remove
+              - channel.warning.acknowledge
+              - channel.warning.send
               - channel.charity_campaign.donate
               - channel.charity_campaign.start
               - channel.charity_campaign.progress
@@ -7263,8 +7276,6 @@ paths:
                         name: Fortnite
                         box_art_url: https://static-cdn.jtvnw.net/ttv-boxart/33214-{width}x{height}.jpg
                         igdb_id: "1905"
-                    pagination:
-                      cursor: eyJiIjpudWxsLCJhIjp7IkN
         "400":
           description: >-
             * The request must specify the _id_ or _name_ or _igdb\_id_ query
@@ -9747,7 +9758,8 @@ paths:
           required: true
         - name: resolution_text
           in: query
-          description: Message supplied by the unban request resolver
+          description: Message supplied by the unban request resolver. The message is
+            limited to a maximum of 500 characters.
           schema:
             type: string
       responses:
@@ -11121,6 +11133,119 @@ paths:
         - twitch_auth:
             - moderator:read:shield_mode
             - moderator:manage:shield_mode
+  /moderation/warnings:
+    post:
+      summary: NEW Warns a user in the specified broadcaster’s chat room, preventing
+        them from chat interaction until the warning is acknowledged.
+      description: >-
+        NEW Warns a user in the specified broadcaster’s chat room, preventing
+        them from chat interaction until the warning is acknowledged. New
+        warnings can be issued to a user when they already have a warning in the
+        channel (new warning will replace old warning).
+
+
+        __Authorization:__
+
+
+        Requires a user access token that includes the **moderator:manage:warnings** scope. Query parameter `moderator_id` must match the `user_id` in the [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).
+      tags:
+        - Moderation
+      externalDocs:
+        description: Warn Chat User
+        url: https://dev.twitch.tv/docs/api/reference#warn-chat-user
+      operationId: warn-chat-user
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The ID of the channel in which the warning will take effect.
+          schema:
+            type: string
+          required: true
+        - name: moderator_id
+          in: query
+          description: The ID of the twitch user who requested the warning.
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WarnChatUserBody"
+            examples:
+              Example:
+                value:
+                  data:
+                    user_id: "9876"
+                    reason: stop doing that!
+      responses:
+        "200":
+          description: Successfully warn a user.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WarnChatUserResponse"
+              examples:
+                Example:
+                  description: >-
+                    _Request:_
+
+
+                    ```bash
+
+                    curl -X POST  'https://api.twitch.tv/helix/moderation/warnings?broadcaster_id=404040&moderator_id=404041' \
+
+                    -H 'Authorization: Bearer 4a4x78f5wqvkybms7mxfist3jmzul' \
+
+                    -H 'Client-Id: t214nt8z1rdtbj69hyarjvh5mi6fh' \
+
+                    -H 'Content-Type: application/json' \
+
+                    -d '{"data": {"user_id":"9876","reason":"stop doing that!"}}'
+
+                    ```
+                  value:
+                    data:
+                      - broadcaster_id: "404040"
+                        user_id: "9876"
+                        moderator_id: "404041"
+                        reason: stop doing that!
+        "400":
+          description: |-
+            * The _broadcaster\_id_ query parameter is required.
+            * The _moderator\_id_ query parameter is required.
+            * The _user\_id_ query parameter is required.
+            * The _reason_ query parameter is required.
+            * The text in the _reason_ field is too long.
+            * The user specified in the _user\_id_ may not be warned.
+        "401":
+          description: >-
+            * The ID in _moderator\_id_ must match the user ID in the user
+            access token.
+
+            * The Authorization header is required and must contain a user access token.
+
+            * The user access token must include the **moderator:manage:warnings** scope.
+
+            * The access token is not valid.
+
+            * The client ID specified in the Client-Id header does not match the client ID specified in the access token.
+        "403":
+          description: The user in _moderator\_id_ is not one of the broadcaster’s
+            moderators.
+        "409":
+          description: You may not update the user’s warning state while someone else is
+            updating the state. For example, someone else is currently warning
+            the user or the user is acknowledging an existing warning. Please
+            retry your request.
+        "429":
+          description: The app has exceeded the number of requests it may make per minute
+            for this broadcaster.
+        "500":
+          description: Internal Server Error.
+      security:
+        - twitch_auth:
+            - moderator:manage:warnings
   /polls:
     get:
       summary: Gets a list of polls that the broadcaster created.
@@ -17581,16 +17706,51 @@ components:
                   request.
               emote_type:
                 type: string
-                description: |-
+                description: >-
                   The type of emote. The possible values are:   
                     
+                  * **none** — No emote type was assigned to this emote.
+
                   * **bitstier** — A Bits tier emote.
+
                   * **follower** — A follower emote.
+
                   * **subscriptions** — A subscriber emote.
+
+                  * **channelpoints** — An emote granted by using channel points.
+
+                  * **rewards** — An emote granted to the user through a special event.
+
+                  * **hypetrain** — An emote granted for participation in a Hype Train.
+
+                  * **prime** — An emote granted for linking an Amazon Prime account.
+
+                  * **turbo** — An emote granted for having Twitch Turbo.
+
+                  * **smilies** — Emoticons supported by Twitch.
+
+                  * **globals** — An emote accessible by everyone.
+
+                  * **owl2019** — Emotes related to Overwatch League 2019.
+
+                  * **twofactor** — Emotes granted by enabling two-factor authentication on an account.
+
+                  * **limitedtime** — Emotes that were granted for only a limited time.
                 enum:
+                  - none
                   - bitstier
                   - follower
                   - subscriptions
+                  - channelpoints
+                  - rewards
+                  - hypetrain
+                  - prime
+                  - turbo
+                  - smilies
+                  - globals
+                  - owl2019
+                  - twofactor
+                  - limitedtime
               emote_set_id:
                 type: string
                 description: An ID that identifies the emote set that the emote belongs to.
@@ -17922,20 +18082,18 @@ components:
                 type: boolean
                 description: If the message passed all checks and was sent.
               drop_reason:
-                type: array
                 description: The reason the message was dropped, if any.
-                items:
-                  type: object
-                  required:
-                    - code
-                    - message
-                  properties:
-                    code:
-                      type: string
-                      description: Code for why the message was dropped.
-                    message:
-                      type: string
-                      description: Message for why the message was dropped.
+                type: object
+                required:
+                  - code
+                  - message
+                properties:
+                  code:
+                    type: string
+                    description: Code for why the message was dropped.
+                  message:
+                    type: string
+                    description: Message for why the message was dropped.
     UserChatColor:
       type: object
       required:
@@ -18234,6 +18392,8 @@ components:
                   * websocket\_network\_timeout — The Twitch WebSocket server timed out writing the message to the client.
 
                   * websocket\_network\_error — The Twitch WebSocket server experienced a network error writing the message to the client.
+
+                  * websocket\_failed\_to\_reconnect - The client failed to reconnect to the Twitch WebSocket server within the required time after a Reconnect Message.
                 enum:
                   - enabled
                   - webhook_callback_verification_pending
@@ -18245,6 +18405,7 @@ components:
                   - websocket_internal_error
                   - websocket_network_timeout
                   - websocket_network_error
+                  - websocket_failed_to_reconnect
               transport:
                 description: The transport details used to send the notifications.
                 type: object
@@ -18388,6 +18549,8 @@ components:
                   * websocket\_network\_timeout — The Twitch WebSocket server timed out writing the message to the client.
 
                   * websocket\_network\_error — The Twitch WebSocket server experienced a network error writing the message to the client.
+
+                  * websocket\_failed\_to\_reconnect - The client failed to reconnect to the Twitch WebSocket server within the required time after a Reconnect Message.
                 enum:
                   - enabled
                   - webhook_callback_verification_pending
@@ -18399,6 +18562,7 @@ components:
                   - websocket_internal_error
                   - websocket_network_timeout
                   - websocket_network_error
+                  - websocket_failed_to_reconnect
               transport:
                 description: The transport details used to send the notifications.
                 type: object
@@ -20957,6 +21121,52 @@ components:
                   activated. Is an empty string if Shield Mode hasn’t been
                   previously activated.
                 format: date-time
+    WarnChatUserBody:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          description: A list that contains information about the warning.
+          type: object
+          required:
+            - user_id
+            - reason
+          properties:
+            user_id:
+              type: string
+              description: The ID of the twitch user to be warned.
+            reason:
+              type: string
+              description: A custom reason for the warning. **Max 500 chars.**
+    WarnChatUserResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          description: A list that contains information about the warning.
+          items:
+            type: object
+            required:
+              - broadcaster_id
+              - user_id
+              - moderator_id
+              - reason
+            properties:
+              broadcaster_id:
+                type: string
+                description: The ID of the channel in which the warning will take effect.
+              user_id:
+                type: string
+                description: The ID of the warned user.
+              moderator_id:
+                type: string
+                description: The ID of the user who applied the warning.
+              reason:
+                type: string
+                description: The reason provided for warning.
     Poll:
       type: object
       required:
@@ -23160,6 +23370,8 @@ components:
             moderator:manage:shoutouts: Manage a broadcaster’s shoutouts.
             moderator:read:unban_requests: View a broadcaster’s unban requests.
             moderator:manage:unban_requests: Manage a broadcaster’s unban requests.
+            moderator:read:warnings: Read warnings in channels where you have the moderator role.
+            moderator:manage:warnings: Warn users in channels where you have the moderator role.
             user:edit: Manage a user object.
             user:read:blocked_users: View the block list of a user.
             user:manage:blocked_users: Manage the block list of a user.

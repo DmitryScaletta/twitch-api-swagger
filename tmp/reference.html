@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-03-15T19:11:46-07:00">
+<meta property="article:published_time" content="2024-07-23T13:14:29-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2024-03-15T19:11:46-07:00","datePublished":"2024-03-15T19:11:46-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","headline":"Reference","dateModified":"2024-07-23T13:14:29-07:00","datePublished":"2024-07-23T13:14:29-07:00","@type":"BlogPosting","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"url":"https://dev.twitch.tv/api/reference/","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -59,7 +59,7 @@
 			<li><a href="https://dev.twitch.tv/products/">Products</a></li>
 			<li><a href="https://dev.twitch.tv/showcase/">Showcase</a></li>
 			<li><a href="https://dev.twitch.tv/support/">Support</a></li>
-			<li><a href="https://blog.twitch.tv/en/tags/Developers">Blog</a></li>
+			<li><a href="https://blog.twitch.tv/en/tags/developers">Blog</a></li>
 			<li><a href="/docs/" class="active">Docs</a></li>
 			<li><a href="/docs/tutorials/extension-101-tutorial-series/introduction">Tutorials</a></li>
 			<li class="no-pad border right-side" data-tw-dashboard-btn><a class="btn light small-pad signup-btn" href="https://dev.twitch.tv/dashboard">Log in with Twitch</a></li>
@@ -407,6 +407,8 @@
 			<dd><a href="#update-shield-mode-status">Update Shield Mode Status</a></dd>
 		
 			<dd><a href="#get-shield-mode-status">Get Shield Mode Status</a></dd>
+		
+			<dd><a href="#warn-chat-user">Warn Chat User</a></dd>
 		
 			<dd><a href="#get-polls">Get Polls</a></dd>
 		
@@ -786,6 +788,10 @@
 	
 	<h1 id="twitch-api-reference">Twitch API Reference</h1>
 	
+
+
+
+
 
 
 
@@ -1901,6 +1907,17 @@
 							
 							<td><a href="#get-shield-mode-status">Get Shield Mode Status</a></td>
 							<td><p>Gets the broadcaster’s Shield Mode activation status.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Moderation</td>
+							
+							<td><a href="#warn-chat-user">Warn Chat User</a></td>
+							<td><p><span class="pill pill-new">NEW</span> Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged.</p>
 </td>
 						</tr>
 					
@@ -8108,16 +8125,16 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
       <td>The ID of the user. This ID must match the user ID in the user access token.</td>
     </tr>
     <tr>
-      <td>broadcaster_id</td>
-      <td>String</td>
-      <td>No</td>
-      <td>Returns all emotes available to the user within the chat owned by the specified broadcaster. This includes the Global and Subscriber Emotes the user has access to, as well as channel-only specific emotes such as Follower Emotes.</td>
-    </tr>
-    <tr>
       <td>after</td>
       <td>String</td>
       <td>No</td>
       <td>The cursor used to get the next page of results. The Pagination object in the response contains the cursor’s value.</td>
+    </tr>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>String</td>
+      <td>No</td>
+      <td>The User ID of a broadcaster you wish to get follower emotes of. Using this query parameter will guarantee inclusion of the broadcaster’s follower emotes in the response body.  <br><br><strong>Note:</strong> If the user specified in <code class="highlighter-rouge">user_id</code> is subscribed to the broadcaster specified, their follower emotes will appear in the response body regardless if this query parameter is used.</td>
     </tr>
   </tbody>
 </table>
@@ -8151,7 +8168,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
     <tr>
       <td>   emote_type</td>
       <td>String</td>
-      <td>The type of emote. The possible values are: <ul><li><b>bitstier</b> — A Bits tier emote.</li><li><b>follower</b> — A follower emote.</li><li><b>subscriptions</b> — A subscriber emote.</li></ul></td>
+      <td>The type of emote. The possible values are: <ul><li><b>none</b> — No emote type was assigned to this emote.</li><li><b>bitstier</b> — A Bits tier emote.</li><li><b>follower</b> — A follower emote.</li><li><b>subscriptions</b> — A subscriber emote.</li><li><b>channelpoints</b> — An emote granted by using channel points.</li><li><b>rewards</b> — An emote granted to the user through a special event.</li><li><b>hypetrain</b> — An emote granted for participation in a Hype Train.</li><li><b>prime</b> — An emote granted for linking an Amazon Prime account.</li><li><b>turbo</b> — An emote granted for having Twitch Turbo.</li><li><b>smilies</b> — Emoticons supported by Twitch.</li><li><b>globals</b> — An emote accessible by everyone.</li><li><b>owl2019</b> — Emotes related to Overwatch League 2019.</li><li><b>twofactor</b> — Emotes granted by enabling two-factor authentication on an account.</li><li><b>limitedtime</b> — Emotes that were granted for only a limited time.</li></ul></td>
     </tr>
     <tr>
       <td>   emote_set_id</td>
@@ -8808,7 +8825,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
     </tr>
     <tr>
       <td>   drop_reason</td>
-      <td>Object[]</td>
+      <td>Object</td>
       <td>The reason the message was dropped, if any.</td>
     </tr>
     <tr>
@@ -9908,7 +9925,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Response Body</h3>
 
-<table><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>data</td><td>Object[]</td><td>List of information about a conduit's shards.</td></tr><tr><td>&nbsp; &nbsp;id</td><td>String</td><td>Shard ID.</td></tr><tr><td>&nbsp; &nbsp;status</td><td>String</td><td>The shard status. The subscriber receives events only for enabled shards. Possible values are:<ul><li>enabled — The shard is enabled.</li><li>webhook_callback_verification_pending — The shard is pending verification of the specified callback URL.</li><li>webhook_callback_verification_failed — The specified callback URL failed verification.</li><li>notification_failures_exceeded — The notification delivery failure rate was too high.</li><li>websocket_disconnected — The client closed the connection.</li><li>websocket_failed_ping_pong — The client failed to respond to a ping message.</li><li>websocket_received_inbound_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).</li><li>websocket_internal_error — The Twitch WebSocket server experienced an unexpected error.</li><li>websocket_network_timeout — The Twitch WebSocket server timed out writing the message to the client.</li><li>websocket_network_error — The Twitch WebSocket server experienced a network error writing the message to the client.</li></ul></td></tr><tr><td>&nbsp; &nbsp;transport</td><td>Object</td><td>The transport details used to send the notifications.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; method</td><td>String</td><td>The transport method. Possible values are:<ul><li>webhook</li><li>websocket</li></ul></td></tr><tr><td>&nbsp; &nbsp; &nbsp; callback</td><td>String</td><td>The callback URL where the notifications are sent. Included only if method is set to webhook.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; session_id</td><td>String</td><td>An ID that identifies the WebSocket that notifications are sent to. Included only if method is set to websocket.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; connected_at</td><td>String</td><td>The UTC date and time that the WebSocket connection was established. Included only if method is set to websocket.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; disconnected_at</td><td>String</td><td>The UTC date and time that the WebSocket connection was lost. Included only if method is set to websocket.</td></tr><tr><td>pagination</td><td>Object</td><td>Contains information used to page through a list of results. The object is empty if there are no more pages left to page through.</td></tr><tr><td>&nbsp; &nbsp;cursor</td><td>String</td><td>The cursor used to get the next page of results. Use the cursor to set the request’s after query parameter.</td></tr></tbody></table>
+<table><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>data</td><td>Object[]</td><td>List of information about a conduit's shards.</td></tr><tr><td>&nbsp; &nbsp;id</td><td>String</td><td>Shard ID.</td></tr><tr><td>&nbsp; &nbsp;status</td><td>String</td><td>The shard status. The subscriber receives events only for enabled shards. Possible values are:<ul><li>enabled — The shard is enabled.</li><li>webhook_callback_verification_pending — The shard is pending verification of the specified callback URL.</li><li>webhook_callback_verification_failed — The specified callback URL failed verification.</li><li>notification_failures_exceeded — The notification delivery failure rate was too high.</li><li>websocket_disconnected — The client closed the connection.</li><li>websocket_failed_ping_pong — The client failed to respond to a ping message.</li><li>websocket_received_inbound_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).</li><li>websocket_internal_error — The Twitch WebSocket server experienced an unexpected error.</li><li>websocket_network_timeout — The Twitch WebSocket server timed out writing the message to the client.</li><li>websocket_network_error — The Twitch WebSocket server experienced a network error writing the message to the client.</li><li>websocket_failed_to_reconnect - The client failed to reconnect to the Twitch WebSocket server within the required time after a Reconnect Message.</li></ul></td></tr><tr><td>&nbsp; &nbsp;transport</td><td>Object</td><td>The transport details used to send the notifications.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; method</td><td>String</td><td>The transport method. Possible values are:<ul><li>webhook</li><li>websocket</li></ul></td></tr><tr><td>&nbsp; &nbsp; &nbsp; callback</td><td>String</td><td>The callback URL where the notifications are sent. Included only if method is set to webhook.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; session_id</td><td>String</td><td>An ID that identifies the WebSocket that notifications are sent to. Included only if method is set to websocket.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; connected_at</td><td>String</td><td>The UTC date and time that the WebSocket connection was established. Included only if method is set to websocket.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; disconnected_at</td><td>String</td><td>The UTC date and time that the WebSocket connection was lost. Included only if method is set to websocket.</td></tr><tr><td>pagination</td><td>Object</td><td>Contains information used to page through a list of results. The object is empty if there are no more pages left to page through.</td></tr><tr><td>&nbsp; &nbsp;cursor</td><td>String</td><td>The cursor used to get the next page of results. Use the cursor to set the request’s after query parameter.</td></tr></tbody></table>
 
 <h3>Response Codes</h3>
 
@@ -10006,7 +10023,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <h3>Response Body</h3>
 
-<table><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>data</td><td>Object[]</td><td>List of successful shard updates.</td></tr><tr><td>&nbsp; &nbsp;id</td><td>String</td><td>Shard ID.</td></tr><tr><td>&nbsp; &nbsp;status</td><td>String</td><td>The shard status. The subscriber receives events only for enabled shards. Possible values are:<ul><li>enabled — The shard is enabled.</li><li>webhook_callback_verification_pending — The shard is pending verification of the specified callback URL.</li><li>webhook_callback_verification_failed — The specified callback URL failed verification.</li><li>notification_failures_exceeded — The notification delivery failure rate was too high.</li><li>websocket_disconnected — The client closed the connection.</li><li>websocket_failed_ping_pong — The client failed to respond to a ping message.</li><li>websocket_received_inbound_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).</li><li>websocket_internal_error — The Twitch WebSocket server experienced an unexpected error.</li><li>websocket_network_timeout — The Twitch WebSocket server timed out writing the message to the client.</li><li>websocket_network_error — The Twitch WebSocket server experienced a network error writing the message to the client.</li></ul></td></tr><tr><td>&nbsp; &nbsp;transport</td><td>Object</td><td>The transport details used to send the notifications.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; method</td><td>String</td><td>The transport method. Possible values are:<ul><li>webhook</li><li>websocket</li></ul></td></tr><tr><td>&nbsp; &nbsp; &nbsp; callback</td><td>String</td><td>The callback URL where the notifications are sent. Included only if method is set to webhook.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; session_id</td><td>String</td><td>An ID that identifies the WebSocket that notifications are sent to. Included only if method is set to websocket.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; connected_at</td><td>String</td><td>The UTC date and time that the WebSocket connection was established. Included only if method is set to websocket.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; disconnected_at</td><td>String</td><td>The UTC date and time that the WebSocket connection was lost. Included only if method is set to websocket.</td></tr><tr><td>errors</td><td>Object[]</td><td>List of unsuccessful updates.</td></tr><tr><td>&nbsp; &nbsp;id</td><td>String</td><td>Shard ID.</td></tr><tr><td>&nbsp; &nbsp;message</td><td>String</td><td>The error that occurred while updating the shard. Possible errors:<ul><li>The length of the string in the secret field is not valid.</li><li>The URL in the transport's callback field is not valid. The URL must use the HTTPS protocol and the 443 port number.</li><li>The value specified in the method field is not valid.</li><li>The callback field is required if you specify the webhook transport method.</li><li>The session_id field is required if you specify the WebSocket transport method.</li><li>The websocket session is not connected.</li><li>The shard id is outside of the conduit’s range.</li></ul></td></tr><tr><td>&nbsp; &nbsp;code</td><td>String</td><td>Error codes used to represent a specific error condition while attempting to update shards.</td></tr></tbody></table>
+<table><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>data</td><td>Object[]</td><td>List of successful shard updates.</td></tr><tr><td>&nbsp; &nbsp;id</td><td>String</td><td>Shard ID.</td></tr><tr><td>&nbsp; &nbsp;status</td><td>String</td><td>The shard status. The subscriber receives events only for enabled shards. Possible values are:<ul><li>enabled — The shard is enabled.</li><li>webhook_callback_verification_pending — The shard is pending verification of the specified callback URL.</li><li>webhook_callback_verification_failed — The specified callback URL failed verification.</li><li>notification_failures_exceeded — The notification delivery failure rate was too high.</li><li>websocket_disconnected — The client closed the connection.</li><li>websocket_failed_ping_pong — The client failed to respond to a ping message.</li><li>websocket_received_inbound_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).</li><li>websocket_internal_error — The Twitch WebSocket server experienced an unexpected error.</li><li>websocket_network_timeout — The Twitch WebSocket server timed out writing the message to the client.</li><li>websocket_network_error — The Twitch WebSocket server experienced a network error writing the message to the client.</li><li>websocket_failed_to_reconnect - The client failed to reconnect to the Twitch WebSocket server within the required time after a Reconnect Message.</li></ul></td></tr><tr><td>&nbsp; &nbsp;transport</td><td>Object</td><td>The transport details used to send the notifications.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; method</td><td>String</td><td>The transport method. Possible values are:<ul><li>webhook</li><li>websocket</li></ul></td></tr><tr><td>&nbsp; &nbsp; &nbsp; callback</td><td>String</td><td>The callback URL where the notifications are sent. Included only if method is set to webhook.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; session_id</td><td>String</td><td>An ID that identifies the WebSocket that notifications are sent to. Included only if method is set to websocket.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; connected_at</td><td>String</td><td>The UTC date and time that the WebSocket connection was established. Included only if method is set to websocket.</td></tr><tr><td>&nbsp; &nbsp; &nbsp; disconnected_at</td><td>String</td><td>The UTC date and time that the WebSocket connection was lost. Included only if method is set to websocket.</td></tr><tr><td>errors</td><td>Object[]</td><td>List of unsuccessful updates.</td></tr><tr><td>&nbsp; &nbsp;id</td><td>String</td><td>Shard ID.</td></tr><tr><td>&nbsp; &nbsp;message</td><td>String</td><td>The error that occurred while updating the shard. Possible errors:<ul><li>The length of the string in the secret field is not valid.</li><li>The URL in the transport's callback field is not valid. The URL must use the HTTPS protocol and the 443 port number.</li><li>The value specified in the method field is not valid.</li><li>The callback field is required if you specify the webhook transport method.</li><li>The session_id field is required if you specify the WebSocket transport method.</li><li>The websocket session is not connected.</li><li>The shard id is outside of the conduit’s range.</li></ul></td></tr><tr><td>&nbsp; &nbsp;code</td><td>String</td><td>Error codes used to represent a specific error condition while attempting to update shards.</td></tr></tbody></table>
 
 <h3>Response Codes</h3>
 
@@ -13079,7 +13096,7 @@ twitch api delete /eventsub/subscriptions <span class="nt">-q</span> <span class
 
 <p>Use the <em>status</em>, <em>type</em>, and <em>user_id</em> query parameters to filter the list of subscriptions that are returned. The filters are mutually exclusive; the request fails if you specify more than one filter.</p>
 
-<table><thead><tr><th>Parameter</th><th>Type</th><th>Required?</th><th>Description</th></tr></thead><tbody><tr><td>status</td><td>String</td><td>No</td><td>Filter subscriptions by its status. Possible values are:<ul><li>enabled — The subscription is enabled.</li><li>webhook_callback_verification_pending — The subscription is pending verification of the specified callback URL.</li><li>webhook_callback_verification_failed — The specified callback URL failed verification.</li><li>notification_failures_exceeded — The notification delivery failure rate was too high.</li><li>authorization_revoked — The authorization was revoked for one or more users specified in the <b>Condition</b> object.</li><li>moderator_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.</li><li>user_removed — One of the users specified in the <b>Condition</b> object was removed.</li><li>version_removed — The subscription to subscription type and version is no longer supported.</li><li>beta_maintenance — The subscription to the beta subscription type was removed due to maintenance.</li><li>websocket_disconnected — The client closed the connection.</li><li>websocket_failed_ping_pong — The client failed to respond to a ping message.</li><li>websocket_received_inbound_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).</li><li>websocket_connection_unused — The client failed to subscribe to events within the required time.</li><li>websocket_internal_error — The Twitch WebSocket server experienced an unexpected error.</li><li>websocket_network_timeout — The Twitch WebSocket server timed out writing the message to the client.</li><li>websocket_network_error — The Twitch WebSocket server experienced a network error writing the message to the client.</li></ul></td></tr><tr><td>type</td><td>String</td><td>No</td><td>Filter subscriptions by subscription type. For a list of subscription types, see <a href="/docs/eventsub/eventsub-subscription-types#subscription-types">Subscription Types</a>.</td></tr><tr><td>user_id</td><td>String</td><td>No</td><td>Filter subscriptions by user ID. The response contains subscriptions where this ID matches a user ID that you specified in the <strong>Condition</strong> object when you <a href="/docs/api/reference#create-eventsub-subscription">created the subscription</a>.</td></tr><tr><td>after</td><td>String</td><td>No</td><td>The cursor used to get the next page of results. The <code>pagination</code> object in the response contains the cursor's value.</td></tr></tbody></table>
+<table><thead><tr><th>Parameter</th><th>Type</th><th>Required?</th><th>Description</th></tr></thead><tbody><tr><td>status</td><td>String</td><td>No</td><td>Filter subscriptions by its status. Possible values are:<ul><li>enabled — The subscription is enabled.</li><li>webhook_callback_verification_pending — The subscription is pending verification of the specified callback URL.</li><li>webhook_callback_verification_failed — The specified callback URL failed verification.</li><li>notification_failures_exceeded — The notification delivery failure rate was too high.</li><li>authorization_revoked — The authorization was revoked for one or more users specified in the <b>Condition</b> object.</li><li>moderator_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.</li><li>user_removed — One of the users specified in the <b>Condition</b> object was removed.</li><li>chat_user_banned - The user specified in the <b>Condition</b> object was banned from the broadcaster's chat.</li><li>version_removed — The subscription to subscription type and version is no longer supported.</li><li>beta_maintenance — The subscription to the beta subscription type was removed due to maintenance.</li><li>websocket_disconnected — The client closed the connection.</li><li>websocket_failed_ping_pong — The client failed to respond to a ping message.</li><li>websocket_received_inbound_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).</li><li>websocket_connection_unused — The client failed to subscribe to events within the required time.</li><li>websocket_internal_error — The Twitch WebSocket server experienced an unexpected error.</li><li>websocket_network_timeout — The Twitch WebSocket server timed out writing the message to the client.</li><li>websocket_network_error — The Twitch WebSocket server experienced a network error writing the message to the client.</li><li>websocket_failed_to_reconnect - The client failed to reconnect to the Twitch WebSocket server within the required time after a Reconnect Message.</li></ul></td></tr><tr><td>type</td><td>String</td><td>No</td><td>Filter subscriptions by subscription type. For a list of subscription types, see <a href="/docs/eventsub/eventsub-subscription-types#subscription-types">Subscription Types</a>.</td></tr><tr><td>user_id</td><td>String</td><td>No</td><td>Filter subscriptions by user ID. The response contains subscriptions where this ID matches a user ID that you specified in the <strong>Condition</strong> object when you <a href="/docs/api/reference#create-eventsub-subscription">created the subscription</a>.</td></tr><tr><td>after</td><td>String</td><td>No</td><td>The cursor used to get the next page of results. The <code>pagination</code> object in the response contains the cursor's value.</td></tr></tbody></table>
 
 <h3>Response Body</h3>
 
@@ -13444,11 +13461,7 @@ twitch api get /eventsub/subscriptions
       </span><span class="s2">"box_art_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/ttv-boxart/33214-{width}x{height}.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"igdb_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1905"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-    </span><span class="err">...</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"cursor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJiIjpudWxsLCJhIjp7IkN"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
@@ -17132,7 +17145,7 @@ curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.
       <td>resolution_text</td>
       <td>String</td>
       <td>No</td>
-      <td>Message supplied by the unban request resolver</td>
+      <td>Message supplied by the unban request resolver. The message is limited to a maximum of 500 characters.</td>
     </tr>
   </tbody>
 </table>
@@ -19034,8 +19047,196 @@ curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.
 
 	<section class="doc-content">
 		<section class="left-docs">
-			<h2 id="get-polls">Get Polls</h2>
+			<h2 id="warn-chat-user">Warn Chat User</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[99]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-new">NEW</span> Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged. 
+New warnings can be issued to a user when they already have a warning in the channel (new warning will replace old warning).</p>
+
+<h3>Authorization</h3>
+
+<p>Requires a user access token that includes the <strong>moderator:manage:warnings</strong> scope. Query parameter <code class="highlighter-rouge">moderator_id</code> must match the <code class="highlighter-rouge">user_id</code> in the <a href="https://dev.twitch.tv/docs/authentication/#user-access-tokens">user access token</a>.</p>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">POST https://api.twitch.tv/helix/moderation/warnings</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The ID of the channel in which the warning will take effect.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The ID of the twitch user who requested the warning.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Request Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>Object</td>
+      <td>Yes</td>
+      <td>A list that contains information about the warning.</td>
+    </tr>
+    <tr>
+      <td>   user_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The ID of the twitch user to be warned.</td>
+    </tr>
+    <tr>
+      <td>   reason</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>A custom reason for the warning. <strong>Max 500 chars.</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>Object[]</td>
+      <td>A list that contains information about the warning.</td>
+    </tr>
+    <tr>
+      <td>   broadcaster_id</td>
+      <td>String</td>
+      <td>The ID of the channel in which the warning will take effect.</td>
+    </tr>
+    <tr>
+      <td>   user_id</td>
+      <td>String</td>
+      <td>The ID of the warned user.</td>
+    </tr>
+    <tr>
+      <td>   moderator_id</td>
+      <td>String</td>
+      <td>The ID of the user who applied the warning.</td>
+    </tr>
+    <tr>
+      <td>   reason</td>
+      <td>String</td>
+      <td>The reason provided for warning.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>200 OK</td>
+      <td>Successfully warn a user.</td>
+    </tr>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul><li>The <i>broadcaster_id</i> query parameter is required.</li><li>The <i>moderator_id</i> query parameter is required.</li><li>The <i>user_id</i> query parameter is required.</li><li>The <i>reason</i> query parameter is required.</li><li>The text in the <i>reason</i> field is too long.</li><li>The user specified in the <i>user_id</i> may not be warned.</li></ul></td>
+    </tr>
+    <tr>
+      <td>401 Unauthorized</td>
+      <td><ul><li>The ID in <i>moderator_id</i> must match the user ID in the user access token.</li><li>The Authorization header is required and must contain a user access token.</li><li>The user access token must include the <b>moderator:manage:warnings</b> scope.</li><li>The access token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the access token.</li></ul></td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td>The user in <i>moderator_id</i> is not one of the broadcaster’s moderators.</td>
+    </tr>
+    <tr>
+      <td>409 Conflict</td>
+      <td>You may not update the user’s warning state while someone else is updating the state. For example, someone else is currently warning the user or the user is acknowledging an existing warning. Please retry your request.</td>
+    </tr>
+    <tr>
+      <td>429 Too Many Requests</td>
+      <td>The app has exceeded the number of requests it may make per minute for this broadcaster.</td>
+    </tr>
+    <tr>
+      <td>500 Internal Server Error</td>
+      <td>Internal Server Error.</td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST  <span class="s1">'https://api.twitch.tv/helix/moderation/warnings?broadcaster_id=404040&amp;moderator_id=404041'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer 4a4x78f5wqvkybms7mxfist3jmzul'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: t214nt8z1rdtbj69hyarjvh5mi6fh'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{"data": {"user_id":"9876","reason":"stop doing that!"}}'</span>
+</code></pre></div></div>
+
+<h3>Example Response</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"broadcaster_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"404040"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9876"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"moderator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"404041"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"reason"</span><span class="p">:</span><span class="w"> </span><span class="s2">"stop doing that!"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="get-polls">Get Polls</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[100]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of polls that the broadcaster created.</p>
 
@@ -19156,7 +19357,7 @@ curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-poll">Create Poll</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[100]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[101]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Creates a poll that viewers in the broadcaster’s channel can vote on.</p>
 
@@ -19439,7 +19640,7 @@ curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="end-poll">End Poll</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[101]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[102]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Ends an active poll. You have the option to end it or end it and archive it.</p>
 
@@ -19689,7 +19890,7 @@ curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-predictions">Get Predictions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[102]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[103]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of Channel Points Predictions that the broadcaster created.</p>
 
@@ -19970,7 +20171,7 @@ curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-prediction">Create Prediction</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[103]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[104]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Creates a Channel Points Prediction.</p>
 
@@ -20266,7 +20467,7 @@ curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="end-prediction">End Prediction</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[104]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[105]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Locks, resolves, or cancels a Channel Points Prediction.</p>
 
@@ -20547,7 +20748,7 @@ curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="start-a-raid">Start a raid</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[105]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[106]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Raid another channel by sending the broadcaster’s viewers to the targeted channel.</p>
 
@@ -20691,7 +20892,7 @@ curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="cancel-a-raid">Cancel a raid</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[106]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[107]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Cancel a pending raid.</p>
 
@@ -20780,7 +20981,7 @@ curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-stream-schedule">Get Channel Stream Schedule</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[107]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[108]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s streaming schedule. You can get the entire schedule or specific segments of the schedule. <a href="https://help.twitch.tv/s/article/channel-page-setup#Schedule" target="_blank">Learn More</a></p>
 
@@ -21034,7 +21235,7 @@ curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-icalendar">Get Channel iCalendar</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[108]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[109]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s streaming schedule as an <a href="https://datatracker.ietf.org/doc/html/rfc5545" target="_blank">iCalendar</a>.</p>
 
@@ -21133,7 +21334,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-channel-stream-schedule">Update Channel Stream Schedule</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[109]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[110]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the broadcaster’s schedule settings, such as scheduling a vacation.</p>
 
@@ -21240,7 +21441,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-channel-stream-schedule-segment">Create Channel Stream Schedule Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[110]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[111]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a single or recurring broadcast to the broadcaster’s streaming schedule. For information about scheduling broadcasts, see <a href="https://help.twitch.tv/s/article/channel-page-setup#Schedule" target="_blank">Stream Schedule</a>.</p>
 
@@ -21508,7 +21709,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-channel-stream-schedule-segment">Update Channel Stream Schedule Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[111]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[112]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates a scheduled broadcast segment.</p>
 
@@ -21779,7 +21980,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-channel-stream-schedule-segment">Delete Channel Stream Schedule Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[112]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[113]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes a broadcast segment from the broadcaster’s streaming schedule.</p>
 
@@ -21866,7 +22067,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="search-categories">Search Categories</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[113]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[114]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the games or categories that match the specified query.</p>
 
@@ -22010,7 +22211,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="search-channels">Search Channels</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[114]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[115]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the channels that match the specified query and have streamed content within the past 6 months.</p>
 
@@ -22248,7 +22449,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-key">Get Stream Key</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[115]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[116]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the channel’s stream key.</p>
 
@@ -22360,7 +22561,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-streams">Get Streams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[116]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[117]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of all streams. The list is in descending order by the number of viewers watching the stream. Because viewers come and go during a stream, it’s possible to find duplicate or missing streams in the list as you page through the results.</p>
 
@@ -22651,7 +22852,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-followed-streams">Get Followed Streams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[117]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[118]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of broadcasters that the user follows and that are streaming live.</p>
 
@@ -22874,7 +23075,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-stream-marker">Create Stream Marker</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[118]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[119]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a marker to a live stream. A marker is an arbitrary point in a live stream that the broadcaster or editor wants to mark, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).</p>
 
@@ -23031,7 +23232,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-markers">Get Stream Markers</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[119]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[120]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of markers from the user’s most recent stream or from the specified VOD/video. A marker is an arbitrary point in a live stream that the broadcaster or editor marked, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).</p>
 
@@ -23258,7 +23459,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-broadcaster-subscriptions">Get Broadcaster Subscriptions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[120]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[121]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of users that subscribe to the specified broadcaster.</p>
 
@@ -23488,7 +23689,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="check-user-subscription">Check User Subscription</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[121]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[122]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Checks whether the user subscribes to the broadcaster’s channel.</p>
 
@@ -23653,7 +23854,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-all-stream-tags">Get All Stream Tags</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[122]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[123]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. <strong>IMPORTANT</strong> As of February 28, 2023, this endpoint returns an empty array. On July 13, 2023, it will return a 410 response.</p>
 
@@ -23835,7 +24036,7 @@ twitch api get /tags/streams <span class="nt">-q</span> <span class="nv">tag_id<
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-tags">Get Stream Tags</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[123]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[124]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. <strong>IMPORTANT</strong> As of February 28, 2023, this endpoint returns an empty array. On July 13, 2023, it will return a 410 response. If you use this endpoint, please update your code to use <a href="#get-channel-information">Get Channel Information</a>.</p>
 
@@ -23989,7 +24190,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-teams">Get Channel Teams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[124]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[125]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of Twitch teams that the broadcaster is a member of.</p>
 
@@ -24148,7 +24349,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-teams">Get Teams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[125]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[126]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about the specified Twitch team. <a href="https://help.twitch.tv/s/article/twitch-teams">Read More</a></p>
 
@@ -24328,7 +24529,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-users">Get Users</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[126]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[127]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about one or more users.<br><br> 
 You may look up users using their user ID, login name, or both but the sum total of the number of users you may look up is 100. For example, you may specify 50 IDs and 50 names or 100 IDs or names, but you cannot specify 100 IDs and 100 names.<br><br> 
@@ -24515,7 +24716,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-user">Update User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[127]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[128]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the specified user’s information. The user ID in the OAuth token identifies the user whose information you want to update.</p>
 
@@ -24598,7 +24799,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-block-list">Get User Block List</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[128]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[129]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of users that the broadcaster has blocked. <a href="https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat?language=en_US#BlockWhispersandMessagesfromStrangers">Read More</a></p>
 
@@ -24720,7 +24921,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="block-user">Block User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[129]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[130]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Blocks the specified user from interacting with or having contact with the broadcaster. The user ID in the OAuth token identifies the broadcaster who is blocking the user.</p>
 
@@ -24763,7 +24964,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="unblock-user">Unblock User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[130]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[131]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes the user from the broadcaster’s list of blocked users. The user ID in the OAuth token identifies the broadcaster who’s removing the block.</p>
 
@@ -24842,7 +25043,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-extensions">Get User Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[131]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[132]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of all extensions (both active and inactive) that the broadcaster has installed. The user ID in the access token identifies the broadcaster.</p>
 
@@ -24941,7 +25142,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-active-extensions">Get User Active Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[132]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[133]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the active extensions that the broadcaster has installed for each configuration.</p>
 
@@ -25154,7 +25355,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-user-extensions">Update User Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[133]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[134]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates an installed extension’s information. You can update the extension’s activation state, ID, and version number. The user ID in the access token identifies the broadcaster whose extensions you’re updating.</p>
 
@@ -25408,7 +25609,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-videos">Get Videos</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[134]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[135]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about one or more published videos. You may get videos by ID, by user, or by game/category.</p>
 
@@ -25488,7 +25689,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-videos">Delete Videos</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[135]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[136]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Deletes one or more videos. You may delete past broadcasts, highlights, or uploads.</p>
 
@@ -25575,7 +25776,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="send-whisper">Send Whisper</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[136]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[137]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Sends a whisper message to the specified user.</p>
 
@@ -25712,7 +25913,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 			<a href="https://devstatus.twitch.tv">Status</a>
 			<a href="https://dev.twitch.tv/support">Support</a>
 			<a href="https://dev.twitch.tv/showcase">Showcase</a>
-			<a href="https://blog.twitch.tv/tagged/developers">Blog</a>
+			<a href="https://blog.twitch.tv/en/tags/developers/">Blog</a>
 		</div>
 		<div class="social-icons">
 			<a class="twitter-icon" href="https://twitter.com/twitchdev"><svg width="256px" height="209px" viewBox="0 0 256 209" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
@@ -25727,7 +25928,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
     </g>
 </svg>
 </a>
-			<a class="medium-icon" href="https://blog.twitch.tv/tagged/developers"><svg width="195px" height="195px" viewBox="0 0 195 195" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<a class="medium-icon" href="https://blog.twitch.tv/en/tags/developers/"><svg width="195px" height="195px" viewBox="0 0 195 195" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs/>
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g fill-rule="nonzero">
@@ -25800,7 +26001,6 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
           <li><a href="https://www.twitch.tv/turbo">Turbo</a></li>
           <li><a href="https://www.twitch.tv/prime">Prime</a></li>
           <li><a href="https://www.twitch.tv/p/extensions/">Extensions</a></li>
-          <li><a href="https://sings.twitch.tv/">Sings</a></li>
         </ul>
       </div>
 
