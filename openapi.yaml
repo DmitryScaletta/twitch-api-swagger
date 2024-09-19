@@ -3660,6 +3660,74 @@ paths:
       security:
         - twitch_auth:
             - moderator:manage:chat_settings
+  /shared_chat/session:
+    get:
+      summary: NEW Retrieves the active shared chat session for a channel.
+      description: >-
+        NEW Retrieves the active shared chat session for a channel.
+
+
+        __Authorization:__
+
+
+        Requires an [app access token](https://dev.twitch.tv/docs/cli/token-command/#app-access-token) or [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).
+      tags:
+        - Chat
+      externalDocs:
+        description: Get Shared Chat Session
+        url: https://dev.twitch.tv/docs/api/reference#get-shared-chat-session
+      operationId: get-shared-chat-session
+      parameters:
+        - name: broadcaster_id
+          in: query
+          description: The User ID of the channel broadcaster.
+          schema:
+            type: string
+          required: true
+      responses:
+        "200":
+          description: Successfully retrieved the shared chat session. Returns an empty
+            array if the broadcaster\_id in the request isn’t in a shared chat
+            session.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSharedChatSessionResponse"
+              examples:
+                Example:
+                  description: >-
+                    _Request:_
+
+
+                    ```bash
+
+                    curl -X GET 'https://api.twitch.tv/helix/shared_chat/session?broadcaster_id=198704263'  \
+
+                    -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
+                    -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
+                    ```
+                  value:
+                    data:
+                      - session_id: 359bce59-fa4e-41a5-bd6f-9bc0c8360485
+                        host_broadcaster_id: "198704263"
+                        participants:
+                          - broadcaster_id: "198704263"
+                          - broadcaster_id: "487263401"
+                        created_at: 2024-09-29T19:45:37Z
+                        updated_at: 2024-09-29T19:45:37Z
+        "400":
+          description: The ID in the `broadcaster_id` query parameter is not valid.
+        "401":
+          description: >-
+            * The OAuth token is not valid.
+
+            * The Authorization header is required and must contain a user access token.
+        "500":
+          description: Internal Server Error.
+      security:
+        - twitch_auth: []
   /chat/emotes/user:
     get:
       summary: NEW Retrieves emotes available to the user across all channels.
@@ -4575,7 +4643,7 @@ paths:
       summary: NEW  Gets the conduits for a client ID.
       description: >-
         NEW Gets the
-        [conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events)
+        [conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/)
         for a client ID.
 
 
@@ -4625,7 +4693,7 @@ paths:
       summary: NEW Creates a new conduit.
       description: >-
         NEW Creates a new
-        [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events).
+        [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/).
 
 
         __Authorization:__
@@ -4689,7 +4757,7 @@ paths:
       summary: NEW Updates a conduit’s shard count.
       description: >-
         NEW Updates a
-        [conduit’s](https://dev.twitch.tv/docs/eventsub/handling-conduit-events)
+        [conduit’s](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/)
         shard count. To delete shards, update the count to a lower number, and
         the shards above the count will be deleted. For example, if the existing
         shard count is 100, by resetting shard count to 50, shards 50-99 are
@@ -4767,7 +4835,7 @@ paths:
         NEW Deletes a specified
         [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/).
         Note that it may take some time for Eventsub subscriptions on a deleted
-        [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events)
+        [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/)
         to show as disabled when calling [Get Eventsub
         Subscriptions](https://dev.twitch.tv/docs/api/reference/#get-eventsub-subscriptions).
 
@@ -4825,7 +4893,7 @@ paths:
       summary: NEW Gets a lists of all shards for a conduit.
       description: >-
         NEW Gets a lists of all shards for a
-        [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events).
+        [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/).
 
 
         __Authorization:__
@@ -4924,7 +4992,7 @@ paths:
       summary: NEW Updates shard(s) for a conduit.
       description: >-
         NEW Updates shard(s) for a
-        [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events).
+        [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/).
 
 
         **NOTE:** Shard IDs are indexed starting at 0, so a conduit with a `shard_count` of 5 will have shards with IDs 0 through 4.
@@ -6533,7 +6601,7 @@ paths:
         If you use [WebSockets to receive events](https://dev.twitch.tv/docs/eventsub/handling-websocket-events), the request must specify a user access token. The request will fail if you use an app access token. If the subscription type requires user authorization, the token must include the required scope. However, if the subscription type doesn’t include user authorization, the token may include any scopes or no scopes.
 
 
-        If you use [Conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events) to receive events, the request must specify an app access token. The request will fail if you use a user access token.
+        If you use [Conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/) to receive events, the request must specify an app access token. The request will fail if you use a user access token.
       tags:
         - EventSub
       externalDocs:
@@ -6858,7 +6926,7 @@ paths:
         __Authorization:__
 
 
-        If you use [Webhooks](https://dev.twitch.tv/docs/eventsub/handling-webhook-events) or [Conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events) to receive events, the request must specify an app access token. The request will fail if you use a user access token.
+        If you use [Webhooks](https://dev.twitch.tv/docs/eventsub/handling-webhook-events) or [Conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/) to receive events, the request must specify an app access token. The request will fail if you use a user access token.
 
 
         If you use [WebSockets to receive events](https://dev.twitch.tv/docs/eventsub/handling-websocket-events), the request must specify a user access token. The request will fail if you use an app access token. The token may include any scopes.
@@ -6959,6 +7027,9 @@ paths:
               - channel.chat_settings.update
               - channel.chat.user_message_hold
               - channel.chat.user_message_update
+              - channel.shared_chat.begin
+              - channel.shared_chat.update
+              - channel.shared_chat.end
               - channel.subscribe
               - channel.subscription.end
               - channel.subscription.gift
@@ -9713,7 +9784,7 @@ paths:
         __Authorization:__
 
 
-        * Requires a user access token that includes the **moderator:manage:unban\\\_requests** scope.
+        * Requires a user access token that includes the **moderator:manage:unban\_requests** scope.
 
         * Query parameter `moderator_id` must match the `user_id` in the[user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).
       tags:
@@ -13126,6 +13197,9 @@ paths:
             * The access token is not valid.
 
             * The client ID specified in the Client-Id header must match the client ID specified in the access token.
+        "403":
+          description: The user must complete additional steps in order to stream. Present
+            the user with the returned error message.
       security:
         - twitch_auth:
             - channel:read:stream_key
@@ -17676,6 +17750,50 @@ components:
             all the settings.
           items:
             $ref: "#/components/schemas/ChatSettings"
+    GetSharedChatSessionResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          description: ""
+          items:
+            type: object
+            required:
+              - session_id
+              - host_broadcaster_id
+              - participants
+              - created_at
+              - updated_at
+            properties:
+              session_id:
+                type: string
+                description: The unique identifier for the shared chat session.
+              host_broadcaster_id:
+                type: string
+                description: The User ID of the host channel.
+              participants:
+                type: array
+                description: The list of participants in the session.
+                items:
+                  type: object
+                  required:
+                    - broadcaster_id
+                  properties:
+                    broadcaster_id:
+                      type: string
+                      description: The User ID of the participant channel.
+              created_at:
+                type: string
+                description: The UTC date and time (in RFC3339 format) for when the session was
+                  created.
+                format: date-time
+              updated_at:
+                type: string
+                description: The UTC date and time (in RFC3339 format) for when the session was
+                  last updated.
+                format: date-time
     GetUserEmotesResponse:
       type: object
       required:
@@ -18182,7 +18300,7 @@ components:
           type: string
           description: A URL that you can use in an iframe to embed the clip (see
             [Embedding Video and
-            Clips](https://dev.twitch.tv/docs/embed/video-and-clips)).
+            Clips](https://dev.twitch.tv/docs/embed/video-and-clips/)).
         broadcaster_id:
           type: string
           description: An ID that identifies the broadcaster that the video was clipped
@@ -23313,6 +23431,8 @@ components:
             analytics:read:games: View analytics data for the games owned by the
               authenticated account.
             bits:read: View Bits information for a channel.
+            channel:bot: Joins your channel’s chatroom as a bot user, and perform
+              chat-related actions as that user.
             channel:manage:ads: Manage ads schedule on a channel.
             channel:read:ads: Read the ads schedule and details on your channel.
             channel:manage:broadcast: Manage a channel’s broadcast configuration, including
@@ -23352,8 +23472,12 @@ components:
               where you are a moderator.
             moderator:read:automod_settings: View a broadcaster’s AutoMod settings.
             moderator:manage:automod_settings: Manage a broadcaster’s AutoMod settings.
+            moderator:read:banned_users: Read the list of bans or unbans in channels where
+              you have the moderator role.
             moderator:manage:banned_users: Ban and unban users.
             moderator:read:blocked_terms: View a broadcaster’s list of blocked terms.
+            moderator:read:chat_messages: Read deleted chat messages in channels where you
+              have the moderator role.
             moderator:manage:blocked_terms: Manage a broadcaster’s list of blocked terms.
             moderator:manage:chat_messages: Delete chat messages in channels where you have the moderator role
             moderator:read:chat_settings: View a broadcaster’s chat room settings.
@@ -23364,34 +23488,42 @@ components:
               Guest Star moderator.
             moderator:manage:guest_star: Manage Guest Star for channels where you are a
               Guest Star moderator.
+            moderator:read:moderators: Read the list of moderators in channels where you
+              have the moderator role.
             moderator:read:shield_mode: View a broadcaster’s Shield Mode status.
             moderator:manage:shield_mode: Manage a broadcaster’s Shield Mode status.
             moderator:read:shoutouts: View a broadcaster’s shoutouts.
             moderator:manage:shoutouts: Manage a broadcaster’s shoutouts.
+            moderator:read:suspicious_users: Read chat messages from suspicious users and
+              see users flagged as suspicious in channels where you have the
+              moderator role.
             moderator:read:unban_requests: View a broadcaster’s unban requests.
             moderator:manage:unban_requests: Manage a broadcaster’s unban requests.
+            moderator:read:vips: Read the list of VIPs in channels where you have the
+              moderator role.
             moderator:read:warnings: Read warnings in channels where you have the moderator role.
             moderator:manage:warnings: Warn users in channels where you have the moderator role.
+            user:bot: Join a specified chat channel as your user and appear as a bot, and
+              perform chat-related actions as your user.
             user:edit: Manage a user object.
+            user:edit:broadcast: View and edit a user’s broadcasting configuration,
+              including Extension configurations.
             user:read:blocked_users: View the block list of a user.
             user:manage:blocked_users: Manage the block list of a user.
             user:read:broadcast: View a user’s broadcasting configuration, including
               Extension configurations.
+            user:read:chat: Receive chatroom messages and informational notifications
+              relating to a channel’s chatroom.
             user:manage:chat_color: Update the color used for the user’s name in chat.
             user:read:email: View a user’s email address.
             user:read:emotes: View emotes available to a user
             user:read:follows: View the list of channels a user follows.
             user:read:moderated_channels: Read the list of channels you have moderator privileges in.
             user:read:subscriptions: View if an authorized user is subscribed to specific channels.
-            user:manage:whispers: Read whispers that you send and receive, and send whispers
-              on your behalf.
-            channel:bot: Allows the client’s bot users access to a channel.
-            channel:moderate: Perform moderation actions in a channel. The user requesting
-              the scope must be a moderator in the channel.
-            chat:edit: Send live stream chat messages using an IRC connection.
-            chat:read: View live stream chat messages using an IRC connection.
-            user:bot: Allows client’s bot to act as this user.
-            user:read:chat: View live stream chat and room messages using EventSub.
-            user:write:chat: Send live stream chat messages using
-            whispers:read: View your whisper messages.
-            whispers:edit: Send whisper messages.
+            user:read:whispers: Receive whispers sent to your user.
+            user:manage:whispers: Receive whispers sent to your user, and send whispers on
+              your user’s behalf.
+            user:write:chat: Send chat messages to a chatroom.
+            chat:edit: Send chat messages to a chatroom using an IRC connection.
+            chat:read: View chat messages sent in a chatroom using an IRC connection.
+            whispers:read: Receive whisper messages for your user using PubSub.

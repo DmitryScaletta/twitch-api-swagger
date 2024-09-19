@@ -38,6 +38,12 @@ const normalizeReferenceHtml = (document: Document) => {
     ['// removes this label', ''],
   ]);
 
+  // wrong quites
+  replaceHtml(getCodeEl('get-shared-chat-session'), [
+    ['“', '"', true],
+    ['”', '"', true],
+  ]);
+
   // missing comma in the examples
   // https://dev.twitch.tv/docs/api/reference/#get-followed-channels
   // https://dev.twitch.tv/docs/api/reference/#get-channel-followers
