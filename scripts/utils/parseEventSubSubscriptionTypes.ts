@@ -6,7 +6,11 @@ const parseEventSubSubscriptionTypes = (html: string) => {
   const typesTd = document.querySelectorAll(
     '#subscription-types + table > tbody > tr > td:nth-child(2)',
   );
-  return [...typesTd].map((td) => td.textContent!.trim());
+  const uniqueTypes = new Set<string>();
+  for (const td of typesTd) {
+    uniqueTypes.add(td.textContent!.trim());
+  }
+  return Array.from(uniqueTypes);
 };
 
 export default parseEventSubSubscriptionTypes;
