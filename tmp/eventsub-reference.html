@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-09-17T16:55:59-07:00">
+<meta property="article:published_time" content="2025-02-19T12:35:20-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"EventSub Reference","url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@type":"BlogPosting","headline":"EventSub Reference","dateModified":"2024-09-17T16:55:59-07:00","datePublished":"2024-09-17T16:55:59-07:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"@context":"http://schema.org"}</script>
+{"description":"EventSub Reference","url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@type":"BlogPosting","headline":"EventSub Reference","dateModified":"2025-02-19T12:35:20-08:00","datePublished":"2025-02-19T12:35:20-08:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -538,6 +538,11 @@
 
 
 
+
+
+
+
+
 	
 		
 
@@ -847,6 +852,27 @@
       <td>string</td>
       <td>yes</td>
       <td>The broadcaster user ID for the channel you want to get ban notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-bits-use-condition">Channel Bits Use Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The user ID of the channel broadcaster. Maximum: 1.</td>
     </tr>
   </tbody>
 </table>
@@ -1527,6 +1553,27 @@
 </table>
 
 <h3 id="channel-points-automatic-reward-redemption-add-condition">Channel Points Automatic Reward Redemption Add Condition</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>yes</td>
+      <td>The broadcaster user ID for the channel you want to receive channel points reward add notifications for.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-points-automatic-reward-redemption-add-v2-condition">Channel Points Automatic Reward Redemption Add V2 Condition</h3>
 
 <table>
   <thead>
@@ -2452,7 +2499,7 @@
     <tr>
       <td>         <code class="highlighter-rouge">bits</code></td>
       <td>Int</td>
-      <td>The amount of bits cheered.</td>
+      <td>The amount of Bits cheered.</td>
     </tr>
     <tr>
       <td>         <code class="highlighter-rouge">tier</code></td>
@@ -2473,6 +2520,200 @@
       <td><code class="highlighter-rouge">held_at</code></td>
       <td>String</td>
       <td>The timestamp of when automod saved the message.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="automod-message-hold-event-v2">Automod Message Hold Event V2</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>The ID of the broadcaster specified in the request.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>String</td>
+      <td>The login of the broadcaster specified in the request.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>String</td>
+      <td>The user name of the broadcaster specified in the request.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>String</td>
+      <td>The message sender’s user ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_login</code></td>
+      <td>String</td>
+      <td>The message sender’s login name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_name</code></td>
+      <td>String</td>
+      <td>The message sender’s display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message_id</code></td>
+      <td>String</td>
+      <td>The ID of the held message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message</code></td>
+      <td>Object[]</td>
+      <td>The body of the message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">text</code></td>
+      <td>String</td>
+      <td>The contents of the message caught by automod.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">fragments</code></td>
+      <td>Object[]</td>
+      <td>Metadata surrounding the potential inappropriate fragments of the message.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">type</code></td>
+      <td>String</td>
+      <td>One of three options:<ul><li>text</li><li>emote</li><li>cheermote</li></ul></td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">text</code></td>
+      <td>String</td>
+      <td>Message text in a fragment.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">emote</code></td>
+      <td>Object</td>
+      <td>Optional. Metadata pertaining to the emote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">id</code></td>
+      <td>String</td>
+      <td>An ID that uniquely identifies this emote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">emote_set_id</code></td>
+      <td>String</td>
+      <td>An ID that identifies the emote set that the emote belongs to.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">cheermote</code></td>
+      <td>Object</td>
+      <td>Optional. Metadata pertaining to the cheermote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">prefix</code></td>
+      <td>String</td>
+      <td>The name portion of the Cheermote string that you use in chat to cheer Bits. The full Cheermote string is the concatenation of {prefix} + {number of Bits}. <br> <br><strong>For example</strong>, if the prefix is “Cheer” and you want to cheer 100 Bits, the full Cheermote string is Cheer100. When the Cheermote string is entered in chat, Twitch converts it to the image associated with the Bits tier that was cheered.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">bits</code></td>
+      <td>Int</td>
+      <td>The amount of Bits cheered.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">tier</code></td>
+      <td>Int</td>
+      <td>The tier level of the cheermote.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">held_at</code></td>
+      <td>String</td>
+      <td>The timestamp of when automod saved the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">reason</code></td>
+      <td>String</td>
+      <td>Possible values are: <ul><li>automod</li><li>blocked_term</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">automod</code></td>
+      <td>Object</td>
+      <td>Optional. If the message was caught by automod, this will be populated.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">category</code></td>
+      <td>String</td>
+      <td>The category of the caught message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">level</code></td>
+      <td>Int</td>
+      <td>The level of severity (1-4).</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">boundaries</code></td>
+      <td>Object[]</td>
+      <td>The bounds of the text that caused the message to be caught.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">start_pos</code></td>
+      <td>Int</td>
+      <td>Index in the message for the start of the problem (0 indexed, inclusive).</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">end_pos</code></td>
+      <td>Int</td>
+      <td>Index in the message for the end of the problem (0 indexed, inclusive).</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">blocked_term</code></td>
+      <td>Object</td>
+      <td>Optional. If the message was caught due to a blocked term, this will be populated.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">terms_found</code></td>
+      <td>Object[]</td>
+      <td>The list of blocked terms found in the message.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">term_id</code></td>
+      <td>String</td>
+      <td>The id of the blocked term found.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">boundary</code></td>
+      <td>Object</td>
+      <td>The bounds of the text that caused the message to be caught.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">start_pos</code></td>
+      <td>Int</td>
+      <td>Index in the message for the start of the problem (0 indexed, inclusive).</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">end_pos</code></td>
+      <td>Int</td>
+      <td>Index in the message for the end of the problem (0 indexed, inclusive).</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">owner_broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>The id of the broadcaster that owns the blocked term.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">owner_broadcaster_user_login</code></td>
+      <td>String</td>
+      <td>The login of the broadcaster that owns the blocked term.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">owner_broadcaster_user_name</code></td>
+      <td>String</td>
+      <td>The username of the broadcaster that owns the blocked term.</td>
     </tr>
   </tbody>
 </table>
@@ -2586,7 +2827,7 @@
     <tr>
       <td>         <code class="highlighter-rouge">bits</code></td>
       <td>Int</td>
-      <td>The amount of bits cheered.</td>
+      <td>The amount of Bits cheered.</td>
     </tr>
     <tr>
       <td>         <code class="highlighter-rouge">tier</code></td>
@@ -2612,6 +2853,220 @@
       <td><code class="highlighter-rouge">held_at</code></td>
       <td>String</td>
       <td>The timestamp of when automod saved the message.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="automod-message-update-event-v2">Automod Message Update Event V2</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>The ID of the broadcaster specified in the request.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>String</td>
+      <td>The login of the broadcaster specified in the request.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>String</td>
+      <td>The user name of the broadcaster specified in the request.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>String</td>
+      <td>The message sender’s user ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_login</code></td>
+      <td>String</td>
+      <td>The message sender’s login name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_name</code></td>
+      <td>String</td>
+      <td>The message sender’s display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_id</code></td>
+      <td>String</td>
+      <td>The ID of the moderator.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_name</code></td>
+      <td>String</td>
+      <td>TThe moderator’s user name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">moderator_user_login</code></td>
+      <td>String</td>
+      <td>The login of the moderator.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message_id</code></td>
+      <td>String</td>
+      <td>The ID of the message that was flagged by automod.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message</code></td>
+      <td>Object[]</td>
+      <td>The body of the message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">text</code></td>
+      <td>String</td>
+      <td>The contents of the message caught by automod.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">fragments</code></td>
+      <td>Object[]</td>
+      <td>Metadata surrounding the potential inappropriate fragments of the message.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">text</code></td>
+      <td>String</td>
+      <td>Message text in a fragment.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">type</code></td>
+      <td>String</td>
+      <td>One of three options:<ul><li>text</li><li>emote</li><li>cheermote</li></ul></td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">emote</code></td>
+      <td>Object</td>
+      <td>Optional. Metadata pertaining to the emote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">id</code></td>
+      <td>String</td>
+      <td>An ID that uniquely identifies this emote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">emote_set_id</code></td>
+      <td>String</td>
+      <td>An ID that identifies the emote set that the emote belongs to.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">cheermote</code></td>
+      <td>Object</td>
+      <td>Optional. Metadata pertaining to the cheermote.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">prefix</code></td>
+      <td>String</td>
+      <td>The name portion of the Cheermote string that you use in chat to cheer Bits. The full Cheermote string is the concatenation of {prefix} + {number of Bits}. <br> <br><strong>For example</strong>, if the prefix is “Cheer” and you want to cheer 100 Bits, the full Cheermote string is Cheer100. When the Cheermote string is entered in chat, Twitch converts it to the image associated with the Bits tier that was cheered.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">bits</code></td>
+      <td>Int</td>
+      <td>The amount of Bits cheered.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">tier</code></td>
+      <td>Int</td>
+      <td>The tier level of the cheermote.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">status</code></td>
+      <td>String</td>
+      <td>The message’s status. Possible values are:<ul><li>Approved</li><li>Denied</li><li>Expired</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">held_at</code></td>
+      <td>String</td>
+      <td>The timestamp of when automod saved the message.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">reason</code></td>
+      <td>String</td>
+      <td>The reason why the message was caught. Possible values are: <ul><li>automod</li><li>blocked_term</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">automod</code></td>
+      <td>Object</td>
+      <td>Optional. If the message was caught by automod, this will be populated.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">category</code></td>
+      <td>String</td>
+      <td>The category of the caught message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">level</code></td>
+      <td>Int</td>
+      <td>The level of severity (1-4).</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">boundaries</code></td>
+      <td>Object[]</td>
+      <td>The bounds of the text that caused the message to be caught.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">start_pos</code></td>
+      <td>Int</td>
+      <td>Index in the message for the start of the problem (Starting at 0).</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">end_pos</code></td>
+      <td>Int</td>
+      <td>Index in the message for the end of the problem (Starting at 0).</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">blocked_term</code></td>
+      <td>Object</td>
+      <td>Optional. If the message was caught due to a blocked term, this will be populated.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">terms_found</code></td>
+      <td>Object[]</td>
+      <td>The list of blocked terms found in the message.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">term_id</code></td>
+      <td>String</td>
+      <td>The id of the blocked term found.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">boundary</code></td>
+      <td>Object</td>
+      <td>The bounds of the text that caused the message to be caught.</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">start_pos</code></td>
+      <td>Int</td>
+      <td>Index in the message for the start of the problem (0 indexed, inclusive).</td>
+    </tr>
+    <tr>
+      <td>         <code class="highlighter-rouge">end_pos</code></td>
+      <td>Int</td>
+      <td>Index in the message for the end of the problem (0 indexed, inclusive).</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">owner_broadcaster_user_id</code></td>
+      <td>String</td>
+      <td>The id of the broadcaster that owns the blocked term.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">owner_broadcaster_user_login</code></td>
+      <td>String</td>
+      <td>The login of the broadcaster that owns the blocked term.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">owner_broadcaster_user_name</code></td>
+      <td>String</td>
+      <td>The username of the broadcaster that owns the blocked term.</td>
     </tr>
   </tbody>
 </table>
@@ -2902,6 +3357,160 @@
   </tbody>
 </table>
 
+<h3 id="channel-bits-use-event">Channel Bits Use Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The User ID of the channel where the Bits were redeemed.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The login of the channel where the Bits were used.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The display name of the channel where the Bits were used.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The User ID of the redeeming user.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login name of the redeeming user.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The display name of the redeeming user.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">bits</code></td>
+      <td>integer</td>
+      <td>The number of Bits used.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>Possible values are: <ul><li>cheer</li><li>power_up</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message</code></td>
+      <td>object[]</td>
+      <td>Optional. An object that contains the user message and emote information needed to recreate the message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">text</code></td>
+      <td>string</td>
+      <td>The chat message in plain text.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">fragments</code></td>
+      <td>object[]</td>
+      <td>The ordered list of chat message fragments.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">text</code></td>
+      <td>string</td>
+      <td>The message text in fragment.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>The type of message fragment. Possible values are: <ul><li>text</li><li>cheermote</li><li>emote</li></ul></td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">emote</code></td>
+      <td>object</td>
+      <td>Optional. The metadata pertaining to the emote.</td>
+    </tr>
+    <tr>
+      <td>          <code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>The ID that uniquely identifies this emote.</td>
+    </tr>
+    <tr>
+      <td>          <code class="highlighter-rouge">emote_set_id</code></td>
+      <td>string</td>
+      <td>The ID that identifies the emote set that the emote belongs to.</td>
+    </tr>
+    <tr>
+      <td>          <code class="highlighter-rouge">owner_id</code></td>
+      <td>string</td>
+      <td>The ID of the broadcaster who owns the emote.</td>
+    </tr>
+    <tr>
+      <td>          <code class="highlighter-rouge">format</code></td>
+      <td>[]string</td>
+      <td>The formats that the emote is available in. For example, if the emote is available only as a static PNG, the array contains only static. But if the emote is available as a static PNG and an animated GIF, the array contains static and animated. The possible formats are: <ul><li><b>animated</b> - An animated GIF is available for this emote.</li><li><b>static</b> - A static PNG file is available for this emote.</li></ul></td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">cheermote</code></td>
+      <td>object</td>
+      <td>Optional. The metadata pertaining to the cheermote.</td>
+    </tr>
+    <tr>
+      <td>          <code class="highlighter-rouge">prefix</code></td>
+      <td>string</td>
+      <td>The name portion of the Cheermote string that you use in chat to cheer Bits. The full Cheermote string is the concatenation of {prefix} + {number of Bits}. For example, if the prefix is “Cheer” and you want to cheer 100 Bits, the full Cheermote string is Cheer100. When the Cheermote string is entered in chat, Twitch converts it to the image associated with the Bits tier that was cheered.</td>
+    </tr>
+    <tr>
+      <td>          <code class="highlighter-rouge">bits</code></td>
+      <td>int</td>
+      <td>The amount of Bits cheered.</td>
+    </tr>
+    <tr>
+      <td>          <code class="highlighter-rouge">tier</code></td>
+      <td>int</td>
+      <td>The tier level of the cheermote.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">power_up</code></td>
+      <td>object</td>
+      <td>Optional. Data about Power-up.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>Possible values: <ul><li>message_effect</li><li>celebration</li><li>gigantify_an_emote</li></ul></td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">emote</code></td>
+      <td>object</td>
+      <td>Optional. Emote associated with the reward.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>The ID that uniquely identifies this emote.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">name</code></td>
+      <td>string</td>
+      <td>The human readable emote token.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">message_effect_id</code></td>
+      <td>string</td>
+      <td>Optional. The ID of the message effect.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="channel-chat-clear-event">Channel Chat Clear Event</h3>
 
 <table>
@@ -3059,7 +3668,7 @@
     <tr>
       <td>         <code class="highlighter-rouge">bits</code></td>
       <td>int</td>
-      <td>The amount of bits cheered.</td>
+      <td>The amount of Bits cheered.</td>
     </tr>
     <tr>
       <td>         <code class="highlighter-rouge">tier</code></td>
@@ -3416,7 +4025,7 @@
     <tr>
       <td>         <code class="highlighter-rouge">bits</code></td>
       <td>int</td>
-      <td>The amount of bits cheered.</td>
+      <td>The amount of Bits cheered.</td>
     </tr>
     <tr>
       <td>         <code class="highlighter-rouge">tier</code></td>
@@ -3716,7 +4325,7 @@
     <tr>
       <td><code class="highlighter-rouge">bits_badge_tier</code></td>
       <td>object</td>
-      <td>Information about the bits badge tier event. Null if <code>notice_type</code> is not <code>bits_badge_tier</code></td>
+      <td>Information about the Bits badge tier event. Null if <code>notice_type</code> is not <code>bits_badge_tier</code></td>
     </tr>
     <tr>
       <td>   <code class="highlighter-rouge">tier</code></td>
@@ -3999,7 +4608,7 @@
     <tr>
       <td>         <code class="highlighter-rouge">bits</code></td>
       <td>Int</td>
-      <td>The amount of bits cheered.</td>
+      <td>The amount of Bits cheered.</td>
     </tr>
     <tr>
       <td>         <code class="highlighter-rouge">tier</code></td>
@@ -4108,7 +4717,7 @@
     <tr>
       <td>         <code class="highlighter-rouge">bits</code></td>
       <td>Int</td>
-      <td>The amount of bits cheered.</td>
+      <td>The amount of Bits cheered.</td>
     </tr>
     <tr>
       <td>         <code class="highlighter-rouge">tier</code></td>
@@ -4226,7 +4835,7 @@
     <tr>
       <td><code class="highlighter-rouge">bits</code></td>
       <td>integer</td>
-      <td>The number of bits cheered.</td>
+      <td>The number of Bits cheered.</td>
     </tr>
   </tbody>
 </table>
@@ -6033,7 +6642,7 @@
     <tr>
       <td>   <code class="highlighter-rouge">type</code></td>
       <td>string</td>
-      <td>The type of reward. One of: <li>single_message_bypass_sub_mode</li><li>send_highlighted_message</li><li>random_sub_emote_unlock</li><li>chosen_sub_emote_unlock</li><li>chosen_modified_sub_emote_unlock</li><li>message_effect</li><li>gigantify_an_emote</li><li>celebration</li></td>
+      <td>The type of reward. One of: <ul><li>single_message_bypass_sub_mode</li><li>send_highlighted_message</li><li>random_sub_emote_unlock</li><li>chosen_sub_emote_unlock</li><li>chosen_modified_sub_emote_unlock</li><li>message_effect</li><li>gigantify_an_emote</li><li>celebration</li></ul></td>
     </tr>
     <tr>
       <td>   <code class="highlighter-rouge">cost</code></td>
@@ -6089,6 +6698,125 @@
       <td><code class="highlighter-rouge">user_input</code></td>
       <td>string</td>
       <td>Optional. A string that the user entered if the reward requires input.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">redeemed_at</code></td>
+      <td>string</td>
+      <td>The UTC date and time (in RFC3339 format) of when the reward was redeemed.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="channel-points-automatic-reward-redemption-add-v2-event">Channel Points Automatic Reward Redemption Add V2 Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The ID of the channel where the reward was redeemed.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The login of the channel where the reward was redeemed.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The display name of the channel where the reward was redeemed.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the redeeming user.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The login of the redeeming user.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The display name of the redeeming user.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>The ID of the Redemption.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">reward</code></td>
+      <td>object</td>
+      <td>An object that contains the reward information.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>The type of reward. One of:  <ul><li>single_message_bypass_sub_mode</li><li>send_highlighted_message</li><li>random_sub_emote_unlock</li><li>chosen_sub_emote_unlock</li><li>chosen_modified_sub_emote_unlock</li></ul></td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">channel_points</code></td>
+      <td>int</td>
+      <td>Number of channel points used.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">emote</code></td>
+      <td>object</td>
+      <td>Optional. Emote associated with the reward.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>The emote ID.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">name</code></td>
+      <td>string</td>
+      <td>The human readable emote token.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">message</code></td>
+      <td>object</td>
+      <td>Optional. An object that contains the user message and emote information needed to recreate the message.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">text</code></td>
+      <td>string</td>
+      <td>The chat message in plain text.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">fragments</code></td>
+      <td>array</td>
+      <td>The ordered list of chat message fragments.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">text</code></td>
+      <td>string</td>
+      <td>The message text in fragment.</td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>The type of message fragment. Possible values are: <ul><li>text</li><li>emote</li></ul></td>
+    </tr>
+    <tr>
+      <td>      <code class="highlighter-rouge">emote</code></td>
+      <td>object</td>
+      <td>Optional. The metadata pertaining to the emote.</td>
+    </tr>
+    <tr>
+      <td>          <code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>The ID that uniquely identifies this emote.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">redeemed_at</code></td>
@@ -7346,7 +8074,7 @@
     <tr>
       <td>         <code class="highlighter-rouge">bits</code></td>
       <td>String</td>
-      <td>The amount of bits cheered.</td>
+      <td>The amount of Bits cheered.</td>
     </tr>
     <tr>
       <td>         <code class="highlighter-rouge">tier</code></td>
@@ -8314,6 +9042,11 @@
       <td>string</td>
       <td>The time when the Hype Train expires. The expiration is extended when the Hype Train reaches a new level.</td>
     </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_golden_kappa_train</code></td>
+      <td>boolean</td>
+      <td>Indicates if the Hype Train is a Golden Kappa Train.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -8388,6 +9121,11 @@
       <td>string</td>
       <td>The time when the Hype Train expires. The expiration is extended when the Hype Train reaches a new level.</td>
     </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_golden_kappa_train</code></td>
+      <td>boolean</td>
+      <td>Indicates if the Hype Train is a Golden Kappa Train.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -8451,6 +9189,11 @@
       <td><code class="highlighter-rouge">cooldown_ends_at</code></td>
       <td>string</td>
       <td>The time when the Hype Train cooldown ends so that the next Hype Train can start.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_golden_kappa_train</code></td>
+      <td>boolean</td>
+      <td>Indicates if the Hype Train is a Golden Kappa Train.</td>
     </tr>
   </tbody>
 </table>
@@ -9514,7 +10257,7 @@
         <!-- <a href="#">Languages</a> -->
       </div>
       <div class="copyright">
-        &copy; 2024 Twitch Interactive, Inc.
+        &copy; 2025 Twitch Interactive, Inc.
       </div>
     </div>
   </div>

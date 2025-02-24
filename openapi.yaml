@@ -91,7 +91,7 @@ paths:
             examples:
               Example:
                 value:
-                  broadcaster_id: "41245072"
+                  broadcaster_id: "141981764"
                   length: 60
                 description: This request starts a commercial.
       responses:
@@ -121,7 +121,7 @@ paths:
                     -H 'Content-Type: application/json' \
 
                     --data-raw '{
-                      "broadcaster_id": "41245072",
+                      "broadcaster_id": "141981764",
                       "length": 60
                     }'
 
@@ -3838,6 +3838,9 @@ paths:
         Sends an announcement to the broadcaster’s chat room.
 
 
+        **Rate Limits**: One announcement may be sent every 2 seconds.
+
+
         __Authorization:__
 
 
@@ -3920,6 +3923,9 @@ paths:
             * The OAuth token is not valid.
 
             * The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.
+        "429":
+          description: The sender has exceeded the number of announcements they may send
+            to this **broadcaster\_id** within a given window.
       security:
         - twitch_auth:
             - moderator:manage:announcements
@@ -3936,7 +3942,7 @@ paths:
         Twitch’s Shoutout feature is a great way for you to show support for other broadcasters and help them grow. Viewers who do not follow the other broadcaster will see a pop-up Follow button in your chat that they can click to follow the other broadcaster. [Learn More](https://help.twitch.tv/s/article/shoutouts)
 
 
-        **Rate Limits** The broadcaster may send a Shoutout once every 2 minutes. They may send the same broadcaster a Shoutout once every 60 minutes.
+        **Rate Limits**: The broadcaster may send a Shoutout once every 2 minutes. They may send the same broadcaster a Shoutout once every 60 minutes.
 
 
         To receive notifications when a Shoutout is sent or received, subscribe to the [channel.shoutout.create](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshoutoutcreate) and [channel.shoutout.receive](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshoutoutreceive) subscription types. The **channel.shoutout.create** event includes cooldown periods that indicate when the broadcaster may send another Shoutout without exceeding the endpoint’s rate limit.
@@ -4448,6 +4454,9 @@ paths:
         Gets one or more video clips that were captured from streams. For
         information about clips, see [How to use
         clips](https://help.twitch.tv/s/article/how-to-use-clips).
+
+
+        When using pagination for clips, note that the maximum number of results returned over multiple requests will be approximately 1,000\. If additional results are necessary, paginate over different query parameters such as multiple `started_at` and `ended_at` timeframes to refine the search.
 
 
         __Authorization:__
@@ -5162,6 +5171,11 @@ paths:
                     ```
                   value:
                     data:
+                      - id: DebatedSocialIssuesAndPolitics
+                        description: Discussions or debates about politics or sensitive social issues
+                          such as elections, civic integrity, military conflict,
+                          and civil rights in a polarizing manner.
+                        name: Politics and Sensitive Social Issues
                       - id: DrugsIntoxication
                         description: Excessive tobacco glorification or promotion, any marijuana
                           consumption/use, legal drug and alcohol induced
@@ -5903,9 +5917,9 @@ paths:
           required: true
         - name: first
           in: query
-          description: The maximum number of items to return per page in the response. The
-            minimum page size is 1 item per page and the maximum is 100 items
-            per page. The default is 20.
+          description: The specific maximum number of items per page in the response. The
+            actual number returned may be less than this limit. [Read
+            More](https://dev.twitch.tv/docs/api/guide#pagination)
           schema:
             type: integer
             format: int32
@@ -7016,6 +7030,7 @@ paths:
               - automod.message.update
               - automod.settings.update
               - automod.terms.update
+              - channel.bits.use
               - channel.update
               - channel.follow
               - channel.ad_break.begin
@@ -7040,7 +7055,6 @@ paths:
               - channel.unban
               - channel.unban_request.create
               - channel.unban_request.resolve
-              - channel.moderate
               - channel.moderate
               - channel.moderator.add
               - channel.moderator.remove
@@ -13063,12 +13077,12 @@ paths:
                     _Request:_
 
 
-                    Gets the list of live and offline channels where the broadcaster’s name contains _loserfruit_.
+                    Gets the list of live and offline channels where the broadcaster’s name contains _twitchdev_.
 
 
                     ```bash
 
-                    curl -X GET 'https://api.twitch.tv/helix/search/channels?query=loserfruit' \
+                    curl -X GET 'https://api.twitch.tv/helix/search/channels?query=twitchdev' \
 
                     -H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \
 
@@ -13078,16 +13092,20 @@ paths:
                   value:
                     data:
                       - broadcaster_language: en
-                        broadcaster_login: loserfruit
-                        display_name: Loserfruit
-                        game_id: "498000"
-                        game_name: House Flipper
-                        id: "41245072"
+                        broadcaster_login: twitchdev
+                        display_name: TwitchDev
+                        game_id: "1469308723"
+                        game_name: Software and Game Development
+                        id: "141981764"
                         is_live: false
                         tag_ids: []
-                        tags: []
-                        thumbnail_url: https://static-cdn.jtvnw.net/jtv_user_pictures/fd17325a-7dc2-46c6-8617-e90ec259501c-profile_image-300x300.png
-                        title: loserfruit
+                        tags:
+                          - WebDevelopment
+                          - GameDevelopment
+                          - SoftwareDevelopment
+                          - English
+                        thumbnail_url: https://static-cdn.jtvnw.net/jtv_user_pictures/8a6381c7-d0c0-4576-b179-38bd5ce1d6af-profile_image-300x300.png
+                        title: Standard Output
                         started_at: ""
                     pagination:
                       cursor: Mg==
@@ -13170,13 +13188,18 @@ paths:
                 $ref: "#/components/schemas/GetStreamKeyResponse"
               examples:
                 Example:
-                  description: |-
+                  description: >-
                     _Request:_
 
+
                     ```bash
-                    curl -X GET 'https://api.twitch.tv/helix/streams/key' \
+
+                    curl -X GET 'https://api.twitch.tv/helix/streams/key?broadcaster_id=141981764' \
+
                     -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
+
                     -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
+
                     ```
                   value:
                     data:
@@ -16336,10 +16359,12 @@ components:
                 type: string
                 description: >-
                   ID of the [Content Classification
-                  Labels](https://blog.twitch.tv/en/2023/06/20/introducing-content-classification-labels/)
+                  Labels](https://help.twitch.tv/s/article/content-classification-labels)
                   that must be added/removed from the channel. Can be one of the
                   following values:  
                     
+                  * DebatedSocialIssuesAndPolitics
+
                   * DrugsIntoxication
 
                   * SexualThemes
@@ -16350,6 +16375,7 @@ components:
 
                   * ProfanityVulgarity
                 enum:
+                  - DebatedSocialIssuesAndPolitics
                   - DrugsIntoxication
                   - SexualThemes
                   - ViolentGraphic
@@ -23464,6 +23490,7 @@ components:
             channel:manage:videos: Manage a channel’s videos, including deleting videos.
             channel:read:vips: Read the list of VIPs in your channel.
             channel:manage:vips: Add or remove the VIP role from users in your channel.
+            channel:moderate: Perform moderation actions in a channel.
             clips:edit: Manage Clips for a channel.
             moderation:read: View a channel’s moderation data including Moderators, Bans,
               Timeouts, and Automod settings.

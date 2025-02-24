@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-09-17T16:55:59-07:00">
+<meta property="article:published_time" content="2025-02-19T12:35:20-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","url":"https://dev.twitch.tv/api/reference/","@type":"BlogPosting","headline":"Reference","dateModified":"2024-09-17T16:55:59-07:00","datePublished":"2024-09-17T16:55:59-07:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","url":"https://dev.twitch.tv/api/reference/","@type":"BlogPosting","headline":"Reference","dateModified":"2025-02-19T12:35:20-08:00","datePublished":"2025-02-19T12:35:20-08:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -783,6 +783,11 @@
 	
 	<h1 id="twitch-api-reference">Twitch API Reference</h1>
 	
+
+
+
+
+
 
 
 
@@ -2446,7 +2451,7 @@
 <span class="nt">-H</span> <span class="s1">'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
 <span class="nt">--data-raw</span> <span class="s1">'{
-  "broadcaster_id": "41245072",
+  "broadcaster_id": "141981764",
   "length": 60
 }'</span>
 </code></pre></div></div>
@@ -4033,7 +4038,7 @@
       <td>tags</td>
       <td>String[]</td>
       <td>No</td>
-      <td>A list of channel-defined tags to apply to the channel. To remove all tags from the channel, set tags to an empty array. Tags help identify the content that the channel streams. <a href="https://help.twitch.tv/s/article/guide-to-tags">Learn More</a><br><br>A channel may specify a maximum of 10 tags. Each tag is limited to a maximum of 25 characters and may not be an empty string or contain spaces or special characters. Tags are case insensitive. For readability, consider using camelCasing or PascalCasing.</td>
+      <td>A list of channel-defined tags to apply to the channel. To remove all tags from the channel, set tags to an empty array. Tags help identify the content that the channel streams. <a href="https://help.twitch.tv/s/article/guide-to-tags" target="_blank">Learn More</a><br><br>A channel may specify a maximum of 10 tags. Each tag is limited to a maximum of 25 characters and may not be an empty string or contain spaces or special characters. Tags are case insensitive. For readability, consider using camelCasing or PascalCasing.</td>
     </tr>
     <tr>
       <td>content_classification_labels</td>
@@ -4045,7 +4050,7 @@
       <td>   id</td>
       <td>string</td>
       <td>Yes</td>
-      <td>ID of the <a href="https://blog.twitch.tv/en/2023/06/20/introducing-content-classification-labels/">Content Classification Labels</a> that must be added/removed from the channel. Can be one of the following values:<ul><li>DrugsIntoxication</li><li>SexualThemes</li><li>ViolentGraphic</li><li>Gambling</li><li>ProfanityVulgarity</li></ul></td>
+      <td>ID of the <a href="https://help.twitch.tv/s/article/content-classification-labels" target="_blank">Content Classification Labels</a> that must be added/removed from the channel. Can be one of the following values:<ul><li>DebatedSocialIssuesAndPolitics</li><li>DrugsIntoxication</li><li>SexualThemes</li><li>ViolentGraphic</li><li>Gambling</li><li>ProfanityVulgarity</li></ul></td>
     </tr>
     <tr>
       <td>   is_enabled</td>
@@ -8709,6 +8714,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 			
 				<p>Sends an announcement to the broadcaster’s chat room.</p>
 
+<p><strong>Rate Limits</strong>: One announcement may be sent every 2 seconds.</p>
 <h3>Authorization</h3>
 
 <p>Requires a <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:announcements</strong> scope.</p>
@@ -8797,6 +8803,10 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
       <td>401 Unauthorized</td>
       <td><ul><li>The Authorization header is required and must contain a user access token.</li><li>The user access token is missing the <b>moderator:manage:announcements</b> scope.</li><li>The OAuth token is not valid.</li><li>The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.</li></ul></td>
     </tr>
+    <tr>
+      <td>429 Too Many Requests</td>
+      <td>The sender has exceeded the number of announcements they may send to this <strong>broadcaster_id</strong> within a given window.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -8829,7 +8839,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <p>Twitch’s Shoutout feature is a great way for you to show support for other broadcasters and help them grow. Viewers who do not follow the other broadcaster will see a pop-up Follow button in your chat that they can click to follow the other broadcaster. <a href="https://help.twitch.tv/s/article/shoutouts">Learn More</a></p>
 
-<p><strong>Rate Limits</strong> The broadcaster may send a Shoutout once every 2 minutes. They may send the same broadcaster a Shoutout once every 60 minutes.</p>
+<p><strong>Rate Limits</strong>: The broadcaster may send a Shoutout once every 2 minutes. They may send the same broadcaster a Shoutout once every 60 minutes.</p>
 
 <p>To receive notifications when a Shoutout is sent or received, subscribe to the <a href="/docs/eventsub/eventsub-subscription-types#channelshoutoutcreate">channel.shoutout.create</a> and <a href="/docs/eventsub/eventsub-subscription-types#channelshoutoutreceive">channel.shoutout.receive</a> subscription types. The <strong>channel.shoutout.create</strong> event includes cooldown periods that indicate when the broadcaster may send another Shoutout without exceeding the endpoint’s rate limit.</p>
 
@@ -9362,6 +9372,8 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 			<a class="editor-link" href="cloudcannon:#content_blocks[37]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets one or more video clips that were captured from streams. For information about clips, see <a href="https://help.twitch.tv/s/article/how-to-use-clips">How to use clips</a>.</p>
+
+<p>When using pagination for clips, note that the maximum number of results returned over multiple requests will be approximately 1,000. If additional results are necessary, paginate over different query parameters such as multiple <code class="highlighter-rouge">started_at</code> and <code class="highlighter-rouge">ended_at</code> timeframes to refine the search.</p>
 
 <h3>Authorization</h3>
 
@@ -10350,6 +10362,11 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DebatedSocialIssuesAndPolitics"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Discussions or debates about politics or sensitive social issues such as elections, civic integrity, military conflict, and civil rights in a polarizing manner."</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Politics and Sensitive Social Issues"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DrugsIntoxication"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Excessive tobacco glorification or promotion, any marijuana consumption/use, legal drug and alcohol induced intoxication, discussions of illegal drugs."</span><span class="p">,</span><span class="w">
@@ -11407,7 +11424,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
       <td>first</td>
       <td>Integer</td>
       <td>No</td>
-      <td>The maximum number of items to return per page in the response. The minimum page size is 1 item per page and the maximum is 100 items per page. The default is 20.</td>
+      <td>The specific maximum number of items per page in the response.  The actual number returned may be less than this limit.  <a href="/docs/api/guide#pagination">Read More</a></td>
     </tr>
     <tr>
       <td>after</td>
@@ -22533,8 +22550,8 @@ END:VCALENDAR%
 	
 			<section class="right-code">
 				<h3>Example Request</h3>
-<p>Gets the list of live and offline channels where the broadcaster’s name contains <em>loserfruit</em>.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/search/channels?query=loserfruit'</span> <span class="se">\</span>
+<p>Gets the list of live and offline channels where the broadcaster’s name contains <em>twitchdev</em>.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/search/channels?query=twitchdev'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'</span>
 </code></pre></div></div>
@@ -22545,16 +22562,21 @@ END:VCALENDAR%
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="s2">"broadcaster_language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"broadcaster_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loserfruit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Loserfruit"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"498000"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"House Flipper"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"41245072"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"broadcaster_login"</span><span class="p">:</span><span class="w"> </span><span class="s2">"twitchdev"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TwitchDev"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"game_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1469308723"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"game_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Software and Game Development"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"141981764"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"is_live"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="s2">"tag_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-      </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/jtv_user_pictures/fd17325a-7dc2-46c6-8617-e90ec259501c-profile_image-300x300.png"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"loserfruit"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"WebDevelopment"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"GameDevelopment"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"SoftwareDevelopment"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"English"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://static-cdn.jtvnw.net/jtv_user_pictures/8a6381c7-d0c0-4576-b179-38bd5ce1d6af-profile_image-300x300.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Standard Output"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="err">...</span><span class="w">
@@ -22697,7 +22719,7 @@ END:VCALENDAR%
 			<section class="right-code">
 				<h3>Example Request</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/streams/key'</span> <span class="se">\</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/helix/streams/key?broadcaster_id=141981764'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
 </code></pre></div></div>
@@ -26197,7 +26219,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
         <!-- <a href="#">Languages</a> -->
       </div>
       <div class="copyright">
-        &copy; 2024 Twitch Interactive, Inc.
+        &copy; 2025 Twitch Interactive, Inc.
       </div>
     </div>
   </div>

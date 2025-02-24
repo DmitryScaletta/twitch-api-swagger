@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2024-09-17T16:55:59-07:00">
+<meta property="article:published_time" content="2025-02-19T12:35:20-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Access Token Scopes","url":"https://dev.twitch.tv/authentication/scopes/","@type":"BlogPosting","headline":"Twitch Access Token Scopes","dateModified":"2024-09-17T16:55:59-07:00","datePublished":"2024-09-17T16:55:59-07:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/authentication/scopes/"},"@context":"http://schema.org"}</script>
+{"description":"Twitch Access Token Scopes","url":"https://dev.twitch.tv/authentication/scopes/","@type":"BlogPosting","headline":"Twitch Access Token Scopes","dateModified":"2025-02-19T12:35:20-08:00","datePublished":"2025-02-19T12:35:20-08:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/authentication/scopes/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -496,6 +496,11 @@
 
 
 
+
+
+
+
+
 	
 		
 
@@ -527,7 +532,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">bits:read</code></td>
-      <td>View Bits information for a channel.<br><br><strong>API</strong><br><a href="/docs/api/reference#get-bits-leaderboard">Get Bits Leaderboard</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelcheer">Channel Cheer</a></td>
+      <td>View Bits information for a channel.<br><br><strong>API</strong><br><a href="/docs/api/reference#get-bits-leaderboard">Get Bits Leaderboard</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelbitsuse">Channel Bits Use</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelcheer">Channel Cheer</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">channel:bot</code></td>
@@ -603,7 +608,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">channel:read:redemptions</code></td>
-      <td>View Channel Points custom rewards and their redemptions on a channel.<br><br><strong>API</strong><br><a href="/docs/api/reference#get-custom-reward">Get Custom Reward</a><br><a href="/docs/api/reference#get-custom-reward-redemption">Get Custom Reward Redemption</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_automatic_reward_redemptionadd">Channel Points Automatic Reward Redemption</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_rewardadd">Channel Points Custom Reward Add</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_rewardupdate">Channel Points Custom Reward Update</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_rewardremove">Channel Points Custom Reward Remove</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_reward_redemptionadd">Channel Points Custom Reward Redemption Add</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_reward_redemptionupdate">Channel Points Custom Reward Redemption Update</a></td>
+      <td>View Channel Points custom rewards and their redemptions on a channel.<br><br><strong>API</strong><br><a href="/docs/api/reference#get-custom-reward">Get Custom Reward</a><br><a href="/docs/api/reference#get-custom-reward-redemption">Get Custom Reward Redemption</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_automatic_reward_redemptionadd">Channel Points Automatic Reward Redemption</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_automatic_reward_redemptionadd-v2">Channel Points Automatic Reward Redemption v2</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_rewardadd">Channel Points Custom Reward Add</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_rewardupdate">Channel Points Custom Reward Update</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_rewardremove">Channel Points Custom Reward Remove</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_reward_redemptionadd">Channel Points Custom Reward Redemption Add</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_reward_redemptionupdate">Channel Points Custom Reward Redemption Update</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">channel:manage:redemptions</code></td>
@@ -634,6 +639,10 @@
       <td>Add or remove the VIP role from users in your channel.<br><br><strong>API</strong><br><a href="/docs/api/reference#get-vips">Get VIPs</a><br><a href="/docs/api/reference#add-channel-vip">Add Channel VIP</a><br><a href="/docs/api/reference#remove-channel-vip">Remove Channel VIP</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelvipadd">Channel VIP Add</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelvipremove">Channel VIP Remove</a></td>
     </tr>
     <tr>
+      <td><code class="highlighter-rouge">channel:moderate</code></td>
+      <td>Perform moderation actions in a channel.<br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelban">Channel Ban</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelunban">Channel Unban</a></td>
+    </tr>
+    <tr>
       <td><code class="highlighter-rouge">clips:edit</code></td>
       <td>Manage Clips for a channel.<br><br><strong>API</strong><br><a href="/docs/api/reference#create-clip">Create Clip</a></td>
     </tr>
@@ -647,7 +656,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">moderator:manage:automod</code></td>
-      <td>Manage messages held for review by AutoMod in channels where you are a moderator.<br><br><strong>API</strong><br><a href="/docs/api/reference#manage-held-automod-messages">Manage Held AutoMod Messages</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#automodmessagehold">AutoMod Message Hold</a><br><a href="/docs/eventsub/eventsub-subscription-types/#automodmessageupdate">AutoMod Message Update</a><br><a href="/docs/authentication/eventsub/eventsub-subscription-types/#automodtermsupdate">AutoMod Terms Update</a></td>
+      <td>Manage messages held for review by AutoMod in channels where you are a moderator.<br><br><strong>API</strong><br><a href="/docs/api/reference#manage-held-automod-messages">Manage Held AutoMod Messages</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#automodmessagehold">AutoMod Message Hold</a><br><a href="/docs/eventsub/eventsub-subscription-types/#automodmessagehold-v2">AutoMod Message Hold v2</a><br><a href="/docs/eventsub/eventsub-subscription-types/#automodmessageupdate">AutoMod Message Update</a><br><a href="/docs/eventsub/eventsub-subscription-types/#automodmessageupdate-v2">AutoMod Message Update v2</a><br><a href="/docs/authentication/eventsub/eventsub-subscription-types/#automodtermsupdate">AutoMod Terms Update</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">moderator:read:automod_settings</code></td>
@@ -663,7 +672,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">moderator:manage:banned_users</code></td>
-      <td>Ban and unban users.<br><br><strong>API</strong><br><a href="/docs/api/reference/#get-banned-users">Get Banned Users</a><br><a href="/docs/api/reference#ban-user">Ban users</a><br><a href="/docs/api/reference#unban-user">Unban user</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelmoderate">Channel Moderate</a></td>
+      <td>Ban and unban users.<br><br><strong>API</strong><br><a href="/docs/api/reference/#get-banned-users">Get Banned Users</a><br><a href="/docs/api/reference#ban-user">Ban User</a><br><a href="/docs/api/reference#unban-user">Unban User</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelmoderate">Channel Moderate</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelmoderate-v2">Channel Moderate v2</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">moderator:read:blocked_terms</code></td>
@@ -1014,7 +1023,7 @@
         <!-- <a href="#">Languages</a> -->
       </div>
       <div class="copyright">
-        &copy; 2024 Twitch Interactive, Inc.
+        &copy; 2025 Twitch Interactive, Inc.
       </div>
     </div>
   </div>
