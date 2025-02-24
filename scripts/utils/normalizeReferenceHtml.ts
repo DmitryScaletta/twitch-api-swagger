@@ -166,7 +166,7 @@ const normalizeReferenceHtml = (document: Document) => {
     ];
     for (const id of ids200) {
       replaceHtml(getDocsEl(id).querySelector('table:last-child')!, [
-        ['<tbody>', '<tr><td>200 OK</td><td></td></tr>'],
+        ['<tbody>', '<tbody><tr><td>200 OK</td><td></td></tr>'],
       ]);
     }
     const ids204 = [
@@ -176,7 +176,7 @@ const normalizeReferenceHtml = (document: Document) => {
     ];
     for (const id of ids204) {
       replaceHtml(getDocsEl(id).querySelector('table:last-child')!, [
-        ['<tbody>', '<tr><td>204 No Content</td><td></td></tr>'],
+        ['<tbody>', '<tbody><tr><td>204 No Content</td><td></td></tr>'],
       ]);
     }
   }
@@ -252,6 +252,49 @@ const normalizeReferenceHtml = (document: Document) => {
       '<td>&nbsp;&nbsp;&nbsp;broadcaster_name</td>',
     ],
   ]);
+
+  // Add missing pagination
+  {
+    const paginationFieldsHtml = `
+      <tr>
+        <td>pagination</td>
+        <td>Object</td>
+        <td>
+          Contains the information used to page through the list of results.
+          The object is empty if there are no more pages left to page through.
+          <a href="/docs/api/guide#pagination">Read More</a>
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;cursor</td>
+        <td>String</td>
+        <td>
+          The cursor used to get the next page of results.
+          Use the cursor to set the request’s <em>after</em> query parameter.
+        </td>
+      </tr>
+    `;
+    const ids = [
+      // has pagination in the examples
+      'get-custom-reward-redemption',
+      'search-categories',
+      'search-channels',
+      // actually has pagination
+      'get-user-block-list',
+      // TODO: maybe has pagination ('get-user-emotes' has pagination in the docs)
+      // 'get-channel-editors',
+      // 'get-channel-emotes',
+      // 'get-global-emotes',
+      // 'get-emote-sets',
+      // 'get-channel-chat-badges',
+      // 'get-global-chat-badges',
+    ];
+    for (const id of ids) {
+      replaceHtml(getDocsEl(id).querySelectorAll('table')[1]!, [
+        ['</tbody>', `${paginationFieldsHtml}</tbody>`],
+      ]);
+    }
+  }
 };
 
 export default normalizeReferenceHtml;

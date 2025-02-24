@@ -14211,6 +14211,16 @@
             "items": {
               "$ref": "#/components/schemas/CustomRewardRedemption"
             }
+          },
+          "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through.[Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "description": "The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter."
+              }
+            }
           }
         }
       },
@@ -19857,6 +19867,16 @@
             "items": {
               "$ref": "#/components/schemas/Category"
             }
+          },
+          "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through.[Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "description": "The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter."
+              }
+            }
           }
         }
       },
@@ -19946,6 +19966,16 @@
             "description": "The list of channels that match the query. The list is empty if there are no matches.",
             "items": {
               "$ref": "#/components/schemas/Channel"
+            }
+          },
+          "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through.[Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "description": "The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter."
+              }
             }
           }
         }
@@ -20842,6 +20872,16 @@
             "description": "The list of blocked users. The list is in descending order by when the user was blocked.",
             "items": {
               "$ref": "#/components/schemas/UserBlockList"
+            }
+          },
+          "pagination": {
+            "description": "Contains the information used to page through the list of results. The object is empty if there are no more pages left to page through.[Read More](https://dev.twitch.tv/docs/api/guide#pagination)",
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "description": "The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter."
+              }
             }
           }
         }
