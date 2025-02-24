@@ -1,5 +1,5 @@
-import type { OpenApi, ParameterObject, SchemaObject } from '../types';
-import parseEventSubSubscriptionTypes from './parseEventSubSubscriptionTypes.js';
+import type { OpenApi, ParameterObject, SchemaObject } from '../types.ts';
+import parseEventSubSubscriptionTypes from './parseEventSubSubscriptionTypes.ts';
 
 const addEventSubSubscriptionTypes = (
   openApi: OpenApi,

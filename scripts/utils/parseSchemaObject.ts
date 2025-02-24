@@ -1,5 +1,5 @@
-import type { FieldSchema, ParameterObject, SchemaObject } from '../types';
-import { PARAMS_MORE_THAN_ONE_VALUES } from './constants.js';
+import type { FieldSchema, ParameterObject, SchemaObject } from '../types.ts';
+import { PARAMS_MORE_THAN_ONE_VALUES } from './constants.ts';
 
 // prettier-ignore
 const TYPES_MAP: Record<string, SchemaObject> = {

@@ -1,5 +1,5 @@
-import type { ExampleObject } from '../types';
-import parseMarkdown from './parseMarkdown.js';
+import type { ExampleObject } from '../types.ts';
+import parseMarkdown from './parseMarkdown.ts';
 
 export type ExampleItem = {
   type: 'example-request' | 'example-response';

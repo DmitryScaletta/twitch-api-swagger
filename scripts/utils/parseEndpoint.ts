@@ -13,19 +13,19 @@ import type {
   ResponseObject,
   ResponsesObject,
   SchemaObject,
-} from '../types';
-import { getBodySchemaName, getResponseSchemaName } from './getSchemaName.js';
-import { RESPONSE_BODY_SCHEMA_NAMES } from './constants.js';
-import parseExamples from './parseExamples.js';
-import parseMarkdown from './parseMarkdown.js';
-import parseResponses from './parseResponses.js';
-import parseTableSchema from './parseTableSchema.js';
+} from '../types.ts';
+import { getBodySchemaName, getResponseSchemaName } from './getSchemaName.ts';
+import { RESPONSE_BODY_SCHEMA_NAMES } from './constants.ts';
+import parseExamples from './parseExamples.ts';
+import parseMarkdown from './parseMarkdown.ts';
+import parseResponses from './parseResponses.ts';
+import parseTableSchema from './parseTableSchema.ts';
 import {
   parseParameterObject,
   parseSchemaObject,
-} from './parseSchemaObject.js';
-import parseTableAsMarkdown from './parseTableAsMarkdown.js';
-import getDescriptionText from './getDescriptionText.js';
+} from './parseSchemaObject.ts';
+import parseTableAsMarkdown from './parseTableAsMarkdown.ts';
+import getDescriptionText from './getDescriptionText.ts';
 
 // https://regex101.com/r/omJKyZ/1
 const SCOPE_REGEX = /(:?\*\*([a-z:_\\]+)\*\*|`([a-z:_]+)`)/g;

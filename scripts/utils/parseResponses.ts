@@ -1,5 +1,5 @@
-import type { ResponseObject, ResponsesObject } from '../types';
-import parseMarkdown from './parseMarkdown.js';
+import type { ResponseObject, ResponsesObject } from '../types.ts';
+import parseMarkdown from './parseMarkdown.ts';
 
 const parseResponses = (table: Element): ResponsesObject => {
   const responses: ResponsesObject = {};

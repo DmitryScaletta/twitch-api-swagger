@@ -1,10 +1,10 @@
 import { JSDOM } from 'jsdom';
-import type { OpenApi } from '../types';
-import { OPEN_API_DESCRIPTION, OPEN_API_TITLE } from './constants.js';
-import normalizeReferenceHtml from './normalizeReferenceHtml.js';
-import parseApiReference from './parseApiReference.js';
-import parseEndpoint from './parseEndpoint.js';
-import addEventSubSubscriptionTypes from './addEventSubSubscriptionTypes.js';
+import type { OpenApi } from '../types.ts';
+import { OPEN_API_DESCRIPTION, OPEN_API_TITLE } from './constants.ts';
+import normalizeReferenceHtml from './normalizeReferenceHtml.ts';
+import parseApiReference from './parseApiReference.ts';
+import parseEndpoint from './parseEndpoint.ts';
+import addEventSubSubscriptionTypes from './addEventSubSubscriptionTypes.ts';
 
 const generateOpenApi = (
   html: string,

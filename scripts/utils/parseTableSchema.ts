@@ -1,5 +1,5 @@
-import type { FieldSchema } from '../types';
-import parseMarkdown from './parseMarkdown.js';
+import type { FieldSchema } from '../types.ts';
+import parseMarkdown from './parseMarkdown.ts';
 
 const parseTableSchema = (table: Element): FieldSchema[] => {
   const fieldSchemas: FieldSchema[] = [];

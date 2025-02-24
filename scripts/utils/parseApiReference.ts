@@ -1,4 +1,4 @@
-import type { ApiReference } from '../types';
+import type { ApiReference } from '../types.ts';
 
 const parseApiReference = (document: Document) => {
   const apiReference = new Map<string, ApiReference>();

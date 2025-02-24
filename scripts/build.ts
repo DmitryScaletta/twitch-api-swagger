@@ -1,9 +1,9 @@
 import fs from 'node:fs/promises';
 import YAML from 'yaml';
-import fetchHtml from './utils/fetchHtml.js';
-import generateOpenApi from './utils/generateOpenApi.js';
-import { HTML_DESCRIPTION, OPEN_API_TITLE } from './utils/constants.js';
-import parseScopes from './utils/parseScopes.js';
+import fetchHtml from './utils/fetchHtml.ts';
+import generateOpenApi from './utils/generateOpenApi.ts';
+import { HTML_DESCRIPTION, OPEN_API_TITLE } from './utils/constants.ts';
+import parseScopes from './utils/parseScopes.ts';
 
 const PAGES = {
   reference: {

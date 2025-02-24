@@ -1,4 +1,4 @@
-import type { Descriptions } from '../types';
+import type { Descriptions } from '../types.ts';
 
 const fmt = (title: string) => `__${title}:__`;
 
