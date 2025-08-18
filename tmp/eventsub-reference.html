@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2025-02-19T12:35:20-08:00">
+<meta property="article:published_time" content="2025-08-14T12:57:05-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"EventSub Reference","url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@type":"BlogPosting","headline":"EventSub Reference","dateModified":"2025-02-19T12:35:20-08:00","datePublished":"2025-02-19T12:35:20-08:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"@context":"http://schema.org"}</script>
+{"description":"EventSub Reference","url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@type":"BlogPosting","headline":"EventSub Reference","dateModified":"2025-08-14T12:57:05-07:00","datePublished":"2025-08-14T12:57:05-07:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -523,8 +523,6 @@
 	
 	<h1 id="eventsub-reference">EventSub Reference</h1>
 	
-
-
 
 
 
@@ -2453,7 +2451,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">message</code></td>
-      <td>Object[]</td>
+      <td>Object</td>
       <td>The body of the message.</td>
     </tr>
     <tr>
@@ -2572,7 +2570,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">message</code></td>
-      <td>Object[]</td>
+      <td>Object</td>
       <td>The body of the message.</td>
     </tr>
     <tr>
@@ -2781,7 +2779,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">message</code></td>
-      <td>Object[]</td>
+      <td>Object</td>
       <td>The body of the message.</td>
     </tr>
     <tr>
@@ -2920,7 +2918,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">message</code></td>
-      <td>Object[]</td>
+      <td>Object</td>
       <td>The body of the message.</td>
     </tr>
     <tr>
@@ -3410,7 +3408,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">message</code></td>
-      <td>object[]</td>
+      <td>object</td>
       <td>Optional. An object that contains the user message and emote information needed to recreate the message.</td>
     </tr>
     <tr>
@@ -3854,6 +3852,11 @@
       <td>   <code class="highlighter-rouge">info</code></td>
       <td>string</td>
       <td>Contains metadata related to the chat badges in the badges tag. Currently, this tag contains metadata only for subscriber badges, to indicate the number of months the user has been a subscriber.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_source_only</code></td>
+      <td>bool</td>
+      <td><strong>Optional.</strong> Determines if a message delivered during a shared chat session is only sent to the source channel. Has no effect if the message is not sent during a shared chat session.</td>
     </tr>
   </tbody>
 </table>
@@ -4562,7 +4565,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">message</code></td>
-      <td>Object[]</td>
+      <td>Object</td>
       <td>The body of the message.</td>
     </tr>
     <tr>
@@ -4671,7 +4674,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">message</code></td>
-      <td>Object[]</td>
+      <td>Object</td>
       <td>The body of the message.</td>
     </tr>
     <tr>
@@ -6666,7 +6669,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">message</code></td>
-      <td>string</td>
+      <td>object</td>
       <td>An object that contains the user message and emote information needed to recreate the message.</td>
     </tr>
     <tr>
@@ -8024,7 +8027,7 @@
     <tr>
       <td><code class="highlighter-rouge">types</code></td>
       <td>[]String</td>
-      <td>User types (if any) that apply to the suspicious user, can be “manual”, “ban_evader_detector”, or “shared_channel_ban”.</td>
+      <td>User types (if any) that apply to the suspicious user, can be “manually_added”, “ban_evader”, or “banned_in_shared_channel”.</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">ban_evasion_evaluation</code></td>
@@ -8033,7 +8036,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">message</code></td>
-      <td>String</td>
+      <td>Object</td>
       <td>The structured chat message.</td>
     </tr>
     <tr>
@@ -9050,6 +9053,140 @@
   </tbody>
 </table>
 
+<h3 id="hype-train-begin-v2-event">Hype Train Begin V2 Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>The Hype Train ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The requested broadcaster ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The requested broadcaster login.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The requested broadcaster display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">total</code></td>
+      <td>integer</td>
+      <td>Total points contributed to the Hype Train.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">progress</code></td>
+      <td>integer</td>
+      <td>The number of points contributed to the Hype Train at the current level.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">goal</code></td>
+      <td>integer</td>
+      <td>The number of points required to reach the next level.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">top_contributions</code></td>
+      <td> <a href="#top-contributions">top_contributions</a> </td>
+      <td>The contributors with the most points contributed.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user that made the contribution.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The user’s login name.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user’s display name.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>The contribution method used. Possible values are: <ul><li><b>bits</b> - Bits contributions with Cheering and Power-ups. </li><li><b>subscription</b> - Subscription activity like subscribing or gifting subscriptions. </li><li><b>other</b> - Covers other contribution methods not listed.</li></ul></td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">total</code></td>
+      <td>integer</td>
+      <td>The total amount contributed. If type is bits, total represents the amount of Bits used. If type is subscription, total is 500, 1000, or 2500 to represent tier 1, 2, or 3 subscriptions, respectively.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">level</code></td>
+      <td>integer</td>
+      <td>The current level of the Hype Train.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">all_time_high_level</code></td>
+      <td>integer</td>
+      <td>The all-time high level this type of Hype Train has reached for this broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">all_time_high_total</code></td>
+      <td>integer</td>
+      <td>The all-time high total this type of Hype Train has reached for this broadcaster.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">shared_train_participants</code></td>
+      <td>object[]</td>
+      <td>Optional. Non-null for a shared Hype Train. Contains the list of broadcasters in the shared Hype Train.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The ID of the broadcaster participating in the shared Hype Train.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The login of the broadcaster participating in the shared Hype Train.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The display name of the broadcaster participating in the shared Hype Train.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">started_at</code></td>
+      <td>string</td>
+      <td>The time when the Hype Train started.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">expires_at</code></td>
+      <td>string</td>
+      <td>The time when the Hype Train expires. The expiration is extended when the Hype Train reaches a new level.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>The type of the Hype Train. Possible values are: <ul><li>treasure</li> <li>golden_kappa</li><li>regular</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_shared_train</code></td>
+      <td>boolean</td>
+      <td>Indicates if the Hype Train is shared. When true, <code class="highlighter-rouge">shared_train_participants</code> will contain the list of broadcasters the train is shared with.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="hype-train-progress-event">Hype Train Progress Event</h3>
 
 <table>
@@ -9129,6 +9266,130 @@
   </tbody>
 </table>
 
+<h3 id="hype-train-progress-v2-event">Hype Train Progress V2 Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>The Hype Train ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The requested broadcaster ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The requested broadcaster login.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The requested broadcaster display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">total</code></td>
+      <td>integer</td>
+      <td>Total points contributed to the Hype Train.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">progress</code></td>
+      <td>integer</td>
+      <td>The number of points contributed to the Hype Train at the current level.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">goal</code></td>
+      <td>integer</td>
+      <td>The number of points required to reach the next level.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">top_contributions</code></td>
+      <td> <a href="#top-contributions">top_contributions</a> </td>
+      <td>The contributors with the most points contributed.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user that made the contribution.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The user’s login name.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user’s display name.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>The contribution method used. Possible values are: <ul><li><b>bits</b> - Bits contributions with Cheering, Power-ups, and Extensions. </li><li><b>subscription</b> - Subscription activity like subscribing or gifting subscriptions. </li><li><b>other</b> - Covers other contribution methods not listed.</li></ul></td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">total</code></td>
+      <td>integer</td>
+      <td>The total amount contributed. If type is bits, total represents the amount of Bits used. If type is subscription, total is 500, 1000, or 2500 to represent tier 1, 2, or 3 subscriptions, respectively.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">level</code></td>
+      <td>integer</td>
+      <td>The current level of the Hype Train.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">shared_train_participants</code></td>
+      <td>object[]</td>
+      <td>Optional. Non-null for a shared Hype Train. Contains the list of broadcasters in the shared Hype Train.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The ID of the broadcaster participating in the shared Hype Train.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The login of the broadcaster participating in the shared Hype Train.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The display name of the broadcaster participating in the shared Hype Train.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">started_at</code></td>
+      <td>string</td>
+      <td>The time when the Hype Train started.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">expires_at</code></td>
+      <td>string</td>
+      <td>The time when the Hype Train expires. The expiration is extended when the Hype Train reaches a new level.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>The type of the Hype Train. Possible values are: <ul><li>treasure</li> <li>golden_kappa</li><li>regular</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_shared_train</code></td>
+      <td>boolean</td>
+      <td>Indicates if the Hype Train is shared. When true, <code class="highlighter-rouge">shared_train_participants</code> will contain the list of broadcasters the train is shared with.</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="hype-train-end-event">Hype Train End Event</h3>
 
 <table>
@@ -9194,6 +9455,125 @@
       <td><code class="highlighter-rouge">is_golden_kappa_train</code></td>
       <td>boolean</td>
       <td>Indicates if the Hype Train is a Golden Kappa Train.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="hype-train-end-v2-event">Hype Train End V2 Event</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">id</code></td>
+      <td>string</td>
+      <td>The Hype Train ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The requested broadcaster ID.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The requested broadcaster login.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The requested broadcaster display name.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">total</code></td>
+      <td>integer</td>
+      <td>Total points contributed to the Hype Train.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">top_contributions</code></td>
+      <td>object[]</td>
+      <td>The contributors with the most points contributed.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_id</code></td>
+      <td>string</td>
+      <td>The ID of the user that made the contribution.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_login</code></td>
+      <td>string</td>
+      <td>The user’s login name.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">user_name</code></td>
+      <td>string</td>
+      <td>The user’s display name.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>The contribution method used. Possible values are: <ul><li><b>bits</b> - Bits contributions with Cheering, Power-ups, and Extensions. </li><li><b>subscription</b> - Subscription activity like subscribing or gifting subscriptions. </li><li><b>other</b> - Covers other contribution methods not listed.</li></ul></td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">total</code></td>
+      <td>integer</td>
+      <td>The total amount contributed. If type is bits, total represents the amount of Bits used. If type is subscription, total is 500, 1000, or 2500 to represent tier 1, 2, or 3 subscriptions, respectively.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">level</code></td>
+      <td>integer</td>
+      <td>The current level of the Hype Train.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">shared_train_participants</code></td>
+      <td>object[]</td>
+      <td>Optional. Non-null for a shared Hype Train. Contains the list of broadcasters in the shared Hype Train.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">broadcaster_user_id</code></td>
+      <td>string</td>
+      <td>The ID of the broadcaster participating in the shared Hype Train.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">broadcaster_user_login</code></td>
+      <td>string</td>
+      <td>The login of the broadcaster participating in the shared Hype Train.</td>
+    </tr>
+    <tr>
+      <td>   <code class="highlighter-rouge">broadcaster_user_name</code></td>
+      <td>string</td>
+      <td>The display name of the broadcaster participating in the shared Hype Train.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">started_at</code></td>
+      <td>string</td>
+      <td>The time when the Hype Train started.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">cooldown_ends_at</code></td>
+      <td>string</td>
+      <td>The time when the Hype Train cooldown ends so that the next Hype Train can start.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">ended_at</code></td>
+      <td>string</td>
+      <td>The time when the Hype Train ended.</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">type</code></td>
+      <td>string</td>
+      <td>The type of the Hype Train. Possible values are: <ul><li>treasure</li> <li>golden_kappa</li><li>regular</li></ul></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">is_shared_train</code></td>
+      <td>boolean</td>
+      <td>Indicates if the Hype Train is shared. When true, <code class="highlighter-rouge">shared_train_participants</code> will contain the list of broadcasters the train is shared with.</td>
     </tr>
   </tbody>
 </table>

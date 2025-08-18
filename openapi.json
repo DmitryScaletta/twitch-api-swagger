@@ -3420,7 +3420,7 @@
     "/chat/messages": {
       "post": {
         "summary": "NEW Sends a message to the broadcaster’s chat room.",
-        "description": "NEW Sends a message to the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the `user:write:chat` scope. If app access token used, then additionally requires `user:bot` scope from chatting user, and either `channel:bot` scope from broadcaster or moderator status.",
+        "description": "NEW Sends a message to the broadcaster’s chat room.\n\n**NOTE:** When sending messages to a Shared Chat session, behaviors differ depending on your authentication token type:\n\n* When using an _App Access Token_, messages will only be sent to the source channel (defined by the `broadcaster_id` parameter) by default starting on May 19, 2025\\. Messages can be sent to all channels by using the `for_source_only` parameter and setting it to `false`.\n* When using a _User Access Token_, messages will be sent to all channels in the shared chat session, including the source channel. This behavior cannot be changed with this token type.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the `user:write:chat` scope. If app access token used, then additionally requires `user:bot` scope from chatting user, and either `channel:bot` scope from broadcaster or moderator status.",
         "tags": [
           "Chat"
         ],
@@ -3440,7 +3440,8 @@
                   "value": {
                     "broadcaster_id": "12826",
                     "sender_id": "141981764",
-                    "message": "Hello, world! twitchdevHype"
+                    "message": "Hello, world! twitchdevHype",
+                    "for_source_only": true
                   }
                 }
               }
@@ -3457,7 +3458,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/chat/messages' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \\\n-H 'Content-Type: application/json' \\\n-d '{\n  \"broadcaster_id\": \"12826\",\n  \"sender_id\": \"141981764\",\n  \"message\": \"Hello, world! twitchdevHype\"\n}'\n```",
+                    "description": "_Request:_\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/chat/messages' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \\\n-H 'Content-Type: application/json' \\\n-d '{\n  \"broadcaster_id\": \"12826\",\n  \"sender_id\": \"141981764\",\n  \"message\": \"Hello, world! twitchdevHype\",\n  \"for_source_only\": true\n}'\n```",
                     "value": {
                       "data": [
                         {
@@ -3472,7 +3473,7 @@
             }
           },
           "400": {
-            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The ID in the _broadcaster\\_id_ query parameter is not valid.\n* The _sender\\_id_ query parameter is required.\n* The ID in the _sender\\_id_ query parameter is not valid.\n* The _text_ query parameter is required.\n* The ID in the _reply\\_parent\\_message\\_id_ query parameter is not valid."
+            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The ID in the _broadcaster\\_id_ query parameter is not valid.\n* The _sender\\_id_ query parameter is required.\n* The ID in the _sender\\_id_ query parameter is not valid.\n* The _text_ query parameter is required.\n* The ID in the _reply\\_parent\\_message\\_id_ query parameter is not valid.\n* Cannot set \\*for\\_source\\_only\\* if User Access Token is used."
           },
           "401": {
             "description": "* The ID in the user\\_id query parameter must match the user ID in the access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the user:write:chat scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
@@ -4446,7 +4447,7 @@
     "/entitlements/drops": {
       "get": {
         "summary": "Gets an organization’s list of entitlements that have been granted to a game, a user, or both.",
-        "description": "Gets an organization’s list of entitlements that have been granted to a game, a user, or both.\n\n**NOTE:** Entitlements returned in the response body data are not guaranteed to be sorted by any field returned by the API. To retrieve **CLAIMED** or **FULFILLED** entitlements, use the `fulfillment_status` query parameter to filter results. To retrieve entitlements for a specific game, use the `game_id` query parameter to filter results.\n\nThe following table identifies the request parameters that you may specify based on the type of access token used.\n\n| Access token type | Parameter | Description |\n| - | - | - |\n| App | None | If you don’t specify request parameters, the request returns all entitlements that your organization owns. |\n| App | user_id | The request returns all entitlements for any game that the organization granted to the specified user. |\n| App | user_id, game_id | The request returns all entitlements that the specified game granted to the specified user. |\n| App | game_id | The request returns all entitlements that the specified game granted to all entitled users. |\n| User | None | If you don’t specify request parameters, the request returns all entitlements for any game that the organization granted to the user identified in the access token. |\n| User | user_id | Invalid. |\n| User | user_id, game_id | Invalid. |\n| User | game_id | The request returns all entitlements that the specified game granted to the user identified in the access token. |\n\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens). The client ID in the access token must own the game.",
+        "description": "Gets an organization’s list of entitlements that have been granted to a game, a user, or both.\n\n**NOTE:** Entitlements returned in the response body data are not guaranteed to be sorted by any field returned by the API. To retrieve **CLAIMED** or **FULFILLED** entitlements, use the `fulfillment_status` query parameter to filter results. To retrieve entitlements for a specific game, use the `game_id` query parameter to filter results.\n\nThe following table identifies the request parameters that you may specify based on the type of access token used.\n\n| Access token type | Parameter | Description |\n| - | - | - |\n| App | None | If you don’t specify request parameters, the request returns all entitlements that your organization owns. |\n| App | user_id | The request returns all entitlements for any game that the organization granted to the specified user. |\n| App | user_id, game_id | The request returns all entitlements that the specified game granted to the specified user. |\n| App | game_id | The request returns all entitlements that the specified game granted to all entitled users. |\n| User | None | If you don’t specify request parameters, the request returns all entitlements for any game that the organization granted to the user identified in the access token. |\n| User | user_id | Invalid. |\n| User | user_id, game_id | Invalid. |\n| User | game_id | The request returns all entitlements that the specified game granted to the user identified in the access token. |\n\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens). The Client ID associated with the access token must be owned by a user who is a member of the [organization](https://dev.twitch.tv/docs/docs/companies/) that holds ownership of the game.",
         "tags": [
           "Entitlements"
         ],
@@ -4524,7 +4525,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\n```bash\ncurl -H GET 'helix/entitlements/drops?user_id=25009227&game_id=33214' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "description": "_Request:_\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/entitlements/drops?user_id=25009227&game_id=33214' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
                     "value": {
                       "data": [
                         {
@@ -4585,7 +4586,7 @@
       },
       "patch": {
         "summary": "Updates the Drop entitlement’s fulfillment status.",
-        "description": "Updates the Drop entitlement’s fulfillment status.\n\nThe following table identifies which entitlements are updated based on the type of access token used.\n\n| Access token type | Data that’s updated |\n| - | - |\n| App | Updates all entitlements with benefits owned by the organization in the access token. |\n| User | Updates all entitlements owned by the user in the access token and where the benefits are owned by the organization in the access token. |\n\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens). The client ID in the access token must own the game.",
+        "description": "Updates the Drop entitlement’s fulfillment status.\n\nThe following table identifies which entitlements are updated based on the type of access token used.\n\n| Access token type | Data that’s updated |\n| - | - |\n| App | Updates all entitlements with benefits owned by the organization in the access token. |\n| User | Updates all entitlements owned by the user in the access token and where the benefits are owned by the organization in the access token. |\n\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens). The Client ID associated with the access token must be owned by a user who is a member of the [organization](https://dev.twitch.tv/docs/docs/companies/) that holds ownership of the game.",
         "tags": [
           "Entitlements"
         ],
@@ -4626,7 +4627,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\n```bash\ncurl -H PATCH 'helix/entitlements/drops' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2' \\\n-H 'Content-Type: application/json' \\\n-d '{\n  \"fulfillment_status\": \"FULFILLED\",\n  \"entitlement_ids\": [\n    \"fb78259e-fb81-4d1b-8333-34a06ffc24c0\",\n    \"862750a5-265e-4ab6-9f0a-c64df3d54dd0\",\n    \"d8879baa-3966-4d10-8856-15fdd62cce02\",\n    \"9a290126-7e3b-4f66-a9ae-551537893b65\"\n  ]\n}'\n```",
+                    "description": "_Request:_\n\n```bash\ncurl -X PATCH 'https://api.twitch.tv/helix/entitlements/drops' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2' \\\n-H 'Content-Type: application/json' \\\n-d '{\n  \"fulfillment_status\": \"FULFILLED\",\n  \"entitlement_ids\": [\n    \"fb78259e-fb81-4d1b-8333-34a06ffc24c0\",\n    \"862750a5-265e-4ab6-9f0a-c64df3d54dd0\",\n    \"d8879baa-3966-4d10-8856-15fdd62cce02\",\n    \"9a290126-7e3b-4f66-a9ae-551537893b65\"\n  ]\n}'\n```",
                     "value": {
                       "data": [
                         {
@@ -5805,7 +5806,7 @@
       },
       "get": {
         "summary": "Gets a list of EventSub subscriptions that the client in the access token created.",
-        "description": "Gets a list of EventSub subscriptions that the client in the access token created.\n\n__Authorization:__\n\nIf you use [Webhooks](https://dev.twitch.tv/docs/eventsub/handling-webhook-events) or [Conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/) to receive events, the request must specify an app access token. The request will fail if you use a user access token.\n\nIf you use [WebSockets to receive events](https://dev.twitch.tv/docs/eventsub/handling-websocket-events), the request must specify a user access token. The request will fail if you use an app access token. The token may include any scopes.\n\n__Request Query Parameters:__\n\nUse the _status_, _type_, and _user\\_id_ query parameters to filter the list of subscriptions that are returned. The filters are mutually exclusive; the request fails if you specify more than one filter.",
+        "description": "Gets a list of EventSub subscriptions that the client in the access token created.\n\n__Authorization:__\n\nIf you use [Webhooks](https://dev.twitch.tv/docs/eventsub/handling-webhook-events) or [Conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/) to receive events, the request must specify an app access token. The request will fail if you use a user access token.\n\nIf you use [WebSockets to receive events](https://dev.twitch.tv/docs/eventsub/handling-websocket-events), the request must specify a user access token. The request will fail if you use an app access token. The token may include any scopes.\n\n__Request Query Parameters:__\n\nUse the _status_, _type_, _user\\_id_, and _subscription\\_id_ query parameters to filter the list of subscriptions that are returned. The filters are mutually exclusive; the request fails if you specify more than one filter.",
         "tags": [
           "EventSub"
         ],
@@ -5935,6 +5936,14 @@
             "name": "user_id",
             "in": "query",
             "description": "Filter subscriptions by user ID. The response contains subscriptions where this ID matches a user ID that you specified in the **Condition** object when you [created the subscription](https://dev.twitch.tv/docs/api/reference#create-eventsub-subscription).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subscription_id",
+            "in": "query",
+            "description": "Returns an array with the subscription matching the ID (as long as it is owned by the client making the request), or an empty array if there is no matching subscription.",
             "schema": {
               "type": "string"
             }
@@ -7202,6 +7211,121 @@
           },
           "401": {
             "description": "* The ID in _broadcaster\\_id_ must match the _user\\_id_ in the user access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:read:hype\\_train** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "channel:read:hype_train"
+            ]
+          }
+        ]
+      }
+    },
+    "/hypetrain/status": {
+      "get": {
+        "summary": "BETA Gets the status of a Hype Train for the specified broadcaster.",
+        "description": "BETA Get the status of a Hype Train for the specified broadcaster.\n\n__Authorization:__\n\n* Requires an [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).\n* Requires OAuth Scope: `channel:read:hype_train`.\n* Requires that `broadcaster_id` and `user_id` match in the User-Access token.",
+        "tags": [
+          "Hype Train"
+        ],
+        "externalDocs": {
+          "description": "Get Hype Train Status",
+          "url": "https://dev.twitch.tv/docs/api/reference#get-hype-train-status"
+        },
+        "operationId": "get-hype-train-status",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "The User ID of the channel broadcaster.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the status object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetHypeTrainStatusResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -X GET\n'https://api.twitch.tv/helix/hypetrain/status?broadcaster_id=123' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "current": {
+                            "id": "1b0AsbInCHZW2SQFQkCzqN07Ib2",
+                            "broadcaster_user_id": "1337",
+                            "broadcaster_user_login": "cool_user",
+                            "broadcaster_user_name": "Cool_User",
+                            "level": 2,
+                            "total": 700,
+                            "progress": 200,
+                            "goal": 1000,
+                            "top_contributions": [
+                              {
+                                "user_id": "123",
+                                "user_login": "pogchamp",
+                                "user_name": "PogChamp",
+                                "type": "bits",
+                                "total": 50
+                              },
+                              {
+                                "user_id": "456",
+                                "user_login": "kappa",
+                                "user_name": "Kappa",
+                                "type": "subscription",
+                                "total": 45
+                              }
+                            ],
+                            "shared_train_participants": [
+                              {
+                                "broadcaster_user_id": "456",
+                                "broadcaster_user_login": "pogchamp",
+                                "broadcaster_user_name": "PogChamp"
+                              },
+                              {
+                                "broadcaster_user_id": "321",
+                                "broadcaster_user_login": "pogchamp",
+                                "broadcaster_user_name": "PogChamp"
+                              }
+                            ],
+                            "started_at": "2020-07-15T17:16:03.17106713Z",
+                            "expires_at": "2020-07-15T17:16:11.17106713Z",
+                            "type": "golden_kappa"
+                          },
+                          "all_time_high": {
+                            "level": 6,
+                            "total": 2850,
+                            "achieved_at": "2020-04-24T20:12:21.003802269Z"
+                          },
+                          "shared_all_time_high": {
+                            "level": 16,
+                            "total": 23850,
+                            "achieved_at": "2020-04-27T20:12:21.003802269Z"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The ID in the `broadcaster_id` query parameter is not valid."
+          },
+          "401": {
+            "description": "* The OAuth token is not valid.\n* The Authorization header is required and must contain a user access token."
+          },
+          "500": {
+            "description": "Internal Server Error."
           }
         },
         "security": [
@@ -12007,6 +12131,9 @@
           },
           "401": {
             "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **user:edit** scope.\n* The access token is not valid.\n* The ID specified in the Client-Id header does not match the client ID specified in the access token."
+          },
+          "429": {
+            "description": "The app exceeded the number of requests that it may make."
           }
         },
         "security": [
@@ -15399,8 +15526,9 @@
               "green",
               "orange",
               "purple",
-              "primary (default)"
-            ]
+              "primary"
+            ],
+            "default": "primary"
           }
         }
       },
@@ -15427,6 +15555,10 @@
           "reply_parent_message_id": {
             "type": "string",
             "description": "The ID of the chat message being replied to."
+          },
+          "for_source_only": {
+            "type": "Bool",
+            "description": "**NOTE:** This parameter can only be set when utilizing an App Access Token. It cannot be specified when a User Access Token is used, and will instead result in an HTTP 400 error.  \n  \nDetermines if the chat message is sent only to the source channel (defined by _broadcaster\\_id_) during a shared chat session. This has no effect if the message is sent during a shared chat session.  \n  \nIf this parameter is not set, the default value when using an App Access Token is `false`. On May 19, 2025 the default value for this parameter will be updated to `true`, and chat messages sent using an App Access Token will only be shared with the source channel by default. If you prefer to send a chat message to both channels in a shared chat session, make sure this parameter is explicitly set to `false` in your API request before May 19."
           }
         }
       },
@@ -17941,6 +18073,220 @@
               "cursor": {
                 "type": "string",
                 "description": "The cursor used to get the next page of results. Use the cursor to set the request’s _after_ query parameter."
+              }
+            }
+          }
+        }
+      },
+      "GetHypeTrainStatusResponse": {
+        "type": "object",
+        "required": [
+          "data",
+          "all_time_high",
+          "shared_all_time_high"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "A list that contains information related to the channel’s Hype Train.",
+            "items": {
+              "type": "object",
+              "required": [
+                "current"
+              ],
+              "properties": {
+                "current": {
+                  "description": "An object describing the current Hype Train. Null if a Hype Train is not active.",
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "broadcaster_user_id",
+                    "broadcaster_user_login",
+                    "broadcaster_user_name",
+                    "level",
+                    "total",
+                    "progress",
+                    "goal",
+                    "top_contributions"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "The Hype Train ID."
+                    },
+                    "broadcaster_user_id": {
+                      "type": "string",
+                      "description": "The broadcaster ID."
+                    },
+                    "broadcaster_user_login": {
+                      "type": "string",
+                      "description": "The broadcaster login."
+                    },
+                    "broadcaster_user_name": {
+                      "type": "string",
+                      "description": "The broadcaster display name."
+                    },
+                    "level": {
+                      "type": "integer",
+                      "description": "The current level of the Hype Train.",
+                      "format": "int32"
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "Total points contributed to the Hype Train.",
+                      "format": "int32"
+                    },
+                    "progress": {
+                      "type": "integer",
+                      "description": "The number of points contributed to the Hype Train at the current level.",
+                      "format": "int32"
+                    },
+                    "goal": {
+                      "type": "integer",
+                      "description": "The number of points required to reach the next level.",
+                      "format": "int32"
+                    },
+                    "top_contributions": {
+                      "type": "array",
+                      "description": "The contributors with the most points contributed.",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "user_id",
+                          "user_login",
+                          "user_name",
+                          "type",
+                          "total",
+                          "shared_train_participants",
+                          "started_at",
+                          "expires_at",
+                          "type",
+                          "is_shared_train"
+                        ],
+                        "properties": {
+                          "user_id": {
+                            "type": "string",
+                            "description": "The ID of the user that made the contribution."
+                          },
+                          "user_login": {
+                            "type": "string",
+                            "description": "The user’s login name."
+                          },
+                          "user_name": {
+                            "type": "string",
+                            "description": "The user’s display name."
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "The type of the Hype Train. Possible values are:   \n  \n* **treasure**\n* **golden\\_kappa**\n* **regular**\n  \n[Learn More](https://help.twitch.tv/s/article/hype-train-guide#special)",
+                            "enum": [
+                              "treasure",
+                              "golden_kappa",
+                              "regular"
+                            ]
+                          },
+                          "total": {
+                            "type": "integer",
+                            "description": "The total number of points contributed for the type.",
+                            "format": "int32"
+                          },
+                          "shared_train_participants": {
+                            "type": "array",
+                            "description": "A list containing the broadcasters participating in the shared Hype Train. Null if the Hype Train is not shared.",
+                            "items": {
+                              "type": "object",
+                              "required": [
+                                "broadcaster_user_id",
+                                "broadcaster_user_login",
+                                "broadcaster_user_name"
+                              ],
+                              "properties": {
+                                "broadcaster_user_id": {
+                                  "type": "string",
+                                  "description": "The broadcaster ID."
+                                },
+                                "broadcaster_user_login": {
+                                  "type": "string",
+                                  "description": "The broadcaster login."
+                                },
+                                "broadcaster_user_name": {
+                                  "type": "string",
+                                  "description": "The broadcaster display name."
+                                }
+                              }
+                            }
+                          },
+                          "started_at": {
+                            "type": "string",
+                            "description": "The time when the Hype Train started.",
+                            "format": "date-time"
+                          },
+                          "expires_at": {
+                            "type": "string",
+                            "description": "The time when the Hype Train expires. The expiration is extended when the Hype Train reaches a new level.",
+                            "format": "date-time"
+                          },
+                          "is_shared_train": {
+                            "type": "boolean",
+                            "description": "Indicates if the Hype Train is shared. When true, shared\\_train\\_participants will contain the list of broadcasters the train is shared with."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "all_time_high": {
+            "description": "An object with information about the channel’s Hype Train records. Null if a Hype Train has not occurred.",
+            "type": "object",
+            "required": [
+              "level",
+              "total",
+              "achieved_at"
+            ],
+            "properties": {
+              "level": {
+                "type": "integer",
+                "description": "The level of the record Hype Train.",
+                "format": "int32"
+              },
+              "total": {
+                "type": "integer",
+                "description": "Total points contributed to the record Hype Train.",
+                "format": "int32"
+              },
+              "achieved_at": {
+                "type": "string",
+                "description": "The time when the record was achieved.",
+                "format": "date-time"
+              }
+            }
+          },
+          "shared_all_time_high": {
+            "description": "An object with information about the channel’s shared Hype Train records. Null if a Hype Train has not occurred.",
+            "type": "object",
+            "required": [
+              "level",
+              "total",
+              "achieved_at"
+            ],
+            "properties": {
+              "level": {
+                "type": "integer",
+                "description": "The level of the record Hype Train.",
+                "format": "int32"
+              },
+              "total": {
+                "type": "integer",
+                "description": "Total points contributed to the record Hype Train.",
+                "format": "int32"
+              },
+              "achieved_at": {
+                "type": "string",
+                "description": "The time when the record was achieved.",
+                "format": "date-time"
               }
             }
           }
