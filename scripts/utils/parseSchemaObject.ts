@@ -32,6 +32,7 @@ export const parseParameterObject =
     required,
     description,
     enumValues,
+    enumDefault,
   }: FieldSchema): ParameterObject => {
     let parameter: ParameterObject = {
       name,
@@ -45,6 +46,9 @@ export const parseParameterObject =
     // enum
     if (enumValues !== null) {
       (parameter.schema as SchemaObject).enum = enumValues;
+      if (enumDefault !== null) {
+        (parameter.schema as SchemaObject).default = enumDefault;
+      }
     }
 
     // type
@@ -113,6 +117,7 @@ export const parseSchemaObject = (
     required,
     description,
     enumValues,
+    enumDefault,
     children,
   }: FieldSchema) => {
     let property: SchemaObject = {
@@ -135,8 +140,14 @@ export const parseSchemaObject = (
     if (enumValues !== null) {
       if (property.type === 'array') {
         property.items!.enum = enumValues;
+        if (enumDefault !== null) {
+          property.items!.default = enumDefault;
+        }
       } else {
         property.enum = enumValues;
+        if (enumDefault !== null) {
+          property.default = enumDefault;
+        }
       }
     }
 

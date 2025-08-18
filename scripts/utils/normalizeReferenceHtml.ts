@@ -44,21 +44,6 @@ const normalizeReferenceHtml = (document: Document) => {
     ['”', '"', true],
   ]);
 
-  // missing comma in the examples
-  // https://dev.twitch.tv/docs/api/reference/#get-followed-channels
-  // https://dev.twitch.tv/docs/api/reference/#get-channel-followers
-  {
-    const ids = ['get-followed-channels', 'get-channel-followers'];
-    for (const id of ids) {
-      replaceHtml(getCodeEl(id), [
-        [
-          '<span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span>',
-          '<span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>',
-          true,
-        ],
-      ]);
-    }
-  }
   // https://dev.twitch.tv/docs/api/reference/#get-channel-chat-badges
   replaceHtml(getCodeEl('get-channel-chat-badges'), [
     [

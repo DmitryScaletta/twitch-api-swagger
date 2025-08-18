@@ -13,6 +13,7 @@ export type ApiReference = {
   summary: string;
 };
 
+// TODO: use https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/json-schema
 // Open API types
 
 export type ExternalDocumentationObject = {
@@ -27,6 +28,7 @@ export type FieldSchema = {
   description: string;
   depth: number;
   enumValues: (string | number)[] | null;
+  enumDefault: string | number | null;
   children: FieldSchema[];
 };
 

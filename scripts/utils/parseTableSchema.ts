@@ -77,8 +77,8 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
     }
     // sometimes indentation can be 2 so use Math.ceil
     let depth = Math.ceil(nbspCount / 3);
-    if (depth > 3) {
-      throw new Error("Depth can't be greater than 3: " + name);
+    if (depth > 4) {
+      throw new Error("Depth can't be greater than 4: " + name);
     }
 
     const description = parseMarkdown(descriptionEl!.innerHTML!);
@@ -92,6 +92,7 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
     // https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
     // TODO: whisper-<user-id>
     let enumValues: FieldSchema['enumValues'] = null;
+    let enumDefault: FieldSchema['enumDefault'] = null;
     if (
       [
         'values are:',
@@ -109,15 +110,25 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
         if (value) liValues!.push(value);
       });
 
-      // "" in enum is an empty string
-      // https://dev.twitch.tv/docs/api/reference#get-users
-      liValues = liValues.map((s) => (s === '""' ? '' : s));
-
       if (liValues.length > 0) {
-        enumValues =
-          type === 'Integer'
-            ? liValues.map((s) => Number.parseInt(s))
-            : liValues;
+        enumValues = liValues.map((s) => {
+          // "" in enum is an empty string
+          // https://dev.twitch.tv/docs/api/reference#get-users
+          if (s === '""') return '';
+
+          // https://dev.twitch.tv/docs/api/reference/#send-chat-announcement
+          if (s.endsWith(' (default)')) {
+            s = s.replace(' (default)', '');
+            enumDefault = s;
+          }
+
+          if (type === 'Integer') {
+            const n = Number.parseInt(s);
+            if (enumDefault !== null) enumDefault = n;
+            return n;
+          }
+          return s;
+        });
       }
     }
 
@@ -128,6 +139,7 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
       description,
       depth,
       enumValues,
+      enumDefault,
       children: [],
     };
 
