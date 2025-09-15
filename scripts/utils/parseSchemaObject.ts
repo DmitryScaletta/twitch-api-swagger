@@ -10,6 +10,7 @@ const TYPES_MAP: Record<string, SchemaObject> = {
   Int64:                { type: 'integer', format: 'int64' },
   float:                { type: 'number', format: 'float' },
   Boolean:              { type: 'boolean' },
+  Bool:                 { type: 'boolean' },
   'Object':             { type: 'object' },
   'Object[]':           { type: 'array', items: { type: 'object' } },
   'map[string,string]': { type: 'object', additionalProperties: { type: 'string' } },

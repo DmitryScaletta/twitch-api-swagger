@@ -486,6 +486,7 @@ const parseEndpoint =
     if (requestBody!) operationObject.requestBody = requestBody;
     operationObject.responses = responses;
     if (requiresAuth) operationObject.security = [{ twitch_auth: scopes }];
+    if (summary.match(/^deprecated/i)) operationObject.deprecated = true;
 
     const path = url.replace('https://api.twitch.tv/helix', '');
     if (!openApi.paths[path]) openApi.paths[path] = {} as PathItemObject;
