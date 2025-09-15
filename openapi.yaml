@@ -8612,9 +8612,11 @@ paths:
             * The request is attempting to modify a restricted slot
   /hypetrain/events:
     get:
-      summary: Gets information about the broadcaster’s current or most recent Hype
-        Train event.
+      summary: DEPRECATED Gets information about the broadcaster’s current or most
+        recent Hype Train event.
       description: |-
+        DEPRECATED Scheduled for removal on December 4, 2025\. Use “Get Hype Train Status” instead. See [announcement](https://discuss.dev.twitch.com/t/legacy-get-hype-train-events-api-and-eventsub-hype-train-v1-subscription-types-deprecation-and-withdrawal-timeline/64299).
+
         Gets information about the broadcaster’s current or most recent Hype Train event.
 
         Instead of polling for events, consider [subscribing](https://dev.twitch.tv/docs/eventsub/manage-subscriptions) to Hype Train events ([Begin](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainbegin), [Progress](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainprogress), [End](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainend)).
@@ -8712,11 +8714,12 @@ paths:
       security:
         - twitch_auth:
             - channel:read:hype_train
+      deprecated: true
   /hypetrain/status:
     get:
-      summary: BETA Gets the status of a Hype Train for the specified broadcaster.
+      summary: NEW Gets the status of a Hype Train for the specified broadcaster.
       description: >-
-        BETA Get the status of a Hype Train for the specified broadcaster.
+        NEW Get the status of a Hype Train for the specified broadcaster.
 
 
         __Authorization:__
@@ -18435,7 +18438,7 @@ components:
           type: string
           description: The ID of the chat message being replied to.
         for_source_only:
-          type: Bool
+          type: boolean
           description: >-
             **NOTE:** This parameter can only be set when utilizing an App
             Access Token. It cannot be specified when a User Access Token is
