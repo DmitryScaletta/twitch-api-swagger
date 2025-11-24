@@ -238,6 +238,39 @@ const normalizeReferenceHtml = (document: Document) => {
     ],
   ]);
 
+  // padding for `video_id` and `markers` fields
+  // https://dev.twitch.tv/docs/api/reference/#get-stream-markers
+  replaceHtml(getDocsEl('get-stream-markers'), [
+    [
+      '<td>&nbsp;&nbsp;&nbsp;video_id</td>',
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;video_id</td>',
+    ],
+    [
+      '<td>&nbsp;&nbsp;&nbsp;markers</td>',
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;markers</td>',
+    ],
+    [
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td>',
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id</td>',
+    ],
+    [
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;created_at</td>',
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;created_at</td>',
+    ],
+    [
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description</td>',
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;description</td>',
+    ],
+    [
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position_seconds</td>',
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position_seconds</td>',
+    ],
+    [
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url</td>',
+      '<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url</td>',
+    ],
+  ]);
+
   // Add missing pagination
   {
     const paginationFieldsHtml = `
