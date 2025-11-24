@@ -3889,6 +3889,100 @@
         ]
       }
     },
+    "/clips/downloads": {
+      "get": {
+        "summary": "NEW Provides URLs to download the video file(s) for the specified clips.",
+        "description": "NEW Provides URLs to download the video file(s) for the specified clips. For information about clips, see [How to use clips](https://help.twitch.tv/s/article/how-to-use-clips).\n\n**Rate Limits**: Limited to 100 requests per minute.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the `editor:manage:clips` or `channel:manage:clips` scope.",
+        "tags": [
+          "Clips"
+        ],
+        "externalDocs": {
+          "description": "Get Clips Download",
+          "url": "https://dev.twitch.tv/docs/api/reference#get-clips-download"
+        },
+        "operationId": "get-clips-download",
+        "parameters": [
+          {
+            "name": "editor_id",
+            "in": "query",
+            "description": "The User ID of the editor for the channel you want to download a clip for. If using the broadcaster’s auth token, this is the same as `broadcaster_id`. This must match the `user_id` in the user access token.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "The ID of the broadcaster you want to download clips for.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "clip_id",
+            "in": "query",
+            "description": "The ID that identifies the clip you want to download. Include this parameter for each clip you want to download, up to a maximum of 10 clips. For example, `clip_id=SleepyGiftedPeppermintNerfRedBlaster-KbkBXYt3lOk3jy8-&clip_id=WimpyAltruisticKleeKeyboardCat-EiY5yMrEwZ4i4gwC`.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the clip download URL(s).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetClipsDownloadResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\nGets clip download URLs for two clips from the TwitchDev channel.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/clips/downloads?broadcaster_id=141981764&editor_id=141981764&clip_id=InexpensiveDistinctFoxChefFrank&clip_id=SpinelessCloudyLeopardMcaT' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "clip_id": "InexpensiveDistinctFoxChefFrank",
+                          "landscape_download_url": "https://production.assets.clips.twitchcdn.net/yFZG...",
+                          "portrait_download_url": null
+                        },
+                        {
+                          "clip_id": "SpinelessCloudyLeopardMcaT",
+                          "landscape_download_url": "https://production.assets.clips.twitchcdn.net/542j...",
+                          "portrait_download_url": null
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The ID in the broadcaster\\_id, editor\\_id, or clip\\_id query parameter is not valid."
+          },
+          "401": {
+            "description": "* The OAuth token is not valid.\n* The Authorization header is required and must contain a user access token or app access token.\n* The access token must include the editor:manage:clips or channel:manage:clips scope\n* The access token is not valid\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
+          },
+          "403": {
+            "description": "The user is not an editor for the specified broadcaster."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "editor:manage:clips",
+              "channel:manage:clips"
+            ]
+          }
+        ]
+      }
+    },
     "/eventsub/conduits": {
       "get": {
         "summary": "NEW  Gets the conduits for a client ID.",
@@ -12146,6 +12240,87 @@
         ]
       }
     },
+    "/authorization/users": {
+      "get": {
+        "summary": "NEW Gets the authorization scopes that the specified user has granted the application.",
+        "description": "NEW Gets the authorization scopes that the specified user(s) have granted the application.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).",
+        "tags": [
+          "Users"
+        ],
+        "externalDocs": {
+          "description": "Get Authorization By User",
+          "url": "https://dev.twitch.tv/docs/api/reference#get-authorization-by-user"
+        },
+        "operationId": "get-authorization-by-user",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "The ID of the user(s) you want to check authorization for. To specify more than one user, include the user\\_id parameter for each user to get. For example, `user_id=1234&user_id=5678`. The maximum number of IDs you may specify is 10.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved user authorization.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAuthorizationByUserResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\nGets the authorized scopes for the TwitchDev user and the TwitchRivals user.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/authorization/users?user_id=141981764&user_id=197886470' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "user_id": "141981764",
+                          "user_name": "TwitchDev",
+                          "user_login": "twitchdev",
+                          "scopes": [
+                            "bits:read",
+                            "channel:bot",
+                            "channel:manage:predictions"
+                          ]
+                        },
+                        {
+                          "user_id": "197886470",
+                          "user_name": "TwitchRivals",
+                          "user_login": "twitchrivals",
+                          "scopes": [
+                            "channel:manage:predictions"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request is malformed - invalid parameters or missing parameters."
+          },
+          "401": {
+            "description": "* The access token is not valid.\n* Authorization header is required and must specify an app access token."
+          },
+          "403": {
+            "description": "The client-id in the header must match the client ID in the access token."
+          },
+          "500": {
+            "description": "Internal Server Error."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": []
+          }
+        ]
+      }
+    },
     "/users/blocks": {
       "get": {
         "summary": "Gets the list of users that the broadcaster has blocked.",
@@ -15798,6 +15973,40 @@
               "cursor": {
                 "type": "string",
                 "description": "The cursor used to get the next page of results. Set the request’s _after_ or _before_ query parameter to this value depending on whether you’re paging forwards or backwards."
+              }
+            }
+          }
+        }
+      },
+      "GetClipsDownloadResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "List of clips and their download URLs.",
+            "items": {
+              "type": "object",
+              "required": [
+                "clip_id",
+                "landscape_download_url",
+                "portrait_download_url"
+              ],
+              "properties": {
+                "clip_id": {
+                  "type": "string",
+                  "description": "An ID that uniquely identifies the clip."
+                },
+                "landscape_download_url": {
+                  "type": "string",
+                  "description": "The landscape URL to download the clip. This field is `null` if the URL is not available."
+                },
+                "portrait_download_url": {
+                  "type": "string",
+                  "description": "The portrait URL to download the clip. This field is `null` if the URL is not available."
+                }
               }
             }
           }
@@ -20561,9 +20770,7 @@
           "user_id",
           "user_name",
           "user_login",
-          "videos",
-          "video_id",
-          "markers"
+          "videos"
         ],
         "properties": {
           "user_id": {
@@ -20582,47 +20789,53 @@
             "type": "array",
             "description": "A list of videos that contain markers. The list contains a single video.",
             "items": {
-              "type": "object"
-            }
-          },
-          "video_id": {
-            "type": "string",
-            "description": "An ID that identifies this video."
-          },
-          "markers": {
-            "type": "array",
-            "description": "The list of markers in this video. The list in ascending order by when the marker was created.",
-            "items": {
               "type": "object",
               "required": [
-                "id",
-                "created_at",
-                "description",
-                "position_seconds",
-                "url"
+                "video_id",
+                "markers"
               ],
               "properties": {
-                "id": {
+                "video_id": {
                   "type": "string",
-                  "description": "An ID that identifies this marker."
+                  "description": "An ID that identifies this video."
                 },
-                "created_at": {
-                  "type": "string",
-                  "description": "The UTC date and time (in RFC3339 format) of when the user created the marker.",
-                  "format": "date-time"
-                },
-                "description": {
-                  "type": "string",
-                  "description": "The description that the user gave the marker to help them remember why they marked the location. Is an empty string if the user didn’t provide one."
-                },
-                "position_seconds": {
-                  "type": "integer",
-                  "description": "The relative offset (in seconds) of the marker from the beginning of the stream.",
-                  "format": "int32"
-                },
-                "url": {
-                  "type": "string",
-                  "description": "A URL that opens the video in Twitch Highlighter."
+                "markers": {
+                  "type": "array",
+                  "description": "The list of markers in this video. The list in ascending order by when the marker was created.",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "created_at",
+                      "description",
+                      "position_seconds",
+                      "url"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "An ID that identifies this marker."
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "description": "The UTC date and time (in RFC3339 format) of when the user created the marker.",
+                        "format": "date-time"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "The description that the user gave the marker to help them remember why they marked the location. Is an empty string if the user didn’t provide one."
+                      },
+                      "position_seconds": {
+                        "type": "integer",
+                        "description": "The relative offset (in seconds) of the marker from the beginning of the stream.",
+                        "format": "int32"
+                      },
+                      "url": {
+                        "type": "string",
+                        "description": "A URL that opens the video in Twitch Highlighter."
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -21186,6 +21399,48 @@
           }
         }
       },
+      "GetAuthorizationByUserResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "List of users and their authorized scopes.",
+            "items": {
+              "type": "object",
+              "required": [
+                "user_id",
+                "user_name",
+                "user_login",
+                "scopes"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "string",
+                  "description": "The user’s ID."
+                },
+                "user_name": {
+                  "type": "string",
+                  "description": "The user’s display name."
+                },
+                "user_login": {
+                  "type": "string",
+                  "description": "The user’s login name."
+                },
+                "scopes": {
+                  "type": "array",
+                  "description": "An array of all the scopes the user has granted to the client ID.",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "UserBlockList": {
         "type": "object",
         "required": [
@@ -21734,6 +21989,7 @@
               "channel:read:ads": "Read the ads schedule and details on your channel.",
               "channel:manage:broadcast": "Manage a channel’s broadcast configuration, including updating channel configuration and managing stream markers and stream tags.",
               "channel:read:charity": "Read charity campaign details and user donations on your channel.",
+              "channel:manage:clips": "Manage Clips for a channel.",
               "channel:edit:commercial": "Run commercials on a channel.",
               "channel:read:editors": "View a list of users with the editor role for a channel.",
               "channel:manage:extensions": "Manage a channel’s Extension configuration, including activating Extensions.",
@@ -21757,6 +22013,7 @@
               "channel:manage:vips": "Add or remove the VIP role from users in your channel.",
               "channel:moderate": "Perform moderation actions in a channel.",
               "clips:edit": "Manage Clips for a channel.",
+              "editor:manage:clips": "Manage Clips as an editor.",
               "moderation:read": "View a channel’s moderation data including Moderators, Bans, Timeouts, and Automod settings.",
               "moderator:manage:announcements": "Send announcements in channels where you have the moderator role.",
               "moderator:manage:automod": "Manage messages held for review by AutoMod in channels where you are a moderator.",
