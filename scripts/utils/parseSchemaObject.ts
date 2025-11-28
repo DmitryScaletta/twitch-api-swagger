@@ -1,5 +1,4 @@
 import type { FieldSchema, ParameterObject, SchemaObject } from '../types.ts';
-import { PARAMS_MORE_THAN_ONE_VALUES } from './constants.ts';
 
 // prettier-ignore
 const TYPES_MAP: Record<string, SchemaObject> = {
@@ -20,6 +19,26 @@ const TYPES_MAP: Record<string, SchemaObject> = {
   'Invite[]':           { type: 'array', items: { type: 'object' } },
   'Label[]':            { type: 'array', items: { type: 'object' } },
   'MediaSettings':      { type: 'object' },
+};
+
+const ARRAY_PARAMETER_REGEXES = [
+  /You may specify a maximum of (?<n>\d+)/, // https://regex101.com/r/rwyWF8/1
+  /up to a maximum of (?<n>\d+)/,
+  /To specify more than one/,
+] as const;
+
+const getIsArrayParameter = (description: string) => {
+  for (const regex of ARRAY_PARAMETER_REGEXES) {
+    const m = regex.exec(description);
+    if (!m) continue;
+    if (m.groups) {
+      const { n } = m.groups as { n: string };
+      const num = Number.parseInt(n);
+      if (num <= 1) continue;
+    }
+    return true;
+  }
+  return false;
 };
 
 const parseType = (rawType: string): SchemaObject | null =>
@@ -93,8 +112,7 @@ export const parseParameterObject =
     if (_required) parameter.required = _required;
 
     // array
-    const possibleArrays = PARAMS_MORE_THAN_ONE_VALUES[endpointId];
-    if (possibleArrays && possibleArrays.includes(name)) {
+    if (getIsArrayParameter(description)) {
       const s = parameter.schema as SchemaObject;
       s.items = { type: s.type! };
       s.type = 'array';

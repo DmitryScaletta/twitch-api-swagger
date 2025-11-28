@@ -18,34 +18,6 @@ __Repository:__ [github.com/DmitryScaletta/twitch-api-swagger](https://github.co
 export const HTML_DESCRIPTION =
   'Unofficial Swagger UI for Twitch API. All endpoints are generated automatically from the twitch docs page. Features: Swagger UI for all Twitch API endpoints; Schemas for Request Query Parameters, Request Body, Response Body; Some additional schemas like Clip, ChatBadge, Prediction, Game, Channel, Video etc.; Response codes and examples; Generated types for TypeScript';
 
-export const PARAMS_MORE_THAN_ONE_VALUES: Record<string, string[]> = {
-  'get-extension-transactions': ['id'],
-  'get-channel-information': ['broadcaster_id'],
-  'get-custom-reward': ['id'],
-  'get-custom-reward-redemption': ['id'],
-  'update-redemption-status': ['id'],
-  'get-emote-sets': ['emote_set_id'],
-  'get-user-chat-color': ['user_id'],
-  'get-clips': ['id'],
-  'get-clips-download': ['clip_id'],
-  'get-code-status': ['code'],
-  'get-drops-entitlements': ['id'],
-  'redeem-code': ['code'],
-  'get-games': ['id', 'name', 'igdb_id'],
-  'get-banned-users': ['user_id'],
-  'get-moderators': ['user_id'],
-  'get-vips': ['user_id'],
-  'get-polls': ['id'],
-  'get-predictions': ['id'],
-  'get-channel-stream-schedule': ['id'],
-  'get-streams': ['user_id', 'user_login', 'game_id', 'language'],
-  'get-broadcaster-subscriptions': ['user_id'],
-  'get-all-stream-tags': ['tag_id'],
-  'get-users': ['id', 'login'],
-  'get-videos': ['id'],
-  'delete-videos': ['id'],
-};
-
 // prettier-ignore
 export const RESPONSE_BODY_SCHEMA_NAMES: Record<string, [path: string, name: string][]> = {
   'get-extension-analytics':                [['data[0]', 'ExtensionAnalytics']],
