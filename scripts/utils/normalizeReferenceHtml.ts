@@ -238,7 +238,7 @@ const normalizeReferenceHtml = (document: Document) => {
     ],
   ]);
 
-  // padding for `video_id` and `markers` fields
+  // Wrong padding for `video_id` and `markers` fields
   // https://dev.twitch.tv/docs/api/reference/#get-stream-markers
   replaceHtml(getDocsEl('get-stream-markers'), [
     [

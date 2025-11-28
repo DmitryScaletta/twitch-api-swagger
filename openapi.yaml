@@ -4737,8 +4737,11 @@ paths:
             clips. For example,
             `clip_id=SleepyGiftedPeppermintNerfRedBlaster-KbkBXYt3lOk3jy8-&clip_id=WimpyAltruisticKleeKeyboardCat-EiY5yMrEwZ4i4gwC`.
           schema:
-            type: string
+            type: array
+            items:
+              type: string
           required: true
+          explode: true
       responses:
         "200":
           description: Successfully retrieved the clip download URL(s).
