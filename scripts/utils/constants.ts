@@ -18,6 +18,15 @@ __Repository:__ [github.com/DmitryScaletta/twitch-api-swagger](https://github.co
 export const HTML_DESCRIPTION =
   'Unofficial Swagger UI for Twitch API. All endpoints are generated automatically from the twitch docs page. Features: Swagger UI for all Twitch API endpoints; Schemas for Request Query Parameters, Request Body, Response Body; Some additional schemas like Clip, ChatBadge, Prediction, Game, Channel, Video etc.; Response codes and examples; Generated types for TypeScript';
 
+export const ENDPOINT_DEPRECATED_TEXT = [
+  'DEPRECATED',
+  '**IMPORTANT** As of February 28, 2023, this endpoint returns an empty array',
+];
+export const FIELD_DEPRECATED_TEXT = [
+  '**IMPORTANT** As of February 28, 2023, this field is deprecated and returns only an empty array',
+  '**NOTE**: This field has been deprecated',
+];
+
 // prettier-ignore
 export const RESPONSE_BODY_SCHEMA_NAMES: Record<string, [path: string, name: string][]> = {
   'get-extension-analytics':                [['data[0]', 'ExtensionAnalytics']],

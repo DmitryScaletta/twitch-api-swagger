@@ -30,14 +30,13 @@ const generateOpenApi = (
   openApi.components.securitySchemes['twitch_auth'].flows.implicit.scopes =
     allScopes;
 
-  // deprecations
-  const schemas = openApi.components.schemas;
-  openApi.paths['/tags/streams']!['get'].deprecated = true;
-  openApi.paths['/streams/tags']!['get'].deprecated = true;
-  schemas['GetAllStreamTagsResponse']!.deprecated = true;
-  schemas['GetStreamTagsResponse']!.deprecated = true;
-  schemas['Channel']!.properties!['tag_ids']!.deprecated = true;
-  schemas['Stream']!.properties!['tag_ids']!.deprecated = true;
+  // scopes for GetAuthorizationByUser endpoint
+  {
+    const name = 'GetAuthorizationByUserResponse';
+    const schema = openApi.components.schemas[name]!;
+    schema.properties!['data']!.items!.properties!['scopes']!.items!.enum =
+      Object.keys(allScopes);
+  }
 
   return openApi;
 };

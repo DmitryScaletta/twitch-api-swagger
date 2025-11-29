@@ -15,7 +15,10 @@ import type {
   SchemaObject,
 } from '../types.ts';
 import { getBodySchemaName, getResponseSchemaName } from './getSchemaName.ts';
-import { RESPONSE_BODY_SCHEMA_NAMES } from './constants.ts';
+import {
+  ENDPOINT_DEPRECATED_TEXT,
+  RESPONSE_BODY_SCHEMA_NAMES,
+} from './constants.ts';
 import parseExamples from './parseExamples.ts';
 import parseMarkdown from './parseMarkdown.ts';
 import parseResponses from './parseResponses.ts';
@@ -472,9 +475,10 @@ const parseEndpoint =
     // add to openApi
     const { tag, summary } = apiReference.get(id)!;
 
+    const description = getDescriptionText(descriptions);
     const operationObject: OperationObject = {
       summary,
-      description: getDescriptionText(descriptions),
+      description,
       tags: [tag],
       externalDocs: {
         description: name,
@@ -486,7 +490,15 @@ const parseEndpoint =
     if (requestBody!) operationObject.requestBody = requestBody;
     operationObject.responses = responses;
     if (requiresAuth) operationObject.security = [{ twitch_auth: scopes }];
-    if (summary.match(/^deprecated/i)) operationObject.deprecated = true;
+
+    for (const txt of ENDPOINT_DEPRECATED_TEXT) {
+      if (description.includes(txt) || summary.includes(txt)) {
+        operationObject.deprecated = true;
+        const schemaName = getResponseSchemaName(name);
+        const responseSchema = openApi.components.schemas[schemaName];
+        if (responseSchema) responseSchema.deprecated = true;
+      }
+    }
 
     const path = url.replace('https://api.twitch.tv/helix', '');
     if (!openApi.paths[path]) openApi.paths[path] = {} as PathItemObject;

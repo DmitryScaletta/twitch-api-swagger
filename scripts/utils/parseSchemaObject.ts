@@ -1,4 +1,5 @@
 import type { FieldSchema, ParameterObject, SchemaObject } from '../types.ts';
+import { FIELD_DEPRECATED_TEXT } from './constants.ts';
 
 // prettier-ignore
 const TYPES_MAP: Record<string, SchemaObject> = {
@@ -118,6 +119,11 @@ export const parseParameterObject =
       s.type = 'array';
       parameter.explode = true;
     }
+
+    if (FIELD_DEPRECATED_TEXT.some((txt) => description.includes(txt))) {
+      parameter.deprecated = true;
+    }
+
     return parameter;
   };
 
@@ -203,6 +209,10 @@ export const parseSchemaObject = (
       if (property.type !== 'array' && property.type !== 'object') {
         console.warn('Wrong nested property type: ' + property.type);
       }
+    }
+
+    if (FIELD_DEPRECATED_TEXT.some((txt) => description.includes(txt))) {
+      property.deprecated = true;
     }
 
     schemaObject.properties![name] = property;
