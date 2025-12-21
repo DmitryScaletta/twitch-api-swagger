@@ -61,14 +61,6 @@ const normalizeReferenceHtml = (document: Document) => {
     ],
   ]);
 
-  // No "data" field in the response body
-  // https://dev.twitch.tv/docs/api/reference#create-clip
-  replaceHtml(getDocsEl('create-clip').querySelectorAll('table')[1]!, [
-    ['<tbody>', '<tbody><tr><td>data</td><td>Object[]</td><td></td></tr>'],
-    ['<td>edit_url</td>', '<td>&nbsp;&nbsp;&nbsp;edit_url</td>'],
-    ['<td>id</td>', '<td>&nbsp;&nbsp;&nbsp;id</td>'],
-  ]);
-
   // Wrong Response Body
   // https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
   replaceHtml(getDocsEl('get-content-classification-labels'), [
