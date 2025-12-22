@@ -4436,7 +4436,8 @@ paths:
           description: The length of the clip in seconds. Possible values range from 5 to
             60 inclusively with a precision of 0.1\. The default is 30.
           schema:
-            type: Float
+            type: number
+            format: float
       responses:
         "202":
           description: Successfully started the clip process.
@@ -4767,7 +4768,8 @@ paths:
           description: "The length of the clip, in seconds. Precision is 0.1\\. Defaults
             to 30\\. Min: 5 seconds, Max: 60 seconds."
           schema:
-            type: Float
+            type: number
+            format: float
         - name: title
           in: query
           description: The title of the clip.

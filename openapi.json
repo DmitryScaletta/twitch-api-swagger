@@ -3671,7 +3671,8 @@
             "in": "query",
             "description": "The length of the clip in seconds. Possible values range from 5 to 60 inclusively with a precision of 0.1\\. The default is 30.",
             "schema": {
-              "type": "Float"
+              "type": "number",
+              "format": "float"
             }
           }
         ],
@@ -3952,7 +3953,8 @@
             "in": "query",
             "description": "The length of the clip, in seconds. Precision is 0.1\\. Defaults to 30\\. Min: 5 seconds, Max: 60 seconds.",
             "schema": {
-              "type": "Float"
+              "type": "number",
+              "format": "float"
             }
           },
           {
