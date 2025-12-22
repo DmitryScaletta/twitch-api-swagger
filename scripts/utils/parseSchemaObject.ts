@@ -9,6 +9,7 @@ const TYPES_MAP: Record<string, SchemaObject> = {
   'Unsigned Integer':   { type: 'integer', format: 'int32' },
   Int64:                { type: 'integer', format: 'int64' },
   float:                { type: 'number', format: 'float' },
+  Float:                { type: 'number', format: 'float' },
   Boolean:              { type: 'boolean' },
   Bool:                 { type: 'boolean' },
   'Object':             { type: 'object' },
