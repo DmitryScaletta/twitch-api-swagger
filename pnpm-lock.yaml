@@ -15,7 +15,7 @@ importers:
         specifier: ^27.3.0
         version: 27.3.0
       node-html-markdown:
-        specifier: ^1.3.0
+        specifier: 1.3.0
         version: 1.3.0
       typescript:
         specifier: ^5.9.3
