@@ -32,6 +32,7 @@ const main = async () => {
     eventSubSubscriptionTypesHtml,
     openApiTemplate,
     indexHtmlTemplate,
+    indexHtmlScalarTemplate,
   ] = await Promise.all([
     fetchHtml(PAGES.reference.url),
     fetchHtml(PAGES.scopes.url),
@@ -39,6 +40,7 @@ const main = async () => {
     fetchHtml(PAGES.eventSubSubscriptionTypes.url),
     fs.readFile('./scripts/templates/openapi.template.json', 'utf8'),
     fs.readFile('./scripts/templates/index.template.html', 'utf8'),
+    fs.readFile('./scripts/templates/scalar.template.html', 'utf8'),
   ]);
 
   const allScopes = parseScopes(scopesHtml);
@@ -51,6 +53,9 @@ const main = async () => {
   const indexHtml = indexHtmlTemplate
     .replace('%TITLE%', OPEN_API_TITLE)
     .replace('%DESCRIPTION%', HTML_DESCRIPTION);
+  const indexHtmlScalar = indexHtmlScalarTemplate
+    .replace('%TITLE%', OPEN_API_TITLE)
+    .replace('%DESCRIPTION%', HTML_DESCRIPTION);
 
   // prettier-ignore
   await Promise.all([
@@ -60,8 +65,8 @@ const main = async () => {
     fs.writeFile(PAGES.eventSubSubscriptionTypes.filename, eventSubSubscriptionTypesHtml),
     fs.writeFile('./openapi.json', JSON.stringify(openApi, null, 2)),
     fs.writeFile('./openapi.yaml', YAML.stringify(openApi)),
-    fs.writeFile('./dist/openapi.json', JSON.stringify(openApi)),
-    fs.writeFile('./dist/index.html', indexHtml),
+    fs.writeFile('./docs/index.html', indexHtml),
+    fs.writeFile('./docs/scalar/index.html', indexHtmlScalar),
   ]);
 };
 
