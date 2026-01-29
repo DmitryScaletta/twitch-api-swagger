@@ -67,6 +67,7 @@ const main = async () => {
     fs.writeFile('./openapi.yaml', YAML.stringify(openApi)),
     fs.writeFile('./docs/index.html', indexHtml),
     fs.writeFile('./docs/scalar/index.html', indexHtmlScalar),
+    fs.writeFile('./docs/openapi.json', JSON.stringify(openApi)),
   ]);
 };
 
