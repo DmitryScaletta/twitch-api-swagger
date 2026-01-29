@@ -40,7 +40,8 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
     const descriptionEl = tr.children[descriptionIdx]!;
 
     const name = parameterEl?.textContent?.trim()!;
-    const descriptionTextLower = descriptionEl.textContent!.toLowerCase();
+    const descriptionText = descriptionEl.textContent!;
+    const descriptionTextLower = descriptionText.toLowerCase();
 
     // type
     const type = typeEl?.textContent?.trim()!;
@@ -84,6 +85,9 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
     const description = parseMarkdown(descriptionEl!.innerHTML!);
 
     // TODO: min, max, default
+    // Possible values are: 0 (no restriction) through 129600 (3 months). The default is 0.
+    // Possible values are: 3 (3 second delay) through 120 (2 minute delay). The default is 30 seconds.
+    // The highest level that the Hype Train reached (the levels are 1 through 5).
 
     // enum
     // TODO: "Valid values are", "Possible values are" without ul li (follower_mode_duration, slow_mode_wait_time)
@@ -91,27 +95,50 @@ const parseTableSchema = (table: Element): FieldSchema[] => {
     // TODO: add default value and enum for the `locale` query parameter
     // https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
     // TODO: whisper-<user-id>
+
     let enumValues: FieldSchema['enumValues'] = null;
     let enumDefault: FieldSchema['enumDefault'] = null;
-    if (
-      [
-        'values are:',
-        'formats are:',
-        'sizes are:',
-        'tiers are:',
-        'themes are:',
-        'following named color values',
-        'following values',
-      ].some((s) => descriptionTextLower.includes(s))
-    ) {
-      let liValues: string[] = [];
+    const ENUM_DESC = [
+      'values are:',
+      'formats are:',
+      'sizes are:',
+      'tiers are:',
+      'themes are:',
+      'following named color values',
+      'following values',
+    ];
+    if (ENUM_DESC.some((s) => descriptionTextLower.includes(s))) {
+      let enumValuesRaw: string[] = [];
+
+      // get enum values from li
       descriptionEl.querySelectorAll('ul li').forEach((li) => {
         const value = li.textContent?.split(/([—:]| - )/)[0]!.trim();
-        if (value) liValues!.push(value);
+        if (value) enumValuesRaw!.push(value);
       });
 
-      if (liValues.length > 0) {
-        enumValues = liValues.map((s) => {
+      // if empty, get enum values from description
+      if (enumValuesRaw.length === 0) {
+        const enumRegex = new RegExp(
+          `(?:${ENUM_DESC.join('|')})\s*(?<values>[^.\n]+)`,
+        );
+        const m = descriptionText.match(enumRegex);
+        if (m) {
+          const { values } = m.groups as { values: string };
+          // skip range values
+          if (!values.includes(' through ')) {
+            enumValuesRaw = values
+              .split(',')
+              .map((s) => s.trim())
+              .filter(Boolean);
+          }
+        } else {
+          console.warn('Cannot find enum values:');
+          console.warn({ name, descriptionText });
+        }
+      }
+
+      if (enumValuesRaw.length > 0) {
+        enumValues = enumValuesRaw.map((s) => {
           // "" in enum is an empty string
           // https://dev.twitch.tv/docs/api/reference#get-users
           if (s === '""') return '';
