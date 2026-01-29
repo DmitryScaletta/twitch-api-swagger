@@ -119,3 +119,5 @@ dist
 
 test/
 twitch/
+
+docs/openapi.json
