@@ -9551,8 +9551,8 @@
     },
     "/moderation/warnings": {
       "post": {
-        "summary": "NEW Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged.",
-        "description": "NEW Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged. New warnings can be issued to a user when they already have a warning in the channel (new warning will replace old warning).\n\n__Authorization:__\n\nRequires a user access token that includes the **moderator:manage:warnings** scope. Query parameter `moderator_id` must match the `user_id` in the [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).",
+        "summary": "Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged.",
+        "description": "Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged. New warnings can be issued to a user when they already have a warning in the channel (new warning will replace old warning).\n\n__Authorization:__\n\nRequires a user access token that includes the **moderator:manage:warnings** scope. Query parameter `moderator_id` must match the `user_id` in the [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).",
         "tags": [
           "Moderation"
         ],
@@ -9610,7 +9610,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\n```bash\ncurl -X POST  'https://api.twitch.tv/helix/moderation/warnings?broadcaster_id=404040&moderator_id=404041' \\\n-H 'Authorization: Bearer 4a4x78f5wqvkybms7mxfist3jmzul' \\\n-H 'Client-Id: t214nt8z1rdtbj69hyarjvh5mi6fh' \\\n-H 'Content-Type: application/json' \\\n-d '{\"data\": {\"user_id\":\"9876\",\"reason\":\"stop doing that!\"}}'\n```",
+                    "description": "_Request:_\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/moderation/warnings?broadcaster_id=404040&moderator_id=404041' \\\n-H 'Authorization: Bearer 4a4x78f5wqvkybms7mxfist3jmzul' \\\n-H 'Client-Id: t214nt8z1rdtbj69hyarjvh5mi6fh' \\\n-H 'Content-Type: application/json' \\\n-d '{\"data\": {\"user_id\":\"9876\",\"reason\":\"stop doing that!\"}}'\n```",
                     "value": {
                       "data": [
                         {
@@ -9649,6 +9649,193 @@
           {
             "twitch_auth": [
               "moderator:manage:warnings"
+            ]
+          }
+        ]
+      }
+    },
+    "/moderation/suspicious_users": {
+      "post": {
+        "summary": "BETA Adds a suspicious user status to a chatter on the broadcaster’s channel.",
+        "description": "BETA Adds a suspicious user status to a chatter on the broadcaster’s channel.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:suspicious\\_users** scope.",
+        "tags": [
+          "Moderation"
+        ],
+        "externalDocs": {
+          "description": "Add suspicious status to chat user",
+          "url": "https://dev.twitch.tv/docs/api/reference#add-suspicious-status-to-chat-user"
+        },
+        "operationId": "add-suspicious-status-to-chat-user",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "The user ID of the broadcaster, indicating the channel where the status is being applied.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "moderator_id",
+            "in": "query",
+            "description": "The user ID of the moderator who is applying the status.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddsuspiciousstatustochatuserBody"
+              },
+              "examples": {
+                "Example": {
+                  "value": {
+                    "user_id": "9876",
+                    "status": "RESTRICTED"
+                  },
+                  "description": "Mark a user as RESTRICTED."
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully applied a suspicious user status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddsuspiciousstatustochatuserResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\nMark a user as RESTRICTED.\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/moderation/suspicious_users?broadcaster_id=141981764&moderator_id=12826' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2' \\\n-H 'Content-Type: application/json' \\\n-d '{\n  \"user_id\": \"9876\",\n  \"status\": \"RESTRICTED\"\n}'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "user_id": "9876",
+                          "broadcaster_id": "141981764",
+                          "moderator_id": "12826",
+                          "updated_at": "2025-12-01T23:08:18+00:00",
+                          "status": "RESTRICTED",
+                          "types": [
+                            "MANUALLY_ADDED"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "* Validation errors: Missing required fields.\n* The ID in the broadcaster\\_id query parameter was not found.\n* The status specified was invalid. Must either be ACTIVE\\_MONITORING or RESTRICTED\n* The status update is not allowed for this user."
+          },
+          "401": {
+            "description": "* The Authorization header is required and must specify user access token.\n* The user access token must include the **moderator:manage:suspicious\\_users** scope.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
+          },
+          "403": {
+            "description": "* The user in the moderator\\_id query parameter is not one of the broadcaster's moderators."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderator:manage:suspicious_users"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "summary": "BETA Remove a suspicious user status from a chatter on broadcaster’s channel.",
+        "description": "BETA Remove a suspicious user status from a chatter on broadcaster’s channel.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:suspicious\\_users** scope.",
+        "tags": [
+          "Moderation"
+        ],
+        "externalDocs": {
+          "description": "Remove suspicious status from chat user",
+          "url": "https://dev.twitch.tv/docs/api/reference#remove-suspicious-status-from-chat-user"
+        },
+        "operationId": "remove-suspicious-status-from-chat-user",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "The user ID of the broadcaster, indicating the channel where the status is being removed.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "moderator_id",
+            "in": "query",
+            "description": "The user ID of the moderator who is removing the status.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "The ID of the user having the suspicious status removed.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed a suspicious user status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemovesuspiciousstatusfromchatuserResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\nRemoves a suspicious user status from a user.\n\n```bash\ncurl -X DELETE 'https://api.twitch.tv/helix/moderation/suspicious_users?broadcaster_id=141981764&moderator_id=12826&user_id=9876' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "user_id": "9876",
+                          "broadcaster_id": "141981764",
+                          "moderator_id": "12826",
+                          "updated_at": "2025-12-01T23:08:18+00:00",
+                          "status": "NO_TREATMENT",
+                          "types": [
+                            "MANUALLY_ADDED"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "* Validation errors: Missing required fields.\n* The ID in the broadcaster\\_id query parameter was not found.\n* The status update is not allowed for this user."
+          },
+          "401": {
+            "description": "* The Authorization header is required and must specify user access token.\n* The user access token must include the **moderator:manage:suspicious\\_users** scope.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
+          },
+          "403": {
+            "description": "* The user in the moderator\\_id query parameter is not one of the broadcaster's moderators."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderator:manage:suspicious_users"
             ]
           }
         ]
@@ -15867,7 +16054,7 @@
           },
           "for_source_only": {
             "type": "boolean",
-            "description": "**NOTE:** This parameter can only be set when utilizing an App Access Token. It cannot be specified when a User Access Token is used, and will instead result in an HTTP 400 error.  \n  \nDetermines if the chat message is sent only to the source channel (defined by _broadcaster\\_id_) during a shared chat session. This has no effect if the message is sent during a shared chat session.  \n  \nIf this parameter is not set, the default value when using an App Access Token is `false`. On May 19, 2025 the default value for this parameter will be updated to `true`, and chat messages sent using an App Access Token will only be shared with the source channel by default. If you prefer to send a chat message to both channels in a shared chat session, make sure this parameter is explicitly set to `false` in your API request before May 19."
+            "description": "**NOTE:** This parameter can only be set when utilizing an App Access Token. It cannot be specified when a User Access Token is used, and will instead result in an HTTP 400 error.  \n  \nDetermines if the chat message is sent only to the source channel (defined by _broadcaster\\_id_) during a shared chat session. This has no effect if the message is not sent during a shared chat session.  \n  \nIf this parameter is not set, the default value when using an App Access Token is `false`. On May 19, 2025 the default value for this parameter will be updated to `true`, and chat messages sent using an App Access Token will only be shared with the source channel by default. If you prefer to send a chat message to both channels in a shared chat session, make sure this parameter is explicitly set to `false` in your API request before May 19."
           }
         }
       },
@@ -19665,6 +19852,146 @@
           }
         }
       },
+      "AddsuspiciousstatustochatuserBody": {
+        "type": "object",
+        "required": [
+          "user_id",
+          "status"
+        ],
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "description": "The ID of the user being given the suspicious status."
+          },
+          "status": {
+            "type": "string",
+            "description": "The type of suspicious status. Possible values are: ACTIVE\\_MONITORING, RESTRICTED",
+            "enum": [
+              "ACTIVE_MONITORING",
+              "RESTRICTED"
+            ]
+          }
+        }
+      },
+      "AddsuspiciousstatustochatuserResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "An array with one object containing information about the suspicious user action.",
+            "items": {
+              "type": "object",
+              "required": [
+                "user_id",
+                "broadcaster_id",
+                "moderator_id",
+                "updated_at",
+                "status",
+                "types"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "string",
+                  "description": "The ID of the user being given the suspicious status."
+                },
+                "broadcaster_id": {
+                  "type": "string",
+                  "description": "The user ID of the broadcaster indicating in which channel the status is being applied."
+                },
+                "moderator_id": {
+                  "type": "string",
+                  "description": "The user ID of the moderator who applied the last status."
+                },
+                "updated_at": {
+                  "type": "string",
+                  "description": "The timestamp of the last time this user’s status was updated.",
+                  "format": "date-time"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "The type of suspicious status. Possible values are: ACTIVE\\_MONITORING, RESTRICTED",
+                  "enum": [
+                    "ACTIVE_MONITORING",
+                    "RESTRICTED"
+                  ]
+                },
+                "types": {
+                  "type": "Array",
+                  "description": "An array of strings representing the type(s) of suspicious user this is. Possible values are: MANUALLY\\_ADDED, DETECTED\\_BAN\\_EVADER, DETECTED\\_SUS\\_CHATTER, BANNED\\_IN\\_SHARED\\_CHANNEL",
+                  "enum": [
+                    "MANUALLY_ADDED",
+                    "DETECTED_BAN_EVADER",
+                    "DETECTED_SUS_CHATTER",
+                    "BANNED_IN_SHARED_CHANNEL"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "RemovesuspiciousstatusfromchatuserResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "An array with one object containing information about the suspicious user action.",
+            "items": {
+              "type": "object",
+              "required": [
+                "user_id",
+                "broadcaster_id",
+                "moderator_id",
+                "updated_at",
+                "status",
+                "types"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "string",
+                  "description": "The ID of the user having the suspicious status removed."
+                },
+                "broadcaster_id": {
+                  "type": "string",
+                  "description": "The user ID of the broadcaster indicating in which channel the status is being removed."
+                },
+                "moderator_id": {
+                  "type": "string",
+                  "description": "The user ID of the moderator who modified the last status."
+                },
+                "updated_at": {
+                  "type": "string",
+                  "description": "The timestamp of the last time this user’s status was updated.",
+                  "format": "date-time"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "The type of suspicious status. Possible values are: NO\\_TREATMENT",
+                  "enum": [
+                    "NO_TREATMENT"
+                  ]
+                },
+                "types": {
+                  "type": "Array",
+                  "description": "An array of strings representing the type(s) of suspicious user this is. Possible values are: MANUALLY\\_ADDED, DETECTED\\_BAN\\_EVADER, DETECTED\\_SUS\\_CHATTER, BANNED\\_IN\\_SHARED\\_CHANNEL",
+                  "enum": [
+                    "MANUALLY_ADDED",
+                    "DETECTED_BAN_EVADER",
+                    "DETECTED_SUS_CHATTER",
+                    "BANNED_IN_SHARED_CHANNEL"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
       "Poll": {
         "type": "object",
         "required": [
@@ -20231,7 +20558,7 @@
                 },
                 "is_mature": {
                   "type": "boolean",
-                  "description": "A Boolean value that indicates whether the channel being raided contains mature content."
+                  "description": "**IMPORTANT** This field is deprecated and returns only `false`.  \n  \nA Boolean value that indicates whether the channel being raided contains mature content."
                 }
               }
             }
@@ -20813,7 +21140,7 @@
           },
           "is_mature": {
             "type": "boolean",
-            "description": "A Boolean value that indicates whether the stream is meant for mature audiences."
+            "description": "**IMPORTANT** This field is deprecated and returns only `false`.  \n  \nA Boolean value that indicates whether the stream is meant for mature audiences."
           }
         }
       },
@@ -21655,6 +21982,7 @@
                       "moderator:read:shoutouts",
                       "moderator:manage:shoutouts",
                       "moderator:read:suspicious_users",
+                      "moderator:manage:suspicious_users",
                       "moderator:read:unban_requests",
                       "moderator:manage:unban_requests",
                       "moderator:read:vips",
@@ -22282,7 +22610,8 @@
               "moderator:manage:shield_mode": "Manage a broadcaster’s Shield Mode status.",
               "moderator:read:shoutouts": "View a broadcaster’s shoutouts.",
               "moderator:manage:shoutouts": "Manage a broadcaster’s shoutouts.",
-              "moderator:read:suspicious_users": "Read chat messages from suspicious users and see users flagged as suspicious in channels where you have the moderator role.",
+              "moderator:read:suspicious_users": "Read chat messages from suspicious users and see users flagged as suspicious in channels where the user has the moderator role.",
+              "moderator:manage:suspicious_users": "Manage suspicious user statuses in channels where the user has the moderator role.",
               "moderator:read:unban_requests": "View a broadcaster’s unban requests.",
               "moderator:manage:unban_requests": "Manage a broadcaster’s unban requests.",
               "moderator:read:vips": "Read the list of VIPs in channels where you have the moderator role.",

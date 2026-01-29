@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2025-12-19T19:11:49-08:00">
+<meta property="article:published_time" content="2026-01-20T18:19:44-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","url":"https://dev.twitch.tv/api/reference/","@type":"BlogPosting","headline":"Reference","dateModified":"2025-12-19T19:11:49-08:00","datePublished":"2025-12-19T19:11:49-08:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"@context":"http://schema.org"}</script>
+{"description":"Twitch Developer tools and services to integrate Twitch into your development or create interactive experience on twitch.tv.","url":"https://dev.twitch.tv/api/reference/","@type":"BlogPosting","headline":"Reference","dateModified":"2026-01-20T18:19:44-08:00","datePublished":"2026-01-20T18:19:44-08:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/api/reference/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -410,6 +410,10 @@
 			<dd><a href="#get-shield-mode-status">Get Shield Mode Status</a></dd>
 		
 			<dd><a href="#warn-chat-user">Warn Chat User</a></dd>
+		
+			<dd><a href="#add-suspicious-status-to-chat-user">Add suspicious status to chat user</a></dd>
+		
+			<dd><a href="#remove-suspicious-status-from-chat-user">Remove suspicious status from chat user</a></dd>
 		
 			<dd><a href="#get-polls">Get Polls</a></dd>
 		
@@ -1967,7 +1971,29 @@
 								<td>Moderation</td>
 							
 							<td><a href="#warn-chat-user">Warn Chat User</a></td>
-							<td><p><span class="pill pill-new">NEW</span> Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged.</p>
+							<td><p>Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Moderation</td>
+							
+							<td><a href="#add-suspicious-status-to-chat-user">Add suspicious status to chat user</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Adds a suspicious user status to a chatter on the broadcaster’s channel.</p>
+</td>
+						</tr>
+					
+				
+					
+						<tr>
+							
+								<td>Moderation</td>
+							
+							<td><a href="#remove-suspicious-status-from-chat-user">Remove suspicious status from chat user</a></td>
+							<td><p><span class="pill pill-beta">BETA</span> Remove a suspicious user status from a chatter on broadcaster’s channel.</p>
 </td>
 						</tr>
 					
@@ -9020,7 +9046,7 @@ twitch api get /chat/emotes/set <span class="nt">-q</span> <span class="nv">emot
       <td>for_source_only</td>
       <td>Bool</td>
       <td>No</td>
-      <td><strong>NOTE:</strong> This parameter can only be set when utilizing an App Access Token. It cannot be specified when a User Access Token is used, and will instead result in an HTTP 400 error.<br><br>Determines if the chat message is sent only to the source channel (defined by <em>broadcaster_id</em>) during a shared chat session. This has no effect if the message is sent during a shared chat session.<br><br>If this parameter is not set, the default value when using an App Access Token is <code class="highlighter-rouge">false</code>. On May 19, 2025 the default value for this parameter will be updated to <code class="highlighter-rouge">true</code>, and chat messages sent using an App Access Token will only be shared with the source channel by default. If you prefer to send a chat message to both channels in a shared chat session, make sure this parameter is explicitly set to <code class="highlighter-rouge">false</code> in your API request before May 19.</td>
+      <td><strong>NOTE:</strong> This parameter can only be set when utilizing an App Access Token. It cannot be specified when a User Access Token is used, and will instead result in an HTTP 400 error.<br><br>Determines if the chat message is sent only to the source channel (defined by <em>broadcaster_id</em>) during a shared chat session. This has no effect if the message is not sent during a shared chat session.<br><br>If this parameter is not set, the default value when using an App Access Token is <code class="highlighter-rouge">false</code>. On May 19, 2025 the default value for this parameter will be updated to <code class="highlighter-rouge">true</code>, and chat messages sent using an App Access Token will only be shared with the source channel by default. If you prefer to send a chat message to both channels in a shared chat session, make sure this parameter is explicitly set to <code class="highlighter-rouge">false</code> in your API request before May 19.</td>
     </tr>
   </tbody>
 </table>
@@ -19940,7 +19966,7 @@ curl <span class="nt">-x</span> GET <span class="sb">`</span>https://api.twitch.
 			<h2 id="warn-chat-user">Warn Chat User</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[103]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
-				<p><span class="pill pill-new">NEW</span> Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged. 
+				<p>Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged. 
 New warnings can be issued to a user when they already have a warning in the channel (new warning will replace old warning).</p>
 
 <h3>Authorization</h3>
@@ -20098,7 +20124,7 @@ New warnings can be issued to a user when they already have a warning in the cha
 			<section class="right-code">
 				<h3>Example Request</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST  <span class="s1">'https://api.twitch.tv/helix/moderation/warnings?broadcaster_id=404040&amp;moderator_id=404041'</span> <span class="se">\</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.twitch.tv/helix/moderation/warnings?broadcaster_id=404040&amp;moderator_id=404041'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Authorization: Bearer 4a4x78f5wqvkybms7mxfist3jmzul'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Client-Id: t214nt8z1rdtbj69hyarjvh5mi6fh'</span> <span class="se">\</span>
 <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
@@ -20125,8 +20151,381 @@ New warnings can be issued to a user when they already have a warning in the cha
 
 	<section class="doc-content">
 		<section class="left-docs">
-			<h2 id="get-polls">Get Polls</h2>
+			<h2 id="add-suspicious-status-to-chat-user">Add suspicious status to chat user</h2>
 			<a class="editor-link" href="cloudcannon:#content_blocks[104]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Adds a suspicious user status to a chatter on the broadcaster’s channel.</p>
+
+<h3>Authorization</h3>
+
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:suspicious_users</strong> scope.</p>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">POST https://api.twitch.tv/helix/moderation/suspicious_users</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The user ID of the broadcaster, indicating the channel where the status is being applied.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The user ID of the moderator who is applying the status.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Request Body Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The ID of the user being given the suspicious status.</td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The type of suspicious status. Possible values are: ACTIVE_MONITORING, RESTRICTED</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>Object[]</td>
+      <td>An array with one object containing information about the suspicious user action.</td>
+    </tr>
+    <tr>
+      <td>   user_id</td>
+      <td>String</td>
+      <td>The ID of the user being given the suspicious status.</td>
+    </tr>
+    <tr>
+      <td>   broadcaster_id</td>
+      <td>String</td>
+      <td>The user ID of the broadcaster indicating in which channel the status is being applied.</td>
+    </tr>
+    <tr>
+      <td>   moderator_id</td>
+      <td>String</td>
+      <td>The user ID of the moderator who applied the last status.</td>
+    </tr>
+    <tr>
+      <td>   updated_at</td>
+      <td>String</td>
+      <td>The timestamp of the last time this user’s status was updated.</td>
+    </tr>
+    <tr>
+      <td>   status</td>
+      <td>String</td>
+      <td>The type of suspicious status. Possible values are: ACTIVE_MONITORING, RESTRICTED</td>
+    </tr>
+    <tr>
+      <td>   types</td>
+      <td>Array</td>
+      <td>An array of strings representing the type(s) of suspicious user this is. Possible values are: MANUALLY_ADDED, DETECTED_BAN_EVADER, DETECTED_SUS_CHATTER, BANNED_IN_SHARED_CHANNEL</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>200 OK</td>
+      <td>Successfully applied a suspicious user status.</td>
+    </tr>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul>
+        <li>Validation errors: Missing required fields.</li>
+        <li>The ID in the broadcaster_id query parameter was not found.</li>
+        <li>The status specified was invalid. Must either be ACTIVE_MONITORING or RESTRICTED</li>
+        <li>The status update is not allowed for this user.</li>
+      </ul></td>
+    </tr>
+    <tr>
+      <td>401 Unauthorized</td>
+      <td><ul>
+        <li>The Authorization header is required and must specify user access token.</li>
+        <li>The user access token must include the <b>moderator:manage:suspicious_users</b> scope.</li>
+        <li>The OAuth token is not valid.</li>
+        <li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li>
+      </ul></td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td><ul>
+        <li>The user in the moderator_id query parameter is not one of the broadcaster's moderators.</li>
+      </ul></td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<p>Mark a user as RESTRICTED.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST <span class="s1">'https://api.twitch.tv/helix/moderation/suspicious_users?broadcaster_id=141981764&amp;moderator_id=12826'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+<span class="nt">-d</span> <span class="s1">'{
+  "user_id": "9876",
+  "status": "RESTRICTED"
+}'</span>
+</code></pre></div></div>
+
+<h3>Example Response</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9876"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"broadcaster_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"141981764"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"moderator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12826"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-12-01T23:08:18+00:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RESTRICTED"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"MANUALLY_ADDED"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="remove-suspicious-status-from-chat-user">Remove suspicious status from chat user</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[105]" data-cms-editor-link-style="modal">&#x270E;</a>
+			
+				<p><span class="pill pill-beta">BETA</span> Remove a suspicious user status from a chatter on broadcaster’s channel.</p>
+
+<h3>Authorization</h3>
+
+<p>Requires an <a href="/docs/authentication#app-access-tokens">app access token</a> or <a href="/docs/authentication#user-access-tokens">user access token</a> that includes the <strong>moderator:manage:suspicious_users</strong> scope.</p>
+
+<h3>URL</h3>
+
+<p><code class="highlighter-rouge">DELETE https://api.twitch.tv/helix/moderation/suspicious_users</code></p>
+
+<h3>Request Query Parameters</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Required?</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>broadcaster_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The user ID of the broadcaster, indicating the channel where the status is being removed.</td>
+    </tr>
+    <tr>
+      <td>moderator_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The user ID of the moderator who is removing the status.</td>
+    </tr>
+    <tr>
+      <td>user_id</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>The ID of the user having the suspicious status removed.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Body</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data</td>
+      <td>Object[]</td>
+      <td>An array with one object containing information about the suspicious user action.</td>
+    </tr>
+    <tr>
+      <td>   user_id</td>
+      <td>String</td>
+      <td>The ID of the user having the suspicious status removed.</td>
+    </tr>
+    <tr>
+      <td>   broadcaster_id</td>
+      <td>String</td>
+      <td>The user ID of the broadcaster indicating in which channel the status is being removed.</td>
+    </tr>
+    <tr>
+      <td>   moderator_id</td>
+      <td>String</td>
+      <td>The user ID of the moderator who modified the last status.</td>
+    </tr>
+    <tr>
+      <td>   updated_at</td>
+      <td>String</td>
+      <td>The timestamp of the last time this user’s status was updated.</td>
+    </tr>
+    <tr>
+      <td>   status</td>
+      <td>String</td>
+      <td>The type of suspicious status. Possible values are: NO_TREATMENT</td>
+    </tr>
+    <tr>
+      <td>   types</td>
+      <td>Array</td>
+      <td>An array of strings representing the type(s) of suspicious user this is. Possible values are: MANUALLY_ADDED, DETECTED_BAN_EVADER, DETECTED_SUS_CHATTER, BANNED_IN_SHARED_CHANNEL</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Response Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>200 OK</td>
+      <td>Successfully removed a suspicious user status.</td>
+    </tr>
+    <tr>
+      <td>400 Bad Request</td>
+      <td><ul>
+        <li>Validation errors: Missing required fields.</li>
+        <li>The ID in the broadcaster_id query parameter was not found.</li>
+        <li>The status update is not allowed for this user.</li>
+      </ul></td>
+    </tr>
+    <tr>
+      <td>401 Unauthorized</td>
+      <td><ul>
+        <li>The Authorization header is required and must specify user access token.</li>
+        <li>The user access token must include the <b>moderator:manage:suspicious_users</b> scope.</li>
+        <li>The OAuth token is not valid.</li>
+        <li>The ID in the Client-Id header must match the Client ID in the OAuth token.</li>
+      </ul></td>
+    </tr>
+    <tr>
+      <td>403 Forbidden</td>
+      <td><ul>
+        <li>The user in the moderator_id query parameter is not one of the broadcaster's moderators.</li>
+      </ul></td>
+    </tr>
+  </tbody>
+</table>
+
+			
+		</section>
+
+	
+			<section class="right-code">
+				<h3>Example Request</h3>
+
+<p>Removes a suspicious user status from a user.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> DELETE <span class="s1">'https://api.twitch.tv/helix/moderation/suspicious_users?broadcaster_id=141981764&amp;moderator_id=12826&amp;user_id=9876'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y'</span> <span class="se">\</span>
+<span class="nt">-H</span> <span class="s1">'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'</span>
+</code></pre></div></div>
+
+<h3>Example Response</h3>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="err">data</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9876"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"broadcaster_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"141981764"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"moderator_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12826"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-12-01T23:08:18+00:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NO_TREATMENT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"MANUALLY_ADDED"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w"> 
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+			</section>
+	
+	</section>
+
+	<section class="doc-content">
+		<section class="left-docs">
+			<h2 id="get-polls">Get Polls</h2>
+			<a class="editor-link" href="cloudcannon:#content_blocks[106]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of polls that the broadcaster created.</p>
 
@@ -20247,7 +20646,7 @@ New warnings can be issued to a user when they already have a warning in the cha
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-poll">Create Poll</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[105]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[107]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Creates a poll that viewers in the broadcaster’s channel can vote on.</p>
 
@@ -20530,7 +20929,7 @@ New warnings can be issued to a user when they already have a warning in the cha
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="end-poll">End Poll</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[106]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[108]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Ends an active poll. You have the option to end it or end it and archive it.</p>
 
@@ -20780,7 +21179,7 @@ New warnings can be issued to a user when they already have a warning in the cha
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-predictions">Get Predictions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[107]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[109]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of Channel Points Predictions that the broadcaster created.</p>
 
@@ -21061,7 +21460,7 @@ New warnings can be issued to a user when they already have a warning in the cha
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-prediction">Create Prediction</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[108]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[110]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Creates a Channel Points Prediction.</p>
 
@@ -21357,7 +21756,7 @@ New warnings can be issued to a user when they already have a warning in the cha
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="end-prediction">End Prediction</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[109]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[111]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Locks, resolves, or cancels a Channel Points Prediction.</p>
 
@@ -21638,7 +22037,7 @@ New warnings can be issued to a user when they already have a warning in the cha
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="start-a-raid">Start a raid</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[110]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[112]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Raid another channel by sending the broadcaster’s viewers to the targeted channel.</p>
 
@@ -21709,7 +22108,7 @@ New warnings can be issued to a user when they already have a warning in the cha
     <tr>
       <td>   is_mature</td>
       <td>Boolean</td>
-      <td>A Boolean value that indicates whether the channel being raided contains mature content.</td>
+      <td><strong>IMPORTANT</strong> This field is deprecated and returns only <code class="highlighter-rouge">false</code>.<br><br>A Boolean value that indicates whether the channel being raided contains mature content.</td>
     </tr>
   </tbody>
 </table>
@@ -21782,7 +22181,7 @@ New warnings can be issued to a user when they already have a warning in the cha
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="cancel-a-raid">Cancel a raid</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[111]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[113]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Cancel a pending raid.</p>
 
@@ -21871,7 +22270,7 @@ New warnings can be issued to a user when they already have a warning in the cha
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-stream-schedule">Get Channel Stream Schedule</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[112]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[114]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s streaming schedule. You can get the entire schedule or specific segments of the schedule. <a href="https://help.twitch.tv/s/article/channel-page-setup#Schedule" target="_blank">Learn More</a></p>
 
@@ -22125,7 +22524,7 @@ New warnings can be issued to a user when they already have a warning in the cha
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-icalendar">Get Channel iCalendar</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[113]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[115]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the broadcaster’s streaming schedule as an <a href="https://datatracker.ietf.org/doc/html/rfc5545" target="_blank">iCalendar</a>.</p>
 
@@ -22224,7 +22623,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-channel-stream-schedule">Update Channel Stream Schedule</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[114]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[116]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the broadcaster’s schedule settings, such as scheduling a vacation.</p>
 
@@ -22331,7 +22730,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-channel-stream-schedule-segment">Create Channel Stream Schedule Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[115]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[117]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a single or recurring broadcast to the broadcaster’s streaming schedule. For information about scheduling broadcasts, see <a href="https://help.twitch.tv/s/article/channel-page-setup#Schedule" target="_blank">Stream Schedule</a>.</p>
 
@@ -22599,7 +22998,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-channel-stream-schedule-segment">Update Channel Stream Schedule Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[116]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[118]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates a scheduled broadcast segment.</p>
 
@@ -22870,7 +23269,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-channel-stream-schedule-segment">Delete Channel Stream Schedule Segment</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[117]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[119]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes a broadcast segment from the broadcaster’s streaming schedule.</p>
 
@@ -22957,7 +23356,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="search-categories">Search Categories</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[118]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[120]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the games or categories that match the specified query.</p>
 
@@ -23101,7 +23500,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="search-channels">Search Channels</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[119]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[121]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the channels that match the specified query and have streamed content within the past 6 months.</p>
 
@@ -23344,7 +23743,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-key">Get Stream Key</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[120]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[122]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the channel’s stream key.</p>
 
@@ -23460,7 +23859,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-streams">Get Streams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[121]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[123]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of all streams. The list is in descending order by the number of viewers watching the stream. Because viewers come and go during a stream, it’s possible to find duplicate or missing streams in the list as you page through the results.</p>
 
@@ -23624,7 +24023,7 @@ END:VCALENDAR%
     <tr>
       <td>   is_mature</td>
       <td>Boolean</td>
-      <td>A Boolean value that indicates whether the stream is meant for mature audiences.</td>
+      <td><strong>IMPORTANT</strong> This field is deprecated and returns only <code class="highlighter-rouge">false</code>.<br><br>A Boolean value that indicates whether the stream is meant for mature audiences.</td>
     </tr>
     <tr>
       <td>pagination</td>
@@ -23751,7 +24150,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-followed-streams">Get Followed Streams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[122]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[124]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of broadcasters that the user follows and that are streaming live.</p>
 
@@ -23885,7 +24284,7 @@ END:VCALENDAR%
     <tr>
       <td>   is_mature</td>
       <td>Boolean</td>
-      <td>A Boolean value that indicates whether the stream is meant for mature audiences.</td>
+      <td><strong>IMPORTANT</strong> This field is deprecated and returns only <code class="highlighter-rouge">false</code>.<br><br>A Boolean value that indicates whether the stream is meant for mature audiences.</td>
     </tr>
     <tr>
       <td>pagination</td>
@@ -23974,7 +24373,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="create-stream-marker">Create Stream Marker</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[123]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[125]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Adds a marker to a live stream. A marker is an arbitrary point in a live stream that the broadcaster or editor wants to mark, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).</p>
 
@@ -24131,7 +24530,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-markers">Get Stream Markers</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[124]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[126]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of markers from the user’s most recent stream or from the specified VOD/video. A marker is an arbitrary point in a live stream that the broadcaster or editor marked, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).</p>
 
@@ -24358,7 +24757,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-broadcaster-subscriptions">Get Broadcaster Subscriptions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[125]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[127]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of users that subscribe to the specified broadcaster.</p>
 
@@ -24588,7 +24987,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="check-user-subscription">Check User Subscription</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[126]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[128]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Checks whether the user subscribes to the broadcaster’s channel.</p>
 
@@ -24753,7 +25152,7 @@ END:VCALENDAR%
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-all-stream-tags">Get All Stream Tags</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[127]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[129]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. <strong>IMPORTANT</strong> As of February 28, 2023, this endpoint returns an empty array. On July 13, 2023, it will return a 410 response.</p>
 
@@ -24935,7 +25334,7 @@ twitch api get /tags/streams <span class="nt">-q</span> <span class="nv">tag_id<
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-stream-tags">Get Stream Tags</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[128]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[130]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><strong>IMPORTANT</strong> Twitch is moving from Twitch-defined tags to channel-defined tags. <strong>IMPORTANT</strong> As of February 28, 2023, this endpoint returns an empty array. On July 13, 2023, it will return a 410 response. If you use this endpoint, please update your code to use <a href="#get-channel-information">Get Channel Information</a>.</p>
 
@@ -25089,7 +25488,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-channel-teams">Get Channel Teams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[129]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[131]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of Twitch teams that the broadcaster is a member of.</p>
 
@@ -25248,7 +25647,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-teams">Get Teams</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[130]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[132]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about the specified Twitch team. <a href="https://help.twitch.tv/s/article/twitch-teams">Read More</a></p>
 
@@ -25428,7 +25827,7 @@ twitch api get /streams/tags <span class="nt">-q</span> <span class="nv">broadca
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-users">Get Users</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[131]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[133]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about one or more users.<br><br> 
 You may look up users using their user ID, login name, or both but the sum total of the number of users you may look up is 100. For example, you may specify 50 IDs and 50 names or 100 IDs or names, but you cannot specify 100 IDs and 100 names.<br><br> 
@@ -25615,7 +26014,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-user">Update User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[132]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[134]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates the specified user’s information. The user ID in the OAuth token identifies the user whose information you want to update.</p>
 
@@ -25698,7 +26097,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-authorization-by-user">Get Authorization By User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[133]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[135]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p><span class="pill pill-new">NEW</span> Gets the authorization scopes that the specified user(s) have granted the application.</p>
 
@@ -25821,7 +26220,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-block-list">Get User Block List</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[134]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[136]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the list of users that the broadcaster has blocked. <a href="https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat?language=en_US#BlockWhispersandMessagesfromStrangers">Read More</a></p>
 
@@ -25943,7 +26342,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="block-user">Block User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[135]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[137]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Blocks the specified user from interacting with or having contact with the broadcaster. The user ID in the OAuth token identifies the broadcaster who is blocking the user.</p>
 
@@ -25986,7 +26385,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="unblock-user">Unblock User</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[136]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[138]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Removes the user from the broadcaster’s list of blocked users. The user ID in the OAuth token identifies the broadcaster who’s removing the block.</p>
 
@@ -26065,7 +26464,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-extensions">Get User Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[137]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[139]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets a list of all extensions (both active and inactive) that the broadcaster has installed. The user ID in the access token identifies the broadcaster.</p>
 
@@ -26164,7 +26563,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-user-active-extensions">Get User Active Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[138]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[140]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets the active extensions that the broadcaster has installed for each configuration.</p>
 
@@ -26377,7 +26776,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="update-user-extensions">Update User Extensions</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[139]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[141]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Updates an installed extension’s information. You can update the extension’s activation state, ID, and version number. The user ID in the access token identifies the broadcaster whose extensions you’re updating.</p>
 
@@ -26631,7 +27030,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="get-videos">Get Videos</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[140]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[142]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Gets information about one or more published videos. You may get videos by ID, by user, or by game/category.</p>
 
@@ -26711,7 +27110,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="delete-videos">Delete Videos</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[141]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[143]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Deletes one or more videos. You may delete past broadcasts, highlights, or uploads.</p>
 
@@ -26798,7 +27197,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
 	<section class="doc-content">
 		<section class="left-docs">
 			<h2 id="send-whisper">Send Whisper</h2>
-			<a class="editor-link" href="cloudcannon:#content_blocks[142]" data-cms-editor-link-style="modal">&#x270E;</a>
+			<a class="editor-link" href="cloudcannon:#content_blocks[144]" data-cms-editor-link-style="modal">&#x270E;</a>
 			
 				<p>Sends a whisper message to the specified user.</p>
 
@@ -27060,7 +27459,7 @@ curl <span class="nt">-X</span> GET <span class="s1">'https://api.twitch.tv/heli
         <!-- <a href="#">Languages</a> -->
       </div>
       <div class="copyright">
-        &copy; 2025 Twitch Interactive, Inc.
+        &copy; 2026 Twitch Interactive, Inc.
       </div>
     </div>
   </div>
