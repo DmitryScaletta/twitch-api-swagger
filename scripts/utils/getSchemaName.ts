@@ -1,9 +1,7 @@
-const endpointNamesMap: Record<string, string> = {
-  'Start a raid': 'StartRaid',
-  'Cancel a raid': 'CancelRaid',
-};
+const capitalizeWord = (word: string) => word[0]!.toUpperCase() + word.slice(1);
+
 export const getSchemaNamePrefix = (endpointName: string) =>
-  endpointNamesMap[endpointName] || endpointName.replaceAll(' ', '');
+  endpointName.split(' ').filter(Boolean).map(capitalizeWord).join('');
 
 export const getBodySchemaName = (endpointName: string) =>
   getSchemaNamePrefix(endpointName) + 'Body';

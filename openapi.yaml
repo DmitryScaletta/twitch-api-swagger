@@ -11726,7 +11726,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AddsuspiciousstatustochatuserBody"
+              $ref: "#/components/schemas/AddSuspiciousStatusToChatUserBody"
             examples:
               Example:
                 value:
@@ -11739,7 +11739,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AddsuspiciousstatustochatuserResponse"
+                $ref: "#/components/schemas/AddSuspiciousStatusToChatUserResponse"
               examples:
                 Example:
                   description: |-
@@ -11842,7 +11842,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/RemovesuspiciousstatusfromchatuserResponse"
+                $ref: "#/components/schemas/RemoveSuspiciousStatusFromChatUserResponse"
               examples:
                 Example:
                   description: |-
@@ -12716,7 +12716,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StartRaidResponse"
+                $ref: "#/components/schemas/StartARaidResponse"
               examples:
                 Example:
                   description: |-
@@ -22456,7 +22456,7 @@ components:
               reason:
                 type: string
                 description: The reason provided for warning.
-    AddsuspiciousstatustochatuserBody:
+    AddSuspiciousStatusToChatUserBody:
       type: object
       required:
         - user_id
@@ -22472,7 +22472,7 @@ components:
           enum:
             - ACTIVE_MONITORING
             - RESTRICTED
-    AddsuspiciousstatustochatuserResponse:
+    AddSuspiciousStatusToChatUserResponse:
       type: object
       required:
         - data
@@ -22523,7 +22523,7 @@ components:
                   - DETECTED_BAN_EVADER
                   - DETECTED_SUS_CHATTER
                   - BANNED_IN_SHARED_CHANNEL
-    RemovesuspiciousstatusfromchatuserResponse:
+    RemoveSuspiciousStatusFromChatUserResponse:
       type: object
       required:
         - data
@@ -23097,7 +23097,7 @@ components:
           description: A list that contains the single prediction that you updated.
           items:
             $ref: "#/components/schemas/Prediction"
-    StartRaidResponse:
+    StartARaidResponse:
       type: object
       required:
         - data

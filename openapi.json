@@ -9730,7 +9730,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddsuspiciousstatustochatuserBody"
+                "$ref": "#/components/schemas/AddSuspiciousStatusToChatUserBody"
               },
               "examples": {
                 "Example": {
@@ -9750,7 +9750,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AddsuspiciousstatustochatuserResponse"
+                  "$ref": "#/components/schemas/AddSuspiciousStatusToChatUserResponse"
                 },
                 "examples": {
                   "Example": {
@@ -9838,7 +9838,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RemovesuspiciousstatusfromchatuserResponse"
+                  "$ref": "#/components/schemas/RemoveSuspiciousStatusFromChatUserResponse"
                 },
                 "examples": {
                   "Example": {
@@ -10556,7 +10556,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StartRaidResponse"
+                  "$ref": "#/components/schemas/StartARaidResponse"
                 },
                 "examples": {
                   "Example": {
@@ -19892,7 +19892,7 @@
           }
         }
       },
-      "AddsuspiciousstatustochatuserBody": {
+      "AddSuspiciousStatusToChatUserBody": {
         "type": "object",
         "required": [
           "user_id",
@@ -19913,7 +19913,7 @@
           }
         }
       },
-      "AddsuspiciousstatustochatuserResponse": {
+      "AddSuspiciousStatusToChatUserResponse": {
         "type": "object",
         "required": [
           "data"
@@ -19973,7 +19973,7 @@
           }
         }
       },
-      "RemovesuspiciousstatusfromchatuserResponse": {
+      "RemoveSuspiciousStatusFromChatUserResponse": {
         "type": "object",
         "required": [
           "data"
@@ -20575,7 +20575,7 @@
           }
         }
       },
-      "StartRaidResponse": {
+      "StartARaidResponse": {
         "type": "object",
         "required": [
           "data"
