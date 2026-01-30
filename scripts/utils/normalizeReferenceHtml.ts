@@ -126,6 +126,8 @@ const normalizeReferenceHtml = (document: Document) => {
   }
 
   // No SUCCESS response code
+  // https://github.com/DmitryScaletta/twitch-api-swagger/issues/11
+
   // https://dev.twitch.tv/docs/api/reference/#get-channel-guest-star-settings
   // https://dev.twitch.tv/docs/api/reference/#get-guest-star-session
   // https://dev.twitch.tv/docs/api/reference/#create-guest-star-session
@@ -134,11 +136,11 @@ const normalizeReferenceHtml = (document: Document) => {
   // https://dev.twitch.tv/docs/api/reference/#send-guest-star-invite
   // https://dev.twitch.tv/docs/api/reference/#delete-guest-star-invite
   {
-    // IMPORTANT: I didn't test response codes, it's just my guess
     const ids200 = [
       'get-channel-guest-star-settings',
       'get-guest-star-session',
       'create-guest-star-session',
+      'end-guest-star-session',
       'get-guest-star-invites',
     ];
     for (const id of ids200) {
@@ -147,8 +149,7 @@ const normalizeReferenceHtml = (document: Document) => {
       ]);
     }
     const ids204 = [
-      'end-guest-star-session',
-      'send-guest-star-invite',
+      'send-guest-star-invite', // NOT TESTED
       'delete-guest-star-invite',
     ];
     for (const id of ids204) {

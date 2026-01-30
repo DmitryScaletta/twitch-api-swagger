@@ -6810,8 +6810,48 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "\n\n__Examples__\n\n_Request:_\n\nEnd Guest Star session\n\n```bash\ncurl -x DELETE `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EndGuestStarSessionResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\nEnd Guest Star session\n\n```bash\ncurl -x DELETE `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "id": "2KFRQbFtpmfyD3IevNRnCzOPRJI",
+                          "guests": [
+                            {
+                              "id": "0",
+                              "user_id": "9321049",
+                              "user_display_name": "Cool_User",
+                              "user_login": "cool_user",
+                              "is_live": true,
+                              "volume": 100,
+                              "assigned_at": "2023-01-02T04:16:53.325Z",
+                              "audio_settings": {
+                                "is_available": true,
+                                "is_host_enabled": true,
+                                "is_guest_enabled": true
+                              },
+                              "video_settings": {
+                                "is_available": true,
+                                "is_host_enabled": true,
+                                "is_guest_enabled": true
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "* Missing or invalid _broadcaster\\_id_\n* Missing or invalid _session\\_id_\n* Session has already been ended"
