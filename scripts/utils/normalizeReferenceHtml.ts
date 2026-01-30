@@ -264,6 +264,19 @@ const normalizeReferenceHtml = (document: Document) => {
     ],
   ]);
 
+  // Replace type `Array` to `String[]`
+  // https://dev.twitch.tv/docs/api/reference#add-suspicious-status-to-chat-user
+  // https://dev.twitch.tv/docs/api/reference#remove-suspicious-status-from-chat-user
+  {
+    const ids = [
+      'add-suspicious-status-to-chat-user',
+      'remove-suspicious-status-from-chat-user',
+    ];
+    for (const id of ids) {
+      replaceHtml(getDocsEl(id), [['<td>Array</td>', '<td>String[]</td>']]);
+    }
+  }
+
   // Add missing pagination
   {
     const paginationFieldsHtml = `

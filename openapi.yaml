@@ -22513,16 +22513,18 @@ components:
                   - ACTIVE_MONITORING
                   - RESTRICTED
               types:
-                type: Array
+                type: array
                 description: "An array of strings representing the type(s) of suspicious user
                   this is. Possible values are: MANUALLY\\_ADDED,
                   DETECTED\\_BAN\\_EVADER, DETECTED\\_SUS\\_CHATTER,
                   BANNED\\_IN\\_SHARED\\_CHANNEL"
-                enum:
-                  - MANUALLY_ADDED
-                  - DETECTED_BAN_EVADER
-                  - DETECTED_SUS_CHATTER
-                  - BANNED_IN_SHARED_CHANNEL
+                items:
+                  type: string
+                  enum:
+                    - MANUALLY_ADDED
+                    - DETECTED_BAN_EVADER
+                    - DETECTED_SUS_CHATTER
+                    - BANNED_IN_SHARED_CHANNEL
     RemoveSuspiciousStatusFromChatUserResponse:
       type: object
       required:
@@ -22563,16 +22565,18 @@ components:
                 enum:
                   - NO_TREATMENT
               types:
-                type: Array
+                type: array
                 description: "An array of strings representing the type(s) of suspicious user
                   this is. Possible values are: MANUALLY\\_ADDED,
                   DETECTED\\_BAN\\_EVADER, DETECTED\\_SUS\\_CHATTER,
                   BANNED\\_IN\\_SHARED\\_CHANNEL"
-                enum:
-                  - MANUALLY_ADDED
-                  - DETECTED_BAN_EVADER
-                  - DETECTED_SUS_CHATTER
-                  - BANNED_IN_SHARED_CHANNEL
+                items:
+                  type: string
+                  enum:
+                    - MANUALLY_ADDED
+                    - DETECTED_BAN_EVADER
+                    - DETECTED_SUS_CHATTER
+                    - BANNED_IN_SHARED_CHANNEL
     Poll:
       type: object
       required:
