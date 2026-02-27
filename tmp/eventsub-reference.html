@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2026-01-20T18:19:44-08:00">
+<meta property="article:published_time" content="2026-02-04T20:31:52-08:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"EventSub Reference","url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@type":"BlogPosting","headline":"EventSub Reference","dateModified":"2026-01-20T18:19:44-08:00","datePublished":"2026-01-20T18:19:44-08:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"@context":"http://schema.org"}</script>
+{"description":"EventSub Reference","url":"https://dev.twitch.tv/eventsub/eventsub-reference/","@type":"BlogPosting","headline":"EventSub Reference","dateModified":"2026-02-04T20:31:52-08:00","datePublished":"2026-02-04T20:31:52-08:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/eventsub/eventsub-reference/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -8979,85 +8979,6 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">id</code></td>
-      <td>string</td>
-      <td>The Hype Train ID.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
-      <td>string</td>
-      <td>The requested broadcaster ID.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
-      <td>string</td>
-      <td>The requested broadcaster login.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
-      <td>string</td>
-      <td>The requested broadcaster display name.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">total</code></td>
-      <td>integer</td>
-      <td>Total points contributed to the Hype Train.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">progress</code></td>
-      <td>integer</td>
-      <td>The number of points contributed to the Hype Train at the current level.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">goal</code></td>
-      <td>integer</td>
-      <td>The number of points required to reach the next level.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">top_contributions</code></td>
-      <td> <a href="#top-contributions">top_contributions</a> </td>
-      <td>The contributors with the most points contributed.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">last_contribution</code></td>
-      <td> <a href="#last-contribution">last_contribution</a> </td>
-      <td>The most recent contribution.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">level</code></td>
-      <td>integer</td>
-      <td>The starting level of the Hype Train.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">started_at</code></td>
-      <td>string</td>
-      <td>The time when the Hype Train started.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">expires_at</code></td>
-      <td>string</td>
-      <td>The time when the Hype Train expires. The expiration is extended when the Hype Train reaches a new level.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">is_golden_kappa_train</code></td>
-      <td>boolean</td>
-      <td>Indicates if the Hype Train is a Golden Kappa Train.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="hype-train-begin-v2-event">Hype Train Begin V2 Event</h3>
-
-<table>
-  <thead>
-    <tr>
       <th>Param</th>
       <th>Type</th>
       <th>Description</th>
@@ -9192,85 +9113,6 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">id</code></td>
-      <td>string</td>
-      <td>The Hype Train ID.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
-      <td>string</td>
-      <td>The requested broadcaster ID.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
-      <td>string</td>
-      <td>The requested broadcaster login.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
-      <td>string</td>
-      <td>The requested broadcaster display name.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">level</code></td>
-      <td>integer</td>
-      <td>The current level of the Hype Train.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">total</code></td>
-      <td>integer</td>
-      <td>Total points contributed to the Hype Train.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">progress</code></td>
-      <td>integer</td>
-      <td>The number of points contributed to the Hype Train at the current level.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">goal</code></td>
-      <td>integer</td>
-      <td>The number of points required to reach the next level.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">top_contributions</code></td>
-      <td> <a href="#top-contributions">top_contributions</a> </td>
-      <td>The contributors with the most points contributed.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">last_contribution</code></td>
-      <td> <a href="#last-contribution">last_contribution</a> </td>
-      <td>The most recent contribution.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">started_at</code></td>
-      <td>string</td>
-      <td>The time when the Hype Train started.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">expires_at</code></td>
-      <td>string</td>
-      <td>The time when the Hype Train expires. The expiration is extended when the Hype Train reaches a new level.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">is_golden_kappa_train</code></td>
-      <td>boolean</td>
-      <td>Indicates if the Hype Train is a Golden Kappa Train.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="hype-train-progress-v2-event">Hype Train Progress V2 Event</h3>
-
-<table>
-  <thead>
-    <tr>
       <th>Param</th>
       <th>Type</th>
       <th>Description</th>
@@ -9391,75 +9233,6 @@
 </table>
 
 <h3 id="hype-train-end-event">Hype Train End Event</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">id</code></td>
-      <td>string</td>
-      <td>The Hype Train ID.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_id</code></td>
-      <td>string</td>
-      <td>The requested broadcaster ID.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_login</code></td>
-      <td>string</td>
-      <td>The requested broadcaster login.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">broadcaster_user_name</code></td>
-      <td>string</td>
-      <td>The requested broadcaster display name.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">level</code></td>
-      <td>integer</td>
-      <td>The final level of the Hype Train.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">total</code></td>
-      <td>integer</td>
-      <td>Total points contributed to the Hype Train.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">top_contributions</code></td>
-      <td> <a href="#top-contributions">top_contributions</a> </td>
-      <td>The contributors with the most points contributed.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">started_at</code></td>
-      <td>string</td>
-      <td>The time when the Hype Train started.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">ended_at</code></td>
-      <td>string</td>
-      <td>The time when the Hype Train ended.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">cooldown_ends_at</code></td>
-      <td>string</td>
-      <td>The time when the Hype Train cooldown ends so that the next Hype Train can start.</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">is_golden_kappa_train</code></td>
-      <td>boolean</td>
-      <td>Indicates if the Hype Train is a Golden Kappa Train.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="hype-train-end-v2-event">Hype Train End V2 Event</h3>
 
 <table>
   <thead>

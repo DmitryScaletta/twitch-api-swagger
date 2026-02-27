@@ -3726,9 +3726,9 @@ paths:
         - twitch_auth: []
   /chat/emotes/user:
     get:
-      summary: NEW Retrieves emotes available to the user across all channels.
+      summary: Retrieves emotes available to the user across all channels.
       description: >-
-        NEW Retrieves emotes available to the user across all channels.
+        Retrieves emotes available to the user across all channels.
 
 
         __Authorization:__
@@ -4025,9 +4025,9 @@ paths:
             - moderator:manage:shoutouts
   /chat/messages:
     post:
-      summary: NEW Sends a message to the broadcaster’s chat room.
+      summary: Sends a message to the broadcaster’s chat room.
       description: >-
-        NEW Sends a message to the broadcaster’s chat room.
+        Sends a message to the broadcaster’s chat room.
 
 
         **NOTE:** When sending messages to a Shared Chat session, behaviors
@@ -4696,12 +4696,12 @@ paths:
         - twitch_auth: []
   /videos/clips:
     post:
-      summary: BETA Creates a clip from the broadcaster’s VOD.
+      summary: NEW  Creates a clip from the broadcaster’s VOD.
       description: >-
-        BETA Creates a clip from a broadcaster’s VOD on behalf of the
-        broadcaster or an editor of the channel. Since a live stream is actively
-        creating a VOD, this endpoint can also be used to create a clip from
-        earlier in the current stream.
+        NEW Creates a clip from a broadcaster’s VOD on behalf of the broadcaster
+        or an editor of the channel. Since a live stream is actively creating a
+        VOD, this endpoint can also be used to create a clip from earlier in the
+        current stream.
 
 
         The duration of a clip can be from 5 seconds to 60 seconds in length,
@@ -4948,9 +4948,9 @@ paths:
             - channel:manage:clips
   /eventsub/conduits:
     get:
-      summary: NEW  Gets the conduits for a client ID.
+      summary: Gets the conduits for a client ID.
       description: >-
-        NEW Gets the
+        Gets the
         [conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/)
         for a client ID.
 
@@ -5000,9 +5000,9 @@ paths:
       security:
         - twitch_auth: []
     post:
-      summary: NEW Creates a new conduit.
+      summary: Creates a new conduit.
       description: >-
-        NEW Creates a new
+        Creates a new
         [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/).
 
 
@@ -5066,9 +5066,9 @@ paths:
       security:
         - twitch_auth: []
     patch:
-      summary: NEW Updates a conduit’s shard count.
+      summary: Updates a conduit’s shard count.
       description: |-
-        NEW Updates a [conduit’s](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/) shard count. To delete shards, update the count to a lower number, and the shards above the count will be deleted. For example, if the existing shard count is 100, by resetting shard count to 50, shards 50-99 are disabled.
+        Updates a [conduit’s](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/) shard count. To delete shards, update the count to a lower number, and the shards above the count will be deleted. For example, if the existing shard count is 100, by resetting shard count to 50, shards 50-99 are disabled.
 
         __Authorization:__
 
@@ -5136,9 +5136,9 @@ paths:
       security:
         - twitch_auth: []
     delete:
-      summary: NEW Deletes a specified conduit.
+      summary: Deletes a specified conduit.
       description: |-
-        NEW Deletes a specified [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/). Note that it may take some time for Eventsub subscriptions on a deleted [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/) to show as disabled when calling [Get Eventsub Subscriptions](https://dev.twitch.tv/docs/api/reference/#get-eventsub-subscriptions).
+        Deletes a specified [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/). Note that it may take some time for Eventsub subscriptions on a deleted [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/) to show as disabled when calling [Get Eventsub Subscriptions](https://dev.twitch.tv/docs/api/reference/#get-eventsub-subscriptions).
 
         __Authorization:__
 
@@ -5182,9 +5182,9 @@ paths:
         - twitch_auth: []
   /eventsub/conduits/shards:
     get:
-      summary: NEW Gets a lists of all shards for a conduit.
+      summary: Gets a lists of all shards for a conduit.
       description: >-
-        NEW Gets a lists of all shards for a
+        Gets a lists of all shards for a
         [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/).
 
 
@@ -5277,9 +5277,9 @@ paths:
       security:
         - twitch_auth: []
     patch:
-      summary: NEW Updates shard(s) for a conduit.
+      summary: Updates shard(s) for a conduit.
       description: >-
-        NEW Updates shard(s) for a
+        Updates shard(s) for a
         [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/).
 
 
@@ -8890,111 +8890,6 @@ paths:
           description: |-
             * _moderator\_id_ is not a Guest Star moderator
             * The request is attempting to modify a restricted slot
-  /hypetrain/events:
-    get:
-      summary: DEPRECATED Gets information about the broadcaster’s current or most
-        recent Hype Train event.
-      description: |-
-        DEPRECATED Scheduled for removal on December 4, 2025\. Use “Get Hype Train Status” instead. See [announcement](https://discuss.dev.twitch.com/t/legacy-get-hype-train-events-api-and-eventsub-hype-train-v1-subscription-types-deprecation-and-withdrawal-timeline/64299).
-
-        Gets information about the broadcaster’s current or most recent Hype Train event.
-
-        Instead of polling for events, consider [subscribing](https://dev.twitch.tv/docs/eventsub/manage-subscriptions) to Hype Train events ([Begin](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainbegin), [Progress](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainprogress), [End](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelhype%5Ftrainend)).
-
-        __Authorization:__
-
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:hype\_train** scope.
-      tags:
-        - Hype Train
-      externalDocs:
-        description: Get Hype Train Events
-        url: https://dev.twitch.tv/docs/api/reference#get-hype-train-events
-      operationId: get-hype-train-events
-      parameters:
-        - name: broadcaster_id
-          in: query
-          description: The ID of the broadcaster that’s running the Hype Train. This ID
-            must match the User ID in the user access token.
-          schema:
-            type: string
-          required: true
-        - name: first
-          in: query
-          description: The maximum number of items to return per page in the response. The
-            minimum page size is 1 item per page and the maximum is 100 items
-            per page. The default is 1.
-          schema:
-            type: integer
-            format: int32
-        - name: after
-          in: query
-          description: The cursor used to get the next page of results. The **Pagination**
-            object in the response contains the cursor’s value. [Read
-            More](https://dev.twitch.tv/docs/api/guide#pagination)
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Successfully retrieved the broadcaster’s Hype Train events.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetHypeTrainEventsResponse"
-              examples:
-                Example:
-                  description: |-
-                    _Request:_
-
-                    ```bash
-                    curl -X GET
-                    'https://api.twitch.tv/helix/hypetrain/events?broadcaster_id=270954519&first=1' \
-                    -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \
-                    -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'
-                    ```
-                  value:
-                    data:
-                      - id: 1b0AsbInCHZW2SQFQkCzqN07Ib2
-                        event_type: hypetrain.progression
-                        event_timestamp: 2020-04-24T20:07:24Z
-                        version: "1.0"
-                        event_data:
-                          broadcaster_id: "270954519"
-                          cooldown_end_time: 2020-04-24T20:13:21.003802269Z
-                          expires_at: 2020-04-24T20:12:21.003802269Z
-                          goal: 1800
-                          id: 70f0c7d8-ff60-4c50-b138-f3a352833b50
-                          last_contribution:
-                            total: 200
-                            type: BITS
-                            user: "134247454"
-                          level: 2
-                          started_at: 2020-04-24T20:05:47.30473127Z
-                          top_contributions:
-                            - total: 600
-                              type: BITS
-                              user: "134247450"
-                          total: 600
-                    pagination:
-                      cursor: eyJiIjpudWxsLCJhIjp7IkN1cnNvciI6IjI3MDk1NDUxOToxNTg3NzU4ODQ0OjFiMEFzYkluQ0haVzJTUUZRa0N6cU4wN0liMiJ9fQ
-        "401":
-          description: >-
-            * The ID in _broadcaster\_id_ must match the _user\_id_ in the user
-            access token.
-
-            * The Authorization header is required and must contain a user
-            access token.
-
-            * The user access token must include the
-            **channel:read:hype\_train** scope.
-
-            * The access token is not valid.
-
-            * The client ID specified in the Client-Id header does not match the
-            client ID specified in the access token.
-      security:
-        - twitch_auth:
-            - channel:read:hype_train
-      deprecated: true
   /hypetrain/status:
     get:
       summary: NEW Gets the status of a Hype Train for the specified broadcaster.
@@ -10045,9 +9940,9 @@ paths:
             - moderator:manage:banned_users
   /moderation/unban_requests:
     get:
-      summary: NEW Gets a list of unban requests for a broadcaster’s channel.
+      summary: Gets a list of unban requests for a broadcaster’s channel.
       description: >-
-        NEW Gets a list of unban requests for a broadcaster’s channel.
+        Gets a list of unban requests for a broadcaster’s channel.
 
 
         __Authorization:__
@@ -10177,9 +10072,9 @@ paths:
             - moderator:read:unban_requests
             - moderator:manage:unban_requests
     patch:
-      summary: NEW Resolves an unban request by approving or denying it.
+      summary: Resolves an unban request by approving or denying it.
       description: >-
-        NEW Resolves an unban request by approving or denying it.
+        Resolves an unban request by approving or denying it.
 
 
         __Authorization:__
@@ -11687,10 +11582,10 @@ paths:
             - moderator:manage:warnings
   /moderation/suspicious_users:
     post:
-      summary: BETA Adds a suspicious user status to a chatter on the broadcaster’s
+      summary: NEW Adds a suspicious user status to a chatter on the broadcaster’s
         channel.
       description: >-
-        BETA Adds a suspicious user status to a chatter on the broadcaster’s
+        NEW Adds a suspicious user status to a chatter on the broadcaster’s
         channel.
 
 
@@ -11705,7 +11600,7 @@ paths:
       tags:
         - Moderation
       externalDocs:
-        description: Add suspicious status to chat user
+        description: Add Suspicious Status to Chat User
         url: https://dev.twitch.tv/docs/api/reference#add-suspicious-status-to-chat-user
       operationId: add-suspicious-status-to-chat-user
       parameters:
@@ -11795,10 +11690,10 @@ paths:
         - twitch_auth:
             - moderator:manage:suspicious_users
     delete:
-      summary: BETA Remove a suspicious user status from a chatter on broadcaster’s
+      summary: NEW Remove a suspicious user status from a chatter on broadcaster’s
         channel.
       description: >-
-        BETA Remove a suspicious user status from a chatter on broadcaster’s
+        NEW Remove a suspicious user status from a chatter on broadcaster’s
         channel.
 
 
@@ -11813,7 +11708,7 @@ paths:
       tags:
         - Moderation
       externalDocs:
-        description: Remove suspicious status from chat user
+        description: Remove Suspicious Status From Chat User
         url: https://dev.twitch.tv/docs/api/reference#remove-suspicious-status-from-chat-user
       operationId: remove-suspicious-status-from-chat-user
       parameters:
@@ -16461,25 +16356,25 @@ components:
                 description: The number of snoozes available for the broadcaster.
                 format: int32
               snooze_refresh_at:
-                type: string
+                type: integer
                 description: The UTC timestamp when the broadcaster will gain an additional
-                  snooze, in RFC3339 format.
-                format: date-time
+                  snooze, in RFC3339 format. Can be `0`.
+                format: int64
               next_ad_at:
-                type: string
+                type: integer
                 description: The UTC timestamp of the broadcaster’s next scheduled ad, in
-                  RFC3339 format. Empty if the channel has no ad scheduled or is
+                  RFC3339 format. `0` if the channel has no ad scheduled or is
                   not live.
-                format: date-time
+                format: int64
               duration:
                 type: integer
                 description: The length in seconds of the scheduled upcoming ad break.
                 format: int32
               last_ad_at:
-                type: string
+                type: integer
                 description: The UTC timestamp of the broadcaster’s last ad-break, in RFC3339
                   format. Empty if the channel has not run an ad or is not live.
-                format: date-time
+                format: int64
               preroll_free_time:
                 type: integer
                 description: The amount of pre-roll free time remaining for the channel in
@@ -16506,15 +16401,16 @@ components:
                 description: The number of snoozes available for the broadcaster.
                 format: int32
               snooze_refresh_at:
-                type: string
+                type: integer
                 description: The UTC timestamp when the broadcaster will gain an additional
-                  snooze, in RFC3339 format.
-                format: date-time
+                  snooze, in RFC3339 format. Can be `0`.
+                format: int64
               next_ad_at:
-                type: string
+                type: integer
                 description: The UTC timestamp of the broadcaster’s next scheduled ad, in
-                  RFC3339 format.
-                format: date-time
+                  RFC3339 format. `0` if the channel has no ad scheduled or is
+                  not live.
+                format: int64
     ExtensionAnalytics:
       type: object
       required:
@@ -21265,172 +21161,6 @@ components:
             their ready status.
           items:
             $ref: "#/components/schemas/GuestStarInvite"
-    HypeTrainEvent:
-      type: object
-      required:
-        - id
-        - event_type
-        - event_timestamp
-        - version
-        - event_data
-      properties:
-        id:
-          type: string
-          description: An ID that identifies this event.
-        event_type:
-          type: string
-          description: The type of event. The string is in the form,
-            hypetrain.{event\_name}. The request returns only progress event
-            types (i.e., hypetrain.progression).
-        event_timestamp:
-          type: string
-          description: The UTC date and time (in RFC3339 format) that the event occurred.
-          format: date-time
-        version:
-          type: string
-          description: The version number of the definition of the event’s data. For
-            example, the value is 1 if the data in `event_data` uses the first
-            definition of the event’s data.
-        event_data:
-          description: The event’s data.
-          type: object
-          required:
-            - broadcaster_id
-            - cooldown_end_time
-            - expires_at
-            - goal
-            - id
-            - last_contribution
-            - level
-            - started_at
-            - top_contributions
-            - total
-          properties:
-            broadcaster_id:
-              type: string
-              description: The ID of the broadcaster that’s running the Hype Train.
-            cooldown_end_time:
-              type: string
-              description: The UTC date and time (in RFC3339 format) that another Hype Train
-                can start.
-              format: date-time
-            expires_at:
-              type: string
-              description: The UTC date and time (in RFC3339 format) that the Hype Train ends.
-              format: date-time
-            goal:
-              type: integer
-              description: The value needed to reach the next level.
-              format: int32
-            id:
-              type: string
-              description: An ID that identifies this Hype Train.
-            last_contribution:
-              description: The most recent contribution towards the Hype Train’s goal.
-              type: object
-              required:
-                - total
-                - type
-                - user
-              properties:
-                total:
-                  type: integer
-                  description: The total amount contributed. If `type` is BITS, `total` represents
-                    the amount of Bits used. If `type` is SUBS, `total` is 500,
-                    1000, or 2500 to represent tier 1, 2, or 3 subscriptions,
-                    respectively.
-                  format: int32
-                type:
-                  type: string
-                  description: >-
-                    The contribution method used. Possible values are:  
-                      
-                    * BITS — Cheering with Bits.
-
-                    * SUBS — Subscription activity like subscribing or gifting
-                    subscriptions.
-
-                    * OTHER — Covers other contribution methods not listed.
-                  enum:
-                    - BITS
-                    - SUBS
-                    - OTHER
-                user:
-                  type: string
-                  description: The ID of the user that made the contribution.
-            level:
-              type: integer
-              description: The highest level that the Hype Train reached (the levels are 1
-                through 5).
-              format: int32
-            started_at:
-              type: string
-              description: The UTC date and time (in RFC3339 format) that this Hype Train
-                started.
-              format: date-time
-            top_contributions:
-              type: array
-              description: The top contributors for each contribution type. For example, the
-                top contributor using BITS (by aggregate) and the top
-                contributor using SUBS (by count).
-              items:
-                type: object
-                required:
-                  - total
-                  - type
-                  - user
-                properties:
-                  total:
-                    type: integer
-                    description: The total amount contributed. If `type` is BITS, `total` represents
-                      the amount of Bits used. If `type` is SUBS, `total` is
-                      500, 1000, or 2500 to represent tier 1, 2, or 3
-                      subscriptions, respectively.
-                    format: int32
-                  type:
-                    type: string
-                    description: >-
-                      The contribution method used. Possible values are:  
-                        
-                      * BITS — Cheering with Bits.
-
-                      * SUBS — Subscription activity like subscribing or gifting
-                      subscriptions.
-
-                      * OTHER — Covers other contribution methods not listed.
-                    enum:
-                      - BITS
-                      - SUBS
-                      - OTHER
-                  user:
-                    type: string
-                    description: The ID of the user that made the contribution.
-            total:
-              type: integer
-              description: The current total amount raised.
-              format: int32
-    GetHypeTrainEventsResponse:
-      type: object
-      required:
-        - data
-      properties:
-        data:
-          type: array
-          description: The list of Hype Train events. The list is empty if the broadcaster
-            hasn’t run a Hype Train within the last 5 days.
-          items:
-            $ref: "#/components/schemas/HypeTrainEvent"
-        pagination:
-          description: Contains the information used to page through the list of results.
-            The object is empty if there are no more pages left to page through.
-            [Read More](https://dev.twitch.tv/docs/api/guide#pagination)
-          type: object
-          properties:
-            cursor:
-              type: string
-              description: The cursor used to get the next page of results. Use the cursor to
-                set the request’s _after_ query parameter.
-      deprecated: true
     GetHypeTrainStatusResponse:
       type: object
       required:
