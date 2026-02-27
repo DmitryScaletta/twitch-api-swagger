@@ -1,7 +1,7 @@
 {
   "name": "twitch-api-swagger",
   "version": "0.1.0",
-  "description": "Twitch API Swagger UI",
+  "description": "Unofficial OpenAPI and Swagger UI for Twitch API",
   "author": "DmitryScaletta",
   "license": "MIT",
   "keywords": [
