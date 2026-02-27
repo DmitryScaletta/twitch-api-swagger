@@ -1,11 +1,11 @@
 # twitch-api-swagger
 
-Unofficial Swagger UI for Twitch API
+Unofficial OpenAPI and Swagger UI for Twitch API
 
 - [Classic Swagger UI](https://twitch-api-swagger.surge.sh) ([mirror](https://dmitryscaletta.github.io/twitch-api-swagger/))
 - [Scalar UI](https://twitch-api-swagger.surge.sh/scalar/) ([mirror](https://dmitryscaletta.github.io/twitch-api-swagger/scalar/))
 
-All endpoints are generated automatically from the [twitch docs](https://dev.twitch.tv/docs/api/reference) page.
+All endpoints are generated automatically from the [twitch docs](https://dev.twitch.tv/docs/api/reference) page with a lot of manual fixes.
 
 ## Features
 
