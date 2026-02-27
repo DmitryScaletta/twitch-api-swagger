@@ -319,6 +319,51 @@ const normalizeReferenceHtml = (document: Document) => {
       ]);
     }
   }
+
+  // Wrong type for `snooze_refresh_at`, `next_ad_at`, `last_ad_at`
+  // https://dev.twitch.tv/docs/api/reference#get-ad-schedule
+  // https://dev.twitch.tv/docs/api/reference#snooze-next-ad
+  {
+    const ZERO = '<code class="highlighter-rouge">0</code>';
+    const ids = ['get-ad-schedule', 'snooze-next-ad'];
+    for (const id of ids) {
+      replaceHtml(getDocsEl(id), [
+        [
+          'The UTC timestamp when the broadcaster will gain an additional snooze, in RFC3339 format.',
+          `The UTC timestamp when the broadcaster will gain an additional snooze, in RFC3339 format. Can be ${ZERO}.`,
+        ],
+      ]);
+    }
+    replaceHtml(getDocsEl('get-ad-schedule'), [
+      ['Empty if the channel', `${ZERO} if the channel`],
+      [
+        'snooze_refresh_at</td>\n      <td>String</td>',
+        'snooze_refresh_at</td>\n      <td>Int64</td>',
+      ],
+      [
+        'next_ad_at</td>\n      <td>String</td>',
+        'next_ad_at</td>\n      <td>Int64</td>',
+      ],
+      [
+        'last_ad_at</td>\n      <td>String</td>',
+        'last_ad_at</td>\n      <td>Int64</td>',
+      ],
+    ]);
+    replaceHtml(getDocsEl('snooze-next-ad'), [
+      [
+        'snooze_refresh_at</td>\n      <td>String</td>',
+        'snooze_refresh_at</td>\n      <td>Int64</td>',
+      ],
+      [
+        'next_ad_at</td>\n      <td>String</td>',
+        'next_ad_at</td>\n      <td>Int64</td>',
+      ],
+      [
+        'The UTC timestamp of the broadcaster’s next scheduled ad, in RFC3339 format.',
+        `The UTC timestamp of the broadcaster’s next scheduled ad, in RFC3339 format. ${ZERO} if the channel has no ad scheduled or is not live.`,
+      ],
+    ]);
+  }
 };
 
 export default normalizeReferenceHtml;
