@@ -42,25 +42,27 @@ const EXTENSION_SCHEMA_NAMES = {
 const parseScopes = (lines: string[]) => {
   const scopes: string[] = [];
   for (const line of lines) {
-    let m = SCOPE_REGEX.exec(line);
-    while (m !== null) {
+    for (const m of line.matchAll(SCOPE_REGEX)) {
       const scope = m[2] || m[3];
-      if (scope?.includes(':')) {
-        scopes.push(scope.replaceAll('\\', ''));
-      }
-      m = SCOPE_REGEX.exec(line);
+      if (!scope?.includes(':')) continue;
+      const normalizedScope = scope.replaceAll('\\', '');
+      if (scopes.includes(normalizedScope)) continue;
+      scopes.push(normalizedScope);
     }
   }
   return scopes;
 };
 
 const getOpenApiExamples = (examples: ExampleObject[]) =>
-  examples.reduce((acc, example, i) => {
-    let exampleTitle = 'Example';
-    if (examples.length > 1) exampleTitle += ` ${i + 1}`;
-    acc[exampleTitle] = example;
-    return acc;
-  }, {} as Record<string, ExampleObject>);
+  examples.reduce(
+    (acc, example, i) => {
+      let exampleTitle = 'Example';
+      if (examples.length > 1) exampleTitle += ` ${i + 1}`;
+      acc[exampleTitle] = example;
+      return acc;
+    },
+    {} as Record<string, ExampleObject>,
+  );
 
 const parseEndpoint =
   (apiReference: Map<string, ApiReference>, openApi: OpenApi) =>
