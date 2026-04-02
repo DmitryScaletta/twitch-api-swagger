@@ -71,9 +71,18 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
         that includes the **channel:edit:commercial** scope.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **channel:edit:commercial** scope for the user represented by the
+        `broadcaster_id` query parameter.
       tags:
         - Ads
       externalDocs:
@@ -181,10 +190,19 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
-        that includes the **channel:read:ads** scope. The `user_id` in the user
-        access token must match the `broadcaster_id`.
+        that includes the **channel:read:ads** scope. The user ID associated
+        with the token must match the `broadcaster_id` in the query parameter.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **channel:read:ads** scope for the user represented by the
+        `broadcaster_id` query parameter.
       tags:
         - Ads
       externalDocs:
@@ -210,10 +228,10 @@ paths:
                   description: |-
                     _Request:_
 
-                    Snooze the next ad.
+                    Retrieves the ad schedule for the TwitchDev channel.
 
                     ```bash
-                    curl -X GET 'https://api.twitch.tv/helix/channels/ads?broadcaster_id=123' \
+                    curl -X GET 'https://api.twitch.tv/helix/channels/ads?broadcaster_id=141981764' \
                     -H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \
                     -H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'
                     ```
@@ -245,10 +263,19 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
-        that includes the **channel:manage:ads** scope. The `user_id` in the
-        user access token must match the `broadcaster_id`.
+        that includes the **channel:manage:ads** scope. The user ID associated
+        with the token must match the `broadcaster_id` in the query parameter.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **channel:manage:ads** scope for the user represented by the
+        `broadcaster_id` query parameter.
       tags:
         - Ads
       externalDocs:
@@ -2101,7 +2128,7 @@ paths:
 
 
         Requires a [user access
-        token](https://dev.twitch.tv/docs/api/authentication#user-access-tokens)
+        token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
         that includes the **channel:manage:redemptions** scope.
 
 
@@ -2852,9 +2879,18 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
         that includes the **moderator:read:chatters** scope.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderator:read:chatters** scope for the user represented by the
+        `moderator_id` query parameter.
       tags:
         - Chat
       externalDocs:
@@ -3505,9 +3541,20 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
-        that includes the **moderator:manage:chat\_settings** scope.
+        that includes the **moderator:manage:chat\_settings** scope. The user ID
+        associated with the token must match the `moderator_id` in the query
+        parameter.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderator:manage:chat\_settings** scope for the user represented by
+        the `moderator_id` query parameter.
 
 
         __Request Body:__
@@ -3934,7 +3981,13 @@ paths:
 
         __Authorization:__
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:shoutouts** scope.
+        Requires one of the following:
+
+        * A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:shoutouts** scope.
+        * BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through prior authorizations, has:  
+            
+        * The **channel:bot** scope for the user represented by the `broadcaster_id` query parameter, and  
+        * The **moderator:manage:shoutouts** and **user:bot** scopes for the user represented by the `moderator_id` in the query parameter.
       tags:
         - Chat
       externalDocs:
@@ -4023,6 +4076,8 @@ paths:
       security:
         - twitch_auth:
             - moderator:manage:shoutouts
+            - channel:bot
+            - user:bot
   /chat/messages:
     post:
       summary: Sends a message to the broadcaster’s chat room.
@@ -9031,9 +9086,18 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
         that includes the **moderation:read** scope.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderation:read** scope for the user represented by the
+        `broadcaster_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -9147,9 +9211,18 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
         that includes the **moderator:manage:automod** scope.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderator:manage:automod** scope for the user represented by the
+        `user_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -9238,9 +9311,20 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
-        that includes the **moderator:read:automod\_settings** scope.
+        that includes the **moderator:read:automod\_settings** or
+        **moderator:manage:automod\_settings** scope.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderator:read:automod\_settings** or
+        **moderator:manage:automod\_settings** scope for the user represented by
+        the `moderator_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -9321,6 +9405,7 @@ paths:
       security:
         - twitch_auth:
             - moderator:read:automod_settings
+            - moderator:manage:automod_settings
     put:
       summary: Updates the broadcaster’s AutoMod settings.
       description: >-
@@ -9332,9 +9417,18 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
         that includes the **moderator:manage:automod\_settings** scope.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderator:manage:automod\_settings** scope for the user represented by
+        the `moderator_id` query parameter.
 
 
         __Request Body:__
@@ -9516,10 +9610,19 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
         that includes the **moderation:read** or
         **moderator:manage:banned\_users** scope.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderation:read** or **moderator:manage:banned\_users** scope for the
+        user represented by the `broadcaster_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -9646,7 +9749,10 @@ paths:
 
         __Authorization:__
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\_users** scope.
+        Requires one of the following:
+
+        * A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\_users** scope.
+        * BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:banned\_users** and **user:bot** scopes for the user represented by the `moderator_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -9821,6 +9927,7 @@ paths:
       security:
         - twitch_auth:
             - moderator:manage:banned_users
+            - user:bot
     delete:
       summary: Removes the ban or timeout that was placed on the specified user.
       description: >-
@@ -9834,9 +9941,18 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
         that includes the **moderator:manage:banned\_users** scope.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderator:manage:banned\_users** and **user:bot** scopes for the user
+        represented by the `moderator_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -9938,6 +10054,7 @@ paths:
       security:
         - twitch_auth:
             - moderator:manage:banned_users
+            - user:bot
   /moderation/unban_requests:
     get:
       summary: Gets a list of unban requests for a broadcaster’s channel.
@@ -10209,10 +10326,19 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
         that includes the **moderator:read:blocked\_terms** or
         **moderator:manage:blocked\_terms** scope.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderator:read:blocked\_terms** or **moderator:manage:blocked\_terms**
+        scope for the user represented by the `moderator_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -10313,9 +10439,18 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
         that includes the **moderator:manage:blocked\_terms** scope.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderator:manage:blocked\_terms** scope for the user represented by
+        the `moderator_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -10444,9 +10579,18 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
         that includes the **moderator:manage:blocked\_terms** scope.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderator:manage:blocked\_terms** scope for the user represented by
+        the `moderator_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -10529,9 +10673,18 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
         that includes the **moderator:manage:chat\_messages** scope.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderator:manage:chat\_messages** scope for the user represented by
+        the `moderator_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -10633,10 +10786,20 @@ paths:
         __Authorization:__
 
 
-        * Query parameter `user_id` must match the user ID in the [User-Access
-        token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+        Requires one of the following:
 
-        * Requires OAuth Scope: `user:read:moderated_channels`
+
+        * A [user access
+        token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+        that includes the **user:read:moderated\_channels**. The user ID
+        associated with the token must match the `user_id` in the query
+        parameter.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **user:read:moderated\_channels** scope for the user represented by the
+        `user_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -10701,6 +10864,9 @@ paths:
           description: ""
         "500":
           description: ""
+      security:
+        - twitch_auth:
+            - user:read:moderated_channels
   /moderation/moderators:
     get:
       summary: Gets all users allowed to moderate the broadcaster’s chat room.
@@ -11297,9 +11463,20 @@ paths:
         __Authorization:__
 
 
-        Requires a [user access
+        Requires one of the following:
+
+
+        * A [user access
         token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
-        that includes the **moderator:manage:shield\_mode** scope.
+        that includes the **moderator:manage:shield\_mode** scope. The user ID
+        associated with the token must match the `moderator_id` in the query
+        parameter.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderator:manage:shield\_mode** scope for the user represented by the
+        `moderator_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -11393,7 +11570,10 @@ paths:
 
         __Authorization:__
 
-        Requires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:shield\_mode** or **moderator:manage:shield\_mode** scope.
+        Requires one of the following:
+
+        * A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:shield\_mode** or **moderator:manage:shield\_mode** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.
+        * BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:shield\_mode** or **moderator:manage:shield\_mode** scope for the user represented by the `moderator_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -11482,10 +11662,20 @@ paths:
         __Authorization:__
 
 
-        Requires a user access token that includes the
-        **moderator:manage:warnings** scope. Query parameter `moderator_id` must
-        match the `user_id` in the [user access
-        token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).
+        Requires one of the following:
+
+
+        * A [user access
+        token](https://dev.twitch.tv/docs/authentication#user-access-tokens)
+        that includes the **moderator:manage:warnings** scope. The user ID
+        associated with the token must match the `moderator_id` in the query
+        parameter.
+
+        * BETA An [app access
+        token](https://dev.twitch.tv/docs/authentication#app-access-tokens)
+        where the application, through a prior authorization, has the
+        **moderator:manage:warnings** scope for the user represented by the
+        `moderator_id` query parameter.
       tags:
         - Moderation
       externalDocs:
@@ -14374,7 +14564,6 @@ paths:
       security:
         - twitch_auth:
             - channel:read:subscriptions
-            - channel:read:subscriptions
   /subscriptions/user:
     get:
       summary: Checks whether the user subscribes to the broadcaster’s channel.
@@ -14464,7 +14653,6 @@ paths:
             _broadcaster\\_id_."
       security:
         - twitch_auth:
-            - user:read:subscriptions
             - user:read:subscriptions
   /tags/streams:
     get:
@@ -15514,7 +15702,6 @@ paths:
       security:
         - twitch_auth:
             - user:read:broadcast
-            - user:edit:broadcast
             - user:edit:broadcast
   /users/extensions:
     get:
@@ -18870,6 +19057,15 @@ components:
             - purple
             - primary
           default: primary
+        source-only:
+          type: boolean
+          description: "Determines if the chat announcement is sent only to the source
+            channel defined by broadcaster\\_id during a shared chat session.
+            This has no effect if the announcement is not sent sent during a
+            shared chat session. The default value is `false`. NOTE: This
+            parameter can only be set when utilizing an App Access Token. It
+            cannot be specified when a User Access Token is used, and will
+            instead result in an HTTP 400 error."
     SendChatMessageBody:
       type: object
       required:

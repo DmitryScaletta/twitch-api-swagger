@@ -108,7 +108,7 @@
     "/channels/commercial": {
       "post": {
         "summary": "Starts a commercial on the specified channel.",
-        "description": "Starts a commercial on the specified channel.\n\n**NOTE**: Only partners and affiliates may run commercials and they must be streaming live at the time.\n\n**NOTE**: Only the broadcaster may start a commercial; the broadcaster’s editors and moderators may not start commercials on behalf of the broadcaster.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:edit:commercial** scope.",
+        "description": "Starts a commercial on the specified channel.\n\n**NOTE**: Only partners and affiliates may run commercials and they must be streaming live at the time.\n\n**NOTE**: Only the broadcaster may start a commercial; the broadcaster’s editors and moderators may not start commercials on behalf of the broadcaster.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:edit:commercial** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **channel:edit:commercial** scope for the user represented by the `broadcaster_id` query parameter.",
         "tags": [
           "Ads"
         ],
@@ -185,7 +185,7 @@
     "/channels/ads": {
       "get": {
         "summary": "Returns ad schedule related information.",
-        "description": "This endpoint returns ad schedule related information, including snooze, when the last ad was run, when the next ad is scheduled, and if the channel is currently in pre-roll free time. Note that a new ad cannot be run until 8 minutes after running a previous ad.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:ads** scope. The `user_id` in the user access token must match the `broadcaster_id`.",
+        "description": "This endpoint returns ad schedule related information, including snooze, when the last ad was run, when the next ad is scheduled, and if the channel is currently in pre-roll free time. Note that a new ad cannot be run until 8 minutes after running a previous ad.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:ads** scope. The user ID associated with the token must match the `broadcaster_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **channel:read:ads** scope for the user represented by the `broadcaster_id` query parameter.",
         "tags": [
           "Ads"
         ],
@@ -215,7 +215,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\nSnooze the next ad.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/channels/ads?broadcaster_id=123' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'\n```",
+                    "description": "_Request:_\n\nRetrieves the ad schedule for the TwitchDev channel.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/channels/ads?broadcaster_id=141981764' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz'\n```",
                     "value": {
                       "data": [
                         {
@@ -252,7 +252,7 @@
     "/channels/ads/schedule/snooze": {
       "post": {
         "summary": "Pushes back the timestamp of the upcoming automatic mid-roll ad by 5 minutes.",
-        "description": "If available, pushes back the timestamp of the upcoming automatic mid-roll ad by 5 minutes. This endpoint duplicates the snooze functionality in the creator dashboard’s Ads Manager.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:ads** scope. The `user_id` in the user access token must match the `broadcaster_id`.",
+        "description": "If available, pushes back the timestamp of the upcoming automatic mid-roll ad by 5 minutes. This endpoint duplicates the snooze functionality in the creator dashboard’s Ads Manager.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:ads** scope. The user ID associated with the token must match the `broadcaster_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **channel:manage:ads** scope for the user represented by the `broadcaster_id` query parameter.",
         "tags": [
           "Ads"
         ],
@@ -1760,7 +1760,7 @@
       },
       "patch": {
         "summary": "Updates a custom reward.",
-        "description": "Updates a custom reward. The app used to create the reward is the only app that may update the reward.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/api/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.\n\n__Request Body:__\n\nThe body of the request should contain only the fields you’re updating.",
+        "description": "Updates a custom reward. The app used to create the reward is the only app that may update the reward.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:redemptions** scope.\n\n__Request Body:__\n\nThe body of the request should contain only the fields you’re updating.",
         "tags": [
           "Channel Points"
         ],
@@ -2425,7 +2425,7 @@
     "/chat/chatters": {
       "get": {
         "summary": "Gets the list of users that are connected to the broadcaster’s chat session.",
-        "description": "Gets the list of users that are connected to the broadcaster’s chat session.\n\n**NOTE**: There is a delay between when users join and leave a chat and when the list is updated accordingly.\n\nTo determine whether a user is a moderator or VIP, use the [Get Moderators](https://dev.twitch.tv/docs/api/reference#get-moderators) and [Get VIPs](https://dev.twitch.tv/docs/api/reference#get-vips) endpoints. You can check the roles of up to 100 users.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:chatters** scope.",
+        "description": "Gets the list of users that are connected to the broadcaster’s chat session.\n\n**NOTE**: There is a delay between when users join and leave a chat and when the list is updated accordingly.\n\nTo determine whether a user is a moderator or VIP, use the [Get Moderators](https://dev.twitch.tv/docs/api/reference#get-moderators) and [Get VIPs](https://dev.twitch.tv/docs/api/reference#get-vips) endpoints. You can check the roles of up to 100 users.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:chatters** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:chatters** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Chat"
         ],
@@ -3000,7 +3000,7 @@
       },
       "patch": {
         "summary": "Updates the broadcaster’s chat settings.",
-        "description": "Updates the broadcaster’s chat settings.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_settings** scope.\n\n__Request Body:__\n\nAll fields are optional. Specify only those fields that you want to update.\n\nTo set the `slow_mode_wait_time` or `follower_mode_duration` field to its default value, set the corresponding `slow_mode` or `follower_mode` field to **true** (and don’t include the `slow_mode_wait_time` or `follower_mode_duration` field).\n\nTo set the `slow_mode_wait_time`, `follower_mode_duration`, or `non_moderator_chat_delay_duration` field’s value, you must set the corresponding `slow_mode`, `follower_mode`, or `non_moderator_chat_delay` field to **true**.\n\nTo remove the `slow_mode_wait_time`, `follower_mode_duration`, or `non_moderator_chat_delay_duration` field’s value, set the corresponding `slow_mode`, `follower_mode`, or `non_moderator_chat_delay` field to **false** (and don’t include the `slow_mode_wait_time`, `follower_mode_duration`, or `non_moderator_chat_delay_duration` field).",
+        "description": "Updates the broadcaster’s chat settings.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_settings** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:chat\\_settings** scope for the user represented by the `moderator_id` query parameter.\n\n__Request Body:__\n\nAll fields are optional. Specify only those fields that you want to update.\n\nTo set the `slow_mode_wait_time` or `follower_mode_duration` field to its default value, set the corresponding `slow_mode` or `follower_mode` field to **true** (and don’t include the `slow_mode_wait_time` or `follower_mode_duration` field).\n\nTo set the `slow_mode_wait_time`, `follower_mode_duration`, or `non_moderator_chat_delay_duration` field’s value, you must set the corresponding `slow_mode`, `follower_mode`, or `non_moderator_chat_delay` field to **true**.\n\nTo remove the `slow_mode_wait_time`, `follower_mode_duration`, or `non_moderator_chat_delay_duration` field’s value, set the corresponding `slow_mode`, `follower_mode`, or `non_moderator_chat_delay` field to **false** (and don’t include the `slow_mode_wait_time`, `follower_mode_duration`, or `non_moderator_chat_delay_duration` field).",
         "tags": [
           "Chat"
         ],
@@ -3353,7 +3353,7 @@
     "/chat/shoutouts": {
       "post": {
         "summary": "Sends a Shoutout to the specified broadcaster.",
-        "description": "Sends a Shoutout to the specified broadcaster. Typically, you send Shoutouts when you or one of your moderators notice another broadcaster in your chat, the other broadcaster is coming up in conversation, or after they raid your broadcast.\n\nTwitch’s Shoutout feature is a great way for you to show support for other broadcasters and help them grow. Viewers who do not follow the other broadcaster will see a pop-up Follow button in your chat that they can click to follow the other broadcaster. [Learn More](https://help.twitch.tv/s/article/shoutouts)\n\n**Rate Limits**: The broadcaster may send a Shoutout once every 2 minutes. They may send the same broadcaster a Shoutout once every 60 minutes.\n\nTo receive notifications when a Shoutout is sent or received, subscribe to the [channel.shoutout.create](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshoutoutcreate) and [channel.shoutout.receive](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshoutoutreceive) subscription types. The **channel.shoutout.create** event includes cooldown periods that indicate when the broadcaster may send another Shoutout without exceeding the endpoint’s rate limit.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:shoutouts** scope.",
+        "description": "Sends a Shoutout to the specified broadcaster. Typically, you send Shoutouts when you or one of your moderators notice another broadcaster in your chat, the other broadcaster is coming up in conversation, or after they raid your broadcast.\n\nTwitch’s Shoutout feature is a great way for you to show support for other broadcasters and help them grow. Viewers who do not follow the other broadcaster will see a pop-up Follow button in your chat that they can click to follow the other broadcaster. [Learn More](https://help.twitch.tv/s/article/shoutouts)\n\n**Rate Limits**: The broadcaster may send a Shoutout once every 2 minutes. They may send the same broadcaster a Shoutout once every 60 minutes.\n\nTo receive notifications when a Shoutout is sent or received, subscribe to the [channel.shoutout.create](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshoutoutcreate) and [channel.shoutout.receive](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshoutoutreceive) subscription types. The **channel.shoutout.create** event includes cooldown periods that indicate when the broadcaster may send another Shoutout without exceeding the endpoint’s rate limit.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:shoutouts** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through prior authorizations, has:  \n    \n* The **channel:bot** scope for the user represented by the `broadcaster_id` query parameter, and  \n* The **moderator:manage:shoutouts** and **user:bot** scopes for the user represented by the `moderator_id` in the query parameter.",
         "tags": [
           "Chat"
         ],
@@ -3411,7 +3411,9 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:manage:shoutouts"
+              "moderator:manage:shoutouts",
+              "channel:bot",
+              "user:bot"
             ]
           }
         ]
@@ -7499,7 +7501,7 @@
     "/moderation/enforcements/status": {
       "post": {
         "summary": "Checks whether AutoMod would flag the specified message for review.",
-        "description": "Checks whether AutoMod would flag the specified message for review.\n\nAutoMod is a moderation tool that holds inappropriate or harassing chat messages for moderators to review. Moderators approve or deny the messages that AutoMod flags; only approved messages are released to chat. AutoMod detects misspellings and evasive language automatically. For information about AutoMod, see [How to Use AutoMod](https://help.twitch.tv/s/article/how-to-use-automod).\n\n**Rate Limits**: Rates are limited per channel based on the account type rather than per access token.\n\n| Account type | Limit per minute | Limit per hour |\n| - | - | - |\n| Normal | 5 | 50 |\n| Affiliate | 10 | 100 |\n| Partner | 30 | 300 |\n\n\nThe above limits are in addition to the standard [Twitch API rate limits](https://dev.twitch.tv/docs/api/guide#twitch-rate-limits). The rate limit headers in the response represent the Twitch rate limits and not the above limits.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** scope.",
+        "description": "Checks whether AutoMod would flag the specified message for review.\n\nAutoMod is a moderation tool that holds inappropriate or harassing chat messages for moderators to review. Moderators approve or deny the messages that AutoMod flags; only approved messages are released to chat. AutoMod detects misspellings and evasive language automatically. For information about AutoMod, see [How to Use AutoMod](https://help.twitch.tv/s/article/how-to-use-automod).\n\n**Rate Limits**: Rates are limited per channel based on the account type rather than per access token.\n\n| Account type | Limit per minute | Limit per hour |\n| - | - | - |\n| Normal | 5 | 50 |\n| Affiliate | 10 | 100 |\n| Partner | 30 | 300 |\n\n\nThe above limits are in addition to the standard [Twitch API rate limits](https://dev.twitch.tv/docs/api/guide#twitch-rate-limits). The rate limit headers in the response represent the Twitch rate limits and not the above limits.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderation:read** scope for the user represented by the `broadcaster_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -7597,7 +7599,7 @@
     "/moderation/automod/message": {
       "post": {
         "summary": "Allow or deny the message that AutoMod flagged for review.",
-        "description": "Allow or deny the message that AutoMod flagged for review. For information about AutoMod, see [How to Use AutoMod](https://help.twitch.tv/s/article/how-to-use-automod).\n\nTo get messages that AutoMod is holding for review, subscribe to the **automod-queue.<moderator\\_id>.<channel\\_id>** [topic](https://dev.twitch.tv/docs/pubsub#topics) using [PubSub](https://dev.twitch.tv/docs/pubsub). PubSub sends a notification to your app when AutoMod holds a message for review.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:automod** scope.",
+        "description": "Allow or deny the message that AutoMod flagged for review. For information about AutoMod, see [How to Use AutoMod](https://help.twitch.tv/s/article/how-to-use-automod).\n\nTo get messages that AutoMod is holding for review, subscribe to the **automod-queue.<moderator\\_id>.<channel\\_id>** [topic](https://dev.twitch.tv/docs/pubsub#topics) using [PubSub](https://dev.twitch.tv/docs/pubsub). PubSub sends a notification to your app when AutoMod holds a message for review.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:automod** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:automod** scope for the user represented by the `user_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -7653,7 +7655,7 @@
     "/moderation/automod/settings": {
       "get": {
         "summary": "Gets the broadcaster’s AutoMod settings.",
-        "description": "Gets the broadcaster’s AutoMod settings. The settings are used to automatically block inappropriate or harassing messages from appearing in the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:automod\\_settings** scope.",
+        "description": "Gets the broadcaster’s AutoMod settings. The settings are used to automatically block inappropriate or harassing messages from appearing in the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:automod\\_settings** or **moderator:manage:automod\\_settings** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:automod\\_settings** or **moderator:manage:automod\\_settings** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -7728,14 +7730,15 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:read:automod_settings"
+              "moderator:read:automod_settings",
+              "moderator:manage:automod_settings"
             ]
           }
         ]
       },
       "put": {
         "summary": "Updates the broadcaster’s AutoMod settings.",
-        "description": "Updates the broadcaster’s AutoMod settings. The settings are used to automatically block inappropriate or harassing messages from appearing in the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:automod\\_settings** scope.\n\n__Request Body:__\n\nBecause PUT is an overwrite operation, you must include all the fields that you want set after the operation completes. Typically, you’ll send a GET request, update the fields you want to change, and pass that object in the PUT request.\n\nYou may set either `overall_level` or the individual settings like `aggression`, but not both.\n\nSetting `overall_level` applies default values to the individual settings. However, setting `overall_level` to 4 does not necessarily mean that it applies 4 to all the individual settings. Instead, it applies a set of recommended defaults to the rest of the settings. For example, if you set `overall_level` to 2, Twitch provides some filtering on discrimination and sexual content, but more filtering on hostility (see the first example response).\n\nIf `overall_level` is currently set and you update `swearing` to 3, `overall_level` will be set to **null** and all settings other than `swearing` will be set to 0\\. The same is true if individual settings are set and you update `overall_level` to 3 — all the individual settings are updated to reflect the default level.\n\nNote that if you set all the individual settings to values that match what `overall_level` would have set them to, Twitch changes AutoMod to use the default AutoMod level instead of using the individual settings.\n\nValid values for all levels are from 0 (no filtering) through 4 (most aggressive filtering). These levels affect how aggressively AutoMod holds back messages for moderators to review before they appear in chat or are denied (not shown).",
+        "description": "Updates the broadcaster’s AutoMod settings. The settings are used to automatically block inappropriate or harassing messages from appearing in the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:automod\\_settings** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:automod\\_settings** scope for the user represented by the `moderator_id` query parameter.\n\n__Request Body:__\n\nBecause PUT is an overwrite operation, you must include all the fields that you want set after the operation completes. Typically, you’ll send a GET request, update the fields you want to change, and pass that object in the PUT request.\n\nYou may set either `overall_level` or the individual settings like `aggression`, but not both.\n\nSetting `overall_level` applies default values to the individual settings. However, setting `overall_level` to 4 does not necessarily mean that it applies 4 to all the individual settings. Instead, it applies a set of recommended defaults to the rest of the settings. For example, if you set `overall_level` to 2, Twitch provides some filtering on discrimination and sexual content, but more filtering on hostility (see the first example response).\n\nIf `overall_level` is currently set and you update `swearing` to 3, `overall_level` will be set to **null** and all settings other than `swearing` will be set to 0\\. The same is true if individual settings are set and you update `overall_level` to 3 — all the individual settings are updated to reflect the default level.\n\nNote that if you set all the individual settings to values that match what `overall_level` would have set them to, Twitch changes AutoMod to use the default AutoMod level instead of using the individual settings.\n\nValid values for all levels are from 0 (no filtering) through 4 (most aggressive filtering). These levels affect how aggressively AutoMod holds back messages for moderators to review before they appear in chat or are denied (not shown).",
         "tags": [
           "Moderation"
         ],
@@ -7862,7 +7865,7 @@
     "/moderation/banned": {
       "get": {
         "summary": "Gets all users that the broadcaster banned or put in a timeout.",
-        "description": "Gets all users that the broadcaster banned or put in a timeout.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** or **moderator:manage:banned\\_users** scope.",
+        "description": "Gets all users that the broadcaster banned or put in a timeout.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** or **moderator:manage:banned\\_users** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderation:read** or **moderator:manage:banned\\_users** scope for the user represented by the `broadcaster_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -7984,7 +7987,7 @@
     "/moderation/bans": {
       "post": {
         "summary": "Bans a user from participating in a broadcaster’s chat room or puts them in a timeout.",
-        "description": "Bans a user from participating in the specified broadcaster’s chat room or puts them in a timeout.\n\nFor information about banning or putting users in a timeout, see [Ban a User](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat#TheBanFeature) and [Timeout a User](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat#TheTimeoutFeature).\n\nIf the user is currently in a timeout, you can call this endpoint to change the duration of the timeout or ban them altogether. If the user is currently banned, you cannot call this method to put them in a timeout instead.\n\nTo remove a ban or end a timeout, see [Unban user](https://dev.twitch.tv/docs/api/reference#unban-user).\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\\_users** scope.",
+        "description": "Bans a user from participating in the specified broadcaster’s chat room or puts them in a timeout.\n\nFor information about banning or putting users in a timeout, see [Ban a User](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat#TheBanFeature) and [Timeout a User](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat#TheTimeoutFeature).\n\nIf the user is currently in a timeout, you can call this endpoint to change the duration of the timeout or ban them altogether. If the user is currently banned, you cannot call this method to put them in a timeout instead.\n\nTo remove a ban or end a timeout, see [Unban user](https://dev.twitch.tv/docs/api/reference#unban-user).\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\\_users** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:banned\\_users** and **user:bot** scopes for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8127,14 +8130,15 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:manage:banned_users"
+              "moderator:manage:banned_users",
+              "user:bot"
             ]
           }
         ]
       },
       "delete": {
         "summary": "Removes the ban or timeout that was placed on the specified user.",
-        "description": "Removes the ban or timeout that was placed on the specified user.\n\nTo ban a user, see [Ban user](https://dev.twitch.tv/docs/api/reference#ban-user).\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\\_users** scope.",
+        "description": "Removes the ban or timeout that was placed on the specified user.\n\nTo ban a user, see [Ban user](https://dev.twitch.tv/docs/api/reference#ban-user).\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\\_users** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:banned\\_users** and **user:bot** scopes for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8209,7 +8213,8 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:manage:banned_users"
+              "moderator:manage:banned_users",
+              "user:bot"
             ]
           }
         ]
@@ -8453,7 +8458,7 @@
     "/moderation/blocked_terms": {
       "get": {
         "summary": "Gets the broadcaster’s list of non-private, blocked words or phrases.",
-        "description": "Gets the broadcaster’s list of non-private, blocked words or phrases. These are the terms that the broadcaster or moderator added manually or that were denied by AutoMod.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:blocked\\_terms** or **moderator:manage:blocked\\_terms** scope.",
+        "description": "Gets the broadcaster’s list of non-private, blocked words or phrases. These are the terms that the broadcaster or moderator added manually or that were denied by AutoMod.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:blocked\\_terms** or **moderator:manage:blocked\\_terms** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:blocked\\_terms** or **moderator:manage:blocked\\_terms** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8552,7 +8557,7 @@
       },
       "post": {
         "summary": "Adds a word or phrase to the broadcaster’s list of blocked terms.",
-        "description": "Adds a word or phrase to the broadcaster’s list of blocked terms. These are the terms that the broadcaster doesn’t want used in their chat room.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\\_terms** scope.",
+        "description": "Adds a word or phrase to the broadcaster’s list of blocked terms. These are the terms that the broadcaster doesn’t want used in their chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\\_terms** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:blocked\\_terms** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8669,7 +8674,7 @@
       },
       "delete": {
         "summary": "Removes the word or phrase from the broadcaster’s list of blocked terms.",
-        "description": "Removes the word or phrase from the broadcaster’s list of blocked terms.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\\_terms** scope.",
+        "description": "Removes the word or phrase from the broadcaster’s list of blocked terms.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\\_terms** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:blocked\\_terms** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8733,7 +8738,7 @@
     "/moderation/chat": {
       "delete": {
         "summary": "Removes a single chat message or all chat messages from the broadcaster’s chat room.",
-        "description": "Removes a single chat message or all chat messages from the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_messages** scope.",
+        "description": "Removes a single chat message or all chat messages from the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_messages** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:chat\\_messages** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8799,7 +8804,7 @@
     "/moderation/channels": {
       "get": {
         "summary": "Gets a list of channels that the specified user has moderator privileges in.",
-        "description": "Gets a list of channels that the specified user has moderator privileges in.\n\n__Authorization:__\n\n* Query parameter `user_id` must match the user ID in the [User-Access token](https://dev.twitch.tv/docs/authentication#user-access-tokens)\n* Requires OAuth Scope: `user:read:moderated_channels`",
+        "description": "Gets a list of channels that the specified user has moderator privileges in.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:moderated\\_channels**. The user ID associated with the token must match the `user_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **user:read:moderated\\_channels** scope for the user represented by the `user_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8878,7 +8883,14 @@
           "500": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "user:read:moderated_channels"
+            ]
+          }
+        ]
       }
     },
     "/moderation/moderators": {
@@ -9316,7 +9328,7 @@
     "/moderation/shield_mode": {
       "put": {
         "summary": "Activates or deactivates the broadcaster’s Shield Mode.",
-        "description": "Activates or deactivates the broadcaster’s Shield Mode.\n\nTwitch’s Shield Mode feature is like a panic button that broadcasters can push to protect themselves from chat abuse coming from one or more accounts. When activated, Shield Mode applies the overrides that the broadcaster configured in the Twitch UX. If the broadcaster hasn’t configured Shield Mode, it applies default overrides.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:shield\\_mode** scope.",
+        "description": "Activates or deactivates the broadcaster’s Shield Mode.\n\nTwitch’s Shield Mode feature is like a panic button that broadcasters can push to protect themselves from chat abuse coming from one or more accounts. When activated, Shield Mode applies the overrides that the broadcaster configured in the Twitch UX. If the broadcaster hasn’t configured Shield Mode, it applies default overrides.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:shield\\_mode** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:shield\\_mode** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -9408,7 +9420,7 @@
       },
       "get": {
         "summary": "Gets the broadcaster’s Shield Mode activation status.",
-        "description": "Gets the broadcaster’s Shield Mode activation status.\n\nTo receive notification when the broadcaster activates and deactivates Shield Mode, subscribe to the [channel.shield\\_mode.begin](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshield%5Fmodebegin) and [channel.shield\\_mode.end](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshield%5Fmodeend) subscription types.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:shield\\_mode** or **moderator:manage:shield\\_mode** scope.",
+        "description": "Gets the broadcaster’s Shield Mode activation status.\n\nTo receive notification when the broadcaster activates and deactivates Shield Mode, subscribe to the [channel.shield\\_mode.begin](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshield%5Fmodebegin) and [channel.shield\\_mode.end](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshield%5Fmodeend) subscription types.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:shield\\_mode** or **moderator:manage:shield\\_mode** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:shield\\_mode** or **moderator:manage:shield\\_mode** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -9487,7 +9499,7 @@
     "/moderation/warnings": {
       "post": {
         "summary": "Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged.",
-        "description": "Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged. New warnings can be issued to a user when they already have a warning in the channel (new warning will replace old warning).\n\n__Authorization:__\n\nRequires a user access token that includes the **moderator:manage:warnings** scope. Query parameter `moderator_id` must match the `user_id` in the [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).",
+        "description": "Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged. New warnings can be issued to a user when they already have a warning in the channel (new warning will replace old warning).\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:warnings** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:warnings** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -11905,7 +11917,6 @@
         "security": [
           {
             "twitch_auth": [
-              "channel:read:subscriptions",
               "channel:read:subscriptions"
             ]
           }
@@ -11984,7 +11995,6 @@
         "security": [
           {
             "twitch_auth": [
-              "user:read:subscriptions",
               "user:read:subscriptions"
             ]
           }
@@ -12859,7 +12869,6 @@
           {
             "twitch_auth": [
               "user:read:broadcast",
-              "user:edit:broadcast",
               "user:edit:broadcast"
             ]
           }
@@ -15960,6 +15969,10 @@
               "primary"
             ],
             "default": "primary"
+          },
+          "source-only": {
+            "type": "boolean",
+            "description": "Determines if the chat announcement is sent only to the source channel defined by broadcaster\\_id during a shared chat session. This has no effect if the announcement is not sent sent during a shared chat session. The default value is `false`. NOTE: This parameter can only be set when utilizing an App Access Token. It cannot be specified when a User Access Token is used, and will instead result in an HTTP 400 error."
           }
         }
       },
