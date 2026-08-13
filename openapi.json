@@ -108,7 +108,7 @@
     "/channels/commercial": {
       "post": {
         "summary": "Starts a commercial on the specified channel.",
-        "description": "Starts a commercial on the specified channel.\n\n**NOTE**: Only partners and affiliates may run commercials and they must be streaming live at the time.\n\n**NOTE**: Only the broadcaster may start a commercial; the broadcaster’s editors and moderators may not start commercials on behalf of the broadcaster.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:edit:commercial** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **channel:edit:commercial** scope for the user represented by the `broadcaster_id` query parameter.",
+        "description": "Starts a commercial on the specified channel.\n\n**NOTE**: Only partners and affiliates may run commercials and they must be streaming live at the time.\n\n**NOTE**: Only the broadcaster may start a commercial; the broadcaster’s editors and moderators may not start commercials on behalf of the broadcaster.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:edit:commercial** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **channel:edit:commercial** scope for the user represented by the `broadcaster_id` query parameter.",
         "tags": [
           "Ads"
         ],
@@ -185,7 +185,7 @@
     "/channels/ads": {
       "get": {
         "summary": "Returns ad schedule related information.",
-        "description": "This endpoint returns ad schedule related information, including snooze, when the last ad was run, when the next ad is scheduled, and if the channel is currently in pre-roll free time. Note that a new ad cannot be run until 8 minutes after running a previous ad.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:ads** scope. The user ID associated with the token must match the `broadcaster_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **channel:read:ads** scope for the user represented by the `broadcaster_id` query parameter.",
+        "description": "This endpoint returns ad schedule related information, including snooze, when the last ad was run, when the next ad is scheduled, and if the channel is currently in pre-roll free time. Note that a new ad cannot be run until 8 minutes after running a previous ad.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:read:ads** scope. The user ID associated with the token must match the `broadcaster_id` in the query parameter.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **channel:read:ads** scope for the user represented by the `broadcaster_id` query parameter.",
         "tags": [
           "Ads"
         ],
@@ -237,7 +237,7 @@
             "description": "The broadcaster ID is not valid."
           },
           "500": {
-            "description": ""
+            "description": "An internal server error occurred. Please report this issue on [our issue tracker](https://github.com/twitchdev/issues/)."
           }
         },
         "security": [
@@ -252,7 +252,7 @@
     "/channels/ads/schedule/snooze": {
       "post": {
         "summary": "Pushes back the timestamp of the upcoming automatic mid-roll ad by 5 minutes.",
-        "description": "If available, pushes back the timestamp of the upcoming automatic mid-roll ad by 5 minutes. This endpoint duplicates the snooze functionality in the creator dashboard’s Ads Manager.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:ads** scope. The user ID associated with the token must match the `broadcaster_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **channel:manage:ads** scope for the user represented by the `broadcaster_id` query parameter.",
+        "description": "If available, pushes back the timestamp of the upcoming automatic mid-roll ad by 5 minutes. This endpoint duplicates the snooze functionality in the creator dashboard’s Ads Manager.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:ads** scope. The user ID associated with the token must match the `broadcaster_id` in the query parameter.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **channel:manage:ads** scope for the user represented by the `broadcaster_id` query parameter.",
         "tags": [
           "Ads"
         ],
@@ -304,7 +304,7 @@
             "description": "Channel has no snoozes left."
           },
           "500": {
-            "description": ""
+            "description": "An internal server error occurred. Please report this issue on [our issue tracker](https://github.com/twitchdev/issues/)."
           }
         },
         "security": [
@@ -669,9 +669,6 @@
           },
           "401": {
             "description": "* The Authorization header is required and must specify a user access token.\n* The user access token must include the the **bits:read** scope.\n* The access token is not valid.\n* The ID in the Client-Id header must match the client ID in the access token."
-          },
-          "403": {
-            "description": ""
           }
         },
         "security": [
@@ -782,6 +779,161 @@
         "security": [
           {
             "twitch_auth": []
+          }
+        ]
+      }
+    },
+    "/bits/custom_power_ups": {
+      "get": {
+        "summary": "NEW Gets a list of custom Power-ups that the specified broadcaster created.",
+        "description": "NEW Gets a list of custom Power-ups that the specified broadcaster created.\n\n**NOTE**: A channel may offer a maximum of 50 custom Power-ups, which includes both enabled and disabled Power-ups.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **bits:read** scope.",
+        "tags": [
+          "Bits"
+        ],
+        "externalDocs": {
+          "description": "Get Custom Power-up",
+          "url": "https://dev.twitch.tv/docs/api/reference#get-custom-power-up"
+        },
+        "operationId": "get-custom-power-up",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "The ID of the broadcaster whose custom Power-ups you want to get. This ID must match the user ID found in the OAuth token.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "A list of IDs to filter the Power-ups by. To specify more than one ID, include this parameter for each Power-up you want to get. For example, `id=1234&id=5678`. You may specify a maximum of 50 IDs.  \n  \nDuplicate IDs are ignored. The response contains only the IDs that were found. If none of the IDs were found, the response is 404 Not Found.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "explode": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the broadcaster’s list of custom Power-ups.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCustomPowerUpResponse"
+                },
+                "examples": {
+                  "Example 1": {
+                    "description": "_Request:_\n\nGets the broadcaster’s list of custom Power-ups.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/bits/custom_power_ups?broadcaster_id=274637212'\n-H 'Client-Id: gx2pv4208cff0ig9ou7nk3riccffxt' \\\n-H 'Authorization: Bearer vjxv3i0l4zxru966wsnwji51tmpkj2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "broadcaster_name": "torpedo09",
+                          "broadcaster_login": "torpedo09",
+                          "broadcaster_id": "274637212",
+                          "id": "92af127c-7326-4483-a52b-b0da0be61c02",
+                          "image": null,
+                          "background_color": "#00FF00",
+                          "is_enabled": true,
+                          "bits": 100,
+                          "title": "game analysis",
+                          "prompt": "",
+                          "is_user_input_required": false,
+                          "max_per_stream_setting": {
+                            "is_enabled": false,
+                            "max_per_stream": 0
+                          },
+                          "max_per_user_per_stream_setting": {
+                            "is_enabled": false,
+                            "max_per_user_per_stream": 0
+                          },
+                          "global_cooldown_setting": {
+                            "is_enabled": false,
+                            "global_cooldown_seconds": 0
+                          },
+                          "is_paused": false,
+                          "is_in_stock": true,
+                          "default_image": {
+                            "url_1x": "https://static-cdn.jtvnw.net/twilight-static-assets/Default-Power-up-Line-Lightshade-28x28.png",
+                            "url_2x": "https://static-cdn.jtvnw.net/twilight-static-assets/Default-Power-up-Line-Lightshade-56x56.png",
+                            "url_4x": "https://static-cdn.jtvnw.net/twilight-static-assets/Default-Power-up-Line-Lightshade-112x112.png"
+                          },
+                          "redemptions_redeemed_current_stream": null,
+                          "cooldown_expires_at": null
+                        }
+                      ]
+                    }
+                  },
+                  "Example 2": {
+                    "description": "_Request:_\n\nGets a specific custom Power-up using the id parameter.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/bits/custom_power_ups?broadcaster_id=274637212&id=92af127c-7326-4483-a52b-b0da0be61c02'\n-H 'Client-Id: gx2pv4208cff0ig9ou7nk3riccffxt' \\\n-H 'Authorization: Bearer vjxv3i0l4zxru966wsnwji51tmpkj2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "broadcaster_name": "torpedo09",
+                          "broadcaster_login": "torpedo09",
+                          "broadcaster_id": "274637212",
+                          "id": "92af127c-7326-4483-a52b-b0da0be61c02",
+                          "image": null,
+                          "background_color": "#00FF00",
+                          "is_enabled": true,
+                          "bits": 100,
+                          "title": "game analysis",
+                          "prompt": "",
+                          "is_user_input_required": false,
+                          "max_per_stream_setting": {
+                            "is_enabled": false,
+                            "max_per_stream": 0
+                          },
+                          "max_per_user_per_stream_setting": {
+                            "is_enabled": false,
+                            "max_per_user_per_stream": 0
+                          },
+                          "global_cooldown_setting": {
+                            "is_enabled": false,
+                            "global_cooldown_seconds": 0
+                          },
+                          "is_paused": false,
+                          "is_in_stock": true,
+                          "default_image": {
+                            "url_1x": "https://static-cdn.jtvnw.net/twilight-static-assets/Default-Power-up-Line-Lightshade-28x28.png",
+                            "url_2x": "https://static-cdn.jtvnw.net/twilight-static-assets/Default-Power-up-Line-Lightshade-56x56.png",
+                            "url_4x": "https://static-cdn.jtvnw.net/twilight-static-assets/Default-Power-up-Line-Lightshade-112x112.png"
+                          },
+                          "redemptions_redeemed_current_stream": null,
+                          "cooldown_expires_at": null
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The request exceeds the maximum number of _id_ query parameters that you may specify."
+          },
+          "401": {
+            "description": "* The Authorization header must specify a user access token.\n* The user access token must include the **bits:read** scope.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
+          },
+          "403": {
+            "description": "* The broadcaster is not a partner or affiliate."
+          },
+          "404": {
+            "description": "* All of the custom Power-ups specified using the _id_ query parameter were not found."
+          },
+          "500": {
+            "description": "An internal server error occurred. Please report this issue on [our issue tracker](https://github.com/twitchdev/issues/)."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "bits:read"
+            ]
           }
         ]
       }
@@ -1000,7 +1152,7 @@
             "description": "* The application exceeded the number of calls it may make per minute. For details, see [Rate Limits](https://dev.twitch.tv/docs/api/guide#twitch-rate-limits)."
           },
           "500": {
-            "description": ""
+            "description": "An internal server error occurred. Please report this issue on [our issue tracker](https://github.com/twitchdev/issues/)."
           }
         },
         "security": [
@@ -1074,7 +1226,7 @@
             "description": "Successfully updated the channel’s properties.\n\n__Examples__\n\n_Request:_\n\n```bash\ncurl -X PATCH 'https://api.twitch.tv/helix/channels?broadcaster_id=41245072' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \\\n-H 'Content-Type: application/json' \\\n--data-raw '{\"game_id\":\"33214\", \"title\":\"there are helicopters in the game? REASON TO PLAY FORTNITE found\", \"broadcaster_language\":\"en\", \"tags\":[\"LevelingUp\"]}'\n```\n\nSet CCLs for a Channel\n\n```bash\ncurl -X PATCH\n'https://api.twitch.tv/helix/channels?broadcaster_id=41245072' \\\n-H 'Authorization: Bearer 2gbdx6oar67tqtcmt49t3wpcgycthx' \\\n-H 'Client-Id: wbmytr93xzw8zbg0p1izqyzzc5mbiz' \\\n-H 'Content-Type: application/json' \\\n--data-raw '{ \n    \"game_id\": \"SomeGameID\",\n    \"content_classification_labels\": [\n       {\"id\": \"Gambling\", \"is_enabled\": true}, \n       {\"id\": \"DrugsIntoxication\", \"is_enabled\": false}  \n     ],\n    \"is_branded_content\": true\n}'\n```"
           },
           "400": {
-            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The request must update at least one property.\n* The `title` field may not contain an empty string.\n* The ID in `game_id` is not valid.\n* To update the `delay` field, the broadcaster must have partner status.\n* The list in the `tags` field exceeds the maximum number of tags allowed.\n* A tag in the `tags` field exceeds the maximum length allowed.\n* A tag in the `tags` field is empty.\n* A tag in the `tags` field contains special characters or spaces.\n* One or more tags in the `tags` field failed AutoMod review.\n* Game restricted for user's age and region"
+            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The request must update at least one property.\n* The `title` field may not contain an empty string.\n* The ID in `game_id` is not valid.\n* To update the `delay` field, the broadcaster must have partner status.\n* The list in the `tags` field exceeds the maximum number of tags allowed.\n* A tag in the `tags` field exceeds the maximum length allowed.\n* A tag in the `tags` field is empty.\n* A tag in the `tags` field contains special characters or spaces.\n* One or more tags in the `tags` field failed AutoMod review.\n* Game restricted for user's age and region\n* Title exceeds the 140 character limit."
           },
           "401": {
             "description": "* User requests CCL for a channel they don’t own\n* The ID in _broadcaster\\_id_ must match the user ID found in the OAuth token.\n* The Authorization header is required and must specify a user access token.\n* The OAuth token must include the **channel:manage:broadcast** scope.\n* The OAuth token is not valid.\n* The ID in the Client-Id header must match the Client ID in the OAuth token."
@@ -1484,7 +1636,7 @@
             "description": "* The broadcaster is not a partner or affiliate."
           },
           "500": {
-            "description": ""
+            "description": "An internal server error occurred. Please report this issue on [our issue tracker](https://github.com/twitchdev/issues/)."
           }
         },
         "security": [
@@ -1543,7 +1695,7 @@
             "description": "* The custom reward specified in the _id_ query parameter was not found."
           },
           "500": {
-            "description": ""
+            "description": "An internal server error occurred. Please report this issue on [our issue tracker](https://github.com/twitchdev/issues/)."
           }
         },
         "security": [
@@ -1746,7 +1898,7 @@
             "description": "* All of the custom rewards specified using the _id_ query parameter were not found."
           },
           "500": {
-            "description": ""
+            "description": "An internal server error occurred. Please report this issue on [our issue tracker](https://github.com/twitchdev/issues/)."
           }
         },
         "security": [
@@ -1922,7 +2074,7 @@
             "description": "* The custom reward specified in the _id_ query parameter was not found."
           },
           "500": {
-            "description": ""
+            "description": "An internal server error occurred. Please report this issue on [our issue tracker](https://github.com/twitchdev/issues/)."
           }
         },
         "security": [
@@ -2222,7 +2374,7 @@
             "description": "* The custom reward specified in the _reward\\_id_ query parameter was not found.\n* The redemptions specified using the _id_ query parameter were not found or their statuses weren't marked as UNFULFILLED."
           },
           "500": {
-            "description": ""
+            "description": "An internal server error occurred. Please report this issue on [our issue tracker](https://github.com/twitchdev/issues/)."
           }
         },
         "security": [
@@ -2425,7 +2577,7 @@
     "/chat/chatters": {
       "get": {
         "summary": "Gets the list of users that are connected to the broadcaster’s chat session.",
-        "description": "Gets the list of users that are connected to the broadcaster’s chat session.\n\n**NOTE**: There is a delay between when users join and leave a chat and when the list is updated accordingly.\n\nTo determine whether a user is a moderator or VIP, use the [Get Moderators](https://dev.twitch.tv/docs/api/reference#get-moderators) and [Get VIPs](https://dev.twitch.tv/docs/api/reference#get-vips) endpoints. You can check the roles of up to 100 users.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:chatters** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:chatters** scope for the user represented by the `moderator_id` query parameter.",
+        "description": "Gets the list of users that are connected to the broadcaster’s chat session.\n\n**NOTE**: There is a delay between when users join and leave a chat and when the list is updated accordingly.\n\nTo determine whether a user is a moderator or VIP, use the [Get Moderators](https://dev.twitch.tv/docs/api/reference#get-moderators) and [Get VIPs](https://dev.twitch.tv/docs/api/reference#get-vips) endpoints. You can check the roles of up to 100 users.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:chatters** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:chatters** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Chat"
         ],
@@ -3000,7 +3152,7 @@
       },
       "patch": {
         "summary": "Updates the broadcaster’s chat settings.",
-        "description": "Updates the broadcaster’s chat settings.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_settings** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:chat\\_settings** scope for the user represented by the `moderator_id` query parameter.\n\n__Request Body:__\n\nAll fields are optional. Specify only those fields that you want to update.\n\nTo set the `slow_mode_wait_time` or `follower_mode_duration` field to its default value, set the corresponding `slow_mode` or `follower_mode` field to **true** (and don’t include the `slow_mode_wait_time` or `follower_mode_duration` field).\n\nTo set the `slow_mode_wait_time`, `follower_mode_duration`, or `non_moderator_chat_delay_duration` field’s value, you must set the corresponding `slow_mode`, `follower_mode`, or `non_moderator_chat_delay` field to **true**.\n\nTo remove the `slow_mode_wait_time`, `follower_mode_duration`, or `non_moderator_chat_delay_duration` field’s value, set the corresponding `slow_mode`, `follower_mode`, or `non_moderator_chat_delay` field to **false** (and don’t include the `slow_mode_wait_time`, `follower_mode_duration`, or `non_moderator_chat_delay_duration` field).",
+        "description": "Updates the broadcaster’s chat settings.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_settings** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:chat\\_settings** scope for the user represented by the `moderator_id` query parameter.\n\n__Request Body:__\n\nAll fields are optional. Specify only those fields that you want to update.\n\nTo set the `slow_mode_wait_time` or `follower_mode_duration` field to its default value, set the corresponding `slow_mode` or `follower_mode` field to **true** (and don’t include the `slow_mode_wait_time` or `follower_mode_duration` field).\n\nTo set the `slow_mode_wait_time`, `follower_mode_duration`, or `non_moderator_chat_delay_duration` field’s value, you must set the corresponding `slow_mode`, `follower_mode`, or `non_moderator_chat_delay` field to **true**.\n\nTo remove the `slow_mode_wait_time`, `follower_mode_duration`, or `non_moderator_chat_delay_duration` field’s value, set the corresponding `slow_mode`, `follower_mode`, or `non_moderator_chat_delay` field to **false** (and don’t include the `slow_mode_wait_time`, `follower_mode_duration`, or `non_moderator_chat_delay_duration` field).",
         "tags": [
           "Chat"
         ],
@@ -3107,8 +3259,8 @@
     },
     "/shared_chat/session": {
       "get": {
-        "summary": "NEW Retrieves the active shared chat session for a channel.",
-        "description": "NEW Retrieves the active shared chat session for a channel.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/cli/token-command/#app-access-token) or [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).",
+        "summary": "Retrieves the active shared chat session for a channel.",
+        "description": "Retrieves the active shared chat session for a channel.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/cli/token-command/#app-access-token) or [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).",
         "tags": [
           "Chat"
         ],
@@ -3280,7 +3432,7 @@
     "/chat/announcements": {
       "post": {
         "summary": "Sends an announcement to the broadcaster’s chat room.",
-        "description": "Sends an announcement to the broadcaster’s chat room.\n\n**Rate Limits**: One announcement may be sent every 2 seconds.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:announcements** scope.",
+        "description": "Sends an announcement to the broadcaster’s chat room.\n\n**Rate Limits**: One announcement may be sent every 2 seconds.**NOTE:** When sending announcements during a Shared Chat session, behaviors differ depending on your authentication token type:\n\n* When using an _App Access Token_, announcements will only be sent to the source channel (defined by the `broadcaster_id` parameter) by default. Announcements can be sent to all channels by using the `for_source_only` parameter and setting it to `false`.\n* When using a _User Access Token_, announcements will be sent to all channels in the shared chat session, including the source channel. This behavior cannot be changed with this token type.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:announcements** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through prior authorizations, has:  \n    \n* The **moderator:manage:announcements** and **user:bot** scopes for the user represented by the `moderator_id` in the query parameter, and  \n* The **channel:bot** scope for the user represented by the `broadcaster_id` query parameter.",
         "tags": [
           "Chat"
         ],
@@ -3302,7 +3454,7 @@
           {
             "name": "moderator_id",
             "in": "query",
-            "description": "The ID of a user who has permission to moderate the broadcaster’s chat room, or the broadcaster’s ID if they’re sending the announcement. This ID must match the user ID in the user access token.",
+            "description": "The ID of a user who has permission to moderate the broadcaster’s chat room, or the broadcaster’s ID if they’re sending the announcement.",
             "schema": {
               "type": "string"
             },
@@ -3316,12 +3468,19 @@
                 "$ref": "#/components/schemas/SendChatAnnouncementBody"
               },
               "examples": {
-                "Example": {
+                "Example 1": {
                   "value": {
                     "message": "Hello chat!",
                     "color": "purple"
                   },
                   "description": "Sends an announcement to the broadcaster’s chat room."
+                },
+                "Example 2": {
+                  "value": {
+                    "message": "Hello chat!",
+                    "color": "purple"
+                  },
+                  "description": "Sends an announcement to the source channel only (default for app tokens)."
                 }
               }
             }
@@ -3329,13 +3488,13 @@
         },
         "responses": {
           "204": {
-            "description": "Successfully sent the announcement.\n\n__Examples__\n\n_Request:_\n\nSends an announcement to the broadcaster’s chat room.\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/chat/announcements?broadcaster_id=11111&moderator_id=44444' \\\n-H 'Authorization: Bearer kpvy3cjboyptmdkiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t' \\\n-H 'Content-Type: application/json' \\\n-d '{\"message\":\"Hello chat!\",\"color\":\"purple\"}'\n```"
+            "description": "Successfully sent the announcement.\n\n__Examples__\n\n_Request:_\n\nSends an announcement to the broadcaster’s chat room.\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/chat/announcements?broadcaster_id=11111&moderator_id=44444' \\\n-H 'Authorization: Bearer kpvy3cjboyptmdkiacwr0c19hotn5s' \\\n-H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t' \\\n-H 'Content-Type: application/json' \\\n-d '{\"message\":\"Hello chat!\",\"color\":\"purple\"}'\n```\n\n_Request:_\n\nSends an announcement to the source channel only (default for app tokens).\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/chat/announcements?broadcaster_id=11111&moderator_id=44444' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: hof5gwx0su6owfnys0nyan9c87zr6t' \\\n-H 'Content-Type: application/json' \\\n-d '{\"message\":\"Hello chat!\",\"color\":\"purple\"}'\n```"
           },
           "400": {
-            "description": "* The `message` field in the request's body is required.\n* The `message` field may not contain an empty string.\n* The string in the `message` field failed review.\n* The specified color is not valid."
+            "description": "* The `message` field in the request's body is required.\n* The `message` field may not contain an empty string.\n* The string in the `message` field failed review.\n* The specified color is not valid.\n* Cannot set `for_source_only` if User Access Token is used."
           },
           "401": {
-            "description": "* The Authorization header is required and must contain a user access token.\n* The user access token is missing the **moderator:manage:announcements** scope.\n* The OAuth token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token."
+            "description": "* The Authorization header is required and must contain an access token.\n* The user access token is missing the **moderator:manage:announcements** scope.\n* The OAuth token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token.\n* The sender must have authorized the app with the **moderator:manage:announcements** and **user:bot** scopes.\n* The broadcaster must have authorized the app with the **channel:bot** scope."
           },
           "429": {
             "description": "The sender has exceeded the number of announcements they may send to this **broadcaster\\_id** within a given window."
@@ -3344,7 +3503,9 @@
         "security": [
           {
             "twitch_auth": [
-              "moderator:manage:announcements"
+              "moderator:manage:announcements",
+              "user:bot",
+              "channel:bot"
             ]
           }
         ]
@@ -3353,7 +3514,7 @@
     "/chat/shoutouts": {
       "post": {
         "summary": "Sends a Shoutout to the specified broadcaster.",
-        "description": "Sends a Shoutout to the specified broadcaster. Typically, you send Shoutouts when you or one of your moderators notice another broadcaster in your chat, the other broadcaster is coming up in conversation, or after they raid your broadcast.\n\nTwitch’s Shoutout feature is a great way for you to show support for other broadcasters and help them grow. Viewers who do not follow the other broadcaster will see a pop-up Follow button in your chat that they can click to follow the other broadcaster. [Learn More](https://help.twitch.tv/s/article/shoutouts)\n\n**Rate Limits**: The broadcaster may send a Shoutout once every 2 minutes. They may send the same broadcaster a Shoutout once every 60 minutes.\n\nTo receive notifications when a Shoutout is sent or received, subscribe to the [channel.shoutout.create](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshoutoutcreate) and [channel.shoutout.receive](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshoutoutreceive) subscription types. The **channel.shoutout.create** event includes cooldown periods that indicate when the broadcaster may send another Shoutout without exceeding the endpoint’s rate limit.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:shoutouts** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through prior authorizations, has:  \n    \n* The **channel:bot** scope for the user represented by the `broadcaster_id` query parameter, and  \n* The **moderator:manage:shoutouts** and **user:bot** scopes for the user represented by the `moderator_id` in the query parameter.",
+        "description": "Sends a Shoutout to the specified broadcaster. Typically, you send Shoutouts when you or one of your moderators notice another broadcaster in your chat, the other broadcaster is coming up in conversation, or after they raid your broadcast.\n\nTwitch’s Shoutout feature is a great way for you to show support for other broadcasters and help them grow. Viewers who do not follow the other broadcaster will see a pop-up Follow button in your chat that they can click to follow the other broadcaster. [Learn More](https://help.twitch.tv/s/article/shoutouts)\n\n**Rate Limits**: The broadcaster may send a Shoutout once every 2 minutes. They may send the same broadcaster a Shoutout once every 60 minutes.\n\nTo receive notifications when a Shoutout is sent or received, subscribe to the [channel.shoutout.create](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshoutoutcreate) and [channel.shoutout.receive](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshoutoutreceive) subscription types. The **channel.shoutout.create** event includes cooldown periods that indicate when the broadcaster may send another Shoutout without exceeding the endpoint’s rate limit.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:shoutouts** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through prior authorizations, has:  \n    \n* The **moderator:manage:shoutouts** and **user:bot** scopes for the user represented by the `moderator_id` in the query parameter, and  \n* The **channel:bot** scope for the user represented by the `broadcaster_id` query parameter.",
         "tags": [
           "Chat"
         ],
@@ -3412,8 +3573,8 @@
           {
             "twitch_auth": [
               "moderator:manage:shoutouts",
-              "channel:bot",
-              "user:bot"
+              "user:bot",
+              "channel:bot"
             ]
           }
         ]
@@ -3422,7 +3583,7 @@
     "/chat/messages": {
       "post": {
         "summary": "Sends a message to the broadcaster’s chat room.",
-        "description": "Sends a message to the broadcaster’s chat room.\n\n**NOTE:** When sending messages to a Shared Chat session, behaviors differ depending on your authentication token type:\n\n* When using an _App Access Token_, messages will only be sent to the source channel (defined by the `broadcaster_id` parameter) by default starting on May 19, 2025\\. Messages can be sent to all channels by using the `for_source_only` parameter and setting it to `false`.\n* When using a _User Access Token_, messages will be sent to all channels in the shared chat session, including the source channel. This behavior cannot be changed with this token type.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the `user:write:chat` scope. If app access token used, then additionally requires `user:bot` scope from chatting user, and either `channel:bot` scope from broadcaster or moderator status.",
+        "description": "Sends a message to the broadcaster’s chat room.\n\n**NOTE:** When sending messages to a Shared Chat session, behaviors differ depending on your authentication token type:\n\n* When using an _App Access Token_, messages will only be sent to the source channel (defined by the `broadcaster_id` parameter) by default starting on May 19, 2025\\. Messages can be sent to all channels by using the `for_source_only` parameter and setting it to `false`.\n* When using a _User Access Token_, messages will be sent to all channels in the shared chat session, including the source channel. This behavior cannot be changed with this token type.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:write:chat** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has:  \n    \n* The **user:write:chat** scope and the **user:bot** scope for the user represented by the `sender_id` query parameter, and  \n* The **channel:bot** scope for the user represented by the `broadcaster_id` query parameter, unless the user represented by the `sender_id` already has moderator status.",
         "tags": [
           "Chat"
         ],
@@ -3475,22 +3636,379 @@
             }
           },
           "400": {
-            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The ID in the _broadcaster\\_id_ query parameter is not valid.\n* The _sender\\_id_ query parameter is required.\n* The ID in the _sender\\_id_ query parameter is not valid.\n* The _text_ query parameter is required.\n* The ID in the _reply\\_parent\\_message\\_id_ query parameter is not valid.\n* Cannot set \\*for\\_source\\_only\\* if User Access Token is used."
+            "description": "* The _broadcaster\\_id_ query parameter is required.\n* The ID in the _broadcaster\\_id_ query parameter is not valid.\n* The _sender\\_id_ query parameter is required.\n* The ID in the _sender\\_id_ query parameter is not valid.\n* The _text_ query parameter is required.\n* The ID in the _reply\\_parent\\_message\\_id_ query parameter is not valid.\n* Cannot set \\*for\\_source\\_only\\* if User Access Token is used.\n* The _reply\\_parent\\_message\\_id_ parameter is not supported when _pin_ is true.\n* The _for\\_source\\_only_ parameter is not supported when _pin_ is true."
           },
           "401": {
-            "description": "* The ID in the user\\_id query parameter must match the user ID in the access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the user:write:chat scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
+            "description": "* The ID in the user\\_id query parameter must match the user ID in the access token.\n* The Authorization header is required and must contain a user access token.\n* The user access token must include the user:write:chat scope.\n* Pinning requires the **moderator:manage:chat\\_messages** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
           },
           "403": {
             "description": "The sender is not permitted to send chat messages to the broadcaster’s chat room."
           },
           "422": {
             "description": "The message is too large."
+          },
+          "429": {
+            "description": "The rate limit has been exceeded."
           }
         },
         "security": [
           {
             "twitch_auth": [
               "user:write:chat",
+              "user:bot",
+              "channel:bot"
+            ]
+          }
+        ]
+      }
+    },
+    "/chat/pins": {
+      "get": {
+        "summary": "NEW Gets the currently pinned message for the broadcaster’s chat room.",
+        "description": "NEW Gets the currently pinned message for the specified broadcaster’s chat room, including message fragments. Only one mod-pinned message can be active per channel at a time.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_messages** or **moderator:read:chat\\_messages** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has:  \n    \n* The **moderator:manage:chat\\_messages** or **moderator:read:chat\\_messages** scope, and the **user:bot** scope for the user represented by the `moderator_id` query parameter, and  \n* The **channel:bot** scope for the user represented by the `broadcaster_id` query parameter.",
+        "tags": [
+          "Chat"
+        ],
+        "externalDocs": {
+          "description": "Get Pinned Chat Message",
+          "url": "https://dev.twitch.tv/docs/api/reference#get-pinned-chat-message"
+        },
+        "operationId": "get-pinned-chat-message",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "The ID of the broadcaster that owns the chat room.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "moderator_id",
+            "in": "query",
+            "description": "The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved pinned message(s).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetPinnedChatMessageResponse"
+                },
+                "examples": {
+                  "Example": {
+                    "description": "_Request:_\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/chat/pins?broadcaster_id=197886470&moderator_id=141981764' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "value": {
+                      "data": [
+                        {
+                          "message_id": "abc-def-123-456",
+                          "broadcaster_id": "197886470",
+                          "sender_user_id": "12826",
+                          "sender_user_login": "twitch",
+                          "sender_user_name": "Twitch",
+                          "pinned_by_user_id": "141981764",
+                          "pinned_by_user_login": "twitchdev",
+                          "pinned_by_user_name": "TwitchDev",
+                          "message": {
+                            "text": "Welcome! bleedPurple Type !rules",
+                            "fragments": [
+                              {
+                                "type": "text",
+                                "text": "Welcome! ",
+                                "cheermote": null,
+                                "emote": null,
+                                "mention": null
+                              },
+                              {
+                                "type": "emote",
+                                "text": "bleedPurple",
+                                "cheermote": null,
+                                "emote": {
+                                  "id": "62835",
+                                  "emote_set_id": "0",
+                                  "owner_id": "0",
+                                  "format": [
+                                    "static"
+                                  ]
+                                },
+                                "mention": null
+                              },
+                              {
+                                "type": "text",
+                                "text": " Type !rules",
+                                "cheermote": null,
+                                "emote": null,
+                                "mention": null
+                              }
+                            ]
+                          },
+                          "starts_at": "2026-05-06T12:30:00Z",
+                          "ends_at": "2026-05-06T12:35:00Z",
+                          "updated_at": "2026-05-06T12:30:00Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A required query parameter is missing."
+          },
+          "401": {
+            "description": "* The Authorization header is required and must specify a user access token or app access token.\n* The access token must include the **moderator:manage:chat\\_messages** or **moderator:read:chat\\_messages** scope."
+          },
+          "403": {
+            "description": "The user does not have permission to moderate the broadcaster’s chat room."
+          },
+          "500": {
+            "description": "An unexpected error occurred."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderator:manage:chat_messages",
+              "moderator:read:chat_messages",
+              "user:bot",
+              "channel:bot"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "summary": "NEW Pins a chat message to the specified broadcaster’s chat room.",
+        "description": "NEW Pins a chat message to the top of the specified broadcaster’s chat room. Only one mod-pinned message can be active per channel at a time. If a mod-pinned message already exists, it is automatically replaced.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_messages** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has:  \n    \n* The **moderator:manage:chat\\_messages** and **user:bot** scopes for the user represented by the `moderator_id` query parameter, and  \n* The **channel:bot** scope for the user represented by the `broadcaster_id` query parameter.",
+        "tags": [
+          "Chat"
+        ],
+        "externalDocs": {
+          "description": "Pin Chat Message",
+          "url": "https://dev.twitch.tv/docs/api/reference#pin-chat-message"
+        },
+        "operationId": "pin-chat-message",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "The ID of the broadcaster that owns the chat room.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "moderator_id",
+            "in": "query",
+            "description": "The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "message_id",
+            "in": "query",
+            "description": "The ID of the message to pin.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "duration_seconds",
+            "in": "query",
+            "description": "The number of seconds the message should be pinned for. Minimum: 30\\. Maximum: 1800\\. If not specified, the message will be pinned until the stream ends.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully pinned the message.\n\n__Examples__\n\n_Request:_\n\n```bash\ncurl -X PUT 'https://api.twitch.tv/helix/chat/pins?broadcaster_id=197886470&moderator_id=141981764&message_id=abc-def-123&duration_seconds=300' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+          },
+          "400": {
+            "description": "* A required query parameter is missing or invalid.\n* The _duration\\_seconds_ value is invalid."
+          },
+          "401": {
+            "description": "* The Authorization header is required and must specify a user access token or app access token.\n* The access token must include the **moderator:manage:chat\\_messages** scope."
+          },
+          "403": {
+            "description": "The user does not have permission to pin messages in this channel."
+          },
+          "404": {
+            "description": "The specified message was not found."
+          },
+          "409": {
+            "description": "The message is already pinned."
+          },
+          "429": {
+            "description": "The rate limit for pinning messages has been exceeded."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderator:manage:chat_messages",
+              "user:bot",
+              "channel:bot"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "summary": "NEW Updates the duration of a pinned chat message.",
+        "description": "NEW Updates the duration of an existing pinned chat message.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_messages** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has:  \n    \n* The **moderator:manage:chat\\_messages** and **user:bot** scopes for the user represented by the `moderator_id` query parameter, and  \n* The **channel:bot** scope for the user represented by the `broadcaster_id` query parameter.",
+        "tags": [
+          "Chat"
+        ],
+        "externalDocs": {
+          "description": "Update Pinned Chat Message",
+          "url": "https://dev.twitch.tv/docs/api/reference#update-pinned-chat-message"
+        },
+        "operationId": "update-pinned-chat-message",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "The ID of the broadcaster that owns the chat room.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "moderator_id",
+            "in": "query",
+            "description": "The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "message_id",
+            "in": "query",
+            "description": "The ID of the pinned message to update.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "duration_seconds",
+            "in": "query",
+            "description": "The new number of seconds the message should remain pinned, starting from now. Minimum: 30\\. Maximum: 1800\\. If not specified, the message will be pinned until the stream ends.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully updated the pinned message.\n\n__Examples__\n\n_Request:_\n\n```bash\ncurl -X PATCH 'https://api.twitch.tv/helix/chat/pins?broadcaster_id=197886470&moderator_id=141981764&message_id=789-xyz&duration_seconds=600' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+          },
+          "400": {
+            "description": "* A required query parameter is missing or invalid.\n* The _duration\\_seconds_ value is invalid."
+          },
+          "401": {
+            "description": "* The Authorization header is required and must specify a user access token or app access token.\n* The access token must include the **moderator:manage:chat\\_messages** scope."
+          },
+          "403": {
+            "description": "The user does not have permission to update pinned messages in this channel."
+          },
+          "404": {
+            "description": "The specified pinned message was not found."
+          },
+          "429": {
+            "description": "The rate limit for updating pinned messages has been exceeded."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderator:manage:chat_messages",
+              "user:bot",
+              "channel:bot"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "summary": "NEW Unpins a pinned chat message from the broadcaster’s chat room.",
+        "description": "NEW Unpins a pinned chat message from the specified broadcaster’s chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_messages** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has:  \n    \n* The **moderator:manage:chat\\_messages** and **user:bot** scopes for the user represented by the `moderator_id` query parameter, and  \n* The **channel:bot** scope for the user represented by the `broadcaster_id` query parameter.",
+        "tags": [
+          "Chat"
+        ],
+        "externalDocs": {
+          "description": "Unpin Chat Message",
+          "url": "https://dev.twitch.tv/docs/api/reference#unpin-chat-message"
+        },
+        "operationId": "unpin-chat-message",
+        "parameters": [
+          {
+            "name": "broadcaster_id",
+            "in": "query",
+            "description": "The ID of the broadcaster that owns the chat room.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "moderator_id",
+            "in": "query",
+            "description": "The ID of the broadcaster or a user that has permission to moderate the broadcaster’s chat room.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "message_id",
+            "in": "query",
+            "description": "The ID of the message to unpin.",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully unpinned the message.\n\n__Examples__\n\n_Request:_\n\n```bash\ncurl -X DELETE 'https://api.twitch.tv/helix/chat/pins?broadcaster_id=197886470&moderator_id=141981764&message_id=789-xyz' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+          },
+          "400": {
+            "description": "A required query parameter is missing."
+          },
+          "401": {
+            "description": "* The Authorization header is required and must specify a user access token or app access token.\n* The access token must include the **moderator:manage:chat\\_messages** scope."
+          },
+          "403": {
+            "description": "The user does not have permission to unpin messages in this channel."
+          },
+          "404": {
+            "description": "The specified pinned message was not found."
+          },
+          "429": {
+            "description": "The rate limit for unpinning messages has been exceeded."
+          }
+        },
+        "security": [
+          {
+            "twitch_auth": [
+              "moderator:manage:chat_messages",
               "user:bot",
               "channel:bot"
             ]
@@ -3641,7 +4159,7 @@
     "/clips": {
       "post": {
         "summary": "Creates a clip from the broadcaster’s stream.",
-        "description": "Creates a clip from the broadcaster’s stream.\n\nThis API captures up to 90 seconds of the broadcaster’s stream. The 90 seconds spans the point in the stream from when you called the API. For example, if you call the API at the 4:00 minute mark, the API captures from approximately the 2:35 mark to approximately the 4:05 minute mark. Twitch tries its best to capture 90 seconds of the stream, but the actual length may be less. This may occur if you begin capturing the clip near the beginning or end of the stream.\n\nBy default, Twitch publishes up to the last 30 seconds of the 90 seconds window and provides a default title for the clip. To specify the title and the portion of the 90 seconds window that’s used for the clip, use the URL in the response’s `edit_url` field. You can specify a clip that’s from 5 seconds to 60 seconds in length. The URL is valid for up to 24 hours or until the clip is published, whichever comes first.\n\nCreating a clip is an asynchronous process that can take a short amount of time to complete. To determine whether the clip was successfully created, call [Get Clips](https://dev.twitch.tv/docs/api/reference#get-clips) using the clip ID that this request returned. If Get Clips returns the clip, the clip was successfully created. If after 15 seconds Get Clips hasn’t returned the clip, assume it failed.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **clips:edit** scope.",
+        "description": "Creates a clip from the broadcaster’s stream.\n\nThis API captures up to 90 seconds of the broadcaster’s stream. The 90 seconds spans the point in the stream from when you called the API. For example, if you call the API at the 4:00 minute mark, the API captures from approximately the 2:35 mark to approximately the 4:05 minute mark. Twitch tries its best to capture 90 seconds of the stream, but the actual length may be less. This may occur if you begin capturing the clip near the beginning or end of the stream.\n\nBy default, Twitch publishes up to the last 30 seconds of the 90 seconds window and provides a default title for the clip. To specify the title and the portion of the 90 seconds window that’s used for the clip, use the URL in the response’s `edit_url` field. You can specify a clip that’s from 5 seconds to 60 seconds in length. The URL is valid for up to 24 hours or until the clip is published, whichever comes first.\n\nCreating a clip is an asynchronous process that can take a short amount of time to complete. To determine whether the clip was successfully created, call [Get Clips](https://dev.twitch.tv/docs/api/reference#get-clips) using the clip ID that this request returned. If Get Clips returns the clip, the clip was successfully created. If after 60 seconds Get Clips hasn’t returned the clip, assume it failed.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **clips:edit** scope.",
         "tags": [
           "Clips"
         ],
@@ -3902,7 +4420,7 @@
     },
     "/videos/clips": {
       "post": {
-        "summary": "NEW  Creates a clip from the broadcaster’s VOD.",
+        "summary": "NEW Creates a clip from the broadcaster’s VOD.",
         "description": "NEW Creates a clip from a broadcaster’s VOD on behalf of the broadcaster or an editor of the channel. Since a live stream is actively creating a VOD, this endpoint can also be used to create a clip from earlier in the current stream.\n\nThe duration of a clip can be from 5 seconds to 60 seconds in length, with a default of 30 seconds if not specified.\n\n`vod_offset` indicates where the clip will end. In other words, the clip will start at (`vod_offset` \\- `duration`) and end at `vod_offset`. This means that the value of `vod_offset` must greater than or equal to the value of `duration`.\n\nThe URL in the response’s `edit_url` field allows you to edit the clip’s title, feature the clip, create a portrait version of the clip, download the clip media, and share the clip directly to social platforms.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **editor:manage:clips** or **channel:manage:clips** scope.",
         "tags": [
           "Clips"
@@ -3943,7 +4461,7 @@
           {
             "name": "vod_offset",
             "in": "query",
-            "description": "Offset in the VOD to create the clip. See notes above.",
+            "description": "The zero-based offset, in seconds, to where the clip should end in the video (VOD). See this endpoint’s description for more information on how to use this parameter.",
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -3979,7 +4497,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/videos/clips?broadcaster_id=141981764&editor_id=12826&vod_id=2277656159' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "description": "_Request:_\n\n```bash\ncurl -X POST 'https://api.twitch.tv/helix/videos/clips?broadcaster_id=141981764&editor_id=12826&vod_id=2277656159&vod_offset=434&title=Standard%20Output' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
                     "value": {
                       "data": [
                         {
@@ -4019,7 +4537,7 @@
     "/clips/downloads": {
       "get": {
         "summary": "NEW Provides URLs to download the video file(s) for the specified clips.",
-        "description": "NEW Provides URLs to download the video file(s) for the specified clips. For information about clips, see [How to use clips](https://help.twitch.tv/s/article/how-to-use-clips).\n\n**Rate Limits**: Limited to 100 requests per minute.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the `editor:manage:clips` or `channel:manage:clips` scope.",
+        "description": "NEW Provides URLs to download the video file(s) for the specified clips. For information about clips, see [How to use clips](https://help.twitch.tv/s/article/how-to-use-clips). These links are temporary and should have a long-term expectation to expire.\n\n**Rate Limits**: Limited to 100 requests per minute.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) or [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the `editor:manage:clips` or `channel:manage:clips` scope.",
         "tags": [
           "Clips"
         ],
@@ -4464,7 +4982,7 @@
       },
       "patch": {
         "summary": "Updates shard(s) for a conduit.",
-        "description": "Updates shard(s) for a [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/).\n\n**NOTE:** Shard IDs are indexed starting at 0, so a conduit with a `shard_count` of 5 will have shards with IDs 0 through 4.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).",
+        "description": "Updates shard(s) for a [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/). You can update up to 100 shards in a single request.\n\n**NOTE:** Shard IDs are indexed starting at 0, so a conduit with a `shard_count` of 5 will have shards with IDs 0 through 4.\n\n__Authorization:__\n\nRequires an [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens).",
         "tags": [
           "Conduits"
         ],
@@ -4517,7 +5035,7 @@
         },
         "responses": {
           "202": {
-            "description": "Successfully retrieved shards.",
+            "description": "Successfully updated shards.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4559,13 +5077,13 @@
             }
           },
           "400": {
-            "description": "The id query parameter is required."
+            "description": "* The \\`conduit\\_id\\` query parameter is required."
           },
           "401": {
-            "description": "Authorization header required with an app access token."
+            "description": "Authorization header requires using an App Access Token for this request."
           },
           "404": {
-            "description": "* Conduit not found.\n* Conduit’s owner must match the client ID in the access token."
+            "description": "* The specified `conduit_id` does not exist.\n* Conduit's owner must match the Client ID in the access token."
           }
         },
         "security": [
@@ -4800,7 +5318,7 @@
             "description": "* The organization associated with the client in the access token must own the game specified in the _game\\_id_ query parameter.\n* The organization associated with the client in the access token must own the entitlements specified in the _id_ query parameter."
           },
           "500": {
-            "description": ""
+            "description": "An internal server error occurred. Please report this issue on [our issue tracker](https://github.com/twitchdev/issues/)."
           }
         },
         "security": [
@@ -4888,7 +5406,7 @@
             "description": "* The Authorization header is required and must specify an app access token or user access token.\n* The access token is not valid.\n* The ID in the Client-Id header must match the Client ID in the access token."
           },
           "500": {
-            "description": ""
+            "description": "An internal server error occurred. Please report this issue on [our issue tracker](https://github.com/twitchdev/issues/)."
           }
         },
         "security": [
@@ -5144,6 +5662,9 @@
           },
           "401": {
             "description": "* The Authorization header is required and must specify a JWT token.\n* The JWT token is not valid.\n* The Client-Id header is required."
+          },
+          "403": {
+            "description": "* The channel found in the JWT provided is not the same as the channel specfieid in `broadcaster_id`\n* JWT could not be verified"
           },
           "422": {
             "description": "* The message is too large."
@@ -5915,7 +6436,7 @@
                       "data": [
                         {
                           "id": "26b1c993-bfcf-44d9-b876-379dacafe75a",
-                          "status": "webhook_callback_verification_pending",
+                          "status": "enabled",
                           "type": "user.update",
                           "version": "1",
                           "condition": {
@@ -5923,8 +6444,9 @@
                           },
                           "created_at": "2020-11-10T14:32:18.730260295Z",
                           "transport": {
-                            "method": "webhook",
-                            "callback": "https://this-is-a-callback.com"
+                            "method": "websocket",
+                            "session_id": "AgoQD6Q1d5Q6TpaD6JknqX2a0hIGY2VsbC1z",
+                            "connected_at": "2026-06-17T18:32:27Z"
                           },
                           "cost": 1
                         }
@@ -5973,7 +6495,10 @@
             "description": "The access token is missing the required scopes."
           },
           "409": {
-            "description": "A subscription already exists for the specified event type and `condition` combination."
+            "description": "A subscription already exists for the specified event type and `condition` combination. The `id` value in the error response represents the existing EventSub subscription."
+          },
+          "410": {
+            "description": "The subscription type and version combination has been removed and can no longer be subscribed to."
           },
           "429": {
             "description": "The request exceeds the number of subscriptions that you may create with the same combination of `type` and `condition` values."
@@ -6031,7 +6556,7 @@
       },
       "get": {
         "summary": "Gets a list of EventSub subscriptions that the client in the access token created.",
-        "description": "Gets a list of EventSub subscriptions that the client in the access token created.\n\n__Authorization:__\n\nIf you use [Webhooks](https://dev.twitch.tv/docs/eventsub/handling-webhook-events) or [Conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/) to receive events, the request must specify an app access token. The request will fail if you use a user access token.\n\nIf you use [WebSockets to receive events](https://dev.twitch.tv/docs/eventsub/handling-websocket-events), the request must specify a user access token. The request will fail if you use an app access token. The token may include any scopes.\n\n__Request Query Parameters:__\n\nUse the _status_, _type_, _user\\_id_, and _subscription\\_id_ query parameters to filter the list of subscriptions that are returned. The filters are mutually exclusive; the request fails if you specify more than one filter.",
+        "description": "Gets a list of EventSub subscriptions that the client in the access token created.\n\n__Authorization:__\n\nIf you use [Webhooks](https://dev.twitch.tv/docs/eventsub/handling-webhook-events) or [Conduits](https://dev.twitch.tv/docs/eventsub/handling-conduit-events/) to receive events, the request must specify an app access token. The request will fail if you use a user access token.\n\nIf you use [WebSockets to receive events](https://dev.twitch.tv/docs/eventsub/handling-websocket-events), the request must specify a user access token. The request will fail if you use an app access token. The token may include any scopes.\n\n__Request Query Parameters:__\n\nUse the _status_, _type_, _user\\_id_, _subscription\\_id_, and _conduit\\_id_ query parameters to filter the list of subscriptions that are returned. The filters are mutually exclusive; the request fails if you specify more than one filter.",
         "tags": [
           "EventSub"
         ],
@@ -6044,7 +6569,7 @@
           {
             "name": "status",
             "in": "query",
-            "description": "Filter subscriptions by its status. Possible values are:  \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* moderator\\_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* chat\\_user\\_banned - The user specified in the **Condition** object was banned from the broadcaster's chat.\n* version\\_removed — The subscription to subscription type and version is no longer supported.\n* beta\\_maintenance — The subscription to the beta subscription type was removed due to maintenance.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_connection\\_unused — The client failed to subscribe to events within the required time.\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.\n* websocket\\_failed\\_to\\_reconnect - The client failed to reconnect to the Twitch WebSocket server within the required time after a Reconnect Message.",
+            "description": "Filter subscriptions by its status. Possible values are:  \n  \n* enabled — The subscription is enabled.\n* webhook\\_callback\\_verification\\_pending — The subscription is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* authorization\\_revoked — The authorization was revoked for one or more users specified in the **Condition** object.\n* moderator\\_removed — The moderator that authorized the subscription is no longer one of the broadcaster's moderators.\n* user\\_removed — One of the users specified in the **Condition** object was removed.\n* chat\\_user\\_banned - The user specified in the **Condition** object was banned from the broadcaster's chat.\n* version\\_removed — The subscription to subscription type and version is no longer supported.\n* beta\\_maintenance — The subscription to the beta subscription type was removed due to maintenance.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_connection\\_unused — The client failed to subscribe to events within the required time.\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.\n* websocket\\_failed\\_to\\_reconnect - The client failed to reconnect to the Twitch WebSocket server within the required time after a Reconnect Message.\n* conduit\\_deleted - The conduit associated with the subscription was deleted.",
             "schema": {
               "type": "string",
               "enum": [
@@ -6065,7 +6590,8 @@
                 "websocket_internal_error",
                 "websocket_network_timeout",
                 "websocket_network_error",
-                "websocket_failed_to_reconnect"
+                "websocket_failed_to_reconnect",
+                "conduit_deleted"
               ]
             }
           },
@@ -6118,6 +6644,7 @@
                 "channel.channel_points_custom_reward.remove",
                 "channel.channel_points_custom_reward_redemption.add",
                 "channel.channel_points_custom_reward_redemption.update",
+                "channel.custom_power_up_redemption.add",
                 "channel.poll.begin",
                 "channel.poll.progress",
                 "channel.poll.end",
@@ -6174,9 +6701,17 @@
             }
           },
           {
+            "name": "conduit_id",
+            "in": "query",
+            "description": "Filter subscriptions by [conduit](https://dev.twitch.tv/docs/eventsub/handling-conduit-events) ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "after",
             "in": "query",
-            "description": "The cursor used to get the next page of results. The `pagination` object in the response contains the cursor's value.",
+            "description": "The cursor used to get the next page of results. The `pagination` object in the response contains the cursor’s value.",
             "schema": {
               "type": "string"
             }
@@ -6526,7 +7061,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the Guest Star settings.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6534,7 +7069,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\n```bash\ncurl -x GET `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&moderator_id=9321049` \\\n\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "description": "_Request:_\n\n```bash\ncurl -X GET `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&moderator_id=9321049` \\\n\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
                     "value": {
                       "data": [
                         {
@@ -6592,7 +7127,7 @@
         },
         "responses": {
           "204": {
-            "description": "Successfully updated channel settings\n\n__Examples__\n\n_Request:_\n\nUpdate browser source layout settings\n\n```bash\ncurl -x PUT `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&group_layout=TILED_LAYOUT` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```\n\n_Request:_\n\nDisable moderator control of slot live setting\n\n```bash\ncurl -x PUT `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&is_moderator_send_live_enabled=false` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```\n\n_Request:_\n\nUpdate max slot count\n\n```bash\ncurl -x PUT `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&slot_count=6` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```\n\n_Request:_\n\nRegenerate browser sources\n\n```bash\ncurl -x PUT `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&regenerate_browser_sources=true` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+            "description": "Successfully updated channel settings\n\n__Examples__\n\n_Request:_\n\nUpdate browser source layout settings\n\n```bash\ncurl -X PUT `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&group_layout=TILED_LAYOUT` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```\n\n_Request:_\n\nDisable moderator control of slot live setting\n\n```bash\ncurl -X PUT `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&is_moderator_send_live_enabled=false` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```\n\n_Request:_\n\nUpdate max slot count\n\n```bash\ncurl -X PUT `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&slot_count=6` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```\n\n_Request:_\n\nRegenerate browser sources\n\n```bash\ncurl -X PUT `https://api.twitch.tv/helix/guest_star/channel_settings?broadcaster_id=9321049&regenerate_browser_sources=true` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
           },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Invalid _slot\\_count_\n* Invalid _group\\_layout_"
@@ -6634,7 +7169,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the Guest Star session.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6642,7 +7177,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\nGet session for host channel\n\n```bash\ncurl -x GET `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049&moderator_id=9321049` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "description": "_Request:_\n\nGet session for host channel\n\n```bash\ncurl -X GET `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049&moderator_id=9321049` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
                     "value": {
                       "data": [
                         {
@@ -6727,7 +7262,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully started the Guest Star session.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6735,7 +7270,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\nStart Guest Star session\n\n```bash\ncurl -x POST `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "description": "_Request:_\n\nStart Guest Star session\n\n```bash\ncurl -X POST `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
                     "value": {
                       "data": [
                         {
@@ -6777,6 +7312,9 @@
           },
           "403": {
             "description": "Insufficient authorization for creating session"
+          },
+          "409": {
+            "description": "Broadcaster is already in another session"
           }
         }
       },
@@ -6813,7 +7351,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully ended the Guest Star session.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6821,7 +7359,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\nEnd Guest Star session\n\n```bash\ncurl -x DELETE `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "description": "_Request:_\n\nEnd Guest Star session\n\n```bash\ncurl -X DELETE `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
                     "value": {
                       "data": [
                         {
@@ -6907,7 +7445,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Successfully retrieved the broadcaster’s Guest Star invites.",
             "content": {
               "application/json": {
                 "schema": {
@@ -6915,10 +7453,10 @@
                 },
                 "examples": {
                   "Example 1": {
-                    "description": "_Request:_\n\nGet session invites\n\n```bash\ncurl -x GET `https://api.twitch.tv/helix/guest_star/invites?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+                    "description": "_Request:_\n\nGet session invites\n\n```bash\ncurl -X GET `https://api.twitch.tv/helix/guest_star/invites?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
                   },
                   "Example 2": {
-                    "description": "_Request:_\n\nGet session for host channel\n\n```bash\ncurl -x GET `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049` \\ -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\ -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "description": "_Request:_\n\nGet session for host channel\n\n```bash\ncurl -X GET `https://api.twitch.tv/helix/guest_star/session?broadcaster_id=9321049` \\ -H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\ -H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
                     "value": {
                       "data": [
                         {
@@ -6939,6 +7477,12 @@
           },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Missing _session\\_id_"
+          },
+          "403": {
+            "description": "The user specified in the `moderator_id` is not permitted to view the broadcaster’s invites."
+          },
+          "404": {
+            "description": "Invalid `session_id`"
           }
         }
       },
@@ -6993,7 +7537,7 @@
         ],
         "responses": {
           "204": {
-            "description": "\n\n__Examples__\n\n_Request:_\n\nInvite user to Guest Star session\n\n```bash\ncurl -x POST `https://api.twitch.tv/helix/guest_star/invites?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+            "description": "Successfully sent the Guest Star invite\n\n__Examples__\n\n_Request:_\n\nInvite user to Guest Star session\n\n```bash\ncurl -X POST `https://api.twitch.tv/helix/guest_star/invites?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
           },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Missing _moderator\\_id_\n* Missing _session\\_id_\n* Missing _guest\\_id_\n* Invalid _session\\_id_"
@@ -7054,10 +7598,13 @@
         ],
         "responses": {
           "204": {
-            "description": "\n\n__Examples__\n\n_Request:_\n\nRemove invite to session\n\n```bash\ncurl -x DELETE `https://api.twitch.tv/helix/guest_star/invites?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+            "description": "Successfully deleted the Guest Star invite\n\n__Examples__\n\n_Request:_\n\nRemove invite to session\n\n```bash\ncurl -X DELETE `https://api.twitch.tv/helix/guest_star/invites?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
           },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Missing _session\\_id_\n* Missing _guest\\_id_\n* Invalid _session\\_id_"
+          },
+          "403": {
+            "description": "The user specified in `moderator_id` is not permitted to delete invites for the broadcaster."
           },
           "404": {
             "description": "No invite exists for specified _guest\\_id_"
@@ -7126,7 +7673,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfuly assigned guest to slot\n\n__Examples__\n\n_Request:_\n\nAssign invited user to slot\n\n```bash\ncurl -x POST `https://api.twitch.tv/helix/guest_star/slot?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104&slot_id=1` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+            "description": "Successfuly assigned guest to slot\n\n__Examples__\n\n_Request:_\n\nAssign invited user to slot\n\n```bash\ncurl -X POST `https://api.twitch.tv/helix/guest_star/slot?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104&slot_id=1` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
           },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Missing _moderator\\_id_\n* Missing _guest\\_id_\n* Missing or invalid _session\\_id_\n* Missing or invalid _slot\\_id_"
@@ -7198,7 +7745,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfuly updated slot(s)\n\n__Examples__\n\n_Request:_\n\nMove slot assignment to a new slot ID\n\n```bash\ncurl -x PATCH `https://api.twitch.tv/helix/guest_star/slot?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&source_slot_id=1&destination_slot_id=2` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+            "description": "Successfuly updated slot(s)\n\n__Examples__\n\n_Request:_\n\nMove slot assignment to a new slot ID\n\n```bash\ncurl -X PATCH `https://api.twitch.tv/helix/guest_star/slot?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&source_slot_id=1&destination_slot_id=2` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
           },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Missing or invalid _session\\_id_\n* Missing or invalid _slot\\_id_"
@@ -7273,7 +7820,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfuly removed user from slot\n\n__Examples__\n\n_Request:_\n\nRemove user from slot\n\n```bash\ncurl -x DELETE `https://api.twitch.tv/helix/guest_star/slot?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104&slot_id=1` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+            "description": "Successfuly removed user from slot\n\n__Examples__\n\n_Request:_\n\nRemove user from slot\n\n```bash\ncurl -X DELETE `https://api.twitch.tv/helix/guest_star/slot?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&guest_id=144601104&slot_id=1` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
           },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Missing _moderator\\_id_\n* Missing or invalid _session\\_id_\n* Missing or invalid _slot\\_id_"
@@ -7372,7 +7919,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfuly updated slot settings\n\n__Examples__\n\n_Request:_\n\nUpdate slot settings to enable slot in broadcasting software\n\n```bash\ncurl -x PATCH `https://api.twitch.tv/helix/guest_star/slot_settings?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&slot_id=1&is_audio_enabled=false` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```\n\n_Request:_\n\nMute a slot’s audio for a guest\n\n```bash\ncurl -x PATCH `https://api.twitch.tv/helix/guest_star/slot_settings?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&slot_id=1&is_live=true` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```\n\n_Request:_\n\nAllow slot audio to be unmuted by a guest. **NOTE**: This operation does not immediately unmute the guest. The guest will be notified they can unmute themselves when ready.\n\n```bash\ncurl -x PATCH `https://api.twitch.tv/helix/guest_star/slot_settings?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&slot_id=1&is_audio_enabled=true` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
+            "description": "Successfuly updated slot settings\n\n__Examples__\n\n_Request:_\n\nUpdate slot settings to enable slot in broadcasting software\n\n```bash\ncurl -X PATCH `https://api.twitch.tv/helix/guest_star/slot_settings?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&slot_id=1&is_audio_enabled=false` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```\n\n_Request:_\n\nMute a slot’s audio for a guest\n\n```bash\ncurl -X PATCH `https://api.twitch.tv/helix/guest_star/slot_settings?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&slot_id=1&is_live=true` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```\n\n_Request:_\n\nAllow slot audio to be unmuted by a guest. **NOTE**: This operation does not immediately unmute the guest. The guest will be notified they can unmute themselves when ready.\n\n```bash\ncurl -X PATCH `https://api.twitch.tv/helix/guest_star/slot_settings?broadcaster_id=9321049&moderator_id=9321049&session_id=2KFRQbFtpmfyD3IevNRnCzOPRJI&slot_id=1&is_audio_enabled=true` \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```"
           },
           "400": {
             "description": "* Missing _broadcaster\\_id_\n* Missing _moderator\\_id_\n* Missing or invalid _session\\_id_\n* Missing or invalid _slot\\_id_"
@@ -7385,8 +7932,8 @@
     },
     "/hypetrain/status": {
       "get": {
-        "summary": "NEW Gets the status of a Hype Train for the specified broadcaster.",
-        "description": "NEW Get the status of a Hype Train for the specified broadcaster.\n\n__Authorization:__\n\n* Requires an [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).\n* Requires OAuth Scope: `channel:read:hype_train`.\n* Requires that `broadcaster_id` and `user_id` match in the User-Access token.",
+        "summary": "Gets the status of a Hype Train for the specified broadcaster.",
+        "description": "Get the status of a Hype Train for the specified broadcaster.\n\n__Authorization:__\n\n* Requires an [user access token](https://dev.twitch.tv/docs/authentication/#user-access-tokens).\n* Requires OAuth Scope: `channel:read:hype_train`.\n* Requires that `broadcaster_id` and `user_id` match in the User-Access token.",
         "tags": [
           "Hype Train"
         ],
@@ -7459,7 +8006,8 @@
                             ],
                             "started_at": "2020-07-15T17:16:03.17106713Z",
                             "expires_at": "2020-07-15T17:16:11.17106713Z",
-                            "type": "golden_kappa"
+                            "type": "golden_kappa",
+                            "is_shared_train": true
                           },
                           "all_time_high": {
                             "level": 6,
@@ -7501,7 +8049,7 @@
     "/moderation/enforcements/status": {
       "post": {
         "summary": "Checks whether AutoMod would flag the specified message for review.",
-        "description": "Checks whether AutoMod would flag the specified message for review.\n\nAutoMod is a moderation tool that holds inappropriate or harassing chat messages for moderators to review. Moderators approve or deny the messages that AutoMod flags; only approved messages are released to chat. AutoMod detects misspellings and evasive language automatically. For information about AutoMod, see [How to Use AutoMod](https://help.twitch.tv/s/article/how-to-use-automod).\n\n**Rate Limits**: Rates are limited per channel based on the account type rather than per access token.\n\n| Account type | Limit per minute | Limit per hour |\n| - | - | - |\n| Normal | 5 | 50 |\n| Affiliate | 10 | 100 |\n| Partner | 30 | 300 |\n\n\nThe above limits are in addition to the standard [Twitch API rate limits](https://dev.twitch.tv/docs/api/guide#twitch-rate-limits). The rate limit headers in the response represent the Twitch rate limits and not the above limits.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderation:read** scope for the user represented by the `broadcaster_id` query parameter.",
+        "description": "Checks whether AutoMod would flag the specified message for review.\n\nAutoMod is a moderation tool that holds inappropriate or harassing chat messages for moderators to review. Moderators approve or deny the messages that AutoMod flags; only approved messages are released to chat. AutoMod detects misspellings and evasive language automatically. For information about AutoMod, see [How to Use AutoMod](https://help.twitch.tv/s/article/how-to-use-automod).\n\n**Rate Limits**: Rates are limited per channel based on the account type rather than per access token.\n\n| Account type | Limit per minute | Limit per hour |\n| - | - | - |\n| Normal | 5 | 50 |\n| Affiliate | 10 | 100 |\n| Partner | 30 | 300 |\n\n\nThe above limits are in addition to the standard [Twitch API rate limits](https://dev.twitch.tv/docs/api/guide#twitch-rate-limits). The rate limit headers in the response represent the Twitch rate limits and not the above limits.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderation:read** scope for the user represented by the `broadcaster_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -7599,7 +8147,7 @@
     "/moderation/automod/message": {
       "post": {
         "summary": "Allow or deny the message that AutoMod flagged for review.",
-        "description": "Allow or deny the message that AutoMod flagged for review. For information about AutoMod, see [How to Use AutoMod](https://help.twitch.tv/s/article/how-to-use-automod).\n\nTo get messages that AutoMod is holding for review, subscribe to the **automod-queue.<moderator\\_id>.<channel\\_id>** [topic](https://dev.twitch.tv/docs/pubsub#topics) using [PubSub](https://dev.twitch.tv/docs/pubsub). PubSub sends a notification to your app when AutoMod holds a message for review.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:automod** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:automod** scope for the user represented by the `user_id` query parameter.",
+        "description": "Allow or deny the message that AutoMod flagged for review. For information about AutoMod, see [How to Use AutoMod](https://help.twitch.tv/s/article/how-to-use-automod).\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:automod** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:automod** scope for the user represented by the `user_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -7655,7 +8203,7 @@
     "/moderation/automod/settings": {
       "get": {
         "summary": "Gets the broadcaster’s AutoMod settings.",
-        "description": "Gets the broadcaster’s AutoMod settings. The settings are used to automatically block inappropriate or harassing messages from appearing in the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:automod\\_settings** or **moderator:manage:automod\\_settings** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:automod\\_settings** or **moderator:manage:automod\\_settings** scope for the user represented by the `moderator_id` query parameter.",
+        "description": "Gets the broadcaster’s AutoMod settings. The settings are used to automatically block inappropriate or harassing messages from appearing in the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:automod\\_settings** or **moderator:manage:automod\\_settings** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:automod\\_settings** or **moderator:manage:automod\\_settings** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -7738,7 +8286,7 @@
       },
       "put": {
         "summary": "Updates the broadcaster’s AutoMod settings.",
-        "description": "Updates the broadcaster’s AutoMod settings. The settings are used to automatically block inappropriate or harassing messages from appearing in the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:automod\\_settings** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:automod\\_settings** scope for the user represented by the `moderator_id` query parameter.\n\n__Request Body:__\n\nBecause PUT is an overwrite operation, you must include all the fields that you want set after the operation completes. Typically, you’ll send a GET request, update the fields you want to change, and pass that object in the PUT request.\n\nYou may set either `overall_level` or the individual settings like `aggression`, but not both.\n\nSetting `overall_level` applies default values to the individual settings. However, setting `overall_level` to 4 does not necessarily mean that it applies 4 to all the individual settings. Instead, it applies a set of recommended defaults to the rest of the settings. For example, if you set `overall_level` to 2, Twitch provides some filtering on discrimination and sexual content, but more filtering on hostility (see the first example response).\n\nIf `overall_level` is currently set and you update `swearing` to 3, `overall_level` will be set to **null** and all settings other than `swearing` will be set to 0\\. The same is true if individual settings are set and you update `overall_level` to 3 — all the individual settings are updated to reflect the default level.\n\nNote that if you set all the individual settings to values that match what `overall_level` would have set them to, Twitch changes AutoMod to use the default AutoMod level instead of using the individual settings.\n\nValid values for all levels are from 0 (no filtering) through 4 (most aggressive filtering). These levels affect how aggressively AutoMod holds back messages for moderators to review before they appear in chat or are denied (not shown).",
+        "description": "Updates the broadcaster’s AutoMod settings. The settings are used to automatically block inappropriate or harassing messages from appearing in the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:automod\\_settings** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:automod\\_settings** scope for the user represented by the `moderator_id` query parameter.\n\n__Request Body:__\n\nBecause PUT is an overwrite operation, you must include all the fields that you want set after the operation completes. Typically, you’ll send a GET request, update the fields you want to change, and pass that object in the PUT request.\n\nYou may set either `overall_level` or the individual settings like `aggression`, but not both.\n\nSetting `overall_level` applies default values to the individual settings. However, setting `overall_level` to 4 does not necessarily mean that it applies 4 to all the individual settings. Instead, it applies a set of recommended defaults to the rest of the settings. For example, if you set `overall_level` to 2, Twitch provides some filtering on discrimination and sexual content, but more filtering on hostility (see the first example response).\n\nIf `overall_level` is currently set and you update `swearing` to 3, `overall_level` will be set to **null** and all settings other than `swearing` will be set to 0\\. The same is true if individual settings are set and you update `overall_level` to 3 — all the individual settings are updated to reflect the default level.\n\nNote that if you set all the individual settings to values that match what `overall_level` would have set them to, Twitch changes AutoMod to use the default AutoMod level instead of using the individual settings.\n\nValid values for all levels are from 0 (no filtering) through 4 (most aggressive filtering). These levels affect how aggressively AutoMod holds back messages for moderators to review before they appear in chat or are denied (not shown).",
         "tags": [
           "Moderation"
         ],
@@ -7865,7 +8413,7 @@
     "/moderation/banned": {
       "get": {
         "summary": "Gets all users that the broadcaster banned or put in a timeout.",
-        "description": "Gets all users that the broadcaster banned or put in a timeout.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** or **moderator:manage:banned\\_users** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderation:read** or **moderator:manage:banned\\_users** scope for the user represented by the `broadcaster_id` query parameter.",
+        "description": "Gets all users that the broadcaster banned or put in a timeout.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderation:read** or **moderator:manage:banned\\_users** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderation:read** or **moderator:manage:banned\\_users** scope for the user represented by the `broadcaster_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -7987,7 +8535,7 @@
     "/moderation/bans": {
       "post": {
         "summary": "Bans a user from participating in a broadcaster’s chat room or puts them in a timeout.",
-        "description": "Bans a user from participating in the specified broadcaster’s chat room or puts them in a timeout.\n\nFor information about banning or putting users in a timeout, see [Ban a User](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat#TheBanFeature) and [Timeout a User](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat#TheTimeoutFeature).\n\nIf the user is currently in a timeout, you can call this endpoint to change the duration of the timeout or ban them altogether. If the user is currently banned, you cannot call this method to put them in a timeout instead.\n\nTo remove a ban or end a timeout, see [Unban user](https://dev.twitch.tv/docs/api/reference#unban-user).\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\\_users** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:banned\\_users** and **user:bot** scopes for the user represented by the `moderator_id` query parameter.",
+        "description": "Bans a user from participating in the specified broadcaster’s chat room or puts them in a timeout.\n\nFor information about banning or putting users in a timeout, see [Ban a User](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat#TheBanFeature) and [Timeout a User](https://help.twitch.tv/s/article/how-to-manage-harassment-in-chat#TheTimeoutFeature).\n\nIf the user is currently in a timeout, you can call this endpoint to change the duration of the timeout or ban them altogether. If the user is currently banned, you cannot call this method to put them in a timeout instead.\n\nTo remove a ban or end a timeout, see [Unban user](https://dev.twitch.tv/docs/api/reference#unban-user).\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\\_users** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:banned\\_users** and **user:bot** scopes for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8138,7 +8686,7 @@
       },
       "delete": {
         "summary": "Removes the ban or timeout that was placed on the specified user.",
-        "description": "Removes the ban or timeout that was placed on the specified user.\n\nTo ban a user, see [Ban user](https://dev.twitch.tv/docs/api/reference#ban-user).\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\\_users** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:banned\\_users** and **user:bot** scopes for the user represented by the `moderator_id` query parameter.",
+        "description": "Removes the ban or timeout that was placed on the specified user.\n\nTo ban a user, see [Ban user](https://dev.twitch.tv/docs/api/reference#ban-user).\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:banned\\_users** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:banned\\_users** and **user:bot** scopes for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8296,7 +8844,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\nGets information about the specified broadcaster.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/moderation/unban_requests?broadcaster_id=274637212&moderator_id=274637212&status=pending' \\\n​​​​​-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
+                    "description": "_Request:_\n\nGets information about the specified broadcaster.\n\n```bash\ncurl -X GET 'https://api.twitch.tv/helix/moderation/unban_requests?broadcaster_id=274637212&moderator_id=141981764&status=pending' \\\n​​​​​-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'\n```",
                     "value": {
                       "data": [
                         {
@@ -8375,7 +8923,7 @@
           {
             "name": "unban_request_id",
             "in": "query",
-            "description": "The ID of the broadcaster or a user that has permission to moderate the broadcaster’s unban requests. This ID must match the user ID in the user access token.",
+            "description": "The ID of the Unban Request to resolve.",
             "schema": {
               "type": "string"
             },
@@ -8409,7 +8957,7 @@
                 },
                 "examples": {
                   "Example": {
-                    "description": "_Request:_\n\nApproving an unban request.\n\n```bash\ncurl -X PATCH 'https://api.twitch.tv/helix/moderation/unban_requests?broadcaster_id=274637212&moderator_id=274637212&unban_request_id=92af127c-7326-4483-a52b-b0daa0be61c01&status=approved' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'`\n```",
+                    "description": "_Request:_\n\nApproving an unban request.\n\n```bash\ncurl -X PATCH 'https://api.twitch.tv/helix/moderation/unban_requests?broadcaster_id=274637212&moderator_id=274637212&unban_request_id=92af127c-7326-4483-a52b-b0da0be61c01&status=approved' \\\n-H 'Authorization: Bearer cfabdegwdoklmawdzdo98xt2fo512y' \\\n-H 'Client-Id: uo6dggojyb8d6soh92zknwmi5ej1q2'`\n```",
                     "value": {
                       "data": [
                         {
@@ -8427,7 +8975,7 @@
                           "status": "approved",
                           "created_at": "2022-08-07T02:07:55Z",
                           "resolved_at": "2022-08-09T02:07:55Z",
-                          "resolution_text": null
+                          "resolution_text": ""
                         }
                       ]
                     }
@@ -8458,7 +9006,7 @@
     "/moderation/blocked_terms": {
       "get": {
         "summary": "Gets the broadcaster’s list of non-private, blocked words or phrases.",
-        "description": "Gets the broadcaster’s list of non-private, blocked words or phrases. These are the terms that the broadcaster or moderator added manually or that were denied by AutoMod.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:blocked\\_terms** or **moderator:manage:blocked\\_terms** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:blocked\\_terms** or **moderator:manage:blocked\\_terms** scope for the user represented by the `moderator_id` query parameter.",
+        "description": "Gets the broadcaster’s list of non-private, blocked words or phrases. These are the terms that the broadcaster or moderator added manually or that were denied by AutoMod.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:blocked\\_terms** or **moderator:manage:blocked\\_terms** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:blocked\\_terms** or **moderator:manage:blocked\\_terms** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8557,7 +9105,7 @@
       },
       "post": {
         "summary": "Adds a word or phrase to the broadcaster’s list of blocked terms.",
-        "description": "Adds a word or phrase to the broadcaster’s list of blocked terms. These are the terms that the broadcaster doesn’t want used in their chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\\_terms** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:blocked\\_terms** scope for the user represented by the `moderator_id` query parameter.",
+        "description": "Adds a word or phrase to the broadcaster’s list of blocked terms. These are the terms that the broadcaster doesn’t want used in their chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\\_terms** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:blocked\\_terms** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8674,7 +9222,7 @@
       },
       "delete": {
         "summary": "Removes the word or phrase from the broadcaster’s list of blocked terms.",
-        "description": "Removes the word or phrase from the broadcaster’s list of blocked terms.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\\_terms** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:blocked\\_terms** scope for the user represented by the `moderator_id` query parameter.",
+        "description": "Removes the word or phrase from the broadcaster’s list of blocked terms.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:blocked\\_terms** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:blocked\\_terms** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8738,7 +9286,7 @@
     "/moderation/chat": {
       "delete": {
         "summary": "Removes a single chat message or all chat messages from the broadcaster’s chat room.",
-        "description": "Removes a single chat message or all chat messages from the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_messages** scope.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:chat\\_messages** scope for the user represented by the `moderator_id` query parameter.",
+        "description": "Removes a single chat message or all chat messages from the broadcaster’s chat room.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:chat\\_messages** scope.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:chat\\_messages** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -8804,7 +9352,7 @@
     "/moderation/channels": {
       "get": {
         "summary": "Gets a list of channels that the specified user has moderator privileges in.",
-        "description": "Gets a list of channels that the specified user has moderator privileges in.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:moderated\\_channels**. The user ID associated with the token must match the `user_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **user:read:moderated\\_channels** scope for the user represented by the `user_id` query parameter.",
+        "description": "Gets a list of channels that the specified user has moderator privileges in.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:moderated\\_channels**. The user ID associated with the token must match the `user_id` in the query parameter.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **user:read:moderated\\_channels** scope for the user represented by the `user_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -9235,9 +9783,6 @@
           "401": {
             "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:manage:vips** scope.\n* The OAuth token is not valid.\n* The ID in the _broadcaster\\_id_ query parameter must match the user ID in the access token.\n* The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token."
           },
-          "403": {
-            "description": "* The ID in the _broadcaster\\_id_ query parameter must match the user ID in the access token."
-          },
           "404": {
             "description": "* The ID in _broadcaster\\_id_ was not found.\n* The ID in _user\\_id_ was not found."
           },
@@ -9301,7 +9846,7 @@
             "description": "* The ID in _broadcaster\\_id_ is not valid.\n* The ID in _user\\_id_ is not valid."
           },
           "401": {
-            "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:manage:vips** scope.\n* The OAuth token is not valid.\n* The ID in the _broadcaster\\_id_ query parameter must match the user ID in the access token.\n* The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token."
+            "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:manage:vips** scope.\n* The OAuth token is not valid.\n* The ID in the _broadcaster\\_id_ query parameter must match the user ID in the access token, unless the user ID in the access token is removing themselves as a VIP.\n* The client ID specified in the Client-Id header does not match the client ID specified in the OAuth token."
           },
           "403": {
             "description": "* The user in _broadcaster\\_id_ doesn't have permission to remove the user's VIP status."
@@ -9328,7 +9873,7 @@
     "/moderation/shield_mode": {
       "put": {
         "summary": "Activates or deactivates the broadcaster’s Shield Mode.",
-        "description": "Activates or deactivates the broadcaster’s Shield Mode.\n\nTwitch’s Shield Mode feature is like a panic button that broadcasters can push to protect themselves from chat abuse coming from one or more accounts. When activated, Shield Mode applies the overrides that the broadcaster configured in the Twitch UX. If the broadcaster hasn’t configured Shield Mode, it applies default overrides.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:shield\\_mode** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:shield\\_mode** scope for the user represented by the `moderator_id` query parameter.",
+        "description": "Activates or deactivates the broadcaster’s Shield Mode.\n\nTwitch’s Shield Mode feature is like a panic button that broadcasters can push to protect themselves from chat abuse coming from one or more accounts. When activated, Shield Mode applies the overrides that the broadcaster configured in the Twitch UX. If the broadcaster hasn’t configured Shield Mode, it applies default overrides.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:shield\\_mode** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:shield\\_mode** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -9420,7 +9965,7 @@
       },
       "get": {
         "summary": "Gets the broadcaster’s Shield Mode activation status.",
-        "description": "Gets the broadcaster’s Shield Mode activation status.\n\nTo receive notification when the broadcaster activates and deactivates Shield Mode, subscribe to the [channel.shield\\_mode.begin](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshield%5Fmodebegin) and [channel.shield\\_mode.end](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshield%5Fmodeend) subscription types.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:shield\\_mode** or **moderator:manage:shield\\_mode** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:shield\\_mode** or **moderator:manage:shield\\_mode** scope for the user represented by the `moderator_id` query parameter.",
+        "description": "Gets the broadcaster’s Shield Mode activation status.\n\nTo receive notification when the broadcaster activates and deactivates Shield Mode, subscribe to the [channel.shield\\_mode.begin](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshield%5Fmodebegin) and [channel.shield\\_mode.end](https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types#channelshield%5Fmodeend) subscription types.\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:read:shield\\_mode** or **moderator:manage:shield\\_mode** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:read:shield\\_mode** or **moderator:manage:shield\\_mode** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -9499,7 +10044,7 @@
     "/moderation/warnings": {
       "post": {
         "summary": "Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged.",
-        "description": "Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged. New warnings can be issued to a user when they already have a warning in the channel (new warning will replace old warning).\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:warnings** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.\n* BETA An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:warnings** scope for the user represented by the `moderator_id` query parameter.",
+        "description": "Warns a user in the specified broadcaster’s chat room, preventing them from chat interaction until the warning is acknowledged. New warnings can be issued to a user when they already have a warning in the channel (new warning will replace old warning).\n\n__Authorization:__\n\nRequires one of the following:\n\n* A [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **moderator:manage:warnings** scope. The user ID associated with the token must match the `moderator_id` in the query parameter.\n* An [app access token](https://dev.twitch.tv/docs/authentication#app-access-tokens) where the application, through a prior authorization, has the **moderator:manage:warnings** scope for the user represented by the `moderator_id` query parameter.",
         "tags": [
           "Moderation"
         ],
@@ -11617,7 +12162,7 @@
     "/streams/markers": {
       "post": {
         "summary": "Adds a marker to a live stream.",
-        "description": "Adds a marker to a live stream. A marker is an arbitrary point in a live stream that the broadcaster or editor wants to mark, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).\n\nYou may not add markers:\n\n* If the stream is not live\n* If the stream has not enabled video on demand (VOD)\n* If the stream is a premiere (a live, first-viewing event that combines uploaded videos with live chat)\n* If the stream is a rerun of a past broadcast, including past premieres.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:broadcast** scope.",
+        "description": "Adds a marker to a live stream. A marker is an arbitrary point in a live stream that the broadcaster or editor wants to mark, so they can return to that spot later to create video highlights. For more information on these features, see [Creating Highlights and Stream Markers](https://help.twitch.tv/s/article/creating-highlights-and-stream-markers).\n\nYou may not add markers:\n\n* If the stream is not live.\n* If the stream has not enabled video on demand (VOD).\n* If the stream is a rerun of a past broadcast.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **channel:manage:broadcast** scope.",
         "tags": [
           "Streams"
         ],
@@ -11674,7 +12219,7 @@
             "description": "* The `user_id` field is required.\n* The length of the string in the `description` field is too long."
           },
           "401": {
-            "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **user:manage:broadcast** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
+            "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **channel:manage:broadcast** scope.\n* The access token is not valid.\n* The Client ID specified in the Client-Id header does not match the Client ID specified in the access token."
           },
           "403": {
             "description": "* The user in the access token is not authorized to create video markers for the user in the `user_id` field. The user in the access token must own the video or they must be one of the broadcaster's editors."
@@ -11693,7 +12238,7 @@
       },
       "get": {
         "summary": "Gets a list of markers from the user’s most recent stream or from the specified VOD/video.",
-        "description": "Gets a list of markers from the user’s most recent stream or from the specified VOD/video. A marker is an arbitrary point in a live stream that the broadcaster or editor marked, so they can return to that spot later to create video highlights (see Video Producer, Highlights in the Twitch UX).\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:broadcast** or **channel:manage:broadcast** scope.",
+        "description": "Gets a list of markers from the user’s most recent stream or from the specified VOD/video. A marker is an arbitrary point in a live stream that the broadcaster or editor marked, so they can return to that spot later to create video highlights. For more information on these features, see [Creating Highlights and Stream Markers](https://help.twitch.tv/s/article/creating-highlights-and-stream-markers).\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:broadcast** or **channel:manage:broadcast** scope.",
         "tags": [
           "Streams"
         ],
@@ -11790,7 +12335,7 @@
             "description": "* The request must specify either the _user\\_id_ or _video\\_id_ query parameter, but not both."
           },
           "401": {
-            "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **user:read:broadcast** or **user:manage:broadcast** scope.\n* The access token is not valid.\n* The client ID specified in the Client-Id header does not match the client ID specified in the access token."
+            "description": "* The Authorization header is required and must contain a user access token.\n* The user access token must include the **user:read:broadcast** or **channel:manage:broadcast** scope.\n* The access token is not valid.\n* The Client ID specified in the Client-Id header does not match the Client ID specified in the access token."
           },
           "403": {
             "description": "* The user in the access token is not authorized to get the video's markers. The user in the access token must own the video or be one of the broadcaster's editors."
@@ -11926,7 +12471,7 @@
     "/subscriptions/user": {
       "get": {
         "summary": "Checks whether the user subscribes to the broadcaster’s channel.",
-        "description": "Checks whether the user subscribes to the broadcaster’s channel.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:subscriptions** scope.\n\nA Twitch extensions may use an app access token if the broadcaster has granted the **user:read:subscriptions** scope from within the Twitch Extensions manager.",
+        "description": "Checks whether the user subscribes to the broadcaster’s channel.\n\n__Authorization:__\n\nRequires a [user access token](https://dev.twitch.tv/docs/authentication#user-access-tokens) that includes the **user:read:subscriptions** scope.",
         "tags": [
           "Subscriptions"
         ],
@@ -12404,7 +12949,7 @@
                           "description": "Supporting third-party developers building Twitch integrations from chatbots to game integrations.",
                           "profile_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/8a6381c7-d0c0-4576-b179-38bd5ce1d6af-profile_image-300x300.png",
                           "offline_image_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/3f13ab61-ec78-4fe6-8481-8682cb3b0ac2-channel_offline_image-1920x1080.png",
-                          "view_count": 5980557,
+                          "view_count": 0,
                           "email": "not-real@email.com",
                           "created_at": "2016-12-14T20:32:28Z"
                         }
@@ -12549,15 +13094,15 @@
                             "bits:read",
                             "channel:bot",
                             "channel:manage:predictions"
-                          ]
+                          ],
+                          "has_authorized": true
                         },
                         {
                           "user_id": "197886470",
                           "user_name": "TwitchRivals",
                           "user_login": "twitchrivals",
-                          "scopes": [
-                            "channel:manage:predictions"
-                          ]
+                          "scopes": [],
+                          "has_authorized": false
                         }
                       ]
                     }
@@ -12649,7 +13194,10 @@
                           "user_login": "travistyoj",
                           "display_name": "TravistyOJ"
                         }
-                      ]
+                      ],
+                      "pagination": {
+                        "cursor": "eyJiIjpudWxsLCJhIjp7Ik9mZnNldCI6NX19"
+                      }
                     }
                   }
                 }
@@ -13944,6 +14492,208 @@
           }
         }
       },
+      "GetCustomPowerUpResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "A list of custom Power-ups. The list is in ascending order by `id`. If the broadcaster hasn’t created custom Power-ups, the list is empty.",
+            "items": {
+              "type": "object",
+              "required": [
+                "broadcaster_id",
+                "broadcaster_login",
+                "broadcaster_name",
+                "id",
+                "title",
+                "prompt",
+                "bits",
+                "image",
+                "default_image",
+                "background_color",
+                "is_enabled",
+                "is_user_input_required",
+                "max_per_stream_setting",
+                "max_per_user_per_stream_setting",
+                "global_cooldown_setting",
+                "is_paused",
+                "is_in_stock",
+                "redemptions_redeemed_current_stream",
+                "cooldown_expires_at"
+              ],
+              "properties": {
+                "broadcaster_id": {
+                  "type": "string",
+                  "description": "The ID that uniquely identifies the broadcaster."
+                },
+                "broadcaster_login": {
+                  "type": "string",
+                  "description": "The broadcaster’s login name."
+                },
+                "broadcaster_name": {
+                  "type": "string",
+                  "description": "The broadcaster’s display name."
+                },
+                "id": {
+                  "type": "string",
+                  "description": "The ID that uniquely identifies this custom Power-up."
+                },
+                "title": {
+                  "type": "string",
+                  "description": "The title of the custom Power-up."
+                },
+                "prompt": {
+                  "type": "string",
+                  "description": "The prompt shown to the viewer when they redeem the custom Power-up if user input is required (see the `is_user_input_required` field)."
+                },
+                "bits": {
+                  "type": "integer",
+                  "description": "The amount of Bits for the custom Power-up.",
+                  "format": "int32"
+                },
+                "image": {
+                  "description": "A set of custom images for the custom Power-up. This field is **null** if the broadcaster didn’t upload images.",
+                  "type": "object",
+                  "required": [
+                    "url_1x",
+                    "url_2x",
+                    "url_4x"
+                  ],
+                  "properties": {
+                    "url_1x": {
+                      "type": "string",
+                      "description": "The URL to a small version of the image."
+                    },
+                    "url_2x": {
+                      "type": "string",
+                      "description": "The URL to a medium version of the image."
+                    },
+                    "url_4x": {
+                      "type": "string",
+                      "description": "The URL to a large version of the image."
+                    }
+                  }
+                },
+                "default_image": {
+                  "description": "A set of default images for the custom Power-up.",
+                  "type": "object",
+                  "required": [
+                    "url_1x",
+                    "url_2x",
+                    "url_4x"
+                  ],
+                  "properties": {
+                    "url_1x": {
+                      "type": "string",
+                      "description": "The URL to a small version of the image."
+                    },
+                    "url_2x": {
+                      "type": "string",
+                      "description": "The URL to a medium version of the image."
+                    },
+                    "url_4x": {
+                      "type": "string",
+                      "description": "The URL to a large version of the image."
+                    }
+                  }
+                },
+                "background_color": {
+                  "type": "string",
+                  "description": "The background color to use for the custom Power-up. The color is in Hex format (for example, #00E5CB)."
+                },
+                "is_enabled": {
+                  "type": "boolean",
+                  "description": "A Boolean value that determines whether the custom Power-up is enabled. Is **true** if enabled; otherwise, **false**. Disabled custom Power-ups aren’t shown to the user."
+                },
+                "is_user_input_required": {
+                  "type": "boolean",
+                  "description": "A Boolean value that determines whether the user must enter information when redeeming the custom Power-up. Is **true** if the user is prompted."
+                },
+                "max_per_stream_setting": {
+                  "description": "The settings used to determine whether to apply a maximum to the number of redemptions allowed per live stream.",
+                  "type": "object",
+                  "required": [
+                    "is_enabled",
+                    "max_per_stream"
+                  ],
+                  "properties": {
+                    "is_enabled": {
+                      "type": "boolean",
+                      "description": "A Boolean value that determines whether the custom Power-up applies a limit on the number of redemptions allowed per live stream. Is **true** if the custom Power-up applies a limit."
+                    },
+                    "max_per_stream": {
+                      "type": "integer",
+                      "description": "The maximum number of redemptions allowed per live stream.",
+                      "format": "int64"
+                    }
+                  }
+                },
+                "max_per_user_per_stream_setting": {
+                  "description": "The settings used to determine whether to apply a maximum to the number of redemptions allowed per user per live stream.",
+                  "type": "object",
+                  "required": [
+                    "is_enabled",
+                    "max_per_user_per_stream"
+                  ],
+                  "properties": {
+                    "is_enabled": {
+                      "type": "boolean",
+                      "description": "A Boolean value that determines whether the custom Power-up applies a limit on the number of redemptions allowed per user per live stream. Is **true** if the custom Power-up applies a limit."
+                    },
+                    "max_per_user_per_stream": {
+                      "type": "integer",
+                      "description": "The maximum number of redemptions allowed per user per live stream.",
+                      "format": "int64"
+                    }
+                  }
+                },
+                "global_cooldown_setting": {
+                  "description": "The settings used to determine whether to apply a cooldown period between redemptions and the length of the cooldown.",
+                  "type": "object",
+                  "required": [
+                    "is_enabled",
+                    "global_cooldown_seconds"
+                  ],
+                  "properties": {
+                    "is_enabled": {
+                      "type": "boolean",
+                      "description": "A Boolean value that determines whether to apply a cooldown period. Is **true** if a cooldown period is enabled."
+                    },
+                    "global_cooldown_seconds": {
+                      "type": "integer",
+                      "description": "The cooldown period, in seconds.",
+                      "format": "int64"
+                    }
+                  }
+                },
+                "is_paused": {
+                  "type": "boolean",
+                  "description": "A Boolean value that determines whether the custom Power-up is currently paused. Is **true** if the custom Power-up is paused. Viewers can’t redeem paused custom Power-ups."
+                },
+                "is_in_stock": {
+                  "type": "boolean",
+                  "description": "A Boolean value that determines whether the custom Power-up is currently in stock. Is **true** if the custom Power-up is in stock. Viewers can’t redeem out of stock custom Power-ups."
+                },
+                "redemptions_redeemed_current_stream": {
+                  "type": "integer",
+                  "description": "The number of redemptions redeemed during the current live stream. The number counts against the `max_per_stream_setting` limit. This field is **null** if the broadcaster’s stream isn’t live or _max\\_per\\_stream\\_setting_ isn’t enabled.",
+                  "format": "int32",
+                  "nullable": true
+                },
+                "cooldown_expires_at": {
+                  "type": "string",
+                  "description": "The timestamp of when the cooldown period expires. Is **null** if the custom Power-up isn’t in a cooldown state. See the `global_cooldown_setting` field.",
+                  "format": "date-time",
+                  "nullable": true
+                }
+              }
+            }
+          }
+        }
+      },
       "ExtensionTransaction": {
         "type": "object",
         "required": [
@@ -14193,14 +14943,14 @@
           },
           "tags": {
             "type": "array",
-            "description": "A list of channel-defined tags to apply to the channel. To remove all tags from the channel, set tags to an empty array. Tags help identify the content that the channel streams. [Learn More](https://help.twitch.tv/s/article/guide-to-tags)  \n  \nA channel may specify a maximum of 10 tags. Each tag is limited to a maximum of 25 characters and may not be an empty string or contain spaces or special characters. Tags are case insensitive. For readability, consider using camelCasing or PascalCasing.",
+            "description": "A list of channel-defined tags to apply to the channel. To remove all tags from the channel, set tags to an empty array. Tags help identify the content that the channel streams. [Learn More](https://help.twitch.tv/s/article/guide-to-tags)  \n  \nA channel may specify a maximum of 10 tags. Each tag is limited to a maximum of 25 characters and may not be an empty string or contain spaces or special characters.",
             "items": {
               "type": "string"
             }
           },
           "content_classification_labels": {
             "type": "array",
-            "description": "List of labels that should be set as the Channel’s CCLs.",
+            "description": "List of labels that should be set as the Channel’s CCLs.  \n**Note:** To clear CCLs for a channel, set all `is_enabled` for all possible CCLs to `false`",
             "items": {
               "type": "object",
               "required": [
@@ -15747,7 +16497,7 @@
                 },
                 "name": {
                   "type": "string",
-                  "description": "The User ID of broadcaster whose channel is receiving the unban request."
+                  "description": "The case-sensitive name of the emote. This is the name that viewers type in the chat window to get the emote to appear."
                 },
                 "emote_type": {
                   "type": "string",
@@ -15771,11 +16521,11 @@
                 },
                 "emote_set_id": {
                   "type": "string",
-                  "description": "An ID that identifies the emote set that the emote belongs to."
+                  "description": "An ID that identifies the emote set that the emote belongs to. If the emote does not belong to a set, this field will be an empty string."
                 },
                 "owner_id": {
                   "type": "string",
-                  "description": "The ID of the broadcaster who owns the emote."
+                  "description": "The ID of the broadcaster who owns the emote. If this emote does not have an owner, this field will be an empty string."
                 },
                 "format": {
                   "type": "array",
@@ -15970,9 +16720,9 @@
             ],
             "default": "primary"
           },
-          "source-only": {
+          "for_source_only": {
             "type": "boolean",
-            "description": "Determines if the chat announcement is sent only to the source channel defined by broadcaster\\_id during a shared chat session. This has no effect if the announcement is not sent sent during a shared chat session. The default value is `false`. NOTE: This parameter can only be set when utilizing an App Access Token. It cannot be specified when a User Access Token is used, and will instead result in an HTTP 400 error."
+            "description": "**NOTE:** This parameter can only be set when utilizing an App Access Token. It cannot be specified when a User Access Token is used, and will instead result in an HTTP 400 error.  \n  \nDetermines if the chat announcement is sent only to the source channel (defined by _broadcaster\\_id_) during a shared chat session. This has no effect if the announcement is not sent during a shared chat session.  \n  \nThe default value when using an App Access Token is `true`. If you prefer to send an announcement to all channels in a shared chat session, set this parameter to `false`."
           }
         }
       },
@@ -16003,6 +16753,10 @@
           "for_source_only": {
             "type": "boolean",
             "description": "**NOTE:** This parameter can only be set when utilizing an App Access Token. It cannot be specified when a User Access Token is used, and will instead result in an HTTP 400 error.  \n  \nDetermines if the chat message is sent only to the source channel (defined by _broadcaster\\_id_) during a shared chat session. This has no effect if the message is not sent during a shared chat session.  \n  \nIf this parameter is not set, the default value when using an App Access Token is `false`. On May 19, 2025 the default value for this parameter will be updated to `true`, and chat messages sent using an App Access Token will only be shared with the source channel by default. If you prefer to send a chat message to both channels in a shared chat session, make sure this parameter is explicitly set to `false` in your API request before May 19."
+          },
+          "pin": {
+            "type": "boolean",
+            "description": "NEW If true, the message will be sent and immediately pinned. Default: false. Cannot be combined with `reply_parent_message_id` or `for_source_only`. When `pin` is true, additionally requires the `moderator:manage:chat_messages` scope and the sender must be the broadcaster or a moderator. Messages pinned via this endpoint are always pinned for 20 minutes. If the pin fails, the message is not sent."
           }
         }
       },
@@ -16047,6 +16801,189 @@
                       "description": "Message for why the message was dropped."
                     }
                   }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetPinnedChatMessageResponse": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "Pinned messages. Empty if none pinned.",
+            "items": {
+              "type": "object",
+              "required": [
+                "message_id",
+                "broadcaster_id",
+                "sender_user_id",
+                "sender_user_login",
+                "sender_user_name",
+                "pinned_by_user_id",
+                "pinned_by_user_login",
+                "pinned_by_user_name",
+                "message",
+                "starts_at",
+                "ends_at",
+                "updated_at"
+              ],
+              "properties": {
+                "message_id": {
+                  "type": "string",
+                  "description": "The ID of the pinned chat message."
+                },
+                "broadcaster_id": {
+                  "type": "string",
+                  "description": "The ID of the broadcaster."
+                },
+                "sender_user_id": {
+                  "type": "string",
+                  "description": "The ID of the user who sent the pinned message."
+                },
+                "sender_user_login": {
+                  "type": "string",
+                  "description": "The login of the user who sent the pinned message."
+                },
+                "sender_user_name": {
+                  "type": "string",
+                  "description": "The display name of the user who sent the pinned message."
+                },
+                "pinned_by_user_id": {
+                  "type": "string",
+                  "description": "The ID of the user who pinned the message."
+                },
+                "pinned_by_user_login": {
+                  "type": "string",
+                  "description": "The login of the user who pinned the message."
+                },
+                "pinned_by_user_name": {
+                  "type": "string",
+                  "description": "The display name of the user who pinned the message."
+                },
+                "message": {
+                  "description": "The pinned message content.",
+                  "type": "object",
+                  "required": [
+                    "text",
+                    "fragments"
+                  ],
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "description": "Plain text of the message."
+                    },
+                    "fragments": {
+                      "type": "array",
+                      "description": "Ordered list of message fragments.",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "type",
+                          "text",
+                          "cheermote",
+                          "prefix",
+                          "bits",
+                          "tier",
+                          "emote",
+                          "id",
+                          "emote_set_id",
+                          "owner_id",
+                          "format",
+                          "mention",
+                          "user_id",
+                          "user_login",
+                          "user_name"
+                        ],
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "description": "The fragment type. Possible values:   \n  \n* text\n* emote\n* cheermote\n* mention"
+                          },
+                          "text": {
+                            "type": "string",
+                            "description": "Fragment text."
+                          },
+                          "cheermote": {
+                            "type": "object",
+                            "description": "Cheermote metadata. Null if not a cheermote fragment."
+                          },
+                          "prefix": {
+                            "type": "string",
+                            "description": "The cheermote prefix."
+                          },
+                          "bits": {
+                            "type": "integer",
+                            "description": "The number of bits cheered.",
+                            "format": "int32"
+                          },
+                          "tier": {
+                            "type": "integer",
+                            "description": "The cheermote tier.",
+                            "format": "int32"
+                          },
+                          "emote": {
+                            "type": "object",
+                            "description": "Emote metadata. Null if not an emote fragment."
+                          },
+                          "id": {
+                            "type": "string",
+                            "description": "The emote ID."
+                          },
+                          "emote_set_id": {
+                            "type": "string",
+                            "description": "The emote set ID."
+                          },
+                          "owner_id": {
+                            "type": "string",
+                            "description": "The ID of the emote owner."
+                          },
+                          "format": {
+                            "type": "array",
+                            "description": "The emote formats available.",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "mention": {
+                            "type": "object",
+                            "description": "Mention metadata. Null if not a mention fragment."
+                          },
+                          "user_id": {
+                            "type": "string",
+                            "description": "The mentioned user’s ID."
+                          },
+                          "user_login": {
+                            "type": "string",
+                            "description": "The mentioned user’s login."
+                          },
+                          "user_name": {
+                            "type": "string",
+                            "description": "The mentioned user’s display name."
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "starts_at": {
+                  "type": "string",
+                  "description": "RFC3339 timestamp of when the message was pinned.",
+                  "format": "date-time"
+                },
+                "ends_at": {
+                  "type": "string",
+                  "description": "RFC3339 expiry timestamp. Null if pinned until stream ends.",
+                  "format": "date-time"
+                },
+                "updated_at": {
+                  "type": "string",
+                  "description": "RFC3339 timestamp of last update.",
+                  "format": "date-time"
                 }
               }
             }
@@ -16549,7 +17486,7 @@
                   "properties": {
                     "method": {
                       "type": "string",
-                      "description": "The transport method. Possible values are:  \n  \n* webhook\n* websocket",
+                      "description": "The transport method. Possible values are:   \n  \n* webhook\n* websocket",
                       "enum": [
                         "webhook",
                         "websocket"
@@ -16557,15 +17494,15 @@
                     },
                     "callback": {
                       "type": "string",
-                      "description": "The callback URL where the notifications are sent. The URL must use the HTTPS protocol and port 443\\. See Processing an event.Specify this field only if method is set to webhook.NOTE: Redirects are not followed."
+                      "description": "The callback URL where the notifications are sent. The URL must use the HTTPS protocol and port 443\\. See Processing an event. Specify this field only if method is set to webhook. **NOTE:** Redirects are not followed."
                     },
                     "secret": {
                       "type": "string",
-                      "description": "The secret used to verify the signature. The secret must be an ASCII string that’s a minimum of 10 characters long and a maximum of 100 characters long. For information about how the secret is used, see Verifying the event message.Specify this field only if method is set to webhook."
+                      "description": "The secret used to verify the signature. The secret must be an ASCII string that’s a minimum of 10 characters long and a maximum of 100 characters long. For information about how the secret is used, see Verifying the event message. Specify this field only if method is set to webhook."
                     },
                     "session_id": {
                       "type": "string",
-                      "description": "An ID that identifies the WebSocket to send notifications to. When you connect to EventSub using WebSockets, the server returns the ID in the Welcome message.Specify this field only if method is set to websocket."
+                      "description": "An ID that identifies the WebSocket to send notifications to. When you connect to EventSub using WebSockets, the server returns the ID in the Welcome message. Specify this field only if method is set to websocket."
                     }
                   }
                 }
@@ -16598,7 +17535,7 @@
                 },
                 "status": {
                   "type": "string",
-                  "description": "The shard status. The subscriber receives events only for enabled shards. Possible values are:  \n  \n* enabled — The shard is enabled.\n* webhook\\_callback\\_verification\\_pending — The shard is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.\n* websocket\\_failed\\_to\\_reconnect - The client failed to reconnect to the Twitch WebSocket server within the required time after a Reconnect Message.",
+                  "description": "The shard status. The subscriber receives events only for enabled shards. Possible values are:   \n  \n* enabled — The shard is enabled.\n* webhook\\_callback\\_verification\\_pending — The shard is pending verification of the specified callback URL.\n* webhook\\_callback\\_verification\\_failed — The specified callback URL failed verification.\n* notification\\_failures\\_exceeded — The notification delivery failure rate was too high.\n* websocket\\_disconnected — The client closed the connection.\n* websocket\\_failed\\_ping\\_pong — The client failed to respond to a ping message.\n* websocket\\_received\\_inbound\\_traffic — The client sent a non-pong message. Clients may only send pong messages (and only in response to a ping message).\n* websocket\\_internal\\_error — The Twitch WebSocket server experienced an unexpected error.\n* websocket\\_network\\_timeout — The Twitch WebSocket server timed out writing the message to the client.\n* websocket\\_network\\_error — The Twitch WebSocket server experienced a network error writing the message to the client.\n* websocket\\_failed\\_to\\_reconnect — The client failed to reconnect to the Twitch WebSocket server within the required time after a Reconnect Message.",
                   "enum": [
                     "enabled",
                     "webhook_callback_verification_pending",
@@ -16622,7 +17559,7 @@
                   "properties": {
                     "method": {
                       "type": "string",
-                      "description": "The transport method. Possible values are:  \n  \n* webhook\n* websocket",
+                      "description": "The transport method. Possible values are:   \n  \n* webhook\n* websocket",
                       "enum": [
                         "webhook",
                         "websocket"
@@ -16668,7 +17605,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "description": "The error that occurred while updating the shard. Possible errors:  \n  \n* The length of the string in the secret field is not valid.\n* The URL in the transport's callback field is not valid. The URL must use the HTTPS protocol and the 443 port number.\n* The value specified in the method field is not valid.\n* The callback field is required if you specify the webhook transport method.\n* The session\\_id field is required if you specify the WebSocket transport method.\n* The websocket session is not connected.\n* The shard id is outside of the conduit’s range."
+                  "description": "The error that occurred while updating the shard. Possible errors:   \n  \n* The length of the string in the secret field is not valid.\n* The URL in the transport's callback field is not valid. The URL must use the HTTPS protocol and the 443 port number.\n* The value specified in the method field is not valid.\n* The callback field is required if you specify the webhook transport method.\n* The session\\_id field is required if you specify the WebSocket transport method.\n* The websocket session is not connected.\n* The shard id is outside of the conduit's range."
                 },
                 "code": {
                   "type": "string",
@@ -17650,6 +18587,7 @@
               "channel.channel_points_custom_reward.remove",
               "channel.channel_points_custom_reward_redemption.add",
               "channel.channel_points_custom_reward_redemption.update",
+              "channel.custom_power_up_redemption.add",
               "channel.poll.begin",
               "channel.poll.progress",
               "channel.poll.end",
@@ -17817,6 +18755,7 @@
               "channel.channel_points_custom_reward.remove",
               "channel.channel_points_custom_reward_redemption.add",
               "channel.channel_points_custom_reward_redemption.update",
+              "channel.custom_power_up_redemption.add",
               "channel.poll.begin",
               "channel.poll.progress",
               "channel.poll.end",
@@ -18085,13 +19024,15 @@
           },
           "type": {
             "type": "string",
-            "description": "The type of goal. Possible values are:   \n  \n* follower — The goal is to increase followers.\n* subscription — The goal is to increase subscriptions. This type shows the net increase or decrease in tier points associated with the subscriptions.\n* subscription\\_count — The goal is to increase subscriptions. This type shows the net increase or decrease in the number of subscriptions.\n* new\\_subscription — The goal is to increase subscriptions. This type shows only the net increase in tier points associated with the subscriptions (it does not account for users that unsubscribed since the goal started).\n* new\\_subscription\\_count — The goal is to increase subscriptions. This type shows only the net increase in the number of subscriptions (it does not account for users that unsubscribed since the goal started).",
+            "description": "The type of goal. Possible values are:   \n  \n* follower — The goal is to increase followers.\n* subscription — The goal is to increase subscriptions. This type shows the net increase or decrease in tier points associated with the subscriptions.\n* subscription\\_count — The goal is to increase subscriptions. This type shows the net increase or decrease in the number of subscriptions.\n* new\\_subscription — The goal is to increase subscriptions. This type shows only the net increase in tier points associated with the subscriptions (it does not account for users that unsubscribed since the goal started).\n* new\\_subscription\\_count — The goal is to increase subscriptions. This type shows only the net increase in the number of subscriptions (it does not account for users that unsubscribed since the goal started).\n* new\\_bit — The goal is to increase the amount of Bits used on the channel.\n* new\\_cheerer — The goal is to increase the amount of unique Cheerers on to Cheer on the channel.",
             "enum": [
               "follower",
               "subscription",
               "subscription_count",
               "new_subscription",
-              "new_subscription_count"
+              "new_subscription_count",
+              "new_bit",
+              "new_cheerer"
             ]
           },
           "description": {
@@ -21238,12 +22179,12 @@
           },
           "points": {
             "type": "integer",
-            "description": "The current number of subscriber points earned by this broadcaster. Points are based on the subscription tier of each user that subscribes to this broadcaster. For example, a Tier 1 subscription is worth 1 point, Tier 2 is worth 2 points, and Tier 3 is worth 6 points. The number of points determines the number of emote slots that are unlocked for the broadcaster (see [Subscriber Emote Slots](https://help.twitch.tv/s/article/subscriber-emote-guide#emoteslots)).",
+            "description": "The current number of subscriber points earned by this broadcaster. Points are based on the subscription tier of each user that subscribes to this broadcaster. For example, a Tier 1 subscription is worth 1 point, Tier 2 is worth 2 points, and Tier 3 is worth 6 points. The number of points determines the number of emote slots that are unlocked for the broadcaster (see [Subscriber Emote Slots](https://help.twitch.tv/s/article/subscriber-emote-guide#emoteslots)).  \n  \nIf the `user_id` query parameter is used, this field will be null.",
             "format": "int32"
           },
           "total": {
             "type": "integer",
-            "description": "The total number of users that subscribe to this broadcaster.",
+            "description": "The total number of users that subscribe to this broadcaster.  \n  \nIf the `user_id` query parameter is used, this field will be null.",
             "format": "int32"
           }
         }
@@ -21418,11 +22359,13 @@
           },
           "background_image_url": {
             "type": "string",
-            "description": "A URL to the team’s background image."
+            "description": "A URL to the team’s background image. This field is **null** if the team does not have a background image set.",
+            "nullable": true
           },
           "banner": {
             "type": "string",
-            "description": "A URL to the team’s banner."
+            "description": "A URL to the team’s banner. This field is **null** if the team does not have a banner set.",
+            "nullable": true
           },
           "created_at": {
             "type": "string",
@@ -21514,11 +22457,13 @@
           },
           "background_image_url": {
             "type": "string",
-            "description": "A URL to the team’s background image."
+            "description": "A URL to the team’s background image. This field is **null** if the team does not have a background image set.",
+            "nullable": true
           },
           "banner": {
             "type": "string",
-            "description": "A URL to the team’s banner."
+            "description": "A URL to the team’s banner. This field is **null** if the team does not have a banner image set.",
+            "nullable": true
           },
           "created_at": {
             "type": "string",
@@ -21687,7 +22632,8 @@
                 "user_id",
                 "user_name",
                 "user_login",
-                "scopes"
+                "scopes",
+                "has_authorized"
               ],
               "properties": {
                 "user_id": {
@@ -21749,8 +22695,8 @@
                       "moderator:read:banned_users",
                       "moderator:manage:banned_users",
                       "moderator:read:blocked_terms",
-                      "moderator:read:chat_messages",
                       "moderator:manage:blocked_terms",
+                      "moderator:read:chat_messages",
                       "moderator:manage:chat_messages",
                       "moderator:read:chat_settings",
                       "moderator:manage:chat_settings",
@@ -21791,6 +22737,10 @@
                       "whispers:read"
                     ]
                   }
+                },
+                "has_authorized": {
+                  "type": "boolean",
+                  "description": "A boolean indicating whether or not the specified user has authorized this application."
                 }
               }
             }
@@ -22339,7 +23289,7 @@
             "scopes": {
               "analytics:read:extensions": "View analytics data for the Twitch Extensions owned by the authenticated account.",
               "analytics:read:games": "View analytics data for the games owned by the authenticated account.",
-              "bits:read": "View Bits information for a channel.",
+              "bits:read": "View Bits-related products and redemptions for a channel.",
               "channel:bot": "Joins your channel’s chatroom as a bot user, and perform chat-related actions as that user.",
               "channel:manage:ads": "Manage ads schedule on a channel.",
               "channel:read:ads": "Read the ads schedule and details on your channel.",
@@ -22378,9 +23328,9 @@
               "moderator:read:banned_users": "Read the list of bans or unbans in channels where you have the moderator role.",
               "moderator:manage:banned_users": "Ban and unban users.",
               "moderator:read:blocked_terms": "View a broadcaster’s list of blocked terms.",
-              "moderator:read:chat_messages": "Read deleted chat messages in channels where you have the moderator role.",
               "moderator:manage:blocked_terms": "Manage a broadcaster’s list of blocked terms.",
-              "moderator:manage:chat_messages": "Delete chat messages in channels where you have the moderator role",
+              "moderator:read:chat_messages": "Read deleted chat messages in channels where you have the moderator role and get pinned chat messages.",
+              "moderator:manage:chat_messages": "Delete chat messages in channels where you have the moderator role and manage pinned chat messages.",
               "moderator:read:chat_settings": "View a broadcaster’s chat room settings.",
               "moderator:manage:chat_settings": "Manage a broadcaster’s chat room settings.",
               "moderator:read:chatters": "View the chatters in a broadcaster’s chat room.",

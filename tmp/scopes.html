@@ -19,11 +19,11 @@
 <meta property="og:site_name" content="Twitch Developers">
 <meta property="og:image" content="https://dev.twitch.tv/marketing-assets/images/TwitchDev.png">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2026-03-26T13:03:44-07:00">
+<meta property="article:published_time" content="2026-07-31T12:03:21-07:00">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@TwitchDev">
 <script type="application/ld+json">
-{"description":"Twitch Access Token Scopes","url":"https://dev.twitch.tv/authentication/scopes/","@type":"BlogPosting","headline":"Twitch Access Token Scopes","dateModified":"2026-03-26T13:03:44-07:00","datePublished":"2026-03-26T13:03:44-07:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/authentication/scopes/"},"@context":"http://schema.org"}</script>
+{"description":"Twitch Access Token Scopes","url":"https://dev.twitch.tv/authentication/scopes/","@type":"BlogPosting","headline":"Twitch Access Token Scopes","dateModified":"2026-07-31T12:03:21-07:00","datePublished":"2026-07-31T12:03:21-07:00","image":"https://dev.twitch.tv/marketing-assets/images/TwitchDev.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dev.twitch.tv/authentication/scopes/"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -391,25 +391,6 @@
 	
 	<dl>
 		<dt>
-			<a href="/docs/pubsub/">PubSub</a>
-		</dt>
-		
-			
-			
-			
-			
-			
-		
-	</dl>
-
-	
-	
-	
-
-	
-	
-	<dl>
-		<dt>
 			<a href="/docs/video-broadcast/">Video Broadcast</a>
 		</dt>
 		
@@ -532,7 +513,7 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">bits:read</code></td>
-      <td>View Bits information for a channel.<br><br><strong>API</strong><br><a href="/docs/api/reference#get-bits-leaderboard">Get Bits Leaderboard</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelbitsuse">Channel Bits Use</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelcheer">Channel Cheer</a></td>
+      <td>View Bits-related products and redemptions for a channel.<br><br><strong>API</strong><br><a href="/docs/api/reference#get-bits-leaderboard">Get Bits Leaderboard</a><br><a href="/docs/api/reference/#get-custom-power-up">Get Custom Power-up</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelbitsuse">Channel Bits Use</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelcheer">Channel Cheer</a><br><a href="/docs/eventsub/eventsub-subscription-types/#channelcustom_power_up_redemptionadd">Channel Custom Power-ups Redemption Add</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">channel:bot</code></td>
@@ -687,16 +668,16 @@
       <td>View a broadcaster’s list of blocked terms.<br><br><strong>API</strong><br><a href="/docs/api/reference#get-blocked-terms">Get Blocked Terms</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelmoderate">Channel Moderate</a></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">moderator:read:chat_messages</code></td>
-      <td>Read deleted chat messages in channels where you have the moderator role.<br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelmoderate">Channel Moderate</a></td>
-    </tr>
-    <tr>
       <td><code class="highlighter-rouge">moderator:manage:blocked_terms</code></td>
       <td>Manage a broadcaster’s list of blocked terms.<br><br><strong>API</strong><br><a href="/docs/api/reference#get-blocked-terms">Get Blocked Terms</a><br><a href="/docs/api/reference#add-blocked-term">Add Blocked Term</a><br><a href="/docs/api/reference#remove-blocked-term">Remove Blocked Term</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelmoderate">Channel Moderate</a></td>
     </tr>
     <tr>
+      <td><code class="highlighter-rouge">moderator:read:chat_messages</code></td>
+      <td>Read deleted chat messages in channels where you have the moderator role and get pinned chat messages.<br><br><strong>API</strong><br><a href="/docs/api/reference#get-pinned-chat-message">Get Pinned Chat Message</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelmoderate">Channel Moderate</a></td>
+    </tr>
+    <tr>
       <td><code class="highlighter-rouge">moderator:manage:chat_messages</code></td>
-      <td>Delete chat messages in channels where you have the moderator role<br><br><strong>API</strong><br><a href="/docs/api/reference#delete-chat-messages">Delete Chat Messages</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelmoderate">Channel Moderate</a></td>
+      <td>Delete chat messages in channels where you have the moderator role and manage pinned chat messages.<br><br><strong>API</strong><br><a href="/docs/api/reference#delete-chat-messages">Delete Chat Messages</a><br><a href="/docs/api/reference#pin-chat-message">Pin Chat Message</a><br><a href="/docs/api/reference#update-pinned-chat-message">Update Pinned Chat Message</a><br><a href="/docs/api/reference#unpin-chat-message">Unpin Chat Message</a><br><br><strong>EventSub</strong><br><a href="/docs/eventsub/eventsub-subscription-types/#channelmoderate">Channel Moderate</a></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">moderator:read:chat_settings</code></td>
@@ -907,7 +888,6 @@
 	<div class="container two-column">
 		<div class="nav nudge-right">
 			<a href="https://dev.twitch.tv/docs">Docs</a>
-			<a href="https://devstatus.twitch.tv">Status</a>
 			<a href="https://dev.twitch.tv/support">Support</a>
 			<a href="https://dev.twitch.tv/showcase">Showcase</a>
 			<a href="https://blog.twitch.tv/en/tags/developers/">Blog</a>
