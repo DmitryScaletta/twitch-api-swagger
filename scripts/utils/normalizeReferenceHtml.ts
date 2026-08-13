@@ -52,30 +52,6 @@ const normalizeReferenceHtml = (document: Document) => {
     ],
   ]);
 
-  // no method
-  // https://dev.twitch.tv/docs/api/reference#get-stream-key
-  replaceHtml(getDocsEl('get-stream-key'), [
-    [
-      'https://api.twitch.tv/helix/streams/key',
-      'GET https://api.twitch.tv/helix/streams/key',
-    ],
-  ]);
-
-  // Wrong Response Body
-  // https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
-  replaceHtml(getDocsEl('get-content-classification-labels'), [
-    [
-      '<tr>\n      <td>&nbsp; &nbsp;content_classification_labels</td>\n      <td>Label[]</td>\n      <td>The list of CCLs available.</td>\n    </tr>',
-      '',
-    ],
-    ['<td>&nbsp; &nbsp; &nbsp; id</td>', '<td>&nbsp;&nbsp;&nbsp;id</td>'],
-    [
-      '<td>&nbsp; &nbsp; &nbsp; description</td>',
-      '<td>&nbsp;&nbsp;&nbsp;description</td>',
-    ],
-    ['<td>&nbsp; &nbsp; &nbsp; name</td>', '<td>&nbsp;&nbsp;&nbsp;name</td>'],
-  ]);
-
   // missing Response Codes table
   // https://dev.twitch.tv/docs/api/reference/#get-content-classification-labels
   // https://dev.twitch.tv/docs/api/reference/#get-moderated-channels

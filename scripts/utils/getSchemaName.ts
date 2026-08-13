@@ -1,7 +1,7 @@
 const capitalizeWord = (word: string) => word[0]!.toUpperCase() + word.slice(1);
 
 export const getSchemaNamePrefix = (endpointName: string) =>
-  endpointName.split(' ').filter(Boolean).map(capitalizeWord).join('');
+  endpointName.replaceAll('-', ' ').split(' ').filter(Boolean).map(capitalizeWord).join('');
 
 export const getBodySchemaName = (endpointName: string) =>
   getSchemaNamePrefix(endpointName) + 'Body';
